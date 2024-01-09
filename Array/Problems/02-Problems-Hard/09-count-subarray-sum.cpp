@@ -1,7 +1,5 @@
 /*
- * Zero Matrix
- * Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
- * You must do it inplace
+ * Count Subarray sum
  * 
  * Example 1:
  * Input: arr = [3,1,2,4], k = 6
