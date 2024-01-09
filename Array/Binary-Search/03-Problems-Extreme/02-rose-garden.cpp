@@ -35,14 +35,9 @@ vector<int> findMinMax(vector<int> arr)
 {
   int min_val = INT_MAX, max_val = INT_MIN;
   vector<int> min_max_vector;
-  for (int i = 0; i < arr.size(); i++)
-  {
-    if (min_val > arr[i]) {
-      min_val = arr[i];
-    }
-    if (max_val < arr[i]) {
-      max_val = arr[i];
-    }
+  for (int i = 0; i < arr.size(); i++) {
+    min_val = min(min_val, arr[i]);
+    max_val = max(max_val, arr[i]);
   }
 
   min_max_vector = {min_val, max_val};
