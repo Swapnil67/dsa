@@ -36,7 +36,7 @@ int bruteForce(vector<int> arr, int k) {
 // TODO
 
 int main() {
-  vector<int> arr = {2,3,4,7,11};
+  vector<int> arr = { 2, 3, 4, 7, 11 };
   int k = 5;
 
   int missingInteger = bruteForce(arr, k);
