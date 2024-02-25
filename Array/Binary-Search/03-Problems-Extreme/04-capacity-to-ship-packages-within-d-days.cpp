@@ -71,7 +71,7 @@ int bruteForce(vector<int> weights, int days) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
-// * TIME COMPLEXITY low((sum-max)+1) * O(N)
+// * TIME COMPLEXITY log((sum-max)+1) * O(N)
 // * log((sum-max)+1) => [findRequiredDays] 
 // * O(N) => [weights array] 
 

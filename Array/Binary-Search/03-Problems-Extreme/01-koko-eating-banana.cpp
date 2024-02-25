@@ -1,4 +1,23 @@
-// TODO Add question
+/*
+* Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas.
+* The guards have gone and will come back in h hours.
+* Koko can decide her bananas-per-hour eating speed of k. Each hour, she chooses some pile of bananas and eats k bananas
+* from that pile. If the pile has less than k bananas, she eats all of them instead and will not eat any more
+* bananas during this hour.
+* Return the minimum integer k such that she can eat all the bananas within h hours.
+
+* Example 1:
+* Input: piles = [3,6,7,11], h = 8
+* Output: 4
+
+* Example 2:
+* Input: piles = [30,11,23,4,20], h = 5
+* Output: 30
+
+* https://leetcode.com/problems/koko-eating-bananas/description/
+* https://www.codingninjas.com/studio/problems/minimum-rate-to-eat-bananas_7449064
+*/
+
 
 #include <iostream>
 #include <cmath>
@@ -7,8 +26,10 @@ using namespace std;
 long long totalHrForPile(vector<int>& piles, int hr, int maxHr) {
   float totalHrs = 0;
   for(int i=0; i<piles.size(); i++) {
-    totalHrs += (piles[i]/hr + (piles[i]%hr != 0));
-    // cout<<piles[i]/hr<<" + "<<(piles[i]%hr != 0)<<" = "<<(piles[i]/hr + (piles[i]%hr != 0))<<" ";
+    // * (piles[i]/hr + (piles[i]%hr != 0)); Ceiling an number without using ceil function
+    totalHrs += (piles[i]/hr + (piles[i]%hr != 0)); // * OR
+    totalHrs += ((float)piles[i] / (float)k);
+    // cout<<piles[i]/hr<<" + "<<(piles[i]%hr != 0)<<" = "<<(piles[i]/hr + (piles[i]%hr != 0))<<" "<<endl;
     if(totalHrs > maxHr) break;
   }
   // cout<<endl;
@@ -69,17 +90,17 @@ int optimalApproach(vector<int> &piles, int maxBananasPerHr, int maxHrs) {
 }
 
 int main() {
-  // vector<int> piles = {3,6,7,11};
-  // int h = 8;
+  vector<int> piles = {3,6,7,11};
+  int h = 8;
   // vector<int> piles = {30,11,23,4,20};
   // int h = 5;
-  vector<int> piles = {30,11,23,4,20};
-  int h = 6;
+  // vector<int> piles = {30,11,23,4,20};
+  // int h = 6;
   // vector<int> piles = {1000000000};
   // int h = 2;
   int maxBananasPerHr = findMax(piles);
   // cout<<"maxBananasPerHr "<<maxBananasPerHr<<endl;
-  // int minHr = bruteForce(piles, maxBananasPerHr, h);
-  int minHr = optimalApproach(piles, maxBananasPerHr, h);
+  int minHr = bruteForce(piles, maxBananasPerHr, h);
+  // int minHr = optimalApproach(piles, maxBananasPerHr, h);
   cout << minHr << endl;
 }
