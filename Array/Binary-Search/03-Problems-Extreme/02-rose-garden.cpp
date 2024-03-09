@@ -1,8 +1,14 @@
-// TODO Add question
-
 /*
  * Minimum no of days to make m bouquets
+ * You are given 'n' roses and you are also given an array 'arr' where 'arr[i]' denotes that the 'ith'
+ * rose will bloom on the 'arr[i]th' day.
+ * You can only pick already bloomed roses that are adjacent to make a bouquet. You are also told that you require exactly 'k'
+ * adjacent bloomed roses to make a single bouquet.
+ * 
+ * Find the minimum number of days required to make at least 'm' bouquets each containing 'k' roses.
+ * Return -1 if it is not possible.
 
+  * https://www.codingninjas.com/studio/problems/rose-garden_2248080
 */
 
 #include <iostream>
@@ -62,6 +68,7 @@ int bruteForce(vector<int> arr, int bouquetsRequired, int flowersInAbouquet) {
       return i;
     }
   }
+  return -1;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
@@ -94,15 +101,17 @@ int optimalApproach(vector<int> days, int bouquetsRequired, int flowersInAbouque
 
 int main()
 {
-  vector<int> arr = {7,7,7,7,13,11,12,7};
-  int bouquetsRequired = 2;
-  int flowersInAbouquet = 3;
+  vector<int> bloomDays = {7,7,7,7,13,11,12,7};
+  int bouquetsRequired = 2, flowersInAbouquet = 3;
 
-  // int minimumdays = bruteForce(arr, bouquetsRequired, flowersInAbouquet);
-  int minimumdays = optimalApproach(arr, bouquetsRequired, flowersInAbouquet);
+  // vector<int> bloomDays = { 1,2,1,2,7,2,2,3,1 };
+  // int bouquetsRequired = 2, flowersInAbouquet = 3;
+
+  // int minimumdays = bruteForce(bloomDays, bouquetsRequired, flowersInAbouquet);
+  int minimumdays = optimalApproach(bloomDays, bouquetsRequired, flowersInAbouquet);
   cout << "Minimum days to make " << bouquetsRequired << " bouquet of " << flowersInAbouquet << " flowers each is " << minimumdays << " days." << endl;
 
-  // bool isMinimumDay = isPossibleDay(arr, 7, bouquetsRequired, flowersInAbouquet);
+  // bool isMinimumDay = isPossibleDay(bloomDays, 7, bouquetsRequired, flowersInAbouquet);
   // cout<<"isMinimumDay: "<<isMinimumDay<<endl;
 
   return 0;
