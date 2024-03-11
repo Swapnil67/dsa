@@ -8,7 +8,7 @@ struct node
   struct node *next;
 };
 
-// * Ponit Head to NULL (For Start i.e., ll with 0 elements)
+// * Point Head to NULL (For Start i.e., ll with 0 elements)
 struct node *head = NULL;
 
 void append() {

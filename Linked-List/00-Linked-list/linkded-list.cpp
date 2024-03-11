@@ -2,6 +2,17 @@
 #include <map>
 using namespace std;
 
+// * Memory Space
+// * 32 Bit
+// * data = 4 bytes
+// * next = 4 bytes
+// * Total = 8 bytes
+// * ------------------
+// * 64 Bit
+// * data = 4 bytes
+// * next = 8 bytes
+// * Total = 12 bytes
+
 class Node {
   public:
     int data;
