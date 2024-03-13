@@ -1,3 +1,7 @@
+/*
+* Convert array to from Linked List
+*/
+
 #include<iostream>
 
 class Node {
