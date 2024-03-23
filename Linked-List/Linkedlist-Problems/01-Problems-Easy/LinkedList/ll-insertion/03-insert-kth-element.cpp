@@ -11,6 +11,7 @@ class Node {
     }
 };
 
+// * LL from Array
 Node* LLFromArray(std::vector<int> arr) {
   Node* head = new Node(arr[0]);
   Node* mover = head;
@@ -22,6 +23,7 @@ Node* LLFromArray(std::vector<int> arr) {
   return head;
 }
 
+// * Traverse LL
 void printLL(Node* head) {
   Node* temp = head;
   while(temp) {
@@ -61,9 +63,8 @@ Node* insertAtK(Node* head, int pos, int val) {
 
 
 int main() {
-
   std::vector<int> arr = { 1, 2, 3, 4, 5, 6 }; 
-    
+
   Node* head = NULL;
 
   head = LLFromArray(arr);
