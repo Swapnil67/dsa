@@ -73,3 +73,4 @@ int main() {
 }
 
 
+// *  g++ -std=c++17 01-delete-head.cpp -o 01-delete-head
