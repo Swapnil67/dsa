@@ -118,10 +118,10 @@ int main() {
   std::vector<int> arr = { 1,2,3,4,5 };
   Node* head = arrayToDLL(arr);
 
-  std::cout<<"------ Before Deleteting Node ------"<<std::endl;
+  std::cout<<"------ Before Deleteting kth Node ------"<<std::endl;
   printDLL(head);
 
-  std::cout<<"------ After Deleteting Node ------"<<std::endl;
+  std::cout<<"------ After Deleteting kth Node ------"<<std::endl;
   head = deleteKthNode(head, 2);
   printDLL(head);
 

@@ -14,6 +14,4 @@ public class Node {
     this.next = n;
     this.prev = p;
   }
-
 }
-
