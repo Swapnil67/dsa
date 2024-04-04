@@ -1,6 +1,20 @@
 /**
+ * * Add Two Numbers
+ * * You are given two non-negative numbers 'num1' and 'num2' represented in the form of linked lists.
  * 
+ * * Example 1
+ * * 'num1' : 1 -> 2 -> 3 -> NULL
+ * * 'num2' : 4 -> 5 -> 6 -> NULL
+ * * Output: 5 -> 7 -> 9 -> NULL
+ * 
+ * * Example 2
+ * * 'num1' : 0 -> 1 -> NULL
+ * * 'num2' : 0 -> NULL
+ * * Output: 0 -> 1 -> NULL
+ * 
+ * * https://leetcode.com/problems/add-two-numbers/
  * * https://takeuforward.org/data-structure/reverse-a-doubly-linked-list/
+ * * https://takeuforward.org/data-structure/add-two-numbers-represented-as-linked-lists/
 */
 
 #include<stack>
