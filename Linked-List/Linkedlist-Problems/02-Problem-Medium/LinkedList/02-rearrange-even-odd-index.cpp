@@ -60,12 +60,18 @@ void printLL(Node* head) {
   std::cout<<std::endl;
 }
 
+
 // * Re Arrange Even and Odd Indices
+
+// * ------------------ Brute Force ---------------------
+
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(N)
 Node* reArrangeEvenOdd(Node* head) {
   std::vector<int> arr;
   Node* temp = head;
 
-  // * Insert Odd index in arr
+  // * Insert Odd index in arr O(N/2)
   while(temp) {
     arr.push_back(temp->data);
     if(temp->next == nullptr) {
@@ -74,7 +80,7 @@ Node* reArrangeEvenOdd(Node* head) {
     temp = temp->next->next;
   }
 
-  // * Insert Even index in arr
+  // * Insert Even index in arr O(N/2)
   temp = head->next;
   while(temp) {
     arr.push_back(temp->data);
@@ -84,7 +90,7 @@ Node* reArrangeEvenOdd(Node* head) {
     temp = temp->next->next;
   }
 
-  // * Traverse the LL and replace the data values with array data values
+  // * Traverse the LL and replace the data values with array data values O(N)
   int j = 0; temp = head;
   while(temp) {
     temp->data = arr[j++];
@@ -100,11 +106,34 @@ Node* reArrangeEvenOdd(Node* head) {
   return head;
 } 
 
+// * ------------------ Optimal ---------------------
+// * TIME COMPLEXITY O(N/2) * 2 = O(N)
+// * SPACE COMPLEXITY O(1)
+Node* reArrangeEvenOddOptimal(Node* head) {
+  if(head == NULL || head->next == NULL){
+    return head;
+  }
+
+  Node* odd = head;
+  Node* even = head->next;
+  Node* evenHead = head->next;
+
+  while(even != NULL && even->next != NULL) {
+    odd->next = odd->next->next;
+    even->next = even->next->next;
+
+    odd = odd->next;
+    even = even->next;
+  }  
+  odd->next = evenHead;
+  return head;
+}
+
 int main() {
   // * testcase 1
-  // std::vector<int> arr = { 1,2,3,4,5,6 };
+  std::vector<int> arr = { 1,2,3,4,5,6 };
   // * testcase 2
-  std::vector<int> arr = { 2,4,6,8,10 };
+  // std::vector<int> arr = { 2,4,6,8,10 };
 
   // * Create a Linked List
   Node* head = arrayToLL(arr);
@@ -113,7 +142,8 @@ int main() {
 
   // * Rearrange even and odd numbers
   std::cout<<"------------ After Rearranging Linked List ------------"<<std::endl;
-  head = reArrangeEvenOdd(head);
+  // head = reArrangeEvenOdd(head);
+  head = reArrangeEvenOddOptimal(head);
   printLL(head);
   return 0;
 }
