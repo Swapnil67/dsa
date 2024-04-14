@@ -5,15 +5,17 @@
  * together followed by the nodes with even indices, and return the reordered list’s head.
  * The first node is considered odd, and the second node is even, and so on.
 
- * * Example 1
- * * head :  1 -> 3 -> 5 -> 7
- * * Output: 1 -> 5 -> 3 -> 7
+ * Example 1
+ * head :  1 -> 3 -> 5 -> 7
+ * Output: 1 -> 5 -> 3 -> 7
  * 
  
- * * Example 1
- * * head : 2 -> 4 -> 6 -> 8 -> 10
- * * Output: 2 -> 6 -> 10 -> 4 -> 8
+ * Example 1
+ * head : 2 -> 4 -> 6 -> 8 -> 10
+ * Output: 2 -> 6 -> 10 -> 4 -> 8
  * 
+ * 
+ * https://www.youtube.com/watch?v=qf6qp7GzD5Q&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=7&pp=iAQB
  
 */
 
@@ -106,7 +108,7 @@ Node* reArrangeEvenOdd(Node* head) {
   return head;
 } 
 
-// * ------------------ Optimal ---------------------
+// * ------------------ Optimal Solution ---------------------
 // * TIME COMPLEXITY O(N/2) * 2 = O(N)
 // * SPACE COMPLEXITY O(1)
 Node* reArrangeEvenOddOptimal(Node* head) {
