@@ -51,7 +51,7 @@ void printDLL(Node* head) {
 
 // * ------------------ BRUTE FORCE ---------------------
 // * TIME COMPLEXITY O(2N)
-// * SPACE COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(N)
 Node* reverseDLLBruteForce(Node* head) {
   // * if head is empty or there is only one element
   // * we can directly just return the head
