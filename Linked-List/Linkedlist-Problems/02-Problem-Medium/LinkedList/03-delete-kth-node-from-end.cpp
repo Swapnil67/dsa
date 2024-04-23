@@ -47,6 +47,7 @@ class Node {
 
 // * Convert array to LL
 Node* arrayToLL(std::vector<int> arr) {
+  if(arr.size() == 0) return nullptr;
   Node* head = new Node(arr[0]);
   Node* temp = head;
   for(int i=1; i<arr.size(); i++) {
