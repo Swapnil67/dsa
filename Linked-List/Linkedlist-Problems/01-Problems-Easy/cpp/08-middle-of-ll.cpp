@@ -1,5 +1,5 @@
 /**
- * *  Middle Of Linked List
+ * * Middle Of Linked List
  * * Given a singly linked list of 'N' nodes. The objective is to determine the middle node of a singly linked list.
  * * However, if the list has an even number of nodes, we return the second middle node.
  * 
@@ -119,8 +119,11 @@ Node* optimal(Node* head) {
 }
 
 int main() {
+  // * testcase 1
   std::vector<int> arr = { 1,2 };
+  // * testcase 2
   // std::vector<int> arr = { 1,2,3,4,5 };
+  // * testcase 3
   // std::vector<int> arr = { 1,2,3,4,5,6 };
   Node* head = arrayToLL(arr);
   printLL(head);
