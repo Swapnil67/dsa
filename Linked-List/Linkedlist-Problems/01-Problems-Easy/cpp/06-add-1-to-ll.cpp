@@ -1,3 +1,27 @@
+/*
+ * Add 1 to LL
+
+ * You are given a Singly Linked List of integers. You have to return true if the linked list is palindrome, else return false.
+
+ * A Linked List is a palindrome if it reads the same from left to right and from right to left.
+ * together followed by the nodes with even indices, and return the reordered list’s head.
+ * The first node is considered odd, and the second node is even, and so on.
+
+ * Example 1
+ * Input  : 1 -> 2 -> 1 -> 'NULL'
+ * Output : true
+
+ * Example 2
+ * Input  : 1 -> 2 -> 3 -> 'NULL'
+ * Output : false
+ * 
+
+ * https://leetcode.com/problems/palindrome-linked-list/
+ * https://www.naukri.com/code360/problems/check-if-linked-list-is-palindrome_985248
+ * https://takeuforward.org/data-structure/check-if-given-linked-list-is-plaindrome/
+ * https://www.youtube.com/watch?v=lRY_G-u_8jk&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=11
+ 
+*/
 
 #include<iostream>
 
