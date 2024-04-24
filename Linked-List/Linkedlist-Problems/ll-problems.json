@@ -51,6 +51,11 @@
       "title": "Delete Kth Node From End",
       "codingNingjas": "https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912",
       "leetCode": "NA"
+    },
+    {
+      "title": "Cycle Detection in a Singly Linked List",
+      "leetCode": "https://leetcode.com/problems/linked-list-cycle/",
+      "codingNingjas": "https://www.naukri.com/code360/problems/cycle-detection-in-a-singly-linked-list_628974"
     }
   ],
   "hard": []
