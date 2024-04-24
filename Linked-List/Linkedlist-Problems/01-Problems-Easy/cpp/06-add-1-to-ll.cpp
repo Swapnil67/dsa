@@ -83,7 +83,7 @@ Node* reverseLL(Node* head) {
   return prev;
 }
 
-// * ------------------ Recursive Approach ---------------------
+// * ------------------ Brute Force Approach ---------------------
 // * TIME COMPLEXITY O(3N)
 // * SPACE COMPLEXITY O(1)
 Node* bruteForce(Node* head) {

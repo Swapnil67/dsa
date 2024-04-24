@@ -28,7 +28,12 @@
     {
       "title": "Intersection of Two Linked Lists",
       "codingNingjas": "https://www.naukri.com/code360/problems/-intersection-of-two-linked-lists_63045",
-      "leetCode": "https://leetcode.com/problems/intersection-of-two-linked-lists/description/"
+      "leetCode": "https://leetcode.com/problems/intersection-of-two-linked-lists/"
+    },
+    {
+      "title": "Middle Of Linked List",
+      "codingNingjas": "https://www.naukri.com/code360/problems/middle-of-linked-list_973250",
+      "leetCode": "https://leetcode.com/problems/middle-of-the-linked-list/"
     }
   ],
   "medium": [

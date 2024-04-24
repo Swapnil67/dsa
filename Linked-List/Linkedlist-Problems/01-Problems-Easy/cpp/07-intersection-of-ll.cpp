@@ -83,7 +83,7 @@ Node* appendLLToTail(Node* head1, Node* head2) {
   return head1;
 }
 
-// * ------------------ Recursive Approach ---------------------
+// * ------------------ Brute Force Approach ---------------------
 // * TIME COMPLEXITY O(N x Ologn)
 // * SPACE COMPLEXITY O(N)
 Node* bruteForce(Node* head1, Node* head2) {

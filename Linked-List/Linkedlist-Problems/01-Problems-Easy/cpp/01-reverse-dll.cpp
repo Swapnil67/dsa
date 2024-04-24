@@ -119,3 +119,5 @@ int main() {
   head = reverseDLLOptimal(head);
   printDLL(head);
 }
+
+// * g++ --std=c++17 01-reverse-dll.cpp -o 01-reverse-dll && ./01-reverse-dll
