@@ -34,7 +34,7 @@ class Node {
 };
 
 // * ------------------- Utility Functions ---------------------
-
+// * Array to LL
 Node* arrayToLL(std::vector<int> arr) {
   if(!arr.size()) return nullptr;
   Node* head = new Node(arr[0]);
@@ -71,6 +71,8 @@ Node* makeLoop(Node* head) {
 // * TIME COMPLEXITY O(N) + 2*O(logN)
 // * SPACE COMPLEXITY O(N)
 int bruteForce(Node* head) {
+  if(head == nullptr || head->next == nullptr) return nullptr;
+
   Node* temp = head;
   int timer = 0;
   std::map<Node*, int> nodeMap;
@@ -95,6 +97,8 @@ int bruteForce(Node* head) {
 // * TIME COMPLEXITY O(N/2) + O(N)
 // * SPACE COMPLEXITY O(1)
 int optimal(Node* head) {
+  if(head == nullptr || head->next == nullptr) return nullptr;
+
   Node* slow = head;
   Node* fast = head;
 

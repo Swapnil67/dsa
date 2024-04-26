@@ -41,9 +41,23 @@ void printDLL(Node* head) {
   std::cout<<std::endl;
 }
 
+Node* reverseDLL(Node* head) {
+  Node* temp = head;
+  Node* back = nullptr;
+  while(temp) {
+    back = temp->prev;
+    temp->prev = temp->next;
+    temp->next = back;
+    temp = temp->prev;
+  }
+  return back->prev;
+}
+
 int main() {
   std::vector<int> arr = { 1,2,3,4,5,6 };
   Node* head = arrayToDLL(arr);
+  printDLL(head);
+  head = reverseDLL(head);
   printDLL(head);
   return 0;
 }

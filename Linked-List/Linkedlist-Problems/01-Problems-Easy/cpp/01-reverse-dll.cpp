@@ -105,7 +105,6 @@ Node* reverseDLLOptimal(Node* head) {
   }
 
   return last->prev;
-
 }
 
 int main() {

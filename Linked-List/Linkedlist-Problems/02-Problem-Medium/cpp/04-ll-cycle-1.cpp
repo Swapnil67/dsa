@@ -36,7 +36,7 @@ class Node {
 };
 
 // * ------------------- Utility Functions ---------------------
-
+// * Array to LL
 Node* arrayToLL(std::vector<int> arr) {
   if(!arr.size()) return NULL;
 
@@ -52,6 +52,7 @@ Node* arrayToLL(std::vector<int> arr) {
   return head;
 }
 
+// * Traverse the LL
 void printLL(Node* head) {
   Node* temp = head;
   while(temp) {
@@ -61,8 +62,10 @@ void printLL(Node* head) {
   std::cout<<std::endl;
 }
 
+// * Make Loop in LL
 Node* makeLoop(Node* head) {
   Node* temp = head;
+  // * Go till temp's tail
   while(temp->next) {
     temp = temp->next;
   }
@@ -124,4 +127,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 04-detect-loop-ll.cpp -o 04-detect-loop-ll && ./04-detect-loop-ll
+// * g++ --std=c++17 04-ll-cycle-1.cpp -o 04-ll-cycle-1 && ./04-ll-cycle-1
