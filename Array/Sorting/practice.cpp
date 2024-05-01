@@ -17,127 +17,39 @@ void print(vector<int>arr) {
   cout<<endl;
 }
 
+// * --------------------- Selection Sort ---------------------
+
 // * Takes the minimum at front
 void selectionSort(vector<int> &arr) {
-  int n = arr.size();
-  for(int i=0; i<n; i++) {
-    int smallestIdx = i;
-    for(int j=i+1; j<n; j++) {
-      if(arr[smallestIdx] > arr[j]) {
-        smallestIdx = j;
-      }
-    }
-    swap(arr[i], arr[smallestIdx]);
-  }
+  // TODO
 }
+
+// * --------------------- Bubble Sort ---------------------
+
 
 // * Push the largest element at last
 void bubbleSort(vector<int> &arr){
-  int n = arr.size();
-  for(int i=0; i<n; i++) {
-    bool swapped = false;
-    for(int j=0; j<n-1; j++) {
-      if(arr[j] > arr[j+1]) {
-        swap(arr[j], arr[j+1]);
-        swapped = true;
-      }
-    }
-    if(swapped == false) break;
-  }
+  // TODO
 }
+
+// * --------------------- Insertion Sort ---------------------
 
 // * Shift the elements
 void insertionSort(vector<int> &arr) {
-  for(int i=1; i<arr.size(); i++) {
-    int temp = arr[i];
-    int j = i-1;
-    for(; j>=0; j--) {
-      if(arr[j] > temp) {
-        arr[j+1] = arr[j];
-      } else {
-        break;
-      }
-    }
-    arr[j+1] = temp;
-  }
+  // TODO
 }
 
-int findPartitionIdx(vector<int>&arr, int low, int high) {
-  int pivot = arr[low];
-  int i = low, j = high;
-
-  while(i < j) {
-    cout<<"i "<<i<<" "<<"j "<<j<<endl;
-    // * Find the element from left which is greater than pivot
-    while(arr[i] <= pivot && i <= high) {
-      i++;
-    }
-    // * Find the element from right which is smaller than pivot
-    while(arr[j] > pivot && j>=low) {
-      j--;
-    }
-
-    if(i<j) swap(arr[i], arr[j]);
-  }
-
-  // * Put the partition element at its correct place
-  swap(arr[low], arr[j]);
-
-  return j;
-}
+// * --------------------- Quick Sort ---------------------
 
 void quickSort(vector<int>&arr, int low, int high) {
-  while(low < high) {
-    int partitionIdx = findPartitionIdx(arr, low, high);
-    // cout<<"partitionIdx "<<partitionIdx<<endl;
-    quickSort(arr, low, partitionIdx);
-    quickSort(arr, partitionIdx+1, high);
-    return;
-  }
+  // TODO
 }
 
 // * --------------------- Merge Sort ---------------------
 
-void merge(vector<int> &arr, int low, int mid, int high)  {
-  vector<int> temp;
-  int left = low;
-  int right = mid+1;
-
-  while(left <= mid && right <= high) {
-    if(arr[left] <= arr[right]) {
-      temp.push_back(arr[left]);
-      left++;
-    }
-    else {
-      temp.push_back(arr[right]);
-      right++;
-    }
-  }
-
-  while(left <= mid) {
-    temp.push_back(arr[left]);
-    left++;
-  }
-
-  while(right <= high) {
-    temp.push_back(arr[right]);
-    right++;
-  }
-
-  for(int i = low; i <= high; i++) {
-    arr[i] = temp[i-low];
-  } 
-}
-
 // * Divide & Merge
 void mergeSort(vector<int>&arr, int low, int high) {
-  if(low >= high) {
-    return;
-  }
-  int mid = (low + high) / 2;
-  mergeSort(arr, low, mid);
-  mergeSort(arr, mid+1, high);
-  merge(arr, low, mid, high);
+  // TODO
 }
 
 int main() {
@@ -158,7 +70,7 @@ int main() {
   // * Merge Sort
   // mergeSort(arr, 0, n-1);
   // * Quick Sort
-  quickSort(arr, 0, n-1);
+  // quickSort(arr, 0, n-1);
 
   print(arr);
   return 0;
