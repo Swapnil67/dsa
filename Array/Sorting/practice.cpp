@@ -62,8 +62,38 @@ void insertionSort(vector<int> &arr) {
   }
 }
 
-void quickSort(vector<int>&arr, int low, int high) {
+int findPartitionIdx(vector<int>&arr, int low, int high) {
+  int pivot = arr[low];
+  int i = low, j = high;
 
+  while(i < j) {
+    cout<<"i "<<i<<" "<<"j "<<j<<endl;
+    // * Find the element from left which is greater than pivot
+    while(arr[i] <= pivot && i <= high) {
+      i++;
+    }
+    // * Find the element from right which is smaller than pivot
+    while(arr[j] > pivot && j>=low) {
+      j--;
+    }
+
+    if(i<j) swap(arr[i], arr[j]);
+  }
+
+  // * Put the partition element at its correct place
+  swap(arr[low], arr[j]);
+
+  return j;
+}
+
+void quickSort(vector<int>&arr, int low, int high) {
+  while(low < high) {
+    int partitionIdx = findPartitionIdx(arr, low, high);
+    // cout<<"partitionIdx "<<partitionIdx<<endl;
+    quickSort(arr, low, partitionIdx);
+    quickSort(arr, partitionIdx+1, high);
+    return;
+  }
 }
 
 // * --------------------- Merge Sort ---------------------
@@ -111,9 +141,9 @@ void mergeSort(vector<int>&arr, int low, int high) {
 }
 
 int main() {
-  // vector<int> arr = { 9,7,1,10,5 };
+  vector<int> arr = { 9,7,1,10,5 };
   // vector<int> arr = { 7,5,1,9 };
-  vector<int> arr = { 17,27,9,2,10 };
+  // vector<int> arr = { 17,27,9,2,10 };
   // vector<int> arr = { 5,2,3,7,1 };
   int n = arr.size();
 
@@ -126,9 +156,9 @@ int main() {
   // * Insertion Sort
   // insertionSort(arr);
   // * Merge Sort
-  mergeSort(arr, 0, n-1);
+  // mergeSort(arr, 0, n-1);
   // * Quick Sort
-  // quickSort(arr, 0, n-1);
+  quickSort(arr, 0, n-1);
 
   print(arr);
   return 0;
