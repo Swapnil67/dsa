@@ -11,31 +11,35 @@ void print(int arr[], int size) {
 
 // * Dry Run
 /*
+* temp = i
+
 *  j i
 * 17,27,9,2,10
-* 17,17,9,2,10
+* 17,27,9,2,10 // * arr[j] > temp -- (false)
 *       
-*    j  i
-* 17,27,9,2,10 -> (j>temp) j--
-*  j    i
-* 17,27,27,2,10
-* 17,17,27,2,10
-* 9,17,27,2,10
+*     j   i
+* 17, 27, 9, 2, 10 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
+*  j      i
+* 17, 27, 27, 2, 10 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
+ 
+* j         i
+*   17, 17, 27, 2, 10 -> Inner loop Ended -> arr[j+1] = temp
+* 9, 17, 27, 2, 10
 
 *       j i
-* 9,17,27,2,10 -> (j>temp) j--
+* 9,17,27,2,10 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
 *    j  
-* 9,17,27,27,10 -> (j>temp) j--
+* 9,17,27,27,10 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
 * j    
-* 9,17,17,27,10 -> (j>temp) j--
+* 9,17,17,27,10 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
 *
 * 9,9,17,27,10
 * 2,9,17,27,10
 
 *         j  i
-* 2,9,17,27,10 -> (j>temp) j--
+* 2,9,17,27,10 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
 *      j 
-* 2,9,17,27,27 -> (j>temp) j--
+* 2,9,17,27,27 -> (arr[j] > temp) arr[j+1] = arr[j] and j--
 *   j
 * 2,9,17,17,27
 * 2,9,10,17,27

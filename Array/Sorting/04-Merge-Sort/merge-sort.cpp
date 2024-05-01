@@ -45,14 +45,18 @@ void mergeArrays(vector<int> &arr, int low, int mid, int high) {
 
 }
 
-// * TIME COMPLEXITY O(NlogN)
+// * TIME COMPLEXITY O(N) * O(LogN) = O(NlogN)
 // * SPACE COMPLEXITY O(N) - (for temp array)
 void mergeSort(vector<int> &arr, int low, int high) {
+
+  // * O(logN)
   if(low == high) return;
   int mid = (low + high) / 2;
   cout<<"low "<<low<<" high "<<high<<" mid "<<mid<<endl;
   mergeSort(arr, low, mid);
   mergeSort(arr, mid+1, high);
+
+  // * O(N)
   mergeArrays(arr, low, mid, high);
 }
 

@@ -17,64 +17,122 @@ void print(vector<int>arr) {
   cout<<endl;
 }
 
-//* Logic of inner and outer loop time complexity
-// * smallest number is always insignificant and hence discarded
-// * i loop took O(n) while j loop took O(n+1) = n , (n-1) (n-2) ... 3 2 1 0 = n(n-1)/2 = n^2/2 - n/2 = n^2
-void selectionSort(vector<int> arr) {
-// * Smallest element goes to left
+// * Takes the minimum at front
+void selectionSort(vector<int> &arr) {
+  int n = arr.size();
+  for(int i=0; i<n; i++) {
+    int smallestIdx = i;
+    for(int j=i+1; j<n; j++) {
+      if(arr[smallestIdx] > arr[j]) {
+        smallestIdx = j;
+      }
+    }
+    swap(arr[i], arr[smallestIdx]);
+  }
 }
 
-// void bubbleSort(vector<int> arr) {
-// * Largest element goes to right
-// * Time Complexity 
-/* * 
-
-*/
-//   int n = arr.size();
-//   for(int i=0; i<n; i++) {
-//     bool is_swapp = false;
-//     for(int j=i+1; j<n-i; j++) {
-//       // cout<<arr[i]<<" "<<arr[j]<<endl;
-//       if(arr[i] > arr[j]) {
-//         is_swapp = true;
-//         swap(arr[i], arr[j]);
-//       }
-//     }
-//     if(is_swapp == false) {
-//       break;
-//     }
-//   }
-//   print(arr);
-// }
-
-void bubbleSort(vector<int> arr){
+// * Push the largest element at last
+void bubbleSort(vector<int> &arr){
   int n = arr.size();
-  for(int i = 0; i < n; i++){
-    bool is_swap = false;
-    for(int j = i + 1; j < n-i; j++){
-      if(arr[i] > arr[j]){
-        is_swap = true;
-        swap(arr[i],arr[j]);
+  for(int i=0; i<n; i++) {
+    bool swapped = false;
+    for(int j=0; j<n-1; j++) {
+      if(arr[j] > arr[j+1]) {
+        swap(arr[j], arr[j+1]);
+        swapped = true;
       }
+    }
+    if(swapped == false) break;
+  }
+}
 
-      if(!is_swap) return;
+// * Shift the elements
+void insertionSort(vector<int> &arr) {
+  for(int i=1; i<arr.size(); i++) {
+    int temp = arr[i];
+    int j = i-1;
+    for(; j>=0; j--) {
+      if(arr[j] > temp) {
+        arr[j+1] = arr[j];
+      } else {
+        break;
+      }
+    }
+    arr[j+1] = temp;
+  }
+}
+
+void quickSort(vector<int>&arr, int low, int high) {
+
+}
+
+// * --------------------- Merge Sort ---------------------
+
+void merge(vector<int> &arr, int low, int mid, int high)  {
+  vector<int> temp;
+  int left = low;
+  int right = mid+1;
+
+  while(left <= mid && right <= high) {
+    if(arr[left] <= arr[right]) {
+      temp.push_back(arr[left]);
+      left++;
+    }
+    else {
+      temp.push_back(arr[right]);
+      right++;
     }
   }
-  print(arr);
+
+  while(left <= mid) {
+    temp.push_back(arr[left]);
+    left++;
+  }
+
+  while(right <= high) {
+    temp.push_back(arr[right]);
+    right++;
+  }
+
+  for(int i = low; i <= high; i++) {
+    arr[i] = temp[i-low];
+  } 
 }
 
-
-void insertionSort(vector<int> arr) {
+// * Divide & Merge
+void mergeSort(vector<int>&arr, int low, int high) {
+  if(low >= high) {
+    return;
+  }
+  int mid = (low + high) / 2;
+  mergeSort(arr, low, mid);
+  mergeSort(arr, mid+1, high);
+  merge(arr, low, mid, high);
 }
 
 int main() {
   // vector<int> arr = { 9,7,1,10,5 };
   // vector<int> arr = { 7,5,1,9 };
-  // vector<int> arr = { 17,27,9,2,10 };
-  vector<int> arr = { 5,2,3,7,1 };
+  vector<int> arr = { 17,27,9,2,10 };
+  // vector<int> arr = { 5,2,3,7,1 };
+  int n = arr.size();
+
   print(arr);
-  selectionSort(arr);
+
+  // * Selection Sort
+  // selectionSort(arr);
+  // * Bubble Sort
   // bubbleSort(arr);
+  // * Insertion Sort
   // insertionSort(arr);
+  // * Merge Sort
+  mergeSort(arr, 0, n-1);
+  // * Quick Sort
+  // quickSort(arr, 0, n-1);
+
+  print(arr);
   return 0;
 }
+
+// * Run the code
+// * g++ --std=c++17 practice.cpp -o practice && ./practice 

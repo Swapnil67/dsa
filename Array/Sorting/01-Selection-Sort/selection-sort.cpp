@@ -8,6 +8,9 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
+// * Takes the minimum at front
+// * Time Complexity O(N^2)
+// * Space Complexity O(1)
 void selectionSort(int arr[], int size) {
   for(int i=0; i<size-1; i++) {
     int minIndex = i;
@@ -38,3 +41,6 @@ int main() {
   print(arr, size); 
   return 0;
 }
+
+// * Run the code
+// * g++ --std=c++17 selection-sort.cpp -o selection-sort && ./selection-sort 

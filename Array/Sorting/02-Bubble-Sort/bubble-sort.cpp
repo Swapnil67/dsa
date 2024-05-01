@@ -14,6 +14,7 @@ void print(int arr[], int size) {
   cout<<endl;
 }
 
+// * Push the largest element at last
 // * For every i there are n-i comparisions
 void bubbleSort(int arr[], int n) {
   for(int i=0;i<n;i++) {
