@@ -1,5 +1,5 @@
 /**
- * *  Delete all occurrences of a given key in a doubly linked list
+ * * Delete all occurrences of a given key in a doubly linked list
  * * A DLL is a data structure that consists of sequentially linked nodes, and the nodes have reference to both
  * * the previous and the next nodes in the sequence of nodes.
  *
