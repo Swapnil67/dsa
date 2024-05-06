@@ -82,6 +82,8 @@ Node* getKthNode(Node* head, int k) {
 
 // * Reverse LL
 // * using the 3-pointer approach
+// * TIME COMPLEXITY  O(N) + O(N) = O(2N)
+// * SPACE COMPLEXITY O(1)
 Node* reverseLL(Node *head) {
    Node* temp = head;  
    

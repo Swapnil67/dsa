@@ -25,11 +25,7 @@ void reverse(vector<int> &arr) {
 }
 
 int main() {
-  vector<int> arr;
-  arr.push_back(1);
-  arr.push_back(2);
-  arr.push_back(3);
-  arr.push_back(4);
+  vector<int> arr = { 1,2,3,4 };
   cout<<"Before Reversing"<<endl;
   print(arr);
   reverse(arr);
