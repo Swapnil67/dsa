@@ -86,8 +86,8 @@ void optimal(std::vector<int> &arr, int k) {
 int main() {
   // int k = 2;
   // std::vector<int> arr = { 1,2,3,4,5 };
-  int k = 3;
-  std::vector<int> arr = { 1,2,3,4,5 };
+  int k = 1;
+  std::vector<int> arr = { 7,1,2,3,4,5,6 };
   std::cout<<"Before Rotation"<<std::endl;
   printArr(arr);
 

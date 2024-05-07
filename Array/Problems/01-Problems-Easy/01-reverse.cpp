@@ -2,6 +2,8 @@
 #include<vector>
 using namespace std;
 
+// * https://www.naukri.com/code360/problems/reverse-the-array_1262298
+
 void swap(int &a, int &b) {
   int temp = a;
   a = b;

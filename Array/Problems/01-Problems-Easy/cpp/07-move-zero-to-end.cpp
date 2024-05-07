@@ -93,6 +93,9 @@ void optimal(std::vector<int> &arr) {
     }
   }
 
+  // * No 0 found in array
+  if(j == -1) return;
+
   // * Now loop from j+1 and replace non-zero elements with zero elements
   for(int i=j+1; i<n; i++) {
     if(arr[i] != 0) {
@@ -103,7 +106,11 @@ void optimal(std::vector<int> &arr) {
 }
 
 int main() {
-  std::vector<int> arr = { 1, 2, 0, 0, 2, 3 };
+
+  // std::vector<int> arr = { 1, 2, 0, 0, 2, 3 };
+  // std::vector<int> arr = { 0, 0, 0, 1 };
+  std::vector<int> arr = { 8, 6, 9 };
+
 
   std::cout<<"Before Moving Zero's"<<std::endl;
   printArr(arr);
