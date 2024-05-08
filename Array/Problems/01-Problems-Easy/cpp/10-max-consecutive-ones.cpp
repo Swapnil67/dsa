@@ -11,7 +11,7 @@
  * * Output : 2
 
  * * https://leetcode.com/problems/max-consecutive-ones/description/
- * * https://www.naukri.com/code360/problems/traffic_6682625
+ * * https://www.naukri.com/code360/problems/maximum-consecutive-ones_3843993
 */
 
 #include<iostream>

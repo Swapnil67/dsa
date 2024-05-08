@@ -48,6 +48,7 @@ int bruteForce(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------`
+// * Using Hashed array
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 int betterApproach(std::vector<int> arr) {
@@ -65,23 +66,25 @@ int betterApproach(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
+// * Using Sum of n natural numbers
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int optimal(std::vector<int>arr) {
   int n = arr.size();
   long long sumN = n*(n+1)/2;
   long long sumArr = 0;
-  for(int i=0; i<n; i++) {
+  for(int i=0; i<=n; i++) {
     sumArr += arr[i];
   }
-  // std::cout<<sumN<<std::endl;
-  // std::cout<<sumArr<<std::endl;
+  // std::cout<<"sumN: "<<sumN<<std::endl;
+  // std::cout<<"sumArr: "<<sumArr<<std::endl;
   return sumN-sumArr;
 }
 
 int main() {
   // std::vector<int> arr = {3, 0, 1};
-  std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
+  // std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
+  std::vector<int> arr = { 4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0 };
   // int missingNumber = bruteForce(arr);
   // int missingNumber = betterApproach(arr);
   int missingNumber = optimal(arr);
@@ -89,4 +92,5 @@ int main() {
   return 0;
 }
 
+// * Run the code
 // * g++ --std=c++17 09-missing-number.cpp -o 09-missing-number && ./09-missing-number
