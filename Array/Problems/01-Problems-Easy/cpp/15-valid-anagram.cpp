@@ -19,6 +19,9 @@
 #include<string>
 #include<iostream>
 
+// * Hashmap
+// * TIME COMPLEXITY O(S) + O(tlogt) [Ordered Map]
+// * SPACE COMPLEXITY O(logS)
 bool validAnagram(std::string s, std::string t) {
   if(s.size() != t.size()) return false;
 
@@ -37,6 +40,26 @@ bool validAnagram(std::string s, std::string t) {
   return true;
 }
 
+// * Hashed Array
+// * TIME COMPLEXITY O(S) + O(t)
+// * SPACE COMPLEXITY O(1)
+bool validAnagram2(std::string s, std::string t) {
+  if(s.size() != t.size()) return false;
+  std::vector alphabets(26, 0);
+  for(char c: s) {
+    alphabets[int(c) - int('a')] += 1;
+  }
+
+  for(char c: t) {
+    // * If the char in hash array not found return false
+    if(alphabets[int(c) - int('a')] == 0)
+      return false;
+    // * decrement the count of char from hash array
+    alphabets[int(c) - int('a')] -= 1;    
+  }
+  return true;
+}
+
 int main() {
   // * testcase 1
   // std::string s = "anagram", t = "nagaram";
@@ -46,6 +69,7 @@ int main() {
   std::string s = "aacc", t = "ccac";
 
   bool isValidAnagram = validAnagram(s, t);
+  // bool isValidAnagram = validAnagram2(s, t);
   std::cout<<"String A: "<<s<<std::endl;
   std::cout<<"String B: "<<t<<std::endl;
   std::cout<<"Is Calid Anagram "<<isValidAnagram<<std::endl;

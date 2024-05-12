@@ -35,6 +35,47 @@ void swap(int &a, int &b) {
 
 // * ------------------------- APPROACH 2: Better FORCE APPROACH -------------------------`
 // * Count 0s, 1s and 2s
+// * Nested Loop
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(1)
+std::vector<int> betterApproach(std::vector<int> arr) {
+  int zeroCount = 0, oneCount = 0, twoCount = 0;
+  int n = arr.size();
+
+  // * O(N)
+  for(int i=0; i<n; i++) {
+    if(arr[i] == 0) zeroCount++;
+    else if(arr[i] == 1) oneCount++;
+    else if(arr[i] == 2) twoCount++;
+  }
+
+  // std::cout<<"Zero Count "<<zeroCount<<std::endl;
+  // std::cout<<"One Count "<<oneCount<<std::endl;
+  // std::cout<<"Two Count "<<twoCount<<std::endl;
+
+  // * O(zeroCount)
+  if(zeroCount > 0) {
+    for(int i=0; i<zeroCount; i++) {
+      arr[i] = 0;
+    }
+  }
+  
+  // * O(oneCount)
+  if(oneCount > 0) {
+    for(int i=zeroCount; i<zeroCount+oneCount; i++) {
+      arr[i] = 1;
+    }
+  }
+
+  // * O(twoCount)
+  if(twoCount > 0) {
+    for(int i=zeroCount+oneCount; i<n; i++) {
+      arr[i] = 2;
+    }
+  }
+
+  return arr;
+}
 
 // * ------------------------- APPROACH 3: Optimal FORCE APPROACH -------------------------`
 // * Dutch Flag Algorithm
@@ -64,11 +105,15 @@ int main() {
   std::vector<int> arr = { 2, 2, 2, 2, 0, 0, 1, 0 };
   // * testcase 2
   // std::vector<int> arr = { 1, 1, 1, 1, 1 };
+  // * testcase 3
+  // std::vector<int> arr = { 1, 2, 1, 2, 1, 1, 1 };
 
-  std::cout<<"Before Sorting"<<std::endl;
+  std::cout<<" ----- Before Sorting ----- "<<std::endl;
   printArr(arr);
+
+  // std::vector<int> ans = betterApproach(arr);
   std::vector<int> ans = optimalApproach(arr);
-  std::cout<<"After Sorting"<<std::endl;
+  std::cout<<" ----- After Sorting ----- "<<std::endl;
   printArr(ans);
   return 0;
 }
