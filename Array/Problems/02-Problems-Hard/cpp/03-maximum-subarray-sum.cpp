@@ -45,22 +45,27 @@ int optimalApproach(std::vector<int>arr) {
   int n = arr.size();
   int maxSum = INT_MIN, sum = 0;
   for(int i=0; i<n; i++) {
-    sum = sum + arr[i];
+    sum = std::max(sum + arr[i], arr[i]);
     maxSum = std::max(maxSum, sum);
-    if(sum < 0) {
-      sum = 0;
-    }
   }
+  // * OR
+  // for(int i=0; i<n; i++) {
+  //   sum = sum + arr[i];
+  //   maxSum = std::max(maxSum, sum);
+  //   if(sum < 0) {
+  //     sum = 0;
+  //   }
+  // }
   return maxSum;
 }
 
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {-3, -5, -6};
+  // std::vector<int> arr = {-3, -5, -6}; // * -3
   // * testcase 2
-  std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-  
+  std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * 6
+
   // int maxSum = bruteForce(arr);
   int maxSum = optimalApproach(arr);
   std::cout<<"Maximum subarray sum: "<<maxSum<<std::endl;
