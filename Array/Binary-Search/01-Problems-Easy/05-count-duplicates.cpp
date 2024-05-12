@@ -2,7 +2,7 @@
 /*
  * 
  * 
- * https://www.codingninjas.com/codestudio/problems/occurrence-of-x-in-a-sorted-array_630456?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf 
+ * https://www.codingninjas.com/codestudio/problems/occurrence-of-x-in-a-sorted-array_630456
 */
 #include<iostream>
 using namespace std;
