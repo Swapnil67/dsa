@@ -69,15 +69,8 @@ vector<int> sumOfArrays(vector<int> &a, vector<int> &b) {
 
 int main() {
   vector<int> ans;
-  vector<int> a;
-  a.push_back(1);
-  a.push_back(8);
-  a.push_back(3);
-
-  vector<int> b;
-  b.push_back(4);
-  b.push_back(6);
-  b.push_back(6);
+  vector<int> a = { 1, 8, 3 };
+  vector<int> b = { 4, 6, 6 };
 
   cout<<"a: ";
   print(a);

@@ -30,7 +30,7 @@ std::vector<int> rearrangeBySign(std::vector<int> &arr) {
   // * Step 1:
   // * Put the +ve & -ve nums in respective arrays;
   for(int i=0; i<n; i++) {
-    if(arr[i] > 0) {
+    if(arr[i] >= 0) {
       positiveNums.push_back(arr[i]);
     }
     else {
