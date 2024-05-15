@@ -15,7 +15,6 @@
 #include<map>
 #include<iostream>
 
-
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {
     std::cout<<arr[i]<<" ";
@@ -67,7 +66,7 @@ int betterApproach(std::vector<int> arr) {
 * Re check if that element exists more than n/2 times
 */
 // * TIME COMPLEXITY O(2N)
-// * SPACE COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> arr) {
   int cnt = 0, n = arr.size();
   int ele;

@@ -17,7 +17,6 @@
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
 */
 
-
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -27,6 +26,9 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
+// * Two Pointers
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 std::vector<int> twoSum(std::vector<int> arr, int target) {
   int n = arr.size();
   int l = 0, r = n-1;
