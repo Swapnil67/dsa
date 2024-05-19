@@ -6,8 +6,7 @@
  * Input: strs = ["eat","tea","tan","ate","nat","bat"]
  * Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
 
-
- * https://www.naukri.com/code360/problems/superior-elements_6783446
+ * https://leetcode.com/problems/group-anagrams/
 */
 
 #include<map>
