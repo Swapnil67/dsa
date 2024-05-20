@@ -25,6 +25,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Set Data Structure
 // * TIME COMPLEXITY O(NLogN) + O(N)
 // * SPACE COMPLEXITY O(N)
 int bruteForce(std::vector<int> arr) {
@@ -45,7 +46,7 @@ int bruteForce(std::vector<int> arr) {
   return idx;
 }
 
-// * ------------------------- APPROACH 2: Optimal FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> arr) {

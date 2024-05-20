@@ -32,7 +32,7 @@ void leftRotate(std::vector<int> &arr) {
   int n = arr.size();
 
   // * keep the 1st element saved
-  int temp = arr[0];
+  int firstEle = arr[0];
 
   // * Start the loop from '1' index
   for(int i=1; i<n; i++) {
@@ -41,7 +41,7 @@ void leftRotate(std::vector<int> &arr) {
   }
 
   // * Put the first element in last position
-  arr[n-1] = temp;
+  arr[n-1] = firstEle;
 }
 
 int main() {

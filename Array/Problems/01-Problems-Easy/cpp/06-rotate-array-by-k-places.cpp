@@ -45,6 +45,12 @@ void bruteForce(std::vector<int> &arr, int k) {
   for(int i=d; i<n; i++) {
     arr[i-k] = arr[i];
   }
+  // * OR
+  // for(int i=0; i<n-k; i++) {
+  //   // std::cout<<i<<" "<<arr[i]<<" | "<<k+i<<" -> "<<arr[k+i]<<std::endl;
+  //   arr[i] = arr[k+i];
+  // }
+
 
   // * Now put the temp elements back to array
   // * O(d)
