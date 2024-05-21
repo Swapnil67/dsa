@@ -52,16 +52,25 @@ int bruteForce(std::vector<int> arr) {
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 int betterApproach(std::vector<int> arr) {
+  // * Find the max ele in array
+  int maxEle = INT_MIN;
   int n = arr.size();
-  std::vector<int> temp(n, 0);
   for(int i=0; i<n; i++) {
-    temp[arr[i]] = 1;
+    maxEle = std::max(maxEle, arr[i]);
   }
-  // printArr(temp);
-  for(int i=1; i<n; i++) {
-    if(temp[i] == 0) 
-      return i;
+  
+  // * Create and Initialize the hashed array
+  std::vector<int> hashedArr(maxEle, 0);
+
+  // * Fill the hashed array
+  for(int i=0; i<n; i++) {
+    hashedArr[arr[i]] = 1;
   }
+
+  for(int i=0; i<hashedArr.size(); i++) {
+    if(hashedArr[i] == 0) return i;
+  }
+  
   return 0;
 }
 

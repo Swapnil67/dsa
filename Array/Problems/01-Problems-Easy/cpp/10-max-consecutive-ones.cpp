@@ -23,10 +23,10 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * This is the only optimal approach
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr) {
+int maxConsecutiveOnes(std::vector<int> arr) {
   int n = arr.size(), c = 0, maxOnes = 0;
   for(int i=0; i<n; i++) {
     if(arr[i] == 1) {

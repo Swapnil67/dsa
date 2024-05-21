@@ -30,6 +30,7 @@ void swap(int &a, int &b) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Create new array
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 void bruteForce(std::vector<int> &arr) {
@@ -58,6 +59,7 @@ void bruteForce(std::vector<int> &arr) {
 
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------`
+// * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 void better(std::vector<int> &arr) {
