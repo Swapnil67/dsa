@@ -1,3 +1,4 @@
+#include<map>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -175,7 +176,6 @@ int maxConsecutiveOnes(std::vector<int> arr) {
   return maxOnes;
 }
 
-
 // * Find the single number
 int findSingleNumber(std::vector<int> arr) {
   int n = arr.size();
@@ -194,6 +194,38 @@ int findSingleNumber(std::vector<int> arr) {
   }
   return -1;
 }
+
+// * Longest Subarray With Sum K
+int findLongestSubarraySum(std::vector<int> arr, int k) {
+  int n = arr.size(), count = 0;
+  std::map<int, int> sumMap;
+  int prefixSum = 0;
+
+  for(int i=0; i<n; i++) {
+    prefixSum += arr[i];
+    std::cout<<"prefixSum "<<prefixSum<<std::endl;
+    if(prefixSum == k) {
+      count = std::max(count, i+1);
+    }
+
+    // * Check if previous prefix sum exists
+    int rem = prefixSum-k;
+    if(sumMap.find(rem) != sumMap.end()) {
+      int len = i - sumMap[rem];
+      count = std::max(count, len);
+    }
+
+    // * Add this prefixSum to map if not present
+    if(sumMap.find(prefixSum) == sumMap.end()) {
+      sumMap[prefixSum] = i;
+    }
+
+  } 
+
+  return count;
+
+}
+
 
 int main() {
   // * Problem 1
@@ -259,6 +291,13 @@ int main() {
   // int singleNumber = findSingleNumber(arr);
   // std::cout<<"Single Number "<<singleNumber<<std::endl;
 
+  // * Problem 11
+  // std::vector<int> arr = {1, 2, 3, 1, 1, 1};
+  std::vector<int> arr = {2, 0, 0, 3};
+  int k = 3;
+  printArr(arr);
+  int longestSubarray = findLongestSubarraySum(arr, k);
+  std::cout << "Longest subarray sum " << longestSubarray << std::endl;
 }
 
 // * Run the code
