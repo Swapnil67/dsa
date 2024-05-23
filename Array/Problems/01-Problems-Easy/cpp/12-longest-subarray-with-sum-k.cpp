@@ -35,6 +35,7 @@ int bruteForce(std::vector<int> arr, int k) {
 }
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------`
+// * Solution for positive and negatives elements in arrays
 // * Map Data Structure
 // * TIME COMPLEXITY O(NlogN) [Ordered Map]
 // * TIME COMPLEXITY O(N) [Best Case UnOrderd Map] or O(N^2) [Worst Case UnOrdered Map]
@@ -67,15 +68,19 @@ int betterApproach(std::vector<int>arr, long long k) {
 
 
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
+// * Solution for positive and zeros elements in arrays
 // * Two Pointer
-// TODO
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int>arr, long long k) {
   int l=0, r=0, len=0;
   long long sum = 0;
+  // * O(N)
   while(l <= r) {
     sum = sum + arr[l];
 
     if(sum > k) {
+      // * O(N)
       while(sum < k) {
         sum = sum - arr[r];
         r++;
