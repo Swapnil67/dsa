@@ -3,12 +3,12 @@
  * write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
  * 
  * Example 1:
- * Input: arr = [ 1, 2, 2, 3, 3, 3, 5 ], target = 4
- * Output: 5
+ * Input: arr = [ 1, 4, 7, 8, 10 ], target = 7
+ * Output: 2
 
  * Example 2:
- * Input: arr = [ -1, 0, 3, 5, 9, 12 ], target = 2
- * Output: -1
+ * Input: arr = [ 2, 4, 6, 7 ], target = 5
+ * Output: 2
  * 
  * https://www.naukri.com/code360/problems/implement-upper-bound_8165383
 */
