@@ -33,30 +33,30 @@ void bruteForce(std::vector<int> &arr, int k) {
   int n = arr.size();
   int d = n % k; // * Number of rotations
 
+  if(d == 0) return;
+
   // * Make a temp array of k elements
   // * O(d)
   std::vector<int> temp;
-  for(int i=0; i<=d; i++) {
+  for(int i=0; i<d; i++) {
+    // std::cout<<i<<" -> "<<arr[i]<<std::endl;
     temp.push_back(arr[i]);
   }
 
   // * From d index shift the elements
   // * O(n-d)
   for(int i=d; i<n; i++) {
-    arr[i-k] = arr[i];
+    arr[i-d] = arr[i];
   }
-  // * OR
-  // for(int i=0; i<n-k; i++) {
-  //   // std::cout<<i<<" "<<arr[i]<<" | "<<k+i<<" -> "<<arr[k+i]<<std::endl;
-  //   arr[i] = arr[k+i];
-  // }
-
 
   // * Now put the temp elements back to array
   // * O(d)
-  for(int i=n-k; i<n; i++) {
-    arr[i] = temp[i-(n-k)];
+  for(int i=n-d; i<n; i++) {
+    // std::cout<<i<<" -> "<<arr[i]<<std::endl;
+    arr[i] = temp[i-(n-d)];
+    j++;
   }
+
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`

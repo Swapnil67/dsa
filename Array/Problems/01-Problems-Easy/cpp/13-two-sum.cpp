@@ -27,19 +27,16 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 std::vector<int> bruteForce(std::vector<int>arr, int target) {
   int n = arr.size();
-  std::vector<int> ans;
   for(int i=0; i<n; i++) {
     for(int j=i+1; j<n; j++) {
       if(i == j) continue;
       if(arr[i] + arr[j] == target) {
         // std::cout<<"i "<<i<<" j "<<j<<" = "<<arr[i] + arr[j]<<std::endl;
-        ans.push_back(i);
-        ans.push_back(j);
-        break;
+        return { i, j }
       }
     }
   }
-  return ans;
+  return {};
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
@@ -57,13 +54,11 @@ std::vector<int> betterApproach(std::vector<int> arr, int target) {
     if(eleMap.find(rem) != eleMap.end()) {
       // * Found the sum 
       // std::cout<<"i "<<eleMap[rem]<<", j "<<i<<" = "<<arr[i] + eleMap[rem]<<std::endl;
-      ans.push_back(eleMap[rem]);
-      ans.push_back(i);
-      break;
+      return { hash[rem], i };
     }
     eleMap[arr[i]] = i;
   }
-  return ans;
+  return {};
 }
 
 

@@ -244,24 +244,34 @@ int findLongestSubarraySumV2(std::vector<int>arr, int k) {
   return count;
 }
 
+std::vector<int> findTwoSum(std::vector<int> arr, int target) {
+  int n = arr.size();
+  std::map<int, int>hash;
+  for(int i=0; i<n; i++) {
+    int rem = target - arr[i];
+    if(hash.find(rem) != hash.end()) {
+      return { hash[rem], i };
+    }
+    hash[arr[i]] = i;
+  }
+  return {};
+}
+
 int main() {
   // * Problem 1
   // std::vector<int> arr = {8, 3, 7, 2, 6};
   // int secondLargestEle = findSecondLargestEle(arr);
   // std::cout<<"2nd Largest Element: "<<secondLargestEle<<std::endl;
-
-  // * Problem 2
-  // std::vector<int> arr = {8, 3, 7, 2, 6};
   // int secondSmallestEle = findSecondSmallestEle(arr);
   // std::cout<<"2nd Smallest Element: "<<secondSmallestEle<<std::endl;
   
-  // * Problem 3
+  // * Problem 2
   // std::vector<int> arr = {1, 2, 2, 3, 3, 3, 4, 4, 5, 5};
   // printArr(arr);
   // int uniqueElements = removeDuplicates(arr);
   // std::cout<<"Unique Element: "<<uniqueElements<<std::endl;
 
-  // * Problem 4
+  // * Problem 3
   // std::vector<int> arr = {1, 2, 3, 4, 5};
   // printArr(arr);
   // rotateByOne(arr);
@@ -316,6 +326,19 @@ int main() {
   // int longestSubarray = findLongestSubarraySumV1(arr, k);
   // int longestSubarray = findLongestSubarraySumV2(arr, k);
   // std::cout << "Longest subarray sum " << longestSubarray << std::endl;
+
+
+  // * Problem 12
+  // std::vector<int> arr = {3, 4, 5, 6};
+  // int target = 7;
+  // std::vector<int> arr = {4, 5, 3, 6};
+  // int target = 10;
+  // printArr(arr);
+  // std::vector<int> ans = findTwoSum(arr, target);
+  // printArr(ans);
+
+  
+
 }
 
 // * Run the code

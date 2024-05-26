@@ -1,7 +1,9 @@
+#include<map>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
+  int n = arr.size();
+  for(int i=0; i<n; i++) { 
     std::cout<<arr[i]<<" ";
   }
   std::cout<<std::endl;
@@ -13,121 +15,120 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
-// * largest element in array
-int largestElement(std::vector<int> arr) {
-  int largestEle = INT_MIN;
+void reverse(std::vector<int> &arr, int l, int r) {
   int n = arr.size();
+  while(l < r) {
+    swap(arr[l++], arr[r--]);
+  }
+}
 
+
+// * 2nd largest element
+int findSecondLargestElement(std::vector<int> arr) {
+  int n = arr.size();
+  int maxEle = INT_MIN, secondMax = INT_MIN;
   for(int i=0; i<n; i++) {
-    largestEle = std::max(largestEle, arr[i]);
+    if(arr[i] > maxEle) {
+      secondMax = maxEle;
+      maxEle = arr[i];
+    }
+    else if(arr[i] > secondMax) {
+      secondMax = arr[i];
+    }
   }
-
-  return largestEle;
+  return secondMax;
 }
 
-// * 2nd largest element in array
-int secondLargestElementInArray(std::vector<int> arr) {
-  int slargest = INT_MIN, largest = INT_MIN;
+// * 2nd Smallest element
+int findSecondSmallestElement(std::vector<int> arr) {
   int n = arr.size();
+  int minEle = INT_MAX, secondMin = INT_MAX;
   for(int i=0; i<n; i++) {
-    if(arr[i] > largest) {
-      slargest = largest;
-      largest = arr[i];
+    if(arr[i] < minEle) {
+      secondMin = minEle;
+      minEle = arr[i];
     }
-    else if(arr[i] > slargest) {
-      slargest = arr[i];
+    else if(arr[i] < secondMin) {
+      secondMin = arr[i];
     }
   }
-  return slargest;
+  return secondMin;
 }
 
-// * 2nd Smallest element in array
-int secondSmallestElementInArray(std::vector<int> arr) {
-  int sSmallest = INT_MAX, smallest = INT_MAX;
+// * Remove Duplicates
+void removeDuplicates(std::vector<int> &arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    if(arr[i] < smallest) {
-      sSmallest = smallest;
-      smallest = arr[i];
-    }
-    else if(arr[i] > smallest && arr[i] < sSmallest) {
-      sSmallest = arr[i];
-    }
-  }
-  return sSmallest;
-}
-
-// * Check if array is sorted
-bool checkIsSortedArray(std::vector<int> arr) {
-  bool isSorted = true;
-  int n = arr.size();
-  for(int i=0; i<n-1; i++) {
-    if (arr[i+1] <= arr[i]) {
-      isSorted = false;
-      break;
-    }
-  }
-  return isSorted;
-}
-
-// * Remove duplicates
-int removeDuplicates(std::vector<int> &arr) {
-  int i = 0;
-  for(int j=1; j<arr.size(); j++) {
-    if (arr[i] != arr[j]) {
-      arr[i + 1] = arr[j];
+  int i = 0, j = 1;
+  for(int j=1; j<n; j++) {
+    if(arr[i] != arr[j]) {
+      arr[i+1] = arr[j];
       i++;
     }
   }
-  return i+1;
 }
 
-void kRotateBruteForce(std::vector<int> &arr, int k) {
-  k = k-1;
+// * Rotate by one
+void rotateByOne(std::vector<int> &arr) {
   int n = arr.size();
-  int d = k % n; // * Rotation count
+  int firstEle = arr[0];
+  for(int i=1; i<n; i++) {
+    arr[i-1] = arr[i];
+  }
+  arr[n-1] = firstEle;
+}
 
-  std::cout<<"k: "<<k<<", n "<<n<<std::endl;
-  std::cout<<"Rotate: "<<d<<std::endl;
-
-  // * Put d elements into k
+// * Rotate by k places
+void rotateByKPlaces(std::vector<int> &arr, int k) {
+  int n = arr.size();
   std::vector<int> temp;
-  for(int i=0; i<=d; i++) {
+  int d = k % n;
+
+  if(d == 0) return;
+
+  // std::cout<<"d = "<<d<<std::endl;
+
+  // * Put first k elements in temp
+  for(int i=0; i<d; i++) {
+    // std::cout<<i<<" -> "<<arr[i]<<std::endl;
     temp.push_back(arr[i]);
   }
-  printArr(temp);
-
-  // * Shift elements after d to front
-  for(int i=0; i<n-d; i++) {
-    arr[i] = arr[(n-d)-i];
-  }
-  printArr(arr);
-
-  // * arr[0] = arr[0+(7-1)]
-  // * arr[0] = arr[6]
-
-  // * arr[0] = arr[1+(7-1)]
-  // * arr[0] = arr[7]
-
-  // * Put temp back to array
-  int j = 0;
+  
+  // * Now shift (k+1 - n) to start
   for(int i=d; i<n; i++) {
-    arr[i] = temp[j];
-    j++;
+    arr[i-d] = arr[i];
   }
 
-  // * arr[0] = arr[0+(7-4)]
-  // * arr[0] = arr[3]
-  // * arr[0] = arr[1+(7-4)]
-  // * arr[0] = arr[4]
+  // * Put temp back to array after (k+1 - n)
+  for(int i=n-d; i<n; i++) {
+    // std::cout<<i<<" -> "<<arr[i]<<std::endl;
+    arr[i] = temp[i-(n-d)];
+  }
+}
 
-  printArr(arr);
+// * Rotate by k places
+void rotateByKPlacesOptimal(std::vector<int> &arr, int k) {
+  int n = arr.size();
+  int d = k % n;
+  if(d == 0) return;
 
+  // * Reverse 0 - d;
+  reverse(arr, 0, d-1);
+  // printArr(arr);
+  
+  // * Reverse d n;
+  reverse(arr, d, n-1);
+  // printArr(arr);
+
+  // * Reverse whole arr;
+  reverse(arr, 0, n-1);
 }
 
 // * Move zeros to end
 void moveZerosToEnd(std::vector<int> &arr) {
-  int j = -1, n = arr.size();
+  int n = arr.size();
+
+  // * Get the index of first zero element
+  int j = 0;
   for(int i=0; i<n; i++) {
     if(arr[i] == 0) {
       j = i;
@@ -141,49 +142,210 @@ void moveZerosToEnd(std::vector<int> &arr) {
       j++;
     }
   }
+}
+
+// * Merge two sorted arrays
+std::vector<int> mergeTwoSortedArrays(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  int i = 0, j = 0, last = -1;
+  // std::cout<<n1<<" "<<n2<<std::endl;
+  std::vector<int> ans;
+  while(i < n1 && j < n2) {
+    if(a[i] > b[j]) {
+      if(b[j] != last) {
+        ans.push_back(b[j]);
+        last = b[j];
+      }
+      j++;
+    }
+    else {
+      if(last != a[i]) {
+        ans.push_back(a[i]);
+        last = a[i];
+      }
+      i++;
+    }
+  }
+
+  // * Put remaining a
+  while(i < n1) {
+    if(last != a[i]) {
+      ans.push_back(a[i]);
+      last = a[i];
+    }
+    i++;
+  }
+
+  // * Put remaining b
+  while(j < n2) {
+    if(last != b[j]) {
+      ans.push_back(b[j]);
+      last = b[j];
+    }
+    j++;
+  }
+
+  return ans;
+}
+
+// * Find Missing Number
+int findMissingNumber(std::vector<int> arr) {
+  int n = arr.size();
+
+  // * Find the largest element in array
+  int maxEle = INT_MIN;
+  for(int i=0; i<n; i++) {
+    maxEle = std::max(maxEle, arr[i]);
+  }
+
+  // * Create an array of length maxEle containing 0
+  std::vector<int> hashArr(maxEle, 0);
+
+  // * Fill the hashed array with array elements
+  for(int i=0; i<n; i++) {
+    hashArr[arr[i]] = 1;
+  }
+
+  // * Loop through the hashArr and return missing element
+  for(int i=0; i<maxEle; i++) {
+    if(hashArr[i] == 0) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+// * Max Consecutive Ones
+int findMaxConsecutiveOnes(std::vector<int> arr) {
+  int n = arr.size();
+  int maxOnes = 0, ones = 0;
+  for(int i=0; i<n; i++) {
+    if(arr[i] == 1) {
+      ones++;
+      maxOnes = std::max(ones, maxOnes);
+    }
+    else {
+      ones = 0;
+    }
+  }
+  return maxOnes;
+}
+
+// * Single Number
+int findSingleNumber(std::vector<int> arr) {
+  int n = arr.size();
+  int l = 0, r = n-1;
+  while(l <= r) {
+    int m = l + (r-l)/2;
+    if(arr[m] != arr[m+1] && arr[m] != arr[m-1]) {
+      return arr[m];
+    }
+    else if((m % 2 == 0 && arr[m] == arr[m+1]) || (m % 2 == 1 && arr[m] == arr[m-1])) {
+      l = m + 1;
+    }
+    else {
+      r = m - 1;
+    }
+  }
+  return -1;
+}
+
+
+// * two Single Number
+std::vector<int> findSingleNumber2(std::vector<int> a) {
+  int n = a.size();
+  int l=0, r=n-1;
+  std::vector<int> ans;
+  while(l <= r) {
+    int m = l + (r-l)/2;
+    if(a[m] != a[m-1] && a[m] != a[m+1]) {
+      ans.push_back(a[m]);
+    }
+    else if((m%2==0 && a[m] == a[m+1]) || (m%2==1 && a[m] == a[m-1])) {
+      l = m + 1;
+    }
+    else {
+      r = m - 1;
+    }
+    return ans;
+  }
 
 }
 
 int main() {
-  // std::vector<int> arr = {1,2,3,4,5,6,7};
-  // std::vector<int> arr = { 1, 1, 2, 3, 3, 4, 5, 5, 5 };
-  // std::vector<int> arr = { 3,1,2,7,10 };
-
-  // * Problem 1
-  // int largestElementAns = largestElement(arr);
-  // std::cout<<"Largest Element = "<<largestElementAns<<std::endl;
+  // * Problem 1 
+  // std::vector<int> arr = {8, 3, 7, 2, 6};
+  // printArr(arr);
+  // int secondLargestEle = findSecondLargestElement(arr);
+  // std::cout<<"2nd Largest Element: "<<secondLargestEle<<std::endl;
+  // int secondSmallestEle = findSecondSmallestElement(arr);
+  // std::cout<<"2nd Smallest Element: "<<secondSmallestEle<<std::endl;
 
   // * Problem 2
-  // int secondLargestElementAns = secondLargestElementInArray(arr);
-  // std::cout<<"2nd Largest Element: "<<secondLargestElementAns<<std::endl;
+  // std::vector<int> arr = {1, 2, 2, 3, 3, 3, 4, 4, 5, 5};
+  // printArr(arr);
+  // removeDuplicates(arr);
+  // printArr(arr);
 
   // * Problem 3
-  // int secondSmallestElementAns = secondSmallestElementInArray(arr);
-  // std::cout<<"2nd Smallest Element: "<<secondSmallestElementAns<<std::endl;
-  
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // printArr(arr);
+  // rotateByOne(arr);
+  // printArr(arr);
+
   // * Problem 4
-  // bool isSortedArray = checkIsSortedArray(arr);
-  // std::cout<<"Is Sorted Array: "<<isSortedArray<<std::endl;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // int k = 7;
+  // printArr(arr);
+  // rotateByKPlaces(arr, k);
+  // rotateByKPlacesOptimal(arr, k);
+  // printArr(arr);
 
   // * Problem 5
-  // int uniqueElements = removeDuplicates(arr);
-  // std::cout<<"Unique Elements: "<<uniqueElements<<std::endl;
-
-  // * Problem 6
   // std::vector<int> arr = {1, 2, 0, 0, 2, 3};
   // std::vector<int> arr = {0, 0, 0, 1};
   // printArr(arr);
   // moveZerosToEnd(arr);
   // printArr(arr);
 
+  // * Problem 6
+  // std::vector<int> a = {3, 3, 4, 5, 6, 7, 8, 9, 9, 9};
+  // std::vector<int> b = {2, 4, 10, 10};
+  // std::cout<<"Array B = ";
+  // printArr(a);
+  // std::cout<<"Array A = ";
+  // printArr(b);
+  // std::vector<int> ans = mergeTwoSortedArrays(a, b);
+  // std::cout<<"Merged Array = ";
+  // printArr(ans);
+
   // * Problem 7
-  int k = 2;
-  std::vector<int> arr = {1,2,3,4,5,6,7};
-  // std::vector<int> arr = {0, 0, 0, 1};
+  // std::vector<int> arr = {3, 0, 1};
+  // std::vector<int> arr = {4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0};
+  // printArr(arr);
+  // int missingNumber = findMissingNumber(arr);
+  // std::cout<<"Missing Number "<<missingNumber<<std::endl;
+
+  // * Problem 8
+  // std::vector<int> arr = {1, 1, 0, 1, 1, 1};
+  // printArr(arr);
+  // int maxOnes = findMaxConsecutiveOnes(arr);
+  // std::cout<<"Max Consecutive Ones "<<maxOnes<<std::endl;
+
+  // * Problem 9
+  // std::vector<int> arr = { 1, 1, 2, 2, 3, 3, 6, 6, 7, 9, 9 };
+  // std::vector<int> arr = {1, 2, 1, 1};
+  // printArr(arr);
+  // int singleNumber = findSingleNumber(arr);
+  // std::cout<<"Single Number "<<singleNumber<<std::endl;
+
+  std::vector<int> arr = { 2, 4, 6, 8, 10, 2, 6, 10 };
   printArr(arr);
-  kRotateBruteForce(arr, k);
-  printArr(arr);
-  
+  std::vector<int> ans = findSingleNumber2(arr);
+  printArr(ans);
+
+
   return 0;
 }
 
