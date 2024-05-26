@@ -22,7 +22,6 @@ void reverse(std::vector<int> &arr, int l, int r) {
   }
 }
 
-
 // * 2nd largest element
 int findSecondLargestElement(std::vector<int> arr) {
   int n = arr.size();
@@ -251,7 +250,6 @@ int findSingleNumber(std::vector<int> arr) {
   return -1;
 }
 
-
 // * two Single Number
 std::vector<int> findSingleNumber2(std::vector<int> a) {
   int n = a.size();
@@ -259,6 +257,7 @@ std::vector<int> findSingleNumber2(std::vector<int> a) {
   std::vector<int> ans;
   while(l <= r) {
     int m = l + (r-l)/2;
+    std::cout<<m<<" ";
     if(a[m] != a[m-1] && a[m] != a[m+1]) {
       ans.push_back(a[m]);
     }
@@ -268,9 +267,49 @@ std::vector<int> findSingleNumber2(std::vector<int> a) {
     else {
       r = m - 1;
     }
-    return ans;
   }
+  return ans;
 
+}
+
+// * Longest Subarray With Sum K
+int findLongestSubarraySumV1(std::vector<int> arr, int k) {
+  int n = arr.size(), prefixSum = 0, cnt = 0;
+  std::map<int, int> prefixMap;
+  for(int i=0; i<n; i++) {
+    prefixSum += arr[i];
+    if(prefixSum == k) {
+      cnt = std::max(cnt, i+1);
+    }
+    int rem = prefixSum - k;
+    if(prefixMap.find(rem) != prefixMap.end()) {
+      cnt = std::max(cnt, i-prefixMap[rem]);
+    }
+    if(prefixMap.find(prefixSum) == prefixMap.end()) {
+      prefixMap[prefixSum] = i;
+    }
+  }
+  return cnt;
+}
+
+// * Longest Subarray With Sum K
+int findLongestSubarraySumV2(std::vector<int> arr, int k) {
+  int n = arr.size();
+  int j = 0, sum = 0, cnt = 0;
+  for(int i=0; i<n; i++) {
+
+    while(sum > k) {
+      sum -= arr[j];
+      j++;
+    }
+
+    sum += arr[i];
+    if(sum == k) {
+      cnt = std::max(cnt, i-j+1);
+    }
+
+  }
+  return cnt;
 }
 
 int main() {
@@ -340,11 +379,21 @@ int main() {
   // int singleNumber = findSingleNumber(arr);
   // std::cout<<"Single Number "<<singleNumber<<std::endl;
 
-  std::vector<int> arr = { 2, 4, 6, 8, 10, 2, 6, 10 };
-  printArr(arr);
-  std::vector<int> ans = findSingleNumber2(arr);
-  printArr(ans);
+  // TODO Problem 10
+  // std::vector<int> arr = { 2, 4, 6, 8, 10, 2, 6, 10 };
+  // printArr(arr);
+  // std::vector<int> ans = findSingleNumber2(arr);
+  // printArr(ans);
 
+  // * Problem 11
+  // std::vector<int> arr = { 1, 2, 3, 1, 1, 1, 1 };
+  // int k = 3;
+  // std::vector<int> arr = {2, 2, 4, 1, 2};
+  // int k = 2;
+  // printArr(arr);
+  // int longestSubarray = findLongestSubarraySumV1(arr, k);
+  // int longestSubarray = findLongestSubarraySumV2(arr, k);
+  // std::cout << "Longest subarray sum " << longestSubarray << std::endl;
 
   return 0;
 }

@@ -97,8 +97,10 @@ int optimalApproach(std::vector<int>arr, long long k) {
 
 
 int main() {
-  int k = 3;
   std::vector<int> arr = { 1,2,3,1,1,1,1 };
+  int k = 3;
+  std::vector<int> arr = {2, 2, 4, 1, 2};
+  int k = 2;
   // int longestSubArrLength = bruteForce(arr, k);
   int longestSubArrLength = betterApproach(arr, k);
   std::cout<<"Sub array with max length "<<longestSubArrLength<<std::endl;
