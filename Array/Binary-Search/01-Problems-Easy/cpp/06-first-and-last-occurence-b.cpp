@@ -40,11 +40,8 @@ int findFirstOccurence(std::vector<int> arr, int k) {
   int idx = -1;
   while(l <= r) {
     int m = l + (r - l) / 2;
-    if(arr[m] == k) {
+    if(arr[m] >= k) {
       idx = m;
-      r = m - 1;
-    }
-    else if(arr[m] > k) {
       r = m - 1;
     }
     else {
