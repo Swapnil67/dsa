@@ -5,8 +5,8 @@
 
 * Example 1:
 * Input: nums = [5,6,0,1,2]
-* Output: 3 
-* Explanation: 3 times rotated
+* Output: 2
+* Explanation: 2 times rotated
 
 * Example 2:
 * Input: nums = [2,3,4,1]

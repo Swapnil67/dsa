@@ -76,11 +76,18 @@ int findInRotatedSortedArray(std::vector<int> arr, int target) {
 
 
 int main() {
-  // std::vector<int> arr = {4, 5, 6, 0, 1, 2};
-  // int target = 0;
+  // * testcase 1
+  std::vector<int> arr = {4, 5, 6, 0, 1, 2};
+  int target = 0;
 
-  std::vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
-  int target = 8;
+  // * testcase 2
+  // std::vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
+  // int target = 8;
+
+  // * testcase 3
+  // * This will fail
+  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
+  // int target = 1;
 
   // int idx = bruteForce(arr, target);
   int idx = findInRotatedSortedArray(arr, target);
