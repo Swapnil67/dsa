@@ -327,7 +327,6 @@ int main() {
   // int longestSubarray = findLongestSubarraySumV2(arr, k);
   // std::cout << "Longest subarray sum " << longestSubarray << std::endl;
 
-
   // * Problem 12
   // std::vector<int> arr = {3, 4, 5, 6};
   // int target = 7;
@@ -336,8 +335,6 @@ int main() {
   // printArr(arr);
   // std::vector<int> ans = findTwoSum(arr, target);
   // printArr(ans);
-
-  
 
 }
 

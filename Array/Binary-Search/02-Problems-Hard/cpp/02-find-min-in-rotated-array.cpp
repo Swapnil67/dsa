@@ -17,8 +17,15 @@
 
 #include<iostream>
 
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Linear search
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Find which part of array is sorted and find the min and then exclude that part
+// * Minimum element is not present in sorted part [Exclude that part]
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
 int findMinimum(std::vector<int> arr) {
@@ -56,7 +63,6 @@ int main() {
   // std::vector<int> arr = {4, 5, 6, 7, 0, 1, 2};
   // * testcase 3
   // std::vector<int> arr = {25, 30, 5, 10, 15, 20};
-
   int minimum = findMinimum(arr);
   std::cout << "Find Minimum " << minimum << std::endl;
 

@@ -48,6 +48,8 @@ int searchInRotatedSorted(std::vector<int> arr, int target) {
   int l = 0, r = n-1;
   while(l <= r) {
     int m = l + (r - l) / 2;
+
+    // * If arr[l] == arr[m] == arr[r]
     if(arr[l] == arr[m] && arr[m] == arr[r]) {
       l++, r--;
       continue;
