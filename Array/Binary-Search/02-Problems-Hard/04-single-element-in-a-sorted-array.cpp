@@ -1,7 +1,7 @@
 /*
  * Single element in a Sorted Array
  * https://leetcode.com/problems/single-element-in-a-sorted-array/
- * https://www.codingninjas.com/codestudio/problems/unique-element-in-sorted-array_1112654?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf 
+ * https://www.codingninjas.com/codestudio/problems/unique-element-in-sorted-array_1112654
 */
 
 #include<iostream>
