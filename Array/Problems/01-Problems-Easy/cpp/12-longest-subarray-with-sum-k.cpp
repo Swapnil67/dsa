@@ -45,7 +45,7 @@ int betterApproach(std::vector<int>arr, long long k) {
   int n = arr.size(), maxLen = 0;
   std::map<long long, int> preSumMap;
   for(int i=0; i<n; i++) {
-    sum = sum+arr[i];
+    sum += arr[i];
     if(sum == k) {
       maxLen = std::max(maxLen, i+1);
     }
@@ -88,7 +88,7 @@ int optimalApproach(std::vector<int>arr, long long k) {
     }
 
     if(sum == k) {
-      len = max(len, l-r);
+      len = std::max(len, l-r);
     }
     l++;
   }
@@ -99,10 +99,11 @@ int optimalApproach(std::vector<int>arr, long long k) {
 int main() {
   std::vector<int> arr = { 1,2,3,1,1,1,1 };
   int k = 3;
-  std::vector<int> arr = {2, 2, 4, 1, 2};
-  int k = 2;
+  // std::vector<int> arr = {2, 2, 4, 1, 2};
+  // int k = 2;
   // int longestSubArrLength = bruteForce(arr, k);
-  int longestSubArrLength = betterApproach(arr, k);
+  // int longestSubArrLength = betterApproach(arr, k);
+  int longestSubArrLength = optimalApproach(arr, k);
   std::cout<<"Sub array with max length "<<longestSubArrLength<<std::endl;
 
   return 0;

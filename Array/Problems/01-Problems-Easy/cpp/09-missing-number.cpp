@@ -93,8 +93,8 @@ int optimal(std::vector<int>arr) {
 
 int main() {
   // std::vector<int> arr = {3, 0, 1};
-  // std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
-  std::vector<int> arr = { 4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0 };
+  std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
+  // std::vector<int> arr = { 4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0 };
   // int missingNumber = bruteForce(arr);
   // int missingNumber = betterApproach(arr);
   int missingNumber = optimal(arr);

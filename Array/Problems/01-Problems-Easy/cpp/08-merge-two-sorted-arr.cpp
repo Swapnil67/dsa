@@ -23,6 +23,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Use set data structure
 // * TIME COMPLEXITY O(N1logN + N2logN) + O(N1+N2)
 // * SPACE COMPLEXITY O(N1 + N2)
 std::vector<int> mergeTwoArraysBruteForce(std::vector<int> a, std::vector<int> b) {
