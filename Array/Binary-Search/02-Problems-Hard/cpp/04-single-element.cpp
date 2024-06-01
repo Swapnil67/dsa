@@ -13,7 +13,7 @@
 * Output: 10
 
 * https://leetcode.com/problems/single-element-in-a-sorted-array/
-* https://www.codingninjas.com/codestudio/problems/unique-element-in-sorted-array_1112654
+* https://www.naukri.com/code360/problems/unique-element-in-sorted-array_1112654
 */
 
 #include<iostream>
