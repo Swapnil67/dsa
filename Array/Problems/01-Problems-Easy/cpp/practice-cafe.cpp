@@ -413,13 +413,13 @@ int main() {
   // std::cout<<"Single number "<<singleNumber<<std::endl;
 
   // * Problem 11
-  std::cout << "Longest subarray with sum k" << std::endl;
-  std::vector<int> arr = { 1,2,3,1,1,1,1 };
-  int k = 3;
-  printArr(arr);
+  // std::cout << "Longest subarray with sum k" << std::endl;
+  // std::vector<int> arr = { 1,2,3,1,1,1,1 };
+  // int k = 3;
+  // printArr(arr);
   // int longestSubarray = findLongestSubarraySumkA(arr, k);
-  int longestSubarray = findLongestSubarraySumkB(arr, k);
-  std::cout<<"Longest subarray "<<longestSubarray<<std::endl;
+  // int longestSubarray = findLongestSubarraySumkB(arr, k);
+  // std::cout<<"Longest subarray "<<longestSubarray<<std::endl;
 
   return 0;
 }
