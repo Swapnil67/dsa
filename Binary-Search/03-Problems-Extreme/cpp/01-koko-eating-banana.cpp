@@ -22,6 +22,8 @@
 
 #include<iostream>
 
+// * ------------------------- Utility Functions -------------------------`
+
 int findMax(std::vector<int> arr) {
   int maxNum = INT_MIN;
   for(int i=0; i<arr.size(); i++) {
@@ -53,11 +55,14 @@ int findHrsToCompletePile(std::vector<int> piles, int maxHr, int k) {
 int bruteForce(std::vector<int> piles, int maxHrs) {
   int maxBananas = findMax(piles);
   int ans = maxBananas;
+  std::cout << "maxBananas " << maxBananas << std::endl;
+
   for (int i = 1; i <= maxBananas; i++) {
     // * O(N) for this loop
-    long long isMinHr = findHrsToCompletePile(piles, i, maxHrs);
+    long long isMinHr = findHrsToCompletePile(piles, maxHrs, i);
+    std::cout << "isMinHr " << isMinHr << std::endl;
     if (isMinHr <= maxHrs) {
-      ans = i;
+      return i;
     }
   }
   return ans;
@@ -86,15 +91,20 @@ int findMinimumBananasToEat(std::vector<int> piles, int hr) {
 }
 
 int main() {
-  std::vector<int> piles = {3, 6, 7, 11};
-  int h = 8;
-  // vector<int> piles = {30,11,23,4,20};
+  // * testcase 1
+  // std::vector<int> piles = {3, 6, 7, 11};
+  // int h = 8;
+  // * testcase 2
+  // std::vector<int> piles = {30, 11, 23, 4, 20};
   // int h = 5;
-  // vector<int> piles = {30,11,23,4,20};
+  // * testcase 3
+  // std::vector<int> piles = {30, 11, 23, 4, 20};
   // int h = 6;
-  // vector<int> piles = {1000000000};
-  // int h = 2;
+  // * testcase 4 (Not Work in Bruteforce)
+  std::vector<int> piles = {1000000000};
+  int h = 2;
 
+  std::cout << "Piles of bananas" << std::endl;
   printArr(piles);
 
   int minimumBananas = bruteForce(piles, h);
