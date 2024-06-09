@@ -84,7 +84,9 @@ int bruteForce(std::vector<int> books, int s) {
   return ans;
 }
 
-
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * TIME COMPLEXITY O(log(total - max)) * O(N) 
+// * SPACE COMPLEXITY O(1)
 int findMaxPagesAssigned(std::vector<int> books, int s) {
   if(s > books.size()) return -1;
   std::vector<int> values = findTotalAndMax(books);
@@ -93,7 +95,7 @@ int findMaxPagesAssigned(std::vector<int> books, int s) {
   while(l <= r) {
     int mid = l + (r - l) / 2;
     int studentsAssigned = findStudentsAssigned(books, s, mid);
-    std::cout << "pages " << mid << " students assigned " << studentsAssigned << std::endl;
+    // std::cout << "pages " << mid << " students assigned " << studentsAssigned << std::endl;
     if(studentsAssigned <= s) {
       r = mid - 1;
     }
@@ -105,10 +107,14 @@ int findMaxPagesAssigned(std::vector<int> books, int s) {
 }
 
 int main() {
+  // * testcase 1
   std::vector<int> books = {12, 34, 67, 90};
   int s = 2;
+
+  // * testcase 2
   // std::vector<int> books = {25, 46, 28, 49, 24};
   // int s = 4; 
+  
   printArr(books);
   // int maxPagesAssigned = bruteForce(books, s);
   int maxPagesAssigned = findMaxPagesAssigned(books, s);
