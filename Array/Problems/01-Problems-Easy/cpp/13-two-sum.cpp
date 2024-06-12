@@ -93,8 +93,8 @@ bool optimalApproach(std::vector<int> arr, int target) {
 
 int main() {
   int target = 9;
-  // std::vector<int> arr = { 2,15,11,4 };
-  std::vector<int> arr = { 2,15,11,7 };
+  // std::vector<int> arr = {2, 15, 11, 4};
+  std::vector<int> arr = {2, 15, 11, 7};
 
   // std::vector<int> ans = bruteForce(arr, target);
   // std::vector<int> ans = betterApproach(arr, target);

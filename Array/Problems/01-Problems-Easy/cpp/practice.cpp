@@ -312,6 +312,40 @@ int findLongestSubarraySumV2(std::vector<int> arr, int k) {
   return cnt;
 }
 
+// * Optimal Approach for index of array
+std::vector<int> twoSumOptimalA(std::vector<int> arr, int target) {
+  int n = arr.size();
+  std::map<int, int> hash;
+  for (int i = 0; i < n; i++) {
+    int rem = target - arr[i];
+    if(hash.find(rem) != hash.end()) {
+      return { hash[rem], i };
+    }
+    hash[arr[i]] = i;
+  }
+  return {-1, -1};
+}
+
+// * Optimal Approach for return true|false is sum exists in array
+bool twoSumOptimalB(std::vector<int> arr, int target) {
+  std::sort(arr.begin(), arr.end());
+  int n = arr.size();
+  int l = 0, r = n-1;
+  while(l < r) {
+    int sum = arr[l] + arr[r];
+    if(sum == target) {
+      return true;
+    }
+    else if(sum > target) {
+      r--;
+    }
+    else {
+      l++;
+    }
+  }
+  return false;
+}
+
 int main() {
   // * Problem 1 
   // std::vector<int> arr = {8, 3, 7, 2, 6};
@@ -394,6 +428,17 @@ int main() {
   // int longestSubarray = findLongestSubarraySumV1(arr, k);
   // int longestSubarray = findLongestSubarraySumV2(arr, k);
   // std::cout << "Longest subarray sum " << longestSubarray << std::endl;
+
+  // * Problem 12
+  // int target = 9;
+  // std::vector<int> arr = {2, 15, 11, 7};
+  // printArr(arr);
+  // std::vector<int> ans = twoSumOptimalA(arr, target);
+  // printArr(ans);
+  // bool ans = twoSumOptimalB(arr, target);
+  // std::cout << "Sum exits " << ans << std::endl;
+
+  
 
   return 0;
 }
