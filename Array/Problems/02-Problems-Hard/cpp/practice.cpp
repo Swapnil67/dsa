@@ -1,10 +1,11 @@
-#include<iostream>
+#include <map>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0;i<arr.size();i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 void swap(int &a, int &b) {
@@ -13,92 +14,127 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
-// * Dutch National Flag Algorithm [Sort 0s, 1s & 2s]
+// * Sort 0s, 1s and 2s
 void dutchNationalFlag(std::vector<int> &arr) {
   int n = arr.size();
-  int low = 0, mid = 0, high = n-1;
-
-  while(mid <= high) {
-    if(arr[mid] == 0)  {
-      swap(arr[mid], arr[low]);
-      mid++;
-      low++;
+  int l = 0, m = 0, h = n-1;
+  while(m <= h) {
+    if(arr[m] == 0) {
+      swap(arr[m], arr[l]);
+      l++;
+      m++;
     }
-    else if(arr[mid] == 1) {
-      mid++;
+    else if(arr[m] == 1) {
+      m++;
     }
-    else if(arr[mid] == 2) {
-      swap(arr[mid], arr[high]);
-      high--;
+    else if(arr[m] == 2) {
+      swap(arr[m], arr[h]);
+      h--;
     }
   }
-} 
+}
 
-// * Moore's Voting Algorithm [Majority Element n/2]
-int mooreVotingAlgorithm(std::vector<int> &arr) {
+// * Majority ELement n/2
+int majorityElementA(std::vector<int> arr) {
   int n = arr.size();
-  int cnt = 0, ele = arr[0];
+  int occurence = n / 2, cnt = 0, ele;
   for(int i=0; i<n; i++) {
     if(cnt == 0) {
       ele = arr[i];
       cnt++;
     }
-    else if(arr[i] == ele) {
+    else if(ele == arr[i]) {
       cnt++;
     }
     else {
       cnt--;
     }
   }
-
-  return ele;
+  int count = 0;
+  for(int i=0; i<n; i++) {
+    if(ele == arr[i])
+      count++;
+  }
+  if(count > occurence) return ele;
+  return -1;
 }
 
-// * Kadanes Algorithm [Max Subarray sum]
-int maxSubarraySumV1(std::vector<int> arr) {
+// * Maximum Subarray Sum
+std::vector<int> maxSubarraySum(std::vector<int> arr) {
   int n = arr.size();
-  int curMax = 0, globalMax = arr[0];
+  int sum = 0, maxSum = INT_MIN;
+  int start = 0, end = 0;
   for(int i=0; i<n; i++) {
-    curMax = curMax + arr[i];
-    std::cout<<"Current Max "<<curMax<<std::endl;
-    globalMax = std::max(globalMax, curMax);
-    if(curMax < 0) curMax = 0;
+    if(sum == 0) {
+      start = i;
+    }
+    sum += arr[i];
+    if(maxSum < sum) {
+      end = i;
+      maxSum = sum;
+    }
+    if(sum < 0) {
+      sum = 0;
+    }
   }
+  return { start, end };
+}
 
-  // * OR
-  // for(int i=0; i<n; i++) {
-  //   curMax = std::max(curMax + arr[i], arr[i]);
-  //   std::cout<<"Current Max "<<curMax<<std::endl;
-  //   globalMax = std::max(globalMax, curMax);
-  // }
-
-  return globalMax;
+// * Maximum Subarray Sum circular
+int maxSubarraySumCircular(std::vector<int> arr) {
+  int curMax = 0, curMin = 0, total = 0;
+  int globalMax = arr[0], globalMin = arr[0];
+  int n = arr.size();
+  for(int i=0; i<arr.size(); i++) {
+    curMax = std::max(curMax + arr[i], arr[i]);
+    curMin = std::min(curMin + arr[i], arr[i]);
+    total += arr[i];
+    globalMax = std::max(globalMax, arr[i]);
+    globalMin = std::min(globalMin, arr[i]);
+  }
+  if(globalMax < 0) {
+    // * All the elements in array is negative
+    return globalMax;
+  }
+  return total - globalMin;
 }
 
 int main() {
-  // * Dutch National Flag Algorithm [Sort 0s, 1s & 2s]
-  // std::vector<int> arr = { 2, 2, 2, 2, 0, 0, 1, 0 };
+  // * Problem 1
+  // std::cout << "Sort 0s, 1s and 2s" << std::endl;
+  // std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
   // printArr(arr);
   // dutchNationalFlag(arr);
   // printArr(arr);
 
-  // * Moore's Voting Algorithm [Majority Element n/2]
-  // std::vector<int> arr = {7, 7, 5, 7, 5, 1, 5, 7, 5, 5, 7, 7, 5, 5, 5, 5};
-  // // std::vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 };
+  // * Problem 2
+  // std::cout << "Majority element n/2" << std::endl;
+  // std::vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
+  // std::vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 };
   // printArr(arr);
-  // int majorityElement = mooreVotingAlgorithm(arr);
-  // std::cout<<"Majority Element "<<majorityElement<<std::endl;
+  // int majorityEle = majorityElementA(arr);
+  // std::cout << "Majority Element n/2 times is " << majorityEle << std::endl;
 
-  // * Kadanes Algorithm [Max Subarray sum v1]
-  // * testcase 1
-  std::vector<int> arr = {-3, -5, -6}; // * -3
-  // * testcase 2
+  // * Problem 3
+  // std::cout << "Maximum Subarray Sum" << std::endl;
   // std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * 6
-  printArr(arr);
-  int maxSum = maxSubarraySumV1(arr);
-  std::cout<<"Max subarray sum "<<maxSum<<std::endl;
+  // printArr(arr);
+  // std::vector<int> points = maxSubarraySum(arr);
+  // std::cout << "Maximum subarray sum exists between " << points[0] << " to " << points[1] << std::endl;
 
-  return 0;
+  // * Problem 4
+  // std::cout << "Maximum Subarray Sum Circular" << std::endl;
+  // std::vector<int> arr = {5, -3, 5}; // * 10
+  // std::vector<int> arr = {-2, -3, -1}; // * -1
+  // printArr(arr);
+  // int maxSum = maxSubarraySumCircular(arr);
+  // std::cout << "Maximum subarray sum in circular array is " << maxSum << std::endl;
+
+  // * Problem 5
+  std::cout << "Rearrange Array Elements by Sign" << std::endl;
+  std::vector<int> arr = {1, 2, -4, -5};
+  printArr(arr);
+
 }
 
 // * Run the code

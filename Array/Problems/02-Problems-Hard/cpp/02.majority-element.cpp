@@ -98,9 +98,9 @@ int optimalApproach(std::vector<int> arr) {
 }
 
 int main() {
-  // std::vector<int> arr = {3, 2, 3};
-  std::vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 };
-  // std::vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
+  // std::vector<int> arr = {3, 2, 3}; // * 3
+  std::vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 }; // * 58
+  // std::vector<int> arr = {2, 2, 1, 1, 1, 2, 2}; // * 2
 
   std::cout<<"Input Array"<<std::endl;
   printArr(arr);

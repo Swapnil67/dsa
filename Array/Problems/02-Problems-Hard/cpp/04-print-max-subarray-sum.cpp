@@ -49,9 +49,9 @@ void printArr(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {-3, -5, -6}; // * [0,0]
+  // std::vector<int> arr = {-3, -5, -6}; // * [0,0]
   // * testcase 2
-  // std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * [3,6]
+  std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * [3,6]
   
   std::vector<int> ans = kadanesAlgorithm(arr);
   printArr(ans);

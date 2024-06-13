@@ -35,8 +35,10 @@ int maxCircularSubarraySum(std::vector<int> arr) {
     globalMin = std::min(globalMin, curMin);
   }
 
-  if(globalMax < 0) 
+  if(globalMax < 0) {
+    // * All the elements in array is negative
     return globalMax;
+  }
   else 
     return std::max(globalMax, (total-globalMin));
 }

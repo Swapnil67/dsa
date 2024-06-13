@@ -2,7 +2,6 @@
  * Rearrange Array Elements by Sign
  * You are given a 0-indexed integer array nums of even length consisting of an variable number of positive
  * and negative integers.
- * **** Here number of -ve & +ve integers are not equal ****
  * 
  * Example 1:
  * Input: nums = [3,1,-2,-5,2,-4,7,8]
@@ -11,6 +10,8 @@
 
  * https://www.naukri.com/code360/problems/alternatives_893342
 */
+
+// ! Here number of -ve & +ve integers are not equal
 
 #include<iostream>
 

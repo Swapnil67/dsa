@@ -1,6 +1,7 @@
 /*
  * Rearrange Array Elements by Sign
- * You are given a 0-indexed integer array nums of even length consisting of an equal number of positive and negative integers.
+ * You are given a 0-indexed integer array nums of even length consisting of an equal number of
+ * positive and negative integers.
  * 
  * Example 1:
  * Input: nums = [3,1,-2,-5,2,-4]
@@ -15,6 +16,8 @@
  * https://www.naukri.com/code360/problems/alternate-numbers_6783445
  * https://leetcode.com/problems/rearrange-array-elements-by-sign/description/
 */
+
+// ! Here number of -ve & +ve integers are equal
 
 #include<iostream>
 
