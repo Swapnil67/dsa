@@ -99,6 +99,25 @@ int maxSubarraySumCircular(std::vector<int> arr) {
   return total - globalMin;
 }
 
+// * ReArrange +ve and -ve elements
+// ! Same number of +ve and -ve elements
+std::vector<int> reArrangeElementsA(std::vector<int> &arr) {
+  int n = arr.size();
+  std::vector<int> ans(n, 0);
+  int p_idx = 0, n_idx = 1;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] > 0) {
+      ans[p_idx] = arr[i];
+      p_idx += 2;
+    }
+    else {
+      ans[n_idx] = arr[i];
+      n_idx += 2;
+    }
+  }
+  return ans;
+}
+
 int main() {
   // * Problem 1
   // std::cout << "Sort 0s, 1s and 2s" << std::endl;
@@ -134,8 +153,10 @@ int main() {
   std::cout << "Rearrange Array Elements by Sign" << std::endl;
   std::vector<int> arr = {1, 2, -4, -5};
   printArr(arr);
+  std::vector<int> ans = reArrangeElementsA(arr);
+  printArr(ans);
 
+  return 0;
 }
-
 // * Run the code
 // * g++ --std=c++17 practice.cpp -o practice && ./practice

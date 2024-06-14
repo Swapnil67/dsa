@@ -62,7 +62,7 @@ std::vector<int> bruteForce(std::vector<int> &arr) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-// * Only works when +ve and -ve elements same in count
+// * Take +ve and -ve indexes in variable 
 // * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(N)
 std::vector<int> optimalApproach(std::vector<int> arr) {
