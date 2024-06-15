@@ -2,6 +2,7 @@
  * For a given 2D array of rotate it to 90 degree
 
  * Example 
+
  * Input
  * 1 2 3
  * 4 5 6
@@ -12,6 +13,7 @@
  * 8 5 2
  * 9 6 3
  * 
+ * https://leetcode.com/problems/rotate-image/description/
  * https://www.naukri.com/code360/problems/rotate-the-matrix_6825090
 */
 
@@ -72,7 +74,7 @@ void rotateMatrix(std::vector<std::vector<int>> &matrix) {
     }
   }
 
-  // * Reverse the rows of transpose matrix
+  // * Reverse the every row of transpose matrix
   for (int i = 0; i < r; i++) {
     reverse(matrix[i]);
   }

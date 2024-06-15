@@ -118,6 +118,48 @@ std::vector<int> reArrangeElementsA(std::vector<int> &arr) {
   return ans;
 }
 
+// ! Different number of +ve and -ve elements
+std::vector<int> reArrangeElementsB(std::vector<int> &arr) {
+  int n = arr.size();
+  std::vector<int> ans(n);
+  std::vector<int> posArr, negArr;
+
+  for (int i = 0; i < n; i++) {
+    if(arr[i] < 0)
+      negArr.push_back(arr[i]);
+    else 
+      posArr.push_back(arr[i]);
+  }
+
+  int positives = posArr.size(), negatives = negArr.size();
+  // std::cout << "positives " << positives << std::endl;
+  // std::cout << "negatives " << negatives << std::endl;
+  if(positives > negatives) {
+    // * More positive elements
+    for (int i = 0; i < negatives; i++) {
+      ans[i * 2] = posArr[i];
+      ans[i * 2 + 1] = negArr[i];
+    }
+    int nextIndex = negatives*2;
+    for (int i = negatives; i < positives; i++) {
+      ans[nextIndex] = posArr[i];
+      nextIndex++;
+    }
+  } else {
+    // * More negative elements
+    for (int i = 0; i < positives; i++) {
+      ans[i * 2] = posArr[i];
+      ans[i * 2 + 1] = negArr[i];
+    }
+    int nextIndex = positives*2;
+    for (int i = positives; i < negatives; i++) {
+      ans[nextIndex] = negArr[i];
+      nextIndex++;
+    }
+  }
+  return ans;
+}
+
 int main() {
   // * Problem 1
   // std::cout << "Sort 0s, 1s and 2s" << std::endl;
@@ -151,9 +193,12 @@ int main() {
 
   // * Problem 5
   std::cout << "Rearrange Array Elements by Sign" << std::endl;
-  std::vector<int> arr = {1, 2, -4, -5};
-  printArr(arr);
-  std::vector<int> ans = reArrangeElementsA(arr);
+  // std::vector<int> arr = {1, 2, -4, -5};
+  // std::vector<int> ans = reArrangeElementsA(arr);
+  // printArr(arr);
+  // std::vector<int> arr = {-1, 2, 3, 4, -3, 1};
+  // std::vector<int> arr = {3, 1, -2, -5, 2, -4, -7, -8, 3, -9};
+  // std::vector<int> ans = reArrangeElementsB(arr);
   printArr(ans);
 
   return 0;

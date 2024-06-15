@@ -11,7 +11,7 @@
  * * Output : arr = [0, 0, 0, 1, 2, 2, 2, 2]
 
  * * https://www.naukri.com/code360/problems/sort-an-array-of-0s-1s-and-2s_892977
- * * https://leetcode.com/problems/sort-colors/
+ * * https://leetcode.com/problems/sort-colors/description/
 */
 
 #include<iostream>

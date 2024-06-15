@@ -13,7 +13,8 @@
  * Example 2:
  * Input: arr = [2,3,4], target = 6
  * Output: [1,3]
-
+ * 
+ * https://www.naukri.com/code360/problems/reading_6845742
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
 */
 

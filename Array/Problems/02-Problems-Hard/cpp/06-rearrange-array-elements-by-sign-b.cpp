@@ -8,6 +8,7 @@
  * Output: [3,-2,1,-5,2,-4,7,8]
  * Explanation: The positive integers in nums are [3,1,2,7,8]. The negative integers are [-2,-5,-4].
 
+ * https://leetcode.com/problems/rearrange-array-elements-by-sign/description/
  * https://www.naukri.com/code360/problems/alternatives_893342
 */
 
@@ -23,6 +24,10 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
+// * ------------------------- APPROACH BRUTE FORCE APPROACH -------------------------`
+// * Nested Loop
+// * TIME COMPLEXITY O(N) + O(N) = O(2N)
+// * SPACE COMPLEXITY O(N)
 std::vector<int> rearrangeBySign(std::vector<int> &arr) {
   std::vector<int> positiveNums;
   std::vector<int> negativeNums;
@@ -30,13 +35,11 @@ std::vector<int> rearrangeBySign(std::vector<int> &arr) {
 
   // * Step 1:
   // * Put the +ve & -ve nums in respective arrays;
-  for(int i=0; i<n; i++) {
-    if(arr[i] >= 0) {
+  for (int i = 0; i < n; i++) {
+    if (arr[i] >= 0)
       positiveNums.push_back(arr[i]);
-    }
-    else {
+    else
       negativeNums.push_back(arr[i]);
-    }
   }
 
   // * Step 2
@@ -46,15 +49,15 @@ std::vector<int> rearrangeBySign(std::vector<int> &arr) {
     // * More +ve than -ve numbers
     // * Step 3
     // * Rearrage numbers till negLength
-    for(int i=0; i<negLength; i++) {
-      arr[2*i] = positiveNums[i];
-      arr[2*i+1] = negativeNums[i];
+    for (int i = 0; i < negLength; i++) {
+      arr[2 * i] = positiveNums[i];
+      arr[2 * i + 1] = negativeNums[i];
     }
 
     // * Step 4
     // * Put the remaining positive to end of array
     int index = negLength * 2;
-    for(int i=negLength; i<posLength; i++) {
+    for (int i = negLength; i < posLength; i++) {
       arr[index] = positiveNums[i];
       index++;
     }
@@ -64,14 +67,14 @@ std::vector<int> rearrangeBySign(std::vector<int> &arr) {
     // * Step 3
     // * Rearrage numbers till posLength
     for(int i=0; i<posLength; i++) {
-      arr[2*i] = positiveNums[i];
-      arr[2*i+1] = negativeNums[i];
+      arr[2 * i] = positiveNums[i];
+      arr[2 * i + 1] = negativeNums[i];
     }
 
     // * Step 4
     // * Put the remaining negative to end of array
     int index = posLength * 2;
-    for(int i=posLength; i<negLength; i++) {
+    for (int i = posLength; i < negLength; i++) {
       arr[index] = negativeNums[i];
       index++;
     }

@@ -3,6 +3,7 @@
  * Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
  * You must do it inplace
  * 
+ * https://leetcode.com/problems/set-matrix-zeroes/description/
  * https://www.naukri.com/code360/problems/zero-matrix_1171153
 */
 

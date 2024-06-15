@@ -30,7 +30,7 @@ void printArr(std::vector<int> arr) {
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
-// * TIME COMPLEXITY O(N) + O(N) = O(2N)
+// * TIME COMPLEXITY O(N) + O(N/2)
 // * SPACE COMPLEXITY O(N)
 std::vector<int> bruteForce(std::vector<int> &arr) {
   std::vector<int> n_pos;
@@ -47,7 +47,7 @@ std::vector<int> bruteForce(std::vector<int> &arr) {
     }
   }
 
-  // * O(N)
+  // * O(N/2)
   for(int i=0; i<n/2; i++) {
     arr[2*i] = n_pos[i];
     arr[2*i+1] = n_neg[i];
