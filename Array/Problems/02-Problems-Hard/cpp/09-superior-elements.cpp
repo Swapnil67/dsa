@@ -61,7 +61,7 @@ std::vector<int> optimal(std::vector<int> arr) {
   for(int i=r; i>=0; i--) {
     if(arr[i] > maxEl) {
       maxEl = arr[i];
-      // std::cout<<"maxEl "<<maxEl<<std::endl;
+      // std::cout << "maxEl " << maxEl << std::endl;
       ans.push_back(arr[i]);
     }
   }

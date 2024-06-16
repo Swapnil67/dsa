@@ -1,4 +1,5 @@
 #include <map>
+#include <set>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
@@ -118,7 +119,7 @@ std::vector<int> reArrangeElementsA(std::vector<int> &arr) {
   return ans;
 }
 
-// ! Different number of +ve and -ve elements
+// * Different number of +ve and -ve elements
 std::vector<int> reArrangeElementsB(std::vector<int> &arr) {
   int n = arr.size();
   std::vector<int> ans(n);
@@ -160,6 +161,34 @@ std::vector<int> reArrangeElementsB(std::vector<int> &arr) {
   return ans;
 }
 
+std::vector<int> superiorElements(std::vector<int> arr)  {
+  int n = arr.size(), maxEle = INT_MIN;
+  std::vector<int> ans;
+  std::set<int> supSet;
+  for (int i = n-1; i >= 0; i--) {
+    if(arr[i] > maxEle) {
+      supSet.insert(arr[i]);
+      maxEle = arr[i];
+    }
+  }
+  for(auto ele: supSet) {
+    ans.push_back(ele);
+  }
+  return ans;
+}
+
+// * Replace elements with greatest 
+void replaceGreatest(std::vector<int> &arr) {
+  int n = arr.size();
+  int maxEle = -1;
+  for (int i = n - 1; i >= 0; i--) {
+    int curMax = std::max(maxEle, arr[i]);
+    arr[i] = maxEle;
+    maxEle = curMax;
+  }
+}
+
+
 int main() {
   // * Problem 1
   // std::cout << "Sort 0s, 1s and 2s" << std::endl;
@@ -192,14 +221,29 @@ int main() {
   // std::cout << "Maximum subarray sum in circular array is " << maxSum << std::endl;
 
   // * Problem 5
-  std::cout << "Rearrange Array Elements by Sign" << std::endl;
+  // std::cout << "Rearrange Array Elements by Sign" << std::endl;
   // std::vector<int> arr = {1, 2, -4, -5};
   // std::vector<int> ans = reArrangeElementsA(arr);
   // printArr(arr);
   // std::vector<int> arr = {-1, 2, 3, 4, -3, 1};
   // std::vector<int> arr = {3, 1, -2, -5, 2, -4, -7, -8, 3, -9};
   // std::vector<int> ans = reArrangeElementsB(arr);
-  printArr(ans);
+  // printArr(ans);
+
+  // * Problem 6
+  // std::cout << "Superior Elements" << std::endl;
+  // std::vector<int> arr = {1, 2, 2, 1};
+  // printArr(arr);
+  // std::vector<int> ans = superiorElements(arr);
+  // printArr(ans);
+
+  // * Problem 7
+  // std::cout << "Replace elements with greatest" << std::endl;
+  // std::vector<int> arr = {17, 18, 5, 4, 6, 1};
+  // printArr(arr);
+  // replaceGreatest(arr);
+  // printArr(arr);
+
 
   return 0;
 }
