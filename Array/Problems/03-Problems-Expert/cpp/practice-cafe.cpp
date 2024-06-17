@@ -287,10 +287,10 @@ std::vector<std::vector<int>> fourSumOptimal(std::vector<int> arr) {
   std::sort(arr.begin(), arr.end());
   std::vector<std::vector<int>> ans;
   for (int i = 0; i < n; i++) {
-    if (i > 0 && arr[i] == arr[i - 1])
+    if (i != 0 && arr[i] == arr[i - 1])
       continue;
     for (int j = i + 1; j < n; j++) {
-      if (j != i + 1 && arr[j] != arr[j - 1])
+      if (j != i + 1 && arr[j] == arr[j - 1])
         continue;
       int k = j + 1, l = n - 1;
       while(k < l) {
@@ -300,12 +300,10 @@ std::vector<std::vector<int>> fourSumOptimal(std::vector<int> arr) {
           ans.push_back(temp); 
           k++;
           l--;
-          while(k < l && arr[k] == arr[k-1]) {
+          while (k < l && arr[k] == arr[k - 1])
             k++;
-          }
-          while(k < l && arr[l] == arr[l+1]) {
+          while (k < l && arr[l] == arr[l + 1])
             l++;
-          }
         }
         else if(sum > 0) l--;
         else k++;
@@ -355,7 +353,7 @@ int main() {
   // std::vector<std::vector<int>> ans = fourSumBrute(arr);
   // std::vector<std::vector<int>> ans = fourSumBetter(arr);
   std::vector<std::vector<int>> ans = fourSumOptimal(arr);
-  std::cout << "Three Sum vectors" << std::endl;
+  std::cout << "Four Sum vectors cafe" << std::endl;
   printMatrix(ans);
   return 0;
 }

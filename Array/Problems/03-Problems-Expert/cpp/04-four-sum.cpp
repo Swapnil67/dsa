@@ -154,10 +154,10 @@ std::vector<std::vector<int>> optimalApproach(std::vector<int> arr, int target) 
 
 
 int main() {
-  // std::vector<int> arr = {1, 0, -1, 0, -2, 2};
-  // int target = 0;
-  std::vector<int> arr = {2, 2, 2, 2, 2};
-  int target = 8;
+  std::vector<int> arr = {1, 0, -1, 0, -2, 2};
+  int target = 0;
+  // std::vector<int> arr = {2, 2, 2, 2, 2};
+  // int target = 8;
   // std::vector<std::vector<int>> ans = bruteForce(arr);
   // std::vector<std::vector<int>> ans = betterApproach(arr, target);
   std::vector<std::vector<int>> ans = optimalApproach(arr, target);
