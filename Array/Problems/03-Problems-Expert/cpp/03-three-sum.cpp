@@ -151,7 +151,8 @@ std::vector<std::vector<int>> optimalApproach(std::vector<int> arr) {
 }
 
 int main() {
-  std::vector<int> arr = {-1, 0, 1, 2, -1, -4};
+  // std::vector<int> arr = {-1, 0, 1, 2, -1, -4};
+  std::vector<int> arr = {-2, -2, -2, -1, -1, -1, 0, 0, 0, 2, 2, 2, 2};
   std::cout<<"Input Array"<<std::endl;
   printArr(arr);
   // std::vector<std::vector<int>> ans = bruteForce(arr);

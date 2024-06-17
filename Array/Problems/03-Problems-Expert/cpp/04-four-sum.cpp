@@ -87,10 +87,10 @@ std::vector<std::vector<int>> bruteForce(std::vector<int>arr) {
 std::vector<std::vector<int>> betterApproach(std::vector<int> arr, int target) {
   int n = arr.size();
   std::set<std::vector<int>> vectorSet;
-  for(int i=0; i<n; i++) {
-    for(int j=i+1; j<n; j++) {
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
       std::set<int> st;
-      for(int k=j+1; k<n; k++) {
+      for (int k = j + 1; k < n; k++) {
         int l = target - (arr[i] + arr[j] + arr[k]);
         if(st.find(l) != st.end()) {
           // * found a quadraplet

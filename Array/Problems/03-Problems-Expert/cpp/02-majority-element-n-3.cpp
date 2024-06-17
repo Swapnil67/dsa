@@ -34,19 +34,21 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N)
 std::vector<int> bruteForce(std::vector<int> arr) {
-  int n = arr.size();
-  int occurence = floor(n/3);
+  int n = arr.size(), occurence = n/3;
+  std::set<int> majoritySet;
   std::vector<int> ans;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int cnt = 0;
-    for(int j=0; j<n; j++) {
-      if(arr[i] == arr[j]) {
-        cnt++;
+    for (int j = 0; j < n; j++) {
+      if(arr[i] == arr[j]) cnt++;
+      if(cnt > occurence) {
+        majoritySet.insert(arr[i]);
+        break;
       }
     }
-    if(cnt > occurence) {
-      ans.push_back(arr[i]);
-    }
+  }
+  for (auto ele : majoritySet) {
+    ans.push_back(ele);
   }
   return ans;
 }
@@ -84,21 +86,17 @@ std::vector<int> optimalApproach(std::vector<int> arr) {
   int ele1 = INT_MIN, ele2 = INT_MIN;
   for(int i=0; i<n; i++) {  
     if(c1 == 0 && arr[i] != ele2) {
-      ele1 = arr[i];
       c1 = 1;
+      ele1 = arr[i];
     }
-    if(c2 == 0 && arr[i] != ele1) {
-      ele2 = arr[i];
+    else if(c2 == 0 && arr[i] != ele1) {
       c2 = 1;
+      ele2 = arr[i];
     }
-
-    if(ele1 == arr[i]) {
-      c1++;
-    } else if(ele2 == arr[i]) {
-      c2++;
-    } else {
-      c1--;
-      c2--;
+    else if(ele1 == arr[i]) c1++;
+    else if(ele2 == arr[i]) c2++; 
+    else {
+      c1--, c2--;
     }
   }
 
