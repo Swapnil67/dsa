@@ -1,5 +1,6 @@
 /*
  * For a given 2D array of rotate it to 90 degree
+ * Inplace 
 
  * Example 
 
