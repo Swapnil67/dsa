@@ -36,7 +36,7 @@ int bruteForce(std::vector<int> arr, int k) {
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------`
 // * Solution for positive and negatives elements in arrays
-// * Map Data Structure
+// * Prefix Sum [Map Data Structure]
 // * TIME COMPLEXITY O(NlogN) [Ordered Map]
 // * TIME COMPLEXITY O(N) [Best Case UnOrderd Map] or O(N^2) [Worst Case UnOrdered Map]
 // * SPACE COMPLEXITY O(N)
