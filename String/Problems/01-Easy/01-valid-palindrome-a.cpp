@@ -111,4 +111,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-valid-palindrome.cpp -o 01-valid-palindrome && ./01-valid-palindrome
+// * g++ --std=c++17 01-valid-palindrome-a.cpp -o 01-valid-palindrome-a && ./01-valid-palindrome-a
