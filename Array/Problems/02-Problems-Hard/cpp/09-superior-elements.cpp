@@ -58,7 +58,7 @@ std::vector<int> optimal(std::vector<int> arr) {
   std::vector<int> ans;
 
   // * O(N)
-  for(int i=r; i>=0; i--) {
+  for (int i = r; i >= 0; i--) {
     if(arr[i] > maxEl) {
       maxEl = arr[i];
       // std::cout << "maxEl " << maxEl << std::endl;
@@ -72,8 +72,8 @@ std::vector<int> optimal(std::vector<int> arr) {
 }
 
 int main() {
-  // std::vector<int> arr = {1, 2, 2, 1};
-  std::vector<int> arr = {1, 2, 3, 2};
+  std::vector<int> arr = {1, 2, 2, 1};
+  // std::vector<int> arr = {1, 2, 3, 2};
   printArr(arr);
   std::vector<int> ans = bruteForce(arr);
   // std::vector<int> ans = optimal(arr);

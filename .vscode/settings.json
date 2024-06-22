@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    ".env*": "dotenv",
     "stdlib.h": "c",
     "stack": "cpp",
     "iostream": "cpp",
@@ -65,7 +66,8 @@
     "queue": "cpp",
     "__tree": "cpp",
     "map": "cpp",
-    "set": "cpp"
+    "set": "cpp",
+    "unordered_set": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,5 +1,6 @@
 #include <map>
 #include <set>
+#include <unordered_set>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
@@ -13,6 +14,13 @@ void swap(int &a, int &b) {
   int temp = a;
   a = b;
   b = temp;
+}
+
+bool linearSearch(std::vector<int> arr, int target) {
+  for (int i = 0; i < arr.size(); i++) {
+    if(arr[i] == target) return true;
+  }
+  return false;
 }
 
 // * Sort 0s, 1s and 2s
@@ -161,37 +169,104 @@ std::vector<int> reArrangeElementsB(std::vector<int> &arr) {
   return ans;
 }
 
-std::vector<int> superiorElements(std::vector<int> arr)  {
-  int n = arr.size(), maxEle = INT_MIN;
+// * Superior elements Brute
+std::vector<int> superiorELementsBrute(std::vector<int> arr) {
+  int n = arr.size();
   std::vector<int> ans;
-  std::set<int> supSet;
-  for (int i = n-1; i >= 0; i--) {
-    if(arr[i] > maxEle) {
-      supSet.insert(arr[i]);
-      maxEle = arr[i];
+  for (int i = 0; i < n; i++) {
+    bool isLeader = true;
+    for (int j = i + 1; j < n; j++) {
+      if(arr[j] >= arr[i]) {
+        isLeader = false;
+        break;
+      }
     }
+    if(isLeader) ans.push_back(arr[i]);
   }
-  for(auto ele: supSet) {
-    ans.push_back(ele);
-  }
+  std::sort(ans.begin(), ans.end());
   return ans;
 }
 
-// * Replace elements with greatest 
-void replaceGreatest(std::vector<int> &arr) {
+// * Superior elements Optimal
+std::vector<int> superiorElements(std::vector<int> arr) {
   int n = arr.size();
-  int maxEle = -1;
-  for (int i = n - 1; i >= 0; i--) {
-    int curMax = std::max(maxEle, arr[i]);
-    arr[i] = maxEle;
-    maxEle = curMax;
+  int maxI = INT_MIN;
+  std::vector<int> ans;
+  for (int i = n-1; i >= 0; i--) {
+    if(arr[i] > maxI) {
+      maxI = arr[i];
+      ans.push_back(arr[i]);
+    }
   }
+  std::sort(ans.begin(), ans.end());
+  return ans;
+}
+
+// * Longest Consecutive Sequence Brute
+int longestConsecutiveBrute(std::vector<int> arr) {
+  int n = arr.size(), longestSequence = INT_MIN;
+  for (int i = 0; i < n; i++) {
+    int nextVal = arr[i]+1, cnt = 1;
+    while(linearSearch(arr, nextVal)) {
+      cnt++;
+      nextVal += 1;
+      longestSequence = std::max(longestSequence, cnt);
+    }
+  }
+  return longestSequence;
+}
+
+// * Longest Consecutive Sequence Optimal
+int findlongestConsecutiveBetter(std::vector<int> &arr) {
+  std::sort(arr.begin(), arr.end());
+  int n = arr.size();
+  int maxSeq = 1, lastSmaller = INT_MIN, cnt = 0;
+  for (int i = 0; i < n; i++) {
+    if (lastSmaller == arr[i] - 1) {
+      cnt++;
+      lastSmaller = arr[i];
+    }
+    else if (lastSmaller != arr[i]) {
+      cnt = 1;
+      lastSmaller = arr[i];
+    }
+    maxSeq = std::max(maxSeq, cnt);
+  }
+  return maxSeq;
+}
+
+int findlongestConsecutive(std::vector<int> &arr) {
+  int n = arr.size(), maxSeq = 1;
+  if(n == 0) return 0;
+  std::unordered_set<int> stArr;
+  // * O(N)
+  // * Put all the elements into a set
+  for (int i = 0; i < n; i++) {
+    stArr.insert(arr[i]);
+  }
+
+  // * O(2N)
+  for(auto it: stArr) {
+    if(stArr.find(it-1) == stArr.end()) {
+      // * You are a first element
+      int nextEle = it + 1, cnt = 1;
+      while (stArr.find(nextEle) != stArr.end()) {
+        cnt++;
+        nextEle += 1;
+      }
+      maxSeq = std::max(maxSeq, cnt);
+    }
+    else {
+      // * Not a first element
+    }
+  }
+  return maxSeq;
 }
 
 
 int main() {
   // * Problem 1
-  // std::cout << "Sort 0s, 1s and 2s" << std::endl;
+  // std::cout << "Sort 0s, 1s and 2s" << std::endl;i
   // std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
   // printArr(arr);
   // dutchNationalFlag(arr);
@@ -233,7 +308,9 @@ int main() {
   // * Problem 6
   // std::cout << "Superior Elements" << std::endl;
   // std::vector<int> arr = {1, 2, 2, 1};
+  // std::vector<int> arr = {1, 2, 3, 2};
   // printArr(arr);
+  // std::vector<int> ans = superiorELementsBrute(arr);
   // std::vector<int> ans = superiorElements(arr);
   // printArr(ans);
 
@@ -244,7 +321,17 @@ int main() {
   // replaceGreatest(arr);
   // printArr(arr);
 
-
+  // * Problem 8
+  // std::cout << "Longest Consecutive Sequence" << std::endl;
+  // std::vector<int> arr = {100, 4, 200, 1, 3, 2};
+  // std::vector<int> arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+  // std::vector<int> arr = {15, 6, 2, 1, 16, 4, 2, 29, 9, 12, 8, 5, 14, 21, 8, 12, 17, 16, 6, 26, 3}; // * o/p = 6
+  // printArr(arr);
+  // int longestSequence = longestConsecutiveBrute(arr);
+  // int longestSequence = findlongestConsecutiveBetter(arr);
+  // int longestSequence = findlongestConsecutive(arr);
+  // std::cout << "Longest consecutive sequence is " << longestSequence << std::endl;
+  
   return 0;
 }
 // * Run the code
