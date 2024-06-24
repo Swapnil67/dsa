@@ -1,5 +1,5 @@
 /**
- * * Merge overlapping intervals
+ * * Merge Two Sorted Arrays Without Extra Space
  * * Given two non-decreasing sorted arrays, ‘A’ and ‘B’, having ‘N’ and ‘M’ elements, respectively.
  * * You must merge these arrays, ‘A’ and ‘B’, into a sorted array without using extra space.
  * * Of all the 'N + M' sorted elements, array 'A' should contain the first 'N' elements, and array 'B' 
