@@ -1,6 +1,5 @@
 /**
  * * Single Number
- * * Array is not sorted
  * * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 
  * * Example 1
@@ -19,6 +18,8 @@
  * * https://www.naukri.com/code360/problems/occurs-once_1214969
 */
 
+// ! Array is not sorted
+
 #include<map>
 #include<iostream>
 
@@ -28,9 +29,9 @@
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int numCount = 0, num = arr[i];
-    for(int j = 0; j<n; j++) {
+    for (int j = 0; j < n; j++) {
       if(arr[j] == num) {
         numCount++;
       }

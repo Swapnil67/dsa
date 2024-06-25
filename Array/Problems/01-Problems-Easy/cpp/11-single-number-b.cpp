@@ -1,6 +1,5 @@
 /**
  * * Single Number
- * * Array is sorted
  * * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 
  * * Example 1
@@ -18,6 +17,8 @@
  * * https://leetcode.com/problems/single-element-in-a-sorted-array/
  * * https://www.naukri.com/code360/problems/find-the-single-element_6680465
 */
+
+// ! Array is sorted
 
 #include<map>
 #include<iostream>
@@ -86,7 +87,7 @@ int optimalApproach(std::vector<int> arr) {
     }
 
     // * Check which side to exclude
-    if(((mid%2 == 0) && arr[mid] == arr[mid+1]) || ((mid%2 == 1) && arr[mid] == arr[mid-1])) { 
+    if (((mid % 2 == 0) && arr[mid] == arr[mid + 1]) || ((mid % 2 == 1) && arr[mid] == arr[mid - 1])) {
       l = mid+1;
     }
     else {

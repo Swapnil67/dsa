@@ -23,6 +23,18 @@ void reverseArray(std::vector<int> &arr) {
   }
 }
 
+// * linear search
+bool linearSearch(std::vector<int> &a, int target) {
+  int n = a.size();
+  for (int i = 0; i < n; i++) {
+    if(a[i] == target) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
 // * Largest Element
 int largestElementInArray(std::vector<int> &arr) {
   int n = arr.size(), largest = INT_MIN;
@@ -204,6 +216,96 @@ std::vector<int> mergeTwoSortedArrays(std::vector<int> a, std::vector<int> b)  {
   return mergedArr;
 }
 
+// * Find missing number brute force
+int missingNumberBrute(std::vector<int> arr) {
+  int n = arr.size();
+  for (int i = 1; i <= n; i++) {
+    if(linearSearch(arr, i)) {
+    }
+    else {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// * Find missing number Optimal Approach
+int findMissingNumber(std::vector<int> arr) {
+  int n = arr.size();
+  int S = (n * (n + 1)) / 2;
+  int Sn = 0;
+  for (int i = 0; i < n; i++) {
+    Sn += arr[i];
+  }
+  return S - Sn;
+}
+
+// * Find max consecutive ones
+int findMaxConsecutiveOnes(std::vector<int> arr) {
+  int n = arr.size();
+  int cnt = 0, maxOnes = INT_MIN;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] == 1) {
+      cnt++;
+      maxOnes = std::max(maxOnes, cnt);
+    }
+    else {
+      cnt = 0;
+    }
+  }
+  return maxOnes;
+}
+
+// * Find single number  
+int singleNumberBrute(std::vector<int> arr) {
+  int n = arr.size();
+  for (int i = 0; i < n; i++) {
+    int cnt = 0;
+    for (int j = 0; j < n; j++) {
+      if(arr[i] == arr[j]) cnt++;
+    }
+    // std::cout << "cnt " << cnt << std::endl;
+    if(cnt == 1) return arr[i];
+  }
+  return -1;
+}
+
+// * Array not sorted
+// * Find single number  
+int findSingleNumberA(std::vector<int> arr) {
+  int n = arr.size();
+  std::map<int, int> countMap;
+  for (int i = 0; i < n; i++) {
+    countMap[arr[i]]++;
+  }
+
+  for (auto it : countMap) {
+    if(it.second == 1)
+      return it.first;
+  }
+  return -1;
+}
+
+// * Array is sorted 
+// * Find single number [Binary Search]
+int findSingleNumberB(std::vector<int> a) {
+  int n = a.size();
+  int l = 0, r = n - 1;
+  while(l <= r) {
+    int m = (l + r) / 2;
+    if (a[m] != a[m - 1] && a[m] != a[m + 1]) {
+      return a[m];
+    }
+    else if ((m % 2 == 0 && a[m] == a[m + 1]) || (m % 2 == 1 && a[m] == a[m - 1])) {
+      l = m + 1;
+    }
+    else {
+      r = m - 1;
+    }
+  }
+  return -1;
+}
+
 int main() {
   // * Problem 0
   // std::cout << "Reverse an array" << std::endl;
@@ -284,8 +386,10 @@ int main() {
 
   // * Problem 8
   // std::cout << "Missing number" << std::endl;
+  // std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
   // std::vector<int> arr = { 4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0 };
   // printArr(arr);
+  // int missingNumber = missingNumberBrute(arr);
   // int missingNumber = findMissingNumber(arr);
   // std::cout << "Missing Number " << missingNumber << std::endl;
 
@@ -296,12 +400,21 @@ int main() {
   // int maxOnes = findMaxConsecutiveOnes(arr);
   // std::cout<<"Maximum consecutive ones "<<maxOnes<<std::endl;
 
-  // * Problem 10
-  // std::cout << "Single Number" << std::endl;
+  // * Problem 10A
+  // std::cout << "Single Number A" << std::endl;
   // std::vector<int> arr = { 1, 1, 2, 3, 3, 4, 4 };
   // printArr(arr);
-  // int singleNumber = findSingleNumber(arr);
+  // int singleNumber = singleNumberBrute(arr);
+  // int singleNumber = findSingleNumberA(arr);
   // std::cout<<"Single number "<<singleNumber<<std::endl;
+
+  // * Problem 10B
+  std::cout << "Single Number B" << std::endl;
+  std::vector<int> arr = {3, 3, 7, 7, 10, 11, 11};
+  printArr(arr);
+  // int singleNumber = singleNumberBrute(arr);
+  int singleNumber = findSingleNumberB(arr);
+  std::cout<<"Single number "<<singleNumber<<std::endl;
 
   // * Problem 11
   // std::cout << "Longest subarray with sum k" << std::endl;

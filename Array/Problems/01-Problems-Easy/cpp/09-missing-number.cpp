@@ -81,14 +81,14 @@ int betterApproach(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int optimal(std::vector<int>arr) {
   int n = arr.size();
-  long long sumN = n*(n+1)/2;
+  long long sumN = n * (n + 1) / 2;
   long long sumArr = 0;
-  for(int i=0; i<=n; i++) {
+  for (int i = 0; i <= n; i++) {
     sumArr += arr[i];
   }
   // std::cout<<"sumN: "<<sumN<<std::endl;
   // std::cout<<"sumArr: "<<sumArr<<std::endl;
-  return sumN-sumArr;
+  return sumN - sumArr;
 }
 
 int main() {
