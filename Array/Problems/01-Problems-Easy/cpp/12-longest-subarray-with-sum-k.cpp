@@ -71,33 +71,28 @@ int betterApproach(std::vector<int>arr, long long k) {
 // * Solution for positive and zeros elements in arrays
 // * Two Pointer
 // * TIME COMPLEXITY O(2N)
-// * SPACE COMPLEXITY O(1)
+// * SPACE COMPLEXITY O(1 )
 int optimalApproach(std::vector<int>arr, long long k) {
-  int l=0, r=0, len=0;
+  int n = arr.size();
   long long sum = 0;
+  int i = 0, len = 0;
   // * O(N)
-  while(l <= r) {
-    sum = sum + arr[l];
-
-    if(sum > k) {
-      // * O(N)
-      while(sum < k) {
-        sum = sum - arr[r];
-        r++;
-      }
+  for (int j = 0; j < n; j++) {
+    sum += arr[j];
+    while(sum > k) {
+      sum -= arr[i];
+      i++;
     }
-
     if(sum == k) {
-      len = std::max(len, l-r);
-    }
-    l++;
+      len = std::max(len, j - i + 1);
+    } 
   }
   return len;
 }
 
 
 int main() {
-  std::vector<int> arr = { 1,2,3,1,1,1,1 };
+  std::vector<int> arr = {1, 2, 3, 1, 1, 1, 1};
   int k = 3;
   // std::vector<int> arr = {2, 2, 4, 1, 2};
   // int k = 2;

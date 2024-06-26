@@ -306,6 +306,92 @@ int findSingleNumberB(std::vector<int> a) {
   return -1;
 }
 
+// * Longest subarray with k sum
+int findLongestSubarraySumkABrute(std::vector<int> arr, int k) {
+  int n = arr.size();
+  int sum = 0, longest = INT_MIN;
+  for (int i = 0; i < n; i++) {
+    sum = 0;
+    for (int j = i; j < n; j++) {
+      sum += arr[j];
+      if(sum == k) {
+        longest = std::max(longest, j - i + 1);
+      }
+    }
+  }
+  return longest;
+}
+
+// * Longest subarray with k sum
+// ! Positives & Negative numbers
+int findLongestSubarraySumkA(std::vector<int> arr, int k) {
+  int n = arr.size();
+  int curSum = 0, longest = INT_MIN;
+  std::map<int, int> prefixSum;
+  for (int i = 0; i < n; i++) {
+    curSum += arr[i];
+    if(curSum == k) {
+      longest = std::max(longest, i + 1);
+    }
+    int rem = curSum - k;
+    if(prefixSum.find(rem) != prefixSum.end()) {
+      longest = std::max(longest, i - prefixSum[rem]);
+    }
+        // * Only save if it does not exists
+    if(prefixSum.find(curSum) == prefixSum.end()) {
+      prefixSum[curSum] = i;
+    }
+  }
+  return longest;
+}
+
+// * Longest subarray with k sum
+// ! Positives & Zeros numbers
+int findLongestSubarraySumkB(std::vector<int> arr, int k) {
+  int n = arr.size();
+  int longest = INT_MIN;
+  int sum = arr[0], i = 0;
+  for (int j = 1; j < n; j++) {
+    while(sum > k) {
+      sum -= arr[i];  
+      i++;
+    }
+    sum += arr[j];
+    // std::cout << "Sum " << sum << std::endl;
+    if(sum == k) {
+      longest = std::max(longest, j - i + 1);
+    }
+  }
+  return longest;
+} 
+
+// * Two Sum brute force
+std::vector<int> twoSumBrute(std::vector<int> arr, int target) {
+  int n = arr.size();
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      if(i != j && arr[i] + arr[j] == target) {
+        return {i, j};
+      }
+    }
+  }
+  return {-1, -1};
+}
+
+// * Two Sum brute [Prefix Sum]
+std::vector<int> twoSumA(std::vector<int> arr, int target) {
+  int n = arr.size();
+  std::map<int, int> prefixSum;
+  for (int i = 0; i < n; i++) {
+    int rem = target - arr[i];
+    if(prefixSum.find(rem) != prefixSum.end()) {
+      return { prefixSum[rem], i };
+    }
+    prefixSum[arr[i]] = i;
+  }
+  return {-1, -1};
+}
+
 int main() {
   // * Problem 0
   // std::cout << "Reverse an array" << std::endl;
@@ -409,24 +495,35 @@ int main() {
   // std::cout<<"Single number "<<singleNumber<<std::endl;
 
   // * Problem 10B
-  std::cout << "Single Number B" << std::endl;
-  std::vector<int> arr = {3, 3, 7, 7, 10, 11, 11};
-  printArr(arr);
+  // std::cout << "Single Number B" << std::endl;
+  // std::vector<int> arr = {3, 3, 7, 7, 10, 11, 11};
+  // printArr(arr);
   // int singleNumber = singleNumberBrute(arr);
-  int singleNumber = findSingleNumberB(arr);
-  std::cout<<"Single number "<<singleNumber<<std::endl;
+  // int singleNumber = findSingleNumberB(arr);
+  // std::cout<<"Single number "<<singleNumber<<std::endl;
 
   // * Problem 11
   // std::cout << "Longest subarray with sum k" << std::endl;
-  // std::vector<int> arr = { 1,2,3,1,1,1,1 };
+  // std::vector<int> arr = {1, 2, 3, 1, 1, 1, 1};
   // int k = 3;
   // printArr(arr);
+  // int longestSubarray = findLongestSubarraySumkABrute(arr, k);
   // int longestSubarray = findLongestSubarraySumkA(arr, k);
   // int longestSubarray = findLongestSubarraySumkB(arr, k);
-  // std::cout<<"Longest subarray "<<longestSubarray<<std::endl;
+  // std::cout << "Longest subarray " << longestSubarray << std::endl;
+
+  // * Problem 12
+  // int target = 9;
+  // std::vector<int> arr = {2, 15, 11, 4};
+  // std::vector<int> arr = {2, 15, 11, 7};
+  // printArr(arr);
+  // std::vector<int> ans = twoSumBrute(arr, target);
+  // std::vector<int> ans = twoSumA(arr, target);
+  // printArr(ans);
+
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 practice-home.cpp -o practice-home && ./practice-home
+// * g++ --std=c++17 practice-home.cpp -o practice-home && ./practice-home–

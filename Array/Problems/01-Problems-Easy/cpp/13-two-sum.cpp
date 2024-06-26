@@ -58,7 +58,7 @@ std::vector<int> betterApproach(std::vector<int> arr, int target) {
     }
     eleMap[arr[i]] = i;
   }
-  return {};
+  return {-1, -1};
 }
 
 
