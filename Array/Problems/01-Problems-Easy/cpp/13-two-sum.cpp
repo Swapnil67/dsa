@@ -49,12 +49,12 @@ std::vector<int> betterApproach(std::vector<int> arr, int target) {
   std::vector<int> ans;
   int n = arr.size();
   std::map<int, int> eleMap;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int rem = target - arr[i];
-    if(eleMap.find(rem) != eleMap.end()) {
+    if (eleMap.find(rem) != eleMap.end()) {
       // * Found the sum 
       // std::cout<<"i "<<eleMap[rem]<<", j "<<i<<" = "<<arr[i] + eleMap[rem]<<std::endl;
-      return { hash[rem], i };
+      return {hash[rem], i};
     }
     eleMap[arr[i]] = i;
   }

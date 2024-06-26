@@ -34,7 +34,6 @@ bool linearSearch(std::vector<int> &a, int target) {
   return false;
 }
 
-
 // * Largest Element
 int largestElementInArray(std::vector<int> &arr) {
   int n = arr.size(), largest = INT_MIN;
@@ -392,6 +391,25 @@ std::vector<int> twoSumA(std::vector<int> arr, int target) {
   return {-1, -1};
 }
 
+bool twoSumB(std::vector<int> arr, int target) {
+  std::sort(arr.begin(), arr.end());
+  int n = arr.size();
+  int l = 0, r = n - 1;
+  while(l<r) {
+    int sum = arr[l] + arr[r];
+    if(sum == target) {
+      return true;
+    }
+    else if(sum > target) {
+      r--;
+    }
+    else {
+      l++;
+    }
+  }
+  return false;
+}
+
 int main() {
   // * Problem 0
   // std::cout << "Reverse an array" << std::endl;
@@ -520,7 +538,9 @@ int main() {
   // std::vector<int> ans = twoSumBrute(arr, target);
   // std::vector<int> ans = twoSumA(arr, target);
   // printArr(ans);
-
+  // bool sumExists = twoSumB(arr, target);
+  // std::cout << "Two Sum exists " << sumExists << std::endl;
+  
 
   return 0;
 }
