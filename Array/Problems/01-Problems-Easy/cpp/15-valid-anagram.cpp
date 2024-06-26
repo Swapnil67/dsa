@@ -51,11 +51,13 @@ bool validAnagram2(std::string s, std::string t) {
   }
 
   for(char c: t) {
+    int idx = (int)c - (int)('a');
+
     // * If the char in hash array not found return false
-    if(alphabets[int(c) - int('a')] == 0)
+    if(alphabets[idx] == 0)
       return false;
     // * decrement the count of char from hash array
-    alphabets[int(c) - int('a')] -= 1;    
+    alphabets[idx] -= 1;    
   }
   return true;
 }

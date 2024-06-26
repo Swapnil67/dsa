@@ -377,7 +377,7 @@ std::vector<int> twoSumBrute(std::vector<int> arr, int target) {
   return {-1, -1};
 }
 
-// * Two Sum brute [Prefix Sum]
+// * Two Sum [Prefix Sum]
 std::vector<int> twoSumA(std::vector<int> arr, int target) {
   int n = arr.size();
   std::map<int, int> prefixSum;
@@ -391,6 +391,7 @@ std::vector<int> twoSumA(std::vector<int> arr, int target) {
   return {-1, -1};
 }
 
+// * Two Sum [Two Pointer]
 bool twoSumB(std::vector<int> arr, int target) {
   std::sort(arr.begin(), arr.end());
   int n = arr.size();
@@ -408,6 +409,68 @@ bool twoSumB(std::vector<int> arr, int target) {
     }
   }
   return false;
+}
+
+// * Hashmap Data structure
+bool validAnagramA(std::string s, std::string t) {
+  std::map<char, int> charMap;
+  for (auto it : s) {
+    charMap[it]++;
+  }
+
+  // for (auto it : charMap) {
+    // std::cout << it.first << " " << it.second << std::endl;
+  // }
+
+  for (auto it : t) { 
+    if(charMap.find(it) != charMap.end() && charMap[it] > 0) charMap[it]--;
+    else return false;
+  }
+
+  return true;
+}
+
+// * Hashed Array
+bool validAnagramB(std::string s, std::string t) {
+  std::vector<int> letters(26, 0);
+  for (auto it : s) {
+    letters[(int)it - (int)('a')]++;
+  }
+
+  for (auto it : t) {
+    int idx = (int)it - (int)('a');
+    if(letters[idx] == 0) {
+      return false;
+    }
+    letters[idx]--;
+  }
+  return true;
+}
+
+void replaceElementsBrute(std::vector<int> &arr) {
+  int n = arr.size();
+  int max = -1;
+  for (int i = 0; i < n; i++) {
+    int greatest = arr[i+1];
+    for (int j = i+1; j < n; j++) {
+      greatest = std::max(greatest, arr[j]);
+    }
+    if(i == n-1){
+      greatest = -1;
+    } 
+    std::cout << "greatest " << greatest << std::endl;
+    arr[i] = greatest;
+  }
+}
+
+void replaceElements(std::vector<int> &arr) {
+  int n = arr.size();
+  int max = -1, curMax = INT_MIN;
+  for (int i = n-1; i >= 0; i--) {
+    curMax = std::max(max, arr[i]);
+    arr[i] = max;
+    max = curMax;
+  }
 }
 
 int main() {
@@ -541,6 +604,21 @@ int main() {
   // bool sumExists = twoSumB(arr, target);
   // std::cout << "Two Sum exists " << sumExists << std::endl;
   
+  // * Problem 13
+  // std::string s = "anagram", t = "nagaram";
+  // std::string s = "aacc", t = "ccac";
+  // std::cout<<"String A: "<<s<<std::endl;
+  // std::cout<<"String B: "<<t<<std::endl;
+  // bool isValidAnagram = validAnagramA(s, t);
+  // bool isValidAnagram = validAnagramB(s, t);
+  // std::cout<<"Is Calid Anagram "<<isValidAnagram<<std::endl;
+
+  // * Problem 14
+  std::vector<int> arr = {17, 18, 5, 4, 6, 1};
+  printArr(arr);
+  // replaceElementsBrute(arr);
+  replaceElements(arr);
+  printArr(arr);
 
   return 0;
 }
