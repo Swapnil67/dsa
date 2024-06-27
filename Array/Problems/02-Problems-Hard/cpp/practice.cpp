@@ -1,37 +1,51 @@
-#include <map>
-#include <set>
-#include <unordered_set>
-#include <iostream>
+#include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
+  for(int i=0;i<arr.size();i++) {
     std::cout << arr[i] << " ";
   }
   std::cout << std::endl;
 }
-
 void swap(int &a, int &b) {
   int temp = a;
   a = b;
   b = temp;
 }
 
-bool linearSearch(std::vector<int> arr, int target) {
-  for (int i = 0; i < arr.size(); i++) {
-    if(arr[i] == target) return true;
+
+void dutchNationalFlagBrute(std::vector<int> &arr) {
+  int n = arr.size();
+  int zeroCount = 0, oneCount = 0, twoCount = 0;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] == 0) zeroCount++;
+    if(arr[i] == 1) oneCount++;
+    if(arr[i] == 2) twoCount++;
   }
-  return false;
+
+  for (int i = 0; i < zeroCount; i++) {
+    arr[i] = 0;
+  }
+
+  if(oneCount) {
+    for (int i = zeroCount; i < zeroCount + oneCount; i++) {
+      arr[i] = 1;
+    }
+  }
+
+  if(twoCount) {
+    for (int i = zeroCount + oneCount; i < n; i++) {
+      arr[i] = 2;
+    }
+  }
 }
 
-// * Sort 0s, 1s and 2s
-void dutchNationalFlag(std::vector<int> &arr) {
+void dutchNationalFlag(std::vector<int> &arr)  {
   int n = arr.size();
-  int l = 0, m = 0, h = n-1;
-  while(m <= h) {
+  int l = 0, m = 0, h = n - 1;
+  while (l < h) {
     if(arr[m] == 0) {
-      swap(arr[m], arr[l]);
-      l++;
-      m++;
+      swap(arr[l], arr[m]);
+      l++, m++;
     }
     else if(arr[m] == 1) {
       m++;
@@ -43,233 +57,17 @@ void dutchNationalFlag(std::vector<int> &arr) {
   }
 }
 
-// * Majority ELement n/2
-int majorityElementA(std::vector<int> arr) {
-  int n = arr.size();
-  int occurence = n / 2, cnt = 0, ele;
-  for(int i=0; i<n; i++) {
-    if(cnt == 0) {
-      ele = arr[i];
-      cnt++;
-    }
-    else if(ele == arr[i]) {
-      cnt++;
-    }
-    else {
-      cnt--;
-    }
-  }
-  int count = 0;
-  for(int i=0; i<n; i++) {
-    if(ele == arr[i])
-      count++;
-  }
-  if(count > occurence) return ele;
-  return -1;
-}
-
-// * Maximum Subarray Sum
-std::vector<int> maxSubarraySum(std::vector<int> arr) {
-  int n = arr.size();
-  int sum = 0, maxSum = INT_MIN;
-  int start = 0, end = 0;
-  for(int i=0; i<n; i++) {
-    if(sum == 0) {
-      start = i;
-    }
-    sum += arr[i];
-    if(maxSum < sum) {
-      end = i;
-      maxSum = sum;
-    }
-    if(sum < 0) {
-      sum = 0;
-    }
-  }
-  return { start, end };
-}
-
-// * Maximum Subarray Sum circular
-int maxSubarraySumCircular(std::vector<int> arr) {
-  int curMax = 0, curMin = 0, total = 0;
-  int globalMax = arr[0], globalMin = arr[0];
-  int n = arr.size();
-  for(int i=0; i<arr.size(); i++) {
-    curMax = std::max(curMax + arr[i], arr[i]);
-    curMin = std::min(curMin + arr[i], arr[i]);
-    total += arr[i];
-    globalMax = std::max(globalMax, arr[i]);
-    globalMin = std::min(globalMin, arr[i]);
-  }
-  if(globalMax < 0) {
-    // * All the elements in array is negative
-    return globalMax;
-  }
-  return total - globalMin;
-}
-
-// * ReArrange +ve and -ve elements
-// ! Same number of +ve and -ve elements
-std::vector<int> reArrangeElementsA(std::vector<int> &arr) {
-  int n = arr.size();
-  std::vector<int> ans(n, 0);
-  int p_idx = 0, n_idx = 1;
-  for (int i = 0; i < n; i++) {
-    if(arr[i] > 0) {
-      ans[p_idx] = arr[i];
-      p_idx += 2;
-    }
-    else {
-      ans[n_idx] = arr[i];
-      n_idx += 2;
-    }
-  }
-  return ans;
-}
-
-// * Different number of +ve and -ve elements
-std::vector<int> reArrangeElementsB(std::vector<int> &arr) {
-  int n = arr.size();
-  std::vector<int> ans(n);
-  std::vector<int> posArr, negArr;
-
-  for (int i = 0; i < n; i++) {
-    if(arr[i] < 0)
-      negArr.push_back(arr[i]);
-    else 
-      posArr.push_back(arr[i]);
-  }
-
-  int positives = posArr.size(), negatives = negArr.size();
-  // std::cout << "positives " << positives << std::endl;
-  // std::cout << "negatives " << negatives << std::endl;
-  if(positives > negatives) {
-    // * More positive elements
-    for (int i = 0; i < negatives; i++) {
-      ans[i * 2] = posArr[i];
-      ans[i * 2 + 1] = negArr[i];
-    }
-    int nextIndex = negatives*2;
-    for (int i = negatives; i < positives; i++) {
-      ans[nextIndex] = posArr[i];
-      nextIndex++;
-    }
-  } else {
-    // * More negative elements
-    for (int i = 0; i < positives; i++) {
-      ans[i * 2] = posArr[i];
-      ans[i * 2 + 1] = negArr[i];
-    }
-    int nextIndex = positives*2;
-    for (int i = positives; i < negatives; i++) {
-      ans[nextIndex] = negArr[i];
-      nextIndex++;
-    }
-  }
-  return ans;
-}
-
-// * Superior elements Brute
-std::vector<int> superiorELementsBrute(std::vector<int> arr) {
-  int n = arr.size();
-  std::vector<int> ans;
-  for (int i = 0; i < n; i++) {
-    bool isLeader = true;
-    for (int j = i + 1; j < n; j++) {
-      if(arr[j] >= arr[i]) {
-        isLeader = false;
-        break;
-      }
-    }
-    if(isLeader) ans.push_back(arr[i]);
-  }
-  std::sort(ans.begin(), ans.end());
-  return ans;
-}
-
-// * Superior elements Optimal
-std::vector<int> superiorElements(std::vector<int> arr) {
-  int n = arr.size();
-  int maxI = INT_MIN;
-  std::vector<int> ans;
-  for (int i = n-1; i >= 0; i--) {
-    if(arr[i] > maxI) {
-      maxI = arr[i];
-      ans.push_back(arr[i]);
-    }
-  }
-  std::sort(ans.begin(), ans.end());
-  return ans;
-}
-
-// * Longest Consecutive Sequence Brute
-int longestConsecutiveBrute(std::vector<int> arr) {
-  int n = arr.size(), longestSequence = INT_MIN;
-  for (int i = 0; i < n; i++) {
-    int nextVal = arr[i]+1, cnt = 1;
-    while(linearSearch(arr, nextVal)) {
-      cnt++;
-      nextVal += 1;
-      longestSequence = std::max(longestSequence, cnt);
-    }
-  }
-  return longestSequence;
-}
-
-// * Longest Consecutive Sequence Optimal
-int findlongestConsecutiveBetter(std::vector<int> &arr) {
-  std::sort(arr.begin(), arr.end());
-  int n = arr.size();
-  int maxSeq = 1, lastSmaller = INT_MIN, cnt = 0;
-  for (int i = 0; i < n; i++) {
-    if (lastSmaller == arr[i] - 1) {
-      cnt++;
-      lastSmaller = arr[i];
-    }
-    else if (lastSmaller != arr[i]) {
-      cnt = 1;
-      lastSmaller = arr[i];
-    }
-    maxSeq = std::max(maxSeq, cnt);
-  }
-  return maxSeq;
-}
-
-int findlongestConsecutive(std::vector<int> &arr) {
-  int n = arr.size(), maxSeq = 1;
-  if(n == 0) return 0;
-  std::unordered_set<int> stArr;
-  // * O(N)
-  // * Put all the elements into a set
-  for (int i = 0; i < n; i++) {
-    stArr.insert(arr[i]);
-  }
-
-  // * O(2N)
-  for(auto it: stArr) {
-    if(stArr.find(it-1) == stArr.end()) {
-      // * You are a first element
-      int nextEle = it + 1, cnt = 1;
-      while (stArr.find(nextEle) != stArr.end()) {
-        cnt++;
-        nextEle += 1;
-      }
-      maxSeq = std::max(maxSeq, cnt);
-    }
-    else {
-      // * Not a first element
-    }
-  }
-  return maxSeq;
-}
-
+// *  0 0 0 0   1 1 1 1  2 1 0 2   2 2 2 2
+// * 0     low-1      low      mid        high
 
 int main() {
   // * Problem 1
-  // std::cout << "Sort 0s, 1s and 2s" << std::endl;i
-  // std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
-  // printArr(arr);
-  // dutchNationalFlag(arr);
+  std::cout << "Sort 0s, 1s and 2s" << std::endl;
+  std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
+  printArr(arr);
+  // dutchNationalFlagBrute(arr);
+  dutchNationalFlag(arr);
+  printArr(arr);
   // printArr(arr);
 
   // * Problem 2

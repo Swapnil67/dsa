@@ -102,7 +102,7 @@ std::vector<int> optimalApproach(std::vector<int> &arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = { 2, 2, 2, 2, 0, 0, 1, 0 };
+  std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
   // * testcase 2
   // std::vector<int> arr = { 1, 1, 1, 1, 1 };
   // * testcase 3
