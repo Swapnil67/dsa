@@ -1,3 +1,4 @@
+#include<map>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -11,7 +12,6 @@ void swap(int &a, int &b) {
   a = b;
   b = temp;
 }
-
 
 void dutchNationalFlagBrute(std::vector<int> &arr) {
   int n = arr.size();
@@ -57,17 +57,84 @@ void dutchNationalFlag(std::vector<int> &arr)  {
   }
 }
 
-// *  0 0 0 0   1 1 1 1  2 1 0 2   2 2 2 2
-// * 0     low-1      low      mid        high
+// * Majority Element Brute
+int majorityElementBrute(std::vector<int> arr) {
+  int n = arr.size();
+  int occurence = n/2;
+  for (int i = 0; i < n; i++) {
+    int cnt = 0;
+    for (int j = 0; j < n; j++) {
+      if(arr[i] == arr[j]) cnt++;
+    }
+    if(cnt > occurence) return arr[i];
+  }
+  return -1;
+}
+
+// * Majority Element Better
+int majorityElementBetter(std::vector<int> arr) {
+  int n = arr.size();
+  std::map<int, int> hashMap;
+  for (int i = 0; i < n; i++) {
+    hashMap[arr[i]]++;
+  }
+  int occurence = n/2;
+  for(auto it: hashMap) {
+    if(it.second > occurence) return it.first;
+  }
+  return -1;
+}
+
+// * Majority Element Optimal [Moore's Voiting Algorithm]
+int majorityElement(std::vector<int> arr) {
+  int n = arr.size();
+  int cnt = 0, majorityEle = -1;
+  for (int i = 0; i < n; i++) {
+    if(cnt == 0) {
+      cnt = 1;
+      majorityEle = arr[i];
+    }
+    else if(majorityEle == arr[i]) {
+      cnt++;
+    }
+    else  {
+      cnt--;
+    }
+  }
+  cnt =  0;
+  int occurence = n/2;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] == majorityEle) cnt++;
+  }
+  if(cnt > occurence) return majorityEle;
+  return -1;
+}
+
+std::vector<int> maxSubarraySumBrute(std::vector<int> arr) {
+  int n = arr.size();
+  long long maxSum = INT_MIN;
+  std::vector<int> ans;
+  for (int i = 0; i < n; i++) {
+    long long sum = 0;
+    for (int j = i; j < n; j++) {
+      sum += arr[j];
+      if(sum > maxSum) {
+        ans = {i, j};
+        maxSum = sum;
+      }
+    }
+  }
+  return ans;
+}
+
 
 int main() {
   // * Problem 1
-  std::cout << "Sort 0s, 1s and 2s" << std::endl;
-  std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
-  printArr(arr);
+  // std::cout << "Sort 0s, 1s and 2s" << std::endl;
+  // std::vector<int> arr = {2, 2, 2, 2, 0, 0, 1, 0};
+  // printArr(arr);
   // dutchNationalFlagBrute(arr);
-  dutchNationalFlag(arr);
-  printArr(arr);
+  // dutchNationalFlag(arr);
   // printArr(arr);
 
   // * Problem 2
@@ -75,15 +142,17 @@ int main() {
   // std::vector<int> arr = {2, 2, 1, 1, 1, 2, 2};
   // std::vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 };
   // printArr(arr);
-  // int majorityEle = majorityElementA(arr);
+  // int majorityEle = majorityElementBrute(arr);
+  // int majorityEle = majorityElementBetter(arr);
+  // int majorityEle = majorityElement(arr);
   // std::cout << "Majority Element n/2 times is " << majorityEle << std::endl;
 
   // * Problem 3
-  // std::cout << "Maximum Subarray Sum" << std::endl;
-  // std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * 6
-  // printArr(arr);
-  // std::vector<int> points = maxSubarraySum(arr);
-  // std::cout << "Maximum subarray sum exists between " << points[0] << " to " << points[1] << std::endl;
+  std::cout << "Maximum Subarray Sum" << std::endl;
+  std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * 6
+  printArr(arr);
+  std::vector<int> points = maxSubarraySumBrute(arr);
+  std::cout << "Maximum subarray sum exists between " << points[0] << " to " << points[1] << std::endl;
 
   // * Problem 4
   // std::cout << "Maximum Subarray Sum Circular" << std::endl;

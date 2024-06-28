@@ -107,8 +107,8 @@ double partiallyOptimal(vector<int> nums1, vector<int> nums2) {
     j++;
   }
 
-  cout<<"firstEle "<<firstEle<<endl;
-  cout<<"secondEle "<<secondEle<<endl;
+  std::cout<<"firstEle "<<firstEle<<std::endl;
+  std::cout<<"secondEle "<<secondEle<<std::endl;
   if(n % 2 == 1) {
     // * Odd Arr
     return (double) (firstEle/2.0);
