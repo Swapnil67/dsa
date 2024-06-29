@@ -26,6 +26,7 @@ bool isCharacter(char ch) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * From start count every word length then return the last count
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::string s) {
@@ -42,6 +43,7 @@ int bruteForce(std::string s) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Loop from backwards
 // * TIME COMPLEXITY O(N) [Worst case]
 // * TIME COMPLEXITY O(len of last word) [Best case]
 // * SPACE COMPLEXITY O(1)
