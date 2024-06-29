@@ -60,7 +60,6 @@ void replaceElements(std::vector<int> &arr) {
 int main() {
   std::vector<int> arr = {17, 18, 5, 4, 6, 1};
   printArr(arr);
-
   // bruteForce(arr);
   replaceElements(arr);
   printArr(arr);
