@@ -18,11 +18,13 @@
 #include<string>
 #include<iostream>
 
-void printStringArr(std::vector<std::string> strs) {
-  int n = strs.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << strs[i] << std::endl;
+void printVectorString(std::vector<std::string> arr) {
+  std::cout<<"[ ";
+  for(std::string s: arr) {
+    std::cout<<s;
+    std::cout<<", ";
   }
+  std::cout<<"]\n";
 }
 
 // * TIME COMPLEXITY O(M x N)
@@ -55,9 +57,12 @@ std::string longestCommonPrefix(std::vector<std::string> strs) {
   return res;
 }
 
+
+// TODO Solve this problem using trie data-structure
+
 int main() {
   std::vector<std::string> strs = { "flower", "flow", "flight" };
-  printStringArr(strs);
+  printVectorString(strs);
   std::string commonPrefix = longestCommonPrefix(strs);
   std::cout << "Longest Common Prefix is = " << commonPrefix << std::endl;
   return 0;

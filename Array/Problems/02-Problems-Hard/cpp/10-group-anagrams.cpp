@@ -46,9 +46,9 @@ std::vector<std::vector<std::string>> bruteForce(std::vector<std::string> strs) 
     }
     stringMap[alphabets].push_back(s);
   }
-  std::vector<std::vector<std::string>> ans;
 
   // * O(N) N -> keys in StringMap
+  std::vector<std::vector<std::string>> ans;
   for(auto it: stringMap) {
     ans.push_back(it.second);
   }
