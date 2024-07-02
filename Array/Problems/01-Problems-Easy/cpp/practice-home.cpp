@@ -473,6 +473,22 @@ void replaceElements(std::vector<int> &arr) {
   }
 }
 
+int pivotIndexBrute(std::vector<int> arr) {
+  int n = arr.size();
+  int sum = 0;
+  for (int i = 0; i < n; i++) {
+    sum += arr[i];
+    int curSum = 0;
+    for (int j = i; j < n; j++) {
+      curSum += arr[j];
+    }
+    if(sum == curSum) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 int main() {
   // * Problem 0
   // std::cout << "Reverse an array" << std::endl;
@@ -614,14 +630,20 @@ int main() {
   // std::cout<<"Is Calid Anagram "<<isValidAnagram<<std::endl;
 
   // * Problem 14
-  std::vector<int> arr = {17, 18, 5, 4, 6, 1};
-  printArr(arr);
+  // std::vector<int> arr = {17, 18, 5, 4, 6, 1};
+  // printArr(arr);
   // replaceElementsBrute(arr);
-  replaceElements(arr);
-  printArr(arr);
+  // replaceElements(arr);
+  // printArr(arr);
 
+
+  // * Pivot Index
+  std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
+  printArr(nums);
+  int pivotIndex = pivotIndexBrute(nums);
+  std::cout << "Pivot Index " << pivotIndex << std::endl;
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 practice-home.cpp -o practice-home && ./practice-home–
+// * g++ --std=c++17 practice-home.cpp -o practice-home && ./practice-home

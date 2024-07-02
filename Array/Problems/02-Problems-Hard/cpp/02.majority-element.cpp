@@ -93,7 +93,9 @@ int optimalApproach(std::vector<int> arr) {
     if(arr[i] == ele) countMaxEle++;
   }
   // * Check if ele is majority element or not
-  if(countMaxEle > (n/2)) return ele;
+  int occurence = n / 2;
+  if (countMaxEle > occurence)
+    return ele;
   return -1;
 }
 

@@ -26,7 +26,6 @@
 
 #include<iostream>
 
-
 void printArr(std::vector<int> arr) {
   int n = arr.size();
   for(int i=0; i<n; i++) { 
@@ -43,18 +42,17 @@ int bruteForce(std::vector<int> nums) {
   int n = nums.size();
   int sum = 0, pivotIdx = -1;
   for (int i = 0; i < n; i++) {
+    sum += nums[i];
     int curSum = 0;
     for (int j = i; j < n; j++) {
-      curSum += nums[j + 1];
+      curSum += nums[j];
     }
     // std::cout << curSum << " " << sum << std::endl;
     if(curSum == sum) {
-      pivotIdx = i;
-      break;
+      return i;
     }
-    sum += nums[i];
   }
-  return pivotIdx;
+  return -1;
 }
 
 
@@ -85,12 +83,12 @@ int findPivotIndex(std::vector<int> nums) {
 }
 
 int main() {
-  // std::vector<int> nums = {1, 2, 3}; // * -1
+  std::vector<int> nums = {1, 2, 3}; // * -1
   // std::vector<int> nums = {2, 1, -1}; // * 0
-  std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
+  // std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
   printArr(nums);
-  // int pivotIndex = bruteForce(nums);
-  int pivotIndex = findPivotIndex(nums);
+  int pivotIndex = bruteForce(nums);
+  // int pivotIndex = findPivotIndex(nums);
   std::cout << "Pivot Index " << pivotIndex << std::endl;
   return 0;
 }
