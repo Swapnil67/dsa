@@ -13,6 +13,21 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
+void printVectorString(std::vector<std::string> arr) {
+  std::cout<<"[ ";
+  for(std::string s: arr) {
+    std::cout<<s;
+    std::cout<<", ";
+  }
+  std::cout<<"]\n";
+}
+
+void printAnagramGroups(std::vector<std::vector<std::string>> ans) {
+  for(int i=0; i<ans.size(); i++) {
+    printVectorString(ans[i]);
+  }
+}
+
 void dutchNationalFlag(std::vector<int> &arr) {
   int n = arr.size();
   int l = 0, m = 0, h = n-1;
@@ -130,6 +145,7 @@ std::vector<int> maxSubarraySumPoints(std::vector<int> arr) {
   return {ansStart, ansEnd};
 }
 
+// * Maximum subarray sum [circular array]
 int maxSubarraySumCircular(std::vector<int> arr) {
   int n = arr.size();
   int total = 0;
@@ -154,7 +170,153 @@ int maxSubarraySumCircular(std::vector<int> arr) {
   }
 
 }
+
 // * --------------------- Maximum Subarray Sum ---------------------
+
+// * --------------------- Rearrange Elements ---------------------
+
+// * [+ve & -ve elements are equal]
+std::vector<int> reArrangeElementsA(std::vector<int> &arr) {
+  int n = arr.size();
+  int pIdx = 0, nIdx = 1;
+  std::vector<int> ans(n, 0);
+  for (int i = 0; i < n; i++) {
+    if(arr[i] > 0) {
+      ans[pIdx] = arr[i];
+      pIdx = pIdx + 2;
+    }
+    else {
+      ans[nIdx] = arr[i];
+      nIdx = nIdx + 2;
+    }
+  }
+  return ans;
+}
+
+// * [+ve & -ve elements are not equal]
+std::vector<int> reArrangeElementsB(std::vector<int> &arr) {
+  int n = arr.size();
+  std::vector<int> pEle, nEle;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] > 0) {
+      pEle.push_back(arr[i]);
+    }
+    else {
+      nEle.push_back(arr[i]);
+    }
+  }
+
+  std::vector<int> ans(n, 0);
+  int pSize = pEle.size(), nSize = nEle.size();
+  if(pSize < nSize) {
+    for (int i = 0; i < pSize; i++) {
+      ans[i * 2] = pEle[i];
+      ans[i * 2 + 1] = nEle[i];
+    }
+
+    int index = pSize * 2;
+    for (int i = pSize; i < n; i++) {
+      ans[index] = nEle[i];
+      index++;
+    }
+  }
+  else {
+    for (int i = 0; i < nSize; i++) {
+      ans[i * 2] = pEle[i];
+      ans[i * 2 + 1] = nEle[i];
+    }
+
+    int index = nSize * 2;
+    for (int i = nSize; i < n; i++) {
+      ans[index] = pEle[i];
+      index++;
+    }
+  }
+
+  return ans;
+
+}
+
+// * --------------------- Rearrange Elements ---------------------
+
+// * --------------------- Superior Elements ---------------------
+
+std::vector<int> superiorElementsBrute(std::vector<int> arr) {
+  int n = arr.size();
+  std::vector<int> ans;
+  for (int i = 0; i < n; i++) {
+    bool isSuperior = false;
+    for (int j = i; j < n; j++) {
+      if(arr[i] > arr[j+1]) {
+        isSuperior = true;
+      }
+      else {
+        isSuperior = false;
+        break;
+      }
+    }
+
+    if(i == (n-1)) isSuperior = true;
+
+    if (isSuperior)
+      ans.push_back(arr[i]);
+  }
+  return ans;
+}
+
+std::vector<int> superiorElements(std::vector<int> arr) {
+  int n = arr.size();
+  int max = INT_MIN;
+  std::vector<int> ans;
+  for (int i = n - 1; i >= 0; i--) {
+    if(arr[i] > max) {
+      max = arr[i];
+      ans.push_back(arr[i]);
+    }
+  }
+
+  std::sort(ans.begin(), ans.end());
+  return ans;
+}
+
+// * --------------------- Rearrange Elements ---------------------
+
+// * --------------------- Group Anagrams ---------------------
+
+std::vector<std::vector<std::string>> groupAnagramsBrute(std::vector<std::string> strs) {
+  std::map<std::vector<int>, std::vector<std::string>> anagramMap;
+  for(std::string s : strs) {
+    std::vector<int> alphabets(26, 0);
+    for(char c : s) {
+      int idx = (int)c - (int)'a';
+      alphabets[idx]++;
+    }
+    anagramMap[alphabets].push_back(s);
+  }
+
+  std::vector<std::vector<std::string>> ans;
+  for(auto it: anagramMap) {
+    ans.push_back(it.second);
+  }
+  return ans;
+}
+
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> strs) {
+  std::map<std::vector<int>, std::vector<std::string>> anagramMap;
+  for(std::string s : strs) {
+    std::string t = s;
+    std::sort(t.begin(), t.end());
+    anagramMap[t].push_back(s);
+  }
+
+  std::vector<std::vector<std::string>> ans;
+  for(auto & [k, v]: anagramMap) {
+    ans.push_back(v);
+  }
+  return ans;
+}
+
+// * --------------------- Group Anagrams ---------------------
 
 int main() {
   // * Problem 1
@@ -185,20 +347,21 @@ int main() {
   // std::cout << "Maximum subarray sum exists between " << points[0] << " to " << points[1] << std::endl;
 
   // * Problem 4
-  std::cout << "Maximum Subarray Sum Circular" << std::endl;
+  // std::cout << "Maximum Subarray Sum Circular" << std::endl;
   // std::vector<int> arr = {5, -3, 5}; // * 10
-  std::vector<int> arr = {-2, -3, -1}; // * -1
-  printArr(arr);
-  int maxSum = maxSubarraySumCircular(arr);
-  std::cout << "Maximum subarray sum in circular array is " << maxSum << std::endl;
+  // std::vector<int> arr = {-2, -3, -1}; // * -1
+  // printArr(arr);
+  // int maxSum = maxSubarraySumCircular(arr);
+  // std::cout << "Maximum subarray sum in circular array is " << maxSum << std::endl;
 
   // * Problem 5
   // std::cout << "Rearrange Array Elements by Sign" << std::endl;
   // std::vector<int> arr = {1, 2, -4, -5};
-  // std::vector<int> ans = reArrangeElementsA(arr);
   // printArr(arr);
+  // std::vector<int> ans = reArrangeElementsA(arr);
   // std::vector<int> arr = {-1, 2, 3, 4, -3, 1};
   // std::vector<int> arr = {3, 1, -2, -5, 2, -4, -7, -8, 3, -9};
+  // printArr(arr);
   // std::vector<int> ans = reArrangeElementsB(arr);
   // printArr(ans);
 
@@ -207,16 +370,19 @@ int main() {
   // std::vector<int> arr = {1, 2, 2, 1};
   // std::vector<int> arr = {1, 2, 3, 2};
   // printArr(arr);
-  // std::vector<int> ans = superiorELementsBrute(arr);
+  // std::vector<int> ans = superiorElementsBrute(arr);
   // std::vector<int> ans = superiorElements(arr);
   // printArr(ans);
 
   // * Problem 7
-  // std::cout << "Replace elements with greatest" << std::endl;
-  // std::vector<int> arr = {17, 18, 5, 4, 6, 1};
-  // printArr(arr);
-  // replaceGreatest(arr);
-  // printArr(arr);
+  // std::cout << "Group anagrams" << std::endl;
+  // std::vector<std::string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+  // printVectorString(strs);
+  // std::vector<std::vector<std::string>> ans = groupAnagramsBrute(strs);
+  // std::vector<std::vector<std::string>> ans = groupAnagrams(strs);
+  // std::cout<<"Anagram Groups"<<std::endl;
+  // printAnagramGroups(ans);
+
 
   // * Problem 8
   // std::cout << "Longest Consecutive Sequence" << std::endl;
