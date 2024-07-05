@@ -61,15 +61,16 @@ int findAllSubarraysWithGivenSum(std::vector<int> arr, int k) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {3, 1, 2, 4};
-  // int k = 6;
+  std::vector<int> arr = {3, 1, 2, 4};
+  int k = 6;
+
   // * testcase 2
   // std::vector<int> arr = {1, 2, 3};
   // int k = 3;
 
   // * testcase 3
-  std::vector<int> arr = { 1,2,3,-3,1,1,1,4,2,-3 };
-  int k = 3; 
+  // std::vector<int> arr = {1, 2, 3, -3, 1, 1, 1, 4, 2, -3};
+  // int k = 3; 
 
   printArr(arr);
   // int cnt = bruteForce(arr, k);

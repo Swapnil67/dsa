@@ -27,7 +27,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 1 -------------------------`
-
+// * Use Priority Queue
 // * TIME COMPLEXITY O(N) + O(N) + O(k) = O(2N) + O(k)
 // * SPACE COMPLEXITY O(N) + O(N) 
 std::vector<int> approach1(std::vector<int> nums, int k) {
@@ -59,7 +59,6 @@ std::vector<int> approach1(std::vector<int> nums, int k) {
 
 }
 
-
 // * ------------------------- APPROACH 2 -------------------------`
 // * TIME COMPLEXITY O(N) + O(N) + O(N) = O(3N)
 // * SPACE COMPLEXITY O(N) + O(N) 
@@ -84,7 +83,7 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
   // * Loop through the frequency vector
   std::vector<int> ans;
   for(int i=n; i>=0; i--) {
-    // std::cout<<freqVector[i].size()<<" ";
+    // std::cout << freqVector[i].size() << std::endl;
     if(freqVector[i].size()) {
       std::vector<int> temp(freqVector[i].begin(), freqVector[i].end());
       for(int i=0; i<temp.size(); i++) {
@@ -101,13 +100,13 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
 }
 
 int main() {
-  // std::vector<int> nums = {1, 1, 1, 2, 2, 3};
-  // int k = 2;
-  std::vector<int> nums = {1, 2, 2, 3, 3};
+  std::vector<int> nums = {1, 1, 1, 2, 2, 3};
   int k = 2;
+  // std::vector<int> nums = {1, 2, 2, 3, 3};
+  // int k = 2;
 
-  std::vector<int> ans = approach1(nums, k);
-  // std::vector<int> ans = approach2(nums, k);
+  // std::vector<int> ans = approach1(nums, k);
+  std::vector<int> ans = approach2(nums, k);
 
   std::cout<<"Top k frequent elements "<<std::endl;
   printArr(ans);

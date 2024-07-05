@@ -1,5 +1,6 @@
 #include<map>
 #include<iostream>
+#include<queue>
 
 void printArr(std::vector<int> arr) {
   for(int i=0;i<arr.size();i++) {
@@ -7,10 +8,20 @@ void printArr(std::vector<int> arr) {
   }
   std::cout << std::endl;
 }
+
 void swap(int &a, int &b) {
   int temp = a;
   a = b;
   b = temp;
+}
+
+bool linearSearch(std::vector<int> arr, int t) {
+  for (int i = 0; i < arr.size(); i++) {
+    if(arr[i] == t) {
+      return true;
+    }
+  }
+  return false;
 }
 
 void printVectorString(std::vector<std::string> arr) {
@@ -302,7 +313,7 @@ std::vector<std::vector<std::string>> groupAnagramsBrute(std::vector<std::string
 }
 
 std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> strs) {
-  std::map<std::vector<int>, std::vector<std::string>> anagramMap;
+  std::map<std::string, std::vector<std::string>> anagramMap;
   for(std::string s : strs) {
     std::string t = s;
     std::sort(t.begin(), t.end());
@@ -317,6 +328,72 @@ std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> str
 }
 
 // * --------------------- Group Anagrams ---------------------
+
+// * --------------------- Most frequent Elements ---------------------
+
+std::vector<int> mostFrequentElementsBrute(std::vector<int>  arr, int k) {
+  int n = arr.size();
+  // * Get the occurence Map of each element
+  std::map<int, int> occurenceMap;
+  for (int i = 0; i < n; i++) {
+    occurenceMap[arr[i]]++;
+  }
+
+  // * Push the occrence map to priority queue
+  std::priority_queue<std::pair<int, int>> pq;
+  for(auto it : occurenceMap) {
+    pq.push({ it.second, it.first });
+  }
+
+  // * Pop top k elements
+  std::vector<int> ans;
+  while(k--) {
+    ans.push_back(pq.top().second);
+    pq.pop();
+  }
+
+  return ans;
+}
+
+// * --------------------- Most frequent Elements ---------------------
+
+// * --------------------- Longest Consecutive Sequence ---------------------
+
+int longestConsecutiveBrute(std::vector<int> arr) {
+  int n = arr.size();
+  int longestSequence = 0;
+  for (int i = 0; i < n; i++) {
+    int curSequence = 0;
+    int nextEle = arr[i]+1;
+    while (linearSearch(arr, nextEle)) {
+      nextEle++;
+      curSequence++;
+    }
+    longestSequence = std::max(longestSequence, curSequence);
+  }
+  return longestSequence;
+}
+
+int findlongestConsecutiveBetter(std::vector<int> arr) {
+  int n = arr.size();
+  std::sort(arr.begin(), arr.end());
+  int longestSequence = 1, curSequence = 0;
+  int nextEle = arr[0];
+  for (int i = 1; i < n; i++) {
+    if(i < n && arr[i] == nextEle) {
+      nextEle++;
+      curSequence++;
+    }
+    else {
+      longestSequence = std::max(longestSequence, curSequence);
+      nextEle = arr[i];
+      curSequence = 1;
+    } 
+  }
+  return longestSequence;
+} 
+
+// * --------------------- Longest Consecutive Sequence ---------------------
 
 int main() {
   // * Problem 1
@@ -383,8 +460,16 @@ int main() {
   // std::cout<<"Anagram Groups"<<std::endl;
   // printAnagramGroups(ans);
 
+  // TODO Problem 8
+  // std::cout << "Most frequent elements" << std::endl;
+  // int k = 2;
+  // std::vector<int> arr = {1, 1, 1, 2, 2, 3};
+  // printArr(arr);
+  // std::vector<int> ans = mostFrequentElementsBrute(arr, k);
+  // std::vector<int> ans = mostFrequentElements(arr, k);
+  // printArr(ans);
 
-  // * Problem 8
+  // TODO Problem 9
   // std::cout << "Longest Consecutive Sequence" << std::endl;
   // std::vector<int> arr = {100, 4, 200, 1, 3, 2};
   // std::vector<int> arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
@@ -395,6 +480,17 @@ int main() {
   // int longestSequence = findlongestConsecutive(arr);
   // std::cout << "Longest consecutive sequence is " << longestSequence << std::endl;
   
+  // TODO Problem 10
+  // std::cout << "Count Subarray Sum" << std::endl;
+  // int k = 6;
+  // std::vector<int> arr = {3, 1, 2, 4};
+  // printArr(arr);
+
+  // TODO Problem 11
+  // std::cout << "Maximum Product Subarray" << std::endl;
+  // std::vector<int> arr = {2, 3, -2, 4};
+  // printArr(arr);
+
   return 0;
 }
 // * Run the code
