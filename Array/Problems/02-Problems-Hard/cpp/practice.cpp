@@ -1,6 +1,7 @@
 #include<map>
-#include<iostream>
 #include<queue>
+#include<iostream>
+#include<unordered_set>
 
 void printArr(std::vector<int> arr) {
   for(int i=0;i<arr.size();i++) {
@@ -355,6 +356,38 @@ std::vector<int> mostFrequentElementsBrute(std::vector<int>  arr, int k) {
   return ans;
 }
 
+std::vector<int> mostFrequentElements(std::vector<int> arr, int k) {
+  int n = arr.size();
+  // * Step 1: create a count map
+  std::map<int, int> countMap;
+  for (int i = 0; i < n; i++) {
+    countMap[arr[i]]++;
+  }
+
+  // * Step 2: Create the frequency vector of count map
+  std::vector<std::vector<int>> freqVector(n);
+  for(auto it: countMap) {
+    freqVector[it.second].push_back(it.first);
+  }
+
+
+  // * Step 3: Now loop over freqVector
+  std::vector<int> ans;
+  for (int i = n; i >= 0; i--) {
+    if(freqVector[i].size()) {
+      std::vector<int> temp(freqVector[i].begin(), freqVector[i].end());
+      for (int j = 0; j < temp.size(); j++) {
+        ans.push_back(temp[j]);
+        k--;
+        if (k == 0) break;
+      }
+    }
+    if(k == 0) break;
+  }
+
+  return ans;
+}
+
 // * --------------------- Most frequent Elements ---------------------
 
 // * --------------------- Longest Consecutive Sequence ---------------------
@@ -376,24 +409,124 @@ int longestConsecutiveBrute(std::vector<int> arr) {
 
 int findlongestConsecutiveBetter(std::vector<int> arr) {
   int n = arr.size();
+  if (n == 0 || n == 1)
+    return n;
   std::sort(arr.begin(), arr.end());
-  int longestSequence = 1, curSequence = 0;
-  int nextEle = arr[0];
-  for (int i = 1; i < n; i++) {
-    if(i < n && arr[i] == nextEle) {
+  int cnt = 0, maxC = INT_MIN, nextEle = arr[0];
+  for (int i = 0; i < n; i++) {
+    if(arr[i] == nextEle) {
+      cnt++;
       nextEle++;
-      curSequence++;
+      maxC = std::max(maxC, cnt);
     }
     else {
-      longestSequence = std::max(longestSequence, curSequence);
+      cnt = 1;
       nextEle = arr[i];
-      curSequence = 1;
-    } 
+    }
   }
-  return longestSequence;
+  return maxC;
 } 
 
+int findlongestConsecutive(std::vector<int> &arr) {
+  int n = arr.size();
+  std::unordered_set<int> st;
+  for (int i = 0; i < n; i++) {
+    st.insert(arr[i]);
+  }
+
+  int longest = 0;
+  for(auto it: st) {
+    if(st.find(it - 1) == st.end()) {
+      int nextEle = it+1, cnt = 1;
+      // * This is the first element
+      while(st.find(nextEle) != st.end()) {
+        cnt++;
+        nextEle += 1;
+      }
+      longest = std::max(longest, cnt);
+    } else {
+
+    }
+  }
+  return longest;
+}
+
 // * --------------------- Longest Consecutive Sequence ---------------------
+
+// * --------------------- Count Subarray Sum ---------------------
+
+int findAllSubarraysWithGivenSumBrute(std::vector<int> arr, int k) {
+  int n = arr.size(), cnt = 0;
+  if(n == 0) return cnt;
+
+  for (int i = 0; i < n; i++) {
+    int curSum = 0; 
+    for (int j = i; j < n; j++) {
+      curSum += arr[j];
+      if(curSum == k) {
+        cnt++;
+        break;
+      }
+    }
+  }
+  return cnt;
+}
+
+int findAllSubarraysWithGivenSum(std::vector<int> arr, int k) {
+  int n = arr.size(), sum = 0, c= 0;
+  std::map<int, int> prefixSum;
+  prefixSum[0] = 1; // * If first rem comes zero
+  for (int i = 0; i < n; i++) {
+    sum += arr[i];
+    int r = sum - k;
+    std::cout << sum << " " << r << " -> " << prefixSum[r] << std::endl;
+    if(prefixSum.find(r) != prefixSum.end()) {
+      c = c + prefixSum[r]; 
+    }
+    prefixSum[sum]++;
+  }
+  return c;
+}
+
+// * --------------------- Count Subarray Sum ---------------------
+
+// * --------------------- Max Product Subarray ---------------------
+
+int findMaxProductBrute(std::vector<int> arr) {
+  int n = arr.size();
+  if(n == 0) return 0;
+
+  int maxP = INT_MIN;
+  for (int i = 0; i < n; i++) {
+    int curP = 1;
+    for (int j = i; j < n; j++) {
+      curP *= arr[j];
+      maxP = std::max(maxP, curP);
+    }
+  }
+  return maxP;
+}
+
+int findMaxProduct(std::vector<int> arr) {
+  int n = arr.size();
+  int maxP = INT_MIN, p = 1, s = 1;
+  for (int i = 0; i < n; i++) {
+    if(p == 0){
+      p = 1;
+    }
+    if(s == 0) {
+      s = 1;
+    }
+    p = p * arr[i];
+    s = s * arr[n - i - 1];
+    maxP = std::max(maxP, std::max(p, s));
+  }
+  return maxP;
+}
+
+
+// * --------------------- Max Product Subarray ---------------------
+
 
 int main() {
   // * Problem 1
@@ -460,7 +593,7 @@ int main() {
   // std::cout<<"Anagram Groups"<<std::endl;
   // printAnagramGroups(ans);
 
-  // TODO Problem 8
+  // * Problem 8
   // std::cout << "Most frequent elements" << std::endl;
   // int k = 2;
   // std::vector<int> arr = {1, 1, 1, 2, 2, 3};
@@ -469,7 +602,7 @@ int main() {
   // std::vector<int> ans = mostFrequentElements(arr, k);
   // printArr(ans);
 
-  // TODO Problem 9
+  // * Problem 9
   // std::cout << "Longest Consecutive Sequence" << std::endl;
   // std::vector<int> arr = {100, 4, 200, 1, 3, 2};
   // std::vector<int> arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
@@ -480,16 +613,25 @@ int main() {
   // int longestSequence = findlongestConsecutive(arr);
   // std::cout << "Longest consecutive sequence is " << longestSequence << std::endl;
   
-  // TODO Problem 10
+  // * Problem 10
   // std::cout << "Count Subarray Sum" << std::endl;
   // int k = 6;
   // std::vector<int> arr = {3, 1, 2, 4};
+  // int k = 3;
+  // std::vector<int> arr = {1, 2, 3, -3, 1, 1, 1, 4, 2, -3};
   // printArr(arr);
+  // int cnt = findAllSubarraysWithGivenSumBrute(arr, k);
+  // int cnt = findAllSubarraysWithGivenSum(arr, k);
+  // std::cout << "There are " << cnt << " subarrays whose sum is equal to " << k << std::endl;
 
-  // TODO Problem 11
+  // * Problem 11
   // std::cout << "Maximum Product Subarray" << std::endl;
   // std::vector<int> arr = {2, 3, -2, 4};
+  // std::vector<int> arr = {-2, 0, -1};
   // printArr(arr);
+  // int maxProduct = findMaxProductBrute(arr);
+  // int maxProduct = findMaxProduct(arr);
+  // std::cout << "Maximum product subarray is " << maxProduct << std::endl;
 
   return 0;
 }

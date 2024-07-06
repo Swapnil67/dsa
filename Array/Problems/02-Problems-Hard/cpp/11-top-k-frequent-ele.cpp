@@ -82,7 +82,7 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
   // * O(N) -> Worst Case
   // * Loop through the frequency vector
   std::vector<int> ans;
-  for(int i=n; i>=0; i--) {
+  for (int i = n; i >= 0; i--) {
     // std::cout << freqVector[i].size() << std::endl;
     if(freqVector[i].size()) {
       std::vector<int> temp(freqVector[i].begin(), freqVector[i].end());

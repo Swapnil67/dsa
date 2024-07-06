@@ -16,6 +16,8 @@
  * https://leetcode.com/problems/maximum-product-subarray/description/
 */
 
+// ! Dynamic Programming Problem
+
 #include<iostream>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
@@ -28,6 +30,10 @@ void printArr(std::vector<int> arr) {
 }
 
 
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * Nested Loop [Find all subarray product]
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr) {
   int n = arr.size();
   int maxProduct = INT_MIN;
@@ -41,20 +47,39 @@ int bruteForce(std::vector<int> arr) {
   return maxProduct;
 }
 
+// * ------------------------- APPROACH 2: Optimal Approach A -------------------------`
+// * Prefix & Suffix product
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int findMaxProduct(std::vector<int> arr) {
   int n = arr.size(), maxProduct = INT_MIN;
-  int curProduct = 1;
+  int prefix = 1, suffix = 1;
   for (int i = 0; i < n; i++) {
-    if(arr[i] * curProduct < 0) {
-      curProduct = 1;
-    }
-    else {
-      curProduct *= arr[i];
-      maxProduct = std::max(maxProduct, curProduct);
-    }
+    if(prefix == 0) prefix = 1;
+    if(suffix == 0) suffix = 1;
+    prefix = prefix * arr[i];
+    suffix = suffix * arr[n-i-1];
+    maxProduct = std::max(maxProduct, std::max(prefix, suffix));
   }
   return maxProduct;
 }
+
+// * ------------------------- APPROACH 3: Optimal Approach B -------------------------`
+// * Kadanes algorithm
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+int kadanesAlgo(std::vector<int> arr) {
+  int n = arr.size();
+  int curMax = arr[0], curMin = arr[0], res = arr[0];
+  for (int i = 1; i < n; i++) {
+    int temp = curMax * arr[i];
+    curMax = std::max(std::max(temp, curMin * arr[i]), arr[i]);
+    curMin = std::min(std::min(temp, curMin * arr[i]), arr[i]);
+    res = std::max(curMax, res);
+  }
+  return res;
+}
+
 
 int main() {
   // * testcase 1
@@ -62,8 +87,10 @@ int main() {
   // * testcase 2
   // std::vector<int> arr = {-2, 0, -1};
   printArr(arr);
+  
   // int maxProduct = bruteForce(arr);
   int maxProduct = findMaxProduct(arr);
+  // int maxProduct = kadanesAlgo(arr);
   std::cout << "Maximum product subarray is " << maxProduct << std::endl;
   return 0;
 }
