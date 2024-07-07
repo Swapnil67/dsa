@@ -77,7 +77,6 @@ int bruteForce(std::vector<int> arr) {
   return cnt;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Merge Sort & Count Pairs
 // * TIME COMPLEXITY O(NLogN)

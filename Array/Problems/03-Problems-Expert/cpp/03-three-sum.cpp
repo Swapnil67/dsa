@@ -91,9 +91,9 @@ std::vector<std::vector<int>> bruteForce(std::vector<int> arr) {
 std::vector<std::vector<int>> betterApproach(std::vector<int> arr) {
   int n = arr.size();
   std::set<std::vector<int>> tripletSet;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     std::set<int> st;
-    for(int j=i+1; j<n; j++) {
+    for (int j = i + 1; j < n; j++) {
       int k = -(arr[i] + arr[j]);
       if(st.find(k) != st.end()) {
         // * found a triplet
@@ -124,8 +124,7 @@ std::vector<std::vector<int>> optimalApproach(std::vector<int> arr) {
   // * O(N^2)
   for(int i=0; i<n; i++) {
     if(i > 0 && arr[i-1] == arr[i]) continue;
-    int j = i+1;
-    int k = n-1;
+    int j = i+1, k = n-1;
     while(j < k) {
       int sum = arr[i] + arr[j] + arr[k];
       if(sum == 0) {

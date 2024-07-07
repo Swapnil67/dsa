@@ -1,13 +1,10 @@
 /**
- * * Merge overlapping intervals
- * * Given two non-decreasing sorted arrays, ‘A’ and ‘B’, having ‘N’ and ‘M’ elements, respectively.
- * * You must merge these arrays, ‘A’ and ‘B’, into a sorted array without using extra space.
- * * Of all the 'N + M' sorted elements, array 'A' should contain the first 'N' elements, and array 'B' 
- * * should have the last 'M' elements. 
+ * * Missing And Repeating Numbers
+ * * You are given an array of ‘N’ integers where each integer value is between ‘1’ and ‘N’. Each integer appears exactly once 
+ * *  except for ‘P’, which appears exactly twice, and ‘Q’, which is missing.
  * 
- * * Note
- * * You must perform the merge operation in place and must not allocate any extra space to merge the two arrays.
- *
+ * * Your task is to find ‘P’ and ‘Q’ and return them respectively.
+
  * * Example 1
  * * Input  :  arr = {4, 3, 6, 2, 1, 1}
  * * Output : [1, 5]
@@ -46,7 +43,7 @@ std::vector<int> bruteForce(std::vector<int> arr) {
     if (repeating != -1 && missing != -1)
       break;
   }
-  return { repeating, missing };
+  return {repeating, missing};
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`

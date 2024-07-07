@@ -102,7 +102,6 @@ void mergeTwoSortedArraysWithoutExtraSpaceA(std::vector<int> &a, std::vector<int
   std::sort(b.begin(), b.end());
 }
 
-
 int main() {
   std::vector<int> a = {1, 8, 8}, b = {2, 3, 4, 5};
   std::cout<<"A vector: ";
