@@ -17,8 +17,8 @@
  * * https://leetcode.com/problems/next-greater-element-i/description/
 */
 
-#include<iostream>
 #include<stack>
+#include<iostream>
 #include<unordered_map>
 
 void printArr(std::vector<int> arr) {

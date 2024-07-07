@@ -47,6 +47,11 @@ std::vector<int> bruteForce(std::vector<int> arr) {
   return ans;
 }
 
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Hash Array
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 std::vector<int> betterApproach(std::vector<int> arr) {
   int n = arr.size();
   std::vector<int> hashArr(n, 0);

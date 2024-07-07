@@ -55,7 +55,6 @@ int bruteForce(std::vector<int> nums) {
   return -1;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * Prefix Sum + Basic Maths
 // * TIME COMPLEXITY O(2N)
