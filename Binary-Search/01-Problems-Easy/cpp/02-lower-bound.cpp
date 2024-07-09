@@ -38,9 +38,9 @@ void printArr(std::vector<int> arr) {
 int lowerBoundBrute(std::vector<int> arr, int x) {
   int n = arr.size();
   int ans = n;
-  for(int i=0; i<n; i++) {
-    if(arr[i] >= x) {
-      ans = min(i, ans);
+  for (int i = 0; i < n; i++) {
+    if (arr[i] >= x) {
+      ans = std::min(i, ans);
     }
   }
   return ans;

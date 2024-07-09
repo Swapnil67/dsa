@@ -18,14 +18,12 @@
 #include<iostream>
 #include<unordered_map>
 
-
 bool isAlphabet(char ch) {
   return (
     ((int)ch >= (int)'A' && (int)ch <= (int)'Z') || 
     ((int)ch >= (int)'a' && (int)ch <= (int)'z')
   );
 }
-
 
 bool wordPattern(std::string pattern, std::string s) {
   std::unordered_map<char, std::string> patternCharToWordMap;

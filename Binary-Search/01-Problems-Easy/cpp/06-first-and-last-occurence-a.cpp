@@ -123,10 +123,9 @@ int main() {
   printArr(arr);
   // std::pair<int, int> ans = bruteForce(arr, k);
   std::pair<int, int> ans = firstAndLastOccurence(arr, k);
-  std::cout<<"First Occurence: "<<ans.first<<std::endl;
-  std::cout<<"Second Occurence: "<<ans.second<<std::endl;
+  std::cout << "First Occurence of " << k << " is " << ans.first << std::endl;
+  std::cout << "Last Occurence of " << k << " is " << ans.second << std::endl;
 
-  
   return 0;
 }
 
