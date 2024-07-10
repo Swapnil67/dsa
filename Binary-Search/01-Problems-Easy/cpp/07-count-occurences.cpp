@@ -73,7 +73,6 @@ int findLastOccurence(std::vector<int> arr, int k) {
   return idx;
 }
 
-
 int countOccurences(std::vector<int> arr, int k) {
   int firstOccurence = findFirstOccurence(arr, k);
   if(firstOccurence == -1) return 0;

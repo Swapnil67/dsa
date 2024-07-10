@@ -37,7 +37,6 @@ int bruteForce(std::vector<int> arr, int target) {
   return ans;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Find which part of array is sorted and search there
 // * TIME COMPLEXITY O(logN)

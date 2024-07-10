@@ -163,6 +163,38 @@ std::pair<int, int> getFirstAndLastOccurence(std::vector<int> arr, int x)  {
   return {first, last};
 }
 
+// * ----------- Search In Rotated Sorted Array -----------
+
+int searchInRotatedSortedA(std::vector<int> arr, int target) {
+  int n = arr.size();
+  int l = 0, r = n - 1;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    if(arr[m] == target) {
+      return m;
+    }
+    else if(arr[l] <= arr[m]) {
+      // * Left part is sorted
+      if(arr[l] <= target && target <= arr[m]) {
+        r = m - 1;
+      }
+      else {
+        l = m + 1;
+      }
+    }
+    else {
+      // * Right part is sorted
+      if(arr[m] <= target && target <= arr[r]) {
+        l = m + 1;
+      }
+      else {
+        r = m - 1;
+      }
+    }
+  }
+  return -1;
+}
+
 int main() {
   // * Problem 1
   // * Binary Search
@@ -217,46 +249,18 @@ int main() {
 
   // * Problem 7
   // * Search In Rotated Sorted Array (A)
-  std::cout << "Search In Rotated Sorted Array" << std::endl;
-  int target = 0;
-  std::vector<int> arr = {4, 5, 6, 0, 1, 2};
-  // int target = 8;
-  // std::vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
-  // int target = 1;
-  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
-  printArr(arr);
-  // int idx = searchInRotatedSortedA(arr, target);
-  // std::cout<<"Index "<<idx<<std::endl;
-  
-  // * Problem 8
-  // * Search In Rotated Sorted Array (B)
-  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
-  // int target = 1;
-  // std::vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
-  // int target = 8;
-  // std::vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
+  // std::cout << "----------- Search In Rotated Sorted Array -----------" << std::endl;
   // int target = 0;
+  // std::vector<int> arr = {4, 5, 6, 0, 1, 2};
+  // int target = 8;
+  // std::vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
+  // ! Below testcase will fail 
+  // int target = 1;
+  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
   // printArr(arr);
-  // int idx = searchInRotatedSortedB(arr, target);
-  // std::cout<<"Index "<<idx<<std::endl;
+  // int idx = searchInRotatedSortedA(arr, target);
+  // std::cout << "Index " << idx << std::endl;
 
-  // * Problem 9
-  // * Find Minimum in rotated sorted array
-  // std::vector<int> arr = {2, 3, 4, 1};
-  // std::vector<int> arr = {4, 5, 6, 7, 0, 1, 2};
-  // std::vector<int> arr = {25, 30, 5, 10, 15, 20};
-  // printArr(arr);
-  // int minEle = minInRotatedSorted(arr);
-  // std::cout<<"Minimum in rotated sorted: "<<minEle<<std::endl;
-
-  // * Problem 10
-  // * Count of rotation
-  // std::vector<int> arr = {2, 3, 4, 1};
-  // std::vector<int> arr = {5, 6, 0, 1, 2};
-  // printArr(arr);
-  // int count = countRotation(arr, target);
-  // std::cout<<"Rotation Count "<<count<<std::endl;
-   
   return 0;
 }
 
