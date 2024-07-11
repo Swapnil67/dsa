@@ -54,10 +54,10 @@ int findPeakElement(std::vector<int> arr) {
   int l = 0, r = n - 1;
   while(l <= r) {
     int m = l + (r - l) / 2;
-    if (arr[m] > arr[m - 1] && arr[m] > arr[m + 1]) { 
+    if (arr[m] > arr[m - 1] && arr[m] > arr[m + 1]) {
       return arr[m];
-    } 
-    else if(arr[m] > arr[m-1]) {
+    }
+    else if (arr[m] > arr[m - 1]) {
       // * Increasing curve
       l = m + 1;
     }

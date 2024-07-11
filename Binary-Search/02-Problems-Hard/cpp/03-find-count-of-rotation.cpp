@@ -81,7 +81,7 @@ int main() {
   std::vector<int> arr = {2, 3, 4, 1};
   printArr(arr);
   int count = findKRotation(arr);
-  std::cout<<"Rotation Count "<<count<<std::endl;
+  std::cout << "Rotation Count " << count << std::endl;
   return 0;
 }
 

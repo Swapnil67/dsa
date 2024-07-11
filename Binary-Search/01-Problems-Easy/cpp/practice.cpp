@@ -249,7 +249,7 @@ int main() {
 
   // * Problem 7
   // * Search In Rotated Sorted Array (A)
-  // std::cout << "----------- Search In Rotated Sorted Array -----------" << std::endl;
+  // std::cout << "----------- Search In Rotated Sorted Array I -----------" << std::endl;
   // int target = 0;
   // std::vector<int> arr = {4, 5, 6, 0, 1, 2};
   // int target = 8;

@@ -48,14 +48,13 @@ int searchInRotatedSorted(std::vector<int> arr, int target) {
   int l = 0, r = n-1;
   while(l <= r) {
     int m = l + (r - l) / 2;
+    if(arr[m] == target) {
+      return m;
+    }
 
     // * If arr[l] == arr[m] == arr[r]
     if(arr[l] == arr[m] && arr[m] == arr[r]) {
       l++, r--;
-      continue;
-    }
-    if(arr[m] == target) {
-      return m;
     }
     else if(arr[l] <= arr[m]) {
       // * Left part is sorted
@@ -82,11 +81,18 @@ int searchInRotatedSorted(std::vector<int> arr, int target) {
 }
 
 int main() {
-  // std::vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
+  // * testcase 1
   // int target = 0;
+  // std::vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
 
-  std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
-  int target = 1;
+  // * testcase 2
+  // int target = 1;
+  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
+
+  // * testcase 3
+  int target = 0;
+  std::vector<int> arr = {1, 0, 1, 1, 1};
+
   printArr(arr);
   int idx = searchInRotatedSorted(arr, target);
   std::cout<<"Index "<<idx<<std::endl;
