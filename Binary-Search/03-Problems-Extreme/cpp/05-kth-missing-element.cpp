@@ -21,7 +21,6 @@
 
 #include<iostream>
 
-
 // * ------------------------- Utility Functions -------------------------`
 
 void printArr(std::vector<int> arr) {
@@ -36,7 +35,7 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int k) {
-  for(int i=0; i<arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
     if(arr[i] <= k) {
       k++;
     }
@@ -47,16 +46,39 @@ int bruteForce(std::vector<int> arr, int k) {
   return k;
 }
 
+// * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------`
+// * Find the missing number at each arr[i]
+// * TIME COMPLEXITY O(logN) 
+// * SPACE COMPLEXITY O(1)
 int findKthMissingNumber(std::vector<int> arr, int k) {
-  // TODO
-  return k;
+  int n = arr.size();
+  int l = 0, r = n - 1;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    int missingTillM = arr[m] - (m + 1);
+    if(missingTillM < k) {
+      l = m + 1;
+    }
+    else {
+      r = m - 1;
+    }
+  }
+
+  // * kth = arr[r] + more
+  // * kth = arr[r] + (k - missingTillR)
+  // * kth = arr[r] + (k - (arr[r] - (r+1)))
+  // * kth = k + r + 1
+  // * kth = k + l ------------ (l = r + 1)
+
+  return k + l;
 }
 
 int main() {
-  std::vector<int> arr = {2, 3, 4, 7, 11};
   int k = 5;
+  std::vector<int> arr = {2, 3, 4, 7, 11};
   printArr(arr);
-  int missingNumber = bruteForce(arr, k);
+  // int missingNumber = bruteForce(arr, k);
+  int missingNumber = findKthMissingNumber(arr, k);
   std::cout << k << " missing number is " << missingNumber << std::endl;
   return 0;
 }

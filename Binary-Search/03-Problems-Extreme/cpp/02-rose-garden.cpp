@@ -99,16 +99,16 @@ int main() {
   // int flowersInAbouquet = 3, bouquetsRequired = 2;
 
   // * testcase 2
-  // std::vector<int> bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
-  // int bouquetsRequired = 2, flowersInAbouquet = 3;
+  std::vector<int> bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
+  int bouquetsRequired = 2, flowersInAbouquet = 3;
 
   // * testcase 3
   // std::vector<int> bloomDays = {1, 10, 3, 10, 2};
   // int bouquetsRequired = 3, flowersInAbouquet = 1;
 
   // * testcase 4
-  std::vector<int> bloomDays = {1, 1, 1, 1};
-  int bouquetsRequired = 1, flowersInAbouquet = 1;
+  // std::vector<int> bloomDays = {1, 1, 1, 1};
+  // int bouquetsRequired = 1, flowersInAbouquet = 1;
 
   printArr(bloomDays);
   // int minDays = bruteForce(days, k, m);

@@ -91,7 +91,6 @@ int main() {
   // * testcase 2
   std::vector<int> arr = {1, 2, 5, 9};
   int threshold = 6;
-
   printArr(arr);
 
   // int smallestDivisor = bruteForce(arr, threshold);

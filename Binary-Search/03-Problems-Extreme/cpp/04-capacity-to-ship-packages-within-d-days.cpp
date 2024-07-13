@@ -77,6 +77,7 @@ int bruteForce(std::vector<int> weights, int maximumDays) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * Search Space [MaxWeight, SumOfWeights]
 // * TIME COMPLEXITY O(log(total - max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int findLeastPossileWeight(std::vector<int> weights, int maximumDays) {
@@ -102,7 +103,6 @@ int main() {
   // * testcase 1
   std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   int days = 5;
-
   // * testcase 2
   // std::vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
   // int days = 5;
