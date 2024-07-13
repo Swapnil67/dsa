@@ -22,7 +22,7 @@
 int checkRoot(int m, int mid, int power) {
   long long nthRoot = 1;
   // std::cout << "---------- " << mid << " --------------- " << std::endl;
-  for(int i=1; i<=power; i++) {
+  for (int i = 1; i <= power; i++) {
     nthRoot = mid * nthRoot;
     // std::cout << "nthRoot " << nthRoot << std::endl;
     if(nthRoot > m) {

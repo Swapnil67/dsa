@@ -91,6 +91,8 @@ int findMinimumBananasToEat(std::vector<int> piles, int hr) {
 }
 
 int main() {
+  std::cout << "Koko eating bananas" << std::endl;
+
   // * testcase 1
   // std::vector<int> piles = {3, 6, 7, 11};
   // int h = 8;
@@ -107,8 +109,8 @@ int main() {
   std::cout << "Piles of bananas" << std::endl;
   printArr(piles);
 
-  int minimumBananas = bruteForce(piles, h);
-  // int minimumBananas = findMinimumBananasToEat(piles, h);
+  // int minimumBananas = bruteForce(piles, h);
+  int minimumBananas = findMinimumBananasToEat(piles, h);
   std::cout << "Koko need to eat " << minimumBananas << " bananas each hour to finish full pile in " << h << " hours." << std::endl;
 
   return 0;

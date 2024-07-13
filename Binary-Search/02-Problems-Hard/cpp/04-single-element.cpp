@@ -54,7 +54,7 @@ int bruteForce(std::vector<int> arr) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
-int findSinleNumber(std::vector<int> arr) {
+int findSingleNumber(std::vector<int> arr) {
   int n = arr.size();
   // * Edge Cases
   if(n == 1) return arr[0];
@@ -88,7 +88,7 @@ int main() {
   // std::vector<int> arr = {1, 1, 2, 2, 3};
   printArr(arr);
   // int singleNumber = bruteForce(arr);
-  int singleNumber = findSinleNumber(arr);
+  int singleNumber = findSingleNumber(arr);
   std::cout<<"Single Number "<<singleNumber<<std::endl;
   return 0;
 }

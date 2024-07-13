@@ -179,6 +179,36 @@ int findNthRoot(int n, int m) {
   return -1;
 } 
 
+// * ----------- Single Element -----------
+
+int singleElement(std::vector<int> arr) {
+  int n = arr.size();
+  if(n == 1) return arr[0];
+  else if(arr[0] != arr[1]) {
+    return arr[0];
+  }
+  else if(arr[n-1] != arr[n-2]) {
+    return arr[n-1];
+  }
+  int l = 0, r = n - 1;
+  while(l <= r) {
+    int m = l + (r - l) / 2;
+    if (arr[m] != arr[m - 1] && arr[m] != arr[m + 1]) {
+      return arr[m];
+    }
+    else if ((m % 2 == 0 && arr[m] == arr[m + 1]) || (m % 2 == 1 && arr[m] == arr[m - 1])) {
+      l = m + 1;
+    }
+    else {
+      r = m - 1;
+    }
+  }
+
+  return -1;
+
+}
+
+
 int main() {
 
   // * Problem 1
@@ -237,10 +267,19 @@ int main() {
   // * nth Root
   // int n = 9, m = 1953125;
   // int n = 5, m = 32768;
-  int n = 3, m = 27;
-  std::cout << "nth Root" << std::endl;
-  int nthRoot = findNthRoot(n, m);
-  std::cout << n << " Root of " << m << " is " << nthRoot << std::endl;
+  // int n = 3, m = 27;
+  // std::cout << "nth Root" << std::endl;
+  // int nthRoot = findNthRoot(n, m);
+  // std::cout << n << " Root of " << m << " is " << nthRoot << std::endl;
+
+  // * Problem 7
+  // * Single Element
+  std::cout << "Single Element" << std::endl;
+  // std::vector<int> arr = {1, 1, 2, 3, 3, 4, 4, 8, 8};
+  std::vector<int> arr = {1, 2, 2, 3, 3};
+  printArr(arr);
+  int ans = singleElement(arr);
+  std::cout << "Single Element " << ans << std::endl;
   return 0;
 }
 
