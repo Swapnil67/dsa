@@ -15,6 +15,7 @@
 * Output: 3
 
 * https://www.spoj.com/problems/AGGRCOW/
+* https://leetcode.com/problems/magnetic-force-between-two-balls/description/
 * https://www.naukri.com/code360/problems/aggressive-cows_1082559
 */
 
@@ -34,16 +35,15 @@ void printArr(std::vector<int> arr) {
 
 bool findIsPossibleDistance(std::vector<int> stalls, int cows, int distance) {
   int cowsPlaced = 1, lastPlace = stalls[0];
-  for(int i=1; i<stalls.size(); i++) {
+  for (int i = 1; i < stalls.size(); i++) {
     // std::cout << "stalls[i] - lastPlace " << stalls[i] - lastPlace << std::endl;
     // std::cout << "cowsPlaced " << cowsPlaced << std::endl;
     if(stalls[i] - lastPlace >= distance) {
       cowsPlaced++;
-      if(cowsPlaced == cows) return true;
       lastPlace = stalls[i];
     }
+    if(cowsPlaced >= cows) return true;
   }
-  if(cowsPlaced >= cows) return true;
   return false;
 }
 
@@ -54,7 +54,7 @@ int bruteForce(std::vector<int> stalls, int cows) {
   int n = stalls.size();
   // * O(N(logN))
   std::sort(stalls.begin(), stalls.end());
-  int ans = stalls[n-1] - stalls[0];
+  int ans = stalls[n - 1] - stalls[0];
 
   // * O(max - min)
   for (int i = 1; i <= stalls[n-1] - stalls[0]; i++) {
@@ -81,7 +81,7 @@ int findMinMaxDistance(std::vector<int> stalls, int cows) {
   std::sort(stalls.begin(), stalls.end());
   int l = 1, r = stalls[n-1] - stalls[0];
   while(l <= r) {
-    int mid = l + (r-l)/2;
+    int mid = l + (r - l) / 2;
     bool isPossibleDistance = findIsPossibleDistance(stalls, cows, mid);
     if(isPossibleDistance) {
       l = mid + 1;

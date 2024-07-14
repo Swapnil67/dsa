@@ -2,7 +2,8 @@
 * Painter's Partition Problem 
 * Given an array/list of length ‘n’, where the array/list represents the boards and each element of the given array/list
 * represents the length of each board. 
-* Some ‘k’ numbers of painters are available to paint these boards. Consider that each unit of a board takes 1 unit of time to paint.
+* Some ‘k’ numbers of painters are available to paint these boards. Consider that each unit of a board takes 1 unit
+* of time to paint.
 
 * You are supposed to return the area of the minimum time to get this job done of painting all the ‘n’ boards 
 * under a constraint that any painter will only paint the continuous sections of boards.
@@ -15,10 +16,12 @@
 * Input: arr = [10, 20, 30, 40], k = 2
 * Output: 60
 
+* https://leetcode.com/problems/split-array-largest-sum/
 * https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557
 */
 
 #include<iostream>
+#include <numeric>
 
 // * ------------------------- Utility Functions -------------------------`
 
@@ -30,18 +33,9 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
-std::vector<int> findTotalAndMax(std::vector<int> arr) {
-  int maxEle = INT_MIN, total = 0;
-  for(int i=0; i<arr.size(); i++) {
-    maxEle = std::max(maxEle, arr[i]);
-    total += arr[i];
-  }
-  return { maxEle, total };
-}
-
 int findPaintersUsed(std::vector<int> boards, int painters, int time) {
   int paintersRequired = 1, boardsPainted = 0;
-  for(int i=0; i<boards.size(); i++) {
+  for (int i = 0; i < boards.size(); i++) {
     if(boardsPainted + boards[i] <= time) {
       // * allocate board to current painter
       boardsPainted += boards[i];
@@ -59,10 +53,10 @@ int findPaintersUsed(std::vector<int> boards, int painters, int time) {
 // * TIME COMPLEXITY O(total) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> boards, int painters) {
-  std::vector<int> values = findTotalAndMax(boards);
-  int maxEle = values[0], total = values[1];
+  int maxEle = *std::max_element(boards.begin(), boards.end());
+  int total = accumulate(boards.begin(), boards.end(), 0); 
   int ans = total;
-  for(int i=maxEle; i<=total; i++) {
+  for (int i = maxEle; i <= total; i++) {
     int time = i;
     int paintersUsed = findPaintersUsed(boards, painters, time);
     // std::cout << "Time "<< time << " painters used " << paintersUsed << std::endl;
@@ -78,8 +72,9 @@ int bruteForce(std::vector<int> boards, int painters) {
 // * TIME COMPLEXITY O(log(total - max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int findMinTimeToPaintBoards(std::vector<int> boards, int painters) {
-  std::vector<int> values = findTotalAndMax(boards);
-  int l = values[0], r = values[1]; 
+  int l = *std::max_element(boards.begin(), boards.end());
+  int r = accumulate(boards.begin(), boards.end(), 0); 
+
   // * O(log(total - max)) 
   while(l <= r) {
     int mid = l + (r-l)/2;

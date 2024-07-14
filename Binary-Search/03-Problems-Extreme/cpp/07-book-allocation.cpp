@@ -40,25 +40,18 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
-std::vector<int> findTotalAndMax(std::vector<int> arr) {
-  int maxEle = INT_MIN, total = 0;
-  for(int i=0; i<arr.size(); i++) {
-    maxEle = std::max(maxEle, arr[i]);
-    total += arr[i];
-  }
-  return { maxEle, total };
-}
-
 // * Returns the students assigned for given pages
-int findStudentsAssigned(std::vector<int> books, int s, int pages) {
+int findStudentsAssigned(std::vector<int> books, int pages) {
+  // * Start with first student and zero pages
   int assignedStudents = 1, assignedPages = 0;
-  for(int i=0; i<books.size(); i++) {
+  for (int i = 0; i < books.size(); i++) {
     if(assignedPages + books[i] <= pages) {
       assignedPages += books[i];
     }
     else {
-      assignedPages = books[i];
+      // * Start assigning to next students
       assignedStudents++;
+      assignedPages = books[i];
     }
   }
   return assignedStudents;
@@ -69,14 +62,14 @@ int findStudentsAssigned(std::vector<int> books, int s, int pages) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> books, int s) {
   if(s > books.size()) return -1;
-  std::vector<int> values = findTotalAndMax(books);
-  int maxPages = values[0], totalPages = values[1];
+  int maxPages = *std::max_element(books.begin(), books.end());
+  int totalPages = accumulate(books.begin(), books.end(), 0); 
   int ans = -1;
   // * O(sum - max+1)
   for(int i=maxPages; i<=totalPages; i++) {
     int pages = i;
     // * O(N) 
-    int studentsAssigned = findStudentsAssigned(books, s, pages);
+    int studentsAssigned = findStudentsAssigned(books, pages);
     if(studentsAssigned == s) {
       ans = pages;
     }
@@ -89,12 +82,11 @@ int bruteForce(std::vector<int> books, int s) {
 // * SPACE COMPLEXITY O(1)
 int findMaxPagesAssigned(std::vector<int> books, int s) {
   if(s > books.size()) return -1;
-  std::vector<int> values = findTotalAndMax(books);
-  int maxPages = values[0], totalPages = values[1]; 
-  int l = maxPages, r = totalPages;
+  int l = *std::max_element(books.begin(), books.end());
+  int r = accumulate(books.begin(), books.end(), 0); 
   while(l <= r) {
     int mid = l + (r - l) / 2;
-    int studentsAssigned = findStudentsAssigned(books, s, mid);
+    int studentsAssigned = findStudentsAssigned(books, mid);
     // std::cout << "pages " << mid << " students assigned " << studentsAssigned << std::endl;
     if(studentsAssigned <= s) {
       r = mid - 1;
@@ -108,12 +100,12 @@ int findMaxPagesAssigned(std::vector<int> books, int s) {
 
 int main() {
   // * testcase 1
-  std::vector<int> books = {12, 34, 67, 90};
-  int s = 2;
+  // int s = 2;
+  // std::vector<int> books = {12, 34, 67, 90};
 
   // * testcase 2
-  // std::vector<int> books = {25, 46, 28, 49, 24};
-  // int s = 4; 
+  int s = 4; 
+  std::vector<int> books = {25, 46, 28, 49, 24};
   
   printArr(books);
   // int maxPagesAssigned = bruteForce(books, s);

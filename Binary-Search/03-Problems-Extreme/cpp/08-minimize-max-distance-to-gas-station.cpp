@@ -91,8 +91,8 @@ long double betterApproach(std::vector<int> gasStations, int extra) {
 
 int main() {
   // * testcase 1
-  std::vector<int> gasStations = {1, 13, 17, 23};
   int extra = 5;
+  std::vector<int> gasStations = {1, 13, 17, 23};
 
   // * testcase 2
   // std::vector<int> gasStations = {1, 2, 3, 4, 5, 6, 7};
