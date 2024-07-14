@@ -8,8 +8,9 @@
 * Let 'dist' be the maximum value of the distance between adjacent gas stations after adding 'k' new gas stations.
 
 * Example 1:
-* Input: books = [12, 34, 67, 90], s = 2
-* Output: 113
+* Input: books = ‘n' = 7 , ‘k’=6, ‘arr’ = {1,2,3,4,5,6,7}
+* Output: 0.5
+* Explanation: We can place 6 gas stations at 1.5, 2.5, 3.5, 4.5, 5.5, 6.5. 
 
 * https://www.naukri.com/code360/problems/minimise-max-distance_7541449
 */
@@ -35,11 +36,11 @@ long double bruteForce(std::vector<int> gasStations, int extra) {
   // * O(extra x n) 
   std::vector<int> howMany(n-1, 0);
   for (int gS = 1; gS <= extra; gS++) {
-    long double maxSection = -1;
     int maxIdx = -1;
+    long double maxSection = -1;
     for (int i = 0; i < n-1; i++) {
       long double diff = gasStations[i+1] - gasStations[i];
-      long double sectionLen = diff / (long double)(howMany[i]+1);
+      long double sectionLen = diff / (long double)(howMany[i] + 1);
       if(sectionLen > maxSection) {
         maxSection = sectionLen;
         maxIdx = i;
@@ -51,37 +52,38 @@ long double bruteForce(std::vector<int> gasStations, int extra) {
   // printArr(howMany);
 
   long double maxLen = -1;
-  for(int i=0; i<n; i++) {
-    long double diff = gasStations[i+1] - gasStations[i];
-    long double sectionLen = diff / (long double)(howMany[i]+1);
+  for (int i = 0; i < n; i++) {
+    long double diff = gasStations[i + 1] - gasStations[i];
+    long double sectionLen = diff / (long double)(howMany[i] + 1);
     maxLen = std::max(maxLen, sectionLen);
   }
-  
+
   return maxLen;
 }
 
 // * ------------------------- APPROACH : Better APPROACH -------------------------`
-// * TIME COMPLEXITY O(n)logn * O(extra)logN 
+// * TIME COMPLEXITY O(n) * O(logn) + O(extra) * O(logN)
+// * Priority Queue operations takes O(logn)
 // * SPACE COMPLEXITY O(n-1)
 long double betterApproach(std::vector<int> gasStations, int extra) {
   int n = gasStations.size();
   std::vector<int> howMany(n-1, 0);
 
-  // * O(n)logn 
+  // * O(n) * O(logn)
   // * Keep all the consecutive diff in priority queue (pq)
   std::priority_queue<std::pair<long double, int>> pq;
   for (int i = 0; i < n; i++) {
-    int diff = gasStations[i+1] - gasStations[i];
-    pq.push({ diff, i });    
+    int diff = gasStations[i + 1] - gasStations[i];
+    pq.push({diff, i});
   }
 
-  // * O(extra)logn
+  // * O(extra) * O(logN)
   for (int i = 1; i <= extra; i++) {
     auto pq_pair = pq.top();
     pq.pop();
     int secIdx = pq_pair.second;
     howMany[secIdx]++;
-    long double diff = gasStations[secIdx+1] - gasStations[secIdx];
+    long double diff = gasStations[secIdx + 1] - gasStations[secIdx];
     long double newSection = diff / (long double)(howMany[secIdx] + 1);
     pq.push({ newSection, secIdx });
   }
@@ -99,8 +101,8 @@ int main() {
   // int extra = 6;
 
   printArr(gasStations);
-  // long double maxDistance = bruteForce(gasStations, extra);
-  long double maxDistance = betterApproach(gasStations, extra);
+  long double maxDistance = bruteForce(gasStations, extra);
+  // long double maxDistance = betterApproach(gasStations, extra);
   std::cout << "Maximum distance " << maxDistance << std::endl;
   return 0;
 }

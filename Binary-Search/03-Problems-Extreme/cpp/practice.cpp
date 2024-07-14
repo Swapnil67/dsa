@@ -1,5 +1,5 @@
+#include<queue>
 #include<iostream>
-
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -283,6 +283,64 @@ int findMinTimeToPaintBoards(std::vector<int> boards, int painters) {
   return l;
 }
 
+// * ------------ Minimize Max Distance to Gas Station  ------------
+
+long double gasStationBrute(std::vector<int> gasStations, int k) {
+  int n = gasStations.size();
+  std::vector<int> positions(n-1, 0);
+  for (int i = 1; i <= k; i++) {
+    int maxIdx = -1;
+    long double maxVal = -1;
+    for (int j = 0; j < n-1; j++) {
+      long double diff = gasStations[j+1] - gasStations[j];
+      long double sectionLength = diff / (long double)(positions[j] + 1);
+      if(sectionLength > maxVal) {
+        maxVal = sectionLength;
+        maxIdx = j;
+      }
+    }
+    positions[maxIdx]++;
+  }
+
+  printArr(positions);
+
+  // * Find the maximum distance
+  long double ans = -1;
+  for (int i = 0; i < n; i++) {
+    long double diff = gasStations[i + 1] - gasStations[i];
+    long double sectionLength = diff / (long double)(positions[i] + 1);
+    ans = std::max(ans, sectionLength);
+  }
+  return ans;
+}
+
+
+long double gasStationBetter(std::vector<int> gasStations, int k) {
+  int n = gasStations.size();
+  std::priority_queue<std::pair<long double, int>> pq;
+
+  // * Step 1: prefill the priority queue
+  for (int i = 0; i < n - 1; i++) {
+    long double diff = gasStations[i+1] - gasStations[i];
+    pq.push({diff, i});
+  }
+
+  // * Step 2: Start putting the gas stations
+  std::vector<int> positions(n - 1, 0);
+  for (int i = 1; i <= k; i++) {
+    auto pq_pair = pq.top();
+    int idx = pq_pair.second;
+    positions[idx]++;
+    long double diff = gasStations[idx + 1] - gasStations[idx];
+    // * Divide in new sections
+    long double sectionLength = diff / (long double)(positions[idx] + 1);
+    pq.pop();
+    pq.push({sectionLength, idx});
+  }
+
+  return pq.top().first;
+}
+
 int main() {
   // * Problem 1
   // std::cout << "Koko eating bananas" << std::endl;
@@ -343,19 +401,21 @@ int main() {
   // std::cout << "maximum number of pages assigned to a student " << maxPagesAssigned << std::endl;
 
   // * problem 8
-  std::cout << "Painter's Partition Problem " << std::endl;
-  int painters = 2;
-  std::vector<int> boards = {2, 1, 5, 6, 2, 3};
-  printArr(boards);
-
-  int minTime = findMinTimeToPaintBoards(boards, painters);
-  std::cout << "Minimum time required to paint above boards is " << minTime << " units." << std::endl;
+  // std::cout << "Painter's Partition Problem " << std::endl;
+  // int painters = 2;
+  // std::vector<int> boards = {2, 1, 5, 6, 2, 3};
+  // printArr(boards);
+  // int minTime = findMinTimeToPaintBoards(boards, painters);
+  // std::cout << "Minimum time required to paint above boards is " << minTime << " units." << std::endl;
 
   // * problem 9
-  // std::cout << "Minimize Max Distance to Gas Station" << std::endl;
-  // int extra = 5;
-  // std::vector<int> gasStations = {1, 13, 17, 23};
-  // printArr(gasStations);
+  std::cout << "Minimize Max Distance to Gas Station" << std::endl;
+  int extra = 5;
+  std::vector<int> gasStations = {1, 13, 17, 23};
+  // long double maxDistance = gasStationBrute(gasStations, extra);
+  long double maxDistance = gasStationBetter(gasStations, extra);
+  printArr(gasStations);
+  std::cout << "Maximum distance " << maxDistance << std::endl;
 }
 
 // * Run the code
