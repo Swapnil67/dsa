@@ -314,7 +314,6 @@ long double gasStationBrute(std::vector<int> gasStations, int k) {
   return ans;
 }
 
-
 long double gasStationBetter(std::vector<int> gasStations, int k) {
   int n = gasStations.size();
   std::priority_queue<std::pair<long double, int>> pq;
@@ -340,6 +339,9 @@ long double gasStationBetter(std::vector<int> gasStations, int k) {
 
   return pq.top().first;
 }
+
+// * ------------ Minimize Max Distance to Gas Station  ------------
+
 
 int main() {
   // * Problem 1

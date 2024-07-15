@@ -61,7 +61,7 @@ long double bruteForce(std::vector<int> gasStations, int extra) {
   return maxLen;
 }
 
-// * ------------------------- APPROACH : Better APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Better APPROACH -------------------------`
 // * TIME COMPLEXITY O(n) * O(logn) + O(extra) * O(logN)
 // * Priority Queue operations takes O(logn)
 // * SPACE COMPLEXITY O(n-1)
@@ -91,18 +91,66 @@ long double betterApproach(std::vector<int> gasStations, int extra) {
   return pq.top().first;
 }
 
+// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
+// * Binary Search
+
+long double countGasStations(std::vector<int> gasStations, long double distance, int extra) {
+  int n = gasStations.size(), cnt = 0;
+  for (int i = 1; i < n; i++) {
+    int gsPossible = (gasStations[i] - gasStations[i-1]) / distance;
+    if ((gasStations[i] - gasStations[i - 1]) == gsPossible * distance) {
+      gsPossible--;
+    }
+    // std::cout << "gsPossible " << gsPossible << std::endl;
+    cnt += gsPossible;
+  }
+  return cnt;
+}
+
+long double gasStation(std::vector<int> gasStations, int extra) {
+  int n = gasStations.size();
+  long double l = 0;
+  long double r;
+  // * Get the max section diff from given gs
+  for (long double i = 1; i < n; i++) {
+    r = std::max(r, (long double)(gasStations[i] - gasStations[i - 1]));
+  }
+
+  std::cout << "l = " << l << " & r = " << r << std::endl;
+
+  long double diff = 1e-6;
+  while (r - l > diff) {
+    long double m = l + (r - l) / (2.0);
+    long double cnt = countGasStations(gasStations, m, extra);
+    // std::cout << "distance: " << m << " & gas stations placed " << cnt << std::endl;
+    if(cnt > extra) {
+      l = m;
+    }
+    else {
+      r = m;
+    }
+  }
+
+  // * For understanding purpose
+  // long double cnt = countGasStations(gasStations, 3, extra);
+  // std::cout << "distance: " << 3 << " & gas stations placed " << cnt << std::endl;
+
+  return r;
+}
+
 int main() {
   // * testcase 1
   int extra = 5;
   std::vector<int> gasStations = {1, 13, 17, 23};
 
   // * testcase 2
-  // std::vector<int> gasStations = {1, 2, 3, 4, 5, 6, 7};
   // int extra = 6;
+  // std::vector<int> gasStations = {1, 2, 3, 4, 5, 6, 7};
 
   printArr(gasStations);
-  long double maxDistance = bruteForce(gasStations, extra);
+  // long double maxDistance = bruteForce(gasStations, extra);
   // long double maxDistance = betterApproach(gasStations, extra);
+  long double maxDistance = gasStation(gasStations, extra);
   std::cout << "Maximum distance " << maxDistance << std::endl;
   return 0;
 }
