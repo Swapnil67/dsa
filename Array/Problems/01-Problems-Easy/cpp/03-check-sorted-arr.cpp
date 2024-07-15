@@ -20,8 +20,8 @@
 bool checkSorted(std::vector<int> arr) {
   bool isSorted = true;
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    if(arr[i+1] <= arr[i] && i < n-1) {
+  for (int i = 0; i < n; i++) {
+    if (arr[i + 1] <= arr[i] && i < n - 1) {
       isSorted = false;
     }
   }
@@ -30,9 +30,9 @@ bool checkSorted(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = { 1,2,3,4,5 };
+  std::vector<int> arr = {1, 2, 3, 4, 5};
   // * testcase 2
-  // std::vector<int> arr = { 4,5,4,4,4 };
+  // std::vector<int> arr = {4, 5, 4, 4, 4};
 
   bool isSorted = checkSorted(arr);
   std::cout<<"Is Array Sorted: "<<isSorted<<std::endl; 

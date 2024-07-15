@@ -17,10 +17,10 @@
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * This is the only optimal approach
@@ -28,7 +28,7 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int maxConsecutiveOnes(std::vector<int> arr) {
   int n = arr.size(), c = 0, maxOnes = 0;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if(arr[i] == 1) {
       c++;
       maxOnes = std::max(c, maxOnes);
@@ -38,7 +38,6 @@ int maxConsecutiveOnes(std::vector<int> arr) {
   }
   return maxOnes;
 }
-
 
 int main() {
   std::vector<int> arr = {1, 1, 0, 1, 1, 1};

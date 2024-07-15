@@ -19,15 +19,14 @@
 
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 void leftRotate(std::vector<int> &arr) {
-
   // * Size of array
   int n = arr.size();
 
@@ -35,13 +34,13 @@ void leftRotate(std::vector<int> &arr) {
   int firstEle = arr[0];
 
   // * Start the loop from '1' index
-  for(int i=1; i<n; i++) {
+  for (int i = 1; i < n; i++) {
     // * Shift the current index to previous index
-    arr[i-1] = arr[i];
+    arr[i - 1] = arr[i];
   }
 
   // * Put the first element in last position
-  arr[n-1] = firstEle;
+  arr[n - 1] = firstEle;
 }
 
 int main() {
@@ -52,12 +51,12 @@ int main() {
   // std::vector<int> arr = {5, 7, 3, 2};
 
   // * testcase 3
-  std::vector<int> arr = { 5 };
-  std::cout<<"Before Rotation"<<std::endl;
+  std::vector<int> arr = {5};
+  std::cout << "Before Rotation" << std::endl;
   printArr(arr);
   
   leftRotate(arr);
-  std::cout<<"After Rotation"<<std::endl;
+  std::cout << "After Rotation" << std::endl;
   printArr(arr);
 }
 

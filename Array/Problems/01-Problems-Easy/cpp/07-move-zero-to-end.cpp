@@ -109,10 +109,9 @@ void optimal(std::vector<int> &arr) {
 
 int main() {
 
-  // std::vector<int> arr = { 1, 2, 0, 0, 2, 3 };
-  // std::vector<int> arr = { 0, 0, 0, 1 };
-  std::vector<int> arr = { 8, 6, 9 };
-
+  std::vector<int> arr = {1, 2, 0, 0, 2, 3};
+  // std::vector<int> arr = {0, 0, 0, 1};
+  // std::vector<int> arr = {8, 6, 9};
 
   std::cout<<"Before Moving Zero's"<<std::endl;
   printArr(arr);

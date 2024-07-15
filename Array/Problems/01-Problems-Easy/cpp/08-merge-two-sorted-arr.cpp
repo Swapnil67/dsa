@@ -106,7 +106,7 @@ int main() {
 
   // std::vector<int> unionArr = mergeTwoArraysBruteForce(a, b);
   std::vector<int> unionArr = mergeTwoArraysOptimal(a, b);
-  std::cout<<"Union ";
+  std::cout << "Union ";
   printArr(unionArr);
   return 0;
 }

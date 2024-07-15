@@ -76,18 +76,18 @@ int optimalApproach(std::vector<int> arr) {
     return arr[0];
   else if(arr[0] != arr[1]) 
     return arr[0];
-  else if(arr[r] != arr[r-1])
+  else if (arr[r] != arr[r - 1])
     return arr[r];
   
   while(l <= r) {
-    int mid = l+(r-l)/2;
+    int mid = l + (r - l) / 2;
     // * Unique Element
-    if(arr[mid] != arr[mid+1] && arr[mid] != arr[mid-1]) {
+    if (arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]) {
       return arr[mid];
     }
 
     // * Check which side to exclude
-    if (((mid % 2 == 0) && arr[mid] == arr[mid + 1]) || ((mid % 2 == 1) && arr[mid] == arr[mid - 1])) {
+    if ((mid % 2 == 0) && arr[mid] == arr[mid - 1]) || ((mid % 2 == 1) && arr[mid] == arr[mid + 1]) {
       l = mid+1;
     }
     else {
@@ -99,7 +99,7 @@ int optimalApproach(std::vector<int> arr) {
 
 
 int main() {
-  std::vector<int> arr = { 1, 1, 2, 3, 3, 4, 4 };
+  std::vector<int> arr = {1, 1, 2, 3, 3, 4, 4};
   // std::vector<int> arr = { 1, 1, 2, 2, 3, 3, 6, 6, 7, 9, 9 };
   // int singleNumber = bruteForce(arr);
   // int singleNumber = betterApproach(arr);

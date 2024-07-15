@@ -21,20 +21,21 @@
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=1; i<=n; i++) {
+  for (int i = 1; i <= n; i++) {
     bool exists = false;
-    for(int j=0; j<n; j++) {
+    for (int j = 0; j < n; j++) {
       if(arr[j] == i) {
         exists = true;  
         break;
@@ -52,26 +53,23 @@ int bruteForce(std::vector<int> arr) {
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 int betterApproach(std::vector<int> arr) {
-
-  // * Find the largest element in array
-  int maxEle = INT_MIN;
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    maxEle = std::max(maxEle, arr[i]);
-  }
-  
+  if(n == 0) return -1;
+
+  int maxEle = *std::max_element(arr.begin(), arr.end());
+
   // * Create a hashed array of length maxEle containing 0
   std::vector<int> hashedArr(maxEle, 0);
 
   // * Fill the hashed array
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     hashedArr[arr[i]] = 1;
   }
 
-  for(int i=0; i<maxEle; i++) {
+  for (int i = 0; i < maxEle; i++) {
     if(hashedArr[i] == 0) return i;
   }
-  
+
   return 0;
 }
 

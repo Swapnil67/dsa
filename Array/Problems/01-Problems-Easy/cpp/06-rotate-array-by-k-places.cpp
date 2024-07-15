@@ -21,9 +21,15 @@
 
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
+}
+
+void swap(int &a, int &b) {
+  int temp = a;
+  a = b;
+  b = temp;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -31,41 +37,36 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(d)
 void bruteForce(std::vector<int> &arr, int k) {
   int n = arr.size();
-  int d = n % k; // * Number of rotations
+  int d = k % n; // * Number of rotations
 
+  // * 360 rotations results in same array
   if(d == 0) return;
 
   // * Make a temp array of k elements
   // * O(d)
   std::vector<int> temp;
-  for(int i=0; i<d; i++) {
-    // std::cout<<i<<" -> "<<arr[i]<<std::endl;
+  for (int i = 0; i <= d; i++) {
+    // std::cout << i << " -> " << arr[i] << std::endl;
     temp.push_back(arr[i]);
   }
 
   // * From d index shift the elements
-  // * O(n-d)
-  for(int i=d; i<n; i++) {
-    arr[i-d] = arr[i];
+  // * O(n - d)
+  for (int i = k; i < n; i++) {
+    arr[i - k] = arr[i];
   }
 
   // * Now put the temp elements back to array
   // * O(d)
-  for(int i=n-d; i<n; i++) {
-    // std::cout<<i<<" -> "<<arr[i]<<std::endl;
-    arr[i] = temp[i-(n-d)];
-    j++;
+  for (int i = n - d; i < n; i++) {
+    // std::cout << i << " -> " << arr[i] << std::endl;
+    // * base = n - d
+    arr[i] = temp[i - (n - d)];
+    // j++;
   }
-
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-
-void swap(int &a, int &b) {
-  int temp = a;
-  a = b;
-  b = temp;
-}
 
 void reverse(std::vector<int> &arr, int low, int high) {
   int l = low, r = high;
@@ -77,23 +78,26 @@ void reverse(std::vector<int> &arr, int low, int high) {
 
 void optimal(std::vector<int> &arr, int k) {
   int n = arr.size(); // * size of array
-  int d = n % k; // * Number of rotations
+  int d = k % n;      // * Number of rotations
 
-  // * Reverse from 0 - d
-  reverse(arr, 0, d);
+  // * Reverse from 0 to d
+  reverse(arr, 0, d - 1);
 
-  // * Reverse from d+1 - n
-  reverse(arr, d+1, n-1);
+  // * Reverse from d+1 to n
+  reverse(arr, d, n - 1);
 
   // * Reverse the complete arr
-  reverse(arr, 0, n-1);
+  reverse(arr, 0, n - 1);
 }
 
 int main() {
-  // int k = 2;
-  // std::vector<int> arr = { 1,2,3,4,5 };
-  int k = 1;
-  std::vector<int> arr = { 7,1,2,3,4,5,6 };
+  // * testcase 1
+  int k = 4;
+  std::vector<int> arr = {1, 2, 3, 4, 5};
+
+  // * testcase 2
+  // int k = 1;
+  // std::vector<int> arr = {7, 1, 2, 3, 4, 5, 6};
   std::cout<<"Before Rotation"<<std::endl;
   printArr(arr);
 

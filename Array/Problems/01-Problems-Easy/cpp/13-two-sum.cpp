@@ -15,10 +15,10 @@
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -31,7 +31,7 @@ std::vector<int> bruteForce(std::vector<int>arr, int target) {
     for(int j=i+1; j<n; j++) {
       if(i == j) continue;
       if(arr[i] + arr[j] == target) {
-        // std::cout<<"i "<<i<<" j "<<j<<" = "<<arr[i] + arr[j]<<std::endl;
+        // std::cout << "i " << i << " j " << j << " = " << arr[i] + arr[j] << std::endl;
         return { i, j }
       }
     }
@@ -72,7 +72,7 @@ bool optimalApproach(std::vector<int> arr, int target) {
   std::vector<int> ans;
 
   printArr(arr);
-  int l=0, r=arr.size()-1;
+  int l = 0, r = arr.size() - 1;
 
   while(l <= r) {
     int sum = arr[l] + arr[r];

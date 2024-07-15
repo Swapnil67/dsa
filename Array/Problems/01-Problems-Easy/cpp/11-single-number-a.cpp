@@ -70,7 +70,7 @@ int betterApproach(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> arr) {
   int xr = 0;
-  for(int i=0; i<arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
     xr = xr ^ arr[i];
     // std::cout<<"xr "<<xr<<std::endl;
   }

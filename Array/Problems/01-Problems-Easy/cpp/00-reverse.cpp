@@ -11,10 +11,10 @@ void swap(int &a, int &b) {
 }
 
 void print(vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  cout<<endl;
+  std::cout << std::endl;
 }
 
 void reverse(vector<int> &arr) {

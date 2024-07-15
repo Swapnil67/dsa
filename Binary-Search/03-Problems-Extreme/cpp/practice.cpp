@@ -340,8 +340,81 @@ long double gasStationBetter(std::vector<int> gasStations, int k) {
   return pq.top().first;
 }
 
-// * ------------ Minimize Max Distance to Gas Station  ------------
+// * ------------ Median of Two Sorted Arrays  ------------
 
+// * Create a merged array
+double findMedianBrute(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  int i = 0, j = 0;
+  std::vector<int> mergeArr;
+  while (i < n1 && j < n2) {
+    if(a[i] < b[j]) {
+      mergeArr.push_back(a[i++]);
+    }
+    else {
+      mergeArr.push_back(b[j++]);
+    }
+  }
+
+  while (i < n1) {
+    mergeArr.push_back(a[i++]);
+  }
+  while (j < n2) {
+    mergeArr.push_back(b[j++]);
+  }
+
+  int n3 = mergeArr.size();
+  int idx1 = n3 / 2;
+  if(n3 % 2 == 1) {
+    return mergeArr[idx1];
+  }
+
+  int idx2 = idx1 - 1;
+
+  return (mergeArr[idx1] + mergeArr[idx2]) / 2.0;
+}
+
+double findMedianBetter(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  int n3 = n1 + n2;
+  int idx2 = n3 / 2;
+  int idx1 = idx2 - 1;
+  int i = 0, j = 0, cnt = 0;
+  double ele1, ele2;
+  while (i < n1 && j < n2) {
+    if(a[i] < b[j]) {
+      if(cnt == idx1) ele1 = a[i];
+      if(cnt == idx2) ele2 = a[i];
+      cnt++;
+      i++;
+    }
+    else {
+      if(cnt == idx1) ele1 = b[j];
+      if(cnt == idx2) ele2 = b[j];
+      cnt++;
+      j++;
+    }
+  }
+
+  while(i < n1) {
+    if(cnt == idx1) ele1 = a[i];
+    if(cnt == idx2) ele2 = a[i];
+    cnt++;
+    i++; 
+  }
+
+  while(j < n2) {
+    if(cnt == idx1) ele1 = b[j];
+    if(cnt == idx2) ele2 = b[j];
+    cnt++;
+    j++;
+  }
+
+  if(n3 % 2 == 1) {
+    return ele2;
+  }
+  return (ele1 + ele2) / 2.0;
+}
 
 int main() {
   // * Problem 1
@@ -411,13 +484,23 @@ int main() {
   // std::cout << "Minimum time required to paint above boards is " << minTime << " units." << std::endl;
 
   // * problem 9
-  std::cout << "Minimize Max Distance to Gas Station" << std::endl;
-  int extra = 5;
-  std::vector<int> gasStations = {1, 13, 17, 23};
+  // std::cout << "Minimize Max Distance to Gas Station" << std::endl;
+  // int extra = 5;
+  // std::vector<int> gasStations = {1, 13, 17, 23};
   // long double maxDistance = gasStationBrute(gasStations, extra);
-  long double maxDistance = gasStationBetter(gasStations, extra);
-  printArr(gasStations);
-  std::cout << "Maximum distance " << maxDistance << std::endl;
+  // long double maxDistance = gasStationBetter(gasStations, extra);
+  // printArr(gasStations);
+  // std::cout << "Maximum distance " << maxDistance << std::endl;
+
+  // * Problem 10
+  std::cout << "Median of Two Sorted Arrays" << std::endl;
+  std::vector<int> a = {1, 3, 4, 7, 10, 12}, b = {2, 3, 6, 15};
+  // std::vector<int> a = {1, 2}, b = {3, 4};
+  printArr(a);
+  printArr(b);
+  // double median = findMedianBrute(a, b);
+  double median = findMedianBetter(a, b);
+  std::cout << "Median of two sorted array is " << median << std::endl;
 }
 
 // * Run the code

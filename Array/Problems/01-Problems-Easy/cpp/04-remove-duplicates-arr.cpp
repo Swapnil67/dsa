@@ -14,8 +14,8 @@
  * * https://www.naukri.com/code360/problems/remove-duplicates-from-sorted-array_1102307
 */
 
-#include<set>
-#include<iostream>
+#include <set>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {
@@ -32,7 +32,7 @@ int bruteForce(std::vector<int> arr) {
   std::set<int> st;
   int n = arr.size();
   // * O(N)
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     // * logN
     st.insert(arr[i]);
   }
@@ -50,11 +50,10 @@ int bruteForce(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> arr) {
-  int n = arr.size();
-  int i=0;
-  for(int j=1; j<n; j++) {
-    if(arr[j] != arr[i]) {
-      arr[i+1] = arr[j];
+  int n = arr.size(), i = 0;
+  for (int j = 1; j < n; j++) {
+    if (arr[j] != arr[i]) {
+      arr[i + 1] = arr[j];
       i++;
     }
   }
@@ -67,7 +66,7 @@ int main() {
   printArr(arr);
   // int uniqueElements = bruteForce(arr);
   int uniqueElements = optimalApproach(arr);
-  std::cout<<"Unique Elements "<<uniqueElements<<std::endl;
+  std::cout << "Unique Elements " << uniqueElements << std::endl;
 }
 
 

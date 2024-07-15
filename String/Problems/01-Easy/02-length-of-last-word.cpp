@@ -51,7 +51,7 @@ int lengthOfLastWord(std::string s) {
   int n = s.size(), cnt = 0;
 
   // * Step 1: Get p to the first char of last word
-  int p = n-1;
+  int p = n - 1;
   for (int i = n - 1; i >= 0; i--) {
     if(!isCharacter(s[p]))
       p--;

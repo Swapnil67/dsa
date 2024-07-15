@@ -11,8 +11,15 @@
  * * https://www.naukri.com/code360/problems/longest-subarray-with-sum-k_5713505
 */
 
-#include<map>
-#include<iostream>
+#include <map>
+#include <iostream>
+
+void printArr(std::vector<int> arr) {
+  for(int i=0; i<arr.size(); i++) {
+    std::cout << arr[i] << " ";
+  }
+  std::cout << std::endl;
+}
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
@@ -20,14 +27,14 @@
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int k) {
   int n = arr.size(), maxLen = INT_MIN;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int sum = 0;
-    for(int j=i; j<n; j++) {
+    for (int j = i; j < n; j++) {
       sum += arr[j];
       // std::cout<<"Sum "<<sum<<std::endl;
       if(sum == k) {
-        std::cout<<"i "<<arr[i]<<" j "<<arr[j]<<std::endl;
-        maxLen = std::max(maxLen, j-i+1);
+        // std::cout << "i " << arr[i] << " j " << arr[j] << std::endl;
+        maxLen = std::max(maxLen, j - i + 1);
       }
     }
   }
@@ -44,16 +51,16 @@ int betterApproach(std::vector<int>arr, long long k) {
   long long sum = 0;
   int n = arr.size(), maxLen = 0;
   std::map<long long, int> preSumMap;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     sum += arr[i];
     if(sum == k) {
-      maxLen = std::max(maxLen, i+1);
+      maxLen = std::max(maxLen, i + 1);
     }
 
     // * Does sumMap contains prefix sum
     int rem = sum - k;
     if (preSumMap.find(rem) != preSumMap.end()) {
-      int len = i-preSumMap[rem];
+      int len = i - preSumMap[rem];
       maxLen = std::max(maxLen, len);
     }
 
@@ -96,9 +103,11 @@ int main() {
   int k = 3;
   // std::vector<int> arr = {2, 2, 4, 1, 2};
   // int k = 2;
+  
+  printArr(arr);
   // int longestSubArrLength = bruteForce(arr, k);
-  // int longestSubArrLength = betterApproach(arr, k);
-  int longestSubArrLength = optimalApproach(arr, k);
+  int longestSubArrLength = betterApproach(arr, k);
+  // int longestSubArrLength = optimalApproach(arr, k);
   std::cout<<"Sub array with max length "<<longestSubArrLength<<std::endl;
 
   return 0;

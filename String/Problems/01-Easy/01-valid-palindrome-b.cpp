@@ -24,6 +24,7 @@
 
 // * ------------------------- Utility -------------------------`
 
+// * Returns the lowercase character [A-Z]
 char getLowerChar(char ch) {
   // return ((int)ch - 65) + 97; // * OR
   if((int)ch >= (int)'A' && (int)ch <= (int)'Z') {

@@ -33,6 +33,9 @@
 #include<string>
 #include<iostream>
 
+// * ------------------------- Utility -------------------------`
+
+// * Returns the lowercase character [A-Z]
 char getLowerChar(char ch) {
   // return ((int)ch - 65) + 97; // * OR
   if((int)ch >= (int)'A' && (int)ch <= (int)'Z') {
@@ -80,7 +83,7 @@ bool bruteForce(std::string str) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 bool findIsValidPalindrome(std::string str) {
-  int l = 0, r = str.size()-1;
+  int l = 0, r = str.size() - 1;
   while(l < r) {
     while (!(isAlphanumeric(str[l])) && l < r)
       l++;

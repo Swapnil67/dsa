@@ -1,4 +1,5 @@
 /*
+* Median of Two Sorted Arrays
 * Given two sorted arrays nums1 and nums2 of size m and n respectively,
 * return the median of the two sorted arrays.
 
@@ -12,6 +13,7 @@
 * Output: 5
 * Explanation: merged array = [1,2,3,3,4,6,7,10,12,15] and median is (6 + 4) / 2 = 5
 
+* https://www.naukri.com/code360/problems/median-of-two-sorted-arrays_985294
 * https://leetcode.com/problems/median-of-two-sorted-arrays/description/ 
 
 */
@@ -52,36 +54,38 @@ std::vector<int> mergeTwoSortedArrays(std::vector<int> arr1, std::vector<int> ar
   return ans;
 }
 
-std::vector<int> returnMedianPositions(std::vector<int> arr1, std::vector<int> arr2) {
-  int n1 = arr1.size(), n2 = arr2.size();
+std::vector<int> returnMedianPositions(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  int n3 = n1 + n2;
+  int idx2 = n3 / 2;
+  int idx1 = idx2 - 1;
   int i = 0, j = 0, cnt = 0;
-  int idx1 = (n1 + n2) / 2, idx2 = (n1 + n2 - 1) / 2;
-  int ele1 = -1, ele2 = -1;
-  while(i < n1 && j < n2) {
-    if(arr1[i] < arr2[j]) {
-      if(cnt == idx1) ele1 = arr1[i];
-      if(cnt == idx2) ele2 = arr1[i];
+  double ele1, ele2;
+  while (i < n1 && j < n2) {
+    if(a[i] < b[j]) {
+      if(cnt == idx1) ele1 = a[i];
+      if(cnt == idx2) ele2 = a[i];
       cnt++;
       i++;
     }
     else {
-      if(cnt == idx1) ele1 = arr2[j];
-      if(cnt == idx2) ele2 = arr2[j];
+      if(cnt == idx1) ele1 = b[j];
+      if(cnt == idx2) ele2 = b[j];
       cnt++;
       j++;
     }
   }
 
   while(i < n1) {
-    if(cnt == idx1) ele1 = arr1[i];
-    if(cnt == idx2) ele2 = arr1[i];
+    if(cnt == idx1) ele1 = a[i];
+    if(cnt == idx2) ele2 = a[i];
     cnt++;
     i++; 
   }
 
   while(j < n2) {
-    if(cnt == idx1) ele1 = arr2[j];
-    if(cnt == idx2) ele2 = arr2[j];
+    if(cnt == idx1) ele1 = b[j];
+    if(cnt == idx2) ele2 = b[j];
     cnt++;
     j++;
   }
