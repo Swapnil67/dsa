@@ -60,7 +60,7 @@ std::vector<int> returnMedianPositions(std::vector<int> a, std::vector<int> b) {
   int idx2 = n3 / 2;
   int idx1 = idx2 - 1;
   int i = 0, j = 0, cnt = 0;
-  double ele1, ele2;
+  int ele1, ele2;
   while (i < n1 && j < n2) {
     if(a[i] < b[j]) {
       if(cnt == idx1) ele1 = a[i];
@@ -133,14 +133,14 @@ double findMedian(std::vector<int> arr1, std::vector<int> arr2) {
   if(n1 > n2) findMedian(arr2, arr1);
   int left = (n1 + n2 + 1) / 2;
   int n = n1 + n2;
-  // std::cout << " left " << left << std::endl;
-  // std::cout << " n1 " << n1 << " n2 " << n2 << std::endl;
-
+  // std::cout << "left " << left << std::endl;
+  
   int l = 0, r = n1;
   while(l <= r) {
-    int m1 = (l + r) >> 2;
+    // std::cout << "l " << l << " r " << r << std::endl;
+    int m1 = l + (r - l) / 2;
     int m2 = left - m1;
-    std::cout << " m1 " << m1 << " m2 " << m2 << std::endl;
+    // std::cout << " m1 " << m1 << " m2 " << m2 << std::endl;
 
     int l1 = INT_MIN, l2 = INT_MIN;
     int r1 = INT_MAX, r2 = INT_MAX;
@@ -148,25 +148,26 @@ double findMedian(std::vector<int> arr1, std::vector<int> arr2) {
       l1 = arr1[m1 - 1];
     if (m2 - 1 >= 0)
       l2 = arr2[m2 - 1];
-    if (m1 < n1)
-      r1 = arr1[m1];
-    if(m2 < n2)
-      r2 = arr2[m2];
+    if (m1 < n1) r1 = arr1[m1];
+    if (m2 < n2) r2 = arr2[m2];
+
+    // std::cout << " l1 " << l1 << " l2 " << l2 << std::endl;
+    // std::cout << " r1 " << r1 << " r2 " << r2 << std::endl;
 
     if (l1 <= r2 && l2 <= r1) {
       if(n % 2 == 1) {
         return std::max(l1, l2);
       }
       else {
-        // std::cout << " l1 " << l1 << " l2 " << l2 << std::endl;
-        // std::cout << " r1 " << r1 << " r2 " << r2 << std::endl;
         return ((double)(std::max(l1, l2) + std::min(r1, r2))) / 2.0;
       }
     }
     else if(l1 > r2) {
+      // * Bring more elements from b to left
       r = m1 - 1;
     }
     else {
+      // * Keep more from a to left
       l = m1 + 1;
     }
   }
@@ -174,9 +175,9 @@ double findMedian(std::vector<int> arr1, std::vector<int> arr2) {
 }
 
 int main() {
-  std::vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
+  // std::vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
   // std::vector<int> nums1 = {7, 12, 14, 15}, nums2 = {1, 2, 3, 4, 9, 11};
-  // std::vector<int> nums1 = {1, 2}, nums2 = {3, 4};
+  std::vector<int> nums1 = {1, 2}, nums2 = {3, 4};
   std::cout << "First Array" << std::endl;
   printArr(nums1);
   std::cout << "Second Array" << std::endl;

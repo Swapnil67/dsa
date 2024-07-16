@@ -344,76 +344,126 @@ long double gasStationBetter(std::vector<int> gasStations, int k) {
 
 // * Create a merged array
 double findMedianBrute(std::vector<int> a, std::vector<int> b) {
-  int n1 = a.size(), n2 = b.size();
+  int n1 = a.size(), n2= b.size();
   int i = 0, j = 0;
-  std::vector<int> mergeArr;
+  std::vector<int> mergedArr;
   while (i < n1 && j < n2) {
     if(a[i] < b[j]) {
-      mergeArr.push_back(a[i++]);
+      mergedArr.push_back(a[i++]);
+    } else {
+      mergedArr.push_back(b[j++]);
     }
-    else {
-      mergeArr.push_back(b[j++]);
-    }
   }
 
-  while (i < n1) {
-    mergeArr.push_back(a[i++]);
-  }
-  while (j < n2) {
-    mergeArr.push_back(b[j++]);
+  while(i < n1) {
+    mergedArr.push_back(a[i++]);
   }
 
-  int n3 = mergeArr.size();
-  int idx1 = n3 / 2;
-  if(n3 % 2 == 1) {
-    return mergeArr[idx1];
+  while(j < n2) {
+    mergedArr.push_back(b[j++]);
   }
 
-  int idx2 = idx1 - 1;
-
-  return (mergeArr[idx1] + mergeArr[idx2]) / 2.0;
+  int n = mergedArr.size();
+  int idx2 = n / 2;
+  if (n % 2 == 0) {
+    int idx1 = idx2 - 1;
+    return (double)(mergedArr[idx1] + mergedArr[idx2]) / 2.0;
+  }
+  return (double)mergedArr[idx2] / 2.0;
 }
 
+// * Use counter
 double findMedianBetter(std::vector<int> a, std::vector<int> b) {
-  int n1 = a.size(), n2 = b.size();
+  int n1 = a.size(), n2= b.size();
+  int i = 0, j = 0;
+  int ele1, ele2, cnt = 0;
   int n3 = n1 + n2;
   int idx2 = n3 / 2;
   int idx1 = idx2 - 1;
-  int i = 0, j = 0, cnt = 0;
-  double ele1, ele2;
+  std::vector<int> mergedArr;
   while (i < n1 && j < n2) {
     if(a[i] < b[j]) {
       if(cnt == idx1) ele1 = a[i];
       if(cnt == idx2) ele2 = a[i];
-      cnt++;
       i++;
-    }
-    else {
+      cnt++;
+    } else {
       if(cnt == idx1) ele1 = b[j];
       if(cnt == idx2) ele2 = b[j];
-      cnt++;
       j++;
+      cnt++;
     }
   }
 
   while(i < n1) {
     if(cnt == idx1) ele1 = a[i];
     if(cnt == idx2) ele2 = a[i];
-    cnt++;
-    i++; 
+    i++;
+    cnt++;  
   }
+
 
   while(j < n2) {
     if(cnt == idx1) ele1 = b[j];
     if(cnt == idx2) ele2 = b[j];
-    cnt++;
     j++;
+    cnt++;
   }
 
-  if(n3 % 2 == 1) {
-    return ele2;
+  if (n3 % 2 == 0) {
+    int idx1 = idx2 - 1;
+    return (double)(ele1 + ele2) / 2.0;
   }
-  return (ele1 + ele2) / 2.0;
+  return (double)ele1 / 2.0;
+}
+
+// * Find Valid Symmetry
+double findMedian(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  if(n1 > n2) {
+    findMedian(b, a);
+  }
+
+  int n = n1 + n2;
+  int l = 0, r = n1;
+  int left = (n1 + n2 + 1) / 2;
+
+  // std::cout << "left " << left << std::endl;
+  while (l <= r) {
+    // std::cout << "l " << l << " r " << r << std::endl;
+    int m1 = l + (r - l) / 2;
+    int m2 = left - m1;
+    // std::cout << "m1 " << m1 << " m2 " << m2 << std::endl;
+    int l1 = INT_MIN, l2 = INT_MIN;
+    int r1 = INT_MAX, r2 = INT_MAX;
+    if(m1 < n1) r1 = a[m1];
+    if(m2 < n2) r2 = b[m2];
+
+    if (m1 - 1 >= 0)
+      l1 = a[m1 - 1];
+    if (m2 - 1 >= 0)
+      l2 = b[m2 - 1];
+
+    // std::cout << " l1 " << l1 << " l2 " << l2 << std::endl;
+    // std::cout << " r1 " << r1 << " r2 " << r2 << std::endl;
+
+    if(l1 <= r2 && l2 <= r1) {
+      // * Valid Symmetry
+      if(n % 2 == 0) {
+        return ((double)(std::max(l1, l2) + std::min(r1, r2))) / 2.0;
+      }
+      else {
+        return std::max(l1, l2);
+      }
+    }
+    else if(l1 > r2) {
+      r = m1 - 1;
+    }
+    else {
+      l = m1 + 1;
+    }
+  }
+  return 0;
 }
 
 int main() {
@@ -494,13 +544,16 @@ int main() {
 
   // * Problem 10
   std::cout << "Median of Two Sorted Arrays" << std::endl;
-  std::vector<int> a = {1, 3, 4, 7, 10, 12}, b = {2, 3, 6, 15};
-  // std::vector<int> a = {1, 2}, b = {3, 4};
+  // std::vector<int> a = {1, 3, 4, 7, 10, 12}, b = {2, 3, 6, 15};
+  std::vector<int> a = {1, 2}, b = {3, 4};
   printArr(a);
   printArr(b);
   // double median = findMedianBrute(a, b);
-  double median = findMedianBetter(a, b);
+  // double median = findMedianBetter(a, b);
+  double median = findMedian(a, b);
   std::cout << "Median of two sorted array is " << median << std::endl;
+
+  // * Problem 11
 }
 
 // * Run the code
