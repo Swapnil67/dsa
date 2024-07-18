@@ -1,4 +1,5 @@
 #include <map>
+#include <stack>
 #include <iostream>
 #include <numeric>
 
@@ -272,6 +273,7 @@ int subarrySumK(std::vector<int> arr, int k) {
 
 // * ------------ Two Sum ---------------
 
+// * Nested Loop
 std::vector<int> twoSumBrute(std::vector<int> arr, int target) {
   int n = arr.size();
   int sum = 0;
@@ -285,19 +287,189 @@ std::vector<int> twoSumBrute(std::vector<int> arr, int target) {
   return {-1, -1};
 }
 
+// * Prefix Map
 std::vector<int> twoSumBetter(std::vector<int> arr, int target) {
   int n = arr.size();
-  int sum = 0;
-  std::map<int, int> prefixMap;
+  std::map<int, int> hashMap;
   for (int i = 0; i < n; i++) {
-    int val = target - arr[i]; 
-    if(prefixMap.find(val) != prefixMap.end()) {
-      return {prefixMap[val], i};
+    int rem = target - arr[i];
+    if(hashMap.find(rem) != hashMap.end()) {
+      return { hashMap[rem], i };
     }
-    prefixMap[arr[i]] = i;
+    hashMap[arr[i]] = i;
   }
   return { -1, -1 };
 }
+
+// * Two Pointer
+bool twoSum(std::vector<int> arr, int target) {
+  sort(arr.begin(), arr.end());
+  int n = arr.size();
+  int l = 0, r = n - 1;
+  while(l <= r) {
+    int sum = arr[l] + arr[r];
+    if(sum == target) {
+      return true;
+    }
+    else if(sum > target) {
+      r--;
+    }
+    else {
+      l++;
+    }
+  }
+  return false;
+}
+
+// * ------------ Can Place Flowers ---------
+
+bool canPlaceFlowers(std::vector<int> arr, int flowers) {
+  int n = arr.size();
+  if(n == 0) return false;
+
+  for (int i = 0; i < n; i++) {
+    bool l = i == 0 || arr[i - 1] == 0;
+    bool r = i == (n - 1) || arr[i + 1] == 0;
+    if(l && r && arr[i] == 0) {
+      flowers--;
+      arr[i] = 1;
+    }
+  }
+
+  return flowers <= 0;
+}
+
+// * ------------ Replace Elements with greatest ---------
+
+// * Nested Loop
+void replaceElementsBrute(std::vector<int> &arr) {
+  int n = arr.size();
+  for (int i = 0; i < n; i++) {
+    if(i == n-1) {
+      arr[i] = -1;
+      break;
+    }
+    int greatest = INT_MIN;
+    for (int j = i + 1; j < n; j++) {
+      greatest = std::max(greatest, arr[j]);
+    }
+    arr[i] = greatest;
+  }
+}
+
+// * Nested Loop
+void replaceElements(std::vector<int> &arr) {
+  int n = arr.size();
+  int g = -1, ng = INT_MIN;
+  for (int i = n - 1; i >= 0; i--) {
+    ng = std::max(ng, arr[i]);
+    arr[i] = g;
+    g = ng;
+  }
+}
+
+// * ------------ Remove Element --------------
+
+int removeElement(std::vector<int> &arr, int val) {
+  int n = arr.size();
+  int idx = -1;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] == val) {
+      idx = i;
+      break;
+    }
+  }
+  if(idx == -1) return -1;
+
+  for (int i = idx + 1; i < n; i++) {
+    if(arr[i] != val) {
+      swap(arr[i], arr[idx]);
+      idx++;
+    }
+  }
+  return idx;
+}
+
+// * ------------ Next greater element --------------
+
+std::vector<int> nextGreaterElementsBrute(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  std::vector<int> ans;
+  for (int i = 0; i < n1; i++) {
+    int j = 0, greater = -1;
+    while(a[i] != b[j]) j++;
+    for (; j < n2; j++) {
+      if(b[j] > a[i]) {
+        greater = b[j];
+        break;
+      }
+    }
+    ans.push_back(greater);
+  }
+  return ans;
+}
+
+// * Using stack DS
+std::vector<int> nextGreaterElement(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
+  std::unordered_map<int, int> hashIdx;
+  std::vector<int> ans(n1, -1);
+  for (int i = 0; i < n1; i++) {
+    hashIdx[a[i]] = i;
+  }
+
+  // * Loop on b array
+  std::stack<int> st;
+  for (int i = 0; i < n2; i++) {
+    int cur = b[i];
+    while(!st.empty() && cur > st.top()) {
+      int idx = hashIdx[st.top()];
+      ans[idx] = cur;
+      st.pop();
+    }
+
+    if(hashIdx.find(cur) != hashIdx.end()) {
+      st.push(cur);
+    }
+  }
+  return ans;
+} 
+
+// * ------------ Find Pivot Index --------------
+
+int findPivotIndexBrute(std::vector<int> arr) {
+  int n = arr.size();
+  int prefixSum = 0;
+  for (int i = 0; i < n; i++) {
+    int curSum = 0;
+    for (int j = i + 1; j < n; j++) {
+      curSum += arr[j];
+    }
+    // std::cout << curSum << " " << prefixSum << std::endl;
+    if(curSum == prefixSum) {
+      return i;
+    }
+    prefixSum += arr[i];
+  }
+
+  return -1;
+}
+
+int findPivotIndex(std::vector<int> arr) {
+  int n = arr.size();
+  int totalSum = std::accumulate(arr.begin(), arr.end(), 0);
+  int leftSum = 0;
+  for (int i = 0; i < n; i++) {
+    int rightSum = totalSum - (leftSum + arr[i]);
+    if(leftSum == rightSum) {
+      return i;
+    }
+    leftSum += arr[i];
+  }
+  return -1;
+}
+
+// * ------------ Find All Numbers Disappeared in an Array --------------
 
 int main() {
 
@@ -373,16 +545,75 @@ int main() {
 
   // * Problem 9
   std::cout << "Two Sum" << std::endl;
-  int target = 9;
+  int target = 19;
   std::vector<int> arr = {2, 15, 11, 7};
   printArr(arr);
   // std::vector<int> ans = twoSumBrute(arr, target);
-  std::vector<int> ans = twoSumBetter(arr, target);
-  printArr(ans); 
-  
+  // std::vector<int> ans = twoSumBetter(arr, target);
+  // printArr(ans); 
+  bool ans = twoSum(arr, target);
+  std::cout << "Two sum found " << ans << std::endl;
+
+  // * Problem 10
+  // TODO
+
+  // * Problem 11
+  // std::cout << "Can Place Flowers" << std::endl;
+  // int newPlots = 1;
+  // std::vector<int> flowerbed = {0, 1, 0, 1, 0, 1, 0, 0};
+  // int newPlots = 2;
+  // std::vector<int> flowerbed = {1, 0, 0, 0, 1};
+  // printArr(flowerbed);
+  // bool ans = canPlaceFlowers(flowerbed, newPlots);
+  // std::cout << "Can place flowers " << ans << std::endl;
+
+  // * Problem 12
+  // std::cout << "Replace Elements with greatest" << std::endl;
+  // std::vector<int> arr = {17, 18, 5, 4, 6, 1};
+  // printArr(arr);
+  // // replaceElementsBrute(arr);
+  // replaceElements(arr);
+  // printArr(arr);
+
+  // * Problem 13
+  // std::cout << "Remove Elements" << std::endl;
+  // int val = 3;
+  // std::vector<int> arr = {2};
+  // printArr(arr);
+  // int ans = removeElement(arr, val);
+  // printArr(arr);
+  // std::cout << "Answer " << ans << std::endl;
+
+  // * Problem 14
+  // std::cout << "Next greater element" << std::endl;
+  // std::vector<int> a = {4, 1, 2}, b = {1, 3, 4, 2};
+  // std::vector<int> a = {2, 4}, b = {1, 2, 3, 4};
+  // std::vector<int> a = {4, 2, 1}, b = {2, 1, 3, 4};
+  // std::cout<<"a: ";
+  // printArr(a);
+  // std::cout<<"b: ";
+  // printArr(b);
+  // // std::vector<int> ans = nextGreaterElementsBrute(a, b);
+  // std::vector<int> ans = nextGreaterElement(a, b);
+  // printArr(ans);
+
+  // * Problem 15
+  // std::cout << "Find Pivot Index" << std::endl;
+  // std::vector<int> nums = {2, 1, -1}; // * 0
+  // std::vector<int> nums = {1, 2, 3}; // * -1
+  // std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
+  // printArr(nums);
+  // int pivotIndex = findPivotIndexBrute(nums);
+  // int pivotIndex = findPivotIndex(nums);
+  // std::cout << "Pivot Index " << pivotIndex << std::endl;
+
+  // * Problem 16
+  // std::cout << "Find All Numbers Disappeared in an Array" << std::endl;
+  // std::vector<int> arr = {4, 3, 2, 7, 8, 2, 3, 1};
+  // printArr(arr);
+
   return 0;
 }
-
 
 // * Run the code
 // * g++ --std=c++17 practice.cpp -o practice && ./practice

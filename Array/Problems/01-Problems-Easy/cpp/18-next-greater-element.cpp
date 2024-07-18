@@ -33,25 +33,22 @@ void printArr(std::vector<int> arr) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N1) [For answer only]
-std::vector<int> bruteForce(std::vector<int> nums1, std::vector<int> nums2) {
-  int n1 = nums1.size(), n2 = nums2.size();
+std::vector<int> bruteForce(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
   std::vector<int> ans;
   for (int i = 0; i < n1; i++) {
-    bool foundGreater = false;
-    // * get j to such that nums1[i] == nums2[j]
+    bool greater = -1;
+    // * get j to such that a[i] == b[j]
     int j = 0;
-    while(nums1[i] != nums2[j]) j++;
-    for (;j < n2; j++) {
-      if(nums2[j] > nums1[i]) {
-        // std::cout << nums1[i] << " " << nums2[j] << std::endl;
-        foundGreater = true;
-        ans.push_back(nums2[j]);
+    while(a[i] != b[j]) j++;
+    for (; j < n2; j++) {
+      if(b[j] > a[i]) {
+        // std::cout << a[i] << " " << b[j] << std::endl;
+        greater = b[j];
         break;
       }
     }
-    if(!foundGreater) {
-      ans.push_back(-1);
-    }
+    ans.push_back(greater);
   }
   return ans;
 }
@@ -60,20 +57,20 @@ std::vector<int> bruteForce(std::vector<int> nums1, std::vector<int> nums2) {
 // * Stack Data structure
 // * TIME COMPLEXITY O(N1 + N2)
 // * SPACE COMPLEXITY O(N1) [For answer only]
-std::vector<int> nextGreaterElements(std::vector<int> nums1, std::vector<int> nums2) {
-  int n1 = nums1.size(), n2 = nums2.size();
+std::vector<int> nextGreaterElements(std::vector<int> a, std::vector<int> b) {
+  int n1 = a.size(), n2 = b.size();
   std::vector<int> ans(n1, -1);
 
-  // * Step 1: Create the index map of nums1 elements such that nums1[i] == nums2[j]
+  // * Step 1: Create the index map of a elements such that a[i] == b[j]
   std::unordered_map<int, int> indexMap;
   for (int i = 0; i < n1; i++) {
-    indexMap[nums1[i]] = i;
+    indexMap[a[i]] = i;
   }
 
   // * Step 2: Use stack to find the next greater element
   std::stack<int> st;
   for (int i = 0; i < n2; i++) {
-    int cur = nums2[i];
+    int cur = b[i];
     while(!st.empty() && cur > st.top()) {
       int pushIdx = indexMap[st.top()];
       // std::cout << pushIdx << std::endl;
@@ -81,7 +78,7 @@ std::vector<int> nextGreaterElements(std::vector<int> nums1, std::vector<int> nu
       st.pop();
     }
     // printArr(ans);
-    // * Check if cur exists in nums1
+    // * Check if cur exists in a
     if (indexMap.find(cur) != indexMap.end()) {
       st.push(cur);
     }
@@ -91,15 +88,15 @@ std::vector<int> nextGreaterElements(std::vector<int> nums1, std::vector<int> nu
 }
 
 int main() {
-  std::vector<int> nums1 = {4, 1, 2}, nums2 = {1, 3, 4, 2};
-  // std::vector<int> nums1 = {2, 4}, nums2 = {1, 2, 3, 4};
-  // std::vector<int> nums1 = {4, 2, 1}, nums2 = {2, 1, 3, 4};
-  std::cout<<"Nums 1: ";
-  printArr(nums1);
-  std::cout<<"Nums 2: ";
-  printArr(nums2);
-  // std::vector<int> ans = bruteForce(nums1, nums2);
-  std::vector<int> ans = nextGreaterElements(nums1, nums2);
+  std::vector<int> a = {4, 1, 2}, b = {1, 3, 4, 2};
+  // std::vector<int> a = {2, 4}, b = {1, 2, 3, 4};
+  // std::vector<int> a = {4, 2, 1}, b = {2, 1, 3, 4};
+  std::cout<<"a: ";
+  printArr(a);
+  std::cout<<"b: ";
+  printArr(b);  
+  // std::vector<int> ans = bruteForce(a, b);
+  std::vector<int> ans = nextGreaterElements(a, b);
   printArr(ans);
 }
 

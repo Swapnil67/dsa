@@ -38,20 +38,21 @@ void printArr(std::vector<int> arr) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> nums) {
-  int n = nums.size();
-  int sum = 0, pivotIdx = -1;
+int bruteForce(std::vector<int> arr) {
+  int n = arr.size();
+  int prefixSum = 0;
   for (int i = 0; i < n; i++) {
-    sum += nums[i];
     int curSum = 0;
-    for (int j = i; j < n; j++) {
-      curSum += nums[j];
+    for (int j = i + 1; j < n; j++) {
+      curSum += arr[j];
     }
-    // std::cout << curSum << " " << sum << std::endl;
-    if(curSum == sum) {
+    // std::cout << curSum << " " << prefixSum << std::endl;
+    if(curSum == prefixSum) {
       return i;
     }
+    prefixSum += arr[i];
   }
+
   return -1;
 }
 
@@ -64,9 +65,7 @@ int findPivotIndex(std::vector<int> nums) {
   int sum = 0, pivotIdx = -1;
 
   // * Step 1: Get the total sum of array [O(N)]
-  for (int i = 0; i < n; i++) {
-    sum += nums[i];
-  }
+  int sum = std::accumulate(arr.begin(), arr.end(), 0);
 
   // * Step 2: Compare curSum with remSum [O(N)] 
   int leftSum = 0;

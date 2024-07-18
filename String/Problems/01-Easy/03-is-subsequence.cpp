@@ -15,6 +15,7 @@
  * * Output : false
 
  * * https://leetcode.com/problems/is-subsequence/description/
+ * * https://www.naukri.com/code360/problems/is-subsequence_892991
 */
 
 #include<string>
@@ -33,8 +34,7 @@ bool isSubsequence(std::string s, std::string t) {
   }
 
   // std::cout << "i " << i << " j " << j << std::endl;
-  if(i >= n1) return true;
-  return false;
+  return i == n1;
 }
 
 int main() {

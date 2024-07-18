@@ -4,13 +4,13 @@
  * * The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
 
  * * Example 1
- * * Input  : nums = [3,2,2,3], val = 3
- * * Output : 2, nums = [2,2,_,_]
+ * * Input  : nums = [3, 2, 2, 3], val = 3
+ * * Output : 2, nums = [2, 2, _, _]
  * * Explanation: Your function should return k = 2, with the first two elements of nums being 2.
 
  * * Example 2
- * * Input  : nums = [0,1,2,2,3,0,4,2], val = 2
- * * Output : 5, nums = [0,1,0,4,2,_,_,_]
+ * * Input  : nums = [0, 1, 2, 2, 3, 0, 4, 2], val = 2
+ * * Output : 5, nums = [0, 1, 3, 0, 4, _, _, _]
  * * Explanation: Your function should return k = 5, with the first five elements of nums containing 0, 0, 1, 3, and 4.
 
  * * https://leetcode.com/problems/remove-element/description/
@@ -32,7 +32,7 @@ void swap(int &a, int &b) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
-// * Two loops
+// * Create a temp array
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 int bruteForce(std::vector<int> &arr, int val) {
@@ -49,7 +49,6 @@ int bruteForce(std::vector<int> &arr, int val) {
 
   return temp.size();
 }
-
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * Two Pointer
@@ -80,8 +79,8 @@ int main() {
   // int val = 2;
   // std::vector<int> arr = {3, 2, 2, 3};
   // * testcase 3
-  int val = 3;
-  std::vector<int> arr = {2};
+  // int val = 3;
+  // std::vector<int> arr = {2};
   printArr(arr);
   // int ans = bruteForce(arr, val);
   int ans = removeElement(arr, val);

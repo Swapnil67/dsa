@@ -6,7 +6,7 @@
 using namespace std;
 
 void print(vector<int> arr) {
-  for(int i=0;i<arr.size();i++) {
+  for (int i = 0; i < arr.size(); i++) {
     cout<<arr[i]<<" ";
   }
   cout<<endl;
@@ -29,12 +29,7 @@ bool checkSortedAndRotated(vector<int> nums) {
 }
 
 int main() {
-  vector<int> nums;
-  nums.push_back(3);
-  nums.push_back(4);
-  nums.push_back(5);
-  nums.push_back(1);
-  nums.push_back(2);
+  vector<int> nums = {3, 4, 5, 1, 2};
 
   // * Not sorted or rotated
   // nums.push_back(2);

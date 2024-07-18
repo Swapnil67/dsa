@@ -61,7 +61,7 @@ int lengthOfLastWord(std::string s) {
   // * Step 2: Count then length of last word
   for (int i = p; i >= 0; i--) {
     if(isCharacter(s[i])) {
-      // std::cout<<s[i]<<" ";
+      // std::cout << s[i] << " ";
       cnt++;
     } else {
       break;
@@ -81,7 +81,7 @@ int main() {
   std::cout << str << std::endl;
   // int len = bruteForce(str);
   int len = lengthOfLastWord(str);
-  std::cout<<"Length of last word is "<<len<<std::endl;
+  std::cout << "Length of last word is " << len << std::endl;
   return 0;
 }
 

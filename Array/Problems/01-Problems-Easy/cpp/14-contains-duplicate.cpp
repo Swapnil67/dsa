@@ -15,6 +15,7 @@
 */
 
 #include <set>
+#include <map>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
@@ -25,6 +26,30 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Hashmap to Count
+// * TIME COMPLEXITY O(N) + O(N)
+// * SPACE COMPLEXITY O(N)
+bool bruteForce(std::vector<int> &nums) {
+  std::map<int, int> countMap;
+  int n = nums.size();
+  for (int i = 0; i < n; i++) {
+    countMap[nums[i]]++;
+  }
+
+  // * loop over count map
+  for(auto it : countMap) {
+    if(it.second > 1) {
+      return true;
+    }
+  }
+  return false;
+} 
+
+// * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------`
+// * Set Data Structure
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 bool containsDuplicate(std::vector<int> &nums) {
   std::set<int> st;
   for (int i = 0; i < nums.size(); i++) {
@@ -41,7 +66,8 @@ int main() {
   std::vector<int> arr = {1, 2, 3, 1};
   std::cout<<"Input Array "<<std::endl;
   printArr(arr);
-  bool isDuplicate = containsDuplicate(arr);
+  bool isDuplicate = bruteForce(arr);
+  // bool isDuplicate = containsDuplicate(arr);
   std::cout<<"Does array contains duplicate "<<isDuplicate<<std::endl;
   return 0;
 }

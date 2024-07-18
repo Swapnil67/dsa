@@ -7,8 +7,8 @@
  * * Input  : target = 5, nums = [4, 1, 2, 3, 1] 
  * * Output : 3
 
- * * https://www.naukri.com/code360/problems/reading_6845742
  * * https://leetcode.com/problems/two-sum/description/
+ * * https://www.naukri.com/code360/problems/reading_6845742
 */
 
 #include<map>

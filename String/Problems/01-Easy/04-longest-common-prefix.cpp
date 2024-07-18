@@ -12,6 +12,7 @@
  * * Explanation: There is no common prefix among the input strings.
 
  * * https://leetcode.com/problems/longest-common-prefix/description/
+ * * https://www.naukri.com/code360/problems/longest-common-prefix_2090383
 */
 
 #include<unordered_map>
@@ -61,7 +62,7 @@ std::string longestCommonPrefix(std::vector<std::string> strs) {
 // TODO Solve this problem using trie data-structure
 
 int main() {
-  std::vector<std::string> strs = { "flower", "flow", "flight" };
+  std::vector<std::string> strs = {"flower", "flow", "flight"};
   printVectorString(strs);
   std::string commonPrefix = longestCommonPrefix(strs);
   std::cout << "Longest Common Prefix is = " << commonPrefix << std::endl;
