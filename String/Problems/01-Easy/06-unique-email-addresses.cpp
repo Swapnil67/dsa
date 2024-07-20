@@ -32,8 +32,6 @@ void printVectorString(std::vector<std::string> arr) {
 std::string isValidEmail(std::string email) {
   std::string localName = "";
   int i = 0;
-  int p = email.find('@');
-  std::string dname = email.substr(p);
 
   while(email[i] != '@') {
     if(email[i] == '.') {
@@ -47,20 +45,22 @@ std::string isValidEmail(std::string email) {
     i++;
   }
 
+  int p = email.find('@');
+  std::string dname = email.substr(p);
   std::string newEmail = localName + dname;
   return newEmail;
 }
 
-int bruteForce(std::vector<std::string> emails) {
-  int n = emails.size();
-  int validMails = 0;
+// * Find Valid Email
+// * TIME COMPLEXITY O(N) * O(M)    [M - Characters of each emails]
+// * SPACE COMPLEXITY O(N)          [N - number of emails]
+int numUniqueEmails(std::vector<std::string> emails) {
   std::unordered_set<std::string> emailSet;
   for(std::string e : emails) {
     std::string ans = isValidEmail(e);
     // std::cout << ans << std::endl;
     emailSet.insert(ans);
   }
-
   return emailSet.size();
 }
 

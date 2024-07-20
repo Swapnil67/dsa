@@ -412,23 +412,21 @@ std::vector<int> nextGreaterElementsBrute(std::vector<int> a, std::vector<int> b
 // * Using stack DS
 std::vector<int> nextGreaterElement(std::vector<int> a, std::vector<int> b) {
   int n1 = a.size(), n2 = b.size();
-  std::unordered_map<int, int> hashIdx;
   std::vector<int> ans(n1, -1);
+  std::unordered_map<int, int> idxMap;
   for (int i = 0; i < n1; i++) {
-    hashIdx[a[i]] = i;
+    idxMap[a[i]] = i;
   }
 
-  // * Loop on b array
   std::stack<int> st;
   for (int i = 0; i < n2; i++) {
     int cur = b[i];
     while(!st.empty() && cur > st.top()) {
-      int idx = hashIdx[st.top()];
+      int idx = idxMap[st.top()];
       ans[idx] = cur;
       st.pop();
     }
-
-    if(hashIdx.find(cur) != hashIdx.end()) {
+    if(idxMap.find(cur) != idxMap.end()) {
       st.push(cur);
     }
   }
@@ -457,10 +455,11 @@ int findPivotIndexBrute(std::vector<int> arr) {
 
 int findPivotIndex(std::vector<int> arr) {
   int n = arr.size();
-  int totalSum = std::accumulate(arr.begin(), arr.end(), 0);
+  int sum = std::accumulate(arr.begin(), arr.end(), 0);
   int leftSum = 0;
-  for (int i = 0; i < n; i++) {
-    int rightSum = totalSum - (leftSum + arr[i]);
+  for (int i = 0; i < n; i++){
+    int rightSum = sum - (leftSum + arr[i]);
+    std::cout << leftSum << " " << rightSum << std::endl;
     if(leftSum == rightSum) {
       return i;
     }
@@ -470,6 +469,32 @@ int findPivotIndex(std::vector<int> arr) {
 }
 
 // * ------------ Find All Numbers Disappeared in an Array --------------
+// TODO
+
+// * ---------- Majority Element (N/2) ------------
+int majorityElement(std::vector<int> arr) {
+  int n = arr.size();
+  int ele = -1, cnt = 0;
+  for (int i = 0; i < n; i++) {
+    if(cnt == 0) {
+      cnt = 1;
+      ele = arr[i];
+    }
+    else if(arr[i] == ele) {
+      cnt++;
+    }
+    else {
+      cnt--;
+    }
+  }
+  cnt = 0;
+  int occurence = n / 2;
+  for (int i = 0; i < n; i++) {
+    if (arr[i] == ele)
+      cnt++;
+  }
+  return (cnt >= occurence) ? ele : -1;
+}
 
 int main() {
 
@@ -544,15 +569,15 @@ int main() {
   // std::cout << "Sub array with max length " << longestSubArrLength << std::endl;
 
   // * Problem 9
-  std::cout << "Two Sum" << std::endl;
-  int target = 19;
-  std::vector<int> arr = {2, 15, 11, 7};
-  printArr(arr);
+  // std::cout << "Two Sum" << std::endl;
+  // int target = 19;
+  // std::vector<int> arr = {2, 15, 11, 7};
+  // printArr(arr);
   // std::vector<int> ans = twoSumBrute(arr, target);
   // std::vector<int> ans = twoSumBetter(arr, target);
   // printArr(ans); 
-  bool ans = twoSum(arr, target);
-  std::cout << "Two sum found " << ans << std::endl;
+  // bool ans = twoSum(arr, target);
+  // std::cout << "Two sum found " << ans << std::endl;
 
   // * Problem 10
   // TODO
@@ -575,7 +600,7 @@ int main() {
   // replaceElements(arr);
   // printArr(arr);
 
-  // * Problem 13
+  // * Problem 13 - Remove Elements
   // std::cout << "Remove Elements" << std::endl;
   // int val = 3;
   // std::vector<int> arr = {2};
@@ -584,7 +609,7 @@ int main() {
   // printArr(arr);
   // std::cout << "Answer " << ans << std::endl;
 
-  // * Problem 14
+  // * Problem 14 - Next greater element
   // std::cout << "Next greater element" << std::endl;
   // std::vector<int> a = {4, 1, 2}, b = {1, 3, 4, 2};
   // std::vector<int> a = {2, 4}, b = {1, 2, 3, 4};
@@ -597,21 +622,28 @@ int main() {
   // std::vector<int> ans = nextGreaterElement(a, b);
   // printArr(ans);
 
-  // * Problem 15
-  // std::cout << "Find Pivot Index" << std::endl;
+  // * Problem 15 - Find Pivot Index
+  std::cout << "Find Pivot Index" << std::endl;
   // std::vector<int> nums = {2, 1, -1}; // * 0
   // std::vector<int> nums = {1, 2, 3}; // * -1
-  // std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
-  // printArr(nums);
+  std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
+  printArr(nums);
   // int pivotIndex = findPivotIndexBrute(nums);
-  // int pivotIndex = findPivotIndex(nums);
-  // std::cout << "Pivot Index " << pivotIndex << std::endl;
+  int pivotIndex = findPivotIndex(nums);
+  std::cout << "Pivot Index " << pivotIndex << std::endl;
 
-  // * Problem 16
+  // * Problem 16 - Find All Numbers Disappeared in an Array
   // TODO
   // std::cout << "Find All Numbers Disappeared in an Array" << std::endl;
   // std::vector<int> arr = {4, 3, 2, 7, 8, 2, 3, 1};
   // printArr(arr);
+
+  // * Problem 17 - Majority Element (n/2)
+  // std::cout << "Majority Element (n/2)" << std::endl;
+  // std::vector<int> arr = {3, 2, 3}; // * 3 
+  // printArr(arr);
+  // int majorityEle = majorityElement(arr);
+  // std::cout<<"Majority Element "<<majorityEle<<std::endl;
 
   return 0;
 }

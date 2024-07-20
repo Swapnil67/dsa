@@ -67,7 +67,7 @@ int betterApproach(std::vector<int> arr) {
 */
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int optimalApproach(std::vector<int> arr) {
+int majorityElement(std::vector<int> arr) {
   int cnt = 0, n = arr.size();
   int ele;
 
@@ -94,9 +94,7 @@ int optimalApproach(std::vector<int> arr) {
   }
   // * Check if ele is majority element or not
   int occurence = n / 2;
-  if (countMaxEle > occurence)
-    return ele;
-  return -1;
+  return (cnt > occurence) ? ele : -1;
 }
 
 int main() {

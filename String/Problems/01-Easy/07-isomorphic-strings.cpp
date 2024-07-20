@@ -37,18 +37,14 @@ bool isIsomorphic(std::string s, std::string t) {
   for (int i = 0; i < s.length(); i++) {
     char c1 = s[i], c2 = t[i];
     if (mapST.find(c1) != mapST.end() && mapST[c1] != c2) {
-      return false;
-    } else {
-      mapST[c1] = c2;
+        return false;
     }
-
     if (mapTS.find(c2) != mapTS.end() && mapTS[c2] != c1) {
-      return false;
-    } else {
-      mapTS[c2] = c1;
+        return false;
     }
+    mapTS[c2] = c1;
+    mapST[c1] = c2;
   }
-
   return true;
 }
 

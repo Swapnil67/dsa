@@ -1,6 +1,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <unordered_set>
 
 bool isAlphabet(char c) {
   return ((int)c >= (int)'A' && (int)c <= (int)'Z') || ((int)c >= (int)'a' && (int)c <= (int)'z');
@@ -107,8 +108,61 @@ std::string longestCommonPrefix(std::vector<std::string> strs) {
   return strPrefix;
 }
 
-// * ------------ Longest Common Prefix ------------
+// * ------------ Unique Email address ------------
 
+std::string validEmail(std::string email) {
+  int i = 0;
+  int p = email.find('@');
+  std::string localName = "";
+  while(email[i] != '@') {
+    if(email[i] == '.') {
+      i++;
+      continue;
+    }
+    if(email[i] == '+') {
+      i++;
+      break;
+    }
+    localName += email[i];
+    i++;
+  }
+
+  std::string domain = email.substr(p);
+  return localName + domain;
+}
+
+int uniqueEmailAddresses(std::vector<std::string> emails) {
+  std::unordered_set<std::string> emailSet;
+  for (std::string e : emails) {
+    std::string email = validEmail(e);
+    std::cout << email << std::endl;
+    emailSet.insert(email);
+  }
+
+  return emailSet.size();
+}
+
+// * ------------ Isomorphic Strings ------------
+
+bool isIsomorphic(std::string s, std::string t) {
+  std::map<char, char> sMapt;
+  std::map<char, char> tMapS;
+  for (int i = 0; i < s.size(); i++) {
+    char c1 = s[i], c2 = t[i];    
+    if(sMapt.find(c1) != sMapt.end() && sMapt[c1] != c2) {
+      return false;
+    }
+
+    if(tMapS.find(c2) != tMapS.end() && tMapS[c2] != c1) {
+      return false;
+    }
+
+    sMapt[c1] = c2;
+    tMapS[c2] = c1;
+  } 
+
+  return true;
+}
 
 int main() {
 
@@ -136,10 +190,30 @@ int main() {
   // std::cout << "Length of last word is " << len << std::endl;
 
   // * Problem 4 - Longest Common Prefix
-  std::vector<std::string> strs = {"flower", "flow", "flight"};
-  printVectorString(strs);
-  std::string commonPrefix = longestCommonPrefix(strs);
-  std::cout << "Longest Common Prefix is = " << commonPrefix << std::endl;
+  // std::vector<std::string> strs = {"flower", "flow", "flight"};
+  // printVectorString(strs);
+  // std::string commonPrefix = longestCommonPrefix(strs);
+  // std::cout << "Longest Common Prefix is = " << commonPrefix << std::endl;
+
+
+  // * Problem 5 - Unique Email address
+  // std::vector<std::string> emails = {"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com",
+                                    //  "testemail+david@lee.tcode.com"};
+
+  // std::vector<std::string> emails = {"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"};
+  // printVectorString(emails);
+  // int validEmails = uniqueEmailAddresses(emails);
+  // std::cout << "Valid Emails " << validEmails << std::endl;
+
+
+  // * Problem 6 - Isomorphic Strings
+  // std::string s = "egg", t = "add";
+  std::string s = "ab", t = "bb";
+  std::cout << "s = " << s << " t = " << t << std::endl;
+  bool ans = isIsomorphic(s, t);
+  std::cout << "Isomorphic strings " << ans << std::endl;
+
+
   return 0;
 }
 
