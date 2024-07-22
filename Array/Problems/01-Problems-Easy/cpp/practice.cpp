@@ -623,14 +623,14 @@ int main() {
   // printArr(ans);
 
   // * Problem 15 - Find Pivot Index
-  std::cout << "Find Pivot Index" << std::endl;
+  // std::cout << "Find Pivot Index" << std::endl;
   // std::vector<int> nums = {2, 1, -1}; // * 0
   // std::vector<int> nums = {1, 2, 3}; // * -1
-  std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
-  printArr(nums);
+  // std::vector<int> nums = {1, 7, 3, 6, 5, 6}; // * 3
+  // printArr(nums);
   // int pivotIndex = findPivotIndexBrute(nums);
-  int pivotIndex = findPivotIndex(nums);
-  std::cout << "Pivot Index " << pivotIndex << std::endl;
+  // int pivotIndex = findPivotIndex(nums);
+  // std::cout << "Pivot Index " << pivotIndex << std::endl;
 
   // * Problem 16 - Find All Numbers Disappeared in an Array
   // TODO
