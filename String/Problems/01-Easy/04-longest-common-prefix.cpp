@@ -37,14 +37,17 @@ void printVectorString(std::vector<std::string> arr) {
 std::string longestCommonPrefix(std::vector<std::string> strs) {
   int n = strs.size();
   std::string res = "";
-
+  if (n == 0)
+    return res;
+    
+  // * Loop over the first string in array
   for (int i = 0; i < strs[0].length(); i++) {
     char ch = strs[0][i];
 
     // * Loop over rest of strings
     bool match = true;
     for (int j = 1; j < n; j++) {
-      if(strs[j][i] != ch) {
+      if (strs[j][i] != ch) {
         match = false;
         break;
       }

@@ -42,7 +42,7 @@ int bruteForce(std::string s) {
   return cnt;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * Loop from backwards
 // * TIME COMPLEXITY O(N) [Worst case]
 // * TIME COMPLEXITY O(len of last word) [Best case]
