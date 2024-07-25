@@ -27,6 +27,7 @@ std::string bruteForce(std::string num) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * num[i] == num[i-1] && num[i] == num[i+1]
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 std::string optimalApproach(std::string num) {

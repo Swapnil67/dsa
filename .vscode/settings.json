@@ -72,7 +72,8 @@
     "common.h": "c",
     "chrono": "c",
     "value.h": "c",
-    "numeric": "cpp"
+    "numeric": "cpp",
+    "iomanip": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

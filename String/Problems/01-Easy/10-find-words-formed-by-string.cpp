@@ -29,6 +29,7 @@ void printVectorString(std::vector<std::string> words) {
 
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Use Hashed Map
 // * TIME COMPLEXITY O(N) + O(N x M)
 // * N -> chars & M -> words
 // * SPACE COMPLEXITY O(N * M) // * For Answer
@@ -58,10 +59,11 @@ int bruteForce(std::vector<std::string> words, std::string chars) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * Use Hashed Array
 // * TIME COMPLEXITY O(N) + O(N x M)
 // * N -> chars & M -> words
 // * SPACE COMPLEXITY O(1) // * For Answer
-int betterApproach(std::vector<std::string> words, std::string chars) {
+int countCharacters(std::vector<std::string> words, std::string chars) {
   std::vector<int> charVector(26, 0);
   for (char c : chars) {
     int idx = (int)(c) - (int)'a';
@@ -93,7 +95,7 @@ int main() {
   std::string chars = "atach";
   printVectorString(words);
   int ans = bruteForce(words, chars);
-  // int ans = betterApproach(words, chars);
+  // int ans = countCharacters(words, chars);
   std::cout << "Answer " << ans << std::endl;
   return 0;
 }
