@@ -18,34 +18,71 @@ int arraySum(std::vector<int> arr) {
 }
 
 std::pair<int, int> getMaxMinOfArray(std::vector<int> arr) {
-  int mx = INT_MIN, mn = INT_MAX;
-  for (int i = 0; i < arr.size(); i++) {
-    mx = std::max(arr[i], mx);
-    mn = std::min(arr[i], mn);
-  }
+  int mx = *std::max_element(arr.begin(), arr.end());
+  int mn = *std::min_element(arr.begin(), arr.end());
   return {mx, mn};
 }
 
 // * ---------- Koko Eating Bananas ----------
 
-int findHrsToCompletePile(std::vector<int> piles, int bananas, int maxH) {
-  int n = piles.size();
-  int curHr = 0;
-  for (int i = 0; i < n; i++) {
-    curHr += std::ceil((float)piles[i] / (float)bananas);
+int calcuateHrsToComplete(std::vector<int> piles, int bananas) {
+  int hoursTook = 0;
+  for (int i = 0; i < piles.size(); i++) {
+    hoursTook += std::ceil((float)piles[i] / (float)bananas);
   }
-  return curHr;
+  return hoursTook;
 }
 
-int findMinimumBananasToEat(std::vector<int> piles, int maxH) {
+int findMinimumBananasToEat(std::vector<int> piles, int hr) {
   int n = piles.size();
-  std::pair<int, int> maxAndMin = getMaxMinOfArray(piles);
-  int l = 0, r = maxAndMin.first;
+  if(n == 0) return -1;
+
+  int l = 0, r = *std::max_element(piles.begin(), piles.end());
   int ans = r;
   while (l <= r) {
     int m = l + (r - l) / 2;
-    int hrsToCompletePile = findHrsToCompletePile(piles, m, maxH);
-    if(hrsToCompletePile <= maxH) {
+    int hoursTook = calcuateHrsToComplete(piles, m);
+    // std::cout << m << " hours took " << hoursTook << std::endl;
+    if(hoursTook <= hr) {
+      ans = m;
+      r = m - 1;
+    }
+    if(hoursTook > hr) {
+      l = m + 1;
+    }
+  }
+
+  return ans;
+}
+
+// * ---------- Rose Garden ----------
+
+int findBouquetsMade(std::vector<int> bloomDays, int flowers, int days) {
+  int totalFlowers = 0, bouquets = 0;
+  for (int i = 0; i < bloomDays.size(); i++) {  
+    if(days >= bloomDays[i]) {
+      totalFlowers++;
+    }
+    else {
+      bouquets += (totalFlowers / flowers);
+      totalFlowers = 0;
+    }
+  }
+  bouquets += (totalFlowers / flowers);
+  return bouquets;
+}
+
+int findMinimumDaysToMakeBouquets(std::vector<int> bloomDays, int flowers, int bouquets) {
+  int n = bloomDays.size();
+  std::pair<int, int> minMaxVal = getMaxMinOfArray(bloomDays);
+  int l = minMaxVal.second, r = minMaxVal.first;
+  std::cout << l << "  " << r << std::endl;
+  int ans = r;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    int bouquetsMade = findBouquetsMade(bloomDays, flowers, m);
+    // std::cout << m << " bouquets made " << bouquetsMade << std::endl;
+    if(bouquetsMade >= bouquets) {
       ans = m;
       r = m - 1;
     }
@@ -54,429 +91,37 @@ int findMinimumBananasToEat(std::vector<int> piles, int maxH) {
     }
   }
   return ans;
-} 
-
-// * ---------- Rose Garden ----------
-
-bool findIsPossibleDay(std::vector<int> bloomDays, int days, int flowersInAbouquet, int bouquetsRequired) {
-  int bouquets = 0, roses = 0;
-  for (int i = 0; i < bloomDays.size(); i++) {
-    if(bloomDays[i] <= days) {
-      roses++;
-    }
-    else {
-      bouquets = bouquets + (roses / flowersInAbouquet);
-      roses = 0;
-    }
-  }
-  bouquets = bouquets + (roses / flowersInAbouquet);
-  if(bouquets >= bouquetsRequired) return true;
-  return false;
-}
-
-int findMinimumDaysToMakeBouquets(std::vector<int> bloomDays, int flowersInAbouquet, int bouquetsRequired) {
-  int n = bloomDays.size();
-  if (n < flowersInAbouquet * bouquetsRequired)
-    return -1;
-
-  std::pair<int, int> minMaxVal = getMaxMinOfArray(bloomDays);
-  int l = minMaxVal.second, r = minMaxVal.first;
-  int ans = r;
-  while (l <= r) {
-    // * Days
-    int m = l + (r - l) / 2;
-    if(findIsPossibleDay(bloomDays, m, flowersInAbouquet, bouquetsRequired)) {
-      ans = m;
-      r = m - 1;
-    }
-    else {
-      l = m + 1;
-    }
-  }
-  return l;
 }
 
 // * ---------- Smallest Divisor ----------
 
-bool isPossibleDivisor(std::vector<int> arr, int divisor, int threshold) {
-  int n = arr.size();
-  int c = 0;
-  for (int i = 0; i < n; i++) {
-    c += std::ceil((float)arr[i] / (float)divisor);
-  }
-  if(c > threshold) return false;
-  return true;
-}
-
-int findSmallestDivisor(std::vector<int> arr, int threshold) {
-  int n = arr.size();
-  std::pair<int, int> minMaxVal = getMaxMinOfArray(arr);
-  int l = 1, r = minMaxVal.first;
-  int ans = r;
-  while (l <= r) {
-    int m = l + (r - l) / 2;
-    if(isPossibleDivisor(arr, m, threshold)) {
-      ans = m;
-      r = m - 1;
-    }
-    else {
-      l = m + 1;
-    }
-  }
-  return ans;
-}
-
 // * ----------- Capacity To Ship Packages Within D Days ----------
-
-bool isPossibleWeight(std::vector<int> weights, long long capacity, int maxDays) {
-  int  days = 1;
-  long long curWeight = 0;
-  for (int i = 0; i < weights.size(); i++) {
-    if(curWeight + weights[i] > capacity)  {
-      days++;
-      curWeight = weights[i];
-    }
-    else {
-      curWeight += weights[i];
-    }
-  }
-  if(days > maxDays) return false;
-  return true;
-}
-
-int findLeastPossileWeight(std::vector<int> weights, int maxDays) {
-  int n = weights.size();
-  std::pair<int, int> minMaxVal = getMaxMinOfArray(weights);
-  long long l = minMaxVal.first, r = arraySum(weights);
-  int ans = r;
-  while (l <= r) {
-    long long m = l + (r - l) / 2;
-    if(isPossibleWeight(weights, m, maxDays)) {
-      // ans = m;
-      r = m - 1;
-    }
-    else {
-      l = m + 1;
-    }
-  }
-  // return ans;
-  return l;
-} 
 
 // * ------------ Kth Missing Positive Number  ------------
 
-int findKthMissingNumber(std::vector<int> arr, int k) {
-  int n = arr.size();
-  int l = 0, r = n - 1;
-  while(l <= r) {
-    int m = l + (r - l) / 2;
-    int missingNos = arr[m] - (m + 1);
-    if(missingNos > k) {
-      r = m - 1;
-    } 
-    else {
-      l = m + 1;
-    }
-  }
-  return k + l;
-}
-
 // * ------------ Aggressive Cows  ------------
-
-bool canWePlace(std::vector<int> arr, int distance, int threshold) {
-  int n = arr.size();
-  int lastPlaced = arr[0], placed = 1;
-  for (int i = 1; i < n; i++) {
-    if(arr[i] - lastPlaced >= distance) {
-      placed++;
-      lastPlaced = arr[i];
-    }
-    if (placed >= threshold)
-      return true;
-  }
-  return false;
-}
-
-int AggressiveCows(std::vector<int> stalls, int cows) {
-  std::sort(stalls.begin(), stalls.end());
-  int n = stalls.size();
-  int l = 1, r = stalls[n - 1] - stalls[0];
-  while (l <= r) {
-    int m = l + (r - l) / 2;
-    if(canWePlace(stalls, m, cows)) {
-      l = m + 1;
-    }
-    else {
-      r = m - 1;
-    }
-  }
-
-  return r;
-}
 
 // * ------------ Allocate Books  ------------
 
-int canAllocatePages(std::vector<int> pages, int maxPages, int students) {
-  int n = pages.size();
-  int allocatedPages = pages[0], allocatedStudents = 1;
-  for (int i = 1; i < n; i++) {
-    if(allocatedPages + pages[i] <= maxPages) {
-      allocatedPages += pages[i];
-    }
-    else {
-      allocatedStudents++;
-      allocatedPages = pages[i];
-    }
-  }
-  if(allocatedStudents > students) return false;
-  return true;
-}
-
-int findMaxPagesAssigned(std::vector<int> pages, int s) {
-  int n = pages.size();
-  std::pair<int, int> minMaxVal = getMaxMinOfArray(pages);
-  int l = minMaxVal.second, r = arraySum(pages);
-  while (l <= r) {
-    int m = l + (r - l) / 2;
-    if(canAllocatePages(pages, m, s)) {
-      r = m - 1;
-    }
-    else {
-      l = m + 1;
-    }
-  }
-  return l;
-}
-
 // * ------------ Painter's Partition Problem  ------------
-
-int canPaintBoardInTime(std::vector<int> boards, int timeGiven, int maxPainters) {
-  int n = boards.size();
-  int paintersRequired = 1, boardsPainted = 0;
-  for (int i = 0; i < n; i++) {
-    if(boardsPainted + boards[i] <= timeGiven) {
-      boardsPainted += boards[i];
-    }
-    else {
-      paintersRequired++;
-      boardsPainted = boards[i];
-    }
-  }
-  if(paintersRequired > maxPainters) {
-    return false;
-  }
-  return true;
-}
-
-int findMinTimeToPaintBoards(std::vector<int> boards, int painters) {
-  int n = boards.size();
-  int l = 1, r = arraySum(boards);
-  while (l <= r) {
-    int m = l + (r - l) / 2;
-    if(canPaintBoardInTime(boards, m, painters)) {
-      r = m - 1;
-    }
-    else {
-      l = m + 1;
-    }
-  }
-  return l;
-}
 
 // * ------------ Minimize Max Distance to Gas Station  ------------
 
-long double gasStationBrute(std::vector<int> gasStations, int k) {
-  int n = gasStations.size();
-  std::vector<int> positions(n-1, 0);
-  for (int i = 1; i <= k; i++) {
-    int maxIdx = -1;
-    long double maxVal = -1;
-    for (int j = 0; j < n-1; j++) {
-      long double diff = gasStations[j+1] - gasStations[j];
-      long double sectionLength = diff / (long double)(positions[j] + 1);
-      if(sectionLength > maxVal) {
-        maxVal = sectionLength;
-        maxIdx = j;
-      }
-    }
-    positions[maxIdx]++;
-  }
-
-  printArr(positions);
-
-  // * Find the maximum distance
-  long double ans = -1;
-  for (int i = 0; i < n; i++) {
-    long double diff = gasStations[i + 1] - gasStations[i];
-    long double sectionLength = diff / (long double)(positions[i] + 1);
-    ans = std::max(ans, sectionLength);
-  }
-  return ans;
-}
-
-long double gasStationBetter(std::vector<int> gasStations, int k) {
-  int n = gasStations.size();
-  std::priority_queue<std::pair<long double, int>> pq;
-
-  // * Step 1: prefill the priority queue
-  for (int i = 0; i < n - 1; i++) {
-    long double diff = gasStations[i+1] - gasStations[i];
-    pq.push({diff, i});
-  }
-
-  // * Step 2: Start putting the gas stations
-  std::vector<int> positions(n - 1, 0);
-  for (int i = 1; i <= k; i++) {
-    auto pq_pair = pq.top();
-    int idx = pq_pair.second;
-    positions[idx]++;
-    long double diff = gasStations[idx + 1] - gasStations[idx];
-    // * Divide in new sections
-    long double sectionLength = diff / (long double)(positions[idx] + 1);
-    pq.pop();
-    pq.push({sectionLength, idx});
-  }
-
-  return pq.top().first;
-}
-
 // * ------------ Median of Two Sorted Arrays  ------------
 
-// * Create a merged array
-double findMedianBrute(std::vector<int> a, std::vector<int> b) {
-  int n1 = a.size(), n2= b.size();
-  int i = 0, j = 0;
-  std::vector<int> mergedArr;
-  while (i < n1 && j < n2) {
-    if(a[i] < b[j]) {
-      mergedArr.push_back(a[i++]);
-    } else {
-      mergedArr.push_back(b[j++]);
-    }
-  }
-
-  while(i < n1) {
-    mergedArr.push_back(a[i++]);
-  }
-
-  while(j < n2) {
-    mergedArr.push_back(b[j++]);
-  }
-
-  int n = mergedArr.size();
-  int idx2 = n / 2;
-  if (n % 2 == 0) {
-    int idx1 = idx2 - 1;
-    return (double)(mergedArr[idx1] + mergedArr[idx2]) / 2.0;
-  }
-  return (double)mergedArr[idx2] / 2.0;
-}
-
-// * Use counter
-double findMedianBetter(std::vector<int> a, std::vector<int> b) {
-  int n1 = a.size(), n2= b.size();
-  int i = 0, j = 0;
-  int ele1, ele2, cnt = 0;
-  int n3 = n1 + n2;
-  int idx2 = n3 / 2;
-  int idx1 = idx2 - 1;
-  std::vector<int> mergedArr;
-  while (i < n1 && j < n2) {
-    if(a[i] < b[j]) {
-      if(cnt == idx1) ele1 = a[i];
-      if(cnt == idx2) ele2 = a[i];
-      i++;
-      cnt++;
-    } else {
-      if(cnt == idx1) ele1 = b[j];
-      if(cnt == idx2) ele2 = b[j];
-      j++;
-      cnt++;
-    }
-  }
-
-  while(i < n1) {
-    if(cnt == idx1) ele1 = a[i];
-    if(cnt == idx2) ele2 = a[i];
-    i++;
-    cnt++;  
-  }
-
-
-  while(j < n2) {
-    if(cnt == idx1) ele1 = b[j];
-    if(cnt == idx2) ele2 = b[j];
-    j++;
-    cnt++;
-  }
-
-  if (n3 % 2 == 0) {
-    int idx1 = idx2 - 1;
-    return (double)(ele1 + ele2) / 2.0;
-  }
-  return (double)ele1 / 2.0;
-}
-
-// * Find Valid Symmetry
-double findMedian(std::vector<int> a, std::vector<int> b) {
-  int n1 = a.size(), n2 = b.size();
-  if(n1 > n2) {
-    findMedian(b, a);
-  }
-
-  int n = n1 + n2;
-  int l = 0, r = n1;
-  int left = (n1 + n2 + 1) / 2;
-
-  // std::cout << "left " << left << std::endl;
-  while (l <= r) {
-    // std::cout << "l " << l << " r " << r << std::endl;
-    int m1 = l + (r - l) / 2;
-    int m2 = left - m1;
-    // std::cout << "m1 " << m1 << " m2 " << m2 << std::endl;
-    int l1 = INT_MIN, l2 = INT_MIN;
-    int r1 = INT_MAX, r2 = INT_MAX;
-    if(m1 < n1) r1 = a[m1];
-    if(m2 < n2) r2 = b[m2];
-
-    if (m1 - 1 >= 0)
-      l1 = a[m1 - 1];
-    if (m2 - 1 >= 0)
-      l2 = b[m2 - 1];
-
-    // std::cout << " l1 " << l1 << " l2 " << l2 << std::endl;
-    // std::cout << " r1 " << r1 << " r2 " << r2 << std::endl;
-
-    if(l1 <= r2 && l2 <= r1) {
-      // * Valid Symmetry
-      if(n % 2 == 0) {
-        return ((double)(std::max(l1, l2) + std::min(r1, r2))) / 2.0;
-      }
-      else {
-        return std::max(l1, l2);
-      }
-    }
-    else if(l1 > r2) {
-      r = m1 - 1;
-    }
-    else {
-      l = m1 + 1;
-    }
-  }
-  return 0;
-}
-
 int main() {
-  // * Problem 1
+  // * Problem 1 - Koko eating bananas 
   // std::cout << "Koko eating bananas" << std::endl;
   // int h = 2;
   // std::vector<int> piles = {1000000000};
+  // std::vector<int> piles = {3, 6, 7, 11};
+  // int h = 8;
   // std::cout << "Piles of bananas" << std::endl;
   // printArr(piles);
   // int minimumBananas = findMinimumBananasToEat(piles, h);
   // std::cout << "Koko need to eat " << minimumBananas << " bananas each hour to finish full pile in " << h << " hours." << std::endl;
 
-  // * Problem 2
+  // * Problem 2 - Rose Garden
   // std::cout << "Rose Garden" << std::endl;
   // std::vector<int> bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
   // int bouquetsRequired = 2, flowersInAbouquet = 3;
@@ -484,7 +129,7 @@ int main() {
   // int minDays = findMinimumDaysToMakeBouquets(bloomDays, flowersInAbouquet, bouquetsRequired);
   // std::cout << "Minimum days required to make " << bouquetsRequired << " bouquets containing " << flowersInAbouquet << " roses each is " << minDays << std::endl;
 
-  // * Problem 3
+  // * Problem 3 - Smallest Divisor
   // std::cout << "Smallest Divisor" << std::endl;
   // int threshold = 6;
   // std::vector<int> arr = {1, 2, 5, 9};
@@ -492,7 +137,7 @@ int main() {
   // int smallestDivisor = findSmallestDivisor(arr, threshold);
   // std::cout << "The smallest divisor is " << smallestDivisor << std::endl;
 
-  // * Problem 4
+  // * Problem 4 - Capacity To Ship Packages Within D Days
   // std::cout << "Capacity To Ship Packages Within D Days" << std::endl;
   // std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   // int days = 5;
@@ -500,7 +145,7 @@ int main() {
   // int leastWeight = findLeastPossileWeight(weights, days);
   // std::cout << "Ship should take atleast " << leastWeight << " weights to transfer all weights in " << days << " days." << std::endl;
 
-  // * problem 5
+  // * problem 5 - Kth Missing Positive Number
   // std::cout << "Kth Missing Positive Number " << std::endl;
   // int k = 5;
   // std::vector<int> arr = {2, 3, 4, 7, 11};
@@ -543,15 +188,15 @@ int main() {
   // std::cout << "Maximum distance " << maxDistance << std::endl;
 
   // * Problem 10
-  std::cout << "Median of Two Sorted Arrays" << std::endl;
+  // std::cout << "Median of Two Sorted Arrays" << std::endl;
   // std::vector<int> a = {1, 3, 4, 7, 10, 12}, b = {2, 3, 6, 15};
-  std::vector<int> a = {1, 2}, b = {3, 4};
-  printArr(a);
-  printArr(b);
+  // std::vector<int> a = {1, 2}, b = {3, 4};
+  // printArr(a);
+  // printArr(b);
   // double median = findMedianBrute(a, b);
   // double median = findMedianBetter(a, b);
-  double median = findMedian(a, b);
-  std::cout << "Median of two sorted array is " << median << std::endl;
+  // double median = findMedian(a, b);
+  // std::cout << "Median of two sorted array is " << median << std::endl;
 
   // * Problem 11
 }

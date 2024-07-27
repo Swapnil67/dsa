@@ -15,17 +15,10 @@
 
 #include<iostream>
 
-std::vector<int> findMinMax(std::vector<int> arr)
-{
-  int min_val = INT_MAX, max_val = INT_MIN;
-  std::vector<int> min_max_vector;
-  for (int i = 0; i < arr.size(); i++) {
-    min_val = std::min(min_val, arr[i]);
-    max_val = std::max(max_val, arr[i]);
-  }
-
-  min_max_vector = {min_val, max_val};
-  return min_max_vector;
+std::vector<int> findMinMax(std::vector<int> arr) {
+  int mx = *std::max_element(arr.begin(), arr.end());
+  int mn = *std::min_element(arr.begin(), arr.end());
+  return {mn, mx};
 }
 
 void printArr(std::vector<int> arr) {
@@ -37,17 +30,17 @@ void printArr(std::vector<int> arr) {
 }
 
 bool findIsPossibleDay(std::vector<int> days, int roses, int bouquetsRequired, int day) {
-  int cnt = 0, totalBouquets = 0;
+  int totalFlowers = 0, totalBouquets = 0;
   for (int i = 0; i < days.size(); i++) {
     if(days[i] <= day) {
-      cnt++;
+      totalFlowers++;
     }
     else {
-      totalBouquets = totalBouquets + (cnt/roses);
-      cnt = 0;
+      totalBouquets += (totalFlowers / roses);
+      totalFlowers = 0;
     }
-  } 
-  totalBouquets = totalBouquets + (cnt/roses);
+  }
+  totalBouquets = totalBouquets + (totalFlowers / roses);
   std::cout << "Days " << day << " no of Bouquets " << totalBouquets << std::endl;
   if(totalBouquets >= bouquetsRequired) return true;
   return false;

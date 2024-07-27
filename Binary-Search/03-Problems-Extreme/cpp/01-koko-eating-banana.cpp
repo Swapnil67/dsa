@@ -24,26 +24,18 @@
 
 // * ------------------------- Utility Functions -------------------------`
 
-int findMax(std::vector<int> arr) {
-  int maxNum = INT_MIN;
-  for(int i=0; i<arr.size(); i++) {
-    maxNum = std::max(arr[i], maxNum);
-  }
-  return maxNum;
-}
-
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
+  for (int i = 0; i < n; i++) {
     std::cout<<arr[i]<<" ";
   }
   std::cout<<std::endl;
 }
 
-int findHrsToCompletePile(std::vector<int> piles, int maxHr, int k) {
+int findHrsToCompletePile(std::vector<int> piles, int bananas) {
   int totalHrs = 0;
   for (int i = 0; i < piles.size(); i++) {
-    totalHrs += std::ceil((float)piles[i] / (float)k);
+    totalHrs += std::ceil((float)piles[i] / (float)bananas);
     // std::cout << piles[i] / k << " + " << (piles[i] % k != 0) << " = " << (piles[i] / k + (piles[i] % k != 0)) << " " << std::endl;
   }
   return totalHrs;
@@ -53,13 +45,13 @@ int findHrsToCompletePile(std::vector<int> piles, int maxHr, int k) {
 // * TIME COMPLEXITY O(N) * O(maxBananasPerHr) 
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> piles, int maxHrs) {
-  int maxBananas = findMax(piles);
+  int maxBananas = *std::max_element(piles.begin(), piles.end());
   int ans = maxBananas;
   std::cout << "maxBananas " << maxBananas << std::endl;
 
   for (int i = 1; i <= maxBananas; i++) {
     // * O(N) for this loop
-    long long isMinHr = findHrsToCompletePile(piles, maxHrs, i);
+    long long isMinHr = findHrsToCompletePile(piles, i);
     std::cout << "isMinHr " << isMinHr << std::endl;
     if (isMinHr <= maxHrs) {
       return i;
@@ -72,13 +64,12 @@ int bruteForce(std::vector<int> piles, int maxHrs) {
 // * TIME COMPLEXITY O(N) * log(maxBananas) 
 // * SPACE COMPLEXITY O(1)
 int findMinimumBananasToEat(std::vector<int> piles, int hr) {
-  int maxBananas = findMax(piles);
-  int l = 0, r = maxBananas;
-  int ans = maxBananas;
+  int l = 0, r = *std::max_element(piles.begin(), piles.end());;
+  int ans = r;
   while(l <= r) {
     int mid = l + (r - l) / 2;
-    // std::cout << "mid " << mid << std::endl;
-    int hrsToCompletePile = findHrsToCompletePile(piles, hr, mid);
+    int hrsToCompletePile = findHrsToCompletePile(piles, mid);
+    // std::cout << mid << " hours took " << hrsToCompletePile << std::endl;
     if(hrsToCompletePile <= hr) {
       ans = mid;
       r = mid - 1;
