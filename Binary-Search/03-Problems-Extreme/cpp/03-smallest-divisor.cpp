@@ -22,16 +22,16 @@
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 int findMaxEle(std::vector<int> arr) {
   int n = arr.size();
   int maxEle = INT_MIN;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     maxEle = std::max(maxEle, arr[i]);
   }
   return maxEle;
@@ -39,7 +39,7 @@ int findMaxEle(std::vector<int> arr) {
 
 bool findIsPossibleDivisor(std::vector<int> arr, int threshold, int divisor) {
   int divisorSum = 0;
-  for(int i=0; i<arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
     divisorSum = divisorSum + std::ceil((float)arr[i]/(float)divisor);
   }
   // std::cout << "divisor " << divisor << std::endl;
@@ -69,7 +69,7 @@ int bruteForce(std::vector<int> arr, int threshold) {
 int findSmallestDivisor(std::vector<int> arr, int threshold) {
   int l = 1, r = findMaxEle(arr);
   // * O(log(Max))
-  while(l <= r) {
+  while (l <= r) {
     int m = l + (r - l) / 2;
     // * O(N)
     bool isPossibleDivisor = findIsPossibleDivisor(arr, threshold, m);

@@ -95,6 +95,33 @@ int findMinimumDaysToMakeBouquets(std::vector<int> bloomDays, int flowers, int b
 
 // * ---------- Smallest Divisor ----------
 
+bool isValidDivisor(std::vector<int> arr, int divisor, int limit) {
+  int n = arr.size();
+  int divisorSum = 0;
+  for (int i = 0; i < n; i++) {
+    divisorSum += std::ceil((float)arr[i] / (float)divisor);
+  }
+  return divisorSum <= limit;
+}
+
+int findSmallestDivisor(std::vector<int> arr, int limit) {
+  int n = arr.size();
+  int l = 0, r = *std::max_element(arr.begin(), arr.end());
+  int ans = r;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    bool isValid = isValidDivisor(arr, m, limit);
+    if(isValid) {
+      ans = m;
+      r = m - 1;
+    }
+    else {
+      l = m + 1;
+    }
+  }
+  return ans;
+}
+
 // * ----------- Capacity To Ship Packages Within D Days ----------
 
 // * ------------ Kth Missing Positive Number  ------------
@@ -131,8 +158,8 @@ int main() {
 
   // * Problem 3 - Smallest Divisor
   // std::cout << "Smallest Divisor" << std::endl;
-  // int threshold = 6;
-  // std::vector<int> arr = {1, 2, 5, 9};
+  // int threshold = 8;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
   // printArr(arr);
   // int smallestDivisor = findSmallestDivisor(arr, threshold);
   // std::cout << "The smallest divisor is " << smallestDivisor << std::endl;
