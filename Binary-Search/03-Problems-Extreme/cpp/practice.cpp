@@ -1,5 +1,6 @@
 #include<queue>
 #include<iostream>
+#include<numeric>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -124,6 +125,40 @@ int findSmallestDivisor(std::vector<int> arr, int limit) {
 
 // * ----------- Capacity To Ship Packages Within D Days ----------
 
+bool isValidWeight(std::vector<int> weights, int days, int maxWeight) {
+  int n = weights.size();
+  int daysTook = 1, curWeight = 0;
+  for (int i = 0; i < n; i++) {
+    if(curWeight + weights[i] > maxWeight)   {
+      daysTook++;
+      curWeight = weights[i];
+    }
+    else {
+      curWeight += weights[i];
+    }
+  }
+  return daysTook <= days;
+}
+
+int findLeastPossileWeight(std::vector<int> weights, int days) {
+  int n = weights.size();
+  int l = 0, r = std::accumulate(weights.begin(), weights.end(), 0);
+  int ans = r;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    bool isValid = isValidWeight(weights, days, m);
+    // std::cout << m << " " << isValid << std::endl;
+    if(isValid) {
+      ans = m;
+      r = m - 1;
+    }
+    else {
+      l = m + 1;
+    }
+  }
+  return ans;
+}
+
 // * ------------ Kth Missing Positive Number  ------------
 
 // * ------------ Aggressive Cows  ------------
@@ -165,12 +200,12 @@ int main() {
   // std::cout << "The smallest divisor is " << smallestDivisor << std::endl;
 
   // * Problem 4 - Capacity To Ship Packages Within D Days
-  // std::cout << "Capacity To Ship Packages Within D Days" << std::endl;
-  // std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  // int days = 5;
-  // printArr(weights);
-  // int leastWeight = findLeastPossileWeight(weights, days);
-  // std::cout << "Ship should take atleast " << leastWeight << " weights to transfer all weights in " << days << " days." << std::endl;
+  std::cout << "Capacity To Ship Packages Within D Days" << std::endl;
+  std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int days = 5;
+  printArr(weights);
+  int leastWeight = findLeastPossileWeight(weights, days);
+  std::cout << "Ship should take atleast " << leastWeight << " weights to transfer all weights in " << days << " days." << std::endl;
 
   // * problem 5 - Kth Missing Positive Number
   // std::cout << "Kth Missing Positive Number " << std::endl;

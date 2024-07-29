@@ -26,10 +26,10 @@
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * Returns the max and sum
@@ -47,18 +47,18 @@ std::map<std::string, int> findMaxWeight(std::vector<int> &weights) {
 
 // * O(N) 
 bool findIsLeastPossibleWeight(std::vector<int> weights, int maximumDays, long long capacity) {  
-  int days = 1, totalWeight = 0;
+  int daysTook = 1, totalWeight = 0;
   for (int i = 0; i < weights.size(); i++) {
     // std::cout << "totalWeight " << totalWeight << std::endl;
     if(totalWeight + weights[i] > capacity) {
-      days++;
+      daysTook++;
       totalWeight = weights[i];
     }
     else {
       totalWeight += weights[i];
     }
   }
-  if(days <= maximumDays) return true;
+  if(daysTook <= maximumDays) return true;
   return false;
 }
 
