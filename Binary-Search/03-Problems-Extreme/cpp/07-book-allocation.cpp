@@ -34,17 +34,17 @@
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * Returns the students assigned for given pages
 int findStudentsAssigned(std::vector<int> books, int pages) {
-  // * Start with first student and zero pages
-  int assignedStudents = 1, assignedPages = 0;
-  for (int i = 0; i < books.size(); i++) {
+  // * Start with first student and books[0] pages
+  int assignedStudents = 1, assignedPages = books[0];
+  for (int i = 1; i < books.size(); i++) {
     if(assignedPages + books[i] <= pages) {
       assignedPages += books[i];
     }

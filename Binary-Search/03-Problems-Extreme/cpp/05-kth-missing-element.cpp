@@ -36,12 +36,10 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int k) {
   for (int i = 0; i < arr.size(); i++) {
-    if(arr[i] <= k) {
+    if (arr[i] <= k)
       k++;
-    }
-    else {
+    else
       break;
-    }
   }
   return k;
 }
@@ -64,7 +62,7 @@ int findKthMissingNumber(std::vector<int> arr, int k) {
     }
   }
 
-  // * kth = arr[r] + more
+  // * kth = arr[r] + more ------------ (high plus how many more you need)
   // * kth = arr[r] + (k - missingTillR)
   // * kth = arr[r] + (k - (arr[r] - (r+1)))
   // * kth = k + r + 1

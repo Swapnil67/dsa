@@ -42,9 +42,8 @@ bool findIsPossibleDistance(std::vector<int> stalls, int cows, int distance) {
       cowsPlaced++;
       lastPlace = stalls[i];
     }
-    if(cowsPlaced >= cows) return true;
   }
-  return false;
+  return cowsPlaced >= cows;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -57,7 +56,7 @@ int bruteForce(std::vector<int> stalls, int cows) {
   int ans = stalls[n - 1] - stalls[0];
 
   // * O(max - min)
-  for (int i = 1; i <= stalls[n-1] - stalls[0]; i++) {
+  for (int i = 1; i <= stalls[n - 1] - stalls[0]; i++) {
     int distance = i;
     // * O(N) 
     bool isPossibleDistance = findIsPossibleDistance(stalls, cows, distance);
