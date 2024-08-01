@@ -15,20 +15,21 @@
 * https://www.naukri.com/code360/problems/minimise-max-distance_7541449
 */
 
-#include<iostream>
 #include<queue>
+#include<iostream>
 
 // * ------------------------- Utility Functions -------------------------
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for(int i=0; i<n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Find the section length of consecutive gas stations
 // * TIME COMPLEXITY O(extra x n) * O(N) 
 // * SPACE COMPLEXITY O(1)
 long double bruteForce(std::vector<int> gasStations, int extra) {
@@ -39,9 +40,9 @@ long double bruteForce(std::vector<int> gasStations, int extra) {
     int maxIdx = -1;
     long double maxSection = -1;
     for (int i = 0; i < n-1; i++) {
-      long double diff = gasStations[i+1] - gasStations[i];
+      long double diff = gasStations[i + 1] - gasStations[i];
       long double sectionLen = diff / (long double)(howMany[i] + 1);
-      if(sectionLen > maxSection) {
+      if (sectionLen > maxSection) {
         maxSection = sectionLen;
         maxIdx = i;
       }

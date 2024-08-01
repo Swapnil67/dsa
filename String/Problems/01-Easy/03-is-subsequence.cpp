@@ -43,7 +43,7 @@ int main() {
   std::cout << "s = " << s << std::endl;
   std::cout << "t = " << t << std::endl;
   bool ans = isSubsequence(s, t);
-  std::cout<<"Is Subsequence "<<ans<<std::endl;
+  std::cout << "Is Subsequence " << ans << std::endl;
   return 0;
 }
 

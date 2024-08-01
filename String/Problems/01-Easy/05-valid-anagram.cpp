@@ -47,7 +47,7 @@ bool bruteForce(std::string s, std::string t) {
 // * SPACE COMPLEXITY O(1)
 bool validAnagram(std::string s, std::string t) {
   std::vector<int> alphabets(26, 0);
-  for(char ch : s) {
+  for (char ch : s) {
     int idx = (int)ch - (int)'a';
     alphabets[idx]++;
   }

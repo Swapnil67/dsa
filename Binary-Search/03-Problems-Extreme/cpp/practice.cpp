@@ -264,6 +264,32 @@ int findMaxPagesAssigned(std::vector<int> books, int s) {
 
 // * ------------ Minimize Max Distance to Gas Station  ------------
 
+long double gasStationBrute(std::vector<int> gasStations, int extra) {
+  int n = gasStations.size();
+  std::vector<int> howMany(n - 1, 0);
+  for (int gS = 1; gS <= extra; gS++) {
+    int maxIdx = -1;
+    long double maxSecLen = -1;
+    for (int i = 0; i < n; i++) {
+      long double diff = gasStations[i + 1] - gasStations[i];
+      long double sectionLength = diff / (long double)(howMany[i] + 1);
+      if(sectionLength > maxSecLen) {
+        maxSecLen = sectionLength;
+        maxIdx = i;
+      }
+    }
+    howMany[maxIdx]++;
+  }
+
+  long double maxLen = -1;
+  for (int i = 0; i < n; i++) {
+    long double diff = gasStations[i + 1] - gasStations[i];
+    long double sectionLength = diff / (long double)(howMany[i] + 1); 
+    maxLen = std::max(maxLen, sectionLength);
+  }
+  return maxLen;
+}
+
 // * ------------ Median of Two Sorted Arrays  ------------
 
 int main() {
@@ -320,15 +346,14 @@ int main() {
   // std::cout << "Min Max Distance b/w cows is " << minMaxDistance << std::endl;
 
   // * problem 7 - Allocate Books
-  std::cout << "Allocate Books" << std::endl;
+  // std::cout << "Allocate Books" << std::endl;
   // int s = 2;
   // std::vector<int> books = {12, 34, 67, 90};
-  int s = 4; 
-  std::vector<int> books = {25, 46, 28, 49, 24};
-  
-  printArr(books);
-  int maxPagesAssigned = findMaxPagesAssigned(books, s);
-  std::cout << "maximum number of pages assigned to a student " << maxPagesAssigned << std::endl;
+  // int s = 4; 
+  // std::vector<int> books = {25, 46, 28, 49, 24};
+  // printArr(books);
+  // int maxPagesAssigned = findMaxPagesAssigned(books, s);
+  // std::cout << "maximum number of pages assigned to a student " << maxPagesAssigned << std::endl;
 
   // * problem 8
   // std::cout << "Painter's Partition Problem " << std::endl;
@@ -338,14 +363,14 @@ int main() {
   // int minTime = findMinTimeToPaintBoards(boards, painters);
   // std::cout << "Minimum time required to paint above boards is " << minTime << " units." << std::endl;
 
-  // * problem 9
-  // std::cout << "Minimize Max Distance to Gas Station" << std::endl;
-  // int extra = 5;
-  // std::vector<int> gasStations = {1, 13, 17, 23};
-  // long double maxDistance = gasStationBrute(gasStations, extra);
+  // * problem 9 - Minimize Max Distance to Gas Station
+  std::cout << "Minimize Max Distance to Gas Station" << std::endl;
+  int extra = 5;
+  std::vector<int> gasStations = {1, 13, 17, 23};
+  printArr(gasStations);
+  long double maxDistance = gasStationBrute(gasStations, extra);
   // long double maxDistance = gasStationBetter(gasStations, extra);
-  // printArr(gasStations);
-  // std::cout << "Maximum distance " << maxDistance << std::endl;
+  std::cout << "Maximum distance " << maxDistance << std::endl;
 
   // * Problem 10
   // std::cout << "Median of Two Sorted Arrays" << std::endl;
