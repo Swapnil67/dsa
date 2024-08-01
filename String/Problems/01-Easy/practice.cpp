@@ -8,19 +8,19 @@ bool isAlphabet(char c) {
 }
 
 void printVectorString(std::vector<std::string> arr) {
-  std::cout<<"[ ";
-  for(std::string s: arr) {
-    std::cout<<s;
-    std::cout<<", ";
+  std::cout << "[ ";
+  for (std::string s : arr) { 
+    std::cout << s;
+    std::cout << ", ";
   }
-  std::cout<<"]\n";
+  std::cout << "]\n";
 }
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * -------------- Valid Anagram --------------

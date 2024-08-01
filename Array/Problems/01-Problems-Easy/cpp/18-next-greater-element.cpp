@@ -23,10 +23,10 @@
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -37,11 +37,11 @@ std::vector<int> bruteForce(std::vector<int> a, std::vector<int> b) {
   int n1 = a.size(), n2 = b.size();
   std::vector<int> ans;
   for (int i = 0; i < n1; i++) {
-    bool greater = -1;
+    int greater = -1, j = 0;
     // * get j to such that a[i] == b[j]
-    int j = 0;
     while(a[i] != b[j]) j++;
-    for (; j < n2; j++) {
+    for (; j < n2; j++)
+    {
       if(b[j] > a[i]) {
         // std::cout << a[i] << " " << b[j] << std::endl;
         greater = b[j];
