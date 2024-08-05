@@ -61,7 +61,6 @@ std::string longestCommonPrefix(std::vector<std::string> strs) {
   return res;
 }
 
-
 // TODO Solve this problem using trie data-structure
 
 int main() {
