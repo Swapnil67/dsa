@@ -25,10 +25,10 @@
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -42,11 +42,11 @@ bool isMonotonic(std::vector<int> arr) {
   bool monotonicIncreasing = true, monotonicDecreasing = true;
   for (int i = 0; i < n - 1; i++) {
     // * Check if not monotonic increasing
-    if(arr[i] > arr[i+1]) {
+    if (arr[i] > arr[i + 1]) {
       monotonicIncreasing = false;
     }
     // * Check if not monotonic decreasing
-    if(arr[i] < arr[i+1]) {
+    if (arr[i] < arr[i + 1]) {
       monotonicDecreasing = false;
     }
 

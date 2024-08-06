@@ -45,7 +45,7 @@ int bruteForce(std::vector<std::string> words, std::string chars) {
     std::unordered_map<char, int> charMap;
     for(char c : s) {
       charMap[c]++;
-      if(charMap.find(c) == charMap.end() || charMap[c] > globalCharMap[c]) {
+      if (charMap.find(c) == charMap.end() || charMap[c] > globalCharMap[c]) {
         found = false;
         break;
       }
@@ -64,10 +64,10 @@ int bruteForce(std::vector<std::string> words, std::string chars) {
 // * N -> chars & M -> words
 // * SPACE COMPLEXITY O(1) // * For Answer
 int countCharacters(std::vector<std::string> words, std::string chars) {
-  std::vector<int> charVector(26, 0);
+  std::vector<int> baseVector(26, 0);
   for (char c : chars) {
     int idx = (int)(c) - (int)'a';
-    charVector[idx]++;
+    baseVector[idx]++;
   }
   
   int c = 0;
@@ -77,7 +77,7 @@ int countCharacters(std::vector<std::string> words, std::string chars) {
     for(char c : s) {
       int idx = (int)(c) - (int)'a';
       curVector[idx]++;
-      if(charVector[idx] == 0 || curVector[idx] > charVector[idx]) {
+      if(baseVector[idx] == 0 || curVector[idx] > baseVector[idx]) {
         found = false;
         break;
       }

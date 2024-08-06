@@ -14,6 +14,7 @@
  * Output: 1
  * 
  * https://leetcode.com/problems/pascals-triangle/description/
+ * https://leetcode.com/problems/pascals-triangle-ii/description/
  * https://www.naukri.com/code360/problems/pascal-s-triangle_1089580
  * https://www.naukri.com/code360/problems/print-pascal-s-triangle_6917910
 */

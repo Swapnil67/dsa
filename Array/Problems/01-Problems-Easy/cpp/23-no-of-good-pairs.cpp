@@ -32,6 +32,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Nested loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr) {
@@ -47,6 +48,7 @@ int bruteForce(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * Use count occurence
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 int betterApproach(std::vector<int> arr) {
@@ -74,6 +76,7 @@ int numIdenticalPairs(std::vector<int> arr) {
   // * O(N)
   for (int i = 0; i < n; i++) {
     int cur = arr[i];
+    // * Check if already the element exists in hashMap
     if(countMap.find(cur) != countMap.end()) {
       // std::cout << cur << " => " << countMap[cur] << std::endl;
       c += countMap[cur];
