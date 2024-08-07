@@ -41,6 +41,7 @@ void printPaths(std::vector<std::vector<std::string>> cities) {
   }
 }
 
+// * Check which city does not have any linked city
 std::string destCity(std::vector<std::vector<std::string>> cities) {
   int n = cities.size();
   if (n == 1)
