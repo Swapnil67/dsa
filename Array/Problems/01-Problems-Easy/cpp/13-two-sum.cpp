@@ -27,16 +27,14 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 std::vector<int> bruteForce(std::vector<int>arr, int target) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    for(int j=i+1; j<n; j++) {
-      if(i == j) continue;
-      if(arr[i] + arr[j] == target) {
-        // std::cout << "i " << i << " j " << j << " = " << arr[i] + arr[j] << std::endl;
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      if (arr[i] + arr[j] == target) {
         return { i, j }
       }
     }
   }
-  return {};
+  return {-1, -1};
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
@@ -68,12 +66,8 @@ std::vector<int> betterApproach(std::vector<int> arr, int target) {
 // * TIME COMPLEXITY O(N) + O(NlogN) [Sorting]
 // * SPACE COMPLEXITY O(1)
 bool optimalApproach(std::vector<int> arr, int target) {
-  sort(arr.begin(), arr.end());
-  std::vector<int> ans;
-
-  printArr(arr);
+  std::sort(arr.begin(), arr.end());
   int l = 0, r = arr.size() - 1;
-
   while(l <= r) {
     int sum = arr[l] + arr[r];
     if(sum == target) {
@@ -85,7 +79,6 @@ bool optimalApproach(std::vector<int> arr, int target) {
     else {
       l++;
     }
-
   }
   return false;
 }
