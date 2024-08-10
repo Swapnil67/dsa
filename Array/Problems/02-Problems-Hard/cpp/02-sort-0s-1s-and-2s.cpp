@@ -18,10 +18,10 @@
 using namespace std;
 
 void printArr(vector<int> arr) {
-  for(int i=0;i<arr.size();i++) {
-    cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  cout<<endl;
+  std::cout << std::endl;
 }
 
 void swap(int &a, int &b) {
@@ -43,7 +43,7 @@ std::vector<int> betterApproach(std::vector<int> arr) {
   int n = arr.size();
 
   // * O(N)
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if(arr[i] == 0) zeroCount++;
     else if(arr[i] == 1) oneCount++;
     else if(arr[i] == 2) twoCount++;

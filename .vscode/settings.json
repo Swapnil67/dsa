@@ -73,7 +73,11 @@
     "chrono": "c",
     "value.h": "c",
     "numeric": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "stdbool.h": "c",
+    "stb_image.h": "c",
+    "toralize.h": "c",
+    "version": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

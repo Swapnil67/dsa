@@ -1,6 +1,10 @@
 dsa-problems.json
+
 .DS_Store
 *.class
+*.vscode
+*.idea
+
 tomorrow.md
 
 random*

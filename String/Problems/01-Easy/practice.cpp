@@ -76,10 +76,10 @@ int main() {
 
   // * Problem 6 - Isomorphic Strings
   // std::string s = "egg", t = "add";
-  std::string s = "ab", t = "bb";
-  std::cout << "s = " << s << " t = " << t << std::endl;
-  bool ans = isIsomorphic(s, t);
-  std::cout << "Isomorphic strings " << ans << std::endl;
+  // std::string s = "ab", t = "bb";
+  // std::cout << "s = " << s << " t = " << t << std::endl;
+  // bool ans = isIsomorphic(s, t);
+  // std::cout << "Isomorphic strings " << ans << std::endl;
 
 
   return 0;

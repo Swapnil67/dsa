@@ -5,27 +5,21 @@
 
  * * Example 1
  * * Input  : nums = [5,6,2,7,4]
- * * Output : 3
- * * Explanation: The pivot index is 3.
- * * Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11
- * * Right sum = nums[4] + nums[5] = 5 + 6 = 11
+ * * Output: 34
+ * * Explanation: We can choose indices 1 and 3 for the first pair (6, 7) and indices 2 and 4 for the second pair (2, 4).
+ * * The product difference is (6 * 7) - (2 * 4) = 34.
 
- * * Example 2
- * * Input  : nums = [1,2,3]
- * * Output : -1
- * * Explanation: There is no index that satisfies the conditions in the problem statement.
- * 
- * * https://leetcode.com/problems/find-pivot-index/description/
+ * * https://leetcode.com/problems/maximum-product-difference-between-two-pairs/description/
 */
 
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 std::vector<int> findLargestAndSmallest(std::vector<int> arr, int n) {
@@ -55,18 +49,17 @@ std::vector<int> findLargestAndSmallest(std::vector<int> arr, int n) {
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // TODO
 
-
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Find largest & smallest and second largest & second smallest
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int maxProductDifference(std::vector<int> arr) {
   int n = arr.size();
   if(n < 4) return -1;
 
   // * Find largest & Second Largest
-  std::vector<int> nums = findLargestAndSmallest(arr, n);
-  int largest = nums[0]; 
-  int secondLargest = nums[1];
-  int smallest = nums[2];
-  int secondSmallest = nums[3];
-  return (largest * secondLargest) - (smallest * secondSmallest);
+  std::vector<int> ans = findLargestAndSmallest(arr, n);
+  return (ans[0] * ans[1]) - (ans[2] * ans[3]);
 }
 
 int main() {
