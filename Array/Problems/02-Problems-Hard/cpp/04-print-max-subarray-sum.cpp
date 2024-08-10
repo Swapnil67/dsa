@@ -21,11 +21,18 @@
 
 #include<iostream>
 
-std::vector<int> kadanesAlgorithm(std::vector<int> arr) {
+void printArr(std::vector<int> arr) {
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
+  }
+  std::cout << std::endl;
+}
+
+std::vector<int> maxSubArray(std::vector<int> arr) {
   int n = arr.size();
   int maxSum = INT_MIN, sum = 0;
   int start = 0, ansStart = -1, ansEnd = -1;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if(sum == 0) {
       start = i;
     }
@@ -37,14 +44,7 @@ std::vector<int> kadanesAlgorithm(std::vector<int> arr) {
 
     if(sum < 0) sum = 0;
   }
-  return { ansStart, ansEnd };
-}
-
-void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
-  }
-  std::cout<<std::endl;
+  return {ansStart, ansEnd};
 }
 
 int main() {
@@ -53,7 +53,7 @@ int main() {
   // * testcase 2
   std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * [3,6]
   
-  std::vector<int> ans = kadanesAlgorithm(arr);
+  std::vector<int> ans = maxSubArray(arr);
   printArr(ans);
   return 0;
 }

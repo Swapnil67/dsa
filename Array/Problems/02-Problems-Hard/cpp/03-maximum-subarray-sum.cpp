@@ -42,10 +42,10 @@ int bruteForce(std::vector<int> arr) {
 // * kadane's Algorithm
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int optimalApproach(std::vector<int>arr) {
+int maxSubArray(std::vector<int>arr) {
   int n = arr.size();
   int maxSum = INT_MIN, sum = 0;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     sum = std::max(sum + arr[i], arr[i]);
     maxSum = std::max(maxSum, sum);
   }

@@ -28,13 +28,13 @@ void printArr(std::vector<int> arr) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N) + O(N) = O(2N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> rearrangeBySign(std::vector<int> &arr) {
+void rearrangeBySign(std::vector<int> &arr) {
   std::vector<int> positiveNums;
   std::vector<int> negativeNums;
   int n = arr.size();
 
   // * Step 1:
-  // * Put the +ve & -ve nums in respective arrays;
+  // * Put the +ve & -ve nums in respective arrays
   for (int i = 0; i < n; i++) {
     if (arr[i] >= 0)
       positiveNums.push_back(arr[i]);
@@ -56,31 +56,64 @@ std::vector<int> rearrangeBySign(std::vector<int> &arr) {
 
     // * Step 4
     // * Put the remaining positive to end of array
-    int index = negLength * 2;
+    int idx = negLength * 2;
     for (int i = negLength; i < posLength; i++) {
-      arr[index] = positiveNums[i];
-      index++;
+      arr[idx] = positiveNums[i];
+      idx++;
     }
   }
   else {
     // * More -ve than +ve numbers
     // * Step 3
     // * Rearrage numbers till posLength
-    for(int i=0; i<posLength; i++) {
+    for (int i = 0; i < posLength; i++) {
       arr[2 * i] = positiveNums[i];
       arr[2 * i + 1] = negativeNums[i];
     }
 
     // * Step 4
     // * Put the remaining negative to end of array
-    int index = posLength * 2;
+    int idx = posLength * 2;
     for (int i = posLength; i < negLength; i++) {
-      arr[index] = negativeNums[i];
-      index++;
+      arr[idx] = negativeNums[i];
+      idx++;
     }
   }
+}
 
-  return arr;
+void rearrangeBySignB(std::vector<int> &arr) {
+  int n = arr.size();
+
+  // * Step 1:
+  // * Put the +ve & -ve nums in respective arrays
+  std::vector<int> posArr, negArr;
+  for (int i = 0; i < n; i++) {
+    if(arr[i] >= 0) 
+      posArr.push_back(arr[i]);
+    else 
+      negArr.push_back(arr[i]);
+  }
+
+  // * Step 2
+  // * Two pointer loop
+  int n1 = posArr.size(), n2 = negArr.size();
+  int i = 0, j = 0;
+  while (i < n1 && j < n2) {
+    arr[2 * i] = posArr[i];
+    i++;
+    arr[2 * j + 1] = negArr[j];
+    j++;
+  }
+
+  int idx = i + j;
+  if (i != n1 - 1) {
+    while(i < n1)
+      arr[idx++] = posArr[i++];
+  }
+  else {
+    while(j < n2)
+      arr[idx++] = negArr[j++];
+  }
 }
 
 int main() {

@@ -48,13 +48,14 @@ int betterApproach(std::vector<int> arr) {
   int n = arr.size();
   std::map<int, int> countMap;
   // * O(NlogN)
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     countMap[arr[i]]++;
   }
 
   // * O(N)
   for(auto it: countMap) {
-    if(it.second > (n/2)) return it.first;
+    if (it.second > (n / 2))
+      return it.first;
   }
   return -1;
 }
@@ -72,10 +73,10 @@ int majorityElement(std::vector<int> arr) {
   int ele;
 
   // * O(N)
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if(cnt == 0) {
       ele = arr[i];
-      cnt++;
+      cnt = 1;
     }
     else if(arr[i] == ele) {
       cnt++;
@@ -107,7 +108,7 @@ int main() {
 
   // int majorityEle = bruteForce(arr);
   // int majorityEle = betterApproach(arr);
-  int majorityEle = optimalApproach(arr);
+  int majorityEle = majorityElement(arr);
   std::cout<<"Majority Element "<<majorityEle<<std::endl;
   return 0;
 }

@@ -28,19 +28,20 @@ int maxCircularSubarraySum(std::vector<int> arr) {
   int globalMax = arr[0], globalMin = arr[0];
   int total = 0;
   for(int i=0; i<n; i++) {
-    curMax = std::max(curMax + arr[i], arr[i]);
-    curMin = std::min(curMin + arr[i], arr[i]);
     total += arr[i];
+    // * Max subarray sum
+    curMax = std::max(curMax + arr[i], arr[i]);
     globalMax = std::max(globalMax, curMax);
+    // * Min subarray sum
+    curMin = std::min(curMin + arr[i], arr[i]);
     globalMin = std::min(globalMin, curMin);
   }
 
-  if(globalMax < 0) {
-    // * All the elements in array is negative
+  // * All the elements in array is negative
+  if (globalMax < 0)
     return globalMax;
-  }
-  else 
-    return std::max(globalMax, (total-globalMin));
+
+  return std::max(globalMax, (total - globalMin));
 }
 
 int main() {
@@ -49,7 +50,7 @@ int main() {
   // * testcase 2
   std::vector<int> arr = { -3, -2, -3 };
   int maxSum = maxCircularSubarraySum(arr);
-  std::cout<<"Maximum circular subarray sum: "<<maxSum<<std::endl;
+  std::cout << "Maximum circular subarray sum: " << maxSum << std::endl;
   return 0;
 }
 

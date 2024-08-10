@@ -22,10 +22,10 @@
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -38,26 +38,18 @@ std::vector<int> bruteForce(std::vector<int> &arr) {
   int n = arr.size();
 
   // * O(N)
-  for(int i=0; i<n; i++) {
-    if(arr[i] >= 0) {
+  for (int i = 0; i < n; i++) {
+    if (arr[i] >= 0) 
       n_pos.push_back(arr[i]);
-    }
-    else {
+    else
       n_neg.push_back(arr[i]);
-    }
   }
 
   // * O(N/2)
-  for(int i=0; i<n/2; i++) {
-    arr[2*i] = n_pos[i];
-    arr[2*i+1] = n_neg[i];
+  for (int i = 0; i < n / 2; i++) {
+    arr[2 * i] = n_pos[i];
+    arr[2 * i + 1] = n_neg[i];
   }
-  // * OR
-  // for(int i=0; i<n/2; i++) {
-  //   arr.push_back(p_arr[i]);
-  //   arr.push_back(n_arr[i]);
-  // }
-
   return arr;
 }
 
@@ -70,7 +62,7 @@ std::vector<int> optimalApproach(std::vector<int> arr) {
   std::vector<int> ans(n);
   // * Intialize the positive & negative indexes
   int p_index = 0, n_index = 1;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if(arr[i] < 0) {
       ans[n_index] = arr[i];
       n_index += 2; // * next negative index
