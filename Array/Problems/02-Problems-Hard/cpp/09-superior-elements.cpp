@@ -18,10 +18,10 @@
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -31,16 +31,16 @@ std::vector<int> bruteForce(std::vector<int> arr) {
   int n = arr.size();
   std::vector<int> ans;
   // * O(N^2)
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int superiorEle = arr[i];
     bool isSuperior = true;
-    for(int j=i+1; j<n; j++) {
-      if(superiorEle <= arr[j]) {
+    for (int j = i + 1; j < n; j++) {
+      if (superiorEle <= arr[j]) {
         isSuperior = false;
         break;
       }
     }
-    if(isSuperior) {
+    if (isSuperior) {
       ans.push_back(superiorEle);
     }
   }
@@ -54,9 +54,8 @@ std::vector<int> bruteForce(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(N) // * For Answer
 std::vector<int> optimal(std::vector<int> arr) {
   int n = arr.size();
-  int r = n-1, maxEl = INT_MIN;
+  int r = n - 1, maxEl = INT_MIN;
   std::vector<int> ans;
-
   // * O(N)
   for (int i = r; i >= 0; i--) {
     if(arr[i] > maxEl) {

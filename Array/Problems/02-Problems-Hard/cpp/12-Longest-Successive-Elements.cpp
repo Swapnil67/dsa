@@ -16,10 +16,10 @@
 #include<unordered_set>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 bool linearSearch(std::vector<int> arr, int ele) {
@@ -36,19 +36,17 @@ bool linearSearch(std::vector<int> arr, int ele) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr) {
   int n = arr.size();
-  int longest = 0;
-
-  for (int i = 0; i < n; i++) {
-    int check = arr[i], cnt = 0;
-    for (int j = 0; j < n; j++) {
-      while (linearSearch(arr, check) == true) {
-        check = check + 1;
-        cnt++;
-      }
-      longest = std::max(longest, cnt);
+  int maxC = 0, curC = 0;
+  for (int i = 0; i < arr.size(); i++) {
+    int cur = arr[i];
+    while(linearSearch(arr, cur)) {
+      curC++;
+      cur += 1;
+      maxC = std::max(maxC, curC);
     }
+    curC = 0;
   }
-  return longest;
+  return maxC;
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
