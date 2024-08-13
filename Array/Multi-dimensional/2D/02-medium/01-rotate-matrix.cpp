@@ -20,7 +20,6 @@
 
 #include<iostream>
 
-
 // * ------------------------- Utility Methods -------------------------
 void printMatrix(std::vector<std::vector<int>> matrix) {
   int r = matrix.size(), c = matrix[0].size();
