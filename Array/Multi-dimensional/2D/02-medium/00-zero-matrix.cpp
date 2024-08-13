@@ -28,14 +28,16 @@ void printMatrix(std::vector<std::vector<int>> matrix, int r, int c) {
 }
 
 // * Mark Row -1
-void markRowForZero(int row, std::vector<std::vector<int>> &matrix, int r, int c) {
+void markRowForZero(int row, std::vector<std::vector<int>> &matrix) {
+  int c = matrix[0].size();
   for (int i = 0; i < c; i++) {
     matrix[row][i]  = -1;
   }
 }
 
 // * Mark Col -1
-void markColForZero(int col, std::vector<std::vector<int>> &matrix, int r, int c) {
+void markColForZero(int col, std::vector<std::vector<int>> &matrix) {
+  int r = matrix.size();
   for (int i = 0; i < r; i++) {
     matrix[i][col]  = -1;
   }
@@ -45,14 +47,16 @@ void markColForZero(int col, std::vector<std::vector<int>> &matrix, int r, int c
 // * Mark -1 to all which are zeros
 // * TIME COMPLEXITY O(r * c) * 0(r + c) + O(r + c)
 // * SPACE COMPLEXITY O(1)
-void bruteForce(std::vector<std::vector<int>> &matrix, int r, int c) {
+void bruteForce(std::vector<std::vector<int>> &matrix) {
+  int r = matrix.size(), c = matrix[0].size();
+
   // *  O(r * c)
   for (int i = 0; i < r; i++) {
     for (int j = 0; j < c; j++) {
       // *  O(r + c)
       if(matrix[i][j] == 0) {
-        markRowForZero(i, matrix, r, c);
-        markColForZero(j, matrix, r, c);
+        markRowForZero(i, matrix);
+        markColForZero(j, matrix);
       }
     }
   }
@@ -72,7 +76,8 @@ void bruteForce(std::vector<std::vector<int>> &matrix, int r, int c) {
 // * Create two vectors for maintaining zero rows and columns
 // * TIME COMPLEXITY O(2(r * c))
 // * SPACE COMPLEXITY O(r) + O(c)
-void betterApproach(std::vector<std::vector<int>> &matrix, int r, int c) {
+void betterApproach(std::vector<std::vector<int>> &matrix) {
+  int r = matrix.size(), c = matrix[0].size();
   std::vector<int> zeroRows(r, 0);
   std::vector<int> zeroCols(c, 0);
 
@@ -96,13 +101,14 @@ void betterApproach(std::vector<std::vector<int>> &matrix, int r, int c) {
   }
 }
 
-
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
 // ! Only Space complexity is optimized
 // * Create two vectors for maintaining zero rows and columns 
 // * TIME COMPLEXITY O(2(r * c))
 // * SPACE COMPLEXITY O(1)
-void optimalApproach(std::vector<std::vector<int>> &matrix, int r, int c) {
+void optimalApproach(std::vector<std::vector<int>> &matrix) {
+  int r = matrix.size(), c = matrix[0].size();
+
   int col0 = 1;
   for (int i = 0; i < r; i++) {
     for (int j = 0; j < c; j++) {
@@ -150,14 +156,16 @@ void optimalApproach(std::vector<std::vector<int>> &matrix, int r, int c) {
 
 int main() {
   std::vector<std::vector<int>> matrix = {{1, 1, 1, 1}, {1, 0, 0, 1}, {1, 1, 0, 1}, {1, 1, 1, 1}};
+  // std::vector<std::vector<int>> matrix = {{1, 1, 1, 1}, {1, 0, 1, 1}, {1, 1, 0, 1}, {0, 1, 1, 1}};
+
   int rows = 4, cols = 4;
   std::cout << "Input Matrix" << std::endl;
   printMatrix(matrix, rows, cols);
 
   std::cout << "\nZero Matrix" << std::endl;
-  // bruteForce(matrix, rows, cols);
-  // betterApproach(matrix, rows, cols);
-  optimalApproach(matrix, rows, cols);
+  // bruteForce(matrix);
+  // betterApproach(matrix);
+  optimalApproach(matrix);
   
   printMatrix(matrix, rows, cols);
   return 0;

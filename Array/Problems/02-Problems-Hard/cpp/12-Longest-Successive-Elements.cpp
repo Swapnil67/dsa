@@ -92,7 +92,7 @@ int findlongestConsecutive(std::vector<int> &arr) {
   for (auto it : st) {
     if (st.find(it - 1) == st.end()) {
       // * You are a first element
-      int nextEle = it+1, cnt = 1;
+      int nextEle = it + 1, cnt = 1;
       while(st.find(nextEle) != st.end()) {
         cnt++;
         nextEle += 1;
@@ -110,13 +110,13 @@ int main() {
   // * testcase 1
   // std::vector<int> arr = {102, 4, 100, 1, 101, 3, 2, 1, 1};
   // * testcase 2
-  std::vector<int> arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+  // std::vector<int> arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
   // * testcase 3
-  // std::vector<int> arr = {15, 6, 2, 1, 16, 4, 2, 29, 9, 12, 8, 5, 14, 21, 8, 12, 17, 16, 6, 26, 3}; // * o/p = 6
+  std::vector<int> arr = {15, 6, 2, 1, 16, 4, 2, 29, 9, 12, 8, 5, 14, 21, 8, 12, 17, 16, 6, 26, 3}; // * o/p = 6
   printArr(arr);
   // int longestSubsequence = bruteForce(arr);
-  // int longestSubsequence = betterApproach(arr);
-  int longestSubsequence = findlongestConsecutive(arr);
+  int longestSubsequence = betterApproach(arr);
+  // int longestSubsequence = findlongestConsecutive(arr);
   std::cout << "Longest subsequence is " << longestSubsequence << std::endl;
   return 0;
 }
