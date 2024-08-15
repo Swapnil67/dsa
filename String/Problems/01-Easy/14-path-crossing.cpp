@@ -43,8 +43,8 @@ bool isPathCrossing(string path) {
 }
 
 int main() {
-  // string path = "NES";
-  string path = "NESWW";
+  string path = "NES";
+  // string path = "NESWW";
   bool isVisited= isPathCrossing(path);
   std::cout << "Is Path Crossing " << isVisited << std::endl;
   return 0;
