@@ -122,28 +122,25 @@ std::vector<std::vector<int>> optimalApproach(std::vector<int> arr) {
   std::vector<std::vector<int>> ans;
 
   // * O(N^2)
-  for(int i=0; i<n; i++) {
-    if(i > 0 && arr[i-1] == arr[i]) continue;
-    int j = i+1, k = n-1;
-    while(j < k) {
+  for (int i = 0; i < n; i++) {
+    if (i > 0 && arr[i - 1] == arr[i])
+      continue;
+    int j = i + 1, k = n - 1;
+    while (j < k) {
       int sum = arr[i] + arr[j] + arr[k];
       if(sum == 0) {
-        ans.push_back({ arr[i], arr[j], arr[k] });
+        ans.push_back({arr[i], arr[j], arr[k]});
         j++;
         k--;
-        while(arr[j] == arr[j-1]) {
+        while (arr[j] == arr[j - 1])
           j++;
-        }
-        while(arr[k] == arr[k+1]) {
+        while (arr[k] == arr[k + 1])
           k--;
-        }
       }
-      else if(sum < 0) {
+      else if (sum < 0)
         j++;
-      }
-      else {
+      else
         k--;
-      }
     }
   }
   return ans;

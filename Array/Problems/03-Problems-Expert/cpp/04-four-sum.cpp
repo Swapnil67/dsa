@@ -46,14 +46,14 @@ void print4dVector(std::vector<std::vector<int>> arr) {
 std::vector<std::vector<int>> bruteForce(std::vector<int>arr) {
   int n = arr.size();
   std::set<std::vector<int>> vectorSet;
-  for(int i=0; i<n; i++) {
-    for(int j=i+1; j<n; j++) {
-      for(int k=j+1; k<n; k++) {
-        for(int l=k+1; l<n; l++) {
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      for (int k = j + 1; k < n; k++) {
+        for (int l = k + 1; l < n; l++) {
           int sum = arr[i] + arr[j] + arr[k] + arr[l];
           // std::cout << arr[i] << " " << arr[j] << " " << arr[k] << " " << arr[l] << std::endl;
-          if(sum == 0) {
-            std::vector<int> temp = { arr[i], arr[j], arr[k], arr[l] };
+          if (sum == 0) {
+            std::vector<int> temp = {arr[i], arr[j], arr[k], arr[l]};
             sort(temp.begin(), temp.end());
             vectorSet.insert(temp);
           }
@@ -114,7 +114,7 @@ std::vector<std::vector<int>> betterApproach(std::vector<int> arr, int target) {
 // * TIME COMPLEXITY O(N^3) 
 // * Space Complexity O(no of quads) => ans
 
-std::vector<std::vector<int>> optimalApproach(std::vector<int> arr, int target) {
+std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
   int n = arr.size();
   std::vector<std::vector<int>> ans;
 
@@ -159,7 +159,7 @@ int main() {
   // int target = 8;
   // std::vector<std::vector<int>> ans = bruteForce(arr);
   // std::vector<std::vector<int>> ans = betterApproach(arr, target);
-  std::vector<std::vector<int>> ans = optimalApproach(arr, target);
+  std::vector<std::vector<int>> ans = fourSum(arr, target);
   print4dVector(ans);
   return 0;
 }

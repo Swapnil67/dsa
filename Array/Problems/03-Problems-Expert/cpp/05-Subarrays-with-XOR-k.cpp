@@ -1,7 +1,7 @@
 /**
  * * Subarrays with XOR ‘K’
  * * Given an array ‘A’ consisting of ‘N’ integers and an integer ‘B’, find the number of subarrays of array ‘A’
- * * whose bitwise XOR( ⊕ ) of all elements is equal to ‘B’.
+ * * whose bitwise XOR(⊕) of all elements is equal to ‘B’.
  * 
  * * 0 <= a, b, c, d < ‘N’ and a, b, c, and d are distinct.
  * * nums[a] + nums[b] + nums[c] + nums[d] == target
@@ -15,15 +15,14 @@
  * * https://leetcode.com/problems/4sum/
 */
 
-
-#include<map> 
-#include<iostream> 
+#include <map>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); ++i) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: Brute/Better APPROACH -------------------------`
@@ -32,12 +31,13 @@ void printArr(std::vector<int> arr) {
 int bruteForce(std::vector<int> arr, int b) {
   int n = arr.size();
   int count = 0;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int XOR = 0;
-    for(int j=i; j<n; j++) {
+    for (int j = i; j < n; j++) {
       XOR = XOR ^ arr[j];
       // std::cout<<"XOR "<<XOR<<std::endl;
-      if(XOR == b) count++;
+      if (XOR == b)
+        count++;
     }
   }
   return count;
@@ -54,14 +54,14 @@ int optimalSolution(std::vector<int> arr, int b) {
   int xr = 0, cnt = 0;
   std::map<int, int> xrMap;
   xrMap[xr]++; // * { 0, 1 } Default
-  // * O(N) 
-  for(int i=0; i<arr.size(); i++) {
+  // * O(N)
+  for (int i = 0; i < arr.size(); i++) {
     xr = xr ^ arr[i];
     int x = xr ^ b;
     cnt += xrMap[x];
     // * O(logN)
     xrMap[xr]++;
-  } 
+  }
   return cnt;
 }
 

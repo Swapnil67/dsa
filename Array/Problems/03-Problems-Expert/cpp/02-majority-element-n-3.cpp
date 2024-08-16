@@ -63,11 +63,12 @@ std::vector<int> betterApproach(std::vector<int> arr) {
   int occurence = floor(n/3);
   std::map<int, int> eleCountMap;
   std::vector<int> ans;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     eleCountMap[arr[i]]++;
-    if(eleCountMap[arr[i]] > occurence)
+    if (eleCountMap[arr[i]] > occurence)
       ans.push_back(arr[i]);
-    if(ans.size() == 2) break;
+    if (ans.size() == 2)
+      break;
   }
   return ans;
 }
@@ -84,35 +85,38 @@ std::vector<int> optimalApproach(std::vector<int> arr) {
   int n = arr.size();
   int c1 = 0, c2 = 0;
   int ele1 = INT_MIN, ele2 = INT_MIN;
-  for(int i=0; i<n; i++) {  
-    if(c1 == 0 && arr[i] != ele2) {
+  for (int i = 0; i < n; i++) {
+    if (c1 == 0 && arr[i] != ele2) {
       c1 = 1;
       ele1 = arr[i];
     }
-    else if(c2 == 0 && arr[i] != ele1) {
+    else if (c2 == 0 && arr[i] != ele1) {
       c2 = 1;
       ele2 = arr[i];
     }
-    else if(ele1 == arr[i]) c1++;
-    else if(ele2 == arr[i]) c2++; 
+    else if (ele1 == arr[i])
+      c1++;
+    else if (ele2 == arr[i])
+      c2++;
     else {
       c1--, c2--;
     }
   }
 
-  // std::cout<<"count 1 "<<c1<<std::endl;
-  // std::cout<<"count 2 "<<c2<<std::endl;
-
   c1 = 0, c2 = 0;
   int occurence = std::floor(n/3);
-  for(int i=0; i<n; i++) {
-    if(ele1 == arr[i]) c1++;
-    if(ele2 == arr[i]) c2++;
+  for (int i = 0; i < n; i++) {
+    if (ele1 == arr[i])
+      c1++;
+    if (ele2 == arr[i])
+      c2++;
   }
   std::vector<int> ans;
 
-  if(c1 > occurence) ans.push_back(ele1);
-  if(c2 > occurence) ans.push_back(ele2);
+  if (c1 > occurence)
+    ans.push_back(ele1);
+  if (c2 > occurence)
+    ans.push_back(ele2);
 
   return ans;
 }
