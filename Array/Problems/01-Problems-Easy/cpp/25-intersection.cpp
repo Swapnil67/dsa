@@ -44,6 +44,11 @@ std::vector<int> bruteForce(std::vector<int> num1, std::vector<int> num2) {
   return ans;
 }
 
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Hashset
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 std::vector<int> betterApproach(std::vector<int> num1, std::vector<int> num2) {
   std::set<int> hashSet;
   std::vector<int> ans;
@@ -80,9 +85,9 @@ int main() {
   // std::vector<int> num1 = {1, 2, 2, 1};
   // std::vector<int> num2 = {2, 2};
 
-  std::cout << "num1 = ";
+  std::cout << "num1 = \t";
   printArr(num1);
-  std::cout << "num2 = ";
+  std::cout << "num2 = \t";
   printArr(num2);
 
   // std::vector<int> ans = bruteForce(num1, num2);
