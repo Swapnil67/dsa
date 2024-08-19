@@ -18,7 +18,7 @@
 #include<string>
 #include<iostream>
 
-bool isCharacter(char ch) {
+bool isValidChar(char ch) {
   return (
     ((int)ch >= (int)'A' && (int)ch <= (int)'Z') || 
     ((int)ch >= (int)'a' && (int)ch <= (int)'z') || 
@@ -29,17 +29,22 @@ bool isCharacter(char ch) {
 // * From start count every word length then return the last count
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::string s) {
-  int n = s.size(), cnt = 0;
-  for (int i = 0; i < n; i++) {
-    if(isCharacter(s[i])) {
-      cnt++;
+int bruteForce(std::string str) { 
+  int n = str.size();
+  int curC = 0, maxC = 0;
+  for (int i = 0; i < n; ++i) {
+    if(isValidChar(str[i])) {
+      curC++;
     }
     else {
-      cnt = 0;
+      maxC = std::max(maxC, curC);
+      curC = 1;
+      while(!isValidChar(str[i]))
+        i++;
     }
   }
-  return cnt;
+  maxC = std::max(maxC, curC);
+  return maxC;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
@@ -50,22 +55,17 @@ int bruteForce(std::string s) {
 int lengthOfLastWord(std::string s) {
   int n = s.size(), cnt = 0;
 
-  // * Step 1: Get p to the first char of last word
-  int p = n - 1;
-  for (int i = n - 1; i >= 0; i--) {
-    if(!isCharacter(s[p]))
-      p--;
-    else break;
-  }
+  // * Step 1: Get i to the first char of last word
+  int i = n-1;
+  while(!isValidChar(str[i]))
+    --i;
 
   // * Step 2: Count then length of last word
-  for (int i = p; i >= 0; i--) {
-    if(isCharacter(s[i])) {
-      // std::cout << s[i] << " ";
+  for (; i >= 0; i--) {
+    if (isValidChar(s[i]))
       cnt++;
-    } else {
+    else
       break;
-    }
   }
   return cnt;
 }

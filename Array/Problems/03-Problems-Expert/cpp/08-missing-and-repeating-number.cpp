@@ -11,18 +11,18 @@
  * * Explanation : 1 is Repeating & 5 is missing number
 
  * * https://www.naukri.com/code360/problems/missing-and-repeating-numbers_6828164
+ * * https://leetcode.com/problems/set-mismatch/description/
 */
-
 
 #include<iostream>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Approach -------------------------`

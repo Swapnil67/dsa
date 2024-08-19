@@ -1,6 +1,6 @@
 /**
  * * Valid Palindrome 2
- * * Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+ * * Given a string s, return true if the s can be palindrome after deleting atmost one character from it.
 
  * * Example 1
  * * Input : str = "aba"
@@ -18,7 +18,6 @@
 // * a-z [97-122]
 
 
-#include<stack>
 #include<string>
 #include<iostream>
 
@@ -47,11 +46,11 @@ bool validPalindromeUntil(std::string str, int l, int r) {
     while (!(isAlphanumeric(str[r])) && r > 1)
       r--; 
 
-    char lowerL = getLowerChar(str[l]);
-    char lowerR = getLowerChar(str[r]); 
-    if(lowerL != lowerR) {
+    char l_ch = getLowerChar(str[l]);
+    char r_ch = getLowerChar(str[r]);
+    if (l_ch != r_ch)
       return false;
-    }
+    
   }
   return true;
 }

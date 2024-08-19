@@ -56,27 +56,27 @@ bool isAlphanumeric(char ch) {
 // * SPACE COMPLEXITY O(N)
 bool bruteForce(std::string str) {
   std::stack<int> charStack;
-  std::string tempStrA = "";
+  std::string s = "";
   // * O(N)
   for(char ch: str) {
     if(isAlphanumeric(ch)) {
       char lowerChar = getLowerChar(ch);
-      tempStrA += lowerChar;
+      s += lowerChar;
       charStack.push(lowerChar);
     }
   }
 
-  std::string tempStrB = "";
+  std::string t = "";
   // * O(N)
   while(!charStack.empty()) {
-    tempStrB += (char)charStack.top(); 
+    t += (char)charStack.top(); 
     charStack.pop();
   }
 
-  // std::cout << tempStrA << std::endl;
-  // std::cout << tempStrB << std::endl;
-  if(tempStrA == tempStrB) return true;
-  return false;
+  // std::cout << s << std::endl;
+  // std::cout << t << std::endl;
+
+  return s == t;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
@@ -90,11 +90,11 @@ bool findIsValidPalindrome(std::string str) {
     while (!(isAlphanumeric(str[r])) && r > 1)
       r--;
 
-    char lowerL = getLowerChar(str[l]);
-    char upperR = getLowerChar(str[r]);
-    if(lowerL != upperR) {
+    char l_ch = getLowerChar(str[l]);
+    char r_ch = getLowerChar(str[r]);
+    if (l_ch != r_ch)
       return false;
-    }
+    
     l++;
     r--;
   }
