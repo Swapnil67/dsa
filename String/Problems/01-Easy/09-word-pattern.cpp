@@ -56,11 +56,6 @@ bool wordPattern(std::string pattern, std::string s) {
       return false;
     }
 
-    // * More words than characters [testcase 3]
-    if(i < s.size()) {
-      return false;
-    }
-
     // * If word is already mapped to some other character
     if(exists) {
       if(word != patternCharToWordMap[c]) {
@@ -76,13 +71,18 @@ bool wordPattern(std::string pattern, std::string s) {
     patternWordToCharMap[word] = c;
   }
 
+  // * More words than characters [testcase 3]
+  if(i < s.size()) {
+    return false;
+  }
+
   return true;
 }
 
 int main() {
   // * testcase 1
-  // std::string pattern = "abba";
-  // std::string s = "dog cat cat dog";
+  std::string pattern = "abba";
+  std::string s = "dog cat cat dog";
   // std::string s = "dog dog dog dog";
   // std::string s = "dog cat cat fish";
 
@@ -95,8 +95,8 @@ int main() {
   // std::string s = "aa aa aa aa";
 
   // * testcase 4
-  std::string pattern = "he";
-  std::string s = "cat";
+  // std::string pattern = "he";
+  // std::string s = "cat";
 
   bool ans = wordPattern(pattern, s);
   std::cout << "Pattern: " << pattern << std::endl;

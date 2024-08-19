@@ -20,35 +20,29 @@
 #include<string>
 #include<iostream>
 
-void printVectorString(std::vector<std::string> arr) {
-  std::cout<<"[ ";
-  for(std::string s: arr) {
-    std::cout<<s;
-    std::cout<<", ";
+void printVectorString(std::vector<std::string> strs) {
+  int n = strs.size();
+  std::cout << "[ "; 
+  for (std::string s : strs) {
+    std::cout << s << ", ";
   }
-  std::cout<<"]\n";
+  std::cout << "]" << std::endl;
 }
 
 std::string isValidEmail(std::string email) {
-  std::string localName = "";
-  int i = 0;
-
-  while(email[i] != '@') {
-    if(email[i] == '.') {
-      i++;
+  int domain_idx = email.find('@');
+  std::string hostname = "";
+  for (int i = 0; i < domain_idx; ++i) {
+    if(email[i] == '.') 
       continue;
-    }
-    else if(email[i] == '+') {
+    else if(email[i] == '+')
       break;
-    }
-    localName += email[i];
-    i++;
+    hostname += email[i];
   }
 
-  int p = email.find('@');
-  std::string dname = email.substr(p);
-  std::string newEmail = localName + dname;
-  return newEmail;
+  std::string domain = email.substr(domain_idx);
+
+  return hostname + domain;
 }
 
 // * Find Valid Email

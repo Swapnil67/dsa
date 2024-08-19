@@ -32,7 +32,6 @@ bool isSubsequence(std::string s, std::string t) {
     }
     j++; // * j is going to increment every time
   }
-
   // std::cout << "i " << i << " j " << j << std::endl;
   return i == n1;
 }

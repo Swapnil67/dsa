@@ -27,7 +27,6 @@ void printVectorString(std::vector<std::string> words) {
   std::cout << std::endl;
 }
 
-
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Use Hashed Map
 // * TIME COMPLEXITY O(N) + O(N x M)

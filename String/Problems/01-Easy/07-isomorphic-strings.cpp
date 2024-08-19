@@ -32,18 +32,22 @@
 */
 // * SPACE COMPLEXITY O(s + t)
 bool isIsomorphic(std::string s, std::string t) {
-  std::unordered_map<char, char> mapST;
-  std::unordered_map<char, char> mapTS;
-  for (int i = 0; i < s.length(); i++) {
-    char c1 = s[i], c2 = t[i];
-    if (mapST.find(c1) != mapST.end() && mapST[c1] != c2) {
+  std::unordered_map<char, char> st_map;
+  std::unordered_map<char, char> ts_map;
+
+  int n1 = s.size();
+  for (int i = 0; i < n1; ++i) {
+    char ch1 = s[i], ch2 = t[i];
+    if(st_map.find(ch1) != st_map.end() && st_map[ch1] != ch2) {
       return false;
     }
-    if (mapTS.find(c2) != mapTS.end() && mapTS[c2] != c1) {
+    
+    if(ts_map.find(ch2) != ts_map.end() && ts_map[ch2] != ch1) {
       return false;
     }
-    mapTS[c2] = c1;
-    mapST[c1] = c2;
+
+    st_map[ch1] = ch2;
+    ts_map[ch2] = ch1;
   }
   return true;
 }

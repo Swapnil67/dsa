@@ -20,12 +20,12 @@
 #include<iostream>
 
 void printVectorString(std::vector<std::string> arr) {
-  std::cout<<"[ ";
-  for(std::string s: arr) {
-    std::cout<<s;
-    std::cout<<", ";
+  std::cout << "[ ";
+  for (std::string s : arr) {
+    std::cout << s;
+    std::cout << ", ";
   }
-  std::cout<<"]\n";
+  std::cout << "]\n";
 }
 
 // * TIME COMPLEXITY O(M x N)

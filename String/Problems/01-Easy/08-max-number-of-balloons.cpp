@@ -2,7 +2,7 @@
  * * Maximum Number of Balloons
  * * Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
 
- * * You can use each character in text at most once. Return the maximum number of instances that can be formed.
+ * * You can use each character in text atmost once. Return the maximum number of instances that can be formed.
 
  * * Example 1
  * * Input  : text = "nlaebolko"
@@ -89,27 +89,23 @@ int betterApproach(std::string str, std::string findStr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int maxNumberOfBalloons(std::string str, std::string findStr) {
-  // * Create the balloon char count map
-  std::unordered_map<char, int> balloonCharMap;
-   for(char c : findStr) {
-    balloonCharMap[c]++;
+  // * Create find string char count map
+  std::unordered_map<char, int> findStrMap;
+   for(char ch : findStr) {
+    findStrMap[ch]++;
   } 
   
   // * Create Input string char count map
   std::unordered_map<char, int> strMap;
-  for(char c : str) {
-    if (c == 'b' || c == 'a' || c == 'l' || c == 'o' || c == 'n') {
-      strMap[c]++;
+  for (char ch : str) {
+    if (findStrMap.find(ch) != findStrMap.end()) {
+      strMap[ch]++;
     }
-  }
-
-  if(balloonCharMap.size() != strMap.size()) {
-    return 0;
   }
 
   int cnt = INT_MAX;
   for(char ch: findStr) {
-    int ans = strMap[ch] / balloonCharMap[ch];
+    int ans = strMap[ch] / findStrMap[ch];
     // std::cout << ch << " -> " << ans << std::endl;
     if(ans < cnt) {
       cnt = ans;
@@ -120,8 +116,6 @@ int maxNumberOfBalloons(std::string str, std::string findStr) {
 }
 
 int main() {
-  std::string findStr = "balloon";
-
   // * testcase 1
   // std::string str = "nlaebolko";
 
@@ -131,6 +125,7 @@ int main() {
   // * testcase 3
   // std::string str = "leetcode";
   
+  std::string findStr = "balloon";
   // int ans = bruteForce(str, findStr);
   // int ans = betterApproach(str, findStr);
   int ans = maxNumberOfBalloons(str, findStr);
