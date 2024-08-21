@@ -36,7 +36,7 @@ std::vector<int> approach1(std::vector<int> nums, int k) {
   // * O(N)
   // * Create a hashmap of number of occurence of each ele
   std::map<int, int> occurenceMap;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     occurenceMap[nums[i]]++;
   }
 
@@ -68,42 +68,50 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
   // * O(N)
   // * Create a hashmap of number of occurence of each ele
   std::map<int, int> occurenceMap;
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; ++i) {
     occurenceMap[nums[i]]++;
   }
+  // * Map
+  // * { 1 : 3, 2 : 2, 3 : 1 }
 
   // * O(N) -> Worst Case
   // * Create a frequency vector from above hashmap
   std::vector<std::vector<int>> freqVector(n);
-  for(auto it: occurenceMap) {
+  for (auto it : occurenceMap) {
     freqVector[it.second].push_back(it.first);
   }
+  // * frequency vector
+  // * [[3],[2],[1],[],[],[]]
 
   // * O(N) -> Worst Case
   // * Loop through the frequency vector
   std::vector<int> ans;
-  for (int i = n; i >= 0; i--) {
-    // std::cout << freqVector[i].size() << std::endl;
+  for (int i = n; i >= 0; --i) {
     if(freqVector[i].size()) {
       std::vector<int> temp(freqVector[i].begin(), freqVector[i].end());
-      for(int i=0; i<temp.size(); i++) {
+      for (int i = 0; i < temp.size(); ++i) {
         ans.push_back(temp[i]);
         k--;
-        if(k == 0) break;
+        if (k == 0)
+          break;
       }
     }
-    if(k == 0) break;
+    if (k == 0)
+      break;
   }
 
   return ans;
-
 }
 
 int main() {
-  std::vector<int> nums = {1, 1, 1, 2, 2, 3};
-  int k = 2;
+  // std::vector<int> nums = {1, 1, 1, 2, 2, 3};
+  // int k = 2;
   // std::vector<int> nums = {1, 2, 2, 3, 3};
   // int k = 2;
+  std::vector<int> nums = {1};
+  int k = 1;
+
+  printArr(nums);
 
   // std::vector<int> ans = approach1(nums, k);
   std::vector<int> ans = approach2(nums, k);
@@ -114,4 +122,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 11-top-k-frequent-ele.cpp -o 11-top-k-frequent-ele && ./11-top-k-frequent-ele
+// * g++ --std=c++17 11-top-k-frequent-ele.cpp -o output && ./output

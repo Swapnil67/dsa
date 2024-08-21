@@ -2,12 +2,12 @@
  * * Number of Students Unable to Eat Lunch
 
  * * Example 1
- * * Input  : nums1 = [1,2,2,1], nums2 = [2,2]
- * * Output : [2]
+ * * Input  : students = [1,1,0,0], sandwiches = [0,1,0,1]
+ * * Output : 0
  * 
  * * Example 2
- * * Input  : nums1 = [4,9,5], nums2 = [9,4,9,8,4]
- * * Output : [9,4]
+ * * Input  : students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1]
+ * * Output : 3
  * * Explanation: [4,9] is also accepted.
 
  * * https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/description/
@@ -24,7 +24,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
-// * HashMap
+// * Count students o
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int countStudents(std::vector<int> students, std::vector<int> sandwiches) {
@@ -53,13 +53,13 @@ int countStudents(std::vector<int> students, std::vector<int> sandwiches) {
 }
 
 int main() {
-  std::vector<int> students = {1, 1, 1, 0, 0, 1};
-  std::vector<int> sandwiches = {1, 0, 0, 0, 1, 1};
+  std::vector<int> students = {1, 1, 0, 0, 0, 0, 0, 0};
+  std::vector<int> sandwiches = {1, 1, 1, 1, 0, 0, 0, 0};
   std::cout << "students = \t";
   printArr(students);
   std::cout << "sandwiches = \t";
   printArr(sandwiches);
-  int ans = bruteForce(students, sandwiches);
+  int ans = countStudents(students, sandwiches);
   std::cout << "Number of Students Unable to Eat Lunch " << ans << std::endl;
   return 0;
 }

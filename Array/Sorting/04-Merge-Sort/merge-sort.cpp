@@ -30,13 +30,11 @@ void mergeArrays(vector<int> &arr, int low, int mid, int high) {
   }
 
   while(left <= mid) {
-    temp.push_back(arr[left]);
-    left++;
+    temp.push_back(arr[left++]);
   }
 
   while(right <= high) {
-    temp.push_back(arr[right]);
-    right++;
+    temp.push_back(arr[right++]);
   }
 
   for(int i = low; i <= high; i++) {
@@ -50,11 +48,12 @@ void mergeArrays(vector<int> &arr, int low, int mid, int high) {
 void mergeSort(vector<int> &arr, int low, int high) {
 
   // * O(logN)
-  if(low == high) return;
+  if (low == high)
+    return;
   int mid = (low + high) / 2;
-  cout<<"low "<<low<<" high "<<high<<" mid "<<mid<<endl;
+  // cout << "low " << low << " high " << high << " mid " << mid << endl;
   mergeSort(arr, low, mid);
-  mergeSort(arr, mid+1, high);
+  mergeSort(arr, mid + 1, high);
 
   // * O(N)
   mergeArrays(arr, low, mid, high);
