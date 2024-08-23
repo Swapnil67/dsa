@@ -51,7 +51,8 @@ int findAllSubarraysWithGivenSum(std::vector<int> arr, int k) {
   for (int i = 0; i < n; i++) {
     sum += arr[i];
     int rem = sum - k;
-    if(prefixSum.find(rem) != prefixSum.end()) {
+    if(prefixSum.count(rem)) {
+      // std::cout << rem << " " << hash[rem] << std::endl;
       cnt += prefixSum[rem];
     }
     prefixSum[sum]++;
