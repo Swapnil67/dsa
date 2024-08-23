@@ -21,10 +21,10 @@
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 int getMinBetweenGivenIndexes(std::vector<int> arr, int i, int j) {
@@ -83,4 +83,4 @@ int main() {
 }
 
 // * run the code
-// * g++ --std=c++17 07-best-time-to-buy-sell-stock.cpp -o output && ./output
+// * g++ --std=c++17 07-best-time-to-buy-sell-stock-1.cpp -o output && ./output
