@@ -59,7 +59,7 @@ int main() {
 
   std::cout << s << std::endl;
   int ans = countPalindromicSubsequence(s);
-  std::cout << "There wiil be " << ans << " unique 3 length palindromic subsequences." << std::endl;
+  std::cout << "There will be " << ans << " unique 3 length palindromic subsequences." << std::endl;
   return 0;
 }
 
