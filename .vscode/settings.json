@@ -77,7 +77,8 @@
     "stdbool.h": "c",
     "stb_image.h": "c",
     "toralize.h": "c",
-    "version": "cpp"
+    "version": "cpp",
+    "bit": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
