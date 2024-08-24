@@ -44,7 +44,6 @@ long long gridGame(std::vector<std::vector<int>> &grid) {
     // std::cout << top << " " << bottom << std::endl;
     long long secondBot = std::max(top, bottom);
     res = std::min(res, secondBot);
-
     bottom += grid[1][i];
   }
   return res;
