@@ -17,7 +17,7 @@ void mergeArrays(vector<int> &arr, int low, int mid, int high) {
   // * [low...mid] 1st Array
   // * [mid+1...high] 2nd Array
 
-  int left = low, right = mid+1;
+  int left = low, right = mid + 1;
   while(left <= mid && right <= high) {
     if(arr[left] <= arr[right]) {
       temp.push_back(arr[left]);
@@ -37,8 +37,8 @@ void mergeArrays(vector<int> &arr, int low, int mid, int high) {
     temp.push_back(arr[right++]);
   }
 
-  for(int i = low; i <= high; i++) {
-    arr[i] = temp[i-low];
+  for(int i = low; i <= high; ++i) {
+    arr[i] = temp[i - low];
   } 
 
 }

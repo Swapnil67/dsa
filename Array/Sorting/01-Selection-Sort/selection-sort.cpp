@@ -12,10 +12,10 @@ void swap(int &a, int &b) {
 // * Time Complexity O(N^2)
 // * Space Complexity O(1)
 void selectionSort(int arr[], int size) {
-  for(int i=0; i<size-1; i++) {
+  for (int i = 0; i < size - 1; i++) {
     int minIndex = i;
-    for(int j=i+1; j<size; j++) {
-      if(arr[minIndex] > arr[j]) {
+    for (int j = i + 1; j < size; j++) {
+      if (arr[minIndex] > arr[j]) {
         minIndex = j;
       }
     }
@@ -24,10 +24,10 @@ void selectionSort(int arr[], int size) {
 }
 
 void print(int arr[], int size) {
-  for(int i=0; i<size; i++) {
-    cout<<arr[i]<<" ";
+  for (int i = 0; i < size; i++) {
+    cout << arr[i] << " ";
   }
-  cout<<endl;
+  cout << endl;
 }
 
 int main() {
