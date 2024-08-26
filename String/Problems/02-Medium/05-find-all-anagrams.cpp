@@ -57,6 +57,7 @@ bool map_compare(Map const &lhs, Map const &rhs) {
          std::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * find all possible anagrams using nested loop
 // * TIME COMPLEXITY O(s * p)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> bruteForce(std::string s, std::string p) {
@@ -79,6 +80,7 @@ std::vector<int> bruteForce(std::string s, std::string p) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * Sliding Window
 // * TIME COMPLEXITY O(s)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> findAnagrams(std::string s, std::string p) {

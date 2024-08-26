@@ -17,7 +17,6 @@
  * https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
 */
 
-
 #include<map>
 #include<iostream>
 
@@ -27,7 +26,7 @@ bool map_compare(Map const &lhs, Map const &rhs) {
          std::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 
-// * Nested Loop
+// * Find all possible substrings using Nested Loop
 // * TIME COMPLEXITY O(n1 * n2)
 // * SPACE COMPLEXITY O(N)
 int bruteForce(std::string haystack, std::string needle) {
@@ -45,7 +44,7 @@ int bruteForce(std::string haystack, std::string needle) {
       if (i + j < n1)
         t += haystack[j + i];
     }
-    std::cout << t << std::endl;
+    // std::cout << t << std::endl;
     if(t == needle)
       return i;
   }
@@ -143,3 +142,32 @@ int main() {
   std::cout << ans << std::endl;
   return 0;
 }
+
+/*
+* "AAASDBDAD"     "AASD"
+* LPS = [0, 1, 0, 0]
+* 
+* i                       j
+* "A A A S D B D A D"     "A A S D"   i == j
+* 
+*    i                       j
+* "A A A S D B D A D"     "A A S D"   i == j
+* 
+*      i                       j
+* "A A A S D B D A D"     "A A S D"   i != j
+* 
+*      i                     j
+* "A A A S D B D A D"     "A A S D"   i == j
+* 
+*        i                     j
+* "A A A S D B D A D"     "A A S D"   i == j
+* 
+*          i                     j
+* "A A A S D B D A D"     "A A S D"   i == j
+* 
+*            i                      j
+* "A A A S D B D A D"     "A A S D"   j == n2
+*  0 1 2 3 4 5 6 7 8
+* 
+* *
+*/

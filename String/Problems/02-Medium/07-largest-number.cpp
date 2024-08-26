@@ -87,10 +87,14 @@ std::string bruteForce(std::vector<int> nums) {
   }
 
   std::string ans = "";
-  for (std::string s : strVec) {
+  for (std::string s : strVec)
     ans += s;
-  }
 
+  if (ans[0] == '0')
+    ans = "0";
+  
+  return ans;
+  
   return std::to_string(std::stoi(ans));
 }
 
