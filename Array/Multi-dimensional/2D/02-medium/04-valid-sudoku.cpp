@@ -32,8 +32,8 @@ bool isValidBoard(std::vector<std::vector<char>> board) {
     for (int j = 0; j < c; ++j) {
       if(board[i][j] == '.')
         continue;
-      
-      std::pair<int, int> square({i/3,j/3});
+      // * location of smaller matrix within board
+      std::pair<int, int> square({i / 3, j / 3});
       if (
           (rowMap.find(i) != rowMap.end()) && (rowMap[i].find(board[i][j]) != rowMap[i].end()) ||
           (colMap.find(j) != colMap.end()) && (colMap[j].find(board[i][j]) != colMap[j].end()) ||
@@ -55,25 +55,26 @@ bool isValidSudoku(std::vector<std::vector<char>>& board) {
     bool row[cnt][cnt] = {false};
     bool col[cnt][cnt] = {false};
     bool sub[cnt][cnt] = {false};
-    
-    for(int r = 0; r < cnt; ++r){
-        for(int c = 0; c < cnt; ++c){
-            if(board[r][c] == '.')
-                continue; // if not number pass
-            
-            int idx = board[r][c] - '0' - 1; //char to num idx
-            // std::cout << idx << std::endl;
-            int area = (r/3) * 3 + (c/3);
-            
-            //if number already exists
-            if(row[r][idx] || col[c][idx] || sub[area][idx]){
-                return false;
-            }
-            
-            row[r][idx] = true;
-            col[c][idx] = true;
-            sub[area][idx] = true;
+
+    for (int r = 0; r < cnt; ++r) {
+      for (int c = 0; c < cnt; ++c) {
+        if (board[r][c] == '.')
+          continue; // if not number pass
+
+        int idx = board[r][c] - '0' - 1; // char to num idx
+        // std::cout << idx << std::endl;
+        int area = (r / 3) * 3 + (c / 3);
+
+        // if number already exists
+        if (row[r][idx] || col[c][idx] || sub[area][idx])
+        {
+          return false;
         }
+
+        row[r][idx] = true;
+        col[c][idx] = true;
+        sub[area][idx] = true;
+      }
     }
     return true;
 }

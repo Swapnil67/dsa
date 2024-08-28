@@ -22,6 +22,9 @@
 #include<set>
 #include<iostream>
 
+// ! Challenge
+// TODO Solve this using bit manipulation
+
 void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
   std::cout << "[ "; 
