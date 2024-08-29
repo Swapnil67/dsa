@@ -29,10 +29,8 @@ void printMatrix(std::vector<std::vector<int>> matrix) {
 // * SPACE COMPLEXITY O(1)
 long long gridGame(std::vector<std::vector<int>> &grid) {
   int c = grid[0].size();
-  std::vector<int> row1Prefix = grid[0];   
-  std::vector<int> row2Prefix = grid[1];
 
-  // * calculate prefix sum
+  // * calculate prefix sum for top
   long long top = grid[0][0], bottom = 0;
   for (int i = 1; i < c; ++i) {
     top += grid[0][i];
