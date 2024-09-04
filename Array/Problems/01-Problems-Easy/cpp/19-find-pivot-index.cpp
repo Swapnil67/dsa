@@ -25,6 +25,7 @@
 */
 
 #include<iostream>
+#include<numeric>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -65,7 +66,7 @@ int findPivotIndex(std::vector<int> nums) {
   int sum = 0, pivotIdx = -1;
 
   // * Step 1: Get the total sum of array [O(N)]
-  int sum = std::accumulate(arr.begin(), arr.end(), 0);
+  int sum = accumulate(nums.begin(), nums.end(), 0);
 
   // * Step 2: Compare curSum with remSum [O(N)] 
   int leftSum = 0;
