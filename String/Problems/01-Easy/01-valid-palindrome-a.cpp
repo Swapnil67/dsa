@@ -38,9 +38,9 @@
 // * Returns the lowercase character [A-Z]
 char getLowerChar(char ch) {
   // return ((int)ch - 65) + 97; // * OR
-  if((int)ch >= (int)'A' && (int)ch <= (int)'Z') {
-    return ((int)ch - (int)'A') + (int)'a';
-  } 
+  if (ch >= 'A' && ch <= 'Z') {
+    return (ch - 'A') + 'a';
+  }
   return ch;
 }
 
@@ -85,13 +85,27 @@ bool bruteForce(std::string str) {
 bool findIsValidPalindrome(std::string str) {
   int l = 0, r = str.size() - 1;
   while(l < r) {
-    while (!(isAlphanumeric(str[l])) && l < r)
+    while (!(isAlphanumeric(str[l])) && l < r) {
       l++;
-    while (!(isAlphanumeric(str[r])) && r > 1)
+      std::cout << "1" << std::endl;
+    }
+
+    while (!(isAlphanumeric(str[r])) && l < r){
       r--;
+      std::cout << "2" << std::endl;
+    }
 
     char l_ch = getLowerChar(str[l]);
     char r_ch = getLowerChar(str[r]);
+
+
+    // * debug
+    // std::cout << "-------------------------------" << std::endl;
+    // std::cout << l << " & " << r << std::endl;
+    // std::cout << str[l] << " " << str[r] << std::endl;
+    // std::cout << l_ch << " " << r_ch << std::endl;
+    // std::cout << isAlphanumeric(str[l]) << " " << isAlphanumeric(str[r]) << std::endl;
+
     if (l_ch != r_ch)
       return false;
     
@@ -105,7 +119,12 @@ int main() {
   // * testcase 1
   // std::string str = "A man, a plan, a canal: Panama";
   // * testcase 2
-  std::string str = "race a car";
+  // std::string str = "race a car";
+  // * testcase 3
+  // std::string str = "s.";
+  // * testcase 4
+  std::string str = ".,";
+
   std::cout << str << std::endl;
   // bool isValid = bruteForce(str);
   bool isValid = findIsValidPalindrome(str);
@@ -114,4 +133,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-valid-palindrome-a.cpp -o 01-valid-palindrome-a && ./01-valid-palindrome-a
+// * g++ --std=c++17 01-valid-palindrome-a.cpp -o output && ./output

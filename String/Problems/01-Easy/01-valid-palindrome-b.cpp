@@ -23,34 +23,10 @@
 
 // * ------------------------- Utility -------------------------`
 
-// * Returns the lowercase character [A-Z]
-char getLowerChar(char ch) {
-  // return ((int)ch - 65) + 97; // * OR
-  if((int)ch >= (int)'A' && (int)ch <= (int)'Z') {
-    return ((int)ch - (int)'A') + (int)'a';
-  } 
-  return ch;
-}
-
-bool isAlphanumeric(char ch) {
-  return (
-    ((int)ch >= (int)'A' && (int)ch <= (int)'Z') || 
-    ((int)ch >= (int)'a' && (int)ch <= (int)'z') || 
-    ((int)ch >= 0 && (int)ch <= 9));
-}
-
 bool validPalindromeUntil(std::string str, int l, int r) {
   while(l < r) {
-    while (!(isAlphanumeric(str[l])) && l < r)
-      l++;
-    while (!(isAlphanumeric(str[r])) && r > 1)
-      r--; 
-
-    char l_ch = getLowerChar(str[l]);
-    char r_ch = getLowerChar(str[r]);
-    if (l_ch != r_ch)
+    if (str[l++] != str[r--])
       return false;
-    
   }
   return true;
 }
@@ -62,29 +38,18 @@ bool findIsValidPalindrome(std::string str) {
   int l = 0, r = str.size()-1;
   // * O(N)
   while(l < r) {
-    while (!(isAlphanumeric(str[l])) && l < r)
-      l++;
-    while (!(isAlphanumeric(str[r])) && r > 1)
-      r--;
-
-    char lowerL = getLowerChar(str[l]);
-    char lowerR = getLowerChar(str[r]);
-
-    // * O(N)
-    if(lowerL != lowerR) {
-      return validPalindromeUntil(str, l + 1, r) || validPalindromeUntil(str, l, r - 1);
+    if (str[l++] != str[r--]) {
+      return validPalindromeUntil(str, l - 1, r) || validPalindromeUntil(str, l, r + 1);
     }
-    l++;
-    r--;
   }
   return true;
 }
 
 int main() {
   // * testcase 1
-  std::string str = "abca";
+  // std::string str = "abca";
   // * testcase 2
-  // std::string str = "abc";
+  std::string str = "abc";
   std::cout << str << std::endl;
   bool isValid = findIsValidPalindrome(str);
   std::cout << "Is Valid Palindrome " << isValid << std::endl;
@@ -92,4 +57,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-valid-palindrome-b.cpp -o 01-valid-palindrome-b && ./01-valid-palindrome-b
+// * g++ --std=c++17 01-valid-palindrome-b.cpp -o output && ./output
