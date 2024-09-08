@@ -69,6 +69,7 @@ std::vector<int> betterApproach(std::vector<int> arr) {
   std::vector<int> prefixArr;
   std::vector<int> postFixArr;
 
+  // * create a prefix array
   int pre = 1;
   for (int i = 0; i < n; ++i) {
     pre *= arr[i];
@@ -76,6 +77,7 @@ std::vector<int> betterApproach(std::vector<int> arr) {
   }
   // printArr(prefixArr);
 
+  // * create a postfix array
   int post = 1;
   for (int i = n - 1; i >= 0; --i) {
     post *= arr[i];
@@ -88,7 +90,7 @@ std::vector<int> betterApproach(std::vector<int> arr) {
   std::vector<int> ans;
   for (int i = 0; i < n; ++i) {
     pre = 1, post = 1;
-    if(i > 0) {
+    if (i > 0) {
       pre = prefixArr[i - 1];
     }
     if (i < n - 1) {
