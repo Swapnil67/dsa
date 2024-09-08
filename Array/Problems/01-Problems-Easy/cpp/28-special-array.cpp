@@ -1,3 +1,4 @@
+#include<iostream>
 
 bool checkXGreater(int x, std::vector<int> nums) {
   int c = 0;
@@ -9,7 +10,7 @@ bool checkXGreater(int x, std::vector<int> nums) {
   return c == x;
 }
 
-int specialArray(vector<int> &nums) {
+int specialArray(std::vector<int> &nums) {
   int c = 0;
   int n = nums.size();
   for (int i = 0; i <= n; ++i) {
