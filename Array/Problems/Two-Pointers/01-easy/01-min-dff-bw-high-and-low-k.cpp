@@ -38,7 +38,6 @@ int minimumDifference(std::vector<int> arr, int k) {
     l += 1;
     r += 1;
   }
-
   return res;
 }
 
