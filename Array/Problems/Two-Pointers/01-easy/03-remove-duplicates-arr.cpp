@@ -72,4 +72,4 @@ int main() {
 
 
 // * Run the code
-// * g++ --std=c++17 04-remove-duplicates-arr.cpp -o 04-remove-duplicates-arr && ./04-remove-duplicates-arr
+// * g++ --std=c++17 04-remove-duplicates-arr.cpp -o output && ./output
