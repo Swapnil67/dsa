@@ -12,16 +12,17 @@
  * * Output : [1 2 3 4 5]
 
  * * https://www.naukri.com/code360/problems/remove-duplicates-from-sorted-array_1102307
+ * * https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
 */
 
 #include <set>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < arr.size(); i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -57,7 +58,7 @@ int optimalApproach(std::vector<int> arr) {
       i++;
     }
   }
-  return i+1;
+  return i + 1;
 }
 
 int main() {

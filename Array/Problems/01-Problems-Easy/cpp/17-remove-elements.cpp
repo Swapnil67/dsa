@@ -73,8 +73,8 @@ int removeElement(std::vector<int> &arr, int val) {
 
 int main() {
   // * testcase 1
-  // int val = 2;
-  // std::vector<int> arr = {0, 1, 2, 2, 3, 0, 4, 2};
+  int val = 2;
+  std::vector<int> arr = {0, 1, 2, 2, 3, 0, 4, 2};
   // * testcase 2
   // int val = 2;
   // std::vector<int> arr = {3, 2, 2, 3};

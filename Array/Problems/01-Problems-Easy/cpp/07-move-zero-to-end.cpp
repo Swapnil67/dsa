@@ -87,20 +87,21 @@ void optimal(std::vector<int> &arr) {
   int n = arr.size();
 
   // * Place j at first 0 elements
-  int j = -1; 
-  for(int i=0; i<n; i++) {
-    if(arr[i] == 0) {
+  int j = -1;
+  for (int i = 0; i < n; i++) {
+    if (arr[i] == 0) {
       j = i;
       break;
     }
   }
 
   // * No 0 found in array
-  if(j == -1) return;
+  if (j == -1)
+    return;
 
   // * Now loop from j+1 and replace non-zero elements with zero elements
-  for(int i=j+1; i<n; i++) {
-    if(arr[i] != 0) {
+  for (int i = j + 1; i < n; i++) {
+    if (arr[i] != 0) {
       swap(arr[j], arr[i]);
       j++;
     }
