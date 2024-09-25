@@ -30,9 +30,9 @@ bool checkPalindrome(std::string str) {
   int n = str.size();
   int l = 0, r = n - 1;
   while (l < r) {
-    if (str[l++] != str[r--]) {
+    if (str[l++] != str[r--])
       return false;
-    }
+    
   }
   return true;
 }
