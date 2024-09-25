@@ -21,7 +21,24 @@
 */
 
 #include<iostream>
+#include<unordered_set>
 
+// * Using Hashset Data structure
+int partitionString2(std::string s) {
+  int n = s.size();
+  int c = 1;
+  std::unordered_set<char> sub_chars;
+  for (int i = 0; i < n; ++i) {
+    if(sub_chars.count(s[i])) {
+      sub_chars = {};
+      c += 1;
+    }
+    sub_chars.insert(s[i]);
+  }
+  return c;
+}
+
+// * Using BitSet Data structure
 int partitionString(std::string s) {
   int n = s.size();
   int sub_strings_cnt = 1;
