@@ -6,7 +6,7 @@
  * Return the maximum amount of water a container can store.
 
  * Example 1
- * Input  :  height = [1,8,6,2,5,4,8,3,7]
+ * Input  : height = [1,8,6,2,5,4,8,3,7]
  * Output : 49
  * 
 
