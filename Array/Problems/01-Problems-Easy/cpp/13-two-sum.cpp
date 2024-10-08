@@ -52,7 +52,7 @@ std::vector<int> betterApproach(std::vector<int> arr, int target) {
     if (eleMap.find(rem) != eleMap.end()) {
       // * Found the sum 
       // std::cout<<"i "<<eleMap[rem]<<", j "<<i<<" = "<<arr[i] + eleMap[rem]<<std::endl;
-      return {hash[rem], i};
+      return {eleMap[rem], i};
     }
     eleMap[arr[i]] = i;
   }
