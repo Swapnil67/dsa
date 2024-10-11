@@ -13,6 +13,7 @@
  * * Output : 6
 
  * * https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/
+ * * https://www.naukri.com/code360/problems/count-the-number-of-subsequences-having-product-not-more-than-p_1214647
 */
 
 #include<iostream>

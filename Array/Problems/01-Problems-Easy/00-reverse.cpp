@@ -27,7 +27,7 @@ void reverse(vector<int> &arr) {
 }
 
 int main() {
-  vector<int> arr = { 1,2,3,4 };
+  vector<int> arr = {1, 2, 3, 4};
   cout<<"Before Reversing"<<endl;
   print(arr);
   reverse(arr);

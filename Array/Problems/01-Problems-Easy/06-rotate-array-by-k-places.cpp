@@ -15,12 +15,14 @@
  * * Output : [4, 5, 1, 2, 3]
 
  * * https://www.naukri.com/code360/problems/rotate-array_1230543
+ * * https://leetcode.com/problems/rotate-array/
 */
 
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++)
+  {
     std::cout << arr[i] << " ";
   }
   std::cout << std::endl;
@@ -37,32 +39,29 @@ void swap(int &a, int &b) {
 // * SPACE COMPLEXITY O(d)
 void bruteForce(std::vector<int> &arr, int k) {
   int n = arr.size();
-  int d = k % n; // * Number of rotations
+  k = k % n; // * Number of rotations
 
   // * 360 rotations results in same array
-  if(d == 0) return;
+  if (k > n || k == 0)
+    return;
 
-  // * Make a temp array of k elements
-  // * O(d)
-  std::vector<int> temp;
-  for (int i = 0; i <= d; i++) {
-    // std::cout << i << " -> " << arr[i] << std::endl;
-    temp.push_back(arr[i]);
+  // * Make a temp array of elements after n - k to n
+  // * O(n - k)
+  std::vector<int> temp(k);
+  for (int i = n - k; i < n; i++) {
+    temp[i - (n - k)] = arr[i];
   }
 
-  // * From d index shift the elements
-  // * O(n - d)
-  for (int i = k; i < n; i++) {
-    arr[i - k] = arr[i];
+  // * Now shift first k elements to right by k steps
+  // * O(n - k - 1)
+  for (int i = n - k - 1; i >= 0; --i) {
+    arr[i + k] = arr[i];
   }
 
   // * Now put the temp elements back to array
-  // * O(d)
-  for (int i = n - d; i < n; i++) {
-    // std::cout << i << " -> " << arr[i] << std::endl;
-    // * base = n - d
-    arr[i] = temp[i - (n - d)];
-    // j++;
+  // * O(k)
+  for (int i = 0; i < k; ++i) {
+    arr[i] = temp[i];
   }
 }
 
@@ -78,35 +77,36 @@ void reverse(std::vector<int> &arr, int low, int high) {
 
 void optimal(std::vector<int> &arr, int k) {
   int n = arr.size(); // * size of array
-  int d = k % n;      // * Number of rotations
-
-  // * Reverse from 0 to d
-  reverse(arr, 0, d - 1);
-
-  // * Reverse from d+1 to n
-  reverse(arr, d, n - 1);
+  k = k % n;      // * Number of rotations
 
   // * Reverse the complete arr
   reverse(arr, 0, n - 1);
+
+  // * Reverse from 0 to k
+  reverse(arr, 0, k - 1);
+
+  // * Reverse from k to n
+  reverse(arr, k, n - 1);
+
 }
 
 int main() {
   // * testcase 1
-  int k = 4;
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  // int k = 4;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  // int k = 1;
-  // std::vector<int> arr = {7, 1, 2, 3, 4, 5, 6};
+  int k = 3;
+  std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7};
   std::cout<<"Before Rotation"<<std::endl;
   printArr(arr);
 
-  // bruteForce(arr, k);
-  optimal(arr, k);
+  bruteForce(arr, k);
+  // optimal(arr, k);
   std::cout<<"After Rotation"<<std::endl;
   printArr(arr);
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 06-rotate-array-by-k-places.cpp -o 06-rotate-array-by-k-places && ./06-rotate-array-by-k-places
+// * g++ --std=c++17 06-rotate-array-by-k-places.cpp -o output && ./output
