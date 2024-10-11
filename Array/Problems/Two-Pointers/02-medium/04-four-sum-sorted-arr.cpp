@@ -16,18 +16,33 @@
  * * https://leetcode.com/problems/4sum/
 */
 
+
 #include<set>
 #include<iostream>
 
-void print4dVector(std::vector<std::vector<int>> arr) {
+// * ------------------------- UTILITY FUNCTIONS -------------------------`
+
+void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    for(int j=0; j<arr[i].size(); j++) {
-      std::cout<<arr[i][j]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
+  }
+  std::cout << std::endl;
+}
+
+// * Time Complexity O(N^2)
+void printMatrix(std::vector<std::vector<int>>&mat) {
+  int n = mat.size();
+  if(n == 0) return;
+  int m = mat[0].size();
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      std::cout << mat[i][j] << " ";
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
   }
 }
+
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * ****** Intuition ******
@@ -92,9 +107,9 @@ std::vector<std::vector<int>> betterApproach(std::vector<int> arr, int target) {
       std::set<int> st;
       for (int k = j + 1; k < n; k++) {
         int l = target - (arr[i] + arr[j] + arr[k]);
-        if(st.find(l) != st.end()) {
+        if (st.count(l)) {
           // * found a quadraplet
-          std::vector<int> temp = { arr[i], arr[j], arr[k], l };
+          std::vector<int> temp = {arr[i], arr[j], arr[k], l};
           sort(temp.begin(), temp.end());
           vectorSet.insert(temp);
         }
@@ -150,19 +165,22 @@ std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
   return ans;
 }
 
-
-
 int main() {
-  std::vector<int> arr = {1, 0, -1, 0, -2, 2};
+  // * testcase 1
   int target = 0;
-  // std::vector<int> arr = {2, 2, 2, 2, 2};
+  // * testcase 2
+  std::vector<int> arr = {1, 0, -1, 0, -2, 2};
   // int target = 8;
+  // std::vector<int> arr = {2, 2, 2, 2, 2};
+
   // std::vector<std::vector<int>> ans = bruteForce(arr);
-  // std::vector<std::vector<int>> ans = betterApproach(arr, target);
+  // std::vector<std::vector<int>> ans = betterApproach(arr);
   std::vector<std::vector<int>> ans = fourSum(arr, target);
-  print4dVector(ans);
+
+  printMatrix(ans);
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 04-four-sum.cpp -o 04-four-sum && ./04-four-sum
+// * g++ --std=c++17 04-four-sum-sorted-arr.cpp -o output && ./output
+

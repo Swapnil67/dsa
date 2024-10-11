@@ -23,21 +23,22 @@
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * Time Complexity O(N^2)
 void printMatrix(std::vector<std::vector<int>>&mat) {
   int n = mat.size();
+  if(n == 0) return;
   int m = mat[0].size();
-  for(int i=0; i<n; i++) {
-    for(int j=0; j<m; j++) {
-      std::cout<<mat[i][j]<<" ";
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      std::cout << mat[i][j] << " ";
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
   }
 }
 
@@ -159,5 +160,6 @@ int main() {
   return 0;
 }
 
+
 // * Run the code
-// * g++ --std=c++17 03-three-sum.cpp -o 03-three-sum && ./03-three-sum
+// * g++ --std=c++17 03-three-sum-sorted-arr.cpp -o output && ./output
