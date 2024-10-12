@@ -13,47 +13,44 @@
  * Output : "Zoro Roronoa" 
 
  * https://www.naukri.com/code360/problems/reverse-words_696444
+ * https://leetcode.com/problems/reverse-words-in-a-string/ 
 */
 
 #include<iostream>
 
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-std::string reverseWords(std::string s) {
+std::string reverseWords(std::string &s) {
   int n = s.size();
-  int c = n - 1;
-  std::string ans = "";
-  for (int i = n - 1; i >= 0; --i) {
-    if(isspace(s[i])) {
-      std::string t = s.substr(i + 1, c - i);
-      // std::cout << i + 1 << " to " << c << " => " << s.substr(i + 1, c - i) << std::endl;
-      c = i - 1;
-      ans += t;
-      ans += " ";
-      while(isspace(s[i--])) {
-        i -= 1;
-      }
-    }
-
-  }
+  // * Reverse complete string
+  reverse(s.begin(), s.end());
 
   int i = 0;
-  std::string t = "";
-  while(i <= c) {
-    t += s[i];
+  // * Declare Two pointers
+  int l = 0, r = 0;
+  while(i < n) {
+    while(i < n && s[i] != ' ') {
+      s[r++] = s[i++];
+    }
+
+    // * Reverse l to r
+    if(l < r) {
+      std::reverse(s.begin() + l, s.begin() + r);
+      s[r] = ' '; // * Add a space
+      r++;        // * Incr the r ptr
+      l = r;      // * Bring l to r
+    }
     i++;
   }
-  ans += t;
-  return ans;
+
+  return s.substr(0, r - 1);
 }
 
 int main() {
   // std::string s = "I am zoro";
-  std::string s = "Roronoa      Zoro     ";
+  std::string s = "   Roronoa      Zoro     ";
   std::cout << s << std::endl;
   std::string ans = reverseWords(s);
   std::cout << ans << std::endl;
 }
 
 // * Run the code
-// * g++ --std=c++17 07-reverse-words-ii.cpp -o output && ./output
+// * g++ --std=c++17 01-reverse-words.cpp -o output && ./output

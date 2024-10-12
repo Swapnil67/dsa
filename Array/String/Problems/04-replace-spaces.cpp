@@ -30,17 +30,11 @@ string replaceSpace(string str) {
 // * SPACE COMPLEXITY = O(1)
 // * Replaces the string without using extra space
 void replaceSpaceInPlace(string &str) {
-  for(int i=0; i<str[i]!='\0'; i++) {
+  for (int i = 0; i < str[i] != '\0'; i++) {
     char ch = str[i];
     if(ch == ' ') {
       str.replace(i, 1, "@40");
-      // str.insert(i, "@");
-      // i++;
-      // str.insert(i, "4");
-      // i++;
-      // str.insert(i, "0");
-      // i++;
-    } 
+    }
   }
 }
 
