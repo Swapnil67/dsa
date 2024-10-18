@@ -33,6 +33,7 @@ std::string reverseWords(std::string &s) {
 
     // * Reverse l to r
     if(l < r) {
+      // std::cout << l << " " << r << std::endl;
       std::reverse(s.begin() + l, s.begin() + r);
       s[r] = ' '; // * Add a space
       r++;        // * Incr the r ptr
@@ -54,3 +55,21 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++17 01-reverse-words.cpp -o output && ./output
+
+
+// * Dry Run
+
+
+// * Roro zoro
+// *         i 
+// * o r o z   o r o R
+// * l
+// *         r
+
+// * reverse from l to r
+
+// *           i 
+// * z o r o   o r o R
+// *           l
+// *           r
+
