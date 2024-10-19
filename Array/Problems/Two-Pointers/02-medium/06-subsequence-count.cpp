@@ -30,7 +30,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------`
-// * Tow Pointer
+// * Two Pointer
 // * TIME COMPLEXITY O(NlogN)
 // * SPACE COMPLEXITY O(1)
 int numSubseq(std::vector<int> arr, int target) {
