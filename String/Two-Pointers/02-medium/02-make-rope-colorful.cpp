@@ -26,14 +26,14 @@ void printArr(std::vector<int> arr) {
 
 int minCost(std::string colors, std::vector<int> neededTime) {
   int n = colors.size();
-  int time = 0;
+  int time = 0, prev = 0;
   for (int i = 0; i < n; ++i) {
-    if (i < n - 1 && colors[i] == colors[i + 1]) {
-      int min_time = std::min(neededTime[i], neededTime[i+1]);
-      // neededTime.erase()
-      time += min_time;
-      std::cout << min_time << " " << time << std::endl;
+    int cur_time = neededTime[i];
+    if (i > 0 && colors[i] != colors[i - 1]) {
+      prev = 0;
     }
+    time = time + std::min(prev, neededTime[i]);
+    prev = std::max(prev, cur_time);
   }
   return time;
 }
@@ -58,4 +58,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 02-make-str-colorful.cpp -o output && ./output
+// * g++ --std=c++17 02-make-rope-colorful.cpp -o output && ./output
