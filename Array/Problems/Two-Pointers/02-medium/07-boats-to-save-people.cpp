@@ -60,7 +60,7 @@ int numRescueBoats(std::vector<int>& people, int limit) {
   int n = people.size();
   int boats = 0;
   int l = 0, r = n - 1;
-  while(l <= r) {
+  while (l <= r) {
     // * at most two people are allowed in boat
     if((people[l] + people[r]) <= limit) {
       l++, r--;

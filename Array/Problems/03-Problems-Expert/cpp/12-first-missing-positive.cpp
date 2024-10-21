@@ -21,9 +21,10 @@
  * https://www.naukri.com/code360/problems/first-missing-positive_699946
 */
 
-
 #include<set>
 #include<iostream>
+
+// * ------------------------- UTILITY FUNCTIONS -------------------------`
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -61,7 +62,7 @@ int bruteForce(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
-// * HashMap
+// * HashSet
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int betterApproach(std::vector<int> arr) {
@@ -90,11 +91,11 @@ int firstMissingPositive(std::vector<int> arr) {
   for (int i = 0; i < n; ++i) {
     int ele = arr[i]; // * 4
 
-    // * check if ele is in bound 
+    // * check if ele is +ve number
     if(ele >= 1 && ele <= n) {
       int chair = ele - 1; // * 3
 
-      // * ele is at correct position
+      // * check if ele is at its correct position
       if (arr[chair] != ele) {
         // * swap
         swap(arr[chair], arr[i]);
@@ -104,12 +105,10 @@ int firstMissingPositive(std::vector<int> arr) {
   }
 
   // printArr(arr);
-
   for (int i = 1; i <= n; ++i) {
     if (i != arr[i - 1])
       return i;
   }
-
   return n + 1;
 }
 
