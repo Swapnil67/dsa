@@ -32,15 +32,13 @@ int minimumLength(std::string s) {
     if(s[i] != s[j]) {
       return j - i + 1;
     }
-    else {
+    i++;
+    j--;
+    while (i < j && s[i] == s[i - 1]) {
       i++;
+    }
+    while (j >= i && s[j] == s[j + 1]) {
       j--;
-      while (i < j && s[i] == s[i - 1]) {
-        i++;
-      }
-      while (j >= i && s[j] == s[j + 1]) {
-        j--;
-      }
     }
   }
   return j - i + 1;
