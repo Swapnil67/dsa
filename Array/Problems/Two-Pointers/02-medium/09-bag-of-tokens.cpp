@@ -38,7 +38,6 @@ void printArr(std::vector<int> arr) {
 }
 
 int bagOfTokensScore(std::vector<int> tokens, int power) {
-
   // * sort the tokens
   std::sort(tokens.begin(), tokens.end()); 
   int n = tokens.size();
