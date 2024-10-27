@@ -51,7 +51,7 @@ int myApproach(std::vector<int>& people, int limit) {
 
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------`
-// * Two Pointer
+// * Take at most two people on boat
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int numRescueBoats(std::vector<int>& people, int limit) {

@@ -34,10 +34,10 @@ int bruteForce(std::vector<int> height) {
   for (int i = 0; i < n; ++i)  {
     for (int j = i + 1; j < n; ++j) {
       int amount = ((j - i) * std::min(height[i], height[j]));
-      std::cout << amount << " ";
+      // std::cout << amount << " ";
       max_water = std::max(amount, max_water);
     }
-    std::cout << std::endl;
+    // std::cout << std::endl;
   }
   return max_water;
 }
@@ -52,24 +52,23 @@ int maxArea(std::vector<int> height) {
   int max_area = INT_MIN;
   while(j > i) {
     int area = (j - i) * std::min(height[i], height[j]);
-    if(height[i] > height[j]) {
+    if (height[i] > height[j])
       j--;
-    }
-    else {
+    else
       i++;
-    }
     max_area = std::max(max_area, area);
   }
   return max_area;
 }
 
 int main() {
-  std::vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+  // std::vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
   // std::vector<int> nums = {1, 1};
+  std::vector<int> nums = {3, 1, 2, 3};
   printArr(nums);
   // int ans = bruteForce(nums);
   int ans = maxArea(nums);
-  std::cout << ans << std::endl;
+  std::cout << "maximum amount of water a container can store : " << ans << std::endl;
   return 0;
 }
 

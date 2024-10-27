@@ -91,21 +91,21 @@ std::vector<std::vector<int>> bruteForce(std::vector<int> arr) {
 */
 std::vector<std::vector<int>> betterApproach(std::vector<int> arr) {
   int n = arr.size();
-  std::set<std::vector<int>> tripletSet;
+  std::set<std::vector<int>> triplet_set;
   for (int i = 0; i < n; i++) {
     std::set<int> st;
     for (int j = i + 1; j < n; j++) {
       int k = -(arr[i] + arr[j]);
       if(st.find(k) != st.end()) {
         // * found a triplet
-        std::vector<int> temp = { arr[i], arr[j], k };
+        std::vector<int> temp = {arr[i], arr[j], k};
         sort(temp.begin(), temp.end());
-        tripletSet.insert(temp);
+        triplet_set.insert(temp);
       }
       st.insert(arr[j]);
     }
   }
-  std::vector<std::vector<int>> ans(tripletSet.begin(), tripletSet.end());
+  std::vector<std::vector<int>> ans(triplet_set.begin(), triplet_set.end());
   return ans;
 }
 

@@ -30,21 +30,27 @@ int bruteForce(std::vector<int> &arr) {
   int n = arr.size(), c = 0;
   std::unordered_map<int, int> countMap;
   for (int i = 0; i < n; ++i) {
-      int val = arr[i];
-      if (countMap.count(val) && countMap[val] >= 2) {
-          // * ignore element
-          continue;
-      } else {
-          arr[c] = val;
-          c++;
-          countMap[val]++;
-      }
+    int val = arr[i];
+    if (countMap.count(val) && countMap[val] >= 2) {
+      // * ignore element
+      continue;
+    }
+    else {
+      arr[c] = val;
+      c++;
+      countMap[val]++;
+    }
   }
+  // * For debugging
+  // for(auto it: cmap) {
+  //   std::cout << it.first << " " << it.second << std::endl;
+  // }
   return c;
 }
 
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * count the duplicates & loop over duplicates
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int removeDuplicates(std::vector<int> &arr) {

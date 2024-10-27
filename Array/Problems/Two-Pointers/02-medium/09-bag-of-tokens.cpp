@@ -49,19 +49,23 @@ int bagOfTokensScore(std::vector<int> tokens, int power) {
 
   while(i <= j) {
     std::cout << power << std::endl;
+    // * Increase the score by reducing power
     if(power >= tokens[i]) {
       power -= tokens[i];
       score += 1;
       i++;
       max_score = std::max(max_score, score);
     }
-    else if (score >= 1) {
-      power += tokens[j];
-      j--;
-      score -= 1;
-    }
     else {
-      return max_score;
+      if (score >= 1) {
+        // * Increase the power by reducing score
+        power += tokens[j];
+        j--;
+        score -= 1;
+      }
+      else {
+        return max_score;
+      }
     }
   }
   return max_score;
@@ -73,7 +77,7 @@ int main() {
   int power = 150;
   std::vector<int> tokens = {200, 100};
   std::cout << "Power " << power << std::endl;
-  std::cout<<"Tokens ";
+  std::cout << "Tokens ";
   printArr(tokens);
   int ans = bagOfTokensScore(tokens, power);
   std::cout << "Max Score " << ans << std::endl;

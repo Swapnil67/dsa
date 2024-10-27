@@ -54,6 +54,7 @@ int kthGrammar(int n, int k) {
     }
     else {
       l = mid + 1;
+      // * Since the right part changes therefore we take compliment
       cur = 1 - cur;
     }
   }

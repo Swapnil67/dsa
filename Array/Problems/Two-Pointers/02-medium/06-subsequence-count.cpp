@@ -2,7 +2,7 @@
  * * Number of Subsequences That Satisfy the Given Sum Condition
  * * You are given an array of integers nums and an integer target.
  * * Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element 
- * * on it is less or equal to target. Since the answer may be too large, return it modulo 109 + 7.
+ * * on it is less or equal to target. Since the answer may be too large, return it modulo 10^9 + 7.
 
  * * Example 1
  * * Input  : nums = [3,5,6,7], target = 9
@@ -50,12 +50,14 @@ int numSubseq(std::vector<int> arr, int target) {
   for (int i = 1; i < n; ++i) {
     power[i] = (power[i - 1] * 2) % M;
   }
+  // printArr(power);
 
   while (l <= r) {
     long long sum = arr[l] + arr[r];
     if(sum <= target) {
       int diff = r - l;
-      ans = (ans % M + power[diff]) % M;
+      // std::cout << diff << std::endl;
+      ans = ((ans % M) + (power[diff])) % M;
       l++;
     }
     else {
@@ -65,18 +67,16 @@ int numSubseq(std::vector<int> arr, int target) {
   return ans;
 }
 
-
-
 int main() {
   // * testcase 1
-  int target = 9;
-  std::vector<int> arr = {3, 5, 6, 7};
+  // int target = 9;
+  // std::vector<int> arr = {3, 5, 6, 7};
   // * testcase 2
   // int target = 12;
   // std::vector<int> arr = {2, 3, 3, 4, 6, 7};
   // * testcase 3
-  // int target = 22;
-  // std::vector<int> arr = {14, 4, 6, 6, 20, 8, 5, 6, 8, 12, 6, 10, 14, 9, 17, 16, 9, 7, 14, 11, 14, 15, 13, 11, 10, 18, 13, 17, 17, 14, 17, 7, 9, 5, 10, 13, 8, 5, 18, 20, 7, 5, 5, 15, 19, 14};
+  int target = 22;
+  std::vector<int> arr = {14, 4, 6, 6, 20, 8, 5, 6, 8, 12, 6, 10, 14, 9, 17, 16, 9, 7, 14, 11, 14, 15, 13, 11, 10, 18, 13, 17, 17, 14, 17, 7, 9, 5, 10, 13, 8, 5, 18, 20, 7, 5, 5, 15, 19, 14};
 
   std::cout << "Input Array" << std::endl;
   printArr(arr);
