@@ -27,9 +27,9 @@
 int bruteForce(std::vector<int> arr) {
   int n = arr.size();
   int maxSum = INT_MIN;
-  for(int i=0; i<n; i++) {
-    int sum=arr[i];
-    for(int j=i+1; j<n; j++) {
+  for (int i = 0; i < n; i++) {
+    int sum = arr[i];
+    for (int j = i + 1; j < n; j++) {
       sum += arr[j];
       maxSum = std::max(maxSum, sum);
     }
@@ -68,7 +68,7 @@ int main() {
   std::vector<int> arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4}; // * 6
 
   // int maxSum = bruteForce(arr);
-  int maxSum = optimalApproach(arr);
+  int maxSum = maxSubArray(arr);
   std::cout<<"Maximum subarray sum: "<<maxSum<<std::endl;
   return 0;
 }

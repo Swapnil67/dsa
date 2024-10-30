@@ -32,6 +32,7 @@ int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
   int ans = 0;
   for (int i = 0; i < n; ++i) {
     int sum = 0, c = 0;
+    // * Loop only i to i + 3 places [our window]
     for (int j = i; (j < i + k) && (i + k <= n); ++j) {
       sum += arr[j];
       c++;
