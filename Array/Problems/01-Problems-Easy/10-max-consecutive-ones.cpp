@@ -27,25 +27,24 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int maxConsecutiveOnes(std::vector<int> arr) {
-  int n = arr.size(), c = 0, maxOnes = 0;
+  int n = arr.size(), c = 0, max_ones = 0;
   for (int i = 0; i < n; i++) {
     if(arr[i] == 1) {
       c++;
-      maxOnes = std::max(c, maxOnes);
+      max_ones = std::max(c, max_ones);
     } else {
       c = 0;
     }
   }
-  return maxOnes;
+  return max_ones;
 }
 
 int main() {
   std::vector<int> arr = {1, 1, 0, 1, 1, 1};
   // std::vector<int> arr = {1, 0, 1, 1, 0, 1};
-  int maxOnes = bruteForce(arr);
-  // int missingNumber = betterApproach(arr);
-  // int missingNumber = optimal(arr);
-  std::cout << "Max Consecutive Ones: " << maxOnes << std::endl;
+  // int max_ones = bruteForce(arr);
+  int max_ones = maxConsecutiveOnes(arr);
+  std::cout << "Max Consecutive Ones: " << max_ones << std::endl;
   return 0;
 }
 
