@@ -9,7 +9,7 @@
  * * Explanation: [1,1,1,0,0,'1',1,1,1,1,'1']
  * * Quoted numbers were flipped from 0 to 1. The longest subarray is underlined.
  * 
- * * Example 1
+ * * Example 2
  * * Input  : nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3
  * * Output : 10
  * * Explanation: [0,0,1,1,'1','1',1,1,1,'1',1,1,0,0,0,1,1,1,1]
