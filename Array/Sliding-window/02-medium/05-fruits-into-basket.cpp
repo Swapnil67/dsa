@@ -94,6 +94,11 @@ int betterApproach(std::vector<int> fruits) {
 }
 
 
+// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * keep frequency map for fruits
+// * Only collect fruits if the frequency map size is less than k
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int totalFruit(std::vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;

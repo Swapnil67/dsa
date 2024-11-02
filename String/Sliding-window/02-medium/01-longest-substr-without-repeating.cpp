@@ -39,7 +39,7 @@ int bruteForce(std::string s) {
     // std::cout << max_len << " ";
     std::vector<int> frequency(256);
     for (int j = i; j < n; ++j) {
-      if(frequency[s[j]] == 1) {
+      if (frequency[s[j]] == 1) {
         break;
       }
       max_len = std::max(max_len, j - i + 1);
