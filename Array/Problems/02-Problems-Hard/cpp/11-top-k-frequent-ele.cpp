@@ -44,7 +44,7 @@ std::vector<int> approach1(std::vector<int> nums, int k) {
   // * Push to priority queue 
   std::priority_queue<std::pair<int,int>> pq;
   for(auto it: occurenceMap) {
-    pq.push({ it.second, it.first });
+    pq.push({it.second, it.first});
   }
 
   // * O(k)
