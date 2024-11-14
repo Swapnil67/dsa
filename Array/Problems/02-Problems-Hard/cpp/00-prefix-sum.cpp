@@ -26,7 +26,7 @@ int findPrefixSum(std::vector<int> arr, int l, int r) {
 
   int prefixLeft = 0;
   if(l > 0) {
-    prefixLeft = prefixSumArr[l-1];
+    prefixLeft = prefixSumArr[l - 1];
   }
   
   // std::cout<<"prefixRight "<<prefixRight<<std::endl;
@@ -35,8 +35,10 @@ int findPrefixSum(std::vector<int> arr, int l, int r) {
 }
 
 int main() {
+  // * testcase 1
   // std::vector<int> arr = {-2, -1, 3, -3, 4};
   // int l = 1, r = 3;
+  // * testcase 2
   std::vector<int> arr = {-2, 0, 3, -5, 2, -1};
   int l = 2, r = 5;
 

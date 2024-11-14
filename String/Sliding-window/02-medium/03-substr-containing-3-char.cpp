@@ -1,5 +1,6 @@
 // TODO
 #include<iostream>
+#include<bits/stdc++.h>
 
 int bruteForce(std::string s) {
   int n = s.size();

@@ -15,6 +15,8 @@
  * * https://leetcode.com/problems/permutation-in-string/description/
 */
 #include<iostream>
+#include<vector>
+#include<bits/stdc++.h>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // TODO

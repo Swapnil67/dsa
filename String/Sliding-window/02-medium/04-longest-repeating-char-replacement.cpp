@@ -17,6 +17,7 @@
 */
 
 #include<iostream>
+#include<bits/stdc++.h>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
