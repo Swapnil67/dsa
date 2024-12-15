@@ -18,18 +18,20 @@
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <climits>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+    printf("%d ", arr[i]);
   }
-  std::cout << std::endl;
+  printf("\n");
 }
 
-int getMinBetweenGivenIndexes(std::vector<int> arr, int i, int j) {
+int getMinBetweenGivenIndexes(std::vector<int> arr, int buy_max) {
   int min = INT_MAX;
-  for (int i = 0; i <= j; ++i) {
+  for (int i = 0; i <= buy_max; ++i) {
     min = std::min(arr[i], min);
   }
   return min;
@@ -41,31 +43,32 @@ int getMinBetweenGivenIndexes(std::vector<int> arr, int i, int j) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> prices) {
   int n = prices.size();
-  int maxProfit = 0;
+  int max_profit = 0;
   for (int i = n - 1; i >= 0; --i) {
     int sell = prices[i];
-    int buy = getMinBetweenGivenIndexes(prices, 0, i - 1);
-    // std::cout << buy << " - " << sell << " = " << sell - buy << std::endl;
-    maxProfit = std::max(maxProfit, sell - buy);
+    int buy = getMinBetweenGivenIndexes(prices, i - 1);
+    max_profit = std::max(max_profit, sell - buy);
   }
-  return maxProfit;
+  return max_profit;
 }
 
-// * ------------------------- APPROACH 3: Optimal FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> prices) {
   int n = prices.size();
 
-  int mini = prices[0], maxProfit = 0;
+  int mini = prices[0], max_profit = 0;
   for (int i = 1; i < n; ++i) {
+    // * Find the profit selling on current day
     int profit = prices[i] - mini;
-    // std::cout << prices[i] << " - " << mini << " " << profit << std::endl;
-    maxProfit = std::max(maxProfit, profit);
+    // * Find the max profit
+    max_profit = std::max(max_profit, profit);
+    // * Update the buying day
     mini = std::min(mini, prices[i]);
   }
 
-  return maxProfit;
+  return max_profit;
 }
 
 int main() {
@@ -77,10 +80,10 @@ int main() {
   std::cout << "Stock Prices" << std::endl;
   printArr(prices);
   // int maxProfit = bruteForce(prices);
-  int maxProfit = optimalApproach(prices);
-  std::cout << "Max Profit from buy & sell is " << maxProfit << std::endl;
+  int max_profit = optimalApproach(prices);
+  printf("Max Profit from buy & sell is: %d\n", max_profit);
   return 0;
 }
 
 // * run the code
-// * g++ --std=c++17 07-best-time-to-buy-sell-stock-1.cpp -o output && ./output
+// * $CXX --std=c++20 07-best-time-to-buy-sell-stock-1.cpp -o output && ./output
