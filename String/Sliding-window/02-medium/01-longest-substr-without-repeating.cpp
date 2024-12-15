@@ -17,6 +17,7 @@
 */
 
 #include<map>
+#include<vector>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -27,7 +28,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
@@ -36,7 +36,7 @@ int bruteForce(std::string s) {
   int n = s.size();
   int max_len = 0;
   for (int i = 0; i < n; ++i) {
-    // std::cout << max_len << " ";
+    // * All ASCII characters [0-255]
     std::vector<int> frequency(256);
     for (int j = i; j < n; ++j) {
       if (frequency[s[j]] == 1) {
@@ -56,22 +56,23 @@ int bruteForce(std::string s) {
 // * SPACE COMPLEXITY O(256)
 int lengthOfLongestSubstring(std::string s) {
   int n = s.size();
-  std::map<char, int> char_index_map;
+  std::map<char, int> hash;
   int i = 0, j = 0, max_len = 0;
   while(j < n) {
     // * check if cur char is already seen
-    if(char_index_map.count(s[j])) {
+    if(hash.count(s[j])) {
       // * checks if the char is found b/w i & j
-      if (char_index_map[s[j]] >= i) {
-        i = char_index_map[s[j]] + 1;
+      // * This is becoz to prevent 'i' assigning a previous index than current 'i'
+      if (hash[s[j]] >= i) {
+        i = hash[s[j]] + 1;
       }
     }
 
     // * update the length of substring
-    max_len = std::max(max_len, (j - i));
+    max_len = std::max(j - i + 1, max_len);
 
     // * update the index of char in map
-    char_index_map[s[j]] = j;
+    hash[s[j]] = j;
 
     j++;
   }
@@ -80,9 +81,9 @@ int lengthOfLongestSubstring(std::string s) {
 }
 
 int main() {
-  std::string s = "abcabcbb";
+  // std::string s = "abcabcbb";
   // std::string s = "abba";
-  // std::string s = "tmmzuxt";
+  std::string s = "tmmzuxt";
   std::cout << "Input String: " << s << std::endl;
 
   // int ans = bruteForce(s);
@@ -93,4 +94,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-longest-substr-without-repeating.cpp -o output && ./output
+// * $CXX --std=c++20 01-longest-substr-without-repeating.cpp -o output && ./output
