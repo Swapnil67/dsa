@@ -16,6 +16,7 @@
 */
 
 #include <map>
+#include <vector>
 #include <iostream>
 #include <unordered_set>
 
@@ -47,6 +48,31 @@ int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
   return ans;
 }
 
+// * Sliding Window Approach 1
+int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
+  int n = arr.size();
+  int ans = 0, i = 0, j = 0;
+  long long sum = 0;
+  while(j < n) {
+    // * check the window execeeds
+    if(j - i + 1 > k) {
+      sum -= arr[i];
+      i++;
+    }
+
+    sum += arr[j];
+    if (j - i + 1 == k) {
+      int avg = sum / k;
+      if(avg >= threshold)
+        ans++;
+    }
+    j++;
+  }
+  return ans;
+}
+
+// * Sliding Window Approach 2
+// * For threshold average the sum of subarray must be >= (k * threshold)
 int numOfSubarrays(std::vector<int> &arr, int &k, int &threshold) {
   int n = arr.size(); 
   int sum = 0, ans = 0;
@@ -54,12 +80,16 @@ int numOfSubarrays(std::vector<int> &arr, int &k, int &threshold) {
 
   for (int i = 0; i < n; ++i) {
     sum += arr[i];
+
     // * add elements till 'k'
     if (i < k - 1)
       continue;
+
     // * Remove the start ele
     if (i > k - 1)
       sum -= arr[i - k];
+
+    // * Avg >= threshold
     if(sum >= target)
       ans++;
     std::cout << sum << std::endl;
@@ -85,4 +115,4 @@ int main() {
 }
 
 // * run the code
-// * g++ --std=c++17 01-sub-array-of-size-k.cpp -o output && ./output
+// * $CXX --std=c++20 01-sub-array-of-size-k.cpp -o output && ./output
