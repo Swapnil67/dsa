@@ -19,6 +19,7 @@
 #include<bits/stdc++.h>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * TIME COMPLEXITY O(n! * n)
 // TODO
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
@@ -56,11 +57,10 @@ bool betterApproach(std::string s1, std::string s2) {
   return false;
 }
 
-
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
 // * Calculate character frequency vector of s1 string
 // * Comparte frequecy vector using sliding window approach
-// * TIME COMPLEXITY O(m+n)
+// * TIME COMPLEXITY O(m + n)
 // * SPACE COMPLEXITY O(26)
 bool checkInclusion(std::string s1, std::string s2) {
   int n1 = s1.size(), n2 = s2.size();
