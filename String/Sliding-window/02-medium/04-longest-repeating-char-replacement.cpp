@@ -21,7 +21,8 @@
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
-// * use => replacements = (j - i + 1) - max_frequency
+// * use => replacements = len_of_substr - max_frequency
+// *                        (j - i + 1) - max_frequency
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(26)
 int bruteForce(std::string s, int k) {
@@ -32,8 +33,13 @@ int bruteForce(std::string s, int k) {
     for (int j = i; j < n; ++j) {
       char_hash[s[j] - 'A']++;
       max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
-      if ((j - i + 1) - max_freq <= k) {
-        max_len = std::max(max_len, j - i + 1);
+      size_t len_of_substr = j - i + 1;
+      int replacements = len_of_substr - max_freq;
+      if (replacements <= k) {
+        max_len = std::max(max_len, (int)len_of_substr);
+      }
+      else {
+        break;
       }
     }
   }
@@ -43,8 +49,9 @@ int bruteForce(std::string s, int k) {
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
 // * Keep char frequency vector
 // * keep max_frequency character and find replacing characters by following formula
-// * replacements = (j - i + 1) - max_frequency
-// * Use while loop to get next max_frequency character
+// * replacements = len_of_substr - max_frequency
+// *                (j - i + 1) - max_frequency
+// * Re-calcuate max_freq here
 // * TIME COMPLEXITY O(2N) * O(26)
 // * SPACE COMPLEXITY O(26)
 int betterApproach(std::string s, int k) {
@@ -55,10 +62,12 @@ int betterApproach(std::string s, int k) {
   while(j < n) {
     char_hash[s[j] - 'A']++;
     max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
+    size_t len_of_substr = j - i + 1;
 
     // * While number of replacement required are greater than the max replacements
-    while ((j - i + 1) - max_freq > k) {
-      char_hash[s[i]-'A']--;
+    // * Shrink window from left
+    while (len_of_substr - max_freq > k) {
+      char_hash[s[i] - 'A']--;
       max_freq = 0;
       // * find new max_freq
       for (int p = 0; p < 26; ++p) {
@@ -79,7 +88,9 @@ int betterApproach(std::string s, int k) {
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
 // * Keep char frequency vector
 // * keep max_frequency character and find replacing characters by following formula
-// * replacements = (j - i + 1) - max_frequency
+// * replacements = len_of_substr - max_frequency
+// *                (j - i + 1) - max_frequency
+// * Do not re-calcuate max_freq here
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(26)
 int characterReplacement(std::string s, int k) {
@@ -90,16 +101,18 @@ int characterReplacement(std::string s, int k) {
   while(j < n) {
     char_hash[s[j] - 'A']++;
     max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
+    size_t len_of_substr = j - i + 1;
 
     // * if number of replacement required are greater than the max replacements
-    if ((j - i + 1) - max_freq > k) {
-      char_hash[s[i]-'A']--;
+    if (len_of_substr - max_freq > k) {
+      char_hash[s[i] - 'A']--;
       max_freq = 0;
       i++;
     }
 
-    if ((j - i + 1) - max_freq <= k) {
-      max_len = std::max(max_len, j - i + 1);
+    len_of_substr = j - i + 1;
+    if (len_of_substr - max_freq <= k) {
+      max_len = std::max(max_len, (int) len_of_substr);
     }
 
     j++;
@@ -123,4 +136,3 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++20 04-longest-repeating-char-replacement.cpp -o output && ./output
-
