@@ -49,7 +49,6 @@ int bruteForce(std::string s) {
   return max_len;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Keep the map of character positions & using sliding window
 // * TIME COMPLEXITY O(N)

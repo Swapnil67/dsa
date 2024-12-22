@@ -19,6 +19,7 @@
 */
 
 #include<iostream>
+#include<vector>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

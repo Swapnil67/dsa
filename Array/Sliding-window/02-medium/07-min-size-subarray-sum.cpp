@@ -23,7 +23,7 @@
 
 
 #include<iostream>
-#include<vector>
+#include <vector>
 #include <climits>
 
 void printArr(std::vector<int> arr) {

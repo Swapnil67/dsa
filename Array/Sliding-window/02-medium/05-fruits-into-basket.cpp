@@ -24,6 +24,7 @@
 
 #include<set>
 #include<map>
+#include<vector>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {

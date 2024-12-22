@@ -30,6 +30,7 @@
 */
 
 #include<set>
+#include<vector>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -70,7 +71,7 @@ int subarraySum(std::vector<int> arr, int window_size) {
   while(j < n) {
 
     // * check if duplicate element
-    while(i < j && (st.count(arr[j]) || st.size() == window_size)) {
+    while (i < j && (st.count(arr[j]) || st.size() == window_size)) {
       cur_sum -= arr[i];
       st.erase(arr[i]);
       i++;

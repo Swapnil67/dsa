@@ -65,12 +65,10 @@ bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
         st.erase(arr[i]);
         i++;
     }
-
     // * Check if we have already seen ele in past
     if (st.find(arr[j]) != st.end()) {
         return true;
     }
-
     // * Add the element to set
     st.insert(arr[j]);
     j++;
