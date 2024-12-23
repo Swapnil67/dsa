@@ -97,6 +97,7 @@ int myBruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
+// * Binary Search Approach
 // * Sort the array & calculate prefix_sum for array
 // * After sort it will be easy to determine which number we want to increment
 // * Eg [1,4,8,13] => for '8' we only focus on '1' & '4' similarly for '13' we focus on '1', '4', '8'
@@ -168,20 +169,17 @@ int maxFrequency(std::vector<int> arr, int k) {
 
   while(j < n) {
     cur_sum += arr[j];
-    long target = arr[j];
 
-    // * Count number of elements b/w i => j [window count]
-    // * (long)(j - i + 1)
-    
     // * Make all numbers equal to arr[j] value and calculate sum
-    long long window_sum = (long)(j - i + 1) * target;
+    long long window_sum = (long)(j - i + 1) * arr[j];
     // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
 
     if(window_sum - cur_sum > k) {
       cur_sum -= arr[i];
       i++;
+    } else {
+      ans = std::max(ans, (j - i + 1));
     }
-    ans = std::max(ans, (j - i + 1));
     j++;
   }
   return ans;

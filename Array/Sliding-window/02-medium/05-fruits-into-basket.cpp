@@ -60,6 +60,33 @@ int bruteForce(std::vector<int> fruits) {
   return fruits_collected;
 }
 
+// * My Approach
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
+int totalFruitBrute(std::vector<int> fruits) {
+  int n = fruits.size();
+  int ans = 0;
+  for(int i = 0; i < n; ++i) {
+    int f1 = -1, f2 = -1;
+    int fruits_collected = 0;
+    for (int j = i; j < n; ++j) {
+      if(f1 == -1) {
+        f1 = fruits[j];
+      }
+      else if(f2 == -1) {
+        f2 = fruits[j];
+      }
+      else if(fruits[j] == f1 || fruits[j] == f2) {
+      } else {
+        break;
+      }
+      fruits_collected++;
+    }
+    ans = std::max(ans, fruits_collected);
+  }
+  return ans;
+}
+
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
 // * keep fruits map and keep the map size to 2
 // * TIME COMPLEXITY O(2N)
