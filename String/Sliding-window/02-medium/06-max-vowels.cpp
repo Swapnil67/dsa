@@ -51,6 +51,11 @@ int maxVowels(std::string s, int k) {
   int i = 0, j = 0, c = 0;
   std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   while(j < n) {
+    // * Check if vowel
+    if(vowels.count(s[j])) {
+      c++;
+    }
+
     // * Minimize window
     if ((j - i + 1) > k) {
       if(vowels.count(s[i])) {
@@ -58,17 +63,10 @@ int maxVowels(std::string s, int k) {
       }
       i++;
     }
-
-    // * Check if vowel
-    if(vowels.count(s[j])) {
-      c++;
-    }
-
-    // * count vowels substring
-    if(j - i + 1 <= k) {
+    else {
+      // * count vowels substring
       ans = std::max(ans, c);
     }
-
     j++;
   }
   return ans;
@@ -76,7 +74,6 @@ int maxVowels(std::string s, int k) {
 
 
 int main() {
-
   // int k = 3;
   // std::string s = "abciiidef";
   int k = 2;
