@@ -38,7 +38,6 @@ int minFlips(std::string s) {
   int ans = INT_MAX;
   int alt1_flips = 0, alt2_flips = 0;
   while(j < s.size()) {
-
     // * Count diff for alt1
     if(s[j] != alt1[j]) {
       alt1_flips++;
@@ -74,8 +73,8 @@ int minFlips(std::string s) {
 
 int main() {
   // std::string s = "111000";
-  // std::string s = "01001001101";
-  std::string s = "010";
+  std::string s = "01001001101";
+  // std::string s = "010";
   std::cout << "Input String: " << s << std::endl;
   int ans = minFlips(s);
   std::cout << "Minimum Number of Flips to Make the Binary String Alternating " << ans << std::endl;
