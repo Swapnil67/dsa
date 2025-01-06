@@ -1,12 +1,12 @@
 // ? WAP to reverse a sting with Stack Data Structure
 
-#include<iostream>
 #include<stack>
+#include<iostream>
 using namespace std;
 
 int main() {
   string str = "Jujutsu";
-  cout<<"Before Reversing: "<<str<<endl;
+  cout << "Before Reversing: " << str << endl;
 
   stack<char> s;
   for(int i=0; i<str.length(); i++) {

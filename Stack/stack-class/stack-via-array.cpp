@@ -17,7 +17,6 @@ class Stack {
 
     // * Time complexity O(1)
     void push(int val) {
-      // cout<<"Top "<<top<<endl;
       if(top == size-1) {
         cout<<"Stack overflow"<<endl;
         return;
