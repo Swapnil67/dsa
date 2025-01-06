@@ -1,49 +1,45 @@
 #include<iostream>
 #include<stack>
-#include<string>
-using namespace std;
 
-bool checkClosingMatch(char t, char ch) {
-  if((t == '(' && ch == ')') || (t == '{' && ch == '}') || (t == '[' && ch == ']')) {
-    return true;
-  } else {
-    return false;
-  }
+char getOpeningBracket(char ch) {
+  if(ch == ')')
+    return '(';
+  else if(ch == ']')
+    return '[';
+  else if(ch == '}')
+    return '{';
+  else 
+    return '0';
 }
 
-bool isValidParenthesis(string txt) {
-  stack<char> carr;
-
-  for(int i=0; i<txt.length(); i++) {
-    char ch = txt[i];
-    // * If opening bracket push in stack
-    // * If closing bracket check stack top & pop
-    if(ch == '(' || ch == '[' || ch == '{') {
-      // cout<<"push "<<ch<<endl;
-      carr.push(ch);
-    } else {
-      if(!carr.empty()) {
-        char top = carr.top();
-        if(checkClosingMatch(top, ch)) {
-          carr.pop();
-        } else {
-          return false;
-        }
-      }
+bool isValidParenthesis(std::string s) {
+    std::stack<char> st;
+  int n = s.size();
+  for(int i = 0; i < n; ++i) {
+    if(s[i] == '(' || s[i] == '{' || s[i] == '[') {
+      st.push(s[i]);
+    }
+    else {
+      char opening_bracket = getOpeningBracket(s[i]);
+      if(st.empty() || st.top() != opening_bracket)
+        return false;
+      st.pop();
     }
   }
-
-  if(carr.empty()) return true;
-  else return false;
+  // std::cout << st.size() << std::endl;
+  return !st.size() ? true : false;
 }
 
 int main() {
-  cout<<"Valid Parenthesis: "<<isValidParenthesis("[{}{}()]")<<endl;
-  cout<<"Valid Parenthesis: "<<isValidParenthesis("[{([])}]")<<endl;
-  cout<<"Valid Parenthesis: "<<isValidParenthesis("[{]]")<<endl;
+  std::cout << "Valid Parenthesis: " << isValidParenthesis("[{}{}()]") << std::endl;
+  std::cout << "Valid Parenthesis: " << isValidParenthesis("[{([])}]") << std::endl;
+  std::cout << "Valid Parenthesis: " << isValidParenthesis("[{]]") << std::endl;
   return 0;
 }
 
 // * [ { } { } ( ) ] -> Valid Parenthesis
 // * [ { ( [ ] ) } ] -> Valid Parenthesis
 // * [ { ) ] -> Invalid Valid Parenthesis
+
+// * Run the code
+// * $CXX --std=c++20 04-valid-parenthesis.cpp -o output && ./output
