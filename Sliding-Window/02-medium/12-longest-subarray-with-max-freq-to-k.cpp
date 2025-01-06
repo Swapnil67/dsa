@@ -1,6 +1,6 @@
 
 /**
- * * Subarray Product Less Than K
+ * * Length of Longest Subarray With at Most K Frequency
  * * You are given an integer array nums and an integer k.
  * * The frequency of an element x is the number of times it occurs in an array.
  * 
@@ -25,7 +25,7 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+void printArr(std::vector<int> &arr) {
   for (int i = 0; i < arr.size(); i++) {
     printf("%d ", arr[i]);
   }

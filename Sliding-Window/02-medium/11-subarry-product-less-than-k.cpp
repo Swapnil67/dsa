@@ -21,7 +21,6 @@
 
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -52,6 +51,10 @@ int bruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Classic Sliding Window
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(1)
 int numSubarrayProductLessThanK(std::vector<int>& nums, int k) {
   int n = nums.size();
   int ans = 0;

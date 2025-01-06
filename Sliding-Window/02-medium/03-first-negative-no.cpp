@@ -15,8 +15,9 @@
  * * https://www.naukri.com/code360/problems/first-negative-in-every-window_759333
 */
 
-#include<iostream>
 #include<deque>
+#include<vector>
+#include<iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
