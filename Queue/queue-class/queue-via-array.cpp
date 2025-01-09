@@ -64,6 +64,12 @@ class Queue {
       return this->cur_size;
     }
 
+    // * top of the queue.
+    int top() {
+      if(this->cur_size == 0) return -1;
+      return this->arr[this->front];
+    }
+
 };
 
 int main() {
