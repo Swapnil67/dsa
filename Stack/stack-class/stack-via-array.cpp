@@ -1,4 +1,4 @@
-// ? Design Stack Data Structure using Array Data Structure
+// * Design Stack Data Structure using Array Data Structure
 
 #include<iostream>
 using namespace std;
