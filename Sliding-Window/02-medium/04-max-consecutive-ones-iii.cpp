@@ -7,12 +7,14 @@
  * * Input  : nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
  * * Output : 6
  * * Explanation: [1,1,1,0,0,'1',1,1,1,1,'1']
+ * *                          ______________
  * * Quoted numbers were flipped from 0 to 1. The longest subarray is underlined.
  * 
  * * Example 2
  * * Input  : nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3
  * * Output : 10
  * * Explanation: [0,0,1,1,'1','1',1,1,1,'1',1,1,0,0,0,1,1,1,1]
+ * *                   _________________________
  * * Quoted numbers were flipped from 0 to 1. The longest subarray is underlined.
  * 
  * * https://leetcode.com/problems/max-consecutive-ones-iii/description/
@@ -57,7 +59,8 @@ int bruteForce(std::vector<int> arr, int k) {
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
-// * keep zero counter and keep the window of k zeros
+// * Classic Sliding Window
+// * keep zero counter and keep the window of 'k' zeros
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 int betterApproach(std::vector<int> arr, int k) {
@@ -86,8 +89,9 @@ int betterApproach(std::vector<int> arr, int k) {
 }
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * keep zeros counter
-// * Only calculate one count if zeros counter is under k
+// * Only calculate 1's count if zeros counter is under 'k'
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int longestOnes(std::vector<int> arr, int k) {
@@ -97,7 +101,7 @@ int longestOnes(std::vector<int> arr, int k) {
     if (arr[j] == 0)
       zeros++;
 
-    // * We have zeros under k
+    // * We have zeros less than 'k' times 
     if(zeros <= k) {
       max_cnt = std::max(max_cnt, j - i + 1);
     }
@@ -118,8 +122,8 @@ int main() {
 
   // * testcase 1
   int k = 2;
-  std::vector<int> arr = {1,1,1,0,0,0,1,1,1,1,0};
-  
+  std::vector<int> arr = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
+
   // * testcase 2
   // int k = 3;
   // std::vector<int> arr = {0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1};

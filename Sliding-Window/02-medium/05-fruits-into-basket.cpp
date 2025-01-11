@@ -18,7 +18,8 @@
  * * Explanation: We can pick from trees [2,3,2,2].
  * * If we had started at the first tree, we would only pick from trees [1,2].
  * 
- * * https://leetcode.com/problems/max-consecutive-ones-iii/description/
+ * * https://leetcode.com/problems/fruit-into-baskets/description/
+ * * https://www.naukri.com/code360/problems/fruits-and-baskets_985356
 */
 
 
@@ -88,6 +89,7 @@ int totalFruitBrute(std::vector<int> fruits) {
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * Classic Sliding Window
 // * keep fruits map and keep the map size to 2
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
@@ -101,14 +103,12 @@ int betterApproach(std::vector<int> fruits) {
     freq_map[fruits[j]]++;
 
     // * When we encounter more than two fruits
-    if (freq_map.size() > 2) {
-      while(freq_map.size() > 2) {
-        freq_map[fruits[i]]--;
-        if(freq_map[fruits[i]] == 0) {
-          freq_map.erase(fruits[i]);
-        }
-        i++;
+    while(freq_map.size() > 2) {
+      freq_map[fruits[i]]--;
+      if(freq_map[fruits[i]] == 0) {
+        freq_map.erase(fruits[i]);
       }
+      i++;
     }
 
     // * When we have two unique fruits
@@ -123,8 +123,9 @@ int betterApproach(std::vector<int> fruits) {
 
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * keep frequency map for fruits
-// * Only collect fruits if the frequency map size is less than k
+// * Only collect fruits if the frequency < 'k'
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int totalFruit(std::vector<int> fruits) {

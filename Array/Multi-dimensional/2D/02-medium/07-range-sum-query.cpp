@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 
 void printMatrix(std::vector<std::vector<int>> matrix) {
   int r = matrix.size(), c = matrix[0].size();

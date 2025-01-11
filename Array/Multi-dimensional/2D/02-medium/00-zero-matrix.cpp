@@ -16,6 +16,7 @@
 */
 
 #include<iostream>
+#include<vector>
 
 // * Print the matrix
 void printMatrix(std::vector<std::vector<int>> matrix, int r, int c) {

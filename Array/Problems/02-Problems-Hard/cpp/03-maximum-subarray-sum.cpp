@@ -19,6 +19,8 @@
 */
 
 #include<iostream>
+#include<vector>
+#include<climits>
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop

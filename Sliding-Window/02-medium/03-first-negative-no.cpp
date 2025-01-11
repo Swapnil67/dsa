@@ -31,21 +31,19 @@ void printArr(std::vector<int> arr) {
 // * Check all k size windows
 // * TIME COMPLEXITY O(N * 3)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> &arr, int &window_size) {
+std::vector<int> bruteForce(std::vector<int> &arr, int &k) {
   int n = arr.size();
   std::vector<int> ans;
   for (int i = 0; i < n; ++i) {
-    bool found = false, c = 0;
-    for (int j = i; (j < i + window_size) && (i + window_size - 1 < n); ++j) {
-      c = 1;
-      if(arr[j] < 0) {
-        found = true;
-        ans.push_back(arr[j]);
+    int first_neg = 0;
+    for (int j = i; i + k <= n && j < i + k; ++j) {
+      if(first_neg == 0 && arr[j] < 0) {
+        first_neg = arr[j];
         break;
       }
     }
-    if(!found && c == 1) {
-      ans.push_back(0);
+    if (i + k <= n) {
+      ans.push_back(first_neg);
     }
   }
   return ans;
@@ -55,33 +53,36 @@ std::vector<int> bruteForce(std::vector<int> &arr, int &window_size) {
 // * Save the -ve numbers to deque
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> firstNegative(std::vector<int> arr, int window_size) {
+std::vector<int> firstNegative(std::vector<int> arr, int k) {
   int n = arr.size();
-  int i = 0, j = 0;
   std::deque<int> dq;
   std::vector<int> ans;
-  
+  int i = 0, j = 0;
+
   while(j < n) {
-    // * Check if -ve element found
-    if (arr[j] < 0)
+    if(arr[j] < 0) {
       dq.push_back(arr[j]);
+    }
 
-    // * Check window
-    if((j - i + 1) == window_size) {
-      if(!dq.empty()) {
-        ans.push_back(dq.front());
-      } else {
-        ans.push_back(0);
-      }
-
+    // * Pop from queue
+    if(j - i + 1 > k) {
       if(arr[i] < 0 && !dq.empty()) {
         dq.pop_front();
       }
-
       i++;
     }
-    j++;
 
+    // * first -ve in 'k' window
+    if(j - i + 1 == k) {
+      if(!dq.empty()) {
+        ans.push_back(dq.front());
+      }
+      else {
+        ans.push_back(0);
+      }
+    }
+
+    j++;
   }
   return ans;
 }

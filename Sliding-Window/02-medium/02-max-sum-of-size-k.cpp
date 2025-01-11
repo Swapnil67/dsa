@@ -41,48 +41,59 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-int subarraySumBrute(std::vector<int> arr, int window_size) {
+// * ------------------------- APPROACH 1A: BRUTE FORCE APPROACH -------------------------`
+// * Nested Loop
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
+int subarraySumBrute(std::vector<int> arr, int k) {
   int n = arr.size();
-  long long max_sum = 0;
+  long long ans = 0;
   for (int i = 0; i < n; ++i) {
-    long long sum = 0, c = 0;
+    long long cur_sum = 0;
     std::set<int> st;
-    for (int j = i; (i + window_size - 1 < n) && j < (i + window_size); ++j) {
-      if(st.count(arr[j])) {
+     for (int j = i; k + i <= n && j < k + i; ++j) {
+      if(!st.count(arr[j])) {
+        cur_sum += arr[j];
+        st.insert(arr[j]);
+      }
+      else {
         break;
       }
-      c++;
-      sum += arr[j];
-      st.insert(arr[j]);
-      // std::cout << arr[j] << " ";
     }
-    // std::cout << std::endl;
-    if (c == window_size)
-      max_sum = std::max(max_sum, sum);
+    if(st.size() == k) {
+      ans = std::max(ans, cur_sum);
+    }
   }
-  return max_sum;
+  return ans;
 }
 
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Classic Sliding Window with set
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(1)
 int subarraySum(std::vector<int> arr, int window_size) {
   int n = arr.size();
   int i = 0, j = 0;
   long long max_sum = 0, cur_sum = 0;
   std::set<int> st;
   while(j < n) {
-
-    // * check if duplicate element
-    while (i < j && (st.count(arr[j]) || st.size() == window_size)) {
+    // * Shrink window 
+    // * on duplicate element
+    // * or on set size >= window_size
+    while (i < j && (st.count(arr[j]) || st.size() >= window_size)) {
       cur_sum -= arr[i];
       st.erase(arr[i]);
       i++;
     }
 
+    // * Update cur_sum & set
     cur_sum += arr[j];
     st.insert(arr[j]);
-    j++;
 
     if (st.size() == window_size)
       max_sum = std::max(max_sum, cur_sum);
+    
+    j++;
   }
 
   return max_sum;
@@ -95,6 +106,7 @@ int main() {
   // std::vector<int> arr = {4, 4, 4};
   // int window_size = 3;
   // std::vector<int> arr = {1, 1, 1, 7, 8, 9};
+  std::cout << "Distinct Elements = " << window_size << std::endl;
   printArr(arr);
 
   int ans= subarraySum(arr, window_size);

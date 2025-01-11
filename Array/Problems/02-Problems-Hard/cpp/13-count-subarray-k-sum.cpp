@@ -4,15 +4,19 @@
  * maximum sum among all subarrays
  * 
  * Example 1:
- * Input: nums = [3, 1, 2, 4], 'K' = 6
+ * Input: nums = [1,1,1], k = 2
  * Output: 2
- * Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+ * 
+ * Example 2:
+ * Input: nums = [1,2,3], k = 3
+ * Output: 1
 
  * https://www.naukri.com/code360/problems/subarray-sums-i_1467103
  * https://leetcode.com/problems/subarray-sum-equals-k/description/
 */
 
 #include<map>
+#include<vector>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -41,7 +45,7 @@ int bruteForce(std::vector<int> arr, int k) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * Prefix Sum [Map Data Structure]
 // * TIME COMPLEXITY O(NlogN) [Ordered Map]
-// * TIME COMPLEXITY O(N) [Best Case UnOrderd Map] or O(N^2) [Worst Case UnOrdered Map]
+// * TIME COMPLEXITY O(N) [Best Case Unordered Map] or O(N^2) [Worst Case Unordered Map]
 // * SPACE COMPLEXITY O(N)
 int findAllSubarraysWithGivenSum(std::vector<int> arr, int k) {
   int n = arr.size();
