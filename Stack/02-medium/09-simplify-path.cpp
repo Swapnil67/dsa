@@ -1,3 +1,26 @@
+/*
+ * Decode String
+
+ * Example 1
+ * Input: s = "/home/"
+ * Output: "/home"
+
+ * Example 2
+ * Input: s = "/home//foo/"
+ * Output: "/home/foo"
+
+ * Example 3
+ * Input: s = "/home/user/Documents/../Pictures"
+ * Output: "/home/user/Pictures"
+ * 
+ * Example 4
+ * Input: s = "/.../a/../b/c/../d/./"
+ * Output: "/.../b/d"
+ * 
+ * https://leetcode.com/problems/simplify-path/description/
+*/
+
+
 #include <iostream>
 #include <vector>
 #include <stack>
@@ -11,6 +34,7 @@ bool isAlphanumeric(char ch) {
 }
 
 // * Creating tokens from scratch
+// * Doesn't works for some test cases (eq, "/..hidden/")
 std::string bruteForce(std::string s) {
   int n = s.length();
   std::vector<std::string> path_vector;
