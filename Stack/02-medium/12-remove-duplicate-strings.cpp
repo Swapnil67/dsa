@@ -1,0 +1,105 @@
+/*
+ * Remove All Adjacent Duplicates in String II
+ * You are given a string s and an integer k, a k duplicate removal consists of choosing k adjacent and equal letters 
+ * from s and removing them, causing the left and the right side of the deleted substring to concatenate together.
+ * We repeatedly make k duplicate removals on s until we no longer can.
+ * Return the final string after all such duplicate removals have been made. It is guaranteed that the answer is unique.
+ * 
+ * * Example 1
+ * * Input  : s = "abcd", k = 2
+ * * Output : "abcd"
+ * 
+ * * Example 2
+ * * Input  : s = "deeedbbcccbdaa", k = 3
+ * * Output : "aa"
+ * 
+ * * Example 2
+ * * Input  : s = "pbbcggttciiippooaais", k = 2
+ * * Output : "ps"
+
+* https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/
+*/
+
+#include <iostream>
+#include <stack>
+#include <vector>
+#include <unordered_map>
+
+std::string removeDuplicates(std::string s, int k) {
+  int n = s.size();
+  std::stack<char> st;
+  std::unordered_map<char, int> char_cnt;
+  for(char ch: s) {
+    if(!st.empty() && st.top() == ch) {
+      char_cnt[ch]++;
+    }
+    else {
+      char_cnt[ch] = 1;
+    }
+    st.push(ch);
+
+    // std::cout << ch << " => " << char_cnt[ch] << std::endl;
+    if (char_cnt[ch] == k) {
+      while(!st.empty() && char_cnt[ch] != 0) {
+        char_cnt[ch]--;
+        st.pop();
+      }
+    }
+  }
+  // std::cout << st.size() << std::endl;
+
+  std::string ans = "";
+  while(!st.empty()) {
+    ans = st.top() + ans;
+    st.pop();
+  } 
+
+  return ans;
+}
+
+std::string removeDuplicates2(std::string s, int k) {
+  int n = s.size();
+  std::vector<std::pair<char, int>> st;
+  for(char ch: s) {
+    if(!st.size() || st.back().first != ch) {
+      // * New character
+      st.push_back({ch, 1});
+    }
+    else {
+      // * found duplicate, i.e. st[-1][0] == ch
+      st.back().second++;
+    }
+
+    if(st.back().second == k) {
+      st.pop_back();
+    }
+  }
+  // std::cout << st.size() << std::endl;
+
+  std::string ans = "";
+  for (auto x : st) {
+      ans.append(x.second, x.first);
+  }
+
+  return ans;
+}
+
+int main() {
+  // int k = 2;
+  // std::string s = "abcd";
+
+  // int k = 3;
+  // std::string s = "deeedbbcccbdaa";
+
+  int k = 4;
+  std::string s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy";
+
+  std::cout << "Input String: " << s << std::endl;
+  std::string ans = removeDuplicates(s, k);
+  std::cout << "Ans: " << ans << std::endl;
+
+  return 0;
+}
+
+// * Run the code
+// * $CXX --std=c++20 12-remove-duplicate-strings.cpp -o output && ./output
