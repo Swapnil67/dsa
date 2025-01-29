@@ -25,6 +25,9 @@
 #include <vector>
 #include <unordered_map>
 
+// * Using Plain Stack + Unordered Map
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(N)
 std::string removeDuplicates(std::string s, int k) {
   int n = s.size();
   std::stack<char> st;
@@ -57,6 +60,9 @@ std::string removeDuplicates(std::string s, int k) {
   return ans;
 }
 
+// * Using Vector as stack
+// * TIME COMPLEXITY O(N) 
+// * SPACE COMPLEXITY O(N)
 std::string removeDuplicates2(std::string s, int k) {
   int n = s.size();
   std::vector<std::pair<char, int>> st;
