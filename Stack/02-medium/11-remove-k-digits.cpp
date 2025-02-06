@@ -47,6 +47,8 @@ std::string bruteForce(std::string str, int k) {
   return ans;
 }
 
+// * Use the following logic
+// * one's ten's hundred's thousand's place
 std::string removeKdigits(std::string str, int k) {
   int n = str.size();
   std::stack<char> st;
