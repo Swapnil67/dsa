@@ -1,3 +1,24 @@
+/**
+ * * Minimum Size Subarray Sum
+ * * Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. 
+ * * The result should also be sorted in ascending order.
+ * 
+ * * An integer a is closer to x than an integer b if:
+ * * |a - x| < |b - x|, or
+ * * |a - x| == |b - x| and a < b
+
+ * * Example 1
+ * * Input: arr = [1,2,3,4,5], k = 4, x = 3
+ * * Output : [1,2,3,4]
+ * 
+ * * Example 2
+ * * Input  :  arr = [1,1,2,3,4,5], k = 4, x = -1
+ * * Output : [1,1,2,3]]
+ * 
+ * * https://leetcode.com/problems/find-k-closest-elements/description/
+*/
+
+
 #include<iostream>
 #include <vector>
 #include <deque>
@@ -30,16 +51,20 @@ std::vector<int> bruteForce(std::vector<int> arr, int k, int x) {
 // * 1st number in window will always be closer to x than the last+1 element
 // * g(m) = f(m) <= f(m+k)
 
-
 std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
+  // * 'h' is little restricted becoz m + k should not become greater than n
   int l = 0, h = n - k, m;
   while(l < h) {
     m = (l + (h - 1)) / 2; // * m is the starting point of window of size k
+
+    // printf("arr[%d] = %d & arr[%d + k] = %d\n", m, arr[m], m, arr[m + k]);
+    // * start of window is not smaller than one outside of window
     if (x - arr[m] > arr[m + k] - x) {
       l = m + 1;
     }
     else {
+      // * f(m) <= f(m+k) (True)
       h = m;
     }
   }

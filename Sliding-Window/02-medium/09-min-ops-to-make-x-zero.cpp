@@ -32,6 +32,33 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
+
+int myApproach(std::vector<int> &arr, int x) {
+  int n = arr.size();
+  int i = 0, j = n - 1, ops = 0;
+  while(i <= j) {
+    if(arr[i] - x > arr[j] - x) {
+      if (x - arr[i] >= 0) {
+        x = x - arr[i];
+        ops++;
+      }
+      i++;
+    }
+    else {
+      if(x - arr[j] >= 0) {
+        x = x - arr[j];
+        ops++;
+      }
+      j--;
+    }
+  }
+  std::cout << x << std::endl;
+  return x == 0 ? ops : -1;
+}
+
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * Basic Algebra
 // * left_sum + right_sum == x
 // * _______________ sum ________________
@@ -71,7 +98,7 @@ int minOperations2(std::vector<int> &arr, int x) {
   int n = arr.size(), longest_subarray = -1;
   int j = 0;
 
-  // * Make prefix array
+  // * Make prefix sum map
   std::map<int, int> prefix_sum;
   prefix_sum[0] = -1;
   long long sum = 0;

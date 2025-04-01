@@ -25,7 +25,6 @@ bool isNumeric(char ch) {
 
 std::string bruteForce(std::string s) {
   int n = s.size();
-  std::string ans = "";
   int j = 0;
   
   std::string token = "";
@@ -69,6 +68,7 @@ std::string bruteForce(std::string s) {
     }
   }
 
+  std::string ans = "";
   while(!st.empty()) {
     ans = st.top() + ans;
     st.pop();
@@ -78,6 +78,7 @@ std::string bruteForce(std::string s) {
 }
 
 int main() {
+
   // std::string s = "3[a]2[bc]";
   // std::string s = "3[a2[c]]";
   std::string s = "2[abc]3[cd]ef";
@@ -85,6 +86,7 @@ int main() {
 
   std::string ans = bruteForce(s);
   std::cout << "Decoded String: " << ans << std::endl;
+
   // std::string ans = simplifyPath(s);
   return 0;
 }

@@ -9,7 +9,8 @@
 using namespace std;
 
 int findMinimumCost(string str) {
-  if(str.length()%2 != 0) {
+  if (str.length() % 2 != 0)
+  {
     return -1;
   }
   stack<char> st;

@@ -6,6 +6,15 @@
   * Remove the closest non-star character to its left, as well as remove the star itself.
   * 
 * Return the string after all stars have been removed.
+
+ * * Example 1
+ * * Input  : s = "leet**cod*e";
+ * * Output : lecoe
+ * 
+ * * Example 2
+ * * Input  : s = "erase*****";
+ * * Output : 
+
 * https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
 */
 

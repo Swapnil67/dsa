@@ -2,7 +2,8 @@
 * Convert array to from Linked List
 */
 
-#include<iostream>
+#include <iostream>
+#include <vector>
 
 class Node {
   public:
@@ -40,7 +41,7 @@ void printLL(Node* head) {
 }
 
 int main() {
-  std::vector<int> arr = { 1,2,3,4,5 };
+  std::vector<int> arr = {1, 2, 3, 4, 5};
   Node* head = arrayToLL(arr);
   Node* temp = head;
   std::cout<<"Elements In LL"<<std::endl;

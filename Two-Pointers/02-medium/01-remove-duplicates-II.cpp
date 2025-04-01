@@ -12,8 +12,9 @@
  * https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/
 */
 
-#include<iostream>
-#include<unordered_map>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {

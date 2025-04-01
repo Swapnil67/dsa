@@ -16,7 +16,8 @@
  * https://leetcode.com/problems/reverse-words-in-a-string/ 
 */
 
-#include<iostream>
+#include <iostream>
+#include <algorithm>
 
 std::string reverseWords(std::string &s) {
   int n = s.size();

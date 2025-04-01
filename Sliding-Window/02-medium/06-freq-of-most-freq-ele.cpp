@@ -38,38 +38,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefix_arr) {
-  int l = 0, r = target_idx;
-  int best_idx = target_idx;
-
-  while(l <= r) {
-    int m = (l + r) / 2;
-
-    // * Count number of elements b/w target_idx & mid index
-    long long count = (target_idx - m + 1);
-
-    // * Make all numbers equal to target_idx value and calculate sum
-    long long window_sum = count * arr[target_idx];
-
-    // * Sum from mid -> target_idx in array [Prefix Sum]
-    long long original_sum =
-        prefix_arr[target_idx] - prefix_arr[m] + arr[m];
-
-    // * Calculate how many operations we need
-    int ops = window_sum - original_sum;
-    if(ops > k) {
-      // * Decrease the gap b/w m -> target_idx
-      l = m + 1;
-    }
-    else {
-      // * Increase the gap b/w m -> target_idx
-      best_idx = m;
-      r = m - 1;
-    }
-  }
-  return target_idx - best_idx + 1;
-}
-
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Using Nested Loop
 // * TIME COMPLEXITY O(N^2)
@@ -97,7 +65,41 @@ int myBruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
-// * Binary Search Approach
+
+// * -------------------------- Binary Search Approach
+
+int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefix_arr) {
+  int l = 0, r = target_idx;
+  int best_idx = target_idx;
+
+  while(l <= r) {
+    int m = (l + r) / 2;
+
+    // * Count number of elements b/w target_idx & mid index
+    long long count = (target_idx - m + 1);
+
+    // * Make all numbers equal to target_idx value and calculate sum
+    long long window_sum = count * arr[target_idx];
+
+    // * Sum from mid to target_idx in array using prefix sum method
+    long long original_sum =
+        prefix_arr[target_idx] - prefix_arr[m] + arr[m];
+
+    // * Calculate how many operations we need
+    int ops = window_sum - original_sum;
+    if(ops > k) {
+      // * Decrease the gap b/w m -> target_idx
+      l = m + 1;
+    }
+    else {
+      // * Increase the gap b/w m -> target_idx
+      best_idx = m;   // * cur best window from m => target_idx
+      r = m - 1;
+    }
+  }
+  return target_idx - best_idx + 1;
+}
+
 // * Sort the array & calculate prefix_sum for array
 // * After sort it will be easy to determine which number we want to increment
 // * Eg [1,4,8,13] => for '8' we only focus on '1' & '4' similarly for '13' we focus on '1', '4', '8'
@@ -122,6 +124,9 @@ int bruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
+
+// * ------------------------- APPROACH 3A: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * Keep cur_sum & window_sum
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
@@ -143,19 +148,22 @@ int betterApproach(std::vector<int> arr, int k) {
     long long window_sum = (long long)count * (long long)arr[j];
     // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
 
-    // * Calculate how many operations we nee
+    // * Calculate how many operations we need
     int ops = window_sum - cur_sum;
     while (ops > k) {
       cur_sum -= arr[i];
       i++;
-      ops = ((long long)(j - i + 1) * (long long)arr[j]) - cur_sum;
+      long long new_window_sum = (long long)(j - i + 1) * (long long)arr[j];
+      ops = new_window_sum - cur_sum;
     }
-    ans = std::max(ans, count);
+    ans = std::max(ans, (j - i + 1));
     j++;
   }
   return ans;
 }
 
+// * ------------------------- APPROACH 3B: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * Keep cur_sum & window_sum
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
@@ -192,6 +200,10 @@ int main() {
   // std::vector<int> arr = {1, 2, 4};
 
   // * testcase 2
+  // int k = 5;
+  // std::vector<int> arr = {1,4,8,13};
+
+  // * testcase 3
   int k = 2;
   std::vector<int> arr = {3, 9, 6};
   
@@ -199,11 +211,11 @@ int main() {
   
   // int ans = bruteForce(arr, k);
   // int ans = betterApproach(arr, k);
-  int ans = maxFrequency(arr, k);
-  std::cout << "Frequency of the Most Frequent Element: " << ans << std::endl;
+  // int ans = maxFrequency(arr, k);
+  // std::cout << "Frequency of the Most Frequent Element: " << ans << std::endl;
   return 0;
 }
 
 
 // * Run the code
-// * g++ --std=c++17 06-freq-of-most-freq-ele.cpp -o output && ./output
+// * $CXX 06-freq-of-most-freq-ele.cpp -o output && ./output

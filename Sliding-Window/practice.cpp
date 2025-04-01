@@ -1,8 +1,10 @@
-#include<set>
 #include<vector>
 #include<deque>
-#include<unordered_map>
 #include<iostream>
+#include <numeric>
+#include <climits>
+#include <map>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -12,10 +14,9 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-
 int main() {
   return 0;
 }
 
 // * Run the code
-// * $CXX practice.cpp -o output && ./output
+// * $CXX --std=c++20 practice.cpp -o output && ./output

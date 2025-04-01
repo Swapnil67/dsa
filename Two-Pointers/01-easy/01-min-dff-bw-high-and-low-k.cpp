@@ -19,6 +19,9 @@
 */
 
 #include<iostream>
+#include <vector>
+#include <climits>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -27,6 +30,9 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+// * Sliding Window Approach
+// * Time Complexity = nlogn + O(N)
+// * Space Complexity = O(1)
 int minimumDifference(std::vector<int> arr, int k) {
   int n = arr.size();
   std::sort(arr.begin(), arr.end());

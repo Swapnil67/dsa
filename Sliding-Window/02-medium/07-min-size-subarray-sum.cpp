@@ -57,6 +57,7 @@ int bruteForce(std::vector<int> arr, int target) {
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * Find the cur_sum
 // * Then find the window while(cur_sum >= target)
 // * TIME COMPLEXITY O(N)
@@ -64,13 +65,13 @@ int bruteForce(std::vector<int> arr, int target) {
 int minSubArrayLen(std::vector<int> arr, int target) {
   int n = arr.size();
   int ans = INT_MAX, cur_sum = 0;
-  int i = 0, j = 0, found = 0;
+  int i = 0, j = 0;
   while(j < n) {
     // std::cout << i << " " << j << std::endl;
     cur_sum += arr[j];
 
+    // * While cur_sum >= target shrink window and store new subarray size
     while(cur_sum >= target) {
-      found = 1;
       // * Shrink the window
       ans = std::min(ans, j - i + 1);
       cur_sum -= arr[i];
@@ -79,7 +80,7 @@ int minSubArrayLen(std::vector<int> arr, int target) {
 
     j++;
   }
-  return found ? ans : found;
+  return ans == INT_MAX ? 0 : ans;
 }
 
 

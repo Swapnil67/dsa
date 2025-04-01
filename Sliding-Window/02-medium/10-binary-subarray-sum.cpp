@@ -4,13 +4,19 @@
  * * Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal.
  * * A subarray is a contiguous part of the array.
 
- * * Return the minimum number of operations to reduce x to exactly 0 if it is possible, otherwise, return -1.
-
  * * Example 1
  * * Input  : nums = [1,0,1,0,1], goal = 2
  * * Output : 4
  * * Explanation: The 4 subarray whose sum is equal to 2
- * 
+ * * [1,0,1,0,1]
+ * * ______
+ * * [1,0,1,0,1]
+ * * ________
+ * * [1,0,1,0,1]
+ * *   ______
+ * * [1,0,1,0,1]
+ * *      ______
+ 
 
  * * Example 2
  * * Input  : nums = [0,0,0,0,0], goal = 0
