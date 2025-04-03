@@ -16,7 +16,9 @@
  * * https://leetcode.com/problems/assign-cookies/description/
 */
 
-#include<iostream>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
 // * ------------------------- Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(nlogn + mlogm)
@@ -26,38 +28,12 @@ int findContentChildren(std::vector<int> children, std::vector<int> cookies) {
   std::sort(children.begin(), children.end());
   std::sort(cookies.begin(), cookies.end());
 
-  size_t s = children.size(), c = cookies.size();
   int i = 0, j = 0;
-
-  while(i < s && j < c) {
+  while(i < children.size() && j < cookies.size()) {
     if(cookies[j] >= children[i]) {
       i++;
     }
     j++;
-  }
-  return i;
-}
-
-// * Same TC & SC
-int findContentChildren2(std::vector<int> children, std::vector<int> cookies) {
-  // * sort both arrays
-  std::sort(children.begin(), children.end());
-  std::sort(cookies.begin(), cookies.end());
-
-  size_t s = children.size(), c = cookies.size();
-  int i = 0, j = 0;
-
-  // * Loop over children
-  while (i < s) {
-    int greed_factor = children[i];
-    // * incr j till you find cookie
-    while (j < c && greed_factor > cookies[j]) {
-      j += 1;
-    }
-    if (j == c)
-      break;
-    i += 1;
-    j += 1;
   }
   return i;
 }

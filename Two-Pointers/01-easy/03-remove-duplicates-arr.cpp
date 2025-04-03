@@ -17,6 +17,7 @@
 
 #include <set>
 #include <iostream>
+#include <vector>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {

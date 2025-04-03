@@ -1,11 +1,5 @@
 /*
- * Minimum Difference Between Highest and Lowest of K Scores
- * You are given a 0-indexed integer array nums, where nums[i] represents the score of the ith student. 
- * You are also given an integer k.
- * 
- * Pick the scores of any k students from the array so that the difference between the highest and the lowest of
- * the k scores is minimized.
- * Return the minimum possible difference.
+ * Merge Two Sorted Arrays
  * 
  * Example 1
  * Input  : nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
@@ -18,7 +12,8 @@
  * https://leetcode.com/problems/merge-sorted-array/description/
 */
 
-#include<iostream>
+#include <iostream>
+#include <vector>
 
 template <typename T>
 void printArr(std::vector<T> arr) {
@@ -30,6 +25,7 @@ void printArr(std::vector<T> arr) {
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 
+// * Classic Merge Sort Algo
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 void mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
@@ -62,15 +58,16 @@ void mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) 
 
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
 
+// * Merge sort but using one of input arr as output array
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
   int last = m + n - 1;
 
   // * merge in reverse order
-  while(m > 0 && n > 0) {
+  while (m > 0 && n > 0) {
     if (nums1[m - 1] > nums2[n - 1]) {
-      nums1[last] = nums1[m-1];
+      nums1[last] = nums1[m - 1];
       m -= 1;
     }
     else {
@@ -80,9 +77,15 @@ void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
     last -= 1;
   }
 
-  // * fill nums1 with leftover nums2 elements
-  while(n > 0) {
-   nums1[last] = nums2[n - 1];
+  // * fill nums1 with leftover elements
+  while (m > 0) {
+    nums1[last] = nums1[m - 1];
+    m -= 1;
+    last -= 1;
+  }
+  
+  while (n > 0) {
+    nums1[last] = nums2[n - 1];
     n -= 1;
     last -= 1;
   }
