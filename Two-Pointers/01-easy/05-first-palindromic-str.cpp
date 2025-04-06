@@ -15,7 +15,8 @@
  * * https://leetcode.com/problems/find-first-palindromic-string-in-the-array/description/
 */
 
-#include<iostream>
+#include <iostream>
+#include <vector>
 
 void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
@@ -32,7 +33,6 @@ bool checkPalindrome(std::string str) {
   while (l < r) {
     if (str[l++] != str[r--])
       return false;
-    
   }
   return true;
 }

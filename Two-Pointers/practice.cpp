@@ -6,24 +6,6 @@
 
 using namespace std;
 
-// /**
-//  * * Assign Cookies
-//  * * Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
-//  * * Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with;
-//  * * and each cookie j has a size s[j]. If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content.
-//  * * Your goal is to maximize the number of your content children and output the maximum number.
-
-//  * * Example 1
-//  * * Input  : g = [1,2,3], s = [1,1]
-//  * * Output : 1
-//  * 
-//  * * Example 2
-//  * * Input  : g = [1,2], s = [1,2,3]
-//  * * Output : 2
-
-//  * * https://leetcode.com/problems/assign-cookies/description/
-// */
-
 template <typename T>
 void printArr(std::vector<T> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -32,31 +14,128 @@ void printArr(std::vector<T> arr) {
   std::cout << std::endl;
 }
 
-int findContentChildren(std::vector<int>& g, std::vector<int>& s) {
-  std::sort(g.begin(), g.end());
-  std::sort(s.begin(), s.end());
-  int i = 0, j = 0, ans = 0;
-  while (i < g.size() && j < s.size()) {
-    if (s[j] >= g[i]) {
-      ans += 1;
-      i += 1;
+template <typename T>
+void printMatrix(std::vector<std::vector<T>> matrix) {
+  int r = matrix.size();
+  if(r == 0) return;
+  int c = matrix[0].size();
+  for (int i = 0; i < r; ++i) {
+    for (int j = 0; j < c; ++j) {
+      std::cout << matrix[i][j] << " ";
     }
-    j += 1;
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;
+}
+
+std::string mergeAlternately(std::string word1, std::string word2) {
+  int i = 0, j = 0, k = 0;
+  std::string ans = "";
+  while(i < word1.size() && j < word2.size()) {
+    ans += word1[i++];
+    ans += word2[j++];
+  }
+  while (i < word1.size()) {
+    ans += word1[i++];
+  }
+
+  while (j < word2.size()) {
+    ans += word2[j++];
   }
   return ans;
 }
 
+std::vector<int> mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
+  int i = 0, j = 0;
+  std::vector<int> ans;
+  while (i < n && j < m) {
+    if(nums1[i] > nums2[j]) {
+      ans.push_back(nums2[j]);
+      j += 1;
+    }
+    else {
+      ans.push_back(nums1[i]);
+      i += 1;
+    }
+  }
+
+  while (i < n) {
+    ans.push_back(nums1[i]);
+    i += 1;
+  }
+
+  while (j < m) {
+    ans.push_back(nums2[j]);
+    j += 1;
+  }
+
+  return ans;
+}
+
+void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
+  int k = m + n - 1;
+  printf("k = %d\n", k);
+  while (m > 0 && n > 0) {
+    if(nums1[m - 1] > nums2[n - 1]) {
+      nums1[k] = nums1[m - 1];
+      m -= 1;
+    }
+    else {
+      nums1[k] = nums2[n - 1];
+      n -= 1;
+    }
+    k -= 1;
+  }
+
+  while (m > 0)
+  {
+    nums1[k] = nums1[m - 1];
+    m -= 1;
+    k -= 1;
+  }
+
+  while (n > 0)
+  {
+    nums1[k] = nums2[n - 1];
+    n -= 1;
+    k -= 1;
+  }
+}
+
+vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+  vector<vector<int>> ans;
+  int i = 0, j = 0;
+  while (i < nums1.size() && j < nums2.size()) {
+    if(nums1[i][0] <= nums2[j][0]) {
+      if(nums1[i][0] == nums2[j][0]) {
+        ans.push_back({{nums1[i][0], nums1[i][1] + nums2[j][1]}});
+        i += 1;
+        j += 1;
+      } else {
+        ans.push_back(nums1[i]);
+        i += 1;
+      }
+    } else {
+      ans.push_back(nums2[j]);
+      j += 1;
+    }
+  }
+
+  while (i < nums1.size()) {
+    ans.push_back(nums1[i]);
+    i += 1; 
+  }
+
+  while (j < nums2.size()) {
+    ans.push_back(nums2[j]);
+    j += 1;
+  }
+
+  return ans;
+}
+
 int main() {
-  std::vector<int> g = {1, 2};
-  std::vector<int> s = {0, 0, 0, 1, 1, 3};
-  // std::vector<int> g = {1, 2};
-  // std::vector<int> s = {1, 2, 3};
-  printf("Greed factor of children\n");
-  printArr(g);
-  printf("Sizes of cookies\n");
-  printArr(s);
-  int ans = findContentChildren(g, s);
-  std::cout << ans << std::endl;
+  
   return 0;
 }
 
