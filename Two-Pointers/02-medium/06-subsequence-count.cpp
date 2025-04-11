@@ -3,20 +3,24 @@
  * * You are given an array of integers nums and an integer target.
  * * Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element 
  * * on it is less or equal to target. Since the answer may be too large, return it modulo 10^9 + 7.
+ * * Leetcode - 1498
 
  * * Example 1
- * * Input  : nums = [3,5,6,7], target = 9
+ * * Input  : nums = [3, 5, 6, 7], target = 9
  * * Output : 4
+ * * [3], [3, 5], [3, 5, 6], [3, 6]
  * 
  * * Example 2
- * * Input  : nums = [3,3,6,8], target = 10
+ * * Input  : nums = [3, 3, 6, 8], target = 10
  * * Output : 6
 
  * * https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/
  * * https://www.naukri.com/code360/problems/count-the-number-of-subsequences-having-product-not-more-than-p_1214647
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`

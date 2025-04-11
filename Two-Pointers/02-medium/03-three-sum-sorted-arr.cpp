@@ -16,8 +16,10 @@
  * * https://leetcode.com/problems/3sum/description/
 */
 
-#include<set>
-#include<iostream>
+#include <set>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
@@ -118,7 +120,7 @@ std::vector<std::vector<int>> betterApproach(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(no of triplets)
 // * O(no of triplets) => ans
 std::vector<std::vector<int>> optimalApproach(std::vector<int> arr) {
-  sort(arr.begin(), arr.end()); // * n(logn)
+  std::sort(arr.begin(), arr.end()); // * n(logn)
   int n = arr.size(); 
   std::vector<std::vector<int>> ans;
 

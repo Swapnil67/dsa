@@ -1,4 +1,5 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -19,9 +20,9 @@ bool findTwoSum(std::vector<int> arr, int target) {
       return true;
     }
     if (sum > target)
-      r--;
+      r -= 1;
     else
-      l++;
+      l += 1;
   }
   return false;
 }

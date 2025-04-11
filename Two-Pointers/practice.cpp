@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include <vector>
 #include <climits>
 #include <algorithm>
@@ -20,122 +21,81 @@ void printMatrix(std::vector<std::vector<T>> matrix) {
   if(r == 0) return;
   int c = matrix[0].size();
   for (int i = 0; i < r; ++i) {
+    printf("[");
     for (int j = 0; j < c; ++j) {
       std::cout << matrix[i][j] << " ";
     }
+    printf("]");
     std::cout << std::endl;
   }
   std::cout << std::endl;
 }
 
-std::string mergeAlternately(std::string word1, std::string word2) {
-  int i = 0, j = 0, k = 0;
-  std::string ans = "";
-  while(i < word1.size() && j < word2.size()) {
-    ans += word1[i++];
-    ans += word2[j++];
+void calculatePowers(std::vector<int> &powers, int n) {
+  powers[0] = 1;
+  int i = 1;
+  while(n > 0) {
+    powers[i] = powers[i - 1] * 2;
+    i += 1;
+    n -= 1;
   }
-  while (i < word1.size()) {
-    ans += word1[i++];
-  }
-
-  while (j < word2.size()) {
-    ans += word2[j++];
-  }
-  return ans;
 }
 
-std::vector<int> mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
-  int i = 0, j = 0;
-  std::vector<int> ans;
-  while (i < n && j < m) {
-    if(nums1[i] > nums2[j]) {
-      ans.push_back(nums2[j]);
-      j += 1;
-    }
-    else {
-      ans.push_back(nums1[i]);
+int numSubseq(std::vector<int> arr, int target) {
+  int n = arr.size();
+  std::sort(arr.begin(), arr.end());
+
+  std::vector<int> powers(n);
+  calculatePowers(powers, n);
+
+  int ans = 0;
+  int M = 1e9 + 7; // * 10^9 + 7
+
+  int i = 0, j = n - 1;
+  while (i <= j) {
+    long long cur_sum = arr[i] + arr[j];
+    if(cur_sum <= target) {
+      int diff = j - i;
+      ans = ans % M + powers[diff] % M;
       i += 1;
     }
+    else {
+      j -= 1;
+    }
   }
-
-  while (i < n) {
-    ans.push_back(nums1[i]);
-    i += 1;
-  }
-
-  while (j < m) {
-    ans.push_back(nums2[j]);
-    j += 1;
-  }
-
   return ans;
 }
 
-void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
-  int k = m + n - 1;
-  printf("k = %d\n", k);
-  while (m > 0 && n > 0) {
-    if(nums1[m - 1] > nums2[n - 1]) {
-      nums1[k] = nums1[m - 1];
-      m -= 1;
+int numRescueBoats(std::vector<int> weights, int limit) {
+  int n = weights.size();
+  int boats_required = 0;
+
+  std::sort(weights.begin(), weights.end());
+  
+  int i = 0, j = n - 1;
+  while(i <= j) {
+    int cur_weight = weights[i] + weights[j];
+    if (cur_weight <= limit) {
+      i += 1;
+      j -= 1;
     }
     else {
-      nums1[k] = nums2[n - 1];
-      n -= 1;
+      j -= 1;
     }
-    k -= 1;
+    boats_required += 1;
   }
-
-  while (m > 0)
-  {
-    nums1[k] = nums1[m - 1];
-    m -= 1;
-    k -= 1;
-  }
-
-  while (n > 0)
-  {
-    nums1[k] = nums2[n - 1];
-    n -= 1;
-    k -= 1;
-  }
+  return boats_required;
 }
 
-vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
-  vector<vector<int>> ans;
-  int i = 0, j = 0;
-  while (i < nums1.size() && j < nums2.size()) {
-    if(nums1[i][0] <= nums2[j][0]) {
-      if(nums1[i][0] == nums2[j][0]) {
-        ans.push_back({{nums1[i][0], nums1[i][1] + nums2[j][1]}});
-        i += 1;
-        j += 1;
-      } else {
-        ans.push_back(nums1[i]);
-        i += 1;
-      }
-    } else {
-      ans.push_back(nums2[j]);
-      j += 1;
-    }
-  }
 
-  while (i < nums1.size()) {
-    ans.push_back(nums1[i]);
-    i += 1; 
-  }
+int kthGrammar(int n, int k) {
 
-  while (j < nums2.size()) {
-    ans.push_back(nums2[j]);
-    j += 1;
-  }
-
-  return ans;
 }
 
 int main() {
-  
+  int n = 4, k = 8;
+  int ans = kthGrammar(n, k);
+  std::cout << "Answer " << ans << std::endl;
   return 0;
 }
 
