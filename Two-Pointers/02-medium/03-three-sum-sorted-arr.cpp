@@ -78,8 +78,8 @@ std::vector<std::vector<int>> bruteForce(std::vector<int> arr) {
 // * If the following is true
 //* arr[i] + arr[j] + arr[k] = 0 
 // * Then we can also derive the following
-//* arr[k] = -(arr[i] + arr[j]);
-
+// * arr[k] = -(arr[i] + arr[j]);
+// * here we are not finding 0 rather we are finding kth element
 // * TIME COMPLEXITY O(N^2) x log(size of set) = O(N^2) x log(m)
 /*
  * O(N^2) => Two for loop

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode 948
  * * Bag of Tokens
  * * You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, 
  * * where each tokens[i] denotes the value of tokeni.
@@ -25,7 +26,9 @@
  * * https://leetcode.com/problems/bag-of-tokens/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
@@ -75,8 +78,8 @@ int main() {
   // std::vector<int> tokens = {100, 200, 300, 400};
   int power = 150;
   std::vector<int> tokens = {200, 100};
-  std::cout << "Power " << power << std::endl;
-  std::cout << "Tokens ";
+  std::cout << "Power: " << power << std::endl;
+  std::cout << "Tokens: ";
   printArr(tokens);
   int ans = bagOfTokensScore(tokens, power);
   std::cout << "Max Score " << ans << std::endl;

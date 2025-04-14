@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include <set>
 #include <vector>
 #include <climits>
@@ -31,71 +32,33 @@ void printMatrix(std::vector<std::vector<T>> matrix) {
   std::cout << std::endl;
 }
 
-void calculatePowers(std::vector<int> &powers, int n) {
-  powers[0] = 1;
-  int i = 1;
-  while(n > 0) {
-    powers[i] = powers[i - 1] * 2;
-    i += 1;
-    n -= 1;
-  }
-}
-
-int numSubseq(std::vector<int> arr, int target) {
-  int n = arr.size();
-  std::sort(arr.begin(), arr.end());
-
-  std::vector<int> powers(n);
-  calculatePowers(powers, n);
-
-  int ans = 0;
-  int M = 1e9 + 7; // * 10^9 + 7
-
+int bagOfTokensScore(std::vector<int> tokens, int power) {
+  int n = tokens.size();
+  std::sort(tokens.begin(), tokens.end());
   int i = 0, j = n - 1;
-  while (i <= j) {
-    long long cur_sum = arr[i] + arr[j];
-    if(cur_sum <= target) {
-      int diff = j - i;
-      ans = ans % M + powers[diff] % M;
-      i += 1;
-    }
-    else {
-      j -= 1;
-    }
-  }
-  return ans;
-}
-
-int numRescueBoats(std::vector<int> weights, int limit) {
-  int n = weights.size();
-  int boats_required = 0;
-
-  std::sort(weights.begin(), weights.end());
-  
-  int i = 0, j = n - 1;
+  int points = 0, max_points = 0;
+  std::sort(tokens.begin(), tokens.end());
   while(i <= j) {
-    int cur_weight = weights[i] + weights[j];
-    if (cur_weight <= limit) {
+    if (power >= tokens[i]) {
+      power -= tokens[i];
+      points += 1;
       i += 1;
-      j -= 1;
+      max_points = std::max(max_points, points);
     }
     else {
-      j -= 1;
+      if (points >= 1) {
+        power += tokens[j]; 
+        points -= 1;
+        j -= 1;
+      } else {
+        return max_points;
+      }
     }
-    boats_required += 1;
   }
-  return boats_required;
-}
-
-
-int kthGrammar(int n, int k) {
-
+  return max_points;
 }
 
 int main() {
-  int n = 4, k = 8;
-  int ans = kthGrammar(n, k);
-  std::cout << "Answer " << ans << std::endl;
   return 0;
 }
 

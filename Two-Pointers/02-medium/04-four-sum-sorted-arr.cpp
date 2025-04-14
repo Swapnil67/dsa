@@ -16,9 +16,10 @@
  * * https://leetcode.com/problems/4sum/
 */
 
-
-#include<set>
-#include<iostream>
+#include <set>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
@@ -146,8 +147,11 @@ std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
         continue;
       int k = j + 1, l = n - 1;
       // * 2 pointers:
-      while(k < l) {
-        long long sum = arr[i] + arr[j] + arr[k] + arr[l];
+      while (k < l) {
+        long sum = arr[i];
+        sum += arr[j];
+        sum += arr[k];
+        sum += arr[l];
         if(sum == target) {
           std::vector<int> temp = {arr[i], arr[j], arr[k], arr[l]};
           ans.push_back(temp);
