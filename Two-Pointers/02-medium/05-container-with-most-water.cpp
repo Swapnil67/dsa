@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 11
  * Container With Most Water
  * You are given an integer array height of length n. There are n vertical lines drawn such that the
  * two endpoints of the ith line are (i, 0) and (i, height[i]).
@@ -12,7 +13,9 @@
  * https://leetcode.com/problems/container-with-most-water/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <climits>
+#include <iostream>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
@@ -61,9 +64,9 @@ int maxArea(std::vector<int> height) {
 }
 
 int main() {
+  std::vector<int> nums = {3, 1, 2, 3};
   // std::vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
   // std::vector<int> nums = {1, 1};
-  std::vector<int> nums = {3, 1, 2, 3};
   printArr(nums);
   // int ans = bruteForce(nums);
   int ans = maxArea(nums);

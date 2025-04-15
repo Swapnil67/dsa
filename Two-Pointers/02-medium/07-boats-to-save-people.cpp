@@ -1,8 +1,8 @@
 /**
  * * Leetcode 881
  * * Boats to Save People
- * * You are given an array people where people[i] is the weight of the ith person, and an infinite number of boats
- * * where each boat can carry a maximum weight of limit. 
+ * * You are given an array people where people[i] is the weight of the ith person, 
+ * * and an infinite number of boats where each boat can carry a maximum weight of limit. 
  * * Each boat carries at most two people at the same time, provided the sum of the weight of those people 
  * * is at most limit.
  * * Return the minimum number of boats to carry every given person.
@@ -33,7 +33,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------`
 // * Take at most two people on boat (Greedy Approach)
 // * If take the most heavy person and move forward
@@ -43,19 +42,20 @@ int numRescueBoats(std::vector<int>& people, int limit) {
   std::sort(people.begin(), people.end());
 
   int n = people.size();
-  int boats = 0;
+  int boats_required = 0;
   int l = 0, r = n - 1;
   while (l <= r) {
     // * at most two people are allowed in boat
     if((people[l] + people[r]) <= limit) {
-      l++, r--;
+      l += 1;
+      r -= 1;
     }
     else {
-      r--;
+      r -= 1;
     }
-    boats++;
+    boats_required += 1;
   }
-  return boats;
+  return boats_required;
 }
 
 int main() {

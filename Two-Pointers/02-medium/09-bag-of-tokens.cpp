@@ -16,11 +16,11 @@
  * * Output : 0
  * 
  * * Example 2
- * * Input  : tokens = [200,100], power = 150
+ * * Input  : tokens = [200, 100], power = 150
  * * Output : 1
  * 
  * * Example 3
- * * Input  : tokens = [100,200,300,400], power = 200
+ * * Input  : tokens = [100, 200, 300, 400], power = 200
  * * Output : 2
 
  * * https://leetcode.com/problems/bag-of-tokens/description/

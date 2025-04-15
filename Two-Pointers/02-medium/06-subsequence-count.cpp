@@ -49,23 +49,23 @@ int numSubseq(std::vector<int> arr, int target) {
   int ans = 0;
 
   // * Create a power vector
-  std::vector<int> power(n);
+  int power[n];
   power[0] = 1;
-  for (int i = 1; i < n; ++i) {
-    power[i] = (power[i - 1] * 2) % M;
+  for(int i = 1; i < n; ++i) {
+    power[i] = (2 * power[i - 1]) % M;
   }
-  // printArr(power);
 
   while (l <= r) {
     long long sum = arr[l] + arr[r];
     if(sum <= target) {
+      // * if this is valid then all combination of elements b/w i - j will be valid 
       int diff = r - l;
       // std::cout << diff << std::endl;
       ans = ((ans % M) + (power[diff])) % M;
-      l++;
+      l += 1;
     }
     else {
-      r--;
+      r -= 1;
     }
   }
   return ans;
