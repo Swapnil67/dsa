@@ -1,21 +1,30 @@
 /*
+ * Leetcode - 1578
  * Minimum Time to Make Rope Colorful
- * Given an integer array nums, move all the even integers at the beginning of the array followed 
- * by all the odd integers.
- * Return any array that satisfies this condition.
+ * Alice has n balloons arranged on a rope. You are given a 0-indexed string colors where colors[i] is the color of the ith balloon.
+ * Alice wants the rope to be colorful. She does not want two consecutive balloons to be of the same color,
+ * so she asks Bob for help. Bob can remove some balloons from the rope to make it colorful. 
+ * You are given a 0-indexed integer array neededTime where neededTime[i] is the time (in seconds) that Bob 
+ * needs to remove the ith balloon from the rope.
+ * Return the minimum time Bob needs to make the rope colorful.
 
  * Example 1
- * Input  : s = "I am zoro"
- * Output : "zoro am I"
+ * Input  : colors = "abaac", neededTime = [1, 2, 3, 4, 5]
+ * Output : 3
  * 
  * Example 2
- * Input  : s = "Roronoa Zoro"
- * Output : "Zoro Roronoa" 
+ * Input  : colors = "abc", neededTime = [1, 2, 3]
+ * Output : 0
+ * 
+ * Example 3
+ * Input  : colors = "aabaa", neededTime = [1, 2, 3, 4, 1]
+ * Output : 2
 
  * https://leetcode.com/problems/minimum-time-to-make-rope-colorful/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {

@@ -14,7 +14,8 @@
  * https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
@@ -55,21 +56,23 @@ bool arrayStringsAreEqual(std::vector<std::string> word1, std::vector<std::strin
   int i = 0, j = 0;   // * Index of char
 
   while (w1 < n1 && w2 < n2) {
+    printf("%d %d & %d %d\n", w1, i, w2, j);
     if(i < word1[w1].size() && j < word2[w2].size()) {
-      if(word1[w1][i] != word2[w2][j]) {
+      if (word1[w1][i] != word2[w2][j]) {
         return false;
       }
-      i++, j++;
+      i += 1;
+      j += 1;
     }
     else {
        // * i goes out of bound
       if (i >= word1[w1].size() && w1 < n1) {
-        w1++;
+        w1 += 1;
         i = 0;
       }
       // * j goes out of bound
       if (j >= word2[w2].size() && w2 < n2) {
-        w2++;
+        w2 += 1;
         j = 0;
       }
     }

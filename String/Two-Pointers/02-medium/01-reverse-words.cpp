@@ -1,8 +1,5 @@
 /*
- * Sort Array By Parity 
- * Given an integer array nums, move all the even integers at the beginning of the array followed 
- * by all the odd integers.
- * Return any array that satisfies this condition.
+ TODO
 
  * Example 1
  * Input  : s = "I am zoro"
@@ -46,6 +43,48 @@ std::string reverseWords(std::string &s) {
   return s.substr(0, r - 1);
 }
 
+// * My Implementation (little easy to grasp)
+
+void reverseString(std::string &s, int l, int r) {
+  while (isspace(s[r]))
+    r -= 1;
+  while(l < r) {
+    char temp = s[l];
+    s[l] = s[r];
+    s[r] = temp;
+    l += 1;
+    r -= 1;
+  }
+}
+
+std::string reverseWords2(std::string s) {
+  int n = s.size();
+  int l = 0, r = n - 1;
+  reverseString(s, l, r);
+
+  std::cout << s << std::endl;
+  int i = 0;
+  l = 0, r = 0;
+
+  while(i < n) {
+    // * move i till you hit space character
+    if (!isspace(s[i])) {
+      i += 1;
+    }
+    else {
+      // printf("%d %d %d\n", i, l, r);
+      r = i;
+      reverseString(s, l, r);
+      r += 1;
+      l = r;
+      // * move i to first character of next word
+      while (isspace(s[i]))
+        i += 1;
+    }
+  }
+  return s;
+}
+
 int main() {
   // std::string s = "I am zoro";
   std::string s = "   Roronoa      Zoro     ";
@@ -74,3 +113,13 @@ int main() {
 // *           l
 // *           r
 
+// *                   i 
+// * z o r o   o r o R
+// *           l
+// *                 r
+
+// *                   i 
+// * z o r o   R o r o
+// *                 l
+// *                 r
+ 

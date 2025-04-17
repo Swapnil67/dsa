@@ -32,6 +32,15 @@ void printMatrix(std::vector<std::vector<T>> matrix) {
   std::cout << std::endl;
 }
 
+void printVectorString(std::vector<std::string> strs) {
+  int n = strs.size();
+  std::cout << "[ "; 
+  for (std::string s : strs) {
+    std::cout << s << ", ";
+  }
+  std::cout << "]" << std::endl;
+}
+
 int numSubseq(std::vector<int> arr, int target) {
   int n = arr.size();
   int M = 1e9 - 7;
@@ -120,22 +129,121 @@ int bagOfTokensScore(std::vector<int> &tokens, int power) {
   return max_points;
 }
 
+bool bruteForceStringEqual(std::vector<std::string> word1, std::vector<std::string> word2){
+  int n1 = word1.size(), n2 = word2.size();
+  std::string str1 = "", str2 = "";
+  for (std::string str :  word1) {
+    str1 += str;
+  }
+  for (std::string str :  word2) {
+    str2 += str;
+  }
+  return str1 == str2;
+}
+
+bool arrayStringsAreEqual(std::vector<std::string> word1, std::vector<std::string> word2){
+  int n1 = word1.size(), n2 = word2.size();
+  int i = 0, j = 0;
+  int ii = 0, jj = 0;
+  while(i < n1 && j < n2) {
+    // printf("%d %d & %d %d\n", i, ii, j, jj);
+    if(word1[i][ii] != word2[j][jj]) {
+      return false;
+    }
+    ii += 1;
+    jj += 1;
+
+    if (ii >= word1[i].size() && i < n1) {
+      i += 1;
+      ii = 0;
+    }
+    if (jj >= word2[j].size() && j < n2) {
+      j += 1;
+      jj = 0;
+    }
+  }
+
+  if (i != n1 || j != n2)
+    return false;
+
+  return true;
+}
+
+void reverseString(std::string &s, int l, int r) {
+  while (isspace(s[r]))
+    r -= 1;
+  while(l < r) {
+    char temp = s[l];
+    s[l] = s[r];
+    s[r] = temp;
+    l += 1;
+    r -= 1;
+  }
+}
+
+std::string reverseWords(std::string s) {
+  int n = s.size();
+  int l = 0, r = n - 1;
+  reverseString(s, l, r);
+
+  std::cout << s << std::endl;
+  int i = 0;
+  l = 0, r = 0;
+
+  while(i < n) {
+    // * move i till you hit space character
+    if (!isspace(s[i])) {
+      i += 1;
+    }
+    else {
+      // printf("%d %d %d\n", i, l, r);
+      r = i;
+      reverseString(s, l, r);
+      r += 1;
+      l = r;
+      // * move i to first character of next word
+      while (isspace(s[i]))
+        i += 1;
+    }
+  }
+  return s;
+}
+
+int minTimeToMakeRopeColorful(std::string s, std::vector<int> neededTime) {
+  int n = s.size();
+  int time = 0, pre_max = 0;
+  for (int i = 0; i < n; ++i) {
+    if(i > 0 && s[i] != s[i - 1]) {
+      pre_max = 0;
+    }
+    time += min(neededTime[i], pre_max);
+    pre_max = max(pre_max, neededTime[i]);
+  }
+  return time;
+}
+
+int minimumLength(std::string s) {
+  int n = s.size();
+  int i = 0, j = n - 1;
+  while(i < j) {
+    printf("%d %d\n", i , j);
+    if (s[i] != s[j]) {
+      return j - i + 1;
+    }
+
+    i += 1;
+    j -= 1;
+    while (i < j && s[i] == s[i - 1])
+      i += 1;
+    while (j >= i && s[j] == s[j + 1])
+      j -= 1;
+  }
+  return j - i + 1;
+}
+
 int main() {
-  int power = 200;
-  std::vector<int> tokens = {100, 200, 300, 400};
-  // int power = 150;
-  // std::vector<int> tokens = {200, 100};
-  std::cout << "Power: " << power << std::endl;
-  std::cout << "Tokens: ";
-  printArr(tokens);
-  int ans = bagOfTokensScore(tokens, power);
-  std::cout << "Max Score " << ans << std::endl;
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 practice.cpp -o output && ./output
-
-// * 0 1 2 3
-// * 3 2 2 1
-// *
