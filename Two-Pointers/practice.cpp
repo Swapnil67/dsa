@@ -268,7 +268,6 @@ int main() {
   std::vector<int> arr = {1, 2, -4, -5};
   std::cout<<"Before Rearranging"<<std::endl;
   printArr(arr);
-
   std::cout<<"After Rearranging"<<std::endl;
   std::vector<int> ans = rearrangeNumbySign(arr);
   printArr(ans);
