@@ -31,7 +31,7 @@ int minimumLength(std::string s) {
   while(i < j) {
     std::cout << i << " " << j << std::endl;
     if(s[i] != s[j]) {
-      return j - i + 1;
+      break;
     }
     i++;
     j--;

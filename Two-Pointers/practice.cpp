@@ -210,14 +210,16 @@ std::string reverseWords(std::string s) {
 }
 
 int minTimeToMakeRopeColorful(std::string s, std::vector<int> neededTime) {
+  int prev_max = 0;
   int n = s.size();
-  int time = 0, pre_max = 0;
+  int time = 0;
   for (int i = 0; i < n; ++i) {
-    if(i > 0 && s[i] != s[i - 1]) {
-      pre_max = 0;
+    if (i > 0 && s[i] != s[i - 1]) {
+      prev_max = 0;
     }
-    time += min(neededTime[i], pre_max);
-    pre_max = max(pre_max, neededTime[i]);
+
+    time = time + min(prev_max, neededTime[i]);
+    prev_max = max(prev_max, neededTime[i]);
   }
   return time;
 }
@@ -225,23 +227,51 @@ int minTimeToMakeRopeColorful(std::string s, std::vector<int> neededTime) {
 int minimumLength(std::string s) {
   int n = s.size();
   int i = 0, j = n - 1;
-  while(i < j) {
-    printf("%d %d\n", i , j);
+  while (i < j) {
     if (s[i] != s[j]) {
-      return j - i + 1;
+      break;
     }
 
     i += 1;
     j -= 1;
-    while (i < j && s[i] == s[i - 1])
+
+    while (i > 0 && i < j && s[i] == s[i - 1]) {
       i += 1;
-    while (j >= i && s[j] == s[j + 1])
+    }
+
+    while (j >= i && s[j] == s[j + 1]) {
       j -= 1;
+    }
   }
+
   return j - i + 1;
 }
 
+std::vector<int> rearrangeNumbySign(std::vector<int> arr) {
+  int n = arr.size();
+  int p_index = 0, n_index = 1;
+  std::vector<int> ans(n);
+  for (int i = 0; i < n; ++i) {
+    if(arr[i] < 0) {  
+      ans[n_index] = arr[i];
+      n_index += 2;
+    }
+    else {
+      ans[p_index] = arr[i];
+      p_index += 2;
+    }
+  }
+  return ans;
+}
+
 int main() {
+  std::vector<int> arr = {1, 2, -4, -5};
+  std::cout<<"Before Rearranging"<<std::endl;
+  printArr(arr);
+
+  std::cout<<"After Rearranging"<<std::endl;
+  std::vector<int> ans = rearrangeNumbySign(arr);
+  printArr(ans);
   return 0;
 }
 

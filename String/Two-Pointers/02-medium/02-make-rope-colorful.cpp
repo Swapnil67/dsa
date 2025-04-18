@@ -33,7 +33,7 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-int minCost(std::string colors, std::vector<int> neededTime) {
+int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
   int n = colors.size();
   int time = 0, prev = 0;
   for (int i = 0; i < n; ++i) {
@@ -62,9 +62,65 @@ int main() {
   std::vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
   std::cout << colors << std::endl;
   printArr(neededTime);
-  int time = minCost(colors, neededTime);
+  int time = minTimeToMakeRopeColorful(colors, neededTime);
   std::cout << time << std::endl;
 }
+
+// * DRY RUN
+// * 1 2 3 4 5 
+// * a b a a c
+// * i 
+// * cur   =  0
+// * p_max =  0
+
+// * 1 2 3 4 5 
+// * a b a a c
+// * i 
+// * cur   =  0             time = time + min(i , prev_max)
+// * p_max =  1             max(i, prev_max)
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *   i 
+// * cur   =  0             time = time + min(i , prev_max)
+// * p_max =  0             s[i] != s[i - 1]
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *   i 
+// * cur   =  0             time = time + min(i , prev_max)
+// * p_max =  2             max(i, prev_max)
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *     i 
+// * cur   =  0             time = time + min(i , prev_max)
+// * p_max =  0             s[i] != s[i - 1]
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *     i 
+// * cur   =  0             time = time + min(i , prev_max)
+// * p_max =  3             max(i, prev_max)
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *       i 
+// * cur   =  3             time = time + min(i , prev_max)
+// * p_max =  4             max(i, prev_max)
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *         i 
+// * cur   =  3             time = time + min(i , prev_max)
+// * p_max =  0             max(i, prev_max)
+
+// * 1 2 3 4 5 
+// * a b a a c
+// *         i 
+// * cur   =  3
+// * p_max =  5
+
 
 // * Run the code
 // * g++ --std=c++17 02-make-rope-colorful.cpp -o output && ./output
