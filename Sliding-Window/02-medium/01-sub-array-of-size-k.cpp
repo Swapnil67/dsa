@@ -35,25 +35,19 @@ void printArr(std::vector<int> arr) {
 int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
   int n = arr.size();
   int ans = 0;
-  for (int i = 0; i < n; ++i) {
-    int sum = 0, c = 0;
-    // * Loop only i to i + 3 places [our window]
-    for (int j = i; (j < i + k) && (i + k <= n); ++j) {
-      sum += arr[j];
-      c++;
+  for(int i = 0; i <= n - k; ++i) {
+    int cur_sum = 0;
+    for (int j = i; j < i + k; ++j) {
+      cur_sum += arr[j];
     }
-    // std::cout << c << " " << sum << " " << sum / k << std::endl;
-    if(c == k) {
-      int avg = sum / k;
-      if(avg >= threshold)
-        ans++;
-    }
+    if (cur_sum / k >= threshold)
+      ans += 1;
   }
   return ans;
 }
 
 // * ------------------------- APPROACH 1B: BRUTE FORCE APPROACH -------------------------`
-// * Nested Loop
+// * Calculate the sum of first window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int bruteForce2(std::vector<int> &arr, int k, int threshold) {
@@ -63,7 +57,8 @@ int bruteForce2(std::vector<int> &arr, int k, int threshold) {
   for(int i = 0; i < n; ++i) {
     cur_sum += arr[i];
     // * window < k
-    if(i < k - 1) 
+    // * For calculating the sum of first window
+    if (i < k - 1)
       continue;
 
     // * Shrink the window
