@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 219
  * * Contains Duplicate II
  * * Given an integer array nums and an integer k, return true if there are two distinct 
  * * indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
@@ -43,6 +44,7 @@ bool bruteForce(std::vector<int> &arr, int &k) {
     int val = arr[i];
     // * check if value already seen
     if(hash_map.count(val)) {
+      // * Check the condition valid within window of 'k'
       if (std::abs(i - hash_map[val]) <= k)
         return true;
     }

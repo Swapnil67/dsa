@@ -1,6 +1,6 @@
 /**
  * * Max Sum Subarray of size K
- * * Given an array of integers arr[]  and a number k. Return the maximum sum of a subarray of size k.
+ * * Given an array of integers arr[] and a number k. Return the maximum sum of a subarray of size k.
  * 
  * * Example 1
  * * Input  : nums = [100, 200, 300, 400], k = 2
@@ -17,7 +17,9 @@
  * * https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
 */
 
+#include <vector>
 #include <iostream>
+
 void printArr(std::vector<int> arr) {
   int n = arr.size();
   for (int i = 0; i < n; i++) {
