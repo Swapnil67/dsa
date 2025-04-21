@@ -26,7 +26,7 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
@@ -61,10 +61,8 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
 
     j += 1;
   }
-
   return max_unsatisfied_customers + already_satisfied_customers;
 }
-
 
 int main() {
   // * testcase 1

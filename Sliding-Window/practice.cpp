@@ -72,19 +72,69 @@ int numOfSubarrays2(std::vector<int> &arr, int &k, int &threshold) {
   return ans;
 }
 
-int main() {
-  // * testcase 1
-  // int k = 3, threshold = 4;
-  // std::vector<int> arr = {2, 2, 2, 2, 5, 5, 5, 8};
-  // * testcase 1
-  int k = 3, threshold = 5;
-  std::vector<int> arr = {11, 13, 17, 23, 29, 31, 7, 5, 2, 3};
-  std::cout << "k = " << k << " & threshold = " << threshold << std::endl;
-  std::cout << "Input Array " << std::endl;
+int numberOfAlternatingGroupsBrute(std::vector<int> &arr, int k) {
+  int temp = k;
+  while (temp - 1 > 0) {
+    arr.push_back(arr[k - temp]);
+    temp -= 1;
+  }
   printArr(arr);
-  // int ans = bruteForce(arr, k, threshold);
-  int ans = numOfSubarrays2(arr, k, threshold);
-  std::cout << "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold " << ans << std::endl;
+
+  int result = 0;
+  int n = arr.size();
+  for (int i = 0; i < n; ++i) {
+    for (int j = i + 1; j < n; ++j) {
+      // * if prev element is same then break
+      if(arr[j] == arr[j - 1]) {
+        break;
+      }
+      // * if window reached incr the result and break
+      if(j - i + 1 == k) {
+        result += 1;
+        break;
+      }
+    }
+  }
+
+  return result;
+}
+
+int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
+  int temp = k;
+  while (temp - 1 > 0) {
+    arr.push_back(arr[k - temp]);
+    temp -= 1;
+  }
+  printArr(arr);
+
+  int result = 0;
+  int i = 0 , j = 0;
+  int n = arr.size();
+  while (j < n) {
+    if(j > 0 && arr[j] == arr[j - 1]) {
+      i = j;
+    }
+    if (j - i + 1 == k) {
+      i += 1;
+      result += 1;
+    }
+
+    j += 1;
+  }
+
+  return result;
+}
+
+int main() {
+  // int k = 3;
+  // std::vector<int> arr = {0, 1, 0, 1, 0};
+  // int k = 6;
+  // std::vector<int> arr = {0, 1, 0, 0, 1, 0, 1};
+  int k = 4;
+  std::vector<int> arr = {1, 1, 0, 1};
+  printArr(arr);
+  int ans = numberOfAlternatingGroups(arr, k);
+  std::cout << ans << std::endl;
   return 0;
 }
 
