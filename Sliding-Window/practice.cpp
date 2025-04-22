@@ -1,6 +1,6 @@
-#include<vector>
-#include<deque>
-#include<iostream>
+#include <vector>
+#include <deque>
+#include <iostream>
 #include <numeric>
 #include <climits>
 #include <map>
@@ -125,16 +125,38 @@ int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
   return result;
 }
 
+int characterReplacement(std::string s, int k) {
+  int n = s.size();
+  int max_len = 0, max_freq = 0;
+  
+  int i = 0, j = 0;
+  std::vector<int> char_hash(26, 0);
+  while(j < n) {
+    char_hash[s[j] - 'A']++;
+    max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
+
+    if(j - i + 1 - max_freq > k) {
+      char_hash[s[i] - 'A']--;
+      max_freq = 0;
+      i += 1;
+    }
+
+
+    if ((j - i + 1) - max_freq <= k) {
+      max_len = std::max(max_len, j - i + 1);
+    }
+    j += 1;
+  }
+
+  return max_len;
+}
+
 int main() {
-  // int k = 3;
-  // std::vector<int> arr = {0, 1, 0, 1, 0};
-  // int k = 6;
-  // std::vector<int> arr = {0, 1, 0, 0, 1, 0, 1};
-  int k = 4;
-  std::vector<int> arr = {1, 1, 0, 1};
-  printArr(arr);
-  int ans = numberOfAlternatingGroups(arr, k);
-  std::cout << ans << std::endl;
+  int k = 1;
+  std::string s = "AAAABBA";
+  std::cout << "Input String: " << s << std::endl;
+  int ans = characterReplacement(s, k);
+  std::cout << "Longest Repeating Character Replacement: " << ans << std::endl;
   return 0;
 }
 

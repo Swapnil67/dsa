@@ -10,15 +10,15 @@
  * * Note that since colors represents a circle, the first and the last tiles are considered to be next to each other.
  * 
  * * Example 1
- * * Input  : colors = [0,1,0,1,0], k = 3
+ * * Input  : colors = [0, 1, 0, 1, 0], k = 3
  * * Output : 3
  * 
  * * Example 2
- * * Input  : colors = [0,1,0,0,1,0,1], k = 6
+ * * Input  : colors = [0, 1, 0, 0, 1, 0, 1], k = 6
  * * Output : 2
  * 
  * * Example 3
- * * Input  : colors = [1,1,0,1], k = 4
+ * * Input  : colors = [1, 1, 0, 1], k = 4
  * * Output : 0
  * 
  * * https://leetcode.com/problems/alternating-groups-ii/description/

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode 3
  * * Longest Substring Without Repeating Characters
  * * Given a string s, find the length of the longest substring without repeating characters.
  * 
@@ -16,9 +17,9 @@
  * * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
 */
 
-#include<map>
-#include<vector>
-#include<iostream>
+#include <map>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -38,13 +39,14 @@ int bruteForce(std::string s) {
   for (int i = 0; i < n; ++i) {
     // * All ASCII characters [0-255]
     std::vector<int> frequency(256);
-    for (int j = i; j < n; ++j) {
+    int j = i;
+    for (; j < n; ++j) {
       if (frequency[s[j]] == 1) {
         break;
       }
-      max_len = std::max(max_len, j - i + 1);
       frequency[s[j]] = 1;
     }
+    max_len = std::max(max_len, j - i + 1);
   }
   return max_len;
 }

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode 424
  * * Longest Repeating Character Replacement
  * * You are given a string s and an integer k. You can choose any character of the string and change it
  * * to any other uppercase English character. You can perform this operation at most k times.
@@ -16,8 +17,8 @@
  * * https://leetcode.com/problems/longest-repeating-character-replacement/description/
 */
 
-#include<iostream>
-#include<bits/stdc++.h>
+#include <iostream>
+#include <bits/stdc++.h>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
@@ -31,7 +32,9 @@ int bruteForce(std::string s, int k) {
     int max_freq = 0;
     std::vector<int> char_hash(26, 0);
     for (int j = i; j < n; ++j) {
+      // * Incr the current character frequency
       char_hash[s[j] - 'A']++;
+      // * check if max frequency of character changed
       max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
       size_t len_of_substr = j - i + 1;
       int replacements = len_of_substr - max_freq;
@@ -60,7 +63,10 @@ int betterApproach(std::string s, int k) {
   int max_len = 0, max_freq = 0;
   std::vector<int> char_hash(26, 0);
   while(j < n) {
+    // * Incr the current character frequency
     char_hash[s[j] - 'A']++;
+
+    // * check if max frequency of character changed
     max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
     size_t len_of_substr = j - i + 1;
 
@@ -73,14 +79,14 @@ int betterApproach(std::string s, int k) {
       for (int p = 0; p < 26; ++p) {
         max_freq = std::max(max_freq, char_hash[p]);
       }
-      i++;
+      i++; // * Incr the left pointer
     }
 
     if ((j - i + 1) - max_freq <= k) {
       max_len = std::max(max_len, j - i + 1);
     }
 
-    j++;
+    j++; // * Incr the right pointer
   }
   return max_len;
 }
@@ -101,18 +107,17 @@ int characterReplacement(std::string s, int k) {
   while(j < n) {
     char_hash[s[j] - 'A']++;
     max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
-    size_t len_of_substr = j - i + 1;
 
     // * if number of replacement required are greater than the max replacements
-    if (len_of_substr - max_freq > k) {
+    if (j - i + 1; - max_freq > k) {
+      // * Shrink the window from left
       char_hash[s[i] - 'A']--;
       max_freq = 0;
       i++;
     }
 
-    len_of_substr = j - i + 1;
-    if (len_of_substr - max_freq <= k) {
-      max_len = std::max(max_len, (int) len_of_substr);
+    if (j - i + 1 - max_freq <= k) {
+      max_len = std::max(max_len, (int) j - i + 1);
     }
 
     j++;
