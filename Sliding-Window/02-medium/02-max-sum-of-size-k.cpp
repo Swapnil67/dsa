@@ -29,9 +29,9 @@
  * * https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/
 */
 
-#include<set>
 #include<vector>
 #include<iostream>
+#include<unordered_set>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -45,20 +45,19 @@ void printArr(std::vector<int> arr) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int subarraySumBrute(std::vector<int> arr, int k) {
+int bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
-  long long ans = 0;
-  for (int i = 0; i < n; ++i) {
-    long long cur_sum = 0;
-    std::set<int> st;
-     for (int j = i; k + i <= n && j < k + i; ++j) {
-      if(!st.count(arr[j])) {
-        cur_sum += arr[j];
-        st.insert(arr[j]);
-      }
-      else {
+  int ans = 0;
+  for (int i = 0; i <= n - k; ++i) {
+    int cur_sum = 0;
+    std::unordered_set<int> st;
+    for(int j = i; j < i + k; ++j) {
+      if(st.find(arr[j]) != st.end()) {
+        // * found duplicate
         break;
       }
+      cur_sum += arr[j];
+      st.insert(arr[j]);
     }
     if(st.size() == k) {
       ans = std::max(ans, cur_sum);
@@ -66,6 +65,10 @@ int subarraySumBrute(std::vector<int> arr, int k) {
   }
   return ans;
 }
+
+// * 0, 1, 2, 3, 4, 5, 6
+// * 1, 5, 4, 2, 9, 9, 9 
+// * n - k = 7 - 3 = 4
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Classic Sliding Window with set
@@ -75,7 +78,7 @@ int subarraySum(std::vector<int> arr, int window_size) {
   int n = arr.size();
   int i = 0, j = 0;
   long long max_sum = 0, cur_sum = 0;
-  std::set<int> st;
+  std::unordered_set<int> st;
   while(j < n) {
     // * Shrink window 
     // * on duplicate element

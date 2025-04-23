@@ -14,9 +14,9 @@
 
  * * https://leetcode.com/problems/permutation-in-string/description/
 */
-#include<iostream>
-#include<vector>
-#include<bits/stdc++.h>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * TIME COMPLEXITY O(n! * n)
@@ -59,7 +59,7 @@ bool betterApproach(std::string s1, std::string s2) {
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
 // * Calculate character frequency vector of s1 string
-// * Comparte frequecy vector using sliding window approach
+// * Compare frequecy vectors of s1 & s2 using sliding window approach
 // * TIME COMPLEXITY O(m + n)
 // * SPACE COMPLEXITY O(26)
 bool checkInclusion(std::string s1, std::string s2) {

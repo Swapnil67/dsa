@@ -15,9 +15,9 @@
  * * https://www.naukri.com/code360/problems/first-negative-in-every-window_759333
 */
 
-#include<deque>
-#include<vector>
-#include<iostream>
+#include <deque>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -31,20 +31,18 @@ void printArr(std::vector<int> arr) {
 // * Check all k size windows
 // * TIME COMPLEXITY O(N * 3)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> &arr, int &k) {
+std::vector<int> bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
   std::vector<int> ans;
-  for (int i = 0; i < n; ++i) {
-    int first_neg = 0;
-    for (int j = i; i + k <= n && j < i + k; ++j) {
-      if(first_neg == 0 && arr[j] < 0) {
-        first_neg = arr[j];
+  for (int i = 0; i <= n - k; ++i) {
+    int neg_num = 0;
+    for(int j = i; j < i + k; ++j)  {
+      if(arr[j] < 0) {
+        neg_num = arr[j];
         break;
       }
     }
-    if (i + k <= n) {
-      ans.push_back(first_neg);
-    }
+    ans.push_back(neg_num);
   }
   return ans;
 }
@@ -65,7 +63,7 @@ std::vector<int> firstNegative(std::vector<int> arr, int k) {
     }
 
     // * Pop from queue
-    if(j - i + 1 > k) {
+    if (j - i + 1 > k) {
       if(arr[i] < 0 && !dq.empty()) {
         dq.pop_front();
       }
@@ -73,7 +71,7 @@ std::vector<int> firstNegative(std::vector<int> arr, int k) {
     }
 
     // * first -ve in 'k' window
-    if(j - i + 1 == k) {
+    if (j - i + 1 == k) {
       if(!dq.empty()) {
         ans.push_back(dq.front());
       }
