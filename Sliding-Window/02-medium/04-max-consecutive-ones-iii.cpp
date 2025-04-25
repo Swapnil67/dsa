@@ -38,24 +38,22 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
-  int max_cnt = 0;
-  for (int i = 0; i < n; ++i) {
-    int cur_cnt = 0, zero_cnt = 0;
-    for (int j = i; j < n; ++j) {
-      if(arr[j] == 1) {
-        cur_cnt++;
-      }
-      else if(zero_cnt < k) {
-        cur_cnt++;
-        zero_cnt++;
-      }
-      else {
-        break;
+  int max_ones = 0;
+  for(int i = 0; i < n; ++i) {
+    int j = i, k_changes = k;
+    for(; j < n; ++j) {
+      if (arr[j] == 0) {
+        if(k_changes > 0) {
+          k_changes -= 1;
+        }
+        else {
+          break;
+        }
       }
     }
-    max_cnt = std::max(max_cnt, cur_cnt);
+    max_ones = std::max(max_ones, j - i);
   }
-  return max_cnt;
+  return max_ones;
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
@@ -80,9 +78,7 @@ int betterApproach(std::vector<int> arr, int k) {
       i++;
     }
 
-    if (zeros <= k) {
-      max_len = std::max(max_len, j - i + 1);
-    }
+    max_len = std::max(max_len, j - i + 1);
     j++;
   }
   return max_len;

@@ -43,27 +43,16 @@ int subarraySum(std::vector<int> arr, int k) {
   return max_sum;
 }
 
-std::vector<int> bruteForce(std::vector<int> arr, int k) {
-  // TODO
-}
+// std::vector<int> firstNegative(std::vector<int> arr, int k) {
+//   // TODO
+// }
 
-std::vector<int> firstNegative(std::vector<int> arr, int k) {
-  // TODO
-}
+
+// int longestOnes(std::vector<int> arr, int k) {
+//   // TODO
+// }
 
 int main() {
-  // * testcase 1
-  // int window_size = 2;
-  // std::vector<int> arr = {5, -3, 2, 3, -4};
-  // * testcase 2
-  int window_size = 3;
-  std::vector<int> arr = {8, 1, -2, 2, -3, 6, 8, -1};
-  printArr(arr);
-  
-  // std::vector<int> ans = bruteForce(arr, window_size);
-  std::vector<int> ans = firstNegative(arr, window_size);
-  std::cout << "First Negative In Every Window" << std::endl;
-  printArr(ans);
   return 0;
 }
 
