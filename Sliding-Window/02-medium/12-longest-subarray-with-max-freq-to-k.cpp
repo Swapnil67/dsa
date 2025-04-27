@@ -1,5 +1,6 @@
 
 /**
+ * * Leetcode - 2958
  * * Length of Longest Subarray With at Most K Frequency
  * * You are given an integer array nums and an integer k.
  * * The frequency of an element x is the number of times it occurs in an array.
@@ -39,15 +40,16 @@ void printArr(std::vector<int> &arr) {
 int bruteForce(std::vector<int>& arr, int k) {
   int n = arr.size();
   int ans = 0;
-  for (int i = 0; i < n; ++i) {
+  for(int i = 0; i < n; ++i) {
     std::unordered_map<int, int> freq_map;
-    for (int j = 0; j < n; ++j) {
-      freq_map[arr[j]]++;
-      if(freq_map[arr[j]] > k) {
+    int j = i; // * This is done here to save the max sub arr calculation
+    for(; j < n; ++j) {
+      if(freq_map[arr[j]] >= k) {
         break;
-      }
-      ans = std::max(ans, j - i + 1);
+      }   
+      freq_map[arr[j]]++;
     }
+    ans = std::max(ans, j - i);
   }
   return ans;
 }
@@ -97,7 +99,8 @@ int maxSubarrayLength2(std::vector<int>& arr, int k) {
     // * Shrink the window
     if (culprit > 0) {
       freq_map[arr[i]]--;
-      if(arr[i] == k) {
+      // * Check if arr[i] is culprit by checking that it occured 'k' times
+      if (freq_map[arr[i]] == k) {
         culprit--;
       }
       i++;

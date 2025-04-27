@@ -17,42 +17,107 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-int subarraySum(std::vector<int> arr, int k) {    
-  int n = arr.size();
-  int max_sum = 0, cur_sum = 0; 
-  int i = 0, j = 0;
-  std::unordered_set<int> st;
-  while(j < n) {
-    while (i < j && (j - i + 1 > k || st.count(arr[j])))
-    {
-      cur_sum -= arr[i];
-      st.erase(arr[i]);
-      i += 1;
-    }
+// * 02 - med
+// int subarraySum(std::vector<int> arr, int k) {    
+// TODO
+// }
 
-    st.insert(arr[j]);
-    cur_sum += arr[j];
+// * 03 - med
+// std::vector<int> firstNegative(std::vector<int> arr, int k) {
+// TODO
+// }
 
-    if(st.size() == k) {
-      max_sum = std::max(max_sum, cur_sum);
-    }
+// * 04 - med
+// int longestOnes(std::vector<int> arr, int k) {
+// TODO
+// }
 
-    j += 1;
+// * 05 - med
+// int totalFruit(std::vector<int> fruits) {
+// TODO  
+// }
+
+// * 06 - med
+// int maxFrequency(std::vector<int> arr, int k) {
+// TODO 
+// }
+
+// * 07 - med
+// int minSubArrayLen(std::vector<int> arr, int target) {
+// TODO 
+// }
+
+// * 08 - med
+// std::vector<int> findClosestElements(std::vector<int> arr, int k, int x) {
+// TODO
+// }
+
+// * 09A - med
+// int minOperations(std::vector<int> arr, int x) {
+// TODO
+// }
+
+// * 09B - med
+// int minOperations2(std::vector<int> arr, int x) {
+// TODO
+// }
+
+// * 10 - med
+// int numSubarraysWithSum(std::vector<int> arr, int goal) {
+// TODO
+// }
+
+// * 11 - med
+// int numSubarrayProductLessThanK(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 12 - med
+// int numSubarrayProductLessThanK(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// int maxSubarrayLength(std::vector<int> arr, int k) {
+// TODO
+// }
+
+int getMax(std::vector<int> &arr) {
+  int max_ele = INT_MIN;
+  for(int i = 0; i < arr.size(); ++i) {
+    max_ele = std::max(max_ele, arr[i]);
   }
-
-  return max_sum;
+  return max_ele;
 }
 
-// std::vector<int> firstNegative(std::vector<int> arr, int k) {
-//   // TODO
-// }
-
-
-// int longestOnes(std::vector<int> arr, int k) {
-//   // TODO
-// }
+int countSubarrays(std::vector<int> arr, int k) {
+  int n = arr.size(), ans = 0;
+  return ans;
+}
 
 int main() {
+  // * testcase 1
+  int k = 2;
+  std::vector<int> arr = {1, 3, 2, 3, 3};
+
+  // * testcase 1
+  // int k = 2;
+  // std::vector<int> arr = {1, 3, 2, 5, 1, 5};
+
+  // * testcase 2
+  // int k = 3;
+  // std::vector<int> arr = {1, 4, 2, 1};
+
+  // * testcase 3
+  // int k = 4;
+  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
+
+  printf("Appear at least: %d\n", k);
+  printf("Input Array\n");
+  printArr(arr);  
+
+  int ans = countSubarrays(arr, k);
+  // int ans = countSubarrays2(arr, k);
+  printf("Length of Longest Subarray With at Most %d Frequency is %d\n", k, ans);
   return 0;
 }
 

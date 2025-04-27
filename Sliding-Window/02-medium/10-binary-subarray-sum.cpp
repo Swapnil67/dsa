@@ -1,5 +1,6 @@
 
 /**
+ * * Leetcode - 930
  * * Binary Subarrays With Sum
  * * Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal.
  * * A subarray is a contiguous part of the array.
@@ -68,8 +69,8 @@ int betterApproach(std::vector<int> arr, int goal) {
   int ans = 0, cur_sum = 0;
   std::unordered_map<int, int> sum_count;
   sum_count[0] = 1; // * If first rem comes zero
-  for(int i = 0; i < n; ++i) {
-    cur_sum += arr[i];
+  for(int &num : arr) {
+    cur_sum += num;
     int rem = cur_sum - goal;
     if(sum_count.find(rem) != sum_count.end()) {
       ans += sum_count[rem];
@@ -79,7 +80,6 @@ int betterApproach(std::vector<int> arr, int goal) {
   return ans;
 }
 
-
 // * ------------------------- APPROACH 3A: Optimal APPROACH -------------------------`
 // * Sliding Window for ans <= goal
 int helper(std::vector<int> arr, int goal) {
@@ -87,7 +87,7 @@ int helper(std::vector<int> arr, int goal) {
   int i = 0, j = 0, ans = 0;
   int cur_sum = 0;
   if (goal < 0)
-    return -1;
+    return 0;
   while(j < n) {
     cur_sum += arr[j];
 
@@ -111,7 +111,7 @@ int numSubarraysWithSum(std::vector<int> arr, int goal) {
 }
 
 // * ------------------------- APPROACH 3B: Optimal APPROACH -------------------------`
-// * Sliding Window + Zero Prefix count
+// * Sliding Window + Prefix Zeros count
 int numSubarraysWithSum2(std::vector<int> arr, int goal) {
   int n = arr.size();
   int i = 0, j = 0, ans = 0;
@@ -140,12 +140,12 @@ int numSubarraysWithSum2(std::vector<int> arr, int goal) {
 
 int main() {
   // * testcase 1
-  // int goal = 2;
-  // std::vector<int> arr = {1, 0, 1, 0, 1};
+  int goal = 2;
+  std::vector<int> arr = {1, 0, 1, 0, 1};
 
   // * testcase 2
-  int goal = 2;
-  std::vector<int> arr = {0, 1, 0, 0, 1};
+  // int goal = 2;
+  // std::vector<int> arr = {0, 1, 0, 0, 1};
 
   // * testcase 3
   // int goal = 0;
@@ -164,4 +164,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 10-binary-subarray-sum.cpp -o output && ./output
+// * g++ --std=c++20 10-binary-subarray-sum.cpp -o output && ./output

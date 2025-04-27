@@ -18,9 +18,9 @@
  * * https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/
 */
 #include <vector>
+#include <climits>
 #include <iostream>
 #include <unordered_map>
-#include <climits>
 #include <bits/algorithmfwd.h>
 
 void printArr(std::vector<int> arr) {
@@ -44,7 +44,7 @@ int bruteForce(std::vector<int> &arr, int k) {
 
   // * get the max_element from array
   int max_ele = getMax(arr);
-  // int max_ele = *max_element(arr.begin(), arr.end());
+
   for(int i = 0; i < n; ++i) {
     std::unordered_map<int, int> freq_map;
     for(int j = i; j < n; ++j) {

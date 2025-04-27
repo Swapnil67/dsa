@@ -66,12 +66,11 @@ int minSubArrayLen(std::vector<int> arr, int target) {
   int n = arr.size();
   int ans = INT_MAX, cur_sum = 0;
   int i = 0, j = 0;
-  while(j < n) {
-    // std::cout << i << " " << j << std::endl;
+  while (j < n) {
     cur_sum += arr[j];
 
     // * While cur_sum >= target shrink window and store new subarray size
-    while(cur_sum >= target) {
+    while (cur_sum >= target) {
       // * Shrink the window
       ans = std::min(ans, j - i + 1);
       cur_sum -= arr[i];

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 658
  * * Minimum Size Subarray Sum
  * * Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. 
  * * The result should also be sorted in ascending order.
@@ -18,10 +19,9 @@
  * * https://leetcode.com/problems/find-k-closest-elements/description/
 */
 
-
-#include<iostream>
-#include <vector>
 #include <deque>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -30,6 +30,11 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
+
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * Push the difference of first k elements to deque
+// * TIME COMPLEXITY O(N * k)
+// * SPACE COMPLEXITY O(N)
 std::vector<int> bruteForce(std::vector<int> arr, int k, int x) {
   std::deque<std::pair<int, int>> dq;
   int n = arr.size();
@@ -51,12 +56,18 @@ std::vector<int> bruteForce(std::vector<int> arr, int k, int x) {
 // * 1st number in window will always be closer to x than the last+1 element
 // * g(m) = f(m) <= f(m+k)
 
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Sliding Window + Binary Search
+// * x - arr[m] > arr[m+k] - x
+// * TIME COMPLEXITY O(logN)
+// * SPACE COMPLEXITY O(1)
 std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
   // * 'h' is little restricted becoz m + k should not become greater than n
-  int l = 0, h = n - k, m;
-  while(l < h) {
-    m = (l + (h - 1)) / 2; // * m is the starting point of window of size k
+  int l = 0, r = n - k, m;
+  // * binary search
+  while(l < r) {
+    m = (l + (r - l)) / 2; // * m is the starting point of window of size k
 
     // printf("arr[%d] = %d & arr[%d + k] = %d\n", m, arr[m], m, arr[m + k]);
     // * start of window is not smaller than one outside of window
@@ -65,7 +76,7 @@ std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
     }
     else {
       // * f(m) <= f(m+k) (True)
-      h = m;
+      r = m;
     }
   }
   return std::vector(arr.begin() + l, arr.begin() + l + k);

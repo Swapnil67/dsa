@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 1838
  * * Frequency of the Most Frequent Element
  * * The frequency of an element is the number of times it occurs in an array.
  * * You are given an integer array nums and an integer k. In one operation, 
@@ -25,9 +26,9 @@
 
 // ! [HINT] => Mostly frequent element will be one of the array elements
 
-#include<iostream>
-#include<vector>
+#include <vector>
 #include <climits>
+#include <iostream>
 #include <bits/algorithmfwd.h>
 
 void printArr(std::vector<int> arr) {
@@ -46,21 +47,23 @@ int myBruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
   int ans = 0;
   for(int i = 0; i < n; ++i) {
-    int cur = arr[i], op = k, freq = 0;
-    for(int j = 0; j < n; ++j) {
-      if(cur - arr[j] >= 0) {
-        if(op >= 0) {
-          freq++;
-          op = op - (cur - arr[j]);
+    int ele = arr[i], cur_ops = k;
+    int j = 0;
+    for (; j < n; ++j) {
+      if(arr[j] < ele) {
+        int required_ops = ele - arr[j];
+        if (cur_ops > 0 && required_ops <= cur_ops) {
+          cur_ops -= required_ops;
         }
         else {
           break;
         }
-      } else {
+      }
+      else {
         break;
       }
     }
-    ans = std::max(ans, freq);
+    ans = std::max(ans, j + 1);
   }
   return ans;
 }
@@ -86,8 +89,7 @@ int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefi
         prefix_arr[target_idx] - prefix_arr[m] + arr[m];
 
     // * Calculate how many operations we need
-    int ops = window_sum - original_sum;
-    if(ops > k) {
+    if(window_sum - original_sum > k) {
       // * Decrease the gap b/w m -> target_idx
       l = m + 1;
     }

@@ -1,5 +1,6 @@
 
 /**
+ * * Leetcode - 1658
  * * Minimum Operations to Reduce X to Zero
  * * You are given an integer array nums and an integer x. In one operation, you can either remove the leftmost or
  * * the rightmost element from the array nums and subtract its value from x. 
@@ -19,10 +20,10 @@
  * * https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero
 */
 
-#include<map>
-#include<iostream>
-#include<numeric>
-#include<climits>
+#include <map>
+#include <iostream>
+#include <numeric>
+#include <climits>
 #include <vector>
 
 void printArr(std::vector<int> arr) {
@@ -32,34 +33,8 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-
-int myApproach(std::vector<int> &arr, int x) {
-  int n = arr.size();
-  int i = 0, j = n - 1, ops = 0;
-  while(i <= j) {
-    if(arr[i] - x > arr[j] - x) {
-      if (x - arr[i] >= 0) {
-        x = x - arr[i];
-        ops++;
-      }
-      i++;
-    }
-    else {
-      if(x - arr[j] >= 0) {
-        x = x - arr[j];
-        ops++;
-      }
-      j--;
-    }
-  }
-  std::cout << x << std::endl;
-  return x == 0 ? ops : -1;
-}
-
-
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Classic Sliding Window
-// * Basic Algebra
+// * Classic Sliding Window + Basic Algebra
 // * left_sum + right_sum == x
 // * _______________ sum ________________
 // * [left_sum][__ sum - x __][right_sum]
@@ -70,9 +45,9 @@ int myApproach(std::vector<int> &arr, int x) {
 int minOperations(std::vector<int> &arr, int x) {
   int n = arr.size();
   int i = 0, j = 0, ans = INT_MIN;
-  long long sum = accumulate(arr.begin(), arr.end(), 0);
-  long long target_sum = sum - x;
-  // printf("sum: %d, target_sum: %d\n", sum, target_sum);
+  long long total_sum = accumulate(arr.begin(), arr.end(), 0);
+  long long target_sum = total_sum - x;
+  // printf("total_sum: %d, target_sum: %d\n", total_sum, target_sum);
   int cur_sum = 0;
   while(j < n) {
     cur_sum += arr[j];
@@ -95,8 +70,7 @@ int minOperations(std::vector<int> &arr, int x) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(X)
 int minOperations2(std::vector<int> &arr, int x) {
-  int n = arr.size(), longest_subarray = -1;
-  int j = 0;
+  int n = arr.size();
 
   // * Make prefix sum map
   std::map<int, int> prefix_sum;
@@ -114,15 +88,17 @@ int minOperations2(std::vector<int> &arr, int x) {
 
   long long target_sum = sum - x;
   long long cur_sum = 0;
+  int j = 0, ans = -1;
   while(j < n) {
     cur_sum += arr[j];
-    long long check_sum = cur_sum - target_sum;
+    long long check_sum = cur_sum - target_sum; 
+    // * check if we found 'check_sum' previously 
     if (prefix_sum.find(check_sum) != prefix_sum.end()) {
-      longest_subarray = std::max(longest_subarray, j - prefix_sum[check_sum]);
+      ans = std::max(ans, j - prefix_sum[check_sum]);
     }
     j++;
   }
-  return longest_subarray < 0 ? -1 : n - longest_subarray;
+  return ans < 0 ? -1 : n - ans;
 }
 
 int main() {
