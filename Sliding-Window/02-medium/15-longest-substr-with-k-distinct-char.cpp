@@ -17,8 +17,9 @@
  * * https://www.naukri.com/code360/problems/distinct-characters_2221410
 */
 
-#include<map>
-#include<iostream>
+#include <map>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -52,6 +53,7 @@ int bruteForce(std::string s, int k) {
 
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * Classic Sliding Window
 // * Keep frequency map of character occurences
 // * If frequency map size becomes greater than k then remove frequency map till it gets to k size
 // * Use while loop to decrease size of frequency map
@@ -65,14 +67,12 @@ int betterApproach(std::string s, int k) {
     freq_map[s[j]]++;
 
     // * Keep frequency map with k distinct elements
-    if(freq_map.size() > k) {
-      while(freq_map.size() > k) {
-        freq_map[s[i]]--;
-        if(freq_map[s[i]] == 0) {
-          freq_map.erase(s[i]);
-        }
-        i++;
+    while(freq_map.size() > k) {
+      freq_map[s[i]]--;
+      if(freq_map[s[i]] == 0) {
+        freq_map.erase(s[i]);
       }
+      i++;
     }
 
     if(freq_map.size() <= k) {
@@ -86,6 +86,7 @@ int betterApproach(std::string s, int k) {
 }
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * Classic Sliding Window
 // * Keep frequency map of character occurences
 // * Only calculate max_len if map size is within k or else decrease the frequency map
 // * TIME COMPLEXITY O(N)
@@ -119,7 +120,6 @@ int kDistinctChars(std::string s, int k) {
 
 
 int main() {
-
   int k = 8;
   std::string s = "fitmgntcesze";
 
@@ -135,4 +135,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 02-longest-substr-with-k-distinct-char.cpp -o output && ./output
+// * g++ --std=c++17 15-longest-substr-with-k-distinct-char.cpp -o output && ./output

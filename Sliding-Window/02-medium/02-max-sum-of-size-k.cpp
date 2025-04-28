@@ -81,8 +81,7 @@ int subarraySum(std::vector<int> arr, int window_size) {
   std::unordered_set<int> st;
   while(j < n) {
     // * Shrink window 
-    // * on duplicate element
-    // * or on set size >= window_size
+    // * on duplicate element or on set size >= window_size
     while (i < j && (st.count(arr[j]) || st.size() >= window_size)) {
       cur_sum -= arr[i];
       st.erase(arr[i]);

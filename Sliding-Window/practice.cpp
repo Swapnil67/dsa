@@ -73,51 +73,31 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 12 - med
-// int numSubarrayProductLessThanK(std::vector<int> arr, int k) {
-// TODO
-// }
-
 // int maxSubarrayLength(std::vector<int> arr, int k) {
 // TODO
 // }
 
-int getMax(std::vector<int> &arr) {
-  int max_ele = INT_MIN;
-  for(int i = 0; i < arr.size(); ++i) {
-    max_ele = std::max(max_ele, arr[i]);
-  }
-  return max_ele;
-}
+// * 13 - med
+// int countSubarrays(std::vector<int> arr, int k) {
+// TODO
+// }
 
-int countSubarrays(std::vector<int> arr, int k) {
-  int n = arr.size(), ans = 0;
-  return ans;
-}
+// * 14 - med
+// int lengthOfLongestSubstring(std::string s) {
+// TODO
+// }
+
+// * 15 - med
+// int kDistinctChars(std::string s, int k) {
+// TODO
+// }
+
+// * 16 - med
+// int numberOfSubstrings(std::string s) {
+// TODO
+// }
 
 int main() {
-  // * testcase 1
-  int k = 2;
-  std::vector<int> arr = {1, 3, 2, 3, 3};
-
-  // * testcase 1
-  // int k = 2;
-  // std::vector<int> arr = {1, 3, 2, 5, 1, 5};
-
-  // * testcase 2
-  // int k = 3;
-  // std::vector<int> arr = {1, 4, 2, 1};
-
-  // * testcase 3
-  // int k = 4;
-  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
-
-  printf("Appear at least: %d\n", k);
-  printf("Input Array\n");
-  printArr(arr);  
-
-  int ans = countSubarrays(arr, k);
-  // int ans = countSubarrays2(arr, k);
-  printf("Length of Longest Subarray With at Most %d Frequency is %d\n", k, ans);
   return 0;
 }
 

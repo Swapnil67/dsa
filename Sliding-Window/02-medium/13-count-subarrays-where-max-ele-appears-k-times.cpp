@@ -1,5 +1,6 @@
 
 /**
+ * * Leetcode - 2962
  * * Count Subarrays Where Max Element Appears at Least K Times
  * * You are given an integer array nums and a positive integer k.
  * * Return the number of subarrays where the maximum element of nums appears at least k times in that subarray.
@@ -30,20 +31,12 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-int getMax(std::vector<int> &arr) {
-  int max_ele = INT_MIN;
-  for(int i = 0; i < arr.size(); ++i) {
-    max_ele = std::max(max_ele, arr[i]);
-  }
-  return max_ele;
-}
-
 int bruteForce(std::vector<int> &arr, int k) {
   int n = arr.size();
   int ans = 0;
 
   // * get the max_element from array
-  int max_ele = getMax(arr);
+  int max_ele = *max_element(arr.begin(), arr.end());
 
   for(int i = 0; i < n; ++i) {
     std::unordered_map<int, int> freq_map;
@@ -61,6 +54,7 @@ int bruteForce(std::vector<int> &arr, int k) {
 
 // * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
 // * Classic Sliding Window
+// * Note: subarrays ending at 'j' => (n - j)
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 int countSubarrays(std::vector<int> &arr, int k) {
@@ -68,16 +62,18 @@ int countSubarrays(std::vector<int> &arr, int k) {
   int i = 0, j = 0, ans = 0;
 
   // * get the max_element from array
-  int max_ele = getMax(arr);
-  int count = 0;
+  int max_ele = *max_element(arr.begin(), arr.end());
+
+  // * sliding window
+  int count = 0;    // * freq of max_ele
   while(j < n) {
     if(arr[j] == max_ele) {
       count++;
     }
 
-    while(count >= k) {
-      ans += n - j;
-      if(arr[i] == max_ele) {
+    while (count >= k) {
+      ans += (n - j);
+      if (arr[i] == max_ele) {
         count--;
       }
       i++;
@@ -98,19 +94,19 @@ int countSubarrays(std::vector<int> &arr, int k) {
 int countSubarrays2(std::vector<int> &arr, int k) {
   int n = arr.size();
   int ans = 0, count = 0;
-  int max_ele = getMax(arr);
+  int max_ele = *max_element(arr.begin(), arr.end());
 
   std::vector<int> max_ele_idx_arr;
   for(int i = 0; i < n; ++i) {
     // * check if cur ele is max_ele
     if(arr[i] == max_ele) {
       count++;
-      max_ele_idx_arr.push_back(i); // * Add the idx to arr
+      max_ele_idx_arr.push_back(i); // * Add the index to arr
     }
 
     // * if count >= k then check the first_idx 
     // * where first_idx to i has count >= k
-    if(count >= k) {
+    if (count >= k) {
       int first_idx = max_ele_idx_arr[max_ele_idx_arr.size() - k];
       ans += first_idx + 1;
     }

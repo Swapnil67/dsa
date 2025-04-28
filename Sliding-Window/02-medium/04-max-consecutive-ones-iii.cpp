@@ -21,8 +21,8 @@
  * * https://leetcode.com/problems/max-consecutive-ones-iii/description/
 */
 
-#include<iostream>
-#include<vector>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

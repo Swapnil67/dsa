@@ -17,7 +17,7 @@
  * * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
 */
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <iostream>
 
@@ -57,12 +57,11 @@ int bruteForce(std::string s) {
 // * SPACE COMPLEXITY O(256)
 int lengthOfLongestSubstring(std::string s) {
   int n = s.size();
-  std::map<char, int> hash;
+  std::unordered_map<char, int> hash;
   int i = 0, j = 0, max_len = 0;
   while(j < n) {
     // * check if cur char is already seen
     if(hash.count(s[j])) {
-      // * checks if the char is found b/w i & j
       // * This is becoz to prevent 'i' assigning a previous index than current 'i'
       if (hash[s[j]] >= i) {
         i = hash[s[j]] + 1;
@@ -70,7 +69,7 @@ int lengthOfLongestSubstring(std::string s) {
     }
 
     // * update the length of substring
-    max_len = std::max(j - i + 1, max_len);
+    max_len = std::max(max_len, (j - i + 1));
 
     // * update the index of char in map
     hash[s[j]] = j;
@@ -95,4 +94,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 01-longest-substr-without-repeating.cpp -o output && ./output
+// * g+= --std=c++20 14-longest-substr-without-repeating.cpp -o output && ./output
