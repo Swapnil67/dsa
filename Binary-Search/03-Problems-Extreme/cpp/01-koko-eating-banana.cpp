@@ -64,7 +64,7 @@ int bruteForce(std::vector<int> piles, int maxHrs) {
 // * TIME COMPLEXITY O(N) * log(maxBananas) 
 // * SPACE COMPLEXITY O(1)
 int findMinimumBananasToEat(std::vector<int> piles, int hr) {
-  int l = 0, r = *std::max_element(piles.begin(), piles.end());;
+  int l = 0, r = *std::max_element(piles.begin(), piles.end());
   int ans = r;
   while(l <= r) {
     int mid = l + (r - l) / 2;

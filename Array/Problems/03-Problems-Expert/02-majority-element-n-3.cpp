@@ -16,9 +16,10 @@
  * * https://leetcode.com/problems/majority-element-ii/description/
 */
 
-#include<map>
-#include<cmath>
-#include<iostream>
+#include <map>
+#include <cmath>
+#include <iostream>
+#include <vector>
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
