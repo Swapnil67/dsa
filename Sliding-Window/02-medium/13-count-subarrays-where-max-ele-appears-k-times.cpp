@@ -99,7 +99,7 @@ int countSubarrays2(std::vector<int> &arr, int k) {
   std::vector<int> max_ele_idx_arr;
   for(int i = 0; i < n; ++i) {
     // * check if cur ele is max_ele
-    if(arr[i] == max_ele) {
+    if (arr[i] == max_ele) {
       count++;
       max_ele_idx_arr.push_back(i); // * Add the index to arr
     }

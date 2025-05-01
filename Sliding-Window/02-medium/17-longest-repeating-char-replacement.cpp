@@ -17,8 +17,8 @@
  * * https://leetcode.com/problems/longest-repeating-character-replacement/description/
 */
 
+#include <vector>
 #include <iostream>
-#include <bits/stdc++.h>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
@@ -109,15 +109,15 @@ int characterReplacement(std::string s, int k) {
     max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
 
     // * if number of replacement required are greater than the max replacements
-    if (j - i + 1; - max_freq > k) {
+    if ((j - i + 1) - max_freq > k) {
       // * Shrink the window from left
       char_hash[s[i] - 'A']--;
       max_freq = 0;
       i++;
     }
 
-    if (j - i + 1 - max_freq <= k) {
-      max_len = std::max(max_len, (int) j - i + 1);
+    if ((j - i + 1) - max_freq <= k) {
+      max_len = std::max(max_len, (j - i + 1));
     }
 
     j++;

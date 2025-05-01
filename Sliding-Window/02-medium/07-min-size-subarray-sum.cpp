@@ -21,8 +21,7 @@
  * * https://leetcode.com/problems/minimum-size-subarray-sum/description/
 */
 
-
-#include<iostream>
+#include <iostream>
 #include <vector>
 #include <climits>
 

@@ -87,12 +87,14 @@ int minOperations2(std::vector<int> &arr, int x) {
   }
 
   long long target_sum = sum - x;
+  // std::cout << "Total Sum: " << sum << " & Target Sum: " << target_sum << std::endl;
+
   long long cur_sum = 0;
   int j = 0, ans = -1;
-  while(j < n) {
+  while (j < n) {
     cur_sum += arr[j];
     long long check_sum = cur_sum - target_sum; 
-    // * check if we found 'check_sum' previously 
+    // * check if we found 'check_sum' previously
     if (prefix_sum.find(check_sum) != prefix_sum.end()) {
       ans = std::max(ans, j - prefix_sum[check_sum]);
     }

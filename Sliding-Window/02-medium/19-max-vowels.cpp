@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 1456
  * * Maximum Number of Vowels in a Substring of Given Length
  * * YGiven a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
  * 
@@ -47,29 +48,29 @@ int bruteForce(std::string s, int k) {
 // * SPACE COMPLEXITY O(1)
 int maxVowels(std::string s, int k) {
   int n = s.size();
-  int ans = INT_MIN;
-  int i = 0, j = 0, c = 0;
+  int max_vowels_cnt = INT_MIN;
+  int i = 0, j = 0, vowel_cnt = 0;
   std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   while(j < n) {
     // * Check if vowel
-    if(vowels.count(s[j])) {
-      c++;
+    if (vowels.count(s[j])) {
+      vowel_cnt++;
     }
 
     // * Minimize window
     if ((j - i + 1) > k) {
       if(vowels.count(s[i])) {
-        c--;
+        vowel_cnt--;
       }
       i++;
     }
     else {
       // * count vowels substring
-      ans = std::max(ans, c);
+      max_vowels_cnt = std::max(max_vowels_cnt, vowel_cnt);
     }
     j++;
   }
-  return ans;
+  return max_vowels_cnt;
 }
 
 
@@ -85,11 +86,9 @@ int main() {
 
   // int ans = bruteForce(s, k);
   int ans = maxVowels(s, k);
-
-  // int ans = numberOfSubstrings(s);
   std::cout << "Maximum Number of Vowels: " << ans << std::endl;
   return 0;
 }
 
 // * Run the code
-// * $CXX --std=c++17 06-max-vowels.cpp -o output && ./output
+// * g++ --std=c++17 19-max-vowels.cpp -o output && ./output

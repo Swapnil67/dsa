@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 567
  * * Permutation in String
  * * Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.
  * * to any other uppercase English character. You can perform this operation at most k times.
@@ -29,25 +30,14 @@
 // * SPACE COMPLEXITY O(n)
 bool betterApproach(std::string s1, std::string s2) {
   int n1 = s1.size(), n2 = s2.size();
-  std::sort(s1.begin(), s1.end());
 
-  // for (int i = 0; i < n2; ++i) {
-  //   std::string temp = "";    
-  //   for (int j = i; j < n2; ++j) {
-  //     temp += s2[j];
-  //     if(temp.size() == s1.size()) {
-  //       std::sort(temp.begin(), temp.end());
-        // std::cout << temp << std::endl;
-  //       if(temp == s1)
-  //         return true;
-  //       else 
-  //         break;
-  //     }
-  //   }
-  // }
+  if (n1 > n2)
+    return false;
+  
+  std::sort(s1.begin(), s1.end()); // * Sort the s1 string
 
-  // * OR
   for (int i = 0; i < n2 - n1; ++i) {
+    // * take n1 len of substrings from s2
     std::string temp = s2.substr(i, n1);
     std::sort(temp.begin(), temp.end());
     if (temp == s1)
@@ -105,4 +95,4 @@ int main() {
 
 
 // * Run the code
-// * g++ --std=c++20 05-permutation-in-string.cpp -o output && ./output
+// * g++ --std=c++20 18-permutation-in-string.cpp -o output && ./output

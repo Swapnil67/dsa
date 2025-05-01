@@ -9,12 +9,12 @@
  * * |a - x| == |b - x| and a < b
 
  * * Example 1
- * * Input: arr = [1,2,3,4,5], k = 4, x = 3
- * * Output : [1,2,3,4]
+ * * Input: arr = [1, 2, 3, 4, 5], k = 4, x = 3
+ * * Output : [1, 2, 3, 4]
  * 
  * * Example 2
- * * Input  :  arr = [1,1,2,3,4,5], k = 4, x = -1
- * * Output : [1,1,2,3]]
+ * * Input  :  arr = [1, 1, 2, 3, 4, 5], k = 4, x = -1
+ * * Output : [1, 1, 2, 3]
  * 
  * * https://leetcode.com/problems/find-k-closest-elements/description/
 */
@@ -67,7 +67,7 @@ std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int l = 0, r = n - k, m;
   // * binary search
   while(l < r) {
-    m = (l + (r - l)) / 2; // * m is the starting point of window of size k
+    m = (l + r) / 2; // * m is the starting point of window of size k
 
     // printf("arr[%d] = %d & arr[%d + k] = %d\n", m, arr[m], m, arr[m + k]);
     // * start of window is not smaller than one outside of window
@@ -107,4 +107,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 08-k-closest-ele.cpp -o output && ./output
+// * g++ --std=c++20 08-k-closest-ele.cpp -o output && ./output

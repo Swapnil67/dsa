@@ -81,6 +81,7 @@ int betterApproach(std::vector<int> arr, int goal) {
 }
 
 // * ------------------------- APPROACH 3A: Optimal APPROACH -------------------------`
+// * Clever apprach
 // * Sliding Window for ans <= goal
 int helper(std::vector<int> arr, int goal) {
   int n = arr.size();

@@ -108,7 +108,7 @@ int kDistinctChars(std::string s, int k) {
     }
     else {
       // * Only calculate if we have k distinct characters
-      max_len = std::max(max_len, j - i + 1);
+      max_len = std::max(max_len, (j - i + 1));
     }
 
     j++;

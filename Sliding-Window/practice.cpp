@@ -34,17 +34,17 @@ void printArr(std::vector<int> arr) {
 
 // * 05 - med
 // int totalFruit(std::vector<int> fruits) {
-// TODO  
+// TODO
 // }
 
 // * 06 - med
 // int maxFrequency(std::vector<int> arr, int k) {
-// TODO 
+// TODO
 // }
 
 // * 07 - med
 // int minSubArrayLen(std::vector<int> arr, int target) {
-// TODO 
+// TODO
 // }
 
 // * 08 - med
@@ -97,7 +97,62 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 17 - med
+// int characterReplacement(std::string s, int k) {
+// TODO
+// }
+
+// * 18 - med
+// bool checkInclusion(std::string s1, std::string s2) {
+// TODO
+// }
+
+
+// * 19 - med
+// int maxVowels(std::string s, int k) {
+// TODO
+// }
+
+long long countOfSubstrings(std::string s, int k) {
+  int n = s.size();
+  std::unordered_map<char, int> vowels_map;
+  std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+  int i = 0, j = 0, consonants = 0, ans = 0;
+
+  while(j < n) {
+    if(vowels.count(s[j])) {
+      vowels_map[s[j]]++;
+    }
+    else {
+      consonants++;
+    }
+
+    while (consonants > k) {
+      if(vowels.count(s[i])) { 
+        vowels_map[s[i]]--;
+      }
+      else {
+        consonants--;
+      }
+      i++;
+    }
+
+    if (consonants == k && vowels_map['a'] > 0 
+         && vowels_map['e'] > 0 && vowels_map['i'] > 0
+         && vowels_map['o'] > 0 && vowels_map['u'] > 0)
+    {
+      ans++;
+    }
+    j++;
+  }
+  return ans;
+}
+
 int main() {
+  int k = 2;
+  std::string word = "iqeaouqi"; 
+  long long ans = countOfSubstrings(word, k);
+  std::cout << ans << std::endl;
   return 0;
 }
 

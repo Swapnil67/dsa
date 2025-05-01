@@ -38,13 +38,18 @@ int bruteForce(std::string s) {
   return ans;
 }
 
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * Classic sliding window
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int numberOfSubstrings(std::string s) {
   int n = s.size();
   int i = 0, j = 0, ans = 0;
   std::vector<int> hash(3, 0);
-  while(j < n) {
+  while (j < n) {
     hash[s[j] - 'a']++;
 
+    // * All three characters are present
     while (hash[0] > 0 && hash[1] > 0 && hash[2] > 0) {
       ans = ans + (n - j);
       hash[s[i] - 'a']--;
@@ -56,6 +61,10 @@ int numberOfSubstrings(std::string s) {
   return ans;
 }
 
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * For every character there is substring that end which has all 3 characters
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int numberOfSubstrings2(std::string s) {
   int n = s.size();
   int ans = 0;

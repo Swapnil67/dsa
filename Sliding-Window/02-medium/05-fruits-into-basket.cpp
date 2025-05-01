@@ -23,11 +23,10 @@
  * * https://www.naukri.com/code360/problems/fruits-and-baskets_985356
 */
 
-
-#include<set>
-#include<map>
-#include<vector>
-#include<iostream>
+#include <unordered_set>
+#include <map>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -47,7 +46,7 @@ int bruteForce(std::vector<int> fruits) {
   int fruits_collected = 0;
   for (int i = 0; i < n; ++i) {
     int basket = 0;
-    std::set<int> st;
+    std::unordered_set<int> st;
     for (int j = i; j < n; ++j) {
       st.insert(fruits[j]);
       if(st.size() <= 2) {
@@ -60,33 +59,6 @@ int bruteForce(std::vector<int> fruits) {
     fruits_collected = std::max(fruits_collected, basket);
   }
   return fruits_collected;
-}
-
-// * My Approach
-// * TIME COMPLEXITY O(N^2)
-// * SPACE COMPLEXITY O(1)
-int totalFruitBrute(std::vector<int> fruits) {
-  int n = fruits.size();
-  int ans = 0;
-  for(int i = 0; i < n; ++i) {
-    int f1 = -1, f2 = -1;
-    int fruits_collected = 0;
-    for (int j = i; j < n; ++j) {
-      if(f1 == -1) {
-        f1 = fruits[j];
-      }
-      else if(f2 == -1) {
-        f2 = fruits[j];
-      }
-      else if(fruits[j] == f1 || fruits[j] == f2) {
-      } else {
-        break;
-      }
-      fruits_collected++;
-    }
-    ans = std::max(ans, fruits_collected);
-  }
-  return ans;
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
@@ -102,7 +74,8 @@ int betterApproach(std::vector<int> fruits) {
 
   while(j < n) {
     freq_map[fruits[j]]++;
-
+    
+    // * Shrink window from left
     // * When we encounter more than two fruits
     while(freq_map.size() > 2) {
       freq_map[fruits[i]]--;
@@ -137,6 +110,8 @@ int totalFruit(std::vector<int> fruits) {
   while(j < n) {
     freq_map[fruits[j]]++;
 
+    // * Shrink window from left
+    // * When we encounter more than two fruits
     if (freq_map.size() > 2) {
       freq_map[fruits[i]]--;
       if (freq_map[fruits[i]] == 0) {

@@ -79,7 +79,7 @@ int betterApproach(std::vector<int> arr, int k) {
       i++;
     }
 
-    max_len = std::max(max_len, j - i + 1);
+    max_len = std::max(max_len, (j - i + 1));
     j++;
   }
   return max_len;
@@ -116,7 +116,6 @@ int longestOnes(std::vector<int> arr, int k) {
 
 
 int main() {
-
   // * testcase 1
   int k = 2;
   std::vector<int> arr = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
