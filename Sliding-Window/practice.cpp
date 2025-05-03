@@ -113,46 +113,27 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
-long long countOfSubstrings(std::string s, int k) {
-  int n = s.size();
-  std::unordered_map<char, int> vowels_map;
-  std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
-  int i = 0, j = 0, consonants = 0, ans = 0;
+// * 20 - med
+// int minFlips(std::string s) {
+// TODO
+// }
 
-  while(j < n) {
-    if(vowels.count(s[j])) {
-      vowels_map[s[j]]++;
-    }
-    else {
-      consonants++;
-    }
+// * 21 - med
+// int equalSubstring(std::string s, std::string t, int max_cost) {
+// TODO
+// }
 
-    while (consonants > k) {
-      if(vowels.count(s[i])) { 
-        vowels_map[s[i]]--;
-      }
-      else {
-        consonants--;
-      }
-      i++;
-    }
+// * 22 - med
+// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
+// TODO
+// }
 
-    if (consonants == k && vowels_map['a'] > 0 
-         && vowels_map['e'] > 0 && vowels_map['i'] > 0
-         && vowels_map['o'] > 0 && vowels_map['u'] > 0)
-    {
-      ans++;
-    }
-    j++;
-  }
-  return ans;
-}
+// * 23 - med
+// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
+// TODO
+// }
 
 int main() {
-  int k = 2;
-  std::string word = "iqeaouqi"; 
-  long long ans = countOfSubstrings(word, k);
-  std::cout << ans << std::endl;
   return 0;
 }
 

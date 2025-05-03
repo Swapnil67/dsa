@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 1888
  * * Minimum Number of Flips to Make the Binary String Alternating
  * * Example 1
  * * Input  : s = "111000"
@@ -18,11 +19,19 @@
 #include<iostream>
 #include<climits>
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Append string to itself
+// * create two alternating string possiblilites and count flips within window
+// * Classic Sliding window
+// * TIME COMPLEXITY O(2N) * 2
+// * SPACE COMPLEXITY O(2N)
 int minFlips(std::string s) {
   int n = s.size();
   s = s + s;
   std::string alt1 = "", alt2 = "";
 
+  // * Create two alternating strings of size n
+  // * alt1 starts with '0' & alt2 starts with '1'
   for (int i = 1; i <= s.size(); ++i) {
     if(i % 2 == 0)  {
       alt1 += '0';

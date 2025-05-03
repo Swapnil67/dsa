@@ -73,6 +73,7 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
 
   int consecutive_cnt = 0; // * count of consecutive elements
 
+  // * Find the answer in first k subarray
   for (int i = 0; i < k; ++i) {
     if (i > 0 && arr[i - 1] + 1 == arr[i]) {
       consecutive_cnt++;
@@ -80,11 +81,11 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
       consecutive_cnt = 1;
     }
   }
-
   if(consecutive_cnt == k) {
     ans[0] = arr[k - 1];
   }
 
+  // * Find the remaining ans through sliding window
   int i = 1, j = k;
   while (j < n) {
     if (arr[j - 1] + 1 == arr[j]) {

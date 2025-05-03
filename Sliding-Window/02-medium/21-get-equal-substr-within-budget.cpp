@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 1208
  * * Get Equal Substrings Within Budget
  * * Example 1
  * * Input  : s = "abcd", t = "bcdf", maxCost = 3
@@ -20,43 +21,50 @@
 
 #include <iostream>
 
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * Check all possible substrings
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(26)
 int bruteForce(std::string s, std::string t, int max_cost) {  
-  int n1 = s.length(), n2 = t.length();
+  int n = s.size();
   int ans = 0;
-  for(int i = 0; i < n1; ++i) {
+  for(int i = 0; i <n; ++i) {
     int cur_cost = 0;
-    for(int j = i; j < n2; ++j) {
-      int diff = std::abs(t[j] - s[j]);
-      if(diff + cur_cost <= max_cost) {
+    int j = i;
+    for (; j < n; ++j) {
+      int diff = std::abs(s[j] - t[j]);
+      if(cur_cost + diff <= max_cost) {
         cur_cost += diff;
-        ans = std::max(ans, j - i + 1);
       }
       else {
         break;
       }
     }
+    ans = std::max(ans, j - i);
   }
-  
   return ans;
 }
 
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int equalSubstring(std::string s, std::string t, int max_cost) {  
-  int n1 = s.length(), n2 = t.length();
-  int ans = 0;
+  int n = s.length();
   int i = 0, j = 0;
-  int cur_cost = 0;
-  while(j < n2) {
+  int ans = 0, cur_cost = 0;
+
+  while(j < n) {
+    // * Add the abs difference to current cost
     cur_cost += std::abs(t[j] - s[j]);
 
-    // * Shrink the window
+    // * Shrink the window from left
     if(cur_cost > max_cost) {
       cur_cost -= std::abs(t[i] - s[i]);
       i++;
     }
 
+    // * calculate new max substring
     if(cur_cost <= max_cost) {
       ans = std::max(ans, j - i + 1);
     }

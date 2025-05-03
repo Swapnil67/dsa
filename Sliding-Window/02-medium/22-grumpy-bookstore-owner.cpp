@@ -27,6 +27,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Calculate max no of unsatisfied customer within minutes window
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
@@ -37,25 +38,25 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
   int already_satisfied_customers = 0;
   int i = 0, j = 0;
   while (j < n) {
-    if(j - i + 1 > minutes) {
-      // * if owner was grumpy then remove those customers from cur_unsatisfied_customers
+    if((j - i + 1) > minutes) {
+      // * if owner was grumpy at 'i' then remove those customers[i] from cur_unsatisfied_customers
       if(grumpy[i]) {
         cur_unsatisfied_customers -= customers[i];
       }
       i += 1;
     }
     
-    // * if owner was grumpy then add those customers to cur_unsatisfied_customers
+    // * if owner was grumpy then add those customers[j] to cur_unsatisfied_customers
     if (grumpy[j]) {
       cur_unsatisfied_customers += customers[j];
     }
     else {
-      // * add these customers to already_satisfied_customers
+      // * add these customers[j] to already_satisfied_customers
       already_satisfied_customers += customers[j];
     }
 
-    // * Max unsatisfied customer in window 
-    if(j - i + 1 == minutes) {
+    // * Max unsatisfied customer in window
+    if ((j - i + 1) == minutes) {
       max_unsatisfied_customers = std::max(max_unsatisfied_customers, cur_unsatisfied_customers);
     }
 
@@ -79,7 +80,6 @@ int main() {
   printArr(grumpy);
   std::cout << "customers " << std::endl;
   printArr(customers);
-  // int ans = bruteForce(customers, grumpy, minutes);
   int ans = maxSatisfied(customers, grumpy, minutes);
   std::cout << "Number of customers satisfied are " << ans << std::endl;
   return 0;

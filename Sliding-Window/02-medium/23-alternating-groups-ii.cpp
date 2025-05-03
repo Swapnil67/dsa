@@ -70,6 +70,7 @@ int bruteForce(std::vector<int> &arr, int k) {
 
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Add k - 1 elements to the input array for making it circular
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N + K)
 // * SPACE COMPLEXITY O(1)
@@ -118,7 +119,6 @@ int main() {
 
   // int ans = bruteForce(arr, k);
   int ans = numberOfAlternatingGroups(arr, k);
-  // int ans = numberOfAlternatingGroups2(arr, k);
   printf("Alternating consecutive tiles: %d\n", ans);
   return 0;
 }
