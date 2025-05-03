@@ -1,6 +1,6 @@
 /**
  * * Leetcode - 658
- * * Minimum Size Subarray Sum
+ * * Find K Closest Elements
  * * Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. 
  * * The result should also be sorted in ascending order.
  * 

@@ -64,8 +64,8 @@ int numberOfSubarrays(std::vector<int> &nums, int k) {
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Using odd count map
 // * Similar to subarray sum equals k
+// * Using odd count map
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int numberOfSubarraysB(std::vector<int> &nums, int k) {
@@ -76,10 +76,11 @@ int numberOfSubarraysB(std::vector<int> &nums, int k) {
   mp[0] = 1;      // * default, we seen 0 odd numbers atleast once
 
   for(int i = 0; i < n; ++i) {
-    odd_count += nums[i] % 2;
+    odd_count += (nums[i] % 2);
 
-    if (mp.count(odd_count - k)) {
-      result += mp[odd_count - k];
+    int rem = odd_count - k;
+    if (mp.count(rem)) {
+      result += mp[rem];
     }
 
     mp[odd_count]++;

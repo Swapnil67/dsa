@@ -74,12 +74,15 @@ long long countOfSubstrings(std::string s, int k) {
   std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   
   // * Pre calculate the next consonant index
+  // *  a e i o q q
+  // * [4 4 4 4 5 6]
   std::vector<int> next_consonant_idx_vec(n);
   int last_consonant_idx = n;
   for (int i = n - 1; i >= 0; --i) {
     next_consonant_idx_vec[i] = last_consonant_idx;
     if(!vowels.count(s[i])) last_consonant_idx = i;
   }
+  // printArr(next_consonant_idx_vec);
 
   long long ans = 0;
   int i = 0, j = 0, consonants = 0;
@@ -108,10 +111,15 @@ long long countOfSubstrings(std::string s, int k) {
     // * Add the subarrays to ans
     if (consonants == k && vowels_map.size() == 5) { // * Valid Window
       // * because we want to include those subarrays to ans
+      // * Eg: 
+      // * a e i o u s a e s
+      // *           ^ = j
+      // *                 ^ = idx
+      // * idx - j = 3 (i.e., 3 subarrays with 1 consonant)
       int idx = next_consonant_idx_vec[j]; // * This will return index of next consonant after jth index
       ans += (idx - j);
 
-      // * Shrink window from left because we added all possible array from previous 'i'
+      // * Shrink window once from left because we added all possible array from previous 'i'
       char ch = s[i];
       if(vowels.count(ch)) { 
         vowels_map[ch]--;
@@ -131,8 +139,8 @@ long long countOfSubstrings(std::string s, int k) {
 }
 
 int main() {
-  // int k = 1;
-  // std::string word = "aeioqq"; 
+  int k = 1;
+  std::string word = "aeioqq"; 
 
   // int k = 0;
   // std::string word = "aeiou"; 
@@ -140,8 +148,10 @@ int main() {
   // int k = 1;
   // std::string word = "ieaouqqieaouqq"; 
 
-  int k = 0;
-  std::string word = "aouiei"; 
+  // int k = 0;
+  // std::string word = "aouiei"; 
+
+  std::cout << word << std::endl;
 
   // long long ans = bruteForce(word, k);
   long long ans = countOfSubstrings(word, k);

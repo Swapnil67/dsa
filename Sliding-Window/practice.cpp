@@ -133,6 +133,22 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 24 - med
+// int numberOfSubarrays(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 25 - med
+// int countOfSubstrings(std::string s, int k) {
+// TODO
+// }
+
+// * 26 - med
+// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+
 int main() {
   return 0;
 }
