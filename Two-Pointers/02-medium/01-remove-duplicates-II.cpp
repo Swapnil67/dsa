@@ -1,6 +1,8 @@
 /*
+ * Leetcode - 80
  * Remove Duplicates from Sorted Array II
- *
+ * Here each unique element must appear atmost twice. The relative order of the elements should be kept the same.
+ * 
  * Example 1
  * Input  : nums = [1,1,1,2,2,3]
  * Output : 5, nums = [1,1,2,2,3,_]

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 26
  * * Remove Duplicates from Sorted Array
  * * You are given a sorted integer array 'arr' of size 'n'.
  * * You need to remove the duplicates from the array such that each element appears only once.
@@ -11,13 +12,13 @@
  * * Input  : ‘n’ = 10, ‘a’ = [1 2 2 3 3 3 4 4 5 5]
  * * Output : [1 2 3 4 5]
 
- * * https://www.naukri.com/code360/problems/remove-duplicates-from-sorted-array_1102307
  * * https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+ * * https://www.naukri.com/code360/problems/remove-duplicates-from-sorted-array_1102307
 */
 
 #include <set>
-#include <iostream>
 #include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {

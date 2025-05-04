@@ -107,7 +107,6 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
-
 // * 19 - med
 // int maxVowels(std::string s, int k) {
 // TODO
