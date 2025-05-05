@@ -46,14 +46,15 @@ int numRescueBoats(std::vector<int>& people, int limit) {
   int l = 0, r = n - 1;
   while (l <= r) {
     // * at most two people are allowed in boat
-    if((people[l] + people[r]) <= limit) {
-      l += 1;
-      r -= 1;
+    if ((people[l] + people[r]) <= limit) {
+      l++;
+      r--;
+    } else {
+      // * Here we take the right person (greedy approach)
+      r--;
     }
-    else {
-      r -= 1;
-    }
-    boats_required += 1;
+
+    boats_required++;
   }
   return boats_required;
 }
@@ -71,3 +72,15 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++17 07-boats-to-save-people.cpp -o output && ./output
+
+// * DRY RUN
+
+// * limit = 9
+// * 3 8 7 1 4
+// * After sorting
+// * 1 3 4 7 8
+// *   i j
+// * i + j = 9 (9 <= limit) True  (ans++) (i++, j--)
+// * i + j = 10 (10 <= limit) False  (ans++) (j--)
+// * i + j = 7 (7 <= limit) True  (ans++) (i++, j--)
+// * break

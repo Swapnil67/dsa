@@ -119,13 +119,14 @@ std::vector<std::vector<int>> betterApproach(std::vector<int> arr) {
 */
 // * SPACE COMPLEXITY O(no of triplets)
 // * O(no of triplets) => ans
-std::vector<std::vector<int>> optimalApproach(std::vector<int> arr) {
+std::vector<std::vector<int>> threeSum(std::vector<int> arr) {
   std::sort(arr.begin(), arr.end()); // * n(logn)
   int n = arr.size(); 
   std::vector<std::vector<int>> ans;
 
   // * O(N^2)
   for (int i = 0; i < n; i++) {
+    // * Doing this to prevent taking duplicate triplet
     if (i > 0 && arr[i - 1] == arr[i])
       continue;
     int j = i + 1, k = n - 1;
@@ -135,9 +136,10 @@ std::vector<std::vector<int>> optimalApproach(std::vector<int> arr) {
         ans.push_back({arr[i], arr[j], arr[k]});
         j++;
         k--;
-        while (arr[j] == arr[j - 1])
+        // * Doing this to prevent taking duplicate triplet
+        while (j < n && arr[j] == arr[j - 1])
           j++;
-        while (arr[k] == arr[k + 1])
+        while (k >= 0 && arr[k] == arr[k + 1])
           k--;
       }
       else if (sum < 0)
@@ -156,7 +158,7 @@ int main() {
   printArr(arr);
   // std::vector<std::vector<int>> ans = bruteForce(arr);
   // std::vector<std::vector<int>> ans = betterApproach(arr);
-  std::vector<std::vector<int>> ans = optimalApproach(arr);
+  std::vector<std::vector<int>> ans = threeSum(arr);
   std::cout<<"Tripletes which gives 0 sum"<<std::endl;
   printMatrix(ans);
   return 0;

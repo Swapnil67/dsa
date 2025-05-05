@@ -4,7 +4,6 @@
  * Given a string s consisting only of characters 'a', 'b', and 'c'. You are asked to apply the following algorithm 
  * on the string any number of times:
 
-
  * 1. Pick a non-empty prefix from the string s where all the characters in the prefix are equal.
  * 2. Pick a non-empty suffix from the string s where all the characters in this suffix are equal.
  * 3. The prefix and the suffix should not intersect at any index.
@@ -23,7 +22,7 @@
  * https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/
 */
 
-#include<iostream>
+#include <iostream>
 
 int minimumLength(std::string s) {
   int n = s.size();

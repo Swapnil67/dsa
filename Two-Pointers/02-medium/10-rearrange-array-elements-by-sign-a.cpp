@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 2149
  * Rearrange Array Elements by Sign
  * You are given a 0-indexed integer array nums of even length consisting of an equal number of
  * positive and negative integers.
@@ -58,7 +59,7 @@ std::vector<int> bruteForce(std::vector<int> &arr) {
 // * Take +ve and -ve indexes in variable 
 // * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(N)
-std::vector<int> optimalApproach(std::vector<int> arr) {
+std::vector<int> rearrangeArray(std::vector<int> arr) {
   int n = arr.size();
   std::vector<int> ans(n);
   // * Intialize the positive & negative indexes
@@ -78,12 +79,13 @@ std::vector<int> optimalApproach(std::vector<int> arr) {
 
 int main() {
   std::vector<int> arr = {1, 2, -4, -5};
-  std::cout<<"Before Rearranging"<<std::endl;
+  std::cout << "Before Rearranging" << std::endl;
   printArr(arr);
 
-  std::cout<<"After Rearranging"<<std::endl;
   // std::vector<int> ans = bruteForce(arr);
-  std::vector<int> ans = optimalApproach(arr);
+  std::vector<int> ans = rearrangeArray(arr);
+  
+  std::cout << "After Rearranging" << std::endl;
   printArr(ans);
   return 0;
 }

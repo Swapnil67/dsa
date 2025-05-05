@@ -1,7 +1,8 @@
 /**
+ * * Leetcode - 1498
  * * Number of Subsequences That Satisfy the Given Sum Condition
  * * You are given an array of integers nums and an integer target.
- * * Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element 
+ * * Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element
  * * on it is less or equal to target. Since the answer may be too large, return it modulo 10^9 + 7.
  * * Leetcode - 1498
 
@@ -9,7 +10,7 @@
  * * Input  : nums = [3, 5, 6, 7], target = 9
  * * Output : 4
  * * [3], [3, 5], [3, 5, 6], [3, 6]
- * 
+ *
  * * Example 2
  * * Input  : nums = [3, 3, 6, 8], target = 10
  * * Output : 6
@@ -22,12 +23,13 @@
 #include <iostream>
 #include <algorithm>
 
-
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
-void printArr(std::vector<int> arr) {
+void printArr(std::vector<int> arr)
+{
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; i++)
+  {
     std::cout << arr[i] << " ";
   }
   std::cout << std::endl;
@@ -37,41 +39,46 @@ void printArr(std::vector<int> arr) {
 // * Two Pointer
 // * TIME COMPLEXITY O(NlogN)
 // * SPACE COMPLEXITY O(1)
-int numSubseq(std::vector<int> arr, int target) {
+int numSubseq(std::vector<int> arr, int target)
+{
   int n = arr.size();
   int M = 1e9 + 7; // * 10^9 + 7
 
   // * Sort the i/p arr
   std::sort(arr.begin(), arr.end());
 
-  // * Create pointers
-  int l = 0, r = n - 1;
-  int ans = 0;
-
   // * Create a power vector
   int power[n];
   power[0] = 1;
-  for(int i = 1; i < n; ++i) {
+  for (int i = 1; i < n; ++i) {
     power[i] = (2 * power[i - 1]) % M;
   }
 
-  while (l <= r) {
+  // * Create pointers
+  int ans = 0;
+  int l = 0, r = n - 1;
+
+  while (l <= r)
+  {
     long long sum = arr[l] + arr[r];
-    if(sum <= target) {
-      // * if this is valid then all combination of elements b/w i - j will be valid 
+    if (sum <= target)
+    {
+      // * if this is valid then all combination of elements b/w i - j will be valid
       int diff = r - l;
       // std::cout << diff << std::endl;
       ans = ((ans % M) + (power[diff])) % M;
-      l += 1;
+      l++;
     }
-    else {
-      r -= 1;
+    else
+    {
+      r--;
     }
   }
   return ans;
 }
 
-int main() {
+int main()
+{
   // * testcase 1
   // int target = 9;
   // std::vector<int> arr = {3, 5, 6, 7};
@@ -90,5 +97,3 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++17 06-subsequence-count.cpp -o output && ./output
-
-

@@ -172,8 +172,9 @@ std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
 int main() {
   // * testcase 1
   int target = 0;
-  // * testcase 2
   std::vector<int> arr = {1, 0, -1, 0, -2, 2};
+  
+  // * testcase 2
   // int target = 8;
   // std::vector<int> arr = {2, 2, 2, 2, 2};
 

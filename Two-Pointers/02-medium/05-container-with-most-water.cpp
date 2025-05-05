@@ -52,13 +52,13 @@ int maxArea(std::vector<int> height) {
   int n = height.size();
   int i = 0, j = n - 1;
   int max_area = INT_MIN;
-  while(j > i) {
-    int area = (j - i) * std::min(height[i], height[j]);
+  while (j > i) {
+    int cur_area = (j - i) * std::min(height[i], height[j]);
     if (height[i] > height[j])
       j--;
     else
       i++;
-    max_area = std::max(max_area, area);
+    max_area = std::max(max_area, cur_area);
   }
   return max_area;
 }

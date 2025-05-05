@@ -5,6 +5,7 @@
 #include <climits>
 #include <iostream>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
@@ -51,6 +52,60 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // }
 
+// * 03 - med
+// std::vector<std::vector<int>> threeSum(std::vector<int> &arr, int target) {
+// TODO
+// }
+
+// * 04 - med
+// std::vector<std::vector<int>> fourSum(std::vector<int> &arr, int target) {
+// TODO
+// }
+
+// * 05 - med
+// int maxArea(std::vector<int> &nums) {
+// TODO
+// }
+
+// * 06 - med
+// int numSubseq(std::vector<int> arr, int target) {
+// TODO
+// }
+
+// * 07 - med
+// int numRescueBoats(std::vector<int> boats, int limit) {
+// TODO
+// }
+
+// * 08 - med
+// int numRescueBoats(std::vector<int> boats, int limit) {
+// TODO
+// }
+
+// * 09 - med
+// int bagOfTokensScore(std::vector<int> tokens, int power) {
+// TODO
+// }
+
+// * 10 - med
+// std::vector<int> rearrangeArray(std::vector<int> arr) {
+// TODO
+// }
+
+// * 11 - med
+// long long dividePlayers(std::vector<int> skill) {
+// TODO
+// }
+
+// * 14 - med
+// int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
+// TODO
+// }
+
+// * 15 - med
+// int minimumLength(std::string s) {
+// TODO
+// }
 
 int main() {
   return 0;

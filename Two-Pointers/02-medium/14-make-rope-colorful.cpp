@@ -48,23 +48,32 @@ int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
 }
 
 int main() {
+
   // * testcase 1
   // std::string colors = "abaac";
   // std::vector<int> neededTime = {1, 2, 3, 4, 5};
+
   // * testcase 2
   // std::string colors = "abc";
   // std::vector<int> neededTime = {1, 2, 3};
+
   // * testcase 3
   // std::string colors = "aabaa";
   // std::vector<int> neededTime = {1, 2, 3, 4, 1};
+  
   // * testcase 4
   std::string colors = "aaabbbabbbb";
   std::vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
-  std::cout << colors << std::endl;
+
+  std::cout << "Rope: " << colors << std::endl;
   printArr(neededTime);
+
   int time = minTimeToMakeRopeColorful(colors, neededTime);
   std::cout << time << std::endl;
 }
+
+// * Run the code
+// * g++ --std=c++17 02-make-rope-colorful.cpp -o output && ./output
 
 // * DRY RUN
 // * 1 2 3 4 5 
@@ -79,11 +88,13 @@ int main() {
 // * cur   =  0             time = time + min(i , prev_max)
 // * p_max =  1             max(i, prev_max)
 
+// * --------------------
+
 // * 1 2 3 4 5 
 // * a b a a c
 // *   i 
 // * cur   =  0             time = time + min(i , prev_max)
-// * p_max =  0             s[i] != s[i - 1]
+// * p_max =  0             s[i] != s[i - 1] -> true
 
 // * 1 2 3 4 5 
 // * a b a a c
@@ -91,17 +102,21 @@ int main() {
 // * cur   =  0             time = time + min(i , prev_max)
 // * p_max =  2             max(i, prev_max)
 
+// * --------------------
+
 // * 1 2 3 4 5 
 // * a b a a c
 // *     i 
 // * cur   =  0             time = time + min(i , prev_max)
-// * p_max =  0             s[i] != s[i - 1]
+// * p_max =  2             s[i] != s[i - 1] -> true
 
 // * 1 2 3 4 5 
 // * a b a a c
 // *     i 
 // * cur   =  0             time = time + min(i , prev_max)
 // * p_max =  3             max(i, prev_max)
+
+// * --------------------
 
 // * 1 2 3 4 5 
 // * a b a a c
@@ -121,6 +136,3 @@ int main() {
 // * cur   =  3
 // * p_max =  5
 
-
-// * Run the code
-// * g++ --std=c++17 02-make-rope-colorful.cpp -o output && ./output
