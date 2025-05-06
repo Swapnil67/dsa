@@ -97,6 +97,11 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // }
 
+// * 12 - med
+// std::vector<int> pivotArray2(std::vector<int> arr, int pivot) {
+// TODO
+// } 
+
 // * 14 - med
 // int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
 // TODO
@@ -106,6 +111,12 @@ void printVectorString(std::vector<std::string> strs) {
 // int minimumLength(std::string s) {
 // TODO
 // }
+
+// * 16 - med
+// bool areSentencesSimilar(std::string s) {
+// TODO
+// }
+
 
 int main() {
   return 0;

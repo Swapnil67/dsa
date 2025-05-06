@@ -103,20 +103,21 @@ std::vector<int> pivotArray(std::vector<int> &arr, int pivot) {
 std::vector<int> pivotArray2(std::vector<int> &arr, int pivot) {
   int n = arr.size();
   int i = 0, j = n - 1;
-  int l = 0, r = n - 1;
+  int l = 0, r = n - 1; // * For ans index
   std::vector<int> ans(n);
 
   while(i < n && j >= 0) {
-    if(arr[i] < pivot) {
+    if (arr[i] < pivot) {
       ans[l] = arr[i];
       l++;
     }
-    
-    if(arr[j] > pivot) {
+
+    if (arr[j] > pivot) {
       ans[r] = arr[j];
       r--;
     }
 
+    // * Keep incr/decr the i & j pointers
     i++;
     j--;
   }
