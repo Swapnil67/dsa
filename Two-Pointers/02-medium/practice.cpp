@@ -9,6 +9,33 @@
 
 using namespace std;
 
+void swap(int &a, int &b) {
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+template <typename T>
+void reverseArr(T &arr, int l, int r) {
+  int n = arr.size();
+  while(l < r) {
+    swap(arr[l++], arr[r--]);
+  }
+}
+
+void reverseString(std::string &s, int l, int r) {
+  while (isspace(s[r]))
+    r -= 1;
+  while(l < r) {
+    char temp = s[l];
+    s[l] = s[r];
+    s[r] = temp;
+    l += 1;
+    r -= 1;
+  }
+}
+
+
 template <typename T>
 void printArr(std::vector<T> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -102,6 +129,11 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // } 
 
+// * 13 - med
+// std::vector<int> rotate(std::vector<int> &arr, int k) {
+// TODO
+// }
+
 // * 14 - med
 // int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
 // TODO
@@ -117,8 +149,18 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // }
 
+// * 17 - med
+// std::string reverseWords(std::string &s) {
+// TODO
+// }
+
 
 int main() {
+    // std::string s = "I am zoro";
+    std::string s = "   Roronoa      Zoro     ";
+    std::cout << s << std::endl;
+    // std::string ans = reverseWords(s);
+    // std::cout << ans << std::endl;
   return 0;
 }
 

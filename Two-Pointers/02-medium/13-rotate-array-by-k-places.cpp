@@ -8,7 +8,7 @@
  * * Output : [2, 3, 4, 5, 1]
  * 
  * * Example 2
- * * Input  : 'k' = 2, 'arr '= [1,2,3,4,5]
+ * * Input  : 'k' = 3, 'arr '= [1,2,3,4,5]
  * * Output : [3, 4, 5, 1, 2]
 
  * * Example 3

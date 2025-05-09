@@ -18,6 +18,7 @@
 
 std::string reverseWords(std::string &s) {
   int n = s.size();
+
   // * Reverse complete string
   reverse(s.begin(), s.end());
 
@@ -59,19 +60,20 @@ void reverseString(std::string &s, int l, int r) {
 
 std::string reverseWords2(std::string s) {
   int n = s.size();
+  
+  // * Reverse complete string
   int l = 0, r = n - 1;
   reverseString(s, l, r);
+  std::cout << "Full Reverse: " << s << std::endl;
 
-  std::cout << s << std::endl;
   int i = 0;
   l = 0, r = 0;
 
-  while(i < n) {
+  while (i < n) {
     // * move i till you hit space character
     if (!isspace(s[i])) {
       i += 1;
-    }
-    else {
+    } else {
       // printf("%d %d %d\n", i, l, r);
       r = i;
       reverseString(s, l, r);
@@ -89,12 +91,13 @@ int main() {
   // std::string s = "I am zoro";
   std::string s = "   Roronoa      Zoro     ";
   std::cout << s << std::endl;
-  std::string ans = reverseWords(s);
+  // std::string ans = reverseWords(s);
+  std::string ans = reverseWords2(s);
   std::cout << ans << std::endl;
 }
 
 // * Run the code
-// * g++ --std=c++17 01-reverse-words.cpp -o output && ./output
+// * g++ --std=c++17 17-reverse-words.cpp -o output && ./output
 
 
 // * Dry Run
