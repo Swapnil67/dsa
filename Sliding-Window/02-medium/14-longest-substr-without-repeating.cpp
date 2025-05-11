@@ -59,9 +59,9 @@ int lengthOfLongestSubstring(std::string s) {
   int n = s.size();
   std::unordered_map<char, int> hash;
   int i = 0, j = 0, max_len = 0;
-  while(j < n) {
+  while (j < n) {
     // * check if cur char is already seen
-    if(hash.count(s[j])) {
+    if (hash.count(s[j])) {
       // * This is becoz to prevent 'i' assigning a previous index than current 'i'
       if (hash[s[j]] >= i) {
         i = hash[s[j]] + 1;

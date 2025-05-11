@@ -176,7 +176,7 @@ int maxFrequency(std::vector<int> arr, int k) {
   long cur_sum = 0;
   int ans = 0;
 
-  while(j < n) {
+  while (j < n) {
     cur_sum += arr[j];
 
     // * Make all numbers equal to arr[j] value and calculate sum

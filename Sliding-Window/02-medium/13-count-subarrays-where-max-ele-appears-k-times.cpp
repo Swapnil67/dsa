@@ -65,17 +65,19 @@ int countSubarrays(std::vector<int> &arr, int k) {
   int max_ele = *max_element(arr.begin(), arr.end());
 
   // * sliding window
-  int count = 0;    // * freq of max_ele
+  int max_ele_cnt = 0;    // * freq of max_ele
   while(j < n) {
     if(arr[j] == max_ele) {
-      count++;
+      max_ele_cnt++;
     }
 
-    while (count >= k) {
+    while (max_ele_cnt >= k) {
+      // * count subarrays ending from j till n
       ans += (n - j);
-      if (arr[i] == max_ele) {
-        count--;
-      }
+
+      // * Move the 'i' since we counted all subarrays with cur 'i' position
+      if (arr[i] == max_ele)
+        max_ele_cnt--;
       i++;
     }
 
@@ -85,6 +87,7 @@ int countSubarrays(std::vector<int> &arr, int k) {
   return ans;
 }
 
+// ! This soln is little difficult to understand.
 // * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
 // * Keep max_ele index vector 
 // * find the first_idx where count >= k

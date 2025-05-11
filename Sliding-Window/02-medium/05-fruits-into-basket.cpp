@@ -43,22 +43,19 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> fruits) {
   int n = fruits.size();
-  int fruits_collected = 0;
+  int max_fruits = 0;
   for (int i = 0; i < n; ++i) {
-    int basket = 0;
     std::unordered_set<int> st;
-    for (int j = i; j < n; ++j) {
+    int j = i;
+    for (; j < n; ++j) {
       st.insert(fruits[j]);
-      if(st.size() <= 2) {
-        basket++;
-      }
-      else {
+      if(st.size() > 2) {
         break;
       }
     }
-    fruits_collected = std::max(fruits_collected, basket);
+    max_fruits = std::max(max_fruits, j - i);
   }
-  return fruits_collected;
+  return max_fruits;
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`

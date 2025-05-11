@@ -53,8 +53,9 @@ int bruteForce(std::vector<int> arr, int k) {
     int cur_sum = 0;
     std::unordered_set<int> st;
     for(int j = i; j < i + k; ++j) {
-      if(st.find(arr[j]) != st.end()) {
+      if(st.count(arr[j])) {
         // * found duplicate
+        cur_sum = 0;
         break;
       }
       cur_sum += arr[j];
@@ -80,7 +81,7 @@ int subarraySum(std::vector<int> arr, int window_size) {
   int i = 0, j = 0;
   long long max_sum = 0, cur_sum = 0;
   std::unordered_set<int> st;
-  while(j < n) {
+  while (j < n) {
     // * Shrink window 
     // * on duplicate element or on set size >= window_size
     while (i < j && (st.count(arr[j]) || st.size() >= window_size)) {
@@ -112,6 +113,7 @@ int main() {
   std::cout << "Distinct Elements = " << window_size << std::endl;
   printArr(arr);
 
+  // int ans= bruteForce(arr, window_size);
   int ans= subarraySum(arr, window_size);
   std::cout << "Subarray Sum Equals K: " << ans << std::endl;
 

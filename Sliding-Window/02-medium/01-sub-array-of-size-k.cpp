@@ -28,7 +28,7 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * ------------------------- APPROACH 1A: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -46,30 +46,6 @@ int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1B: BRUTE FORCE APPROACH -------------------------`
-// * Calculate the sum of first window
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-int bruteForce2(std::vector<int> &arr, int k, int threshold) {
-  int n = arr.size();
-  int ans = 0;
-  long long cur_sum = 0;
-  for(int i = 0; i < n; ++i) {
-    cur_sum += arr[i];
-    // * window < k
-    // * For calculating the sum of first window
-    if (i < k - 1)
-      continue;
-
-    // * Shrink the window
-    if(i > k - 1) 
-      cur_sum -= arr[i - k];
-
-    if (cur_sum / k >= threshold)
-      ans++;
-  }
-  return ans;
-}
 
 // * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
 // * Classic Sliding Window
@@ -100,7 +76,7 @@ int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
 }
 
 // * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
-// * Classic Sliding Window
+// * Classic Sliding Window without 'i' or 'j'
 // * Sliding Window Approach 2
 // * For threshold average the sum of subarray must be >= (k * threshold)
 // * If avg of size 'k' array is 'threshold'
@@ -126,7 +102,6 @@ int numOfSubarrays(std::vector<int> &arr, int &k, int &threshold) {
     // * Avg >= threshold
     if(sum >= target)
       ans++;
-    std::cout << sum << std::endl;
   }
 
   return ans;

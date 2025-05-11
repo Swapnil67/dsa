@@ -63,7 +63,7 @@ std::vector<int> bruteForce(std::vector<int> arr, int k, int x) {
 // * SPACE COMPLEXITY O(1)
 std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
-  // * 'h' is little restricted becoz m + k should not become greater than n
+  // * 'r' is little restricted becoz m + k should not become greater than n
   int l = 0, r = n - k, m;
   // * binary search
   while(l < r) {
@@ -102,7 +102,6 @@ int main() {
   // std::vector<int> ans = bruteForce(arr, k, x);
   std::vector<int> ans = findClosestElements(arr, k, x);
   printArr(ans);
-  // std::cout << "Minimum Size Subarray Sum: " << ans << std::endl;
   return 0;
 }
 

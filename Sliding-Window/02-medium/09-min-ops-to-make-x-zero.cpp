@@ -33,40 +33,10 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Classic Sliding Window + Basic Algebra
-// * left_sum + right_sum == x
-// * _______________ sum ________________
-// * [left_sum][__ sum - x __][right_sum]
-// * target_sum = sum - x
-// * Problem converted to simple sliding window
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-int minOperations(std::vector<int> &arr, int x) {
-  int n = arr.size();
-  int i = 0, j = 0, ans = INT_MIN;
-  long long total_sum = accumulate(arr.begin(), arr.end(), 0);
-  long long target_sum = total_sum - x;
-  // printf("total_sum: %d, target_sum: %d\n", total_sum, target_sum);
-  int cur_sum = 0;
-  while(j < n) {
-    cur_sum += arr[j];
-    
-    // * Shrink the window
-    while(i <= j && cur_sum > target_sum) {
-      cur_sum -= arr[i];
-      i++;
-    }
 
-    if(cur_sum == target_sum) {
-      ans = std::max(ans, (j - i + 1));
-    }
-    j++; 
-  }
-  return ans < 0 ? -1 : n - ans;
-}
-
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * Using prefix sum map
+
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(X)
 int minOperations2(std::vector<int> &arr, int x) {
@@ -99,6 +69,39 @@ int minOperations2(std::vector<int> &arr, int x) {
       ans = std::max(ans, j - prefix_sum[check_sum]);
     }
     j++;
+  }
+  return ans < 0 ? -1 : n - ans;
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Classic Sliding Window + Basic Algebra
+// * left_sum + right_sum == x
+// * _______________ sum ________________
+// * [left_sum][__ sum - x __][right_sum]
+// * target_sum = sum - x
+// * Problem converted to simple sliding window
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+int minOperations(std::vector<int> &arr, int x) {
+  int n = arr.size();
+  int i = 0, j = 0, ans = INT_MIN;
+  long long total_sum = accumulate(arr.begin(), arr.end(), 0);
+  long long target_sum = total_sum - x;
+  // printf("total_sum: %d, target_sum: %d\n", total_sum, target_sum);
+  int cur_sum = 0;
+  while(j < n) {
+    cur_sum += arr[j];
+    
+    // * Shrink the window
+    while(i <= j && cur_sum > target_sum) {
+      cur_sum -= arr[i];
+      i++;
+    }
+
+    if(cur_sum == target_sum) {
+      ans = std::max(ans, (j - i + 1));
+    }
+    j++; 
   }
   return ans < 0 ? -1 : n - ans;
 }

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 
  * * Longest Substring with At Most K Distinct Characters
  * * You are given a string 'str' and an integer ‘K’.
  * * Your task is to find the length of the largest substring with at most ‘K’ distinct characters.
@@ -120,6 +121,9 @@ int kDistinctChars(std::string s, int k) {
 
 
 int main() {
+  // int k = 2;
+  // std::string s = "abbbbbbc";
+
   int k = 8;
   std::string s = "fitmgntcesze";
 
