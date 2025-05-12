@@ -17,21 +17,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * 17 - med
-// int characterReplacement(std::string s, int k) {
-// TODO
-// }
-
-// * 18 - med
-// bool checkInclusion(std::string s1, std::string s2) {
-// TODO
-// }
-
-// * 19 - med
-// int maxVowels(std::string s, int k) {
-// TODO
-// }
-
 // * 20 - med
 // int minFlips(std::string s) {
 // TODO
@@ -149,6 +134,21 @@ void printArr(std::vector<int> arr) {
 
 // * 16 - med
 // int numberOfSubstrings(std::string s) {
+// TODO
+// }
+
+// * 17 - med
+// int characterReplacement(std::string s, int k) {
+// TODO
+// }
+
+// * 18 - med
+// bool checkInclusion(std::string s1, std::string s2) {
+// TODO
+// }
+
+// * 19 - med
+// int maxVowels(std::string s, int k) {
 // TODO
 // }
 

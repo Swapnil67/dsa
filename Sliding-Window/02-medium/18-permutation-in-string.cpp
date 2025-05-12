@@ -83,7 +83,12 @@ bool checkInclusion(std::string s1, std::string s2) {
 
 
 int main() {
+  // * testcase 1
   std::string s1 = "ab", s2 = "eidbaooo";
+
+  // * testcase 2
+  // std::string s1 = "ab", s2 = "eidboaoo";
+
   std::cout << "String 1: " << s1 << std::endl;
   std::cout << "String 2: " << s2 << std::endl;
 

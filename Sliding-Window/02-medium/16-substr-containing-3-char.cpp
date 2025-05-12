@@ -79,7 +79,12 @@ int numberOfSubstrings2(std::string s) {
 
 
 int main() {
+  // * testcase 1
   std::string s = "abcabc";
+
+  // * testcase 2
+  // std::string s = "aaacb";
+
   std::cout << "Input String: " << s << std::endl;
   // int ans = bruteForce(s);
   int ans = numberOfSubstrings(s);
@@ -87,3 +92,15 @@ int main() {
   
   return 0;
 }
+
+// * Run the code
+// * g++ --std=c++20 16-substr-containing-3-char.cpp -o output && ./output
+
+// * a b c a b c
+// *       ^
+// *           ^
+
+// * ans = 0, 4, 3, 2, 1
+// * a = 0 1 0 1
+// * b = 0 1 0 1
+// * c = 0 1 0 1
