@@ -1,7 +1,7 @@
 /**
  * * Leetcode - 1456
  * * Maximum Number of Vowels in a Substring of Given Length
- * * YGiven a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+ * * Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
  * 
  * * Example 1
  * * Input  : s = "abciiidef", k = 3
@@ -27,17 +27,14 @@ int bruteForce(std::string s, int k) {
   int n = s.size();
   int ans = INT_MIN;
   std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
-  for (int i = 0; i < n; ++i) {
-    std::string temp = "";
-    for (int j = i; (k + i < n && j < k + i); ++j) {
-      if(vowels.count(s[j])) {
-        temp += s[j];
-      }
-      else {
-        break;
+  for (int i = 0; i < n - k; ++i) {
+    int vowels_cnt = 0;
+    for (int j = i; j < i + k; ++j) {
+      if (vowels.count(s[j])) {
+        vowels_cnt++;
       }
     }
-    ans = std::max(ans, (int)temp.size());
+    ans = std::max(ans, vowels_cnt);
   }
   return ans;
 }
@@ -59,12 +56,11 @@ int maxVowels(std::string s, int k) {
 
     // * Minimize window
     if ((j - i + 1) > k) {
-      if(vowels.count(s[i])) {
+      if (vowels.count(s[i])) {
         vowel_cnt--;
       }
       i++;
-    }
-    else {
+    } else {
       // * count vowels substring
       max_vowels_cnt = std::max(max_vowels_cnt, vowel_cnt);
     }

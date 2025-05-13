@@ -38,21 +38,21 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
   int already_satisfied_customers = 0;
   int i = 0, j = 0;
   while (j < n) {
+    // * if owner was grumpy then add those customers[j] to cur_unsatisfied_customers
+    if (grumpy[j]) {
+      cur_unsatisfied_customers += customers[j];
+    } else {
+      // * add these customers[j] to already_satisfied_customers
+      already_satisfied_customers += customers[j];
+    }
+
+    // * Minutes window exceeded
     if((j - i + 1) > minutes) {
       // * if owner was grumpy at 'i' then remove those customers[i] from cur_unsatisfied_customers
       if(grumpy[i]) {
         cur_unsatisfied_customers -= customers[i];
       }
       i += 1;
-    }
-    
-    // * if owner was grumpy then add those customers[j] to cur_unsatisfied_customers
-    if (grumpy[j]) {
-      cur_unsatisfied_customers += customers[j];
-    }
-    else {
-      // * add these customers[j] to already_satisfied_customers
-      already_satisfied_customers += customers[j];
     }
 
     // * Max unsatisfied customer in window
@@ -67,14 +67,14 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
 
 int main() {
   // * testcase 1
-  // int minutes = 3;
-  // std::vector<int> customers = {1, 0, 1, 2, 1, 1, 7, 5};
-  // std::vector<int> grumpy = {0, 1, 0, 1, 0, 1, 0, 1};
+  int minutes = 3;
+  std::vector<int> customers = {1, 0, 1, 2, 1, 1, 7, 5};
+  std::vector<int> grumpy = {0, 1, 0, 1, 0, 1, 0, 1};
 
   // * testcase 2
-  int minutes = 1;
-  std::vector<int> customers = {1};
-  std::vector<int> grumpy = {0};
+  // int minutes = 1;
+  // std::vector<int> customers = {1};
+  // std::vector<int> grumpy = {0};
 
   std::cout << "Grumpy " << std::endl;
   printArr(grumpy);

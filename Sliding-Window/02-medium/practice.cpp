@@ -17,31 +17,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * 20 - med
-// int minFlips(std::string s) {
-// TODO
-// }
-
-// * 21 - med
-// int equalSubstring(std::string s, std::string t, int max_cost) {
-// TODO
-// }
-
-// * 22 - med
-// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
-// TODO
-// }
-
-// * 23 - med
-// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 24 - med
-// int numberOfSubarrays(std::vector<int> &arr, int k) {
-// TODO
-// }
-
 // * 25 - med
 // int countOfSubstrings(std::string s, int k) {
 // TODO
@@ -150,6 +125,32 @@ void printArr(std::vector<int> arr) {
 // * 19 - med
 // int maxVowels(std::string s, int k) {
 // TODO
+// }
+
+// * 20 - med
+// int minFlips(std::string s) {
+// TODO
+// }
+
+
+// * 21 - med
+// int equalSubstring(std::string s, std::string t, int max_cost) {
+// TODO
+// }
+
+// * 22 - med
+// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
+// TODO
+// }
+
+// * 23 - med
+// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
+// TODO Tomorrow
+// }
+
+// * 24 - med
+// int numberOfSubarrays(std::vector<int> &arr, int k) {
+// TODO Tomorrow
 // }
 
 int main() {

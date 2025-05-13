@@ -29,8 +29,7 @@ int bruteForce(std::string s, std::string t, int max_cost) {
   int n = s.size();
   int ans = 0;
   for(int i = 0; i <n; ++i) {
-    int cur_cost = 0;
-    int j = i;
+    int cur_cost = 0, j = i;
     for (; j < n; ++j) {
       int diff = std::abs(s[j] - t[j]);
       if(cur_cost + diff <= max_cost) {
@@ -93,8 +92,8 @@ int main() {
   std::cout << "s: " << s << std::endl;
   std::cout << "t: " << t << std::endl;
 
-  int ans = bruteForce(s, t, max_cost);
-  // int ans = equalSubstring(s, t, max_cost);
+  // int ans = bruteForce(s, t, max_cost);
+  int ans = equalSubstring(s, t, max_cost);
   std::cout << ans << " Equal Substrings Within Budget" << std::endl;
 
   return 0;
