@@ -17,16 +17,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * 25 - med
-// int countOfSubstrings(std::string s, int k) {
-// TODO
-// }
-
-// * 26 - med
-// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
-// TODO
-// }
-
 // * 01 - med
 // int numOfSubarrays(std::vector<int> arr, int k, int threshold) {
 // TODO
@@ -145,12 +135,32 @@ void printArr(std::vector<int> arr) {
 
 // * 23 - med
 // int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
-// TODO Tomorrow
-// }
+// TODO
+// } 
 
 // * 24 - med
 // int numberOfSubarrays(std::vector<int> &arr, int k) {
-// TODO Tomorrow
+// TODO
+// }
+
+// * 25 - med
+// int countOfSubstrings(std::string s, int k) {
+// TODO
+// }
+
+// * 26 - med
+// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 27 - med
+// int maximumBeauty2(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 28 - med
+// int takeCharacters(std::string s, int k) {
+// TODO
 // }
 
 int main() {

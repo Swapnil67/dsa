@@ -46,7 +46,6 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
   for (int i = 0; i <= n - k; ++i) {
     int cur_power = -1;
     for (int j = i; j < i + k; ++j) {
-      // std::cout << arr[j] << " ";
       if (j > i) {
         if(arr[j] == arr[j - 1] + 1) {
           cur_power = arr[j];
@@ -57,7 +56,6 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
         }
       }
     }
-    // std::cout << "\n-------" << std::endl;
     ans.push_back(cur_power);
   }
   return ans;
@@ -70,7 +68,6 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
 std::vector<int> resultsArray(std::vector<int> arr, int k) {
   int n = arr.size();
   std::vector<int> ans((n - k + 1), -1);
-
   int consecutive_cnt = 0; // * count of consecutive elements
 
   // * Find the answer in first k subarray
@@ -86,7 +83,9 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
   }
 
   // * Find the remaining ans through sliding window
-  int i = 1, j = k;
+  // * here 'i' acts a current index for ans vector
+  int i = 1;
+  int j = k;
   while (j < n) {
     if (arr[j - 1] + 1 == arr[j]) {
       consecutive_cnt++;
@@ -94,7 +93,7 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
       consecutive_cnt = 1;
     }
 
-    if(consecutive_cnt >= k) {
+    if (consecutive_cnt >= k) {
       ans[i] = arr[j];
     }
 

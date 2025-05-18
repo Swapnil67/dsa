@@ -1,7 +1,6 @@
 /**
  * * leetcode - 3208
  * * Alternating Groups II
- * 
  * * There is a circle of red and blue tiles. You are given an array of integers colors and an integer k. 
  * * The color of tile i is represented by colors[i]:
  * * An alternating group is every k contiguous tiles in the circle with alternating colors
@@ -40,32 +39,30 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N * K)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> &arr, int k) {
-
   // * Append k - 1 elements to the end of array (to make circular)
-  int temp = k;
-  while (temp - 1 > 0) {
-    arr.push_back(arr[k - temp]);
-    temp -= 1;
+  for(int i = 0; i < k - 1; ++i) {
+    arr.push_back(arr[i]);
   }
   printArr(arr);
 
-  int result = 0;
+  int ans = 0;
   int n = arr.size();
-  for (int i = 0; i < n; ++i) {
-    for (int j = i + 1; j < n; ++j) {
-      // * if prev element is same then break
-      if(arr[j] == arr[j - 1]) {
-        break;
-      }
-      // * if window reached incr the result and break
-      if(j - i + 1 == k) {
-        result += 1;
+
+  for(int i = 0; i <= n - k; ++i) {
+    bool is_alternating = true;
+    for(int j = i; j < i + k; ++j) {
+      std::cout << arr[j] << " ";
+      if(j > i && arr[j] == arr[j - 1]) {
+        is_alternating = false;
         break;
       }
     }
+    printf("\n");
+    if (is_alternating)
+      ans++;
   }
 
-  return result;
+  return ans;
 }
 
 
@@ -77,10 +74,8 @@ int bruteForce(std::vector<int> &arr, int k) {
 int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
 
   // * Append k - 1 elements to the end of array (to make circular)
-  int temp = k;
-  while (temp - 1 > 0) {
-    arr.push_back(arr[k - temp]);
-    temp -= 1;
+  for(int i = 0; i < k - 1; ++i) {
+    arr.push_back(arr[i]);
   }
   // printArr(arr);
 

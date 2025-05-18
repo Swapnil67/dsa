@@ -13,11 +13,11 @@
  * * Note that you can apply the operation to each index only once.
 
  * * Example 1
- * * Input  : nums = [4,6,1,2], k = 2
+ * * Input  : nums = [4, 6, 1, 2], k = 2
  * * Output : 3
 
  * * Example 2
- * * Input  : nums = [1,1,1,1], k = 10
+ * * Input  : nums = [1, 1, 1, 1], k = 10
  * * Output : 4
 
  * * https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/
@@ -43,7 +43,7 @@ void printArr(std::vector<int> arr) {
 // * Check the overlapping intervals
 // * (-1, 3) & (0 , 4) are overlapping intervals
 
-// * -1 0 1 2 3 4 5 6 7 8 9
+// * -1 0 1 2 3 4 5 6 7 8 9       intervals
 // *  <------->                   (-1, 3)
 // *     <------>                 (0, 4)
 // *        <------>              (2, 6)
@@ -58,6 +58,11 @@ int bruteForce(std::vector<int> arr, int k) {
     intervals.push_back({arr[i] - k, arr[i] + k});
   }
   std::sort(intervals.begin(), intervals.end()); // * o(nlogn)
+
+  // * For debugging
+  // for(auto a: intervals) {
+  //   std::cout << "(" << a.first << ", " << a.second << ")" << std::endl;
+  // }
 
   int max_beauty = 0;
   std::deque<int> dq;
@@ -97,7 +102,7 @@ int binarySearch(std::vector<int> &nums, int target) {
 // * x, y
 // * [(x - k), (x + k)] [(y - k), (y + k)]
 // * For overlapping we know (x + k) >= (y - k)
-// * x + 2k >= y
+// * x + 2k >= y   (adding k on both sides)
 // * y <= (x + 2k)
 int maximumBeauty(std::vector<int> arr, int k) {
   int n = arr.size();
@@ -108,6 +113,7 @@ int maximumBeauty(std::vector<int> arr, int k) {
     int x = arr[i];
     int y = x + 2 * k;
 
+    // * Find the max index of element who is >= 'y'
     int j = binarySearch(arr, y);
     max_beauty = std::max(max_beauty, j - i + 1);
   }

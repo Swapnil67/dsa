@@ -97,12 +97,11 @@ long long countOfSubstrings(std::string s, int k) {
     // * Shrink window from left
     while (consonants > k) {
       char ch = s[i];
-      if(vowels.count(ch)) { 
+      if (vowels.count(ch)) {
         vowels_map[ch]--;
         if (vowels_map[ch] == 0)
           vowels_map.erase(ch);
-      }
-      else {
+      } else {
         consonants--;
       }
       i++;
@@ -121,12 +120,11 @@ long long countOfSubstrings(std::string s, int k) {
 
       // * Shrink window once from left because we added all possible array from previous 'i'
       char ch = s[i];
-      if(vowels.count(ch)) { 
+      if (vowels.count(ch)) {
         vowels_map[ch]--;
         if (vowels_map[ch] == 0)
           vowels_map.erase(ch);
-      }
-      else {
+      } else {
         consonants--;
       }
       i++;
@@ -150,6 +148,9 @@ int main() {
 
   // int k = 0;
   // std::string word = "aouiei"; 
+
+  // int k = 2;
+  // std::string word = "iqeaouqi"; 
 
   std::cout << word << std::endl;
 

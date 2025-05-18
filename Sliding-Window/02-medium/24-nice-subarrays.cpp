@@ -33,20 +33,20 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-
 int helper(std::vector<int> &nums, int goal) {
   int n = nums.size();
   int ans = 0;
   int i = 0, j = 0, cur_sum = 0;
 
-  while(j < n) {
+  while (j < n) {
     cur_sum += (nums[j] % 2);
 
-    while(i <= j && cur_sum > goal) {
+    while (i <= j && cur_sum > goal) {
       cur_sum -= (nums[i] % 2);
       i++;
     }
 
+    // * add all subarrays from 'i' to 'j'
     ans += (j - i + 1);
     j++;
   }
@@ -86,9 +86,10 @@ int numberOfSubarraysB(std::vector<int> &nums, int k) {
     mp[odd_count]++;
   }
 
-  for(auto a: mp) {
-    printf("%d: %d\n", a.first, a.second);
-  }
+  // * For debugging
+  // for(auto a: mp) {
+  //   printf("%d: %d\n", a.first, a.second);
+  // }
 
   return result;
 }
