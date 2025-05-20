@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 455
  * 
  * Find First Palindromic String in the Array
  * Given an array of strings words, return the first palindromic string in the array. 
@@ -12,7 +13,7 @@
  * Input  : words = ["notapalindrome","racecar"]
  * Output : "racecar"
 
- * * https://leetcode.com/problems/find-first-palindromic-string-in-the-array/description/
+ * https://leetcode.com/problems/find-first-palindromic-string-in-the-array/description/
 */
 
 #include <iostream>

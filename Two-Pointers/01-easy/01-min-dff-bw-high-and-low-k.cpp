@@ -12,13 +12,13 @@
  * Output : 0
  * 
  * Example 2
- * Input  : nums = [9,4,1,7], k = 2
+ * Input  : nums = [9, 4, 1, 7], k = 2
  * Output : 2
 
  * https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/description/
 */
 
-#include<iostream>
+#include <iostream>
 #include <vector>
 #include <climits>
 #include <algorithm>
@@ -54,7 +54,7 @@ int main() {
   std::vector<int> nums = {9, 4, 1, 7};
   printArr(nums);
   int ans = minimumDifference(nums, k);
-  std::cout << ans << std::endl;
+  std::cout << "Minimum Difference Between Highest and Lowest of K Scores: " << ans << std::endl;
   return 0;
 }
 

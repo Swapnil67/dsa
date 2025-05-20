@@ -53,12 +53,14 @@ int bruteForce(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> arr) {
-  int n = arr.size(), i = 0;
-  for (int j = 1; j < n; j++) {
+  int n = arr.size();
+  int i = 0, j = 1;
+  while (j < n) {
     if (arr[j] != arr[i]) {
       arr[i + 1] = arr[j];
       i++;
     }
+    j++;
   }
   return i + 1;
 }

@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 905
  * Sort Array By Parity 
  * Given an integer array nums, move all the even integers at the beginning of the array followed 
  * by all the odd integers.
@@ -15,7 +16,9 @@
  * https://leetcode.com/problems/sort-array-by-parity/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 template <typename T>
 void printArr(std::vector<T> arr) {
@@ -32,15 +35,33 @@ void swap(T &a, T &b) {
   b = temp;
 }
 
+// * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
+// * TIME COMPLEXITY (N)
+// * SPACE COMPLEXITY O(N)
+std::vector<int> bruteForce(std::vector<int> &arr) {
+  int n = arr.size();
+  int l = 0, r = n - 1;
+  std::vector<int> ans(n);
+  for(int i = 0; i < n; ++i) {
+    if (arr[i] % 2 == 0) {
+      ans[l] = arr[i];
+      l++;
+    } else {
+      ans[r] = arr[i];
+      r--;
+    }
+  }
+
+  return ans;
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * TIME COMPLEXITY (N)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> sortArrayByParity(std::vector<int> nums) {
   int n = nums.size();
   std::vector<int> ans(nums.begin(), nums.end());
   int i = 0, j = 0;
-
-  if (n == 1)
-    return ans;
 
   while (j < n) {
     if (nums[j] % 2 == 0) {
@@ -50,13 +71,33 @@ std::vector<int> sortArrayByParity(std::vector<int> nums) {
     j++;
   }
   return ans;
+
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+static bool comparator(int &a, int &b) {
+  return a % 2 < b % 2;
+}
+// * using built in sort function
+// * TIME COMPLEXITY (N)
+// * SPACE COMPLEXITY O(1)
+std::vector<int> sortArrayByParity2(std::vector<int> nums) {
+  std::sort(nums.begin(), nums.end(), comparator);
+  return nums;
 }
 
 int main() {
-  // std::vector<int> arr = {3, 1, 2, 4};
-  std::vector<int> arr = {0, 1, 2};
+  std::vector<int> arr = {3, 1, 2, 4};
+  // std::vector<int> arr = {0, 1, 2};
+
+  std::cout << "Before Sorting" << std::endl;
   printArr(arr);
-  std::vector<int> ans = sortArrayByParity(arr);
+  
+  // std::vector<int> ans = bruteForce(arr);
+  // std::vector<int> ans = sortArrayByParity(arr);
+  std::vector<int> ans = sortArrayByParity2(arr);
+
+  std::cout << "After Sorting" << std::endl;
   printArr(ans);
 }
 

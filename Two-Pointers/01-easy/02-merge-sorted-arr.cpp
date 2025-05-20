@@ -56,7 +56,7 @@ void mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) 
 
 }
 
-// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 
 // * Merge sort but using one of input arr as output array
 // * TIME COMPLEXITY O(N)
@@ -95,12 +95,13 @@ int main() {
   int m = 3, n = 3;
   std::vector<int> nums1 = {2, 2, 3, 0, 0, 0};
   std::vector<int> nums2 = {1, 5, 6};
+  std::cout << "Before Merging" << std::endl;
   std::cout<<"nums1: ";
   printArr(nums1);
   std::cout<<"nums2: ";
   printArr(nums2);
-
-  std::cout<<"Merged: ";
+  
+  std::cout << "After Merging" << std::endl;
   // mergeBrute(nums1, m, nums2, n);
   merge(nums1, m, nums2, n);
   printArr(nums1);
