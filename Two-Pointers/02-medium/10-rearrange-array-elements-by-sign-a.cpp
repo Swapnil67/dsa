@@ -31,7 +31,7 @@ void printArr(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
-// * Nested Loop
+// * Create different arrays for +ve & -ve elements
 // * TIME COMPLEXITY O(N) + O(N/2)
 // * SPACE COMPLEXITY O(N)
 std::vector<int> bruteForce(std::vector<int> &arr) {

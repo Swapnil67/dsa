@@ -47,8 +47,7 @@ int numRescueBoats(std::vector<int>& people, int limit) {
   while (l <= r) {
     // * at most two people are allowed in boat
     if ((people[l] + people[r]) <= limit) {
-      l++;
-      r--;
+      l++, r--;
     } else {
       // * Here we take the right person (greedy approach)
       r--;

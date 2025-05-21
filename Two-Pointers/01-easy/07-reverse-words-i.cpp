@@ -1,9 +1,9 @@
 /*
- * Sort Array By Parity 
- * Given an integer array nums, move all the even integers at the beginning of the array followed 
- * by all the odd integers.
- * Return any array that satisfies this condition.
-
+ * Leetcode - 557
+ * Reverse Words in a String III
+ * Given a string s, reverse the order of characters in each word within a sentence while still preserving whitespace
+ * and initial word order.
+ * 
  * Example 1
  * Input  : s = "Let's take LeetCode contest"
  * Output : "s'teL ekat edoCteeL tsetnoc"
@@ -54,7 +54,13 @@ std::string reverseWords(std::string s) {
 }
 
 int main() {
+  // * testcase 1
   std::string s = "Let's take LeetCode contest";
+  // * testcase 2
+  // std::string s = "Roronoa Zoro";
+  // * testcase 3
+  // std::string s = "Mr Ding";
+
   std::cout << s << std::endl;
   std::string ans = reverseWords(s);
   std::cout << ans << std::endl;

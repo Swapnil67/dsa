@@ -25,11 +25,9 @@
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
-void printArr(std::vector<int> arr)
-{
+void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++)
-  {
+  for (int i = 0; i < n; i++) {
     std::cout << arr[i] << " ";
   }
   std::cout << std::endl;
@@ -61,8 +59,7 @@ int numSubseq(std::vector<int> arr, int target)
   while (l <= r)
   {
     long long sum = arr[l] + arr[r];
-    if (sum <= target)
-    {
+    if (sum <= target) {
       // * if this is valid then all combination of elements b/w i - j will be valid
       int diff = r - l;
       // std::cout << diff << std::endl;
@@ -91,6 +88,7 @@ int main()
 
   std::cout << "Input Array" << std::endl;
   printArr(arr);
+  std::cout << "Target " << target << std::endl;
   int ans = numSubseq(arr, target);
   std::cout << "Number of subsequences: " << ans << std::endl;
 }

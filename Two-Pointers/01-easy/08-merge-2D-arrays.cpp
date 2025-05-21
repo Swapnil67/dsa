@@ -1,13 +1,10 @@
 /*
+ * Leetcode - 2570
  * Merge Two 2D Arrays by Summing Values
  * Merge the two arrays into one array that is sorted in ascending order by id, respecting the following conditions:
  * - Only ids that appear in at least one of the two arrays should be included in the resulting array.
  * - Each id should be included only once and its value should be the sum of the values of this id in the two arrays. 
  *   If the id does not exist in one of the two arrays, then assume its value in that array to be 0.
-
- * Example 1
- * Input  : s = "Let's take LeetCode contest"
- * Output : "s'teL ekat edoCteeL tsetnoc"
  * 
  * Example 2
  * Input  : nums1 = {{1, 2}, {2, 3}, {4, 5}}, nums2 = {{1, 4}, {3, 2}, {4, 1}}
@@ -33,33 +30,32 @@ void printMatrix(std::vector<std::vector<int>> matrix) {
   std::cout << std::endl;
 }
 
-std::vector<std::vector<int>> mergeArrays(std::vector<std::vector<int>>& nums1, std::vector<std::vector<int>>& nums2) {
+std::vector<std::vector<int>> mergeArrays(
+    std::vector<std::vector<int>> &nums1,
+    std::vector<std::vector<int>> &nums2) {
   std::vector<std::vector<int>> ans;
   int i = 0, j = 0;
   while (i < nums1.size() && j < nums2.size()) {
-    if(nums1[i][0] <= nums2[j][0]) {
-      if(nums1[i][0] == nums2[j][0]) {
-        ans.push_back({{nums1[i][0], nums1[i][1] + nums2[j][1]}});
-        i += 1;
-        j += 1;
-      } else {
-        ans.push_back(nums1[i]);
-        i += 1;
-      }
+    if (nums1[i][0] == nums2[j][0]) {
+      ans.push_back({nums1[i][0], nums1[i][1] + nums2[j][1]});
+      i++, j++;
+    } else if(nums1[i][0] > nums2[j][0]) {
+      ans.push_back({nums2[j]});
+      j++;
     } else {
-      ans.push_back(nums2[j]);
-      j += 1;
+      ans.push_back({nums1[i]});
+      i++;
     }
   }
 
   while (i < nums1.size()) {
     ans.push_back(nums1[i]);
-    i += 1; 
+    i++;
   }
-
+  
   while (j < nums2.size()) {
     ans.push_back(nums2[j]);
-    j += 1;
+    j++;
   }
 
   return ans;

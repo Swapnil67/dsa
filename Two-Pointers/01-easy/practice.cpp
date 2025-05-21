@@ -10,6 +10,21 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+void printMatrix(std::vector<std::vector<int>> matrix) {
+  int r = matrix.size();
+  if(r == 0) return;
+  int c = matrix[0].size();
+  for (int i = 0; i < r; ++i) {
+    std::cout << "{ ";
+    for (int j = 0; j < c; ++j) {
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << "},";
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;
+}
+
 void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
   std::cout << "[ "; 
@@ -51,63 +66,40 @@ void swap(T &a, T &b) {
 // TODO Tonight
 // }
 
-// * 10 - Valid Word Abbreviation
-// std::string validWordAbbreviation(std::vector<std::string> &words) {
-// TODO Tonight
-// }
-
 // * 06 - Sort Array By Parity 
 // std::vector<int> sortArrayByParity(std::vector<int> &arr) {
 // TODO Tonight
 // }
 
-std::string reverseWord(std::string temp) {
-  int l = 0, r = temp.size() - 1;
-  std::cout << "Temp " << temp << std::endl;
-  while(l < r) {
-    swap(temp[l], temp[r]);
-    l++;
-    r--;
-  }
-  return temp;
-} 
+// * 07 - TODO
+// std::string reverseWords(std::string s) {
+// TODO Tonight
+// }
 
+// * 08 - Merge Two 2D Arrays by Summing Values
+// std::vector<std::vector<int>> mergeArrays(
+//     std::vector<std::vector<int>> nums1,
+//     std::vector<std::vector<int>> nums2) {
+// TODO
+// }
 
-// * 06 - Sort Array By Parity 
-std::string reverseWords(std::string s) {
-  int n = s.size();
-  std::string ans = "";
-  int start = 0;
-  for(int i = 0; i < n; ++i) {
-    char ch = s[i];
-    if(isspace(ch)) {
-      std::cout << start - i << " " << i << std::endl;
-      std::string word = reverseWord(s.substr(i - start, i));
-      std::cout << "word " << word << std::endl;
-      ans += word;
-      ans += " ";
-      i += 1;
-      start = i;
-    }
-  }
-  // reverseWord(s, start, n - 1);
-  std::cout << "ans " << ans << std::endl;
-  return ans;
-}
+// * 09 - Move Zero's to End
+// void moveZeroes(std::vector<int> &arr) {
+// TODO
+// }
 
-// * Let's take LeetCode contest
-// *      i
-
+// * 10 - Valid Word Abbreviation
+// bool validWordAbbreviation(std::string &word, std::string &abbr) {
+// TODO Submit Tonight
+// }
 
 int main() {
-  // std::string s = "Let's take LeetCode contest";
-  // std::string s = "Roronoa Zoro";
-  std::string s = "Mr Ding";
-  std::cout << s << std::endl;
-  std::string ans = reverseWords(s);
-  std::cout << ans << std::endl;
   return 0;
 }
 
 // * Run the code
 // * g++ -std=c++17 practice.cpp -o output && ./output
+
+
+
+

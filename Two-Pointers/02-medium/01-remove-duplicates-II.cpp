@@ -32,6 +32,7 @@ void printArr(std::vector<int> arr) {
 int bruteForce(std::vector<int> &arr) {
   int n = arr.size(), c = 0;
   std::unordered_map<int, int> countMap;
+  
   for (int i = 0; i < n; ++i) {
     int val = arr[i];
     if (countMap.count(val) && countMap[val] >= 2) {
@@ -44,6 +45,7 @@ int bruteForce(std::vector<int> &arr) {
       countMap[val]++;
     }
   }
+
   // * For debugging
   // for(auto it: cmap) {
   //   std::cout << it.first << " " << it.second << std::endl;
@@ -67,6 +69,7 @@ int removeDuplicates(std::vector<int> &arr) {
         c += 1;
         j += 1;
     }
+
     // * loop over duplicates
     for (int k = 0; k < std::min(2, c); ++k) {
         arr[i] = arr[j];

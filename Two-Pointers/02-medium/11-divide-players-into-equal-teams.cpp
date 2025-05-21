@@ -42,9 +42,11 @@ void printArr(std::vector<int> arr) {
 }
 
 // * Classic Two Pointers Approach
+// * Make pairs of smallest & largest numbers
 long long dividePlayers(std::vector<int>& skill) {
   int n = skill.size();
   std::sort(skill.begin(), skill.end());
+
   long long ans = 0;
   int i = 0, j = n - 1;
   long long chemistry = skill[i] + skill[j];
@@ -59,12 +61,50 @@ long long dividePlayers(std::vector<int>& skill) {
   return ans;
 }
 
+long long dividePlayers2(std::vector<int>& skill) {
+  int n = skill.size();
+  std::sort(skill.begin(), skill.end());
+
+  long long total_sum = 0;
+
+  // * count the frequency of array elements
+  std::vector<int> freq_vec(1000, 0);
+  for (int x : skill) {
+    freq_vec[x]++;
+    total_sum += x;
+  }
+
+  // * Sum per pair
+  long long sum = total_sum / (n / 2); 
+
+  long long ans = 0;
+  for (int i = 0; i < n; ++i) {
+    // * get the required sum needed for pair
+    int required = sum - skill[i];
+    if (freq_vec[required] <= 0)
+      return -1;
+
+    ans += (skill[i] * required);
+  }
+
+  // * This is because we also add duplicate pairs while we traverse the whole array
+  return ans / 2;
+}
+
 int main() {
-  // std::vector<int> skill = {3, 4};
-  std::vector<int> skill = {1, 1, 2, 3};
+  // * testcase 1
+  std::vector<int> skill = {3, 4};
+
+  // * testcase 2
+  // std::vector<int> skill = {1, 1, 2, 3};
+
+  // * testcase 3
   // std::vector<int> skill = {3, 2, 5, 1, 3, 4};
+
   printArr(skill);
-  long long ans = dividePlayers(skill);
+
+  // long long ans = dividePlayers(skill);
+  long long ans = dividePlayers2(skill);
   std::cout << ans << std::endl;
   return 0;
 }

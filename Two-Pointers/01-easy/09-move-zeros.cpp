@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 283
  * * Move Zero's to End
  * * Given an array 'arr' of 'n' non-negative integers, your task is to move all the zeros to the end of the array while keeping 
  * * the non-zero elements at the start of the array in their original order. Return the modified array.
@@ -28,6 +29,8 @@ void printArr(std::vector<int> arr) {
 void moveZeroes(std::vector<int> &nums) {
   int n = nums.size();
   int i = -1;
+    
+  // * go to first zero index
   for (int k = 0; k < n; ++k) {
     if(nums[k] == 0) {
       i = k;

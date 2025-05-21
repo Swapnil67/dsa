@@ -32,16 +32,16 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> height) {
   int n = height.size();
-  int max_water = INT_MIN;
+  int maxArea = INT_MIN;
   for (int i = 0; i < n; ++i)  {
     for (int j = i + 1; j < n; ++j) {
-      int amount = ((j - i) * std::min(height[i], height[j]));
-      // std::cout << amount << " ";
-      max_water = std::max(amount, max_water);
+      int curArea = ((j - i) * std::min(height[i], height[j]));
+      // std::cout << curArea << " ";
+      maxArea = std::max(curArea, maxArea);
     }
     // std::cout << std::endl;
   }
-  return max_water;
+  return maxArea;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
@@ -64,6 +64,7 @@ int maxArea(std::vector<int> height) {
 }
 
 int main() {
+  
   std::vector<int> nums = {3, 1, 2, 3};
   // std::vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
   // std::vector<int> nums = {1, 1};

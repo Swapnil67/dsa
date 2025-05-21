@@ -50,7 +50,7 @@ int bagOfTokensScore(std::vector<int> tokens, int power) {
   int max_score = 0; // * initially
 
   while(i <= j) {
-    std::cout << power << std::endl;
+    // std::cout << power << std::endl;
     // * Increase the score by reducing power
     if(power >= tokens[i]) {
       power -= tokens[i];
