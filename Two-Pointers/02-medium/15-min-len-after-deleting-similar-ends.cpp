@@ -28,15 +28,20 @@ int minimumLength(std::string s) {
   int n = s.size();
   int i = 0, j = n - 1;
   while(i < j) {
-    std::cout << i << " " << j << std::endl;
+    // std::cout << i << " " << j << std::endl;
     if(s[i] != s[j]) {
       break;
     }
+    // * move both pointers once
     i++;
     j--;
+
+    // * check if prefix are equal
     while (i < j && s[i] == s[i - 1]) {
       i++;
     }
+
+    // * check if suffix are equal
     while (j >= i && s[j] == s[j + 1]) {
       j--;
     }
@@ -57,4 +62,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 03-min-len-after-deleting-similar-ends.cpp -o output && ./output
+// * g++ --std=c++17 15-min-len-after-deleting-similar-ends.cpp -o output && ./output

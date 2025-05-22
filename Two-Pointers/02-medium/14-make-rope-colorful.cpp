@@ -35,16 +35,18 @@ void printArr(std::vector<int> arr) {
 
 int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
   int n = colors.size();
-  int time = 0, prev = 0;
+  int timeRequired = 0, prevMax = 0;
   for (int i = 0; i < n; ++i) {
-    int cur_time = neededTime[i];
+
+    // * reset the prevMax if found alternating color
     if (i > 0 && colors[i] != colors[i - 1]) {
-      prev = 0;
+      prevMax = 0;
     }
-    time = time + std::min(prev, neededTime[i]);
-    prev = std::max(prev, cur_time);
+    int curTime = neededTime[i];
+    timeRequired = timeRequired + std::min(prevMax, neededTime[i]);
+    prevMax = std::max(prevMax, curTime);
   }
-  return time;
+  return timeRequired;
 }
 
 int main() {

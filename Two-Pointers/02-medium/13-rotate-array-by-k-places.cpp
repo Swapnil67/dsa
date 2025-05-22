@@ -99,12 +99,13 @@ int main() {
   // * testcase 2
   int k = 3;
   std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7};
-  std::cout<<"Before Rotation"<<std::endl;
+  std::cout << "Before Rotation" << std::endl;
   printArr(arr);
 
   bruteForce(arr, k);
   // rotate(arr, k);
-  std::cout<<"After Rotation"<<std::endl;
+  
+  std::cout << "After Rotation" << std::endl;
   printArr(arr);
   return 0;
 }

@@ -46,6 +46,7 @@ std::vector<int> bruteForce(std::vector<int> &arr, int pivot) {
     }
   }
 
+  // * here we use less_than_pivot for answer 
   for(int i = 0; i < equal_to_pivot.size(); i++) {
     less_than_pivot.push_back(equal_to_pivot[i]);
   }
@@ -57,6 +58,7 @@ std::vector<int> bruteForce(std::vector<int> &arr, int pivot) {
 }
 
 // * ------------------------- APPROACH 2A: Optimal APPROACH -------------------------`
+// * Get the starting positions of less than & greater than elements
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 
@@ -98,34 +100,34 @@ std::vector<int> pivotArray(std::vector<int> &arr, int pivot) {
 }
 
 // * ------------------------- APPROACH 2B: Optimal APPROACH -------------------------`
+// * Classic Two Pointer Approach
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> pivotArray2(std::vector<int> &arr, int pivot) {
   int n = arr.size();
   int i = 0, j = n - 1;
-  int l = 0, r = n - 1; // * For ans index
+  int lessIdx = 0, moreIdx = n - 1; // * For ans index
   std::vector<int> ans(n);
 
-  while(i < n && j >= 0) {
+  while (i < n && j >= 0) {
     if (arr[i] < pivot) {
-      ans[l] = arr[i];
-      l++;
+      ans[lessIdx] = arr[i];
+      lessIdx++;
     }
 
     if (arr[j] > pivot) {
-      ans[r] = arr[j];
-      r--;
+      ans[moreIdx] = arr[j];
+      moreIdx--;
     }
 
     // * Keep incr/decr the i & j pointers
-    i++;
-    j--;
+    i++, j--;
   }
 
   // * Put pivot in indexes from l -> r
-  while(l <= r) {
-    ans[l] = pivot;
-    l++;
+  while(lessIdx <= moreIdx) {
+    ans[lessIdx] = pivot;
+    lessIdx++;
   }
 
   return ans;

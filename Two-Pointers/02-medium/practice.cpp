@@ -68,20 +68,7 @@ void printVectorString(std::vector<std::string> strs) {
   std::cout << "]" << std::endl;
 }
 
-// * 13 - med
-// std::vector<int> rotate(std::vector<int> &arr, int k) {
-// TODO
-// }
 
-// * 14 - med
-// int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
-// TODO
-// }
-
-// * 15 - med
-// int minimumLength(std::string s) {
-// TODO
-// }
 
 // * 16 - med
 // bool areSentencesSimilar(std::string s) {
@@ -92,7 +79,6 @@ void printVectorString(std::vector<std::string> strs) {
 // std::string reverseWords(std::string &s) {
 // TODO
 // }
-
 
 // * 01 - med
 // int removeDuplicates(std::vector<int> &arr) {    
@@ -150,12 +136,40 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // }
 
-// * 12 - med
+// * 12 - Partition Array According to Given Pivot
 // std::vector<int> pivotArray2(std::vector<int> arr, int pivot) {
 // TODO
 // } 
 
+// * 13 - Rotate array by K places
+// std::vector<int> rotate(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 14 - Minimum Time to Make Rope Colorful
+// int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
+// TODO 
+// }
+
+// * 15 - Minimum Length of String After Deleting Similar Ends
+// int minimumLength(std::string s) {
+// TODO
+// }
+
+
 int main() {
+  // * testcase 1
+  std::string s1 = "My name is Haley", s2 = "My Haley";
+
+  // * testcase 2
+  // std::string s1 = "of", s2 = "of course";
+
+  std::cout << s1 << std::endl;
+  std::cout << s2 << std::endl;
+
+  // bool ans = areSentencesSimilar(s1, s2);
+  // std::cout << "Is similar sentences: " << ans << std::endl;
+  
   return 0;
 }
 
