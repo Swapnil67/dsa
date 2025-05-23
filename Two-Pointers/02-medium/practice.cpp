@@ -63,22 +63,11 @@ void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
   std::cout << "[ "; 
   for (std::string s : strs) {
-    std::cout << s << ", ";
+    std::cout << '"' << s << '"' << ", ";
   }
   std::cout << "]" << std::endl;
 }
 
-
-
-// * 16 - med
-// bool areSentencesSimilar(std::string s) {
-// TODO
-// }
-
-// * 17 - med
-// std::string reverseWords(std::string &s) {
-// TODO
-// }
 
 // * 01 - med
 // int removeDuplicates(std::vector<int> &arr) {    
@@ -156,20 +145,17 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // }
 
+// * 16 - Sentence Similarity III
+// bool areSentencesSimilar(std::string s1, std::string s2) {
+// TODO
+// }
+
+// * 17 - Reverse Words in a String
+// std::string reverseWords(std::string &s) {
+// TODO
+// }
 
 int main() {
-  // * testcase 1
-  std::string s1 = "My name is Haley", s2 = "My Haley";
-
-  // * testcase 2
-  // std::string s1 = "of", s2 = "of course";
-
-  std::cout << s1 << std::endl;
-  std::cout << s2 << std::endl;
-
-  // bool ans = areSentencesSimilar(s1, s2);
-  // std::cout << "Is similar sentences: " << ans << std::endl;
-  
   return 0;
 }
 

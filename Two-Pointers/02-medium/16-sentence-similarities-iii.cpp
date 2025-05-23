@@ -44,7 +44,7 @@ std::vector<std::string> getStringVector(std::string sentence) {
   std::string word = "";
   std::vector<std::string> vec;
   for(char &ch : sentence) {
-    if (ch == ' ') {
+    if (isspace(ch)) {
       vec.push_back(word);
       word = "";
     } else {

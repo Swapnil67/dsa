@@ -1,13 +1,18 @@
 /*
- TODO
+ * Leetcode - 151
+ * Reverse Words in a String
 
  * Example 1
  * Input  : s = "I am zoro"
  * Output : "zoro am I"
  * 
  * Example 2
- * Input  : s = "Roronoa Zoro"
+ * Input  : s = "   Roronoa Zoro   "
  * Output : "Zoro Roronoa" 
+ * 
+ * Example 3
+ * Input  : s = "the sky is blue"
+ * Output : "blue is sky the"
 
  * https://www.naukri.com/code360/problems/reverse-words_696444
  * https://leetcode.com/problems/reverse-words-in-a-string/ 
@@ -15,7 +20,27 @@
 
 #include <iostream>
 #include <algorithm>
+#include <sstream>
 
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * Using stringstream
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+std::string bruteForce(std::string &s) {
+  int n = s.size();
+  std::stringstream ss(s);
+  
+  std::string token = "", result = "";
+  while(ss >> token) {
+    result = token + " " + result;
+  }
+  return result;
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Using Two Pointers
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 std::string reverseWords(std::string &s) {
   int n = s.size();
 
@@ -27,7 +52,9 @@ std::string reverseWords(std::string &s) {
   int l = 0, r = 0;
   while(i < n) {
     while(i < n && s[i] != ' ') {
-      s[r++] = s[i++];
+      s[r] = s[i];
+      i++;
+      r++;
     }
 
     // * Reverse l to r
@@ -89,10 +116,14 @@ std::string reverseWords2(std::string s) {
 
 int main() {
   // std::string s = "I am zoro";
-  std::string s = "   Roronoa      Zoro     ";
+  // std::string s = "   Roronoa      Zoro     ";
+  // std::string s = "  hello world  ";
+  std::string s = "blue is sky the";
+
   std::cout << s << std::endl;
+  std::string ans = bruteForce(s);
   // std::string ans = reverseWords(s);
-  std::string ans = reverseWords2(s);
+  // std::string ans = reverseWords2(s);
   std::cout << ans << std::endl;
 }
 
