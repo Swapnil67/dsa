@@ -1,5 +1,6 @@
 /*
-* Validate Stack Sequences
+ * Leetcode - 946
+ * Validate Stack Sequences
  * Given two integer arrays pushed and popped each with distinct values, return true if this could have 
  * been the result of a sequence of push and pop operations on an initially empty stack, or false otherwise.
  * 
@@ -27,17 +28,19 @@ void printArr(std::vector<int> &arr) {
 
 bool validateStackSequences(std::vector<int> &pushed, std::vector<int> &popped) {
   int n = pushed.size();
-  std::stack<int> pushed_st;
+  std::stack<int> st;
   int j = 0;
   for (int i = 0; i < n; ++i) {
-    pushed_st.push(pushed[i]);
-    while(!pushed_st.empty() && pushed_st.top() == popped[j]) {
-      pushed_st.pop();
+    st.push(pushed[i]);
+
+    // * keep popping if st.top() == popped[j]
+    while (!st.empty() && st.top() == popped[j]) {
+      st.pop();
       j++;
     }
   }
 
-  return pushed_st.size() ? false : true;
+  return st.size() ? false : true;
 }
 
 int main() {

@@ -1,6 +1,7 @@
 /*
-* Evaluate Reverse Polish Notation
-* You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
+  * Leetcode - 150
+  * Evaluate Reverse Polish Notation
+  * You are given an array of strings tokens that represents an arithmetic expression in a Reverse Polish Notation.
   * The valid operators are '+', '-', '*', and '/'.
   * Each operand may be an integer or another expression.
   * The division between two integers always truncates toward zero.
@@ -8,12 +9,12 @@
   * The input represents a valid arithmetic expression in a reverse polish notation.
   * The answer and all the intermediate calculations can be represented in a 32-bit integer.
   * 
-* https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
+  * https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
 */
 
-#include <iostream>
 #include <stack>
 #include <vector>
+#include <iostream>
 
 void printArr(std::vector<std::string> &arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -27,10 +28,8 @@ void printArr(std::vector<std::string> &arr) {
     if (!st.empty())                  \
     {                                 \
       int num1 = st.top();            \
-      std::cout << num1 << std::endl; \
       st.pop();                       \
       int num2 = st.top();            \
-      std::cout << num2 << std::endl; \
       st.pop();                       \
       int ans = num2 op num1;         \
       st.push(ans);                   \
@@ -40,31 +39,12 @@ void printArr(std::vector<std::string> &arr) {
 int evalRPN(std::vector<std::string> &tokens) {
   int n = tokens.size();
   std::stack<int> st;
-  for (int i = 0; i < n; i++) {
-    if (tokens[i] == "+") {
-      if(!st.empty()) {
-        BINARY_OP(st, +);
-      }
-    }
-    else if (tokens[i] == "-") {
-      if(!st.empty()) {
-        BINARY_OP(st, -);
-      }
-    }
-    else if (tokens[i] == "*") {
-      if(!st.empty()) {
-        BINARY_OP(st, *);
-      }
-    }
-    else if (tokens[i] == "/") {
-      if(!st.empty()) {
-        BINARY_OP(st, /);
-        // std::cout << st.top() << std::endl;
-      }
-    }
-    else {
-      st.push(std::stoi(tokens[i]));
-    }
+  for(std::string &s: tokens) {
+    if(s == "+") { BINARY_OP(st, +) }
+    else if(s == "-") { BINARY_OP(st, -) }
+    else if(s == "*") { BINARY_OP(st, *) }
+    else if(s == "/") { BINARY_OP(st, /) }
+    else { st.push(std::stoi(s)); }
   }
   return st.empty() ? 0 : st.top();
 }

@@ -1,4 +1,5 @@
 /*
+* Leetcode - 2390
 * Removing Stars From a String
 * You are given a string s, which contains stars *.
 * In one operation, you can:
@@ -15,7 +16,7 @@
  * * Input  : s = "erase*****";
  * * Output : 
 
-* https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
+* https://leetcode.com/problems/removing-stars-from-a-string/description/
 */
 
 #include <iostream>
@@ -53,8 +54,25 @@ std::string removeStars(std::string s) {
 }
 
 // * ------------------------- APPROACH 1B: Optimal Approach -------------------------`
-// * Without using stack
+// * Using string as stack
 std::string removeStars2(std::string s) {
+  int n = s.size();
+  std::string ans = "";
+  std::stack<char> st;
+  for (char &ch : s) {
+    if(ch == '*') {
+      ans.pop_back();
+    } else {
+      ans += ch;
+    }
+  }
+
+  return ans;
+}
+
+// * ------------------------- APPROACH 1B: Optimal Approach -------------------------`
+// * Using Two Pointer
+std::string removeStars3(std::string s) {
   int i = 0;
   for (char ch : s) {
     if(ch == '*') {

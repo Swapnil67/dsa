@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 739
  * Daily Temperatures
  * Given an array of integers temperatures represents the daily temperatures, return an array answer 
  * such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. 
@@ -11,7 +12,7 @@
  * * Input  : temperatures = [30,40,50,60]
  * * Output : [1,1,1,0]
  * 
-* https://leetcode.com/problems/daily-temperatures/description/
+ * https://leetcode.com/problems/daily-temperatures/description/
 */
 
 
@@ -38,16 +39,14 @@ std::vector<int> bruteForce(std::vector<int> temperatures) {
     int days = 0;
     for (int j = i + 1; j < n; ++j) {
       days++;
-      if(temperatures[j] > warmer_temperature) {
+      if (temperatures[j] > warmer_temperature) {
         warmer_temperature = temperatures[j];
         break;
       }
     }
-    if(warmer_temperature == temperatures[i]) {
-      ans.push_back(0);
-    } else {
-      ans.push_back(days);
-    }
+    if (warmer_temperature == temperatures[i])
+      days = 0;
+    ans.push_back(days);
   }
   return ans;
 }
@@ -62,7 +61,7 @@ std::vector<int> dailyTemperatures(std::vector<int> &temperatures) {
   std::stack<int> mono_st;    // * Monotonic stack
 
   for (int i = n - 1; i >= 0; --i) {
-    // * Till stack top has smaller element than current one
+    // * st.top() should only contain element greater than temperatures[i] 
     while (!mono_st.empty() && temperatures[i] >= temperatures[mono_st.top()]) {
       mono_st.pop();
     }

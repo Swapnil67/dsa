@@ -1,5 +1,6 @@
 /*
-* Generate Parentheses
+ * Leetcode - 22
+ * Generate Parentheses
  * Given two integer arrays pushed and popped each with distinct values, return true if this could have 
  * been the result of a sequence of push and pop operations on an initially empty stack, or false otherwise.
  * 
@@ -11,7 +12,7 @@
  * * Input  : n = 1
  * * Output : ["()"]
 
-* https://leetcode.com/problems/generate-parentheses/description/
+ * https://leetcode.com/problems/generate-parentheses/description/
 */
 
 #include <iostream>
@@ -44,6 +45,7 @@ bool isValidParentheses(std::string s) {
 }
 
 // * TIME COMPLEXITY O(2^2N) ~ O(2^N)
+// * Using Recursion & Backtracking
 void backtrackingBrute(std::vector<std::string> &ans, std::string &s, int n)
 {
   if (s.size() == 2 * n) {
@@ -72,21 +74,23 @@ std::vector<std::string> bruteForce(int n) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-
-
 // * TIME COMPLEXITY O(2^2N) ~ O(2^N)
 void backtracking(std::vector<std::string> &ans, int open_count, int close_count, int n, std::string s)
 {
+  // * No need to check isValidParentheses here
   if (s.size() == 2 * n) {
     ans.push_back(s);
     return;
   }
+
+  // * open_count cannot become greater than n
   if (open_count < n) {
     s.push_back('(');
     backtracking(ans, open_count + 1, close_count, n, s);
     s.pop_back();
   }
   
+  // * close_cnt cannot become greater than open_count
   if(close_count < open_count) {
     s.push_back(')');
     backtracking(ans, open_count, close_count + 1, n, s);

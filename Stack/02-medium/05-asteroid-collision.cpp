@@ -1,5 +1,6 @@
 /*
-* Asteroid Collision
+ * Leetcode - 735
+ * Asteroid Collision
  * We are given an array asteroids of integers representing asteroids in a row. 
  * The indices of the asteriod in the array represent their relative position in space.
  * For each asteroid, the absolute value represents its size, and the sign represents its direction 
@@ -22,7 +23,7 @@
  * * Output : [10]
  * * Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
  * 
-* https://leetcode.com/problems/asteroid-collision/description/
+ * https://leetcode.com/problems/asteroid-collision/description/
 */
 
 #include <iostream>
@@ -41,8 +42,7 @@ void printArr(std::vector<int> &arr) {
 std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
   std::stack<int> st;
   int n = asteroids.size();
-  for (int i = 0; i < n; ++i) {
-    int cur_asteroid = asteroids[i];
+  for(int &cur_asteroid: asteroids) {
     // * Asteroid Collision 
     while (!st.empty() && cur_asteroid < 0 && st.top() > 0) {
       int sum = st.top() + cur_asteroid;
@@ -50,13 +50,12 @@ std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
         // * Both asteroids got destoryed
         st.pop();
         cur_asteroid = 0;
-      } else if (sum > 0) {
-        // * Left asteroids is bigger
-        cur_asteroid = 0;
-        break;
-      } else {
+      } else if (sum < 0) {
         // * right asteroids is bigger
         st.pop();
+      } else {
+        // * Left asteroids is bigger
+        cur_asteroid = 0;
       }
     }
 
@@ -80,8 +79,7 @@ std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
 std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
   std::vector<int> ans;
   int n = asteroids.size();
-  for (int i = 0; i < n; ++i) {
-    int cur_asteroid = asteroids[i];
+  for(int &cur_asteroid: asteroids) {
     // * Asteroid Collision
     while (!ans.empty() && cur_asteroid < 0 && ans[ans.size() - 1] > 0) {
       int sum = ans[ans.size() - 1] + cur_asteroid;
@@ -89,13 +87,12 @@ std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
         // * Both asteroids got destoryed
         ans.pop_back();
         cur_asteroid = 0;
-      } else if (sum > 0) {
-        // * Left asteroids is bigger
-        cur_asteroid = 0;
-        break;
-      } else {
+      } else if (sum < 0) {
         // * right asteroids is bigger
         ans.pop_back();
+      } else {
+        // * Left asteroids is bigger
+        cur_asteroid = 0;
       }
     }
 
@@ -134,9 +131,6 @@ int main() {
   // std::vector<int> ans = asteroidCollision(asteroids);
   std::vector<int> ans = asteroidCollision2(asteroids);
   printArr(ans);
-
-  // printf("Minimum Number of Operations to Make Array Continuous: %d\n", ans);
-  // printArr(ans);
 
   return 0;
 }

@@ -1,5 +1,6 @@
 /*
-* Online Stock Span
+ * Leetcode - 901
+ * Online Stock Span
  * * Example 1
  * * Input  : ["StockSpanner", "next", "next", "next", "next", "next", "next", "next"]
  * [[], [100], [80], [60], [70], [60], [75], [85]]
@@ -27,7 +28,8 @@ class StockSpanner {
 
       std::stack<std::pair<int, int>> temp = this->st;
       // std::cout << temp.size() << " " << temp.top() << std::endl;
-      while(!temp.empty()) {
+      
+      while (!temp.empty()) {
         if(temp.top().first > price) {
           break;
         }
