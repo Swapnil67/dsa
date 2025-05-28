@@ -1,6 +1,7 @@
 /*
- * Decode String
-
+ * Leetcode - 71
+ * Simplify Path
+ 
  * Example 1
  * Input: s = "/home/"
  * Output: "/home"
@@ -19,7 +20,6 @@
  * 
  * https://leetcode.com/problems/simplify-path/description/
 */
-
 
 #include <iostream>
 #include <vector>
@@ -131,12 +131,10 @@ std::string simplifyPath(std::string s) {
     if (token == "." || token == "")
       continue;
 
-    if(token == "..") {
+    if (token == "..") {
       if (!st.empty())
         st.pop();
-    }
-    else
-    {
+    } else {
       st.push(token);
     }
   }
@@ -168,4 +166,4 @@ int main() {
 
 
 // * Run the code
-// * $CXX --std=c++20 09-simplify-path.cpp -o output && ./output
+// * g++ --std=c++20 09-simplify-path.cpp -o output && ./output

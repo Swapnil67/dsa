@@ -6,8 +6,10 @@
  * [[], [100], [80], [60], [70], [60], [75], [85]]
  * * Output : [null, 1, 1, 1, 2, 1, 4, 6]
  * 
-* https://leetcode.com/problems/online-stock-span/description/
+ * https://leetcode.com/problems/online-stock-span/description/
 */
+
+// ! Monotonic Stack
 
 #include <iostream>
 #include <stack>
@@ -52,6 +54,7 @@ class StockSpanner {
 
       // * Check the previous day stock price
       // * If <= to today price pop the previous day stock span
+      // * This keeps the st in decreasing order
       while (!this->st.empty() && this->st.top().first <= price) {
         stock_span += this->st.top().second;
         this->st.pop();
@@ -74,4 +77,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 06-online-stock-span.cpp -o output && ./output
+// * g++ --std=c++20 06-online-stock-span.cpp -o output && ./output

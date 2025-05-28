@@ -60,4 +60,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 03-validate-stack-sequences.cpp -o output && ./output 
+// * g++ 03-validate-stack-sequences.cpp -o output && ./output 

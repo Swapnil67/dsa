@@ -119,4 +119,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 04-generate-parantheses.cpp -o output && ./output
+// * g++ 04-generate-parantheses.cpp -o output && ./output

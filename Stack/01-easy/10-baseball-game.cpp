@@ -1,3 +1,5 @@
+// TODO 
+
 #include <iostream>
 #include <stack>
 #include <vector>
@@ -43,7 +45,7 @@ int calPoints(std::vector<std::string> operations) {
       st.push(n3);
       sum += n3;
     } else {
-      // * Integer
+      // * String to Integer
       int n = std::stoi(ops);
       st.push(n);
       sum += n;

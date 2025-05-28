@@ -42,13 +42,12 @@ void moveZeroes(std::vector<int> &nums) {
     return;
 
   int j = i + 1;
-  while (j < n) {
+  for (int j = j + 1; j < n; ++j) {
     if(nums[j] != 0) {
       nums[i] = nums[j];
       nums[j] = 0;
       i++;
     }
-    j++;
   }
 }
 

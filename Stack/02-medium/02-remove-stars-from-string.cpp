@@ -19,8 +19,8 @@
 * https://leetcode.com/problems/removing-stars-from-a-string/description/
 */
 
-#include <iostream>
 #include <stack>
+#include <iostream>
 
 // * ------------------------- APPROACH 1A: Optimal Approach -------------------------`
 // * Using stack
@@ -29,7 +29,7 @@ std::string removeStars(std::string s) {
   std::stack<char> st;
   for (int i = n - 1; i >= 0; --i) {
     // std::cout << i << " " << s[i] << std::endl;
-    if(s[i] == '*') {
+    if (s[i] == '*') {
       st.push(s[i]);
     }
     else {
@@ -70,7 +70,7 @@ std::string removeStars2(std::string s) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1B: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1C: Optimal Approach -------------------------`
 // * Using Two Pointer
 std::string removeStars3(std::string s) {
   int i = 0;
@@ -100,4 +100,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 02-remove-stars-from-string.cpp -o output && ./output 
+// * g++ 02-remove-stars-from-string.cpp -o output && ./output 

@@ -49,6 +49,7 @@ int takeCharacters(std::string s, int k) {
       i++;
     }
 
+    // * 'a' >= k || 'b' >= k || 'c' >= k
     if (char_freq[0] >= k && char_freq[1] >= k && char_freq[2] >= k) {
       max_window = std::max(max_window, (j - i + 1));
     }

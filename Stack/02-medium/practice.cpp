@@ -2,6 +2,7 @@
 #include <vector>
 #include <stack>
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 
 template<typename T>
@@ -22,6 +23,17 @@ void reverseArr(std::vector<int> &arr, int i, int j) {
     j--;
   }
 }
+
+
+// * 09 - Simplify Path
+// std::string simplifyPath(std::string path) {
+// TODO
+// }
+
+// * 10 - Decode String
+// std::string decodeString(std::string s) {
+// TODO
+// }
 
 // * 01 - Evaluate Reverse Polish Notation
 // int evalRPN(std::vector<std::string> &tokens) {
@@ -45,70 +57,30 @@ void reverseArr(std::vector<int> &arr, int i, int j) {
 
 // * 05 - Asteroid Collision
 // std::vector<int> asteroidCollision(std::vector<int> asteroids) {
-  // TODO
-  // }
-  
+// TODO
+// }
+
 // * 06 - Online Stock Span
 // class StockSpanner {
-//  TODO
+// TODO
 // };
-  
-// * 07 - Daily Temperatures
-// std::vector<int> dailyTemperatures(std::vector<int> temperatures) {
-// TODO
-// }
-  
+
 // * 07 - Daily Temperatures
 // std::vector<int> dailyTemperatures(std::vector<int> temperatures) {
 // TODO
 // }
 
-// * 08 - Daily Temperatures
-int carFleet(int target, std::vector<int> position, std::vector<int> speed) {
-  int n = position.size();
+// * 08 - Car Fleet
+// int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
+// TODO
+// }
 
-  // * Pairs of <position, speed>
-  std::vector<std::pair<float, float>> cars(n);
-  for (int i = 0; i < n; ++i) {
-    cars[i] = {(float)position[i], (float)speed[i]};
-  }
-  std::sort(cars.begin(), cars.end(), std::greater<std::pair<float, float>>());
-
-  // * For debug information
-  for (int i = 0; i < n; ++i) {
-    printf("(%f %f)\n", cars[i].first, cars[i].second);
-  }
-  printf("\n");
-  
-  std::stack<int> st;
-  for (int i = 0; i < n; ++i) {
-    float t = ((float) target - cars[i].first) / cars[i].second;
-    std::cout << t << std::endl;
-    if (!st.empty() && st.top() >= t) {
-      st.pop();
-    }
-    st.push(t);
-  }
-  return st.size();
-}
+// * 11 - Remove k digits
+// std::string removeKdigits(std::string num, int k) {
+// TODO
+// }
 
 int main() {
-  // int target = 12;
-  // std::vector<int> position = {10, 8, 0, 5, 3}, speed = {2, 4, 1, 1, 3};
-
-  int target = 10;
-  std::vector<int> position = {0, 4, 2}, speed = {2, 1, 3};
-
-  // int target = 10;
-  // std::vector<int> position = {1, 3, 6}, speed = {2, 3, 1};
-
-  printf("Target: %d\n", target);
-  printf("Car positions: \n");
-  printArr(position);
-  printf("Car speeds: \n");
-  printArr(speed);
-  int fleets = carFleet(target, position, speed);
-  std::cout << "Car Fleets: " << fleets << std::endl;
   return 0;
 }
 

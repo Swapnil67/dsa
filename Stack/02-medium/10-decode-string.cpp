@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 394
  * Decode String
 
  * Example 1
@@ -16,12 +17,8 @@
  * https://leetcode.com/problems/decode-string/description/
 */
 
-#include <iostream>
 #include <stack>
-
-bool isNumeric(char ch) {
-  return ((int)ch >= '0' && (int)ch <= '9');
-}
+#include <iostream>
 
 std::string bruteForce(std::string s) {
   int n = s.size();
@@ -30,12 +27,12 @@ std::string bruteForce(std::string s) {
   std::string token = "";
   std::stack<char> st;
 
-  for(char &ch :s) {
-    if(ch == ']') {
-      std::string temp = "";
+  for (char &ch : s) {
+    if (ch == ']') {
 
       // * Get the string
-      while(!st.empty() && st.top() != '[') {
+      std::string temp = "";
+      while (!st.empty() && st.top() != '[') {
         temp = st.top() + temp;
         st.pop();
       }
@@ -45,7 +42,7 @@ std::string bruteForce(std::string s) {
 
       // * Get the number
       std::string num_str = "";
-      while(!st.empty() && isNumeric(st.top())) {
+      while(!st.empty() && isdigit(st.top())) {
         num_str = st.top() + num_str;
         st.pop();
       }
@@ -62,7 +59,7 @@ std::string bruteForce(std::string s) {
       }
 
       // std::cout << num_str << " -> " << temp << " = " << temp2 << std::endl;
-    } 
+    }
     else {
       st.push(ch);
     }
@@ -93,4 +90,4 @@ int main() {
 
 
 // * Run the code
-// * $CXX --std=c++20 10-decode-string.cpp -o output && ./output
+// * g++ --std=c++20 10-decode-string.cpp -o output && ./output

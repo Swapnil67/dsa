@@ -20,6 +20,8 @@
  * https://leetcode.com/problems/car-fleet/description/
 */
 
+// ! Monotonic Stack
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -36,7 +38,7 @@ void printArr(std::vector<int> &arr) {
 // * TIME COMPLEXITY O(n * logn)
 // * SPACE COMPLEXITY O(n)
 int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
-  int n = position.size(), fleet = 1;
+  int n = position.size();
   
   // * Pairs of <position, speed>
   std::vector<std::pair<float, float>> cars(n);
@@ -52,6 +54,7 @@ int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
   // }
   // printf("\n");
 
+  int fleet = 1;
   float f_target = (float)target;
   std::pair<float, float> back = cars[0], front;
   for(int i = 1; i < n; ++i) {
@@ -89,4 +92,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 08-car-fleet.cpp -o output && ./output
+// * g++ --std=c++20 08-car-fleet.cpp -o output && ./output

@@ -23,17 +23,17 @@ void printArr(std::vector<std::string> &arr) {
   std::cout << std::endl;
 }
 
-#define BINARY_OP(st, op)             \
-  {                                   \
-    if (!st.empty())                  \
-    {                                 \
-      int num1 = st.top();            \
-      st.pop();                       \
-      int num2 = st.top();            \
-      st.pop();                       \
-      int ans = num2 op num1;         \
-      st.push(ans);                   \
-    }                                 \
+#define BINARY_OP(st, op)     \
+  {                           \
+    if (!st.empty())          \
+    {                         \
+      int num1 = st.top();    \
+      st.pop();               \
+      int num2 = st.top();    \
+      st.pop();               \
+      int ans = num2 op num1; \
+      st.push(ans);           \
+    }                         \
   }
 
 int evalRPN(std::vector<std::string> &tokens) {
@@ -61,4 +61,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 01-evaluate-rpn.cpp -o output && ./output
+// * g++ -std=c++20 01-evaluate-rpn.cpp -o output && ./output

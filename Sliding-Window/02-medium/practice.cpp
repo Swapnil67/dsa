@@ -1,6 +1,7 @@
 #include <map>
 #include <set>
 #include <deque>
+#include <queue>
 #include <vector>
 #include <numeric>
 #include <climits>
@@ -161,7 +162,13 @@ void printArr(std::vector<int> arr) {
 // * 28 - med
 // int takeCharacters(std::string s, int k) {
 // TODO
+// } 
+
+// * 29 - med
+// int longestSubarray(std::vector<int> &nums, int limit) {
+// TODO
 // }
+
 
 int main() {
   return 0;
@@ -169,3 +176,4 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++20 practice.cpp -o output && ./output
+

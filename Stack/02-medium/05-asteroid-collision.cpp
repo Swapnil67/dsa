@@ -38,6 +38,7 @@ void printArr(std::vector<int> &arr) {
   printf("\n");
 }
 
+// * ------------------------- APPROACH 1A: Optimal Approach -------------------------`
 // * Using Stack
 std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
   std::stack<int> st;
@@ -75,6 +76,7 @@ std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
   return ans;
 }
 
+// * ------------------------- APPROACH 1B: Optimal Approach -------------------------`
 // * Using only vector
 std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
   std::vector<int> ans;
@@ -136,4 +138,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 05-asteroid-collision.cpp -o output && ./output
+// * g++ --std=c++20 05-asteroid-collision.cpp -o output && ./output

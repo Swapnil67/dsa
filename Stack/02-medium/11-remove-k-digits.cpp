@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 402
  * Remove K Digits
  * Given string num representing a non-negative integer num, and an integer k, return the smallest possible 
  * integer after removing k digits from num.
@@ -22,6 +23,7 @@
 #include <climits>
 #include <stack>
 
+// ! Monotonic Stack
 
 std::string bruteForce(std::string str, int k) {
   int n = str.size();
@@ -47,11 +49,14 @@ std::string bruteForce(std::string str, int k) {
   return ans;
 }
 
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(2N) ~ O(N)
+// * SPACE COMPLEXITY O(1)
+
 // * Use the following logic
 // * one's ten's hundred's thousand's place
 std::string removeKdigits(std::string str, int k) {
   int n = str.size();
-  std::stack<char> st;
   std::string ans = "";
 
   if (n == k)
@@ -73,6 +78,7 @@ std::string removeKdigits(std::string str, int k) {
 
   // std::cout << ans << " " << k << std::endl;
 
+  // * When the num string is already sorted
   while (k > 0 && ans.length()) {
     ans.pop_back();
     k--;
@@ -84,8 +90,8 @@ std::string removeKdigits(std::string str, int k) {
 }
 
 int main() {
-  // int k = 3;
-  // std::string num = "1432219";
+  int k = 3;
+  std::string num = "1432219";
 
   // int k = 1;
   // std::string num = "112";
@@ -93,8 +99,8 @@ int main() {
   // int k = 1;
   // std::string num = "10200";
 
-  int k = 9;
-  std::string num = "1234567890";
+  // int k = 9;
+  // std::string num = "1234567890";
 
   std::cout << num << std::endl;
 
@@ -105,4 +111,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 11-remove-k-digits.cpp -o output && ./output
+// * g++ --std=c++20 11-remove-k-digits.cpp -o output && ./output

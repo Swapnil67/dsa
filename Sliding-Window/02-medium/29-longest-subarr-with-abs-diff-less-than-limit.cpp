@@ -71,7 +71,7 @@ int longestSubarray(std::vector<int> &nums, int limit) {
 
   typedef std::pair<int, int> P;
   std::priority_queue<P, std::vector<P>> maxPq; // * Max Heap
-  std::priority_queue<P, std::vector<P>, std::greater<P>> minPq; // * Max Heap
+  std::priority_queue<P, std::vector<P>, std::greater<P>> minPq; // * Min Heap
   
   int i = 0, j = 0, ans = 0;
 

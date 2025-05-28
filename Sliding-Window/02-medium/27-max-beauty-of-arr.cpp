@@ -99,10 +99,10 @@ int binarySearch(std::vector<int> &nums, int target) {
   return ans;
 }
 
-// * x, y
-// * [(x - k), (x + k)] [(y - k), (y + k)]
+// *  x                  y
+// * [(x - k), (x + k)], [(y - k), (y + k)]
 // * For overlapping we know (x + k) >= (y - k)
-// * x + 2k >= y   (adding k on both sides)
+// * x + 2k >= y   (adding 'k' on both sides)
 // * y <= (x + 2k)
 int maximumBeauty(std::vector<int> arr, int k) {
   int n = arr.size();
@@ -133,7 +133,7 @@ int maximumBeauty2(std::vector<int> arr, int k) {
   int max_beauty = 0;
   int i = 0, j = 0;
   while (i < n) {
-    while (j < n && arr[j] <= arr[i] + 2 * k) {
+    while (j < n && (arr[i] + 2 * k) >= arr[j]) {
       j++;
     }
     max_beauty = std::max(max_beauty, j - i);

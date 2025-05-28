@@ -15,6 +15,7 @@
  * https://leetcode.com/problems/daily-temperatures/description/
 */
 
+// ! Monotonic Stack
 
 #include <stack>
 #include <vector>
@@ -44,6 +45,7 @@ std::vector<int> bruteForce(std::vector<int> temperatures) {
         break;
       }
     }
+    // * we did not get the warmer temperature than current
     if (warmer_temperature == temperatures[i])
       days = 0;
     ans.push_back(days);
@@ -88,4 +90,4 @@ int main() {
 }
 
 // * run the code
-// * $CXX --std=c++17 07-daily-temperatures.cpp -o output && ./output
+// * g++ --std=c++17 07-daily-temperatures.cpp -o output && ./output

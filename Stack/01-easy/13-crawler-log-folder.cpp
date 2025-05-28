@@ -28,8 +28,6 @@ void printVectorString(std::vector<std::string>& strs) {
 }
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
-// * Classic Sliding Window
-// * Similar to binary subarry sum
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int minOperations(std::vector<std::string> logs) {
