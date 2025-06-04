@@ -16,6 +16,10 @@
 #include <stack>
 #include <iostream>
 
+// * ------------------------- APPROACH A: Optimal Approach -------------------------`
+// * Using Stack
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 int minAddToMakeValid(std::string s) {
   std::stack<char> st;
   for(char &ch: s) {
@@ -29,6 +33,10 @@ int minAddToMakeValid(std::string s) {
   return st.size();
 }
 
+// * ------------------------- APPROACH B: Optimal Approach -------------------------`
+// * Without Using Stack
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int minAddToMakeValid2(std::string s) {
   int size = 0; // * stack size
   int open = 0; // * open brackets required

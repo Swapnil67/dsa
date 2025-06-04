@@ -21,6 +21,10 @@ void printArr(std::vector<int> &arr) {
   printf("\n");
 }
 
+// * ------------------------- APPROACH 1: Brute Approach -------------------------
+// * Nested Loop
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> nums) {
   int n = nums.size();
   long long sum = 0;
@@ -28,9 +32,7 @@ int bruteForce(std::vector<int> nums) {
     long long cur_min = nums[i];
     long long cur_sum = 0;
     for(int j = i; j < n; ++j) {
-      if(cur_min > nums[j]) {
-        cur_min = nums[j];
-      }
+      cur_min = std::min(cur_min, (long long)nums[j]);
       cur_sum += cur_min;
     }
     // std::cout << cur_sum << std::endl;

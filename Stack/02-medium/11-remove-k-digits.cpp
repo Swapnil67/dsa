@@ -49,7 +49,7 @@ std::string bruteForce(std::string str, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(2N) ~ O(N)
 // * SPACE COMPLEXITY O(1)
 

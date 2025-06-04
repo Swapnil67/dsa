@@ -32,31 +32,32 @@
 std::string removeDuplicates(std::string s, int k) {
   int n = s.size();
   std::stack<char> st;
-  std::unordered_map<char, int> char_cnt;
-  for(char ch: s) {
-    if(!st.empty() && st.top() == ch) {
-      char_cnt[ch]++;
-    }
-    else {
-      char_cnt[ch] = 1;
+  std::unordered_map<char, int> freqHash;
+  for (char &ch : s) {
+    if (!st.empty() && st.top() == ch) {
+      freqHash[ch]++;
+    } else {
+      freqHash[ch] = 1;
     }
     st.push(ch);
 
-    // std::cout << ch << " => " << char_cnt[ch] << std::endl;
-    if (char_cnt[ch] == k) {
-      while(!st.empty() && char_cnt[ch] != 0) {
-        char_cnt[ch]--;
+    // std::cout << ch << " => " << freqHash[ch] << std::endl;
+    // * If frequency becomes 'k'
+    if (freqHash[ch] == k) {
+      while (!st.empty() && freqHash[ch] != 0) {
+        freqHash[ch]--;
         st.pop();
       }
     }
   }
   // std::cout << st.size() << std::endl;
 
+  // * Create the answer
   std::string ans = "";
   while(!st.empty()) {
     ans = st.top() + ans;
     st.pop();
-  } 
+  }
 
   return ans;
 }
@@ -91,6 +92,30 @@ std::string removeDuplicates2(std::string s, int k) {
   return ans;
 }
 
+// * My Solution
+std::string removeDuplicates3(std::string s, int k) {
+  int n = s.size();
+  std::unordered_map<char, int> freqHash;
+  for(char &ch: s) {
+    freqHash[ch]++;
+    if (freqHash[ch] == k) {
+      while (freqHash[ch] == 0)
+        freqHash[ch]--;
+      freqHash.erase(ch);
+    }
+  }
+
+  std::string ans = "";
+  for(auto it: freqHash) {
+    while(it.second > 0) {
+      ans = it.first + ans;
+      it.second--;
+    }
+  }
+
+  return ans;
+}
+
 int main() {
   // int k = 2;
   // std::string s = "abcd";
@@ -109,4 +134,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 12-remove-duplicate-strings.cpp -o output && ./output
+// * g++ --std=c++20 12-remove-duplicate-strings.cpp -o output && ./output

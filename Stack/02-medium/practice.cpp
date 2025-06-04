@@ -1,9 +1,11 @@
+#include <stack>
 #include <string>
 #include <vector>
-#include <stack>
+#include <climits>
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <unordered_map>
 
 template<typename T>
 void printArr(std::vector<T> &arr) {
@@ -80,7 +82,59 @@ void reverseArr(std::vector<int> &arr, int i, int j) {
 // TODO
 // }
 
+// * 12 - Remove All Adjacent Duplicates in String II
+// std::string removeDuplicates(std::string s, int k) {
+// TODO
+// }
+
+// * 13 - 132 Pattern
+// bool find132pattern(std::vector<int> &nums) {
+// TODO
+// }
+
+// * 13 - Sum of Subarray Minimums
+
+int smallestNextToLeft(std::vector<int> &nums, int cur, int i) {
+  int start = i;
+  for (; i >= 0; --i) {
+    if (cur > nums[i])
+      break;
+  }
+  return start - i;
+}
+
+int smallestNextToRight(std::vector<int> &nums, int cur, int i) {
+  int start = i;
+  int n = nums.size();
+  for (; i < n; ++i) {
+    if (cur > nums[i])
+      break;
+  }
+  return i - start;
+}
+
+long long sumSubarrayMins(std::vector<int> &nums) {
+  int n = nums.size();
+  long long ans = 0;
+  for(int i = 0; i < n; ++i) { 
+    int cur = nums[i];
+    int a = smallestNextToLeft(nums, cur, i);
+    int b = smallestNextToRight(nums, cur, i);
+
+    ans += (a * b);
+    // std::cout << a << " " << b << std::endl;
+  }
+
+  return ans;
+}
+
 int main() {
+  std::vector<int> nums = {3, 1, 2, 4};
+  // std::vector<int> nums = {11, 81, 94, 43, 3};
+
+  printArr(nums);
+  long long ans = sumSubarrayMins(nums);
+  std::cout << "Sum of Subarray Minimums: " << ans << std::endl;
   return 0;
 }
 
