@@ -14,6 +14,10 @@
  * * Example 2
  * * Input  : nums = [3, 3, 6, 8], target = 10
  * * Output : 6
+ *
+ * * Example 2
+ * * Input  : nums = [2, 3, 3, 4, 6, 7], target = 12
+ * * Output : 12
 
  * * https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/
  * * https://www.naukri.com/code360/problems/count-the-number-of-subsequences-having-product-not-more-than-p_1214647
@@ -79,9 +83,11 @@ int main()
   // * testcase 1
   // int target = 9;
   // std::vector<int> arr = {3, 5, 6, 7};
+
   // * testcase 2
   // int target = 12;
   // std::vector<int> arr = {2, 3, 3, 4, 6, 7};
+
   // * testcase 3
   int target = 22;
   std::vector<int> arr = {14, 4, 6, 6, 20, 8, 5, 6, 8, 12, 6, 10, 14, 9, 17, 16, 9, 7, 14, 11, 14, 15, 13, 11, 10, 18, 13, 17, 17, 14, 17, 7, 9, 5, 10, 13, 8, 5, 18, 20, 7, 5, 5, 15, 19, 14};

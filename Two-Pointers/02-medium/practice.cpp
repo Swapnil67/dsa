@@ -69,16 +69,6 @@ void printVectorString(std::vector<std::string> strs) {
 }
 
 
-// * 01 - med
-// int removeDuplicates(std::vector<int> &arr) {    
-// TODO
-// }
-
-// * 02 - med
-// std::vector<int> findTwoSum(std::vector<int> &arr, int target) {    
-// TODO Tonight
-// }
-
 // * 03 - med
 // std::vector<std::vector<int>> threeSum(std::vector<int> &arr, int target) {
 // TODO Tonight
@@ -87,42 +77,6 @@ void printVectorString(std::vector<std::string> strs) {
 // * 04 - med
 // std::vector<std::vector<int>> fourSum(std::vector<int> &arr, int target) {
 // TODO Tonight
-// }
-
-// * 05 - med
-// int maxArea(std::vector<int> &height) {
-// TODO 
-// }
-
-
-// * 06 - Number of Subsequences That Satisfy the Given Sum Condition
-// int numSubseq(std::vector<int> arr, int target) {
-// TODO Tonight
-// }
-
-// * 07 - Boats to Save People
-// int numRescueBoats(std::vector<int> boats, int limit) {
-// TODO 
-// }
-
-// * 08 - K-th Symbol in Grammar
-// int kthGrammar(int n, int k) {
-// TODO 
-// }
-
-// * 09 - Bag of Tokens
-// int bagOfTokensScore(std::vector<int> tokens, int power) {
-// TODO
-// }
-
-// * 10 - Rearrange Array Elements by Sign
-// std::vector<int> rearrangeArray(std::vector<int> arr) {
-// TODO
-// }
-
-// * 11 - Divide Players Into Teams of Equal Skill
-// long long dividePlayers(std::vector<int> skill) {
-// TODO
 // }
 
 // * 12 - Partition Array According to Given Pivot
@@ -153,6 +107,52 @@ void printVectorString(std::vector<std::string> strs) {
 // * 17 - Reverse Words in a String
 // std::string reverseWords(std::string &s) {
 // TODO
+// }
+
+
+// * 01 - med
+// int removeDuplicates(std::vector<int> &arr) {    
+// TODO
+// }
+
+// * 02 - med
+// std::vector<int> findTwoSumSorted(std::vector<int> &arr, int target) {    
+// TODO
+// }
+
+// * 05 - med
+// int maxArea(std::vector<int> &height) {
+// TODO
+// }
+
+// * 06 - Number of Subsequences That Satisfy the Given Sum Condition
+// int numSubseq(std::vector<int> arr, int target) {
+// TODO
+// }
+
+// * 07 - Boats to Save People
+// int numRescueBoats(std::vector<int> boats, int limit) {
+// TODO
+// }
+
+// * 08 - K-th Symbol in Grammar
+// int kthGrammar(int n, int k) {
+// TODO
+// }
+
+// * 09 - Bag of Tokens
+// int bagOfTokensScore(std::vector<int> tokens, int power) {
+// TODO
+// }
+
+// * 10 - Rearrange Array Elements by Sign
+// std::vector<int> rearrangeArray(std::vector<int> arr) {
+// TODO Tomorrow
+// }
+
+// * 11 - Divide Players Into Teams of Equal Skill
+// long long dividePlayers(std::vector<int> skill) {
+// TODO Tomorrow
 // }
 
 int main() {

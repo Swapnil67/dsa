@@ -42,8 +42,8 @@ std::vector<int> findTwoSumSorted(std::vector<int> &arr, int target) {
   while(i < j) {
     int cur_sum = arr[i] + arr[j];
     if(cur_sum == target) {
-      ans.push_back(i+1);
-      ans.push_back(j+1);
+      ans.push_back(i + 1);
+      ans.push_back(j + 1);
       return ans;
     }
     else if(cur_sum > target) {
@@ -86,7 +86,7 @@ int main() {
   
   // * Note that this returns the index
   // std::vector<int> ans = findTwoSumSorted(arr, target);
-  // printArr(ans)
+  // printArr(ans);
   return 0;
 }
 

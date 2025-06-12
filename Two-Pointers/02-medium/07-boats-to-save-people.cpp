@@ -8,11 +8,11 @@
  * * Return the minimum number of boats to carry every given person.
 
  * * Example 1
- * * Input  : nums = [3,2,2,1], limit = 3
+ * * Input  : nums = [3, 2, 2, 1], limit = 3
  * * Output : 3
  * 
  * * Example 2
- * * Input  : nums = [5,1,4,2], limit = 6
+ * * Input  : nums = [5, 1, 4, 2], limit = 6
  * * Output : 2
 
  * * https://leetcode.com/problems/boats-to-save-people/description/
