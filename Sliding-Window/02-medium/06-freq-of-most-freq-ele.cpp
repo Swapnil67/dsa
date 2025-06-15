@@ -29,7 +29,7 @@
 #include <vector>
 #include <climits>
 #include <iostream>
-#include <bits/algorithmfwd.h>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -212,11 +212,11 @@ int main() {
   
   // int ans = bruteForce(arr, k);
   // int ans = betterApproach(arr, k);
-  // int ans = maxFrequency(arr, k);
-  // std::cout << "Frequency of the Most Frequent Element: " << ans << std::endl;
+  int ans = maxFrequency(arr, k);
+  std::cout << "Frequency of the Most Frequent Element: " << ans << std::endl;
   return 0;
 }
 
 
 // * Run the code
-// * $CXX 06-freq-of-most-freq-ele.cpp -o output && ./output
+// * g++ --std=c++20 06-freq-of-most-freq-ele.cpp -o output && ./output

@@ -141,12 +141,12 @@ int numSubarraysWithSum2(std::vector<int> arr, int goal) {
 
 int main() {
   // * testcase 1
-  int goal = 2;
-  std::vector<int> arr = {1, 0, 1, 0, 1};
+  // int goal = 2;
+  // std::vector<int> arr = {1, 0, 1, 0, 1};
 
   // * testcase 2
-  // int goal = 2;
-  // std::vector<int> arr = {0, 1, 0, 0, 1};
+  int goal = 2;
+  std::vector<int> arr = {0, 1, 0, 0, 1};
 
   // * testcase 3
   // int goal = 0;

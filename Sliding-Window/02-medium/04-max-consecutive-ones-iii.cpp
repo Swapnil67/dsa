@@ -41,15 +41,14 @@ int bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
   int max_ones = 0;
   for(int i = 0; i < n; ++i) {
-    int j = i, k_changes = k;
+    int j = i, flips = k;
     for(; j < n; ++j) {
+      // * check if flips available
       if (arr[j] == 0) {
-        if(k_changes > 0) {
-          k_changes -= 1;
-        }
-        else {
+        // * All flips used
+        if (flips <= 0)
           break;
-        }
+        flips -= 1;
       }
     }
     max_ones = std::max(max_ones, j - i);
@@ -64,18 +63,18 @@ int bruteForce(std::vector<int> arr, int k) {
 // * SPACE COMPLEXITY O(1)
 int betterApproach(std::vector<int> arr, int k) {
   int n = arr.size();
-  int i = 0, j = 0, zeros = 0;
+  int i = 0, j = 0;
+  int flips = 0;
   int max_len = 0;
 
   while(j < n) {
     if(arr[j] == 0) 
-      zeros++;
+      flips++;
     
-    // * Increase the window from left till it has k zeros
-    while(zeros > k) {
-      if(arr[i] == 0) {
-        zeros--;
-      }
+    // * Increase the window from left till it has k flips
+    while (flips > k) {
+      if (arr[i] == 0)
+        flips--;
       i++;
     }
 

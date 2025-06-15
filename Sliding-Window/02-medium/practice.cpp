@@ -18,80 +18,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * 01 - med
-// int numOfSubarrays(std::vector<int> arr, int k, int threshold) {
-// TODO
-// }
-
-// * 02 - med
-// int subarraySum(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 03 - med
-// std::vector<int> firstNegative(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 04 - med
-// int longestOnes(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 05 - med
-// int totalFruit(std::vector<int> fruits) {
-// TODO
-// }
-
-// * 06 - med
-// int maxFrequency(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 07 - med
-// int minSubArrayLen(std::vector<int> arr, int target) {
-// TODO
-// }
-
-// * 08 - med
-// std::vector<int> findClosestElements(std::vector<int> arr, int k, int x) {
-// TODO
-// }
-
-// * 09A - med
-// int minOperations(std::vector<int> arr, int x) {
-// TODO
-// }
-
-// * 09B - med
-// int minOperations2(std::vector<int> arr, int x) {
-// TODO
-// }
-
-// * 10 - med
-// int numSubarraysWithSum(std::vector<int> arr, int goal) {
-// TODO
-// }
-
-// * 11 - med
-// int numSubarrayProductLessThanK(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 12 - med
-// int maxSubarrayLength(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 13 - med
-// int countSubarrays(std::vector<int> arr, int k) {
-// TODO
-// }
-
-// * 14 - med
-// int lengthOfLongestSubstring(std::string s) {
-// TODO
-// }
 
 // * 15 - med
 // int kDistinctChars(std::string s, int k) {
@@ -122,7 +48,6 @@ void printArr(std::vector<int> arr) {
 // int minFlips(std::string s) {
 // TODO
 // }
-
 
 // * 21 - med
 // int equalSubstring(std::string s, std::string t, int max_cost) {
@@ -169,6 +94,82 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * ------------------------------------------------------------------------------------------
+
+// * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+// int numOfSubarrays(std::vector<int> arr, int k, int threshold) {
+// TODO
+// }
+
+// * 02 - Maximum Sum of Distinct Subarrays With Length K
+// int subarraySum(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 03 - First Negative In Every Window
+// std::vector<int> firstNegative(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 04 - Max Consecutive Ones III
+// int longestOnes(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 05 - Fruit Into Baskets
+// int totalFruit(std::vector<int> fruits) {
+// TODO
+// }
+
+// * 06 - Frequency of the Most Frequent Element
+// int maxFrequency(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 07 - Minimum Size Subarray Sum
+// int minSubArrayLen(std::vector<int> arr, int target) {
+// TODO
+// }
+
+// * 08 - Find K Closest Elements
+// std::vector<int> findClosestElements(std::vector<int> arr, int k, int x) {
+// TODO
+// }
+
+// * 09A - Minimum Operations to Reduce X to Zero
+// int minOperations(std::vector<int> arr, int x) {  
+// TODO
+// }
+
+// * 09B - Minimum Operations to Reduce X to Zero
+// int minOperations2(std::vector<int> arr, int x) {
+// TODO
+// }
+
+// * 10 - Binary Subarrays With Sum
+// int numSubarraysWithSum(std::vector<int> arr, int goal) {
+// TODO
+// }
+
+// * 11 - Subarray Product Less Than K
+// int numSubarrayProductLessThanK(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 12 - Length of Longest Subarray With at Most K Frequency
+// int maxSubarrayLength(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 13 - Count Subarrays Where Max Element Appears at Least K Times
+// int countSubarrays(std::vector<int> arr, int k) {
+// TODO
+// }
+
+// * 14 - Longest Substring Without Repeating Characters
+// int lengthOfLongestSubstring(std::string s) {
+// TODO
+// }
 
 int main() {
   return 0;

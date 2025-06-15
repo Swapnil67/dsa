@@ -77,6 +77,7 @@ int numSubarrayProductLessThanK(std::vector<int>& nums, int k) {
       i++;
     }
 
+    // * Add all the subarrays b/w 'i' & 'j'
     ans += (j - i + 1);
     j++;
   }

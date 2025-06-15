@@ -22,9 +22,9 @@
  * * https://leetcode.com/problems/minimum-size-subarray-sum/description/
 */
 
-#include <iostream>
 #include <vector>
 #include <climits>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -39,41 +39,42 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int target) {
+  int ans = INT_MAX;
   int n = arr.size();
-  int ans = INT_MAX, found = 0;
-  for (int i = 0; i < n; ++i) {
-    int cur_sum = 0;
-    for (int j = i; j < n; ++j) {
-      cur_sum += arr[j];
-      if(cur_sum >= target) {
-        ans = std::min(ans, j - i + 1);
-        found = 1;
+  for(int i = 0; i < n; ++i) {
+    int curSum = 0;
+    int j = i;
+    for(; j < n; ++j) {
+      curSum += arr[j];
+      // * break if we found the subarray
+      if (curSum >= target)
         break;
-      }
     }
+    // std::cout << curSum << std::endl;
+    if (curSum >= target)
+      ans = std::min(ans, j - i + 1);
   }
-
-  return found ? ans : found;
+  return ans == INT_MAX ? 0 : ans;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Classic Sliding Window
-// * Find the cur_sum
-// * Then find the window while(cur_sum >= target)
+// * Find the curSum
+// * Then find the window while(curSum >= target)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int minSubArrayLen(std::vector<int> arr, int target) {
   int n = arr.size();
-  int ans = INT_MAX, cur_sum = 0;
+  int ans = INT_MAX, curSum = 0;
   int i = 0, j = 0;
   while (j < n) {
-    cur_sum += arr[j];
+    curSum += arr[j];
 
-    // * While cur_sum >= target shrink window and store new subarray size
-    while (cur_sum >= target) {
+    // * While curSum >= target shrink window and store new subarray size
+    while (i < j && curSum >= target) {
       // * Shrink the window
       ans = std::min(ans, j - i + 1);
-      cur_sum -= arr[i];
+      curSum -= arr[i];
       i++;
     }
 

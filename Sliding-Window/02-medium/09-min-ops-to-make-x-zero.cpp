@@ -21,10 +21,10 @@
 */
 
 #include <map>
-#include <iostream>
 #include <numeric>
 #include <climits>
 #include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -36,7 +36,6 @@ void printArr(std::vector<int> arr) {
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * Using prefix sum map
-
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(X)
 int minOperations2(std::vector<int> &arr, int x) {
@@ -70,7 +69,11 @@ int minOperations2(std::vector<int> &arr, int x) {
     }
     j++;
   }
-  return ans < 0 ? -1 : n - ans;
+
+  if (ans < 0)
+    return -1;
+
+  return n - ans;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
@@ -103,7 +106,10 @@ int minOperations(std::vector<int> &arr, int x) {
     }
     j++; 
   }
-  return ans < 0 ? -1 : n - ans;
+
+  if (ans < 0)
+    return -1;
+  return n - ans;
 }
 
 int main() {

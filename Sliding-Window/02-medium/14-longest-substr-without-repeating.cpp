@@ -13,6 +13,11 @@
  * * Output : 1
  * * Explanation: The answer is "b", with the length of 1.
 
+ * * Example 3
+ * * Input  : s = "tmmzuxt"
+ * * Output : 3
+ * * Explanation: The answer is "mzuxt", with the length of 5.
+
  * * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
  * * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
 */
@@ -80,6 +85,35 @@ int lengthOfLongestSubstring(std::string s) {
   return max_len;
 }
 
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * Keep the map of character positions & using sliding window
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(256)
+int lengthOfLongestSubstring2(std::string s) {
+  int n = s.size();
+  std::unordered_map<char, int> charFreq;
+
+  int ans = 0;
+  int i = 0, j = 0;
+  while (j < n) {
+    charFreq[s[j]]++;
+
+    // * Shrink the window
+    while (charFreq[s[j]] > 1) {
+      charFreq[s[i]]--;
+      if (charFreq[s[i]] == 0) {
+        charFreq.erase(s[i]);
+      }
+      i++;
+    }
+
+    ans = std::max(ans, j - i + 1);
+    j++;
+  }
+
+  return ans;
+}
+
 int main() {
   // std::string s = "abcabcbb";
   // std::string s = "abba";
@@ -94,4 +128,4 @@ int main() {
 }
 
 // * Run the code
-// * g+= --std=c++20 14-longest-substr-without-repeating.cpp -o output && ./output
+// * g++ --std=c++20 14-longest-substr-without-repeating.cpp -o output && ./output

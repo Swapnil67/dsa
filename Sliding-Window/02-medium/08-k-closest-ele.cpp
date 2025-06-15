@@ -85,16 +85,16 @@ std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
 int main() {
 
   // * testcase 1
-  // int k = 4, x = 3;
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  int k = 4, x = 3;
+  std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int k = 4, x = -1;
   // std::vector<int> arr = {1, 1, 2, 3, 4, 5};
 
   // * testcase 2
-  int k = 1, x = 9;
-  std::vector<int> arr = {1, 1, 1, 10, 10, 10};
+  // int k = 1, x = 9;
+  // std::vector<int> arr = {1, 1, 1, 10, 10, 10};
 
   printf("Input Array: ");
   printArr(arr);
@@ -102,8 +102,41 @@ int main() {
   // std::vector<int> ans = bruteForce(arr, k, x);
   std::vector<int> ans = findClosestElements(arr, k, x);
   printArr(ans);
+
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 08-k-closest-ele.cpp -o output && ./output
+
+
+// * ============ DRY RUN ============
+// * arr = [1, 1, 2, 3, 4, 5], n = 6, k = 4, x = -1
+// * l = 0, r = (n - k) = 2
+
+// * --------------------------------------
+
+// * [1, 1, 2, 3, 4, 5]
+// *  l  m  r 
+
+// * x - arr[m]     = -1 - 1    = -2
+// * arr[m + k] - x = 5 - (- 1) = 6
+// * r = m (left side is more closer)
+
+// * --------------------------------------
+
+// * [1, 1, 2, 3, 4, 5]
+// *  l  r  
+// *  m  
+
+// * x - arr[m]     = -1 - 1    = -2
+// * arr[m + k] - x =  4 - (-1) = 5
+// * r = m (left side is more closer)
+
+// * --------------------------------------
+
+// * [1, 1, 2, 3, 4, 5]
+// *  l 
+// *  r
+
+// * Break the loop

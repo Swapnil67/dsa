@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 1343
  * * Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
  * * Given an array of integers arr and two integers 'k' and 'threshold', return the number of 
  * * sub-arrays of size 'k' and average greater than or equal to 'threshold'.
@@ -111,12 +112,15 @@ int main() {
   // * testcase 1
   int k = 3, threshold = 4;
   std::vector<int> arr = {2, 2, 2, 2, 5, 5, 5, 8};
-  // * testcase 1
+
+  // * testcase 2
   // int k = 3, threshold = 5;
   // std::vector<int> arr = {11, 13, 17, 23, 29, 31, 7, 5, 2, 3};
+
   std::cout << "k = " << k << " & threshold = " << threshold << std::endl;
   std::cout << "Input Array " << std::endl;
   printArr(arr);
+  
   // int ans = bruteForce(arr, k, threshold);
   int ans = numOfSubarrays(arr, k, threshold);
   std::cout << "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold " << ans << std::endl;

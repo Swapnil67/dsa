@@ -21,8 +21,8 @@
 #include <vector>
 #include <climits>
 #include <iostream>
+#include <algorithm>
 #include <unordered_map>
-#include <bits/algorithmfwd.h>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -119,8 +119,8 @@ int countSubarrays2(std::vector<int> &arr, int k) {
 
 int main() {
   // * testcase 1
-  int k = 2;
-  std::vector<int> arr = {1, 3, 2, 3, 3};
+  // int k = 2;
+  // std::vector<int> arr = {1, 3, 2, 3, 3};
 
   // * testcase 1
   // int k = 2;
@@ -131,20 +131,20 @@ int main() {
   // std::vector<int> arr = {1, 4, 2, 1};
 
   // * testcase 3
-  // int k = 4;
-  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
+  int k = 4;
+  std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
 
   printf("Appear at least: %d\n", k);
   printf("Input Array\n");
   printArr(arr);  
 
   // int ans = bruteForce(arr, k);
-  // int ans = countSubarrays(arr, k);
-  int ans = countSubarrays2(arr, k);
+  int ans = countSubarrays(arr, k);
+  // int ans = countSubarrays2(arr, k);
   printf("Length of Longest Subarray With at Most %d Frequency is %d\n", k, ans);
 
   return 0;
 }
 
 // * Run the code
-// * $CXX --std=c++20 13-count-subarrays-where-max-ele-appears-k-times.cpp -o output && ./output
+// * g++ --std=c++20 13-count-subarrays-where-max-ele-appears-k-times.cpp -o output && ./output

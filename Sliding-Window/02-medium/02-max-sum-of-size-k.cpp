@@ -104,10 +104,15 @@ int subarraySum(std::vector<int> arr, int window_size) {
 }
 
 int main() {
+  // * testcase 1
   int window_size = 3;
   std::vector<int> arr = {1, 5, 4, 2, 9, 9, 9};
+  
+  // * testcase 2
   // int window_size = 3;
   // std::vector<int> arr = {4, 4, 4};
+
+  // * testcase 3
   // int window_size = 3;
   // std::vector<int> arr = {1, 1, 1, 7, 8, 9};
   std::cout << "Distinct Elements = " << window_size << std::endl;

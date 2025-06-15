@@ -19,14 +19,18 @@
  * * Explanation: We can pick from trees [2,3,2,2].
  * * If we had started at the first tree, we would only pick from trees [1,2].
  * 
+ * * Example 4
+ * * Input  : fruits = [3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4]
+ * * Output : 5
+ * * Explanation: Do Dry Run
+ * 
  * * https://leetcode.com/problems/fruit-into-baskets/description/
  * * https://www.naukri.com/code360/problems/fruits-and-baskets_985356
 */
 
-#include <unordered_set>
-#include <map>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -38,23 +42,30 @@ void printArr(std::vector<int> arr) {
 
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
-// * Check all k size windows with k zeros
+// * Keep two fruits variable f1 & f2
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> fruits) {
   int n = fruits.size();
+
   int max_fruits = 0;
   for (int i = 0; i < n; ++i) {
-    std::unordered_set<int> st;
+    int f1 = -1, f2 = -1;
     int j = i;
     for (; j < n; ++j) {
-      st.insert(fruits[j]);
-      if(st.size() > 2) {
+      if (f1 == -1) {
+        f1 = fruits[j];
+      }
+      else if (f2 == -1) {
+        f2 = fruits[j];
+      }
+      else if (f1 != fruits[j] && f2 != fruits[j]) {
         break;
       }
     }
     max_fruits = std::max(max_fruits, j - i);
   }
+
   return max_fruits;
 }
 
@@ -66,30 +77,30 @@ int bruteForce(std::vector<int> fruits) {
 int betterApproach(std::vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;
-  int fruits_collected = 0;
-  std::map<int, int> freq_map;
+  int fruitsCollected = 0;
+  std::unordered_map<int, int> fruitsFreq;
 
   while(j < n) {
-    freq_map[fruits[j]]++;
+    fruitsFreq[fruits[j]]++;
     
     // * Shrink window from left
     // * When we encounter more than two fruits
-    while(freq_map.size() > 2) {
-      freq_map[fruits[i]]--;
-      if(freq_map[fruits[i]] == 0) {
-        freq_map.erase(fruits[i]);
+    while(fruitsFreq.size() > 2) {
+      fruitsFreq[fruits[i]]--;
+      if(fruitsFreq[fruits[i]] == 0) {
+        fruitsFreq.erase(fruits[i]);
       }
       i++;
     }
 
     // * When we have two unique fruits
-    if(freq_map.size() <= 2) {
-      fruits_collected = std::max(fruits_collected, j - i + 1);
+    if(fruitsFreq.size() <= 2) {
+      fruitsCollected = std::max(fruitsCollected, j - i + 1);
     }
 
     j++;
   }
-  return fruits_collected;
+  return fruitsCollected;
 }
 
 
@@ -102,36 +113,37 @@ int betterApproach(std::vector<int> fruits) {
 int totalFruit(std::vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;
-  int fruits_collected = 0;
-  std::map<int, int> freq_map;
+  int fruitsCollected = 0;
+  std::unordered_map<int, int> fruitsFreq;
   while(j < n) {
-    freq_map[fruits[j]]++;
+    fruitsFreq[fruits[j]]++;
 
     // * Shrink window from left
     // * When we encounter more than two fruits
-    if (freq_map.size() > 2) {
-      freq_map[fruits[i]]--;
-      if (freq_map[fruits[i]] == 0) {
-        freq_map.erase(fruits[i]);
+    if (fruitsFreq.size() > 2) {
+      fruitsFreq[fruits[i]]--;
+      if (fruitsFreq[fruits[i]] == 0) {
+        fruitsFreq.erase(fruits[i]);
       }
       i++;
     }
     else {
-      fruits_collected = std::max(fruits_collected, j - i + 1);
+      fruitsCollected = std::max(fruitsCollected, j - i + 1);
     }
     j++;
   }
 
-  return fruits_collected;
+  return fruitsCollected;
 }
 int main() {
-
   // * testcase 1
-  // std::vector<int> fruits = {1, 2, 3, 2, 2};
+  std::vector<int> fruits = {1, 2, 3, 2, 2};
+
   // * testcase 2
   // std::vector<int> fruits = {0, 1, 2, 2};
+
   // * testcase 2
-  std::vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
+  // std::vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
 
   printArr(fruits);
   
