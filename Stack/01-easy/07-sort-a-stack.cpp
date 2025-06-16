@@ -19,10 +19,6 @@ void sortedInsert(stack<int> &s, int val) {
 
 // * Time complexity O(n)
 void printStack(stack<int> &s) {
-  // stack<int> p;
-  // p.push(1);
-  // p.push(2);
-  // p.push(3);
   stack<int> p = s;
   while(!p.empty()) {
     cout<<p.top()<<" ";
