@@ -1,8 +1,7 @@
 /*
  * Leetcode - 22
  * Generate Parentheses
- * Given two integer arrays pushed and popped each with distinct values, return true if this could have 
- * been the result of a sequence of push and pop operations on an initially empty stack, or false otherwise.
+ * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
  * 
  * * Example 1
  * * Input  : n = 3
@@ -15,9 +14,9 @@
  * https://leetcode.com/problems/generate-parentheses/description/
 */
 
-#include <iostream>
 #include <stack>
 #include <vector>
+#include <iostream>
 
 void printStringVector(std::vector<std::string> strs) {
   int n = strs.size();

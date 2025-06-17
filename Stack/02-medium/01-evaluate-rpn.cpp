@@ -50,9 +50,15 @@ int evalRPN(std::vector<std::string> &tokens) {
 }
 
 int main() {
+  // * testcase 1
   // std::vector<std::string> tokens = {"2", "1", "+", "3", "*"};
+
+  // * testcase 2
   // std::vector<std::string> tokens = {"4", "13", "5", "/", "+"};
+
+  // * testcase 3
   std::vector<std::string> tokens = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+
   printArr(tokens);
   int ans = evalRPN(tokens);
   std::cout << ans << std::endl;
@@ -61,4 +67,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ -std=c++20 01-evaluate-rpn.cpp -o output && ./output
+// * g++ --std=c++20 01-evaluate-rpn.cpp -o output && ./output

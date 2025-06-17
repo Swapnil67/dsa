@@ -40,12 +40,17 @@ bool validateStackSequences(std::vector<int> &pushed, std::vector<int> &popped) 
     }
   }
 
-  return st.size() ? false : true;
+  return st.empty();
 }
 
 int main() {
+  // * testcase 1
   // std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 5, 3, 2, 1};
+  
+  // * testcase 2
   // std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 3, 5, 1, 2};
+
+  // * testcase 3
   std::vector<int> pushed = {2, 1, 0}, popped = {1, 2, 0};
 
   std::cout << "Pushed Array: " << std::endl;

@@ -83,16 +83,18 @@ std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
   int n = asteroids.size();
   for(int &cur_asteroid: asteroids) {
     // * Asteroid Collision
-    while (!ans.empty() && cur_asteroid < 0 && ans[ans.size() - 1] > 0) {
-      int sum = ans[ans.size() - 1] + cur_asteroid;
+    while (!ans.empty() && cur_asteroid < 0 && ans.back() > 0) {
+      int sum = ans.back() + cur_asteroid;
       if (sum == 0) {
         // * Both asteroids got destoryed
         ans.pop_back();
         cur_asteroid = 0;
-      } else if (sum < 0) {
+      } 
+      else if (sum < 0) {
         // * right asteroids is bigger
         ans.pop_back();
-      } else {
+      } 
+      else {
         // * Left asteroids is bigger
         cur_asteroid = 0;
       }

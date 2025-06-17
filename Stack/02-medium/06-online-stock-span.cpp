@@ -23,16 +23,16 @@ class StockSpanner {
 
     int nextBrute(int price) {
       int stock_span = 1;
-      if(this->st.empty()) {
+      if (this->st.empty()) {
         this->st.push({price, stock_span});
         return stock_span;
       }
 
       std::stack<std::pair<int, int>> temp = this->st;
       // std::cout << temp.size() << " " << temp.top() << std::endl;
-      
+
       while (!temp.empty()) {
-        if(temp.top().first > price) {
+        if (temp.top().first > price) {
           break;
         }
         stock_span++;
