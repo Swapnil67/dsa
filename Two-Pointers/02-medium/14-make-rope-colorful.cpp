@@ -50,7 +50,6 @@ int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
 }
 
 int main() {
-
   // * testcase 1
   // std::string colors = "abaac";
   // std::vector<int> neededTime = {1, 2, 3, 4, 5};
@@ -75,7 +74,7 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 02-make-rope-colorful.cpp -o output && ./output
+// * g++ --std=c++17 14-make-rope-colorful.cpp -o output && ./output
 
 // * DRY RUN
 // * 1 2 3 4 5 

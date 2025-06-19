@@ -50,15 +50,16 @@ std::string reverseWords(std::string &s) {
   int i = 0;
   // * Declare Two pointers
   int l = 0, r = 0;
-  while(i < n) {
-    while(i < n && s[i] != ' ') {
+  while (i < n) {
+    // * put the char from 'i' to 'r'
+    while (i < n && !isspace(s[i])) {
       s[r] = s[i];
       i++;
       r++;
     }
 
     // * Reverse l to r
-    if(l < r) {
+    if (l < r) {
       // std::cout << l << " " << r << std::endl;
       std::reverse(s.begin() + l, s.begin() + r);
       s[r] = ' '; // * Add a space
@@ -71,59 +72,15 @@ std::string reverseWords(std::string &s) {
   return s.substr(0, r - 1);
 }
 
-// * My Implementation (little easy to grasp)
-
-void reverseString(std::string &s, int l, int r) {
-  while (isspace(s[r]))
-    r -= 1;
-  while(l < r) {
-    char temp = s[l];
-    s[l] = s[r];
-    s[r] = temp;
-    l += 1;
-    r -= 1;
-  }
-}
-
-std::string reverseWords2(std::string s) {
-  int n = s.size();
-  
-  // * Reverse complete string
-  int l = 0, r = n - 1;
-  reverseString(s, l, r);
-  std::cout << "Full Reverse: " << s << std::endl;
-
-  int i = 0;
-  l = 0, r = 0;
-
-  while (i < n) {
-    // * move i till you hit space character
-    if (!isspace(s[i])) {
-      i += 1;
-    } else {
-      // printf("%d %d %d\n", i, l, r);
-      r = i;
-      reverseString(s, l, r);
-      r += 1;
-      l = r;
-      // * move i to first character of next word
-      while (isspace(s[i]))
-        i += 1;
-    }
-  }
-  return s;
-}
-
 int main() {
   // std::string s = "I am zoro";
   // std::string s = "   Roronoa      Zoro     ";
   // std::string s = "  hello world  ";
   std::string s = "blue is sky the";
-
   std::cout << s << std::endl;
-  std::string ans = bruteForce(s);
-  // std::string ans = reverseWords(s);
-  // std::string ans = reverseWords2(s);
+  
+  // std::string ans = bruteForce(s);
+  std::string ans = reverseWords(s);
   std::cout << ans << std::endl;
 }
 

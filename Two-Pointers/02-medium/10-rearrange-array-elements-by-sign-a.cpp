@@ -61,9 +61,13 @@ std::vector<int> bruteForce(std::vector<int> &arr) {
 // * SPACE COMPLEXITY O(N)
 std::vector<int> rearrangeArray(std::vector<int> arr) {
   int n = arr.size();
+
+  // * initialize the ans array
   std::vector<int> ans(n);
+
   // * Intialize the positive & negative indexes
-  int p_index = 0, n_index = 1;
+  int p_index = 0; // * even index
+  int n_index = 1; // * odd index
   for (int i = 0; i < n; i++) {
     if(arr[i] < 0) {
       ans[n_index] = arr[i];

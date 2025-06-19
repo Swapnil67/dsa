@@ -101,20 +101,24 @@ std::vector<int> pivotArray(std::vector<int> &arr, int pivot) {
 
 // * ------------------------- APPROACH 2B: Optimal APPROACH -------------------------`
 // * Classic Two Pointer Approach
+// * The key here is to incr 'i' till n & decr 'j' till 0
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> pivotArray2(std::vector<int> &arr, int pivot) {
   int n = arr.size();
   int i = 0, j = n - 1;
-  int lessIdx = 0, moreIdx = n - 1; // * For ans index
+  
   std::vector<int> ans(n);
+  int lessIdx = 0, moreIdx = n - 1; // * For ans index
 
   while (i < n && j >= 0) {
+    // * Put the smaller than pivot from front
     if (arr[i] < pivot) {
       ans[lessIdx] = arr[i];
       lessIdx++;
     }
 
+    // * Put the greater than pivot from back
     if (arr[j] > pivot) {
       ans[moreIdx] = arr[j];
       moreIdx--;
@@ -125,7 +129,7 @@ std::vector<int> pivotArray2(std::vector<int> &arr, int pivot) {
   }
 
   // * Put pivot in indexes from l -> r
-  while(lessIdx <= moreIdx) {
+  while (lessIdx <= moreIdx) {
     ans[lessIdx] = pivot;
     lessIdx++;
   }

@@ -32,6 +32,7 @@ int minimumLength(std::string s) {
     if(s[i] != s[j]) {
       break;
     }
+    
     // * move both pointers once
     i++;
     j--;
@@ -51,11 +52,14 @@ int minimumLength(std::string s) {
 
 int main() {
   // * testcase 1
-  // std::string s = "cabaabac";
+  std::string s = "cabaabac";
+
   // * testcase 2
   // std::string s = "aabccabba";
+  
   // * testcase 3
-  std::string s = "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb";
+  // std::string s = "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb";
+
   std::cout << s << std::endl;
   int length = minimumLength(s);
   std::cout << length << std::endl;

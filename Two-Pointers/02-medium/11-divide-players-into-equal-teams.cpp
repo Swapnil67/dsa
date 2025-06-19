@@ -44,12 +44,16 @@ void printArr(std::vector<int> arr) {
 // * Classic Two Pointers Approach
 // * Make pairs of smallest & largest numbers
 long long dividePlayers(std::vector<int>& skill) {
-  int n = skill.size();
+  // * sort the array
   std::sort(skill.begin(), skill.end());
-
-  long long ans = 0;
+  
+  int n = skill.size();
   int i = 0, j = n - 1;
+  
+  // * all pairs should have following chemistry
   long long chemistry = skill[i] + skill[j];
+  
+  long long ans = 0;
   while (i < j) {
     if((skill[i] + skill[j]) != chemistry) {
       return -1;

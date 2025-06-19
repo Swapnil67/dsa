@@ -68,7 +68,6 @@ void printVectorString(std::vector<std::string> strs) {
   std::cout << "]" << std::endl;
 }
 
-
 // * 03 - med
 // std::vector<std::vector<int>> threeSum(std::vector<int> &arr, int target) {
 // TODO Tonight
@@ -78,37 +77,6 @@ void printVectorString(std::vector<std::string> strs) {
 // std::vector<std::vector<int>> fourSum(std::vector<int> &arr, int target) {
 // TODO Tonight
 // }
-
-// * 12 - Partition Array According to Given Pivot
-// std::vector<int> pivotArray2(std::vector<int> arr, int pivot) {
-// TODO
-// } 
-
-// * 13 - Rotate array by K places
-// std::vector<int> rotate(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 14 - Minimum Time to Make Rope Colorful
-// int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
-// TODO 
-// }
-
-// * 15 - Minimum Length of String After Deleting Similar Ends
-// int minimumLength(std::string s) {
-// TODO
-// }
-
-// * 16 - Sentence Similarity III
-// bool areSentencesSimilar(std::string s1, std::string s2) {
-// TODO
-// }
-
-// * 17 - Reverse Words in a String
-// std::string reverseWords(std::string &s) {
-// TODO
-// }
-
 
 // * 01 - med
 // int removeDuplicates(std::vector<int> &arr) {    
@@ -147,12 +115,47 @@ void printVectorString(std::vector<std::string> strs) {
 
 // * 10 - Rearrange Array Elements by Sign
 // std::vector<int> rearrangeArray(std::vector<int> arr) {
-// TODO Tomorrow
+// TODO 
 // }
 
 // * 11 - Divide Players Into Teams of Equal Skill
 // long long dividePlayers(std::vector<int> skill) {
-// TODO Tomorrow
+// TODO
+// }
+
+// * 12 - Partition Array According to Given Pivot
+// std::vector<int> pivotArray2(std::vector<int> arr, int pivot) {
+// TODO
+// }
+
+// * 13 - Rotate array by K places
+// std::vector<int> rotate(std::vector<int> &arr, int k) {
+// TODO
+// } 
+
+// * 14 - Minimum Time to Make Rope Colorful
+// int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
+// TODO
+// }
+
+// * 15 - Minimum Length of String After Deleting Similar Ends
+// int minimumLength(std::string s) {
+// TODO
+// }
+
+// * 16 - Sentence Similarity III
+// bool areSentencesSimilar(std::string s1, std::string s2) {
+// TODO
+// }
+
+// * 17 - Reverse Words in a String
+// std::string reverseWords(std::string &s) {
+// TODO
+// }
+
+// * 18 - Adding Spaces to a String
+// std::string addSpaces(std::string s, std::vector<int> &spaces) {
+// TODO
 // }
 
 int main() {

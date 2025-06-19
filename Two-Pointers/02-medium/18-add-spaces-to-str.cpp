@@ -27,7 +27,7 @@ std::string addSpaces(std::string s, std::vector<int> spaces) {
 
   std::string ans = "";
   for (int i = 0; i < m; ++i) {
-    // * check if the cur char is space
+    // * check if the current char is space
     if (j < n && i == spaces[j]) {
       ans += ' ';
       j++;
