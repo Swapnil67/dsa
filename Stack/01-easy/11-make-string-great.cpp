@@ -20,64 +20,29 @@
  * * https://leetcode.com/problems/make-the-string-great/description/
 */
 
-#include<stack>
-#include<string>
-#include<iostream>
+#include <stack>
+#include <string>
+#include <iostream>
+#include <algorithm>
 
-void reverseString(std::string &s) {
-  int i = 0, j = s.size() - 1;
-  while(i < j) {
-    char temp = s[i];
-    s[i] = s[j];
-    s[j] = temp;
-    i++;
-    j--;
-  }
-}
 
-char toUpperCase(char ch) {
-  if(ch >= 'A' && ch <= 'Z')
-    return ch;
-  return (ch - 'a') + 'A';
-}
-
-void matchedCharacters(std::stack<int> &st, char ch) {
-  if(ch == st.top()) {
-    st.pop();
-  } else {
-    st.push(ch);
-  } 
-}
-
+// * ------------------------- APPROACH 1: Better Approach -------------------------
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 std::string makeGood(std::string s) {
   int n = s.size();
-  std::stack<int> st;
-  for(char ch: s) {
+  std::stack<char> st;
+  for (char &ch : s) {
     if(ch >= 'A' && ch <= 'Z') {
-      if(!st.empty()) {
-        if(st.top() >= 'A' && st.top() <= 'Z') {
-          st.push(ch); 
-        }
-        else {
-          char top_upper_ch = toUpperCase(st.top());
-          // std::cout << st.top() << " " << top_upper_ch << std::endl;
-          ch == top_upper_ch ? st.pop() : st.push(ch);
-        }
-      }
-      else {
+      if (!st.empty() && (int)st.top() == ch + 32) {
+        st.pop();
+      } else {
         st.push(ch);
       }
-    } else {
-      if(!st.empty()) {
-        if(st.top() >= 'A' && st.top() <= 'Z') {
-          if (ch >= 'a' && ch <= 'z') {
-            char cur_upper_ch = toUpperCase(ch);
-            st.top() == cur_upper_ch ? st.pop() : st.push(ch);
-          }
-        } else {
-          char top_upper_ch = toUpperCase(st.top());
-          ch == top_upper_ch ? st.pop() : st.push(ch);
-        }
+    }
+    else if (ch >= 'a' && ch <= 'z') {
+      if (!st.empty() && (int)st.top() == ch - 32) {
+        st.pop();
       } else {
         st.push(ch);
       }
@@ -89,8 +54,36 @@ std::string makeGood(std::string s) {
     ans += st.top();
     st.pop();
   }
+  std::reverse(ans.begin(), ans.end());
+  return ans;
+}
 
-  reverseString(ans);
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+std::string makeGood2(std::string s) {
+  int n = s.size();
+  std::stack<char> st;
+  std::string ans = "";
+
+  for (char &ch : s) {
+    if(ch >= 'A' && ch <= 'Z') {
+      if (ans.size() && (int)ans.back() == ch + 32) {
+        ans.pop_back();
+      } else {
+        ans += ch;
+      }
+    }
+    else if (ch >= 'a' && ch <= 'z') {
+      if (ans.size() && (int)ans.back() == ch - 32) {
+        ans.pop_back();
+      } else {
+        ans += ch;
+      }
+    }
+  }
+
   return ans;
 }
 
@@ -106,4 +99,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 11-make-string-great.cpp -o output && ./output
+// * g++ --std=c++20 11-make-string-great.cpp -o output && ./output

@@ -13,21 +13,22 @@ char getOpeningBracket(char ch) {
 }
 
 bool isValidParenthesis(std::string s) {
-    std::stack<char> st;
+  std::stack<char> st;
   int n = s.size();
-  for(int i = 0; i < n; ++i) {
-    if(s[i] == '(' || s[i] == '{' || s[i] == '[') {
-      st.push(s[i]);
+  for (char &ch : s) {
+    if (ch == ']' || ch == '}' || ch == ')') {
+      char op = getOpeningBracket(ch);
+      if(!st.empty() && st.top() != op) {
+        return false;
+      }
+      st.pop();
     }
     else {
-      char opening_bracket = getOpeningBracket(s[i]);
-      if(st.empty() || st.top() != opening_bracket)
-        return false;
-      st.pop();
+      st.push(ch);
     }
   }
   // std::cout << st.size() << std::endl;
-  return !st.size() ? true : false;
+  return st.empty();
 }
 
 int main() {
@@ -42,4 +43,4 @@ int main() {
 // * [ { ) ] -> Invalid Valid Parenthesis
 
 // * Run the code
-// * $CXX --std=c++20 04-valid-parenthesis.cpp -o output && ./output
+// * g++ --std=c++20 04-valid-parenthesis.cpp -o output && ./output

@@ -56,14 +56,14 @@ std::vector<int> bruteForce(std::vector<int> prices) {
 std::vector<int> finalPrices(std::vector<int> prices) {
   int n = prices.size();
   std::vector<int> ans = prices;
-  std::stack<int> monotonic_stack;
+  std::stack<int> st;
 
   for (int i = 0; i < n; ++i) {
-    while (!monotonic_stack.empty() && prices[i] <= prices[monotonic_stack.top()]) {
-      ans[monotonic_stack.top()] = prices[monotonic_stack.top()] - prices[i];
-      monotonic_stack.pop();
+    while (!st.empty() && prices[i] <= prices[st.top()]) {
+      ans[st.top()] = prices[st.top()] - prices[i];
+      st.pop();
     }
-    monotonic_stack.push(i);
+    st.push(i);
   }
 
   return ans;

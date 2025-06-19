@@ -69,4 +69,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 10-baseball-game.cpp -o output && ./output
+// * g++ --std=c++20 10-baseball-game.cpp -o output && ./output

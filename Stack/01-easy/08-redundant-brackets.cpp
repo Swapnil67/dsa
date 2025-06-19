@@ -1,29 +1,29 @@
-#include<stack>
-#include<string>
-#include<iostream>
-using namespace std;
+// * Check if redundant bracket
 
-bool redundantBrackets(string &s) {
-  stack<char> st;
-  for(int i=0; i<s.length(); i++) {
-    char ch = s[i];
-    // cout<<ch<<" ";
+#include <stack>
+#include <string>
+#include <iostream>
+
+bool checkRedundantBrackets(std::string &s) {
+  std::stack<char> st;
+  for(char &ch : s) {
     if(ch == '(' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%') {
       st.push(ch);
     } else {
       if(ch == ')') {
         bool isRedundant = true;
-        if(st.empty()) {
+        if (st.empty()) {
           return isRedundant;
         }
-        while(st.top() != '(') {
+        while (st.top() != '(') {
           char top = st.top();
-          if(top == '+' || top == '-' || top == '*' || top == '/' || top == '%') {
+          if (top == '+' || top == '-' || top == '*' || top == '/' || top == '%') {
             isRedundant = false;
           }
           st.pop();
         }
-        if(isRedundant == true) 
+
+        if (isRedundant == true) 
           return true;
         
         st.pop();
@@ -37,8 +37,12 @@ int main() {
   // * Redundant = "((a+b))"
   // * Not Redundant = "(c+(a+b))"
 
-  string st = "(a+b))";
-  bool isRedundantBracket = redundantBrackets(st);
-  cout<<"\nisRedundantBracket: "<<isRedundantBracket;
+  std::string st = "(a+b)";
+  // std::string st = "((a+b))";
+  bool isRedundantBracket = checkRedundantBrackets(st);
+  std::cout << "isRedundantBracket: " << isRedundantBracket << std::endl;
   return 0;
 }
+
+
+// * g++ --std=c++20 08-redundant-brackets.cpp -o output && ./output

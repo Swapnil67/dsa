@@ -16,11 +16,11 @@ int findMinimumCost(string str) {
   stack<char> st;
   for(int i=0; i<str.length(); i++) {
     char ch = str[i];
-    if(ch == '{') {
+    if (ch == '{') {
       st.push(ch);
     } else {
-      if(ch == '}') {
-        if(!st.empty() && st.top() == '{') {
+      if (ch == '}') {
+        if (!st.empty() && st.top() == '{') {
           st.pop();
         } else {
           st.push(ch);

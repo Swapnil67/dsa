@@ -1,5 +1,3 @@
-// ? WAP to reverse a sting with Stack Data Structure
-
 #include<iostream>
 #include<stack>
 using namespace std;

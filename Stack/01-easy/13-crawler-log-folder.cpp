@@ -31,7 +31,6 @@ void printVectorString(std::vector<std::string>& strs) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int minOperations(std::vector<std::string> logs) {
-  int n = logs.size();
   std::stack<std::string> st;
   for(std::string &s : logs) {
     if(s == "../") {
@@ -39,6 +38,7 @@ int minOperations(std::vector<std::string> logs) {
         st.pop();
     }
     else if(s == "./") {
+      continue;
     }
     else {
       st.push(s);
