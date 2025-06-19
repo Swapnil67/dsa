@@ -19,56 +19,6 @@ void printArr(std::vector<int> arr) {
 }
 
 
-// * 15 - med
-// int kDistinctChars(std::string s, int k) {
-// TODO
-// }
-
-// * 16 - med
-// int numberOfSubstrings(std::string s) {
-// TODO
-// }
-
-// * 17 - med
-// int characterReplacement(std::string s, int k) {
-// TODO
-// }
-
-// * 18 - med
-// bool checkInclusion(std::string s1, std::string s2) {
-// TODO
-// }
-
-// * 19 - med
-// int maxVowels(std::string s, int k) {
-// TODO
-// }
-
-// * 20 - med
-// int minFlips(std::string s) {
-// TODO
-// }
-
-// * 21 - med
-// int equalSubstring(std::string s, std::string t, int max_cost) {
-// TODO
-// }
-
-// * 22 - med
-// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
-// TODO
-// }
-
-// * 23 - med
-// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
-// TODO
-// } 
-
-// * 24 - med
-// int numberOfSubarrays(std::vector<int> &arr, int k) {
-// TODO
-// }
-
 // * 25 - med
 // int countOfSubstrings(std::string s, int k) {
 // TODO
@@ -171,10 +121,71 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 15 - Longest Substring with At Most K Distinct Characters
+// int kDistinctChars(std::string s, int k) {
+// TODO
+// }
+
+// * 16 - Number of Substrings Containing All Three Characters
+// int numberOfSubstrings(std::string s) {
+// TODO
+// }
+
+// * 17 - Longest Repeating Character Replacement
+// int characterReplacement(std::string s, int k) {
+// TODO
+// }
+
+// * 18 - Permutation in String
+// bool checkInclusion(std::string s1, std::string s2) {
+// TODO
+// }
+
+// * 19 - Maximum Number of Vowels in a Substring of Given Length
+// int maxVowels(std::string s, int k) {
+// TODO
+// }
+
+// * 20 - Minimum Number of Flips to Make the Binary String Alternating
+// int minFlips(std::string s) {
+// TODO
+// }
+
+// * 21 - get Equal Substrings Within Budget
+// int equalSubstring(std::string s, std::string t, int maxCost) {
+// TODO
+// }
+
+// * 22 - Grumpy Bookstore Owner
+// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
+// TODO
+// }
+
+// * 23 - Alternating Groups II
+// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
+// TODO
+// } 
+
+// * 24 - Count Number of Nice Subarrays
+int numberOfSubarrays(std::vector<int> &arr, int k) {
+}
+
 int main() {
+  int k = 3;
+  std::vector<int> arr = {1, 1, 2, 1, 1};
+
+  // int k = 2;
+  // std::vector<int> arr = {2, 2, 2, 1, 2, 2, 1, 2, 2, 2};
+
+  printArr(arr);
+
+  int ans = numberOfSubarrays(arr, k);
+  // int ans = numberOfSubarraysB(arr, k);
+  
+  std::cout << "Nice subarrays: " << ans << std::endl;
+
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 practice.cpp -o output && ./output
-

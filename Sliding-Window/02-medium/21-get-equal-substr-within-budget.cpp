@@ -32,10 +32,9 @@ int bruteForce(std::string s, std::string t, int max_cost) {
     int cur_cost = 0, j = i;
     for (; j < n; ++j) {
       int diff = std::abs(s[j] - t[j]);
-      if(cur_cost + diff <= max_cost) {
+      if (cur_cost + diff <= max_cost) {
         cur_cost += diff;
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -58,16 +57,13 @@ int equalSubstring(std::string s, std::string t, int max_cost) {
     cur_cost += std::abs(t[j] - s[j]);
 
     // * Shrink the window from left
-    if(cur_cost > max_cost) {
+    if (cur_cost > max_cost) {
       cur_cost -= std::abs(t[i] - s[i]);
       i++;
-    }
-
-    // * calculate new max substring
-    if(cur_cost <= max_cost) {
+    } else {
+      // * calculate new max substring
       ans = std::max(ans, j - i + 1);
     }
-
     j++;
   }
   
@@ -100,4 +96,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++17 08-get-equal-substr-within-budget.cpp -o output && ./output
+// * g++ --std=c++20 21-get-equal-substr-within-budget.cpp -o output && ./output

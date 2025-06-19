@@ -31,6 +31,7 @@
 bool betterApproach(std::string s1, std::string s2) {
   int n1 = s1.size(), n2 = s2.size();
 
+  // * This is not possible
   if (n1 > n2)
     return false;
   
@@ -40,7 +41,8 @@ bool betterApproach(std::string s1, std::string s2) {
     // * take n1 len of substrings from s2
     std::string temp = s2.substr(i, n1);
     std::sort(temp.begin(), temp.end());
-    if (temp == s1)
+    std::cout << temp << " -> " << s1.compare(temp) << std::endl;
+    if (s1.compare(temp) == 0)
       return true;
   }
 
@@ -63,7 +65,7 @@ bool checkInclusion(std::string s1, std::string s2) {
 
   int i = 0, j = 0;
   std::vector<int> s2_freq_vec(26, 0);
-  while(j < n2) {
+  while (j < n2) {
     s2_freq_vec[s2[j] - 'a']++;
 
     // * Shrink window
@@ -72,6 +74,7 @@ bool checkInclusion(std::string s1, std::string s2) {
       i++;
     }
 
+    // * compare two vectors
     if (s1_freq_vec == s2_freq_vec)
       return true;
 
@@ -84,16 +87,16 @@ bool checkInclusion(std::string s1, std::string s2) {
 
 int main() {
   // * testcase 1
-  std::string s1 = "ab", s2 = "eidbaooo";
+  // std::string s1 = "ab", s2 = "eidbaooo";
 
   // * testcase 2
-  // std::string s1 = "ab", s2 = "eidboaoo";
+  std::string s1 = "ab", s2 = "eidboaoo";
 
   std::cout << "String 1: " << s1 << std::endl;
   std::cout << "String 2: " << s2 << std::endl;
 
-  // bool ans = betterApproach(s1, s2);
-  bool ans = checkInclusion(s1, s2);
+  bool ans = betterApproach(s1, s2);
+  // bool ans = checkInclusion(s1, s2);
   std::cout << "Permutation in String: " << ans << std::endl;
   return 0;
 }

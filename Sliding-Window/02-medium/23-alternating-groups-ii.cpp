@@ -51,13 +51,13 @@ int bruteForce(std::vector<int> &arr, int k) {
   for(int i = 0; i <= n - k; ++i) {
     bool is_alternating = true;
     for(int j = i; j < i + k; ++j) {
-      std::cout << arr[j] << " ";
+      // std::cout << arr[j] << " ";
       if(j > i && arr[j] == arr[j - 1]) {
         is_alternating = false;
         break;
       }
     }
-    printf("\n");
+    // printf("\n");
     if (is_alternating)
       ans++;
   }

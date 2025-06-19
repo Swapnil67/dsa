@@ -87,9 +87,15 @@ int minFlips(std::string s) {
 
 
 int main() {
-  // std::string s = "111000";
-  std::string s = "01001001101";
+  // * testcase 1
+  std::string s = "111000";
+
+  // * testcase 2
+  // std::string s = "01001001101";
+  
+  // * testcase 3
   // std::string s = "010";
+
   std::cout << "Input String: " << s << std::endl;
   int ans = minFlips(s);
   std::cout << "Minimum Number of Flips to Make the Binary String Alternating " << ans << std::endl;
@@ -98,7 +104,7 @@ int main() {
 
 
 // * Run the code
-// * $CXX --std=c++17 07-min-flips-to-alternating-str.cpp -o output && ./output
+// * g++ --std=c++20 20-min-flips-to-alternating-str.cpp -o output && ./output
 
 
 // * IDEA

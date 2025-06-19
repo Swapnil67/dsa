@@ -127,8 +127,14 @@ int characterReplacement(std::string s, int k) {
 
 
 int main() {
+  // * testcase 1
   int k = 1;
   std::string s = "AABABBA";
+  
+  // * testcase 2
+  // int k = 2;
+  // std::string s = "ABAB";
+  
   std::cout << "Input String: " << s << std::endl;
   // int ans = bruteForce(s, k);
   // int ans = betterApproach(s, k);

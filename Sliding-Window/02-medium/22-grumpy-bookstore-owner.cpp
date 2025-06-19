@@ -80,6 +80,7 @@ int main() {
   printArr(grumpy);
   std::cout << "customers " << std::endl;
   printArr(customers);
+  
   int ans = maxSatisfied(customers, grumpy, minutes);
   std::cout << "Number of customers satisfied are " << ans << std::endl;
   return 0;

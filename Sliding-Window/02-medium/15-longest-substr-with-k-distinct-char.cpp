@@ -41,12 +41,10 @@ int bruteForce(std::string s, int k) {
     std::map<int, int> freq_map;
     for (int j = i; j < n; ++j) {
       freq_map[s[j]]++;
-      if(freq_map.size() <= k) {
-        max_len = std::max(max_len, j - i + 1);
-      }
-      else {
+      if (freq_map.size() > k) {
         break;
       }
+      max_len = std::max(max_len, j - i + 1);
     }
   }
   return max_len;
@@ -68,9 +66,9 @@ int betterApproach(std::string s, int k) {
     freq_map[s[j]]++;
 
     // * Keep frequency map with k distinct elements
-    while(freq_map.size() > k) {
+    while (freq_map.size() > k) {
       freq_map[s[i]]--;
-      if(freq_map[s[i]] == 0) {
+      if (freq_map[s[i]] == 0) {
         freq_map.erase(s[i]);
       }
       i++;

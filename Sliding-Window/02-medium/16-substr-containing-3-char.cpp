@@ -49,7 +49,7 @@ int numberOfSubstrings(std::string s) {
   while (j < n) {
     hash[s[j] - 'a']++;
 
-    // * All three characters are present
+    // * While all 3 characters are present
     while (hash[0] > 0 && hash[1] > 0 && hash[2] > 0) {
       ans = ans + (n - j);
       hash[s[i] - 'a']--;

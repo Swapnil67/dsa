@@ -16,8 +16,9 @@
  * * https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/
 */
 
-#include<iostream>
-#include<bits/stdc++.h>
+#include <iostream>
+#include <climits>
+#include <unordered_set>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings of less than k
@@ -50,20 +51,18 @@ int maxVowels(std::string s, int k) {
   std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   while(j < n) {
     // * Check if vowel
-    if (vowels.count(s[j])) {
+    if (vowels.count(s[j]))
       vowel_cnt++;
-    }
 
     // * Minimize window
     if ((j - i + 1) > k) {
-      if (vowels.count(s[i])) {
+      if (vowels.count(s[i]))
         vowel_cnt--;
-      }
       i++;
-    } else {
-      // * count vowels substring
-      max_vowels_cnt = std::max(max_vowels_cnt, vowel_cnt);
     }
+
+    // * count vowels substring
+    max_vowels_cnt = std::max(max_vowels_cnt, vowel_cnt);
     j++;
   }
   return max_vowels_cnt;
@@ -71,12 +70,18 @@ int maxVowels(std::string s, int k) {
 
 
 int main() {
-  // int k = 3;
-  // std::string s = "abciiidef";
-  int k = 2;
-  std::string s = "aeiou";
+  // * testcase 1
+  int k = 3;
+  std::string s = "abciiidef";
+
+  // * testcase 2
+  // int k = 2;
+  // std::string s = "aeiou";
+
+  // * testcase 3
   // int k = 3;
   // std::string s = "leetcode";
+
   std::cout << "k: " << k << std::endl;
   std::cout << "Input String: " << s << std::endl;
 
