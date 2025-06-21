@@ -16,13 +16,8 @@
  * https://www.naukri.com/code360/problems/lower-bound_8165382
 */
 
-
-/*
- * For a sorted array 'arr', 'lower_bound' of a number 'x' is defined as the smallest index 'idx' 
- * such that the value 'arr[idx]' is not less than 'x' 
-*/
-
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

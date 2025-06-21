@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 704
  * Binary Search
  * Given an array of integers nums which is sorted in ascending order, and an integer target,
  * write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.
@@ -15,7 +16,8 @@
  * https://www.naukri.com/code360/problems/binary-search_972
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -45,12 +47,13 @@ int binarySearch(std::vector<int> arr, int target) {
 
 
 int main() {
-  std::vector<int> arr = {-1, 0, 3, 5, 9, 12};
   // * testcase 1
   // int target = 5;
-
+  
   // * testcase 2
   int target = 4;
+
+  std::vector<int> arr = {-1, 0, 3, 5, 9, 12};
 
   std::cout<<"Input Array"<<std::endl;
   printArr(arr);

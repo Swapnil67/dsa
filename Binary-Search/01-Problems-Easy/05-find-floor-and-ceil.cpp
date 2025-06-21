@@ -21,7 +21,8 @@
 // * Floor = Greatest element smaller than x
 // * Ceil = Smallest element greater than x
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

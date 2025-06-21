@@ -18,7 +18,8 @@
  * If the greater value does not exist then the answer is 'n', Where 'n' is the size of the array.
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

@@ -11,17 +11,19 @@
  * Input: arr = [ 1 2 4 7 ], target = 9
  * Output: 4
  * 
+ * https://leetcode.com/problems/search-insert-position/description/
  * https://www.naukri.com/code360/problems/algorithm-to-find-best-insert-position-in-sorted-array_839813
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -29,16 +31,16 @@ void printArr(std::vector<int> arr) {
 int bruteForce(std::vector<int> arr, int target) {
   int idx = -1;
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    if(arr[i] < target) {
-      idx = i+1;
+  for (int i = 0; i < n; i++) {
+    if (arr[i] < target) {
+      idx = i + 1;
     }
   }
   return idx;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
-// * Lower bound (Smallest element greater than x)
+// * Lower bound (Smallest element greater than or equal x)
 // * TIME COMPLEXITY O(logn)
 int findInsertIndex(std::vector<int> arr, int target) {
   int n = arr.size();
