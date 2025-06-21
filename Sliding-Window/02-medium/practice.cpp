@@ -18,32 +18,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-
-// * 25 - med
-// int countOfSubstrings(std::string s, int k) {
-// TODO
-// }
-
-// * 26 - med
-// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 27 - med
-// int maximumBeauty2(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 28 - med
-// int takeCharacters(std::string s, int k) {
-// TODO
-// } 
-
-// * 29 - med
-// int longestSubarray(std::vector<int> &nums, int limit) {
-// TODO
-// }
-
 // * ------------------------------------------------------------------------------------------
 
 // * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
@@ -167,25 +141,38 @@ void printArr(std::vector<int> arr) {
 // } 
 
 // * 24 - Count Number of Nice Subarrays
-int numberOfSubarrays(std::vector<int> &arr, int k) {
-}
+// int numberOfSubarrays(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
+// int countOfSubstrings(std::string s, int k) {
+// TODO
+// }
+
+// * 26 - Find the Power of K-Size Subarrays I
+// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 27 - Maximum Beauty of an Array After Applying Operation
+// int maximumBeauty(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 28 - Take K of Each Character From Left and Right
+// int takeCharacters(std::string s, int k) {
+// TODO
+// } 
+
+// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+// int longestSubarray(std::vector<int> &nums, int limit) {
+// TODO
+// }
 
 int main() {
-  int k = 3;
-  std::vector<int> arr = {1, 1, 2, 1, 1};
-
-  // int k = 2;
-  // std::vector<int> arr = {2, 2, 2, 1, 2, 2, 1, 2, 2, 2};
-
-  printArr(arr);
-
-  int ans = numberOfSubarrays(arr, k);
-  // int ans = numberOfSubarraysB(arr, k);
-  
-  std::cout << "Nice subarrays: " << ans << std::endl;
-
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 practice.cpp -o output && ./output
+// * g++ --std=c++20 practice.cpp -o output && ./output 

@@ -61,12 +61,15 @@ int takeCharacters(std::string s, int k) {
 }
 
 int main() {
+  // * testcase 1
   // int k = 2;
   // std::string s = "aabaaaacaabc";
-
+  
+  // * testcase 2
   int k = 1;
   std::string s = "a";
-
+  
+  // * testcase 3
   // int k = 1;
   // std::string s = "abc";
 

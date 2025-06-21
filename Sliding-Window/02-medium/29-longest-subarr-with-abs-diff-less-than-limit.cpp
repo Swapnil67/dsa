@@ -29,9 +29,9 @@
  * * https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/
 */
 
-#include <vector>
 #include <set>
 #include <queue>
+#include <vector>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
@@ -104,10 +104,57 @@ int longestSubarray(std::vector<int> &nums, int limit) {
 }
 
 // * ------------------------- APPROACH 2B: Optimal APPROACH -------------------------`
+// ! Use this approach (more easy) 
+/*
+ * Use a sliding window [left, right] and maintain:
+ *  maxDeque: decreasing deque for tracking maximum
+ *  minDeque: increasing deque for tracking minimum
+ *  At each step:
+ *   1. Expand right
+ *   2. Shrink left if the difference between max and min exceeds limit
+ *   3. Track max length of valid window
+*/
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(2N)
+int longestSubarray2(std::vector<int> &nums, int limit) {
+  int n = nums.size();
+  std::deque<int> mindq, maxdq;
+  int i = 0, ans = 0;
+  for(int j = 0; j < n; ++j) {
+    // * Maintain mindq (increasing)
+    while(!mindq.empty() && nums[j] < mindq.back()) {
+      mindq.pop_back();
+    }
+    mindq.push_back(nums[j]);
+
+    // * Maintain maxdq (decreasing)
+    while(!maxdq.empty() && nums[j] > maxdq.back()) {
+      maxdq.pop_back();
+    }
+    maxdq.push_back(nums[j]);
+
+    // * Shrink window if limit exceeded
+    while(maxdq.front() - mindq.front() > limit) {
+      if(maxdq.front() == nums[i]) {
+        maxdq.pop_front();
+      }
+      if(mindq.front() == nums[i]) {
+        mindq.pop_front();
+      }
+      i++;
+    }
+
+    ans = std::max(ans, j - i + 1);
+  } 
+  return ans;
+}
+
+
+// * ------------------------- APPROACH 2C: Optimal APPROACH -------------------------`
 // * Using multiset data-structure
 // * TIME COMPLEXITY O(n * log(n))
 // * SPACE COMPLEXITY O(N)
-int longestSubarray2(std::vector<int> &nums, int limit) {
+int longestSubarray3(std::vector<int> &nums, int limit) {
   int n = nums.size();
   
   int i = 0, j = 0, ans = 0;

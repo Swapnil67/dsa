@@ -63,6 +63,7 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Classic Sliding Window
+// * Keep the consecutive_count variable
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> resultsArray(std::vector<int> arr, int k) {
@@ -83,8 +84,7 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
   }
 
   // * Find the remaining ans through sliding window
-  // * here 'i' acts a current index for ans vector
-  int i = 1;
+  int i = 1;  // * here 'i' acts a current index for ans vector
   int j = k;
   while (j < n) {
     if (arr[j - 1] + 1 == arr[j]) {
@@ -93,6 +93,7 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
       consecutive_cnt = 1;
     }
 
+    // * If window is greater than k
     if (consecutive_cnt >= k) {
       ans[i] = arr[j];
     }

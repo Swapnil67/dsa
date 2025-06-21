@@ -85,7 +85,7 @@ int bruteForce(std::vector<int> arr, int k) {
 
 int binarySearch(std::vector<int> &nums, int target) {
   int n = nums.size();
-  int l = 0, r = nums.size() - 1, ans = 0;
+  int l = 0, r = n - 1, ans = 0;
   while(l <= r) {
     int m = l + (r - l) / 2;
     if (target >= nums[m]) { // * y <= (x + 2k) 
@@ -133,6 +133,7 @@ int maximumBeauty2(std::vector<int> arr, int k) {
   int max_beauty = 0;
   int i = 0, j = 0;
   while (i < n) {
+    // * incr 'j' till arr[j] <= (arr[i] + 2k) 
     while (j < n && (arr[i] + 2 * k) >= arr[j]) {
       j++;
     }
