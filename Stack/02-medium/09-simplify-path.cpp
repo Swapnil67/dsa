@@ -151,16 +151,11 @@ std::string simplifyPath(std::string s) {
 }
 
 int main() {
-  // std::string s = "/home//foo/";
-  std::string s = "/home/user/Documents/../Pictures";
-  // std::string s = "/../";
-  // std::string s = "/.../a/../b/c/../d/./";
-  // std::string s = "/..hidden/";
-  std::cout << "Path: " << s << std::endl;
-
-  // std::string ans = bruteForce(s);
-  std::string ans = simplifyPath(s);
-  std::cout << "Simplified Path: " << ans << std::endl;
+  std::cout << "Simplified Path: " << simplifyPath("/home/user/Documents/../Pictures") << std::endl;
+  std::cout << "Simplified Path: " << simplifyPath("/../") << std::endl;
+  std::cout << "Simplified Path: " << simplifyPath("/..hidden/") << std::endl;
+  std::cout << "Simplified Path: " << simplifyPath("/home//foo/") << std::endl;
+  std::cout << "Simplified Path: " << simplifyPath("/.../a/../b/c/../d/./") << std::endl;
   return 0;
 }
 

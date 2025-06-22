@@ -47,10 +47,10 @@ int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
   }
   // * sort in descending order
   std::sort(cars.begin(), cars.end(), std::greater<std::pair<float, float>>());
-  
+
   // * For debug information
-  // for (int i = 0; i < n; ++i) {
-  //   printf("%f %f\n", cars[i].first, cars[i].second);
+  // for (auto &it: cars) {
+  //   printf("%f %f\n", it.first, it.second);
   // }
   // printf("\n");
 
@@ -77,15 +77,19 @@ int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
 }
 
 int main() {
+  // * testcase 1
   // int target = 12;
   // std::vector<int> position = {10, 8, 0, 5, 3}, speed = {2, 4, 1, 1, 3};
 
+  // * testcase 2
   int target = 10;
   std::vector<int> position = {1, 3, 6}, speed = {2, 3, 1};
+
   printf("Car positions: \n");
   printArr(position);
   printf("Car speeds: \n");
   printArr(speed);
+
   int fleets = carFleet(target, position, speed);
   std::cout << "Car Fleets: " << fleets << std::endl;
   return 0;

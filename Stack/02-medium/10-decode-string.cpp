@@ -20,11 +20,10 @@
 #include <stack>
 #include <iostream>
 
-std::string bruteForce(std::string s) {
+std::string decodeString(std::string s) {
   int n = s.size();
   int j = 0;
   
-  std::string token = "";
   std::stack<char> st;
 
   for (char &ch : s) {
@@ -81,10 +80,8 @@ int main() {
   std::string s = "2[abc]3[cd]ef";
   std::cout << "Input String: " << s << std::endl;
 
-  std::string ans = bruteForce(s);
+  std::string ans = decodeString(s);
   std::cout << "Decoded String: " << ans << std::endl;
-
-  // std::string ans = simplifyPath(s);
   return 0;
 }
 

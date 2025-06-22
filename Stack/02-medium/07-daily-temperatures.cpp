@@ -60,29 +60,34 @@ std::vector<int> bruteForce(std::vector<int> temperatures) {
 std::vector<int> dailyTemperatures(std::vector<int> &temperatures) {
   int n = temperatures.size();
   std::vector<int> ans(n);
-  std::stack<int> mono_st;    // * Monotonic stack
-
-  for (int i = n - 1; i >= 0; --i) {
-    // * st.top() should only contain element greater than temperatures[i] 
-    while (!mono_st.empty() && temperatures[i] >= temperatures[mono_st.top()]) {
-      mono_st.pop();
+  std::stack<int> st;    // * Monotonic stack
+  
+  for (int i = 0; i < temperatures.size(); ++i) {
+     // * st.top() should only contain element greater than temperatures[i] 
+    while(!st.empty() && temperatures[st.top()] < temperatures[i]) {
+      // * next greater element
+      ans[st.top()] = i - st.top();
+      st.pop(); 
     }
 
-    int days = 0;
-    if(!mono_st.empty()) {
-      days = mono_st.top() - i; // * days
-    }
-    ans[i] = days;
-
-    mono_st.push(i);
+    st.push(i);
   }
 
   return ans;
 }
 
 int main() {
+  // * testcase 1
   std::vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
+
+  // * testcase 2
+  // std::vector<int> temperatures = {30, 40, 50, 60};
+
+  // * testcase 3
+  // std::vector<int> temperatures = {30, 60, 90};
+
   printArr(temperatures);
+
   // std::vector<int> ans = bruteForce(temperatures);
   std::vector<int> ans = dailyTemperatures(temperatures);
   printArr(ans);

@@ -19,9 +19,9 @@
 * https://leetcode.com/problems/remove-k-digits/description/
 */
 
-#include <iostream>
-#include <climits>
 #include <stack>
+#include <climits>
+#include <iostream>
 
 // ! Monotonic Stack
 
@@ -40,7 +40,8 @@ std::string bruteForce(std::string str, int k) {
         j += k;
       temp += str[j];
     }
-    if(std::stoi(temp) < min_num) {
+
+    if (std::stoi(temp) < min_num) {
       min_num = std::stoi(temp);
       ans = std::to_string(min_num);
     }
@@ -90,8 +91,8 @@ std::string removeKdigits(std::string str, int k) {
 }
 
 int main() {
-  int k = 3;
-  std::string num = "1432219";
+  // int k = 3;
+  // std::string num = "1432219";
 
   // int k = 1;
   // std::string num = "112";
@@ -99,8 +100,8 @@ int main() {
   // int k = 1;
   // std::string num = "10200";
 
-  // int k = 9;
-  // std::string num = "1234567890";
+  int k = 9;
+  std::string num = "1234567890";
 
   std::cout << num << std::endl;
 

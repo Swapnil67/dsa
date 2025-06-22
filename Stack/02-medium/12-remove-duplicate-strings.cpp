@@ -17,6 +17,10 @@
  * * Example 2
  * * Input  : s = "pbbcggttciiippooaais", k = 2
  * * Output : "ps"
+ * 
+ * * Example 2
+ * * Input  : s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy", k = 4
+ * * Output : "ybth"
 
 * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/
 */
@@ -34,6 +38,7 @@ std::string removeDuplicates(std::string s, int k) {
   std::stack<char> st;
   std::unordered_map<char, int> freqHash;
   for (char &ch : s) {
+    freqHash[ch]++;
     if (!st.empty() && st.top() == ch) {
       freqHash[ch]++;
     } else {
@@ -63,6 +68,7 @@ std::string removeDuplicates(std::string s, int k) {
 }
 
 // * Using Vector as stack
+// ! This will pass all testcases 
 // * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(N)
 std::string removeDuplicates2(std::string s, int k) {
@@ -78,6 +84,7 @@ std::string removeDuplicates2(std::string s, int k) {
       st.back().second++;
     }
 
+    // * if ch count gets equal to 'k'
     if(st.back().second == k) {
       st.pop_back();
     }
@@ -86,23 +93,29 @@ std::string removeDuplicates2(std::string s, int k) {
 
   std::string ans = "";
   for (auto x : st) {
-      ans.append(x.second, x.first);
+    ans.append(x.second, x.first);
   }
 
   return ans;
 }
 
 // * My Solution
+// ! this fails on testcase 4 but the answer is right it's just that order is different
+// ! since here we are using unordered_map this changes the order of o/p
 std::string removeDuplicates3(std::string s, int k) {
   int n = s.size();
   std::unordered_map<char, int> freqHash;
   for(char &ch: s) {
     freqHash[ch]++;
-    if (freqHash[ch] == k) {
+    if (freqHash[ch] >= k) {
       while (freqHash[ch] == 0)
         freqHash[ch]--;
       freqHash.erase(ch);
     }
+  }
+
+  for(auto it: freqHash) {
+    std::cout << it.first << " -> " << it.second << std::endl;
   }
 
   std::string ans = "";
@@ -117,17 +130,24 @@ std::string removeDuplicates3(std::string s, int k) {
 }
 
 int main() {
+  // * testcase 1
   // int k = 2;
   // std::string s = "abcd";
 
+  // * testcase 2
   // int k = 3;
   // std::string s = "deeedbbcccbdaa";
 
+  // * testcase 3
+  // int k = 2;
+  // std::string s = "pbbcggttciiippooaais";
+
+  // * testcase 4
   int k = 4;
   std::string s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy";
 
   std::cout << "Input String: " << s << std::endl;
-  std::string ans = removeDuplicates(s, k);
+  std::string ans = removeDuplicates3(s, k);
   std::cout << "Ans: " << ans << std::endl;
 
   return 0;

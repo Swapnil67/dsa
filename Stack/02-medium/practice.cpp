@@ -8,13 +8,19 @@
 #include <unordered_map>
 
 template <typename T>
-void printArr(std::vector<T> &arr)
-{
-  for (int i = 0; i < arr.size(); i++)
-  {
+void printArr(std::vector<T> &arr) {
+  for (int i = 0; i < arr.size(); i++) {
     std::cout << arr[i] << " ";
   }
   std::cout << std::endl;
+}
+
+template <typename T>
+void printStack(std::stack<T> st) {
+  while (!st.empty()) {
+    std::cout << st.top() << std::endl;
+    st.pop();
+  }
 }
 
 void reverseArr(std::vector<int> &arr, int i, int j)
@@ -30,35 +36,6 @@ void reverseArr(std::vector<int> &arr, int i, int j)
   }
 }
 
-// * 09 - Simplify Path
-// std::string simplifyPath(std::string path) {
-// TODO
-// }
-
-// * 10 - Decode String
-// std::string decodeString(std::string s) {
-// TODO
-
-
-// * 08 - Car Fleet
-// int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
-// TODO
-// }
-
-// * 11 - Remove k digits
-// std::string removeKdigits(std::string num, int k) {
-// TODO
-// }
-
-// * 12 - Remove All Adjacent Duplicates in String II
-// std::string removeDuplicates(std::string s, int k) {
-// TODO
-// }
-
-// * 13 - 132 Pattern
-// bool find132pattern(std::vector<int> &nums) {
-// TODO
-// }
 
 // * ------------------------------------------------
 
@@ -93,18 +70,41 @@ void reverseArr(std::vector<int> &arr, int i, int j)
 // };
 
 // * 07 - Daily Temperatures
-std::vector<int> dailyTemperatures(std::vector<int> temperatures) {
+// std::vector<int> dailyTemperatures(std::vector<int> temperatures) {
+// TODO
+// }
 
-}
+// * 08 - Car Fleet
+// int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
+// TODO
+// }
+
+// * 09 - Simplify Path
+// std::string simplifyPath(std::string path) {
+// TODO
+// }
+
+// * 10 - Decode String
+// std::string decodeString(std::string s) {
+// TODO
+// }
+
+// * 11 - Remove k digits
+// std::string removeKdigits(std::string num, int k) {
+// TODO
+// }
+
+// * 12 - Remove All Adjacent Duplicates in String II
+// std::string removeDuplicates(std::string s, int k) {
+// TODO
+// 
+
+// * 13 - 132 Pattern
+// bool find132pattern(std::vector<int> &nums) {
+// TODO
+// }}
 
 int main() {
-  std::vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
-  printArr(temperatures);
-  
-  // std::vector<int> ans = bruteForce(temperatures);
-  std::vector<int> ans = dailyTemperatures(temperatures);
-  printArr(ans);
-
   return 0;
 }
 
