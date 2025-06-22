@@ -19,7 +19,8 @@
  * https://www.naukri.com/code360/problems/first-and-last-position-of-an-element-in-sorted-array_1082549
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 // * Using Plain Binary Search
 
@@ -33,15 +34,16 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
+// * Lower Bound
 // * O(logN)
 int findFirstOccurence(std::vector<int> arr, int k) {
   int n = arr.size();
   int l = 0, r = n - 1;
-  int idx = -1;
+  int ans = -1;
   while(l <= r) {
     int m = l + (r - l) / 2;
     if(arr[m] >= k) {
-      idx = m;
+      ans = m;
       r = m - 1;
     }
     else {
@@ -49,18 +51,18 @@ int findFirstOccurence(std::vector<int> arr, int k) {
     }
   }
   
-  return idx;
+  return ans;
 }
 
 // * O(logN)
 int findLastOccurence(std::vector<int> arr, int k) {
   int n = arr.size();
   int l = 0, r = n - 1;
-  int idx = -1;
+  int ans = -1;
   while(l <= r) {
     int m = l + (r - l) / 2;
     if(arr[m] == k) {
-      idx = m;
+      ans = m;
       l = m + 1;
     }
     else if(arr[m] < k) {
@@ -71,7 +73,7 @@ int findLastOccurence(std::vector<int> arr, int k) {
     }
   }
 
-  return idx;
+  return ans;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -135,4 +137,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 06-first-and-last-occurence-b.cpp -o 06-first-and-last-occurence-b && ./06-first-and-last-occurence-b
+// * g++ --std=c++17 06-first-and-last-occurence-b.cpp -o output && ./output

@@ -65,15 +65,16 @@ int findUpperBound(std::vector<int> arr, int x) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 4, 7, 8, 10};
   // int x = 7;
+  // std::vector<int> arr = {1, 4, 7, 8, 10};
 
   // * testcase 2
-  std::vector<int> arr = {2, 4, 6, 7};
   int x = 5;
+  std::vector<int> arr = {2, 4, 6, 7};
 
-  std::cout<<"Input Array"<<std::endl;
+  std::cout << "Input Array" << std::endl;
   printArr(arr);
+  
   // int upperBound = upperBoundBrute(arr, x);
   int upperBound = findUpperBound(arr, x);
   std::cout<<"Upper Bound Index: "<<upperBound<<std::endl;
@@ -82,4 +83,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 03-upper-bound.cpp -o 03-upper-bound && ./03-upper-bound
+// * g++ --std=c++17 03-upper-bound.cpp -o output && ./output

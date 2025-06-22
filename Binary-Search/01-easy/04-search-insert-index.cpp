@@ -62,8 +62,8 @@ int findInsertIndex(std::vector<int> arr, int target) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {1, 2, 4, 7};
   int target = 6;
+  std::vector<int> arr = {1, 2, 4, 7};
 
   std::cout<<"Input Array"<<std::endl;
   printArr(arr);
@@ -75,4 +75,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 04-search-insert-index.cpp -o 04-search-insert-index && ./04-search-insert-index
+// * g++ --std=c++17 04-search-insert-index.cpp -o output && ./output

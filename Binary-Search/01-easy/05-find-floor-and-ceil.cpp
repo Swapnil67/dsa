@@ -36,7 +36,7 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(logn)
 int findCeil(std::vector<int> arr, int x) {
   int n = arr.size();
-  int l = 0, r = n-1;
+  int l = 0, r = n - 1;
   int ceilEle = -1;
   while(l <= r) {
     int m = l + (r - l) / 2;
@@ -85,17 +85,21 @@ std::pair<int, int> getFloorAndCeil(std::vector<int>arr, int x) {
 }
 
 int main() {
-  std::vector<int> arr = {1, 2, 3, 4, 8, 10, 10, 12, 19};
+  // * testcase 1
   int x = 5;
-  // std::vector<int> arr = {3, 4, 4, 7, 8, 10};
+  std::vector<int> arr = {1, 2, 3, 4, 8, 10, 10, 12, 19};
+
+  // * testcase 2
   // int x = 2;
+  // std::vector<int> arr = {3, 4, 4, 7, 8, 10};
+
   printArr(arr);
   std::pair<int, int> ans = getFloorAndCeil(arr, x);
-  std::cout<<"Floor Element: "<<ans.first<<std::endl;
-  std::cout<<"Ceil Element: "<<ans.second<<std::endl;
+  std::cout << "Floor Element: " << ans.first << std::endl;
+  std::cout << "Ceil Element: " << ans.second << std::endl;
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 05-find-floor-and-ceil.cpp -o 05-find-floor-and-ceil && ./05-find-floor-and-ceil
+// * g++ --std=c++17 05-find-floor-and-ceil.cpp -o output && ./output

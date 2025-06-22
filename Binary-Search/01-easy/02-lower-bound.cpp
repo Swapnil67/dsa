@@ -64,12 +64,12 @@ int findLowerBound(std::vector<int> arr, int x) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 2, 3};
   // int x = 0;
+  // std::vector<int> arr = {1, 2, 2, 3};
 
   // * testcase 2
-  std::vector<int> arr = {1, 2, 2, 3, 3, 5};
   int x = 2;
+  std::vector<int> arr = {1, 2, 2, 3, 3, 5};
 
   std::cout<<"Input Array"<<std::endl;
   printArr(arr);
@@ -80,4 +80,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 02-lower-bound.cpp -o 02-lower-bound && ./02-lower-bound
+// * g++ --std=c++17 02-lower-bound.cpp -o output && ./output

@@ -15,7 +15,8 @@
  * https://www.naukri.com/code360/problems/occurrence-of-x-in-a-sorted-array_630456
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 // * Using Plain Binary Search
 
@@ -82,12 +83,12 @@ int countOccurences(std::vector<int> arr, int k) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = { 1, 1, 1, 2, 2, 3, 3 };
   // int k = 3;
+  // std::vector<int> arr = { 1, 1, 1, 2, 2, 3, 3 };
 
   // * testcase 2
-  std::vector<int> arr = { 1, 1, 1, 2, 2, 3, 3 };
   int k = 8;
+  std::vector<int> arr = { 1, 1, 1, 2, 2, 3, 3 };
 
   int occurences = countOccurences(arr, k);
   std::cout<<"Total Occurences: "<<occurences<<std::endl;
@@ -96,4 +97,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 07-count-occurences.cpp -o 07-count-occurences && ./07-count-occurences
+// * g++ --std=c++17 07-count-occurences.cpp -o output && ./output

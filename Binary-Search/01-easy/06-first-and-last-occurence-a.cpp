@@ -19,7 +19,8 @@
  * https://www.naukri.com/code360/problems/first-and-last-position-of-an-element-in-sorted-array_1082549
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 // * Using Lower & Upper Bound concept
 
@@ -77,13 +78,12 @@ int findUpperBound(std::vector<int> arr, int k) {
 std::pair<int, int> bruteForce(std::vector<int> arr, int k) {
   std::pair<int, int> ans(-1, -1);
   int n = arr.size();
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     if(arr[i] == k) {
-      if(ans.first == -1) {
+      if (ans.first == -1) {
         ans.first = i;
         ans.second = i;
-      }
-      else if(ans.first != -1) {
+      } else if(ans.first != -1) {
         ans.second = i;
       }
     }
@@ -130,4 +130,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 06-first-and-last-occurence-a.cpp -o 06-first-and-last-occurence-a && ./06-first-and-last-occurence-a
+// * g++ --std=c++17 06-first-and-last-occurence-a.cpp -o output && ./output
