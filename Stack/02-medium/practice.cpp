@@ -102,7 +102,7 @@ void reverseArr(std::vector<int> &arr, int i, int j)
 // * 13 - 132 Pattern
 // bool find132pattern(std::vector<int> &nums) {
 // TODO
-// }}
+// }
 
 int main() {
   return 0;

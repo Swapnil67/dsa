@@ -1,6 +1,7 @@
 /*
  * Leetcode - 901
  * Online Stock Span
+ * 
  * * Example 1
  * * Input  : ["StockSpanner", "next", "next", "next", "next", "next", "next", "next"]
  * [[], [100], [80], [60], [70], [60], [75], [85]]
@@ -23,12 +24,12 @@ class StockSpanner {
 
     int nextBrute(int price) {
       int stock_span = 1;
-      if (this->st.empty()) {
-        this->st.push({price, stock_span});
+      if (st.empty()) {
+        st.push({price, stock_span});
         return stock_span;
       }
 
-      std::stack<std::pair<int, int>> temp = this->st;
+      std::stack<std::pair<int, int>> temp = st;
       // std::cout << temp.size() << " " << temp.top() << std::endl;
 
       while (!temp.empty()) {
@@ -39,7 +40,7 @@ class StockSpanner {
         temp.pop();
       }
 
-      this->st.push({price, stock_span});
+      st.push({price, stock_span});
       return stock_span;
     }
 
@@ -47,19 +48,19 @@ class StockSpanner {
       int stock_span = 1;
 
       // * Stack is empty
-      if(this->st.empty()) {
-        this->st.push({price, stock_span});
+      if(st.empty()) {
+        st.push({price, stock_span});
         return stock_span;
       }
 
       // * Check the previous day stock price
       // * If <= to today price pop the previous day stock span
       // * This keeps the st in decreasing order
-      while (!this->st.empty() && this->st.top().first <= price) {
-        stock_span += this->st.top().second;
-        this->st.pop();
+      while (!st.empty() && st.top().first <= price) {
+        stock_span += st.top().second;
+        st.pop();
       }
-      this->st.push({price, stock_span});
+      st.push({price, stock_span});
 
       return stock_span;
     }

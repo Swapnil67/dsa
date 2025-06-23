@@ -74,10 +74,10 @@ std::string decodeString(std::string s) {
 }
 
 int main() {
-
-  // std::string s = "3[a]2[bc]";
+  std::string s = "3[a]2[bc]";
   // std::string s = "3[a2[c]]";
-  std::string s = "2[abc]3[cd]ef";
+  // std::string s = "2[abc]3[cd]ef";
+
   std::cout << "Input String: " << s << std::endl;
 
   std::string ans = decodeString(s);

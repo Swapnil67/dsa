@@ -74,12 +74,14 @@ bool bruteForce(std::vector<int> nums) {
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * num1 < num3 < num2 
+// * num2 will be largest & num3 will be second largest
 // * Using Monotonic Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 bool find132pattern(std::vector<int> nums) {
   int n = nums.size();
-  int num3 = INT_MIN;
+  int num3 = INT_MIN; 
   std::stack<int> st;
 
   // * consider nums[j] as the largest element (i.e., n2)
