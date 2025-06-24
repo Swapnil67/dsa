@@ -5,7 +5,7 @@
 
  * * Example 1
  * * Input  : arr = [3, 1, 2, 4]
- * * Output : 17
+ * * Output : 30
 
  * * Example 2
  * * Input  : arr = [1, 1]
