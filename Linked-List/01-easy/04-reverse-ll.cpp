@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 206
  * Reverse Linked List
 
  * You are given a Singly Linked List of integers. You need to reverse the Linked List by changing the links between nodes.
@@ -12,29 +13,27 @@
  * Output : 4 -> 3 -> 2 -> 1 -> 'NULL'
  * 
 
+ * https://leetcode.com/problems/reverse-linked-list/
  * https://www.naukri.com/code360/problems/reverse-linked-list_920513
- * https://leetcode.com/problems/reverse-linked-list/submissions/1234160860/
- * https://www.youtube.com/watch?v=D2vI2DNJGd8&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=10
- 
 */
 
-#include<stack>
-#include<iostream>
-
+#include <stack>
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
-    int data;
+    int val;
     Node* next;
 
     Node(int d) {
-      this->data = d;
-      this->next = nullptr;
+      val = d;
+      next = nullptr;
     }
 
     Node(int d, Node* n) {
-      this->data = d;
-      this->next = n;
+      val = d;
+      next = n;
     }
 
 };
@@ -45,7 +44,7 @@ class Node {
 Node* arrayToLL(std::vector<int> arr) {
   Node* head = new Node(arr[0]);
   Node* temp = head;
-  for(int i=1; i<arr.size(); i++) {
+  for (int i = 1; i < arr.size(); i++) {
     Node* newNode = new Node(arr[i]);
     temp->next = newNode;
     temp = newNode;
@@ -56,32 +55,32 @@ Node* arrayToLL(std::vector<int> arr) {
 // * Traverse the LL
 void printLL(Node* head) {
   Node* temp = head;
-  while(temp) {
-    std::cout<<temp->data<<" ";
+  while (temp) {
+    std::cout << temp->val << " ";
     temp = temp->next;
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 // * ------------------ BRUTE FORCE ---------------------
-// * TIME COMPLEXITY O(N)
+// * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 Node* reverseLLBruteForce(Node* head) {
   if(head == nullptr || head->next == nullptr) 
     return head;
 
-  std::stack<int> st;
-
+  // * Push the ll elements to stack
   Node* temp = head;
-  while(temp) {
-    st.push(temp->data);
+  std::stack<int> st;
+  while (temp) {
+    st.push(temp->val);
     temp = temp->next;
   }
 
+  // * Update the data in original ll from stack
   temp = head;
-
   while(temp) {
-    temp->data = st.top();
+    temp->val = st.top();
     st.pop();
     temp = temp->next;
   }
@@ -99,6 +98,7 @@ Node* reverseLLOptimal(Node* head) {
   Node* prev = nullptr;
 
   while(temp) {
+    // * keep this stored before hand
     Node* front = temp->next;
     temp->next = prev;
     prev = temp;

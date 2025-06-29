@@ -3,8 +3,9 @@
  * * https://takeuforward.org/data-structure/reverse-a-doubly-linked-list/
 */
 
-#include<stack>
-#include<iostream>
+#include <stack>
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
