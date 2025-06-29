@@ -94,34 +94,34 @@ Node* reverseLLOptimal(Node* head) {
   if(head == nullptr || head->next == nullptr) 
     return head;
 
-  Node* temp = head;
-  Node* prev = nullptr;
+  Node* current = head;
+  Node* tail = nullptr;
 
-  while(temp) {
+  while (current) {
     // * keep this stored before hand
-    Node* front = temp->next;
-    temp->next = prev;
-    prev = temp;
-    temp = front;
+    Node* front = current->next;
+    current->next = tail;
+    tail = current;
+    current = front;
   }
 
-  return prev;
+  return tail;
 }
 
 // * ------------------ Recursive Approach ---------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-Node* reverseLLOptimalRecursive(Node* temp, Node* prev) {
-  if(temp == nullptr) {
-    return prev;
+Node* reverseLLOptimalRecursive(Node* current, Node* tail) {
+  if(current == nullptr) {
+    return tail;
   }
 
-  Node* front = temp->next;
-  temp->next = prev;
-  prev = temp;
-  temp = front;
+  Node* front = current->next;
+  current->next = tail;
+  tail = current;
+  current = front;
 
-  return reverseLLOptimalRecursive(temp, prev);
+  return reverseLLOptimalRecursive(current, tail);
 }
 
 int main() {

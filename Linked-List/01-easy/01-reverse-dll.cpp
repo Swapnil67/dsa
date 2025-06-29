@@ -91,8 +91,8 @@ Node* reverseDLLBruteForce(Node* head) {
 Node* reverseDLLOptimal(Node* head) {
   // * if head is empty or there is only one element
   // * we can directly just return the head
-  if(head==NULL || head->next == NULL){
-      return head;
+  if (head == NULL || head->next == NULL) {
+    return head;
   }
 
   Node* current = head;

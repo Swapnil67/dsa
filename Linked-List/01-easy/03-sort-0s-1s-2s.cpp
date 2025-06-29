@@ -12,7 +12,8 @@
  * https://www.naukri.com/code360/problems/sort-linked-list-of-0s-1s-2s_1071937?leftPanelTabValue=PROBLEM 
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
@@ -63,28 +64,38 @@ void printLL(Node* head) {
 Node* bruteForce(Node* head) {
   Node* temp = head;
   int zeroCount = 0, oneCount = 0, twoCount = 0;
-  
+
   // * Count the 0s, 1s and 2s O(N)
-  while(temp) {
+  while (temp)
+  {
     int d = temp->data;
-    if(d == 0) zeroCount++;
-    else if(d == 1) oneCount++;
-    else if(d == 2) twoCount++;
+    if (d == 0)
+      zeroCount++;
+    else if (d == 1)
+      oneCount++;
+    else if (d == 2)
+      twoCount++;
     temp = temp->next;
   }
 
   temp = head;
-  for(int i=0; i<zeroCount; i++) { // * O(zeroCount)
+  
+  while(zeroCount > 0) {  // * O(zeroCount)
     temp->data = 0;
     temp = temp->next;
+    zeroCount--;
   }
-  for(int i=0; i<oneCount; i++) { // * O(oneCount)
+
+  while(oneCount > 0) {  // * O(oneCount)
     temp->data = 1;
     temp = temp->next;
+    oneCount--;
   }
-  for(int i=0; i<twoCount; i++) { // * O(twoCount)
+
+  while(twoCount > 0) {  // * O(twoCount)
     temp->data = 2;
     temp = temp->next;
+    twoCount--;
   }
   return head;
 }
@@ -132,7 +143,7 @@ Node* optimalSolution(Node* head) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = { 1,0,2,2,1,1,0,1,0 };
+  std::vector<int> arr = {1, 0, 2, 2, 1, 1, 0, 1, 0};
 
   // * Create a Linked List
   Node* head = arrayToLL(arr);

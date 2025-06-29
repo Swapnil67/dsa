@@ -18,14 +18,12 @@
 
  * https://leetcode.com/problems/palindrome-linked-list/
  * https://www.naukri.com/code360/problems/check-if-linked-list-is-palindrome_985248
- * https://takeuforward.org/data-structure/check-if-given-linked-list-is-plaindrome/
- * https://www.youtube.com/watch?v=lRY_G-u_8jk&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=11
  
 */
 
-
-#include<iostream>
-#include<stack>
+#include <stack>
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
@@ -118,7 +116,7 @@ bool bruteForce(Node* head) {
 // * ------------------ Optimal Approach ---------------------
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-bool optimalApproach (Node* head) {
+bool isPalindrome (Node* head) {
   if(head == nullptr || head->next == nullptr) 
     return true;
 
@@ -158,19 +156,19 @@ bool optimalApproach (Node* head) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = { 1,2,3,4 };
+  std::vector<int> arr = {1, 2, 3, 4};
   // * testcase 2
-  // std::vector<int> arr = { 1,2,1 };
+  // std::vector<int> arr = {1, 2, 1};
   // * testcase 3
-  // std::vector<int> arr = { 1,2,2,1 };
+  std::vector<int> arr = {1, 2, 2, 1};
+
   Node* head = arrayToLL(arr);
   std::cout << " ---------- Linked List -----------  " << std::endl;
   printLL(head);
 
-  // bool isPalindrome = bruteForce(head);
-  bool isPalindrome = optimalApproach(head);
-  std::cout<<"Is Palindrome: "<<isPalindrome<<std::endl;
-
+  // bool ans = bruteForce(head);
+  bool ans = isPalindrome(head);
+  std::cout<<"Is Palindrome: "<<ans<<std::endl;
   return 0;
 }
 

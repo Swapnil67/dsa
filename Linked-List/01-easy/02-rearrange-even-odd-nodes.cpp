@@ -1,5 +1,5 @@
 /*
- *  Segregate Even And Odd Nodes In a Linked List
+ * Segregate Even And Odd Nodes In a Linked List
 
  * You are given the head node of a singly linked list 'head'. Your task is to modify the linked list 
  * in such a way that all the even valued nodes appear before the all odd valued node and order of nodes
@@ -14,9 +14,10 @@
  * * head : 2 -> 1 -> 3 -> 5 -> 6 -> 4 -> 7
  * * Output: 2 -> 6 -> 4 -> 1 -> 3 -> 5 -> 7
  * 
- 
 */
-#include<iostream>
+
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
@@ -65,8 +66,8 @@ Node* reArrangeEvenOddNodes(Node* head) {
   Node* temp = head;
 
   // * Insert Even Nodes in arr
-  while(temp) {
-    if(temp->data % 2 == 0 && temp->data >= 0) {
+  while (temp) {
+    if (temp->data % 2 == 0 && temp->data >= 0) {
       arr.push_back(temp->data);
     }
     temp = temp->next;
@@ -75,8 +76,8 @@ Node* reArrangeEvenOddNodes(Node* head) {
 
   // * Insert Odd Nodes in arr
   temp = head;
-  while(temp) {
-    if(temp->data % 2 != 0 && temp->data >= 0) {
+  while (temp) {
+    if (temp->data % 2 != 0 && temp->data >= 0) {
       arr.push_back(temp->data);
     }
     temp = temp->next;
@@ -84,8 +85,8 @@ Node* reArrangeEvenOddNodes(Node* head) {
 
   // * Traverse the LL and replace the data values with array data values
   int j = 0; temp = head;
-  while(temp) {
-    if(arr[j] >= 0) {
+  while (temp) {
+    if (arr[j] >= 0) {
       temp->data = arr[j];
     }
     j++;
@@ -93,31 +94,34 @@ Node* reArrangeEvenOddNodes(Node* head) {
   }
 
   // * For debugging
-  for(int i=0; i<arr.size(); i++) {
-    std::cout<<arr[i]<<" ";
-  }
-  std::cout<<std::endl;
+  // for (int i = 0; i < arr.size(); i++) {
+  //   std::cout << arr[i] << " ";
+  // }
+  // std::cout << std::endl;
 
   return head;
 } 
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = { 6,5,3,4,7,1,2 };
+  // std::vector<int> arr = {6, 5, 3, 4, 7, 1, 2};
+
   // * testcase 2
-  // std::vector<int> arr = { 1,2,3,4,5,-1 };
+  // std::vector<int> arr = {1, 2, 3, 4, 5, -1};
+
   // * testcase 3
-  std::vector<int> arr = { 4,11,5,11,0,6,1,6,6,5,17,14,19,19,12,9,9,-1 };
+  std::vector<int> arr = {4, 11, 5, 11, 0, 6, 1, 6, 6, 5, 17, 14, 19, 19, 12, 9, 9, -1};
 
   // * Create a Linked List
   Node* head = arrayToLL(arr);
-  std::cout<<"------------ Before Rearranging Linked List ------------"<<std::endl;
+  std::cout << "------------ Before Rearranging Linked List ------------" << std::endl;
   printLL(head);
 
   // * Rearrange even and odd numbers
-  std::cout<<"------------ After Rearranging Linked List ------------"<<std::endl;
+  std::cout << "------------ After Rearranging Linked List ------------" << std::endl;
   head = reArrangeEvenOddNodes(head);
   // printLL(head);
+
   return 0;
 }
 
