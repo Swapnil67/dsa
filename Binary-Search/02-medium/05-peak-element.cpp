@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 162
  * Find Peak Element
  * A peak element is an element that is strictly greater than its neighbors.
  * 
@@ -16,7 +17,8 @@
  * https://www.naukri.com/code360/problems/find-peak-element_1081482
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -31,8 +33,8 @@ void printArr(std::vector<int> arr) {
 int bruteForce(std::vector<int> arr) {
   int n = arr.size();
   int peakEle;
-  for(int i=0; i<n; i++) {
-    if ((i == 0 || arr[i] > arr[i - 1]) && (i == n || arr[i] > arr[i + 1])) { 
+  for (int i = 0; i < n; i++) {
+    if ((i == 0 || arr[i] > arr[i - 1]) && (i == n || arr[i] > arr[i + 1])) {
       peakEle = arr[i];
       break;
     }
@@ -47,21 +49,24 @@ int findPeakElement(std::vector<int> arr) {
   int n = arr.size();
 
   // * Array with only one element
-  if(n == 1) return arr[0];
-  if(arr[0] > arr[1]) return arr[0];
-  if(arr[n-1] > arr[n-2]) return arr[n-1];
+  if(n == 1)
+    return arr[0];
+  if (arr[0] > arr[1])
+    return arr[0];
+  if (arr[n - 1] > arr[n - 2])
+    return arr[n - 1];
 
-  int l = 0, r = n - 1;
-  while(l <= r) {
+  int l = 1, r = n - 2; // * '0' & 'n-1' handled above
+  while (l <= r) {
     int m = l + (r - l) / 2;
     if (arr[m] > arr[m - 1] && arr[m] > arr[m + 1]) {
       return arr[m];
     }
-    else if (arr[m] > arr[m - 1]) {
-      // * Increasing curve
+
+    // * Increasing curve
+    if (arr[m] > arr[m - 1]) {
       l = m + 1;
-    }
-    else {
+    } else {
       // * Decreasing curve
       r = m - 1;
     }

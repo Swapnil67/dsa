@@ -1,6 +1,9 @@
+#include <math.h>
 #include <climits>
 #include <vector>
 #include <iostream>
+#include <numeric>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -35,10 +38,30 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 05 - Find Peak Element
+// int findPeakElement(std::vector<int> arr) {
+// TODO
+// }
+
+// * 06 - Nth Root of a number
+// int findNthRoot(int n, int m) {
+// TODO
+// }
+
+// * 09 - Koko eating bananas
+// int findMinimumBananasToEat(std::vector<int> piles, int h) {
+// TODO
+// }
+
+// * 10 - Capacity To Ship Packages Within D Days
+// int findLeastPossileWeight(std::vector<int> weights, int days) {
+// TODO
+// }
+
 int main() {
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 practice.cpp -o practice && ./practice
+// * g++ --std=c++20 practice.cpp -o output && ./output
 
