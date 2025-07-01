@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 160
  * * Intersection of Two Linked Lists
  * * Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect.
  * * If the two linked lists have no intersection at all, return null.
@@ -13,12 +14,11 @@
 
  * * https://leetcode.com/problems/intersection-of-two-linked-lists/description/
  * * https://www.naukri.com/code360/problems/-intersection-of-two-linked-lists_63045
- * * https://takeuforward.org/data-structure/find-intersection-of-two-linked-lists/
- * * https://www.youtube.com/watch?v=0DYoPz2Tpt4&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=13
 */
 
-#include<iostream>
-#include<map>
+#include <map>
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
@@ -124,38 +124,39 @@ Node* optimal(Node* head1, Node* head2) {
   int c2 = countLL(head2);
 
   if(c1 > c2) {
-    Node* newHead = forwardHead(head1, c1, c2);
-    head1 = newHead;
+    head1 = forwardHead(head1, c1, c2);
   } else if(c2 > c1) {
-    Node* newHead = forwardHead(head2, c2, c1);
-    head2 = newHead;
+    head2 = forwardHead(head2, c2, c1);
   }
 
   Node* temp1 = head1;
   Node* temp2 = head2;
   while(temp1 && temp2) {
-    if(temp1 == temp2) {
+    if (temp1 == temp2) {
       return temp1;
     }
-    if(temp1) temp1 = temp1->next;
-    if(temp2) temp2 = temp2->next;
+    if (temp1)
+      temp1 = temp1->next;
+    if (temp2)
+      temp2 = temp2->next;
   }
 
   return NULL;
 }
 
 int main() {
-  std::vector<int> arr1 = { 4,1 };
-  std::vector<int> arr2 = { 5,6,1 };
+  std::vector<int> arr1 = {4, 1};
+  std::vector<int> arr2 = {5, 6, 1};
+
   // * testcase 1
-  std::vector<int> intersectArr = { 8,4,5 };
+  std::vector<int> intersectArr = {8, 4, 5};
+
   // * testcase 2
-  // std::vector<int> intersectArr = {  };
+  // std::vector<int> intersectArr = {};
 
   Node* head1 = arrayToLL(arr1);
   Node* head2 = arrayToLL(arr2);
   Node* intersectHead = arrayToLL(intersectArr);
-
 
   head1 = appendLLToTail(head1, intersectHead);
   head2 = appendLLToTail(head2, intersectHead);
@@ -167,13 +168,11 @@ int main() {
   // Node* intersectNode = bruteForce(head1, head2);
   Node* intersectNode = optimal(head1, head2);
   if(intersectNode) {
-    std::cout<<"Intersected at '"<<intersectNode->data<<"'"<<std::endl;
-  } 
-  else {
-    std::cout<<"Not Intersecting"<<std::endl;
+    std::cout << "Intersected at '" << intersectNode->data << "'" << std::endl;
+  } else {
+    std::cout << "Not Intersecting" << std::endl;
   }
-
 
 }
 
-// * g++ --std=c++17 07-intersection-of-ll.cpp -o 07-intersection-of-ll && ./07-intersection-of-ll
+// * g++ --std=c++17 07-intersection-of-ll.cpp -o output && ./output

@@ -1,6 +1,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 typedef struct Node Node;
 
@@ -45,6 +46,9 @@ void printLL(Node *ll) {
 }
 
 Node *arrayToLL(std::vector<int> &arr) {
+  if (!arr.size())
+    return nullptr;
+
   // * create the head node
   Node *head = new Node(arr[0]);
   
@@ -79,9 +83,14 @@ Node *arrayToDLL(std::vector<int> &arr) {
   return head;
 }
 
-// Node *reverseLL(Node *temp, Node *prev) {
-// TODO
-// }
+int getLLSize(Node* head) {
+  int cnt = 0;
+  while (head) {
+    cnt++;
+    head = head->next;
+  }
+  return cnt;
+}
 
 // * 01 - Reverse Doubly Linked List
 // Node *reverseDLL(Node *head) {
@@ -105,6 +114,21 @@ Node *arrayToDLL(std::vector<int> &arr) {
 
 // * 05 - Check If Linked List Is Palindrome
 // bool isPalindrome(Node *head) {
+// TODO
+// }
+  
+// * 06 - Add 1 to LL
+// Node *addOne(Node *head) {
+// TODO
+// }
+
+// * 07 - Intersection of Two Linked Lists
+// Node *getIntersectionNode(Node *head1, Node *head2) {
+// TODO
+// }
+
+// * 08 - Middle Of Linked List
+// Node *middleNode(Node *head) {
 // TODO
 // }
 

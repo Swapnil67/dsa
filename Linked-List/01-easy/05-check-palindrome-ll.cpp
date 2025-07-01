@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 243
  * Check If Linked List Is Palindrome
 
  * You are given a Singly Linked List of integers. You have to return true if the linked list is palindrome, else return false.
@@ -160,7 +161,7 @@ int main() {
   // * testcase 2
   // std::vector<int> arr = {1, 2, 1};
   // * testcase 3
-  std::vector<int> arr = {1, 2, 2, 1};
+  // std::vector<int> arr = {1, 2, 2, 1};
 
   Node* head = arrayToLL(arr);
   std::cout << " ---------- Linked List -----------  " << std::endl;
@@ -168,9 +169,28 @@ int main() {
 
   // bool ans = bruteForce(head);
   bool ans = isPalindrome(head);
-  std::cout<<"Is Palindrome: "<<ans<<std::endl;
+  std::cout << "Is Palindrome: " << ans << std::endl;
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++17 05-check-palindrome-ll.cpp -o 05-check-palindrome-ll && ./05-check-palindrome-ll
+
+// * --------------- DRY RUN ---------------
+
+// * STEP 1
+// * Find the middle of the ll using (Tortoise & hare algorithm)
+// * 1 2 3 4
+// *   s
+// *     f
+
+// * STEP 2
+// * Reverse ll fron s->next
+// * 1 2 4 3
+// * i   j
+
+// * STEP 3
+// * Start comparing the ll from i & j till j == nullptr
+
+// * STEP 4
+// * Before returning the answer again reverse the ll from s->next to keep the input same

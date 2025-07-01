@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 876
  * * Middle Of Linked List
  * * Given a singly linked list of 'N' nodes. The objective is to determine the middle node of a singly linked list.
  * * However, if the list has an even number of nodes, we return the second middle node.
@@ -13,11 +14,10 @@
 
  * * https://leetcode.com/problems/middle-of-the-linked-list/
  * * https://www.naukri.com/code360/problems/middle-of-linked-list_973250
- * * https://takeuforward.org/data-structure/find-middle-element-in-a-linked-list/
- * * https://www.youtube.com/watch?v=7LjQ57RqgEc&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=16
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 class Node {
   public: 
@@ -84,14 +84,11 @@ Node* bruteForce(Node* head) {
   int ll_count = countLL(head);
 
   // * Middle node index of ll
-  int midIdx = (ll_count/2)+1;
+  int midIdx = (ll_count / 2) + 1;
   Node* temp = head;
 
-  while(temp) {
+  while(temp && midIdx > 0) {
     midIdx--;
-    if(midIdx == 0) {
-      return temp;
-    }
     temp = temp->next;
   }
   return temp;
@@ -101,7 +98,7 @@ Node* bruteForce(Node* head) {
 // * Tortoise & Hare Algorithm
 // * TIME COMPLEXITY O(N/2)
 // * SPACE COMPLEXITY O(1)
-Node* optimal(Node* head) {
+Node* middleNode(Node* head) {
   if(!head) return nullptr;
   if(head && head->next == nullptr) return head;
 
@@ -120,7 +117,7 @@ Node* optimal(Node* head) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = { 1,2 };
+  std::vector<int> arr = {1, 2};
   // * testcase 2
   // std::vector<int> arr = { 1,2,3,4,5 };
   // * testcase 3
@@ -129,8 +126,8 @@ int main() {
   printLL(head);
 
   // Node* middleNode = bruteForce(head);
-  Node* middleNode = optimal(head);
-  std::cout<<"Middle Node: "<<middleNode->data<<std::endl;
+  Node* midNode = middleNode(head);
+  std::cout << "Middle Node: " << midNode->data << std::endl;
   return 0;
 }
 

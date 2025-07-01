@@ -1,29 +1,26 @@
 /*
  * Add 1 to LL
+ * You're given a positive integer represented in the form of a singly linked-list of digits. The length of the number is 'n'.
 
- * You are given a Singly Linked List of integers. You have to return true if the linked list is palindrome, else return false.
-
- * A Linked List is a palindrome if it reads the same from left to right and from right to left.
- * together followed by the nodes with even indices, and return the reordered list’s head.
- * The first node is considered odd, and the second node is even, and so on.
+ * Add 1 to the number, i.e., increment the given number by one.
+ * The digits are stored such that the most significant digit is at the head of the linked list
+ * and the least significant digit is at the tail of the linked list.
 
  * Example 1
- * Input  : 1 -> 2 -> 1 -> 'NULL'
- * Output : true
+ * Input  : 1 -> 5 -> 2
+ * Output : 1 -> 5 -> 3
 
  * Example 2
- * Input  : 1 -> 2 -> 3 -> 'NULL'
- * Output : false
+ * Input  : 9 -> 9
+ * Output : 1 -> 0 -> 0
  * 
 
- * https://leetcode.com/problems/palindrome-linked-list/
- * https://www.naukri.com/code360/problems/check-if-linked-list-is-palindrome_985248
- * https://takeuforward.org/data-structure/check-if-given-linked-list-is-plaindrome/
- * https://www.youtube.com/watch?v=lRY_G-u_8jk&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=11
- 
+ * https://leetcode.com/problems/plus-one-linked-list/description/
+ * https://www.naukri.com/code360/problems/add-one-to-a-number-represented-as-linked-list_920557
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 class Node {
   public:
@@ -95,9 +92,9 @@ Node* bruteForce(Node* head) {
 
   // * Do Addition
   int carry = 1;
-  while(temp) {
+  while (temp) {
     temp->data = carry + temp->data;
-    if(temp->data < 10) {
+    if (temp->data < 10) {
       carry = 0;
       break;
     }
@@ -109,7 +106,7 @@ Node* bruteForce(Node* head) {
   }
 
   // * Reverse LL
-  if(carry == 1) {
+  if (carry == 1) {
     Node* newNode = new Node(1);
     temp = reverseLL(prevHead);
     newNode->next = temp;
@@ -124,9 +121,9 @@ Node* bruteForce(Node* head) {
 // * ------------------ Optimal (Recursive) Approach ---------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int helper(Node* head) {
+int helper (Node* head) {
   Node* temp = head;
-  if(temp == nullptr) {
+  if (temp == nullptr) {
     return 1;
   }
 
@@ -134,14 +131,14 @@ int helper(Node* head) {
 
   // * Backtracking Logic
   temp->data = carry + temp->data;
-  if(temp->data < 10) {
+  if (temp->data < 10) {
     return 0;
   }
   temp->data = 0;
   return 1;
 }
 
-Node* optimal(Node* head) {
+Node* addOne(Node* head) {
   int carry = helper(head);
   if(carry == 1) {
     Node* newNode = new Node(1);
@@ -157,10 +154,12 @@ int main() {
   // * testcase 2
   // std::vector<int> arr = { 1,5,3,4 };
   Node* head = arrayToLL(arr);
+  
+  std::cout << " ---------- Linked List -----------  " << std::endl;
   printLL(head);
 
   // head = bruteForce(head);
-  head = optimal(head);
+  head = addOne(head);
   printLL(head);
   return 0;
 }
