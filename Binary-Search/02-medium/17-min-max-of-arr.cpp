@@ -18,7 +18,6 @@
  * * - Choose i = 3, and nums becomes [4,6,2,5].
  * * - Choose i = 1, and nums becomes [5,5,2,5].
  
- * 
  * * https://leetcode.com/problems/minimize-maximum-of-array/description/
  */
 
@@ -111,7 +110,7 @@ int main(void) {
 // * arr[i] = arr[i] - 1              - (i > 1 && i < n)
 // * arr[i - 1] = arr[i - 1] + 1          
 
-// * i = 1
+// * i = 0
 // * 3 7 1 6
 // * 4 6
 
@@ -121,5 +120,21 @@ int main(void) {
 
 // * i = 3
 // * 5 5 1 6
-// *     2 5          arr[3] = arr[3] - 1
+// *     2 5          arr[3] = arr[3] - 1 & arr[2] = arr[2] + 1
 
+
+// * For i = 5 till i < n - 1
+
+// * i = 0
+// * 3 7 1 6
+// * 2 5
+
+// * i = 1
+// * 4 6 1 6
+// * 2 5 
+
+// * i = 2
+// * 4 6 1 6
+// * 2 5 5 2
+
+// * Max ele = 5

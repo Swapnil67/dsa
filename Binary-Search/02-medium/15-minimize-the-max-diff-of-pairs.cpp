@@ -59,12 +59,12 @@ int minimizeMax(std::vector<int> &nums, int p) {
 
 int main(void) {
   // * testcase 1
-  // int p = 2;
-  // std::vector<int> nums = {10, 1, 2, 7, 1, 3};
+  int p = 2;
+  std::vector<int> nums = {10, 1, 2, 7, 1, 3};
   
   // * testcase 2
-  int p = 1;
-  std::vector<int> nums = {4, 2, 1, 2};
+  // int p = 1;
+  // std::vector<int> nums = {4, 2, 1, 2};
 
   printArr(nums);
 

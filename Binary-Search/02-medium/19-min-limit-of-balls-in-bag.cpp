@@ -47,6 +47,8 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+// ! Binary Search on Answers
+
 bool isValidPenalty(std::vector<int> nums, int operations, int currentPenalty) {
   int n = nums.size();
   int ans = INT_MIN;
@@ -61,7 +63,7 @@ bool isValidPenalty(std::vector<int> nums, int operations, int currentPenalty) {
   return totalOps <= operations;
 }
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * TIME COMPLEXITY O(maxPenalty * logn)
 // * SPACE COMPLEXITY O(1)
 int burteForce(std::vector<int> &nums, int operations) {
@@ -98,7 +100,7 @@ int minimumSize(std::vector<int> &nums, int operations) {
   return ans;
 }
 
-int main() {
+int main(void) {
   int maxOperations = 2;
   std::vector<int> nums = {9};
   
