@@ -1,3 +1,4 @@
+#include <stack>
 #include <vector>
 #include <iostream>
 
@@ -24,8 +25,12 @@ void printArr(std::vector<T> arr) {
   }
   std::cout << "]" << std::endl;
 }
+
+// ! Left | Root | Right
+
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * Left | Root | Right
+
+// * Using Recursion
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
@@ -36,6 +41,33 @@ void inOrder(TreeNode* node, std::vector<int> &ans) {
   inOrder(node->left, ans);
   ans.push_back(node->data);
   inOrder(node->right, ans);
+}
+
+// * Using Stack
+std::vector<int> inOrderIterative(TreeNode* root) {
+  std::vector<int> ans;
+  if (root == nullptr)
+    return ans;
+
+  std::stack<TreeNode *> st;
+  TreeNode *node = root;
+  while (true) {
+    if (node != nullptr) {
+      st.push(node);
+      node = node->left;
+    }
+    else {
+      if (st.empty())
+        break;
+      TreeNode *temp = st.top();
+      st.pop();
+      ans.push_back(temp->data);
+      // std::cout << temp->data << std::endl;
+      node = temp->right;
+    }
+  }
+
+  return ans;
 }
 
 int main(void) {
@@ -51,7 +83,9 @@ int main(void) {
 
 
   std::vector<int> ans;
-  inOrder(root, ans);
+  // inOrder(root, ans);
+
+  ans = inOrderIterative(root);
 
   printArr(ans);
   return 0;
