@@ -1,6 +1,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 typedef struct TreeNode TreeNode;
 
@@ -28,7 +29,6 @@ void printArr(std::vector<T> arr) {
 // ! Left | Right | Root
 
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * Using Recursion
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
@@ -44,6 +44,10 @@ void postOrder(TreeNode* node, std::vector<int> &ans) {
 }
 
 // * Using 2 Stacks
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY 
+// *    O(2n) - stack
+// *    O(n) - output array
 std::vector<int> postOrderIterative1(TreeNode* root) {
   std::vector<int> ans;
   if (root == nullptr)
@@ -75,6 +79,10 @@ std::vector<int> postOrderIterative1(TreeNode* root) {
 }
 
 // * Using 1 Stack
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY 
+// *    O(n) - stack
+// *    O(n) - output array
 std::vector<int> postOrderIterative2(TreeNode* root) {
   std::vector<int> ans;
   if (root == nullptr)
@@ -107,6 +115,33 @@ std::vector<int> postOrderIterative2(TreeNode* root) {
   }
 
   return ans;
+}
+
+// * Much easy to understand
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY 
+// *    O(n) - stack
+// *    O(n) - output array
+void postOrderIterative3(TreeNode *root, std::vector<int> &ans) {
+  if (root == nullptr)
+    return;
+
+  std::stack<TreeNode*> st;
+  TreeNode*cur = root; 
+
+  while (cur || !st.empty()) {
+    if(cur) {
+      ans.push_back(cur->data);
+      st.push(cur);
+      cur = cur->right;
+    } else {
+      cur = st.top();
+      st.pop();
+      cur = cur->left;
+    }
+  } 
+
+  std::reverse(ans.begin(), ans.end());
 }
 
 

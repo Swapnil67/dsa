@@ -46,7 +46,6 @@ int maxDepthBFS(TreeNode *root) {
     // * Process the complete level
     int n = q.size();
     // std::cout << n << std::endl;
-
     while (n--) {
       TreeNode *node = q.front();
       q.pop();

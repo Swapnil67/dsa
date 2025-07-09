@@ -27,8 +27,7 @@ void printArr(std::vector<T> arr) {
 
 // ! Root | Left | Right
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * Using Recursion
+// * DFS Recursion
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
@@ -42,7 +41,10 @@ void preOrder(TreeNode* node, std::vector<int> &ans) {
   preOrder(node->right, ans);
 }
 
-// * Using Stack
+
+// * DFS Iterative - (Stack)
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY Worst Case = O(n)
 std::vector<int> preOrderIterative(TreeNode* root) {
   std::vector<int> ans;
   

@@ -16,7 +16,6 @@ struct TreeNode {
   }
 };
 
-
 template <typename T>
 void printArr(std::vector<T> arr) {
   std::cout << "[ ";
@@ -28,9 +27,7 @@ void printArr(std::vector<T> arr) {
 
 // ! Left | Root | Right
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
-
-// * Using Recursion
+// * DFS Recursion
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
@@ -43,7 +40,9 @@ void inOrder(TreeNode* node, std::vector<int> &ans) {
   inOrder(node->right, ans);
 }
 
-// * Using Stack
+// * DFS Iterative - (Stack)
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY Worst Case = O(n)
 std::vector<int> inOrderIterative(TreeNode* root) {
   std::vector<int> ans;
   if (root == nullptr)
