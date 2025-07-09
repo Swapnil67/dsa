@@ -18,9 +18,9 @@
  * https://leetcode.com/problems/reverse-words-in-a-string/ 
 */
 
+#include <sstream>
 #include <iostream>
 #include <algorithm>
-#include <sstream>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Using stringstream
@@ -90,6 +90,7 @@ int main() {
 
 // * Dry Run
 
+// * put s[r] = s[i]
 
 // * Roro zoro
 // *         i 

@@ -47,11 +47,10 @@ int numRescueBoats(std::vector<int>& people, int limit) {
   while (l <= r) {
     // * at most two people are allowed in boat
     if ((people[l] + people[r]) <= limit) {
-      l++, r--;
-    } else {
-      // * Here we take the right person (greedy approach)
-      r--;
+      l++;
     }
+    // * Here we always take the right person (greedy approach)
+    r--;
 
     boats_required++;
   }
@@ -59,10 +58,12 @@ int numRescueBoats(std::vector<int>& people, int limit) {
 }
 
 int main() {
-  // int limit = 6;
-  // std::vector<int> arr = {5, 1, 4, 2};
-  int limit = 9;
-  std::vector<int> arr = {3, 8, 7, 1, 4};
+  int limit = 6;
+  std::vector<int> arr = {5, 1, 4, 2};
+  
+  // int limit = 9;
+  // std::vector<int> arr = {3, 8, 7, 1, 4};
+
   printArr(arr);
   int ans = numRescueBoats(arr, limit);
   std::cout << "minimum number of boats to carry every given person " << ans << std::endl;

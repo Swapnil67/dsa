@@ -21,14 +21,12 @@
 #include <iostream>
 
 std::string addSpaces(std::string s, std::vector<int> spaces) {
-  int m = s.length();
-  int n = spaces.size();
   int j = 0;
 
   std::string ans = "";
-  for (int i = 0; i < m; ++i) {
+  for (int i = 0; i < s.length(); ++i) {
     // * check if the current char is space
-    if (j < n && i == spaces[j]) {
+    if (j < spaces.size() && i == spaces[j]) {
       ans += ' ';
       j++;
     }

@@ -93,12 +93,13 @@ void rotate(std::vector<int> &arr, int k) {
 
 int main() {
   // * testcase 1
-  // int k = 4;
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  int k = 4;
+  std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  int k = 3;
-  std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7};
+  // int k = 3;
+  // std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7};
+
   std::cout << "Before Rotation" << std::endl;
   printArr(arr);
 
@@ -111,4 +112,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 06-rotate-array-by-k-places.cpp -o output && ./output
+// * g++ --std=c++17 13-rotate-array-by-k-places.cpp -o output && ./output

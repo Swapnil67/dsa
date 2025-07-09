@@ -67,19 +67,17 @@ int numSubseq(std::vector<int> arr, int target)
       // * if this is valid then all combination of elements b/w i - j will be valid
       int diff = r - l;
       // std::cout << diff << std::endl;
-      ans = ((ans % M) + (power[diff])) % M;
+      ans = ((ans % M) + (power[diff])) % M ;
       l++;
     }
-    else
-    {
+    else {
       r--;
     }
   }
   return ans;
 }
 
-int main()
-{
+int main() {
   // * testcase 1
   // int target = 9;
   // std::vector<int> arr = {3, 5, 6, 7};

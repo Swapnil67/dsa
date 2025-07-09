@@ -85,6 +85,7 @@ int main() {
   std::vector<int> nums = {0, 0, 1, 1, 1, 1, 2, 3, 3};
   // std::vector<int> nums = {1, 1};
   // std::vector<int> nums = {1, 2, 2};
+  
   printArr(nums);
   // int ans = bruteForce(nums);
   int ans = removeDuplicates(nums);

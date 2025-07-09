@@ -97,13 +97,13 @@ long long dividePlayers2(std::vector<int>& skill) {
 
 int main() {
   // * testcase 1
-  std::vector<int> skill = {3, 4};
+  // std::vector<int> skill = {3, 4};
 
   // * testcase 2
   // std::vector<int> skill = {1, 1, 2, 3};
 
   // * testcase 3
-  // std::vector<int> skill = {3, 2, 5, 1, 3, 4};
+  std::vector<int> skill = {3, 2, 5, 1, 3, 4};
 
   printArr(skill);
 

@@ -42,9 +42,8 @@ int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
     if (i > 0 && colors[i] != colors[i - 1]) {
       prevMax = 0;
     }
-    int curTime = neededTime[i];
     timeRequired = timeRequired + std::min(prevMax, neededTime[i]);
-    prevMax = std::max(prevMax, curTime);
+    prevMax = std::max(prevMax, neededTime[i]);
   }
   return timeRequired;
 }

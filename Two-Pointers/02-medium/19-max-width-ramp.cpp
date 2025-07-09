@@ -46,7 +46,7 @@ int bruteForce(std::vector<int> &nums) {
       }
     }
   }
-  return ans;
+  return ans < 0 ? 0 : ans;
 }
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
@@ -72,6 +72,7 @@ int betterApproach(std::vector<int> &nums) {
 
 // * ------------------------- APPROACH 3A: Optimal Approach -------------------------`
 // * Two Pointers
+// * Pre calculate next greater element to the right of each element
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int maxWidthRampA(std::vector<int> &nums) {
@@ -123,3 +124,19 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++20 17-max-width-ramp.cpp -o output && ./output
+
+
+
+// * 6 0 8 2 1 5
+
+// * Next greater element to right vector
+// * 8 8 8 5 5 5 
+
+
+// * 0 1 2 3 4 5 
+// * 6 0 8 2 1 5 
+// * 8 8 8 5 5 5 
+// *   i
+// *           j
+
+// * ans =  4

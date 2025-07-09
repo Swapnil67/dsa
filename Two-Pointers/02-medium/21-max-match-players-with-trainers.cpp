@@ -12,11 +12,11 @@
  * * Return the maximum number of matchings between players and trainers that satisfy these conditions.
 
  * * Example 1
- * * Input  : players = [4,7,9], trainers = [8,2,5,8]
+ * * Input  : players = [4, 7, 9], trainers = [8, 2, 5, 8]
  * * Output : 2
  * 
  * * Example 2
- * * Input  : players = [1,1,1], trainers = [10]
+ * * Input  : players = [1, 1, 1], trainers = [10]
  * * Output : 1
 
  * * https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/
@@ -31,19 +31,19 @@
 // * ------------------------- Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(nlogn + mlogm)
 // * SPACE COMPLEXITY O(1)
-int matchPlayersAndTrainers(std::vector<int>& players, std::vector<int>& trainers) {
-    std::sort(players.begin(), players.end());
-    std::sort(trainers.begin(), trainers.end());
+int matchPlayersAndTrainers(std::vector<int> &players, std::vector<int> &trainers) {
+	std::sort(players.begin(), players.end());
+	std::sort(trainers.begin(), trainers.end());
 
-    int i = 0, j = 0;
-    while (i < players.size() && j < trainers.size()) {
-        if(trainers[j] >= players[i]) {
-            i++;
-        }
-        j++;
-    }
-    
-    return i;
+	int i = 0, j = 0;
+	while (i < players.size() && j < trainers.size()) {
+		if (trainers[j] >= players[i]) {
+			i++;
+		}
+		j++;
+	}
+
+	return i;
 }
 
 int main(void) {

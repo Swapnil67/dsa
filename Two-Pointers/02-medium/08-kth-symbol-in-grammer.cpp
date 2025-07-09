@@ -52,7 +52,7 @@ int kthGrammar(int n, int k) {
   int cur = 0;
   while(l < r) {
     int mid = (l + r) / 2;
-    if(k <= mid) {
+    if (k <= mid) {
       r = mid;
     } else {
       l = mid + 1;

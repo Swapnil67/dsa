@@ -76,13 +76,16 @@ int bagOfTokensScore(std::vector<int> tokens, int power) {
 }
 
 int main() {
-  // int power = 200;
-  // std::vector<int> tokens = {100, 200, 300, 400};
-  int power = 150;
-  std::vector<int> tokens = {200, 100};
+  int power = 200;
+  std::vector<int> tokens = {100, 200, 300, 400};
+
+  // int power = 150;
+  // std::vector<int> tokens = {200, 100};
+
   std::cout << "Power: " << power << std::endl;
   std::cout << "Tokens: ";
   printArr(tokens);
+
   int ans = bagOfTokensScore(tokens, power);
   std::cout << "Max Score " << ans << std::endl;
   return 0;

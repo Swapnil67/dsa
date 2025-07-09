@@ -72,8 +72,7 @@ std::vector<int> rearrangeArray(std::vector<int> arr) {
     if(arr[i] < 0) {
       ans[n_index] = arr[i];
       n_index += 2; // * next negative index
-    }
-    else {
+    } else {
       ans[p_index] = arr[i];
       p_index += 2; // * next positive index
     }
