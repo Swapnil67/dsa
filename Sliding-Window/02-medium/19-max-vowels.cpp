@@ -71,12 +71,12 @@ int maxVowels(std::string s, int k) {
 
 int main() {
   // * testcase 1
-  int k = 3;
-  std::string s = "abciiidef";
+  // int k = 3;
+  // std::string s = "abciiidef";
 
   // * testcase 2
-  // int k = 2;
-  // std::string s = "aeiou";
+  int k = 2;
+  std::string s = "aeiou";
 
   // * testcase 3
   // int k = 3;

@@ -16,10 +16,8 @@
  * * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
 */
 
-#include <map>
 #include <vector>
 #include <iostream>
-#include <unordered_set>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -56,7 +54,7 @@ int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
   int n = arr.size();
   int ans = 0, i = 0, j = 0;
   long long sum = 0;
-  while(j < n) {
+  while (j < n) {
     // * check the window execeeds
     if(j - i + 1 > k) {
       sum -= arr[i];
@@ -65,10 +63,9 @@ int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
 
     sum += arr[j];
 
-    // * Check if window sum >= threshold
+    // * Check if avg >= threshold
     if (j - i + 1 == k) {
-      int avg = sum / k;
-      if(avg >= threshold)
+      if ((sum / k) >= threshold)
         ans++;
     }
     j++;
@@ -123,7 +120,7 @@ int main() {
   
   // int ans = bruteForce(arr, k, threshold);
   int ans = numOfSubarrays(arr, k, threshold);
-  std::cout << "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold " << ans << std::endl;
+  std::cout << "Number of Sub-arrays of Size '" << k << "' and Average Greater than or Equal to '" << threshold << "' are " << ans << std::endl;
   return 0;
 }
 

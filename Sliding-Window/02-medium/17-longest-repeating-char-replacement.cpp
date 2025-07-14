@@ -68,11 +68,10 @@ int betterApproach(std::string s, int k) {
 
     // * check if max frequency of character changed
     max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
-    size_t len_of_substr = j - i + 1;
 
     // * While number of replacement required are greater than the max replacements
     // * Shrink window from left
-    while (len_of_substr - max_freq > k) {
+    while ((j - i + 1) - max_freq > k) {
       char_hash[s[i] - 'A']--;
       max_freq = 0;
       // * find new max_freq
@@ -82,9 +81,7 @@ int betterApproach(std::string s, int k) {
       i++; // * Incr the left pointer
     }
 
-    if ((j - i + 1) - max_freq <= k) {
-      max_len = std::max(max_len, j - i + 1);
-    }
+    max_len = std::max(max_len, j - i + 1);
 
     j++; // * Incr the right pointer
   }
@@ -115,8 +112,7 @@ int characterReplacement(std::string s, int k) {
       max_freq = 0;
       i++;
     }
-
-    if ((j - i + 1) - max_freq <= k) {
+    else {
       max_len = std::max(max_len, (j - i + 1));
     }
 
@@ -128,12 +124,12 @@ int characterReplacement(std::string s, int k) {
 
 int main() {
   // * testcase 1
-  int k = 1;
-  std::string s = "AABABBA";
+  // int k = 1;
+  // std::string s = "AABABBA";
   
   // * testcase 2
-  // int k = 2;
-  // std::string s = "ABAB";
+  int k = 2;
+  std::string s = "ABAB";
   
   std::cout << "Input String: " << s << std::endl;
   // int ans = bruteForce(s, k);

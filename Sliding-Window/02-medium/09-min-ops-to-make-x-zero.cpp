@@ -137,4 +137,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 09-min-ops-to-make-x-zero.cpp -o output && ./output
+// * g++ --std=c++20 09-min-ops-to-make-x-zero.cpp -o output && ./output

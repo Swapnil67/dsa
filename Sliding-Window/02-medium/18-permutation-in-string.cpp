@@ -41,7 +41,7 @@ bool betterApproach(std::string s1, std::string s2) {
     // * take n1 len of substrings from s2
     std::string temp = s2.substr(i, n1);
     std::sort(temp.begin(), temp.end());
-    std::cout << temp << " -> " << s1.compare(temp) << std::endl;
+    // std::cout << temp << " -> " << s1.compare(temp) << std::endl;
     if (s1.compare(temp) == 0)
       return true;
   }

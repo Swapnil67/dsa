@@ -85,7 +85,7 @@ int betterApproach(std::vector<int> fruits) {
     
     // * Shrink window from left
     // * When we encounter more than two fruits
-    while(fruitsFreq.size() > 2) {
+    while (fruitsFreq.size() > 2) {
       fruitsFreq[fruits[i]]--;
       if(fruitsFreq[fruits[i]] == 0) {
         fruitsFreq.erase(fruits[i]);

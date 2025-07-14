@@ -105,4 +105,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 11-subarry-product-less-than-k.cpp -o output && ./output
+// * g++ --std=c++20 11-subarry-product-less-than-k.cpp -o output && ./output

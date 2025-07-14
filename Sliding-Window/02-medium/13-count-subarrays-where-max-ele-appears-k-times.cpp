@@ -59,14 +59,15 @@ int bruteForce(std::vector<int> &arr, int k) {
 // * SPACE COMPLEXITY O(N)
 int countSubarrays(std::vector<int> &arr, int k) {
   int n = arr.size();
-  int i = 0, j = 0, ans = 0;
 
   // * get the max_element from array
   int max_ele = *max_element(arr.begin(), arr.end());
 
-  // * sliding window
+  int i = 0, j = 0, ans = 0;
   int max_ele_cnt = 0;    // * freq of max_ele
-  while(j < n) {
+
+  // * sliding window
+  while (j < n) {
     if(arr[j] == max_ele) {
       max_ele_cnt++;
     }

@@ -183,19 +183,19 @@ int maxFrequency(std::vector<int> arr, int k) {
     long long window_sum = (long)(j - i + 1) * arr[j];
     // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
 
-    if(window_sum - cur_sum > k) {
+    if (window_sum - cur_sum > k) {
       cur_sum -= arr[i];
       i++;
     } else {
       ans = std::max(ans, (j - i + 1));
     }
+    
     j++;
   }
   return ans;
 }
 
 int main() {
-
   // * testcase 1
   // int k = 5;
   // std::vector<int> arr = {1, 2, 4};

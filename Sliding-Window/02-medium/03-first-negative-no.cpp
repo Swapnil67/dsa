@@ -59,24 +59,21 @@ std::vector<int> firstNegative(std::vector<int> arr, int k) {
 
   while (j < n) {
     // * If -ve then push to dequeue
-    if (arr[j] < 0) {
+    if (arr[j] < 0)
       dq.push_back(arr[j]);
-    }
 
     // * Shrink the window & Pop from queue
     if (j - i + 1 > k) {
-      if(arr[i] < 0 && !dq.empty()) {
+      if (arr[i] < 0 && !dq.empty())
         dq.pop_front();
-      }
       i++;
     }
 
     // * first -ve in 'k' window
     if (j - i + 1 == k) {
-      if(!dq.empty()) {
+      if (!dq.empty()) {
         ans.push_back(dq.front());
-      }
-      else {
+      } else {
         ans.push_back(0);
       }
     }

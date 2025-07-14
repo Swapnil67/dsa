@@ -89,13 +89,14 @@ int helper(std::vector<int> arr, int goal) {
   int cur_sum = 0;
   if (goal < 0)
     return 0;
-  while(j < n) {
+  while (j < n) {
     cur_sum += arr[j];
 
     while (i < j && cur_sum > goal) {
       cur_sum -= arr[i];
       i++;
     }
+    
     // * for all cur_sum <= goal
     ans += (j - i + 1);
     j++;

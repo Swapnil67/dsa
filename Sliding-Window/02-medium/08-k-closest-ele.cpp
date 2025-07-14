@@ -64,10 +64,10 @@ std::vector<int> bruteForce(std::vector<int> arr, int k, int x) {
 std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
   // * 'r' is little restricted becoz m + k should not become greater than n
-  int l = 0, r = n - k, m;
+  int l = 0, r = n - k;
   // * binary search
   while(l < r) {
-    m = (l + r) / 2; // * m is the starting point of window of size k
+    int m = (l + r) / 2; // * m is the starting point of window of size k
 
     // printf("arr[%d] = %d & arr[%d + k] = %d\n", m, arr[m], m, arr[m + k]);
     // * start of window is not smaller than one outside of window
@@ -85,16 +85,16 @@ std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
 int main() {
 
   // * testcase 1
-  int k = 4, x = 3;
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  // int k = 4, x = 3;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int k = 4, x = -1;
   // std::vector<int> arr = {1, 1, 2, 3, 4, 5};
 
   // * testcase 2
-  // int k = 1, x = 9;
-  // std::vector<int> arr = {1, 1, 1, 10, 10, 10};
+  int k = 1, x = 9;
+  std::vector<int> arr = {1, 1, 1, 10, 10, 10};
 
   printf("Input Array: ");
   printArr(arr);
@@ -138,5 +138,7 @@ int main() {
 // * [1, 1, 2, 3, 4, 5]
 // *  l 
 // *  r
+
+// * Ans = { arr.begin() + l, arr.begin() + l + k }
 
 // * Break the loop

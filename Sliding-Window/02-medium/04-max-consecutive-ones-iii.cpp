@@ -64,24 +64,23 @@ int bruteForce(std::vector<int> arr, int k) {
 int betterApproach(std::vector<int> arr, int k) {
   int n = arr.size();
   int i = 0, j = 0;
-  int flips = 0;
-  int max_len = 0;
+  int flips = 0, ans = 0;
 
   while(j < n) {
-    if(arr[j] == 0) 
-      flips++;
+    if (arr[j] == 0)
+      k--;
     
     // * Increase the window from left till it has k flips
-    while (flips > k) {
+    while (k < 0) {
       if (arr[i] == 0)
-        flips--;
+        k++;
       i++;
     }
 
-    max_len = std::max(max_len, (j - i + 1));
+    ans = std::max(ans, (j - i + 1));
     j++;
   }
-  return max_len;
+  return ans;
 }
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
@@ -92,25 +91,20 @@ int betterApproach(std::vector<int> arr, int k) {
 // * SPACE COMPLEXITY O(1)
 int longestOnes(std::vector<int> arr, int k) {
   int n = arr.size();
-  int i = 0, j = 0, max_cnt = 0, zeros = 0;
+  int ans = 0;
+  int i = 0, j = 0;
   while (j < n) {
     if (arr[j] == 0)
-      zeros++;
-
-    // * We have zeros less than 'k' times 
-    if(zeros <= k) {
-      max_cnt = std::max(max_cnt, j - i + 1);
-    }
-    else {
-      // * We have more zeros than k
+      k--;
+    if (k < 0) {
       if (arr[i] == 0)
-        zeros--;
+        k++;
       i++;
     }
-
+    ans = std::max((j - i + 1), ans);
     j++;
   }
-  return max_cnt;
+  return ans;
 }
 
 

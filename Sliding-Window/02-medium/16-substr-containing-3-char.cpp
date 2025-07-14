@@ -80,10 +80,10 @@ int numberOfSubstrings2(std::string s) {
 
 int main() {
   // * testcase 1
-  std::string s = "abcabc";
+  // std::string s = "abcabc";
 
   // * testcase 2
-  // std::string s = "aaacb";
+  std::string s = "aaacb";
 
   std::cout << "Input String: " << s << std::endl;
   // int ans = bruteForce(s);

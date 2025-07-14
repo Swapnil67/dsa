@@ -15,7 +15,7 @@
 
  * * Example 3
  * * Input  : s = "tmmzuxt"
- * * Output : 3
+ * * Output : 5
  * * Explanation: The answer is "mzuxt", with the length of 5.
 
  * * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
@@ -51,7 +51,7 @@ int bruteForce(std::string s) {
       }
       frequency[s[j]] = 1;
     }
-    max_len = std::max(max_len, j - i + 1);
+    max_len = std::max(max_len, j - i);
   }
   return max_len;
 }
@@ -118,10 +118,11 @@ int main() {
   // std::string s = "abcabcbb";
   // std::string s = "abba";
   std::string s = "tmmzuxt";
+
   std::cout << "Input String: " << s << std::endl;
 
-  // int ans = bruteForce(s);
-  int ans = lengthOfLongestSubstring(s);
+  int ans = bruteForce(s);
+  // int ans = lengthOfLongestSubstring(s);
   std::cout << "Longest Substring Without Repeating Characters: " << ans << std::endl;
 
   return 0;

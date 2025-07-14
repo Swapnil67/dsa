@@ -119,11 +119,11 @@ int kDistinctChars(std::string s, int k) {
 
 
 int main() {
-  // int k = 2;
-  // std::string s = "abbbbbbc";
+  int k = 2;
+  std::string s = "abbbbbbc";
 
-  int k = 8;
-  std::string s = "fitmgntcesze";
+  // int k = 8;
+  // std::string s = "fitmgntcesze";
 
   std::cout << "Distinct Characters: " << k << std::endl;
   std::cout << "Input String: " << s << std::endl;
