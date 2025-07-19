@@ -18,51 +18,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * 21 - get Equal Substrings Within Budget
-// int equalSubstring(std::string s, std::string t, int maxCost) {
-// TODO
-// }
-
-// * 22 - Grumpy Bookstore Owner
-// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
-// TODO
-// }
-
-// * 23 - Alternating Groups II
-// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
-// TODO
-// } 
-
-// * 24 - Count Number of Nice Subarrays
-// int numberOfSubarrays(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
-// int countOfSubstrings(std::string s, int k) {
-// TODO
-// }
-
-// * 26 - Find the Power of K-Size Subarrays I
-// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 27 - Maximum Beauty of an Array After Applying Operation
-// int maximumBeauty(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 28 - Take K of Each Character From Left and Right
-// int takeCharacters(std::string s, int k) {
-// TODO
-// } 
-
-// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
-// int longestSubarray(std::vector<int> &nums, int limit) {
-// TODO
-// }
-
 // * ------------------------------------------------------------------------------------------
 
 // * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
@@ -166,26 +121,63 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 20 - Minimum Number of Flips to Make the Binary String Alternating
-int minFlips(std::string s) {
-  
-}
+// int minFlips(std::string s) {
+// TODO
+// }
 
-int main() {
-  // * testcase 1
-  std::string s = "111000";
+// * 21 - get Equal Substrings Within Budget
+// int equalSubstring(std::string s, std::string t, int maxCost) {
+// TODO
+// }
 
-  // * testcase 2
-  // std::string s = "01001001101";
-  
-  // * testcase 3
-  // std::string s = "010";
+// * 22 - Grumpy Bookstore Owner
+// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
+// TODO
+// }
 
-  std::cout << "Input String: " << s << std::endl;
-  int ans = minFlips(s);
-  std::cout << "Minimum Number of Flips to Make the Binary String Alternating " << ans << std::endl;
+// * 23 - Alternating Groups II
+// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
+// TODO
+// }
 
+// * 24 - Count Number of Nice Subarrays
+// int numberOfSubarrays(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
+// long long countOfSubstrings(std::string s, int k) {
+// TODO
+// }
+
+// * 26 - Find the Power of K-Size Subarrays I
+// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 27 - Maximum Beauty of an Array After Applying Operation
+// int maximumBeauty(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 28 - Take K of Each Character From Left and Right
+// int takeCharacters(std::string s, int k) {
+// TODO
+// } 
+
+// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+// int longestSubarray(std::vector<int> &nums, int limit) {
+// TODO
+// }
+
+// * 30 - Sliding Subarray Beauty
+// std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
+// TODO
+// }
+
+int main(void) {
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 practice.cpp -o output && ./output 
+// * g++ --std=c++20 practice.cpp -o output && ./output

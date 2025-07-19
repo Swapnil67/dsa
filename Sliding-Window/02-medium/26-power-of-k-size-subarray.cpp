@@ -24,9 +24,9 @@
  * * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/description/
 */
 
+#include <deque>
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -61,7 +61,7 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
 // * Classic Sliding Window
 // * Keep the consecutive_count variable
 // * TIME COMPLEXITY O(2N)
@@ -93,12 +93,50 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
       consecutive_cnt = 1;
     }
 
-    // * If window is greater than k
+    // * If we found >= k cconsecutive_cnt elements
     if (consecutive_cnt >= k) {
       ans[i] = arr[j];
     }
 
     i++;
+    j++;
+  }
+
+  return ans;
+}
+
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * Monotonic Deque
+// * Classic Sliding Window
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+std::vector<int> resultsArray2(std::vector<int> &arr, int k) {
+  int n = arr.size();
+  std::deque<int> dq;
+
+  std::vector<int> ans;
+  int j = 0;
+  while (j < n) {
+    
+    // * Shrink window
+    if (dq.size() == k) {
+      dq.pop_front();
+    }
+
+    // * Not consecutive
+    while (!dq.empty() && dq.back() + 1 != arr[j]) {
+      dq.pop_front();
+    }
+    dq.push_back(arr[j]);
+
+    if (j >= k - 1) {
+      if (dq.size() == k) {
+        ans.push_back(dq.back());
+      } else {
+        ans.push_back(-1);
+      }
+    }
+
     j++;
   }
 

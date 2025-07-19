@@ -1,5 +1,6 @@
 
 /**
+ * * Leetcode - 992
  * * Subarrays with K Different Integers
  * * Given an integer array nums and an integer k, return the number of good subarrays of nums.
  * 
@@ -38,7 +39,7 @@ int bruteForce(std::vector<int> &arr, int k) {
   int ans = 0;
   for (int i = 0; i < n; ++i) {
     std::unordered_map<int, int> freq_map;
-    for(int j = i; j < n; ++j) {
+    for (int j = i; j < n; ++j) {
       freq_map[arr[j]]++;
       if(freq_map.size() == k) {
         ans++;
@@ -139,7 +140,7 @@ int main() {
   // int ans = bruteForce(arr, k);
   // int ans = subarraysWithKDistinct(arr, k);
   int ans = subarraysWithKDistinct2(arr, k);
-  printf("Length of Longest Subarray With at Most %d Frequency is %d\n", k, ans);
+  printf("Subarrays with %d Different Integers is %d\n", k, ans);
 
   return 0;
 }

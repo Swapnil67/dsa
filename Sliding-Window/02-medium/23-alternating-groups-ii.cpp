@@ -40,25 +40,28 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> &arr, int k) {
   // * Append k - 1 elements to the end of array (to make circular)
-  for(int i = 0; i < k - 1; ++i) {
+  int temp = k - 1;
+  for (int i = 0; i < temp; ++i) {
     arr.push_back(arr[i]);
   }
-  printArr(arr);
-
-  int ans = 0;
+  // printArr(arr);
+  
   int n = arr.size();
-
-  for(int i = 0; i <= n - k; ++i) {
-    bool is_alternating = true;
-    for(int j = i; j < i + k; ++j) {
-      // std::cout << arr[j] << " ";
-      if(j > i && arr[j] == arr[j - 1]) {
-        is_alternating = false;
+  int ans = 0;
+  for (int i = 0; i <= n - k; ++i) {
+    bool isAlt = true;
+    int j = i;
+    for (; j < i + k; ++j) {
+      std::cout << arr[j] << " ";
+      if ((j - i) == k - 1)
+        break;
+      if (j < n && arr[j] == arr[j + 1]) {
+        isAlt = false;
         break;
       }
     }
-    // printf("\n");
-    if (is_alternating)
+    // std::cout << std::endl;
+    if ((j - i) == k - 1 && isAlt)
       ans++;
   }
 
@@ -72,7 +75,6 @@ int bruteForce(std::vector<int> &arr, int k) {
 // * TIME COMPLEXITY O(N + K)
 // * SPACE COMPLEXITY O(1)
 int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
-
   // * Append k - 1 elements to the end of array (to make circular)
   for(int i = 0; i < k - 1; ++i) {
     arr.push_back(arr[i]);

@@ -1,5 +1,6 @@
 
 /**
+ * * Leetcode - 239
  * * Sliding Window Maximum
  * * You are given an array of integers nums, there is a sliding window of size k which is moving from the very left 
  * * of the array to the very right. You can only see the k numbers in the window. 
@@ -63,28 +64,28 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
 // * SPACE COMPLEXITY O(N)
 std::vector<int> maxSlidingWindow(std::vector<int> arr, int k) {
   int n = arr.size();
-  std::vector<int> ans;
   std::deque<int> dq;
-  for(int i = 0; i < n; ++i) {
-    // * Shrink the dq
-    // * check dq.front() <= i-k
-    while(!dq.empty() && dq.front() <= i - k) {
-      dq.pop_front();
-    }
-
-    // * Check if cur 'i' is greater
-    // * bring the greater to the start of dq
-    while(!dq.empty() && arr[i] > arr[dq.back()]) {
+  int i = 0, j = 0;
+  std::vector<int> ans;
+  while (j < n) {
+    // * Monotonic Decreasing Deque
+    while (!dq.empty() && dq.back() < arr[j]) {
       dq.pop_back();
     }
+    dq.push_back(arr[j]);
 
-    // * push 'i' 
-    dq.push_back(i);
-
-    // * check if window >= k
-    if(i >= k - 1) {
-      ans.push_back(arr[dq.front()]);
+    // * Shrink the window
+    if ((j - i + 1) > k) {
+      // * Remove from the front of deque
+      if (arr[i] == dq.front())
+        dq.pop_front();
+      i++;
     }
+
+    if ((j - i + 1) == k)
+      ans.push_back(dq.front());
+
+    j++;
   }
 
   return ans;
@@ -120,4 +121,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 02-sliding-window-maximum.cpp -o output && ./output
+// * g++ --std=c++20 03-sliding-window-maximum.cpp -o output && ./output

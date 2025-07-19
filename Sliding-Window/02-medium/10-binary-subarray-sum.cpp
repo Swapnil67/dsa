@@ -97,7 +97,7 @@ int helper(std::vector<int> arr, int goal) {
       i++;
     }
     
-    // * for all cur_sum <= goal
+    // * add all subarrays from 'i' to 'j'
     ans += (j - i + 1);
     j++;
   }

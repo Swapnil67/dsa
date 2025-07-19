@@ -1,6 +1,7 @@
 /**
  * * Leetcode - 1208
  * * Get Equal Substrings Within Budget
+ * 
  * * Example 1
  * * Input  : s = "abcd", t = "bcdf", maxCost = 3
  * * Output : 3

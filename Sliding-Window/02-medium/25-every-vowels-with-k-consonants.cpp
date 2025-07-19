@@ -48,17 +48,16 @@ long long bruteForce(std::string s, int k) {
   
   for (int i = 0; i < n; ++i) {
     int consonants = 0;
-    std::unordered_map<char, int> vowels_map;
+    std::unordered_set<char> st;
     for (int j = i; j < n; ++j) {
-      if(vowels.count(s[j])) { 
-        vowels_map[s[j]]++;
-      }
-      else {
+      if (vowels.count(s[j])) { 
+        st.insert(s[j]);
+      } else {
         consonants++;
       }
-      if (consonants == k && vowels_map.size() == 5) {
+
+      if (consonants == k && st.size() == 5)
         ans++;
-      }
     }
   }
   return ans;
@@ -137,8 +136,8 @@ long long countOfSubstrings(std::string s, int k) {
 }
 
 int main() {
-  int k = 1;
-  std::string word = "aeioqq"; 
+  // int k = 1;
+  // std::string word = "aeioqq"; 
 
   // int k = 0;
   // std::string word = "aeiou"; 
@@ -149,8 +148,8 @@ int main() {
   // int k = 0;
   // std::string word = "aouiei"; 
 
-  // int k = 2;
-  // std::string word = "iqeaouqi"; 
+  int k = 2;
+  std::string word = "iqeaouqi"; 
 
   std::cout << word << std::endl;
 

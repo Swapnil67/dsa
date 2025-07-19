@@ -35,7 +35,6 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(N)
@@ -51,12 +50,14 @@ void printArr(std::vector<int> arr) {
 
 int bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
+  
+  // * 1. Create pair of intervals
   std::vector<std::pair<int, int>> intervals;
-
-  // * Create pair of intervals
   for (int i = 0; i < n; ++i) {
     intervals.push_back({arr[i] - k, arr[i] + k});
   }
+  
+  // * 2. Sort the intervals in ASC order
   std::sort(intervals.begin(), intervals.end()); // * o(nlogn)
 
   // * For debugging
@@ -79,7 +80,7 @@ int bruteForce(std::vector<int> arr, int k) {
 }
 
 // * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
-// * Binary Search
+// * Binary Search + Math Equation
 // * TIME COMPLEXITY 2 * O(nlogn)
 // * SPACE COMPLEXITY O(1)
 
@@ -101,7 +102,7 @@ int binarySearch(std::vector<int> &nums, int target) {
 
 // *  x                  y
 // * [(x - k), (x + k)], [(y - k), (y + k)]
-// * For overlapping we know (x + k) >= (y - k)
+// * (x + k) >= (y - k) -> For overlapping we know 
 // * x + 2k >= y   (adding 'k' on both sides)
 // * y <= (x + 2k)
 int maximumBeauty(std::vector<int> arr, int k) {
@@ -128,15 +129,20 @@ int maximumBeauty(std::vector<int> arr, int k) {
 // * SPACE COMPLEXITY O(1)
 int maximumBeauty2(std::vector<int> arr, int k) {
   int n = arr.size();
+
+  // * 1. Sort the arr
   std::sort(arr.begin(), arr.end());
 
   int max_beauty = 0;
   int i = 0, j = 0;
   while (i < n) {
-    // * incr 'j' till arr[j] <= (arr[i] + 2k) 
-    while (j < n && (arr[i] + 2 * k) >= arr[j]) {
-      j++;
+    // * Shrink the window
+    // * incr 'i' if arr[j] > (arr[i] + 2k) 
+    if (arr[j] > (arr[i] + 2 * k)) {
+      i++;
     }
+
+    // * Find new max window
     max_beauty = std::max(max_beauty, j - i);
     i++;
   }
@@ -147,16 +153,16 @@ int maximumBeauty2(std::vector<int> arr, int k) {
 
 int main() {
   // * testcase 1
-  int k = 2;
-  std::vector<int> arr = {4, 6, 1, 2};
+  // int k = 2;
+  // std::vector<int> arr = {4, 6, 1, 2};
 
   // * testcase 2
   // int k = 10;
   // std::vector<int> arr = {1, 1, 1, 1};
 
   // * testcase 3
-  // int k = 2;
-  // std::vector<int> arr = {3, 2, 3, 2, 3, 2};
+  int k = 2;
+  std::vector<int> arr = {3, 2, 3, 2, 3, 2};
 
   printArr(arr);
 
@@ -167,7 +173,6 @@ int main() {
   return 0;
 
 }
-
 
 // * Run the code
 // * g++ --std=c++20 27-max-beauty-of-arr.cpp -o output && ./output

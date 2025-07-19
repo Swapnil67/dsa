@@ -22,7 +22,7 @@
 
  * * 
  * * 4             |4 - 4| = 0
- * * 4, 7          |4 - 7| = 3
+ * * 4, 7          |4 - 7| = 3  (Answer = [4, 7])
  * * 
  * * 7             |7 - 7| = 0
 
@@ -64,33 +64,37 @@ int bruteForce(std::vector<int> nums, int limit) {
 
 // * ------------------------- APPROACH 2A: Optimal APPROACH -------------------------`
 // * Using Min Heap & Max Heap
+// * Min Heap = To find min element in subarray
+// * Max Heap = To find max element in subarray
+
 // * TIME COMPLEXITY O(n * log(n))
 // * SPACE COMPLEXITY O(N + N)
 int longestSubarray(std::vector<int> &nums, int limit) {
   int n = nums.size();
 
   typedef std::pair<int, int> P;
-  std::priority_queue<P, std::vector<P>> maxPq; // * Max Heap
+  std::priority_queue<P, std::vector<P>> maxPq;                  // * Max Heap
   std::priority_queue<P, std::vector<P>, std::greater<P>> minPq; // * Min Heap
   
   int i = 0, j = 0, ans = 0;
 
   while(j < n) { // * O(n * log(n))
 
-    maxPq.push({nums[j], j});
-    minPq.push({nums[j], j});
+    maxPq.push({nums[j], j});   // * Max ele will be at top of heap
+    minPq.push({nums[j], j});   // * Min ele will be at top of heap
 
     // * If the diff in largest & smallest element of current subarray is greater than limit
     // * then shrink window
     while (maxPq.top().first - minPq.top().first > limit) {
+      // * Find the next position for 'i'
       i = std::min(maxPq.top().second, minPq.top().second) + 1;
 
-      // * shrink max heap from top
+      // * Remove all index less than 'i' from 'maxPq'
       while (i > maxPq.top().second) {
         maxPq.pop(); // * log(n)
       }
-
-      // * shrink min heap from top
+      
+      // * Remove all index less than 'i' from 'minPq'
       while (i > minPq.top().second) {
         minPq.pop(); // * log(n)
       }
@@ -118,28 +122,28 @@ int longestSubarray(std::vector<int> &nums, int limit) {
 // * SPACE COMPLEXITY O(2N)
 int longestSubarray2(std::vector<int> &nums, int limit) {
   int n = nums.size();
-  std::deque<int> mindq, maxdq;
+  std::deque<int> minDq, maxDq;
   int i = 0, ans = 0;
-  for(int j = 0; j < n; ++j) {
-    // * Maintain mindq (increasing)
-    while(!mindq.empty() && nums[j] < mindq.back()) {
-      mindq.pop_back();
+  for (int j = 0; j < n; ++j) {
+    // * Maintain minDq (increasing)
+    while(!minDq.empty() && nums[j] < minDq.back()) {
+      minDq.pop_back();
     }
-    mindq.push_back(nums[j]);
+    minDq.push_back(nums[j]);
 
-    // * Maintain maxdq (decreasing)
-    while(!maxdq.empty() && nums[j] > maxdq.back()) {
-      maxdq.pop_back();
+    // * Maintain maxDq (decreasing)
+    while(!maxDq.empty() && nums[j] > maxDq.back()) {
+      maxDq.pop_back();
     }
-    maxdq.push_back(nums[j]);
+    maxDq.push_back(nums[j]);
 
     // * Shrink window if limit exceeded
-    while(maxdq.front() - mindq.front() > limit) {
-      if(maxdq.front() == nums[i]) {
-        maxdq.pop_front();
+    while(maxDq.front() - minDq.front() > limit) {
+      if(maxDq.front() == nums[i]) {
+        maxDq.pop_front();
       }
-      if(mindq.front() == nums[i]) {
-        mindq.pop_front();
+      if(minDq.front() == nums[i]) {
+        minDq.pop_front();
       }
       i++;
     }

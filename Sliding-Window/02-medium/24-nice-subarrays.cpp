@@ -33,6 +33,29 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * Nested Loop
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(26)
+int bruteForce(std::vector<int> &arr, int k) {
+  int n = arr.size();
+  int ans = 0;
+  for (int i = 0; i < n; ++i) {
+    int odds = 0;
+    for (int j = i; j < n; ++j) {
+      if (arr[j] % 2 == 1) {
+        odds++;
+      }
+      if (odds == k) {
+        ans += (n - j);
+        break;
+      }
+    }
+  }
+  return ans;
+}
+
+
 int helper(std::vector<int> &nums, int goal) {
   int n = nums.size();
   int ans = 0;
@@ -71,19 +94,19 @@ int numberOfSubarrays(std::vector<int> &nums, int k) {
 int numberOfSubarraysB(std::vector<int> &nums, int k) {
   int n = nums.size();
   
-  int odd_count = 0, result = 0;
+  int cur_odd_count = 0, result = 0;
   std::unordered_map<int, int> mp;
   mp[0] = 1;      // * default, we seen 0 odd numbers atleast once
 
   for(int i = 0; i < n; ++i) {
-    odd_count += (nums[i] % 2);
+    cur_odd_count += (nums[i] % 2);
 
-    int rem = odd_count - k;
+    int rem = cur_odd_count - k;
     if (mp.count(rem)) {
       result += mp[rem];
     }
 
-    mp[odd_count]++;
+    mp[cur_odd_count]++;
   }
 
   // * For debugging

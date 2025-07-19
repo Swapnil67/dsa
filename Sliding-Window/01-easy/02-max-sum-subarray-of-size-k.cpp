@@ -33,7 +33,7 @@ int maxSumOfKSubarray(std::vector<int> arr, int window_size) {
   int n = arr.size();
   int i = 0, j = 0;
   long long max_sum = 0, cur_sum = 0;
-  while(j < n) {
+  while (j < n) {
     // * Check if window size exceeded
     if(j - i + 1 > window_size) {
       cur_sum -= arr[i];

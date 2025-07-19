@@ -79,7 +79,7 @@ std::vector<int> decrypt(std::vector<int>& code, int k) {
   if (k == 0)
     return ans;
 
-  // * Get the window pointers
+  // * Get the window pointers for sliding window
   int i = -1, j = -1;
   if (k < 0) {
     i = n - std::abs(k);

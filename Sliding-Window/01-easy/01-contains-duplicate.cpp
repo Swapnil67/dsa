@@ -69,7 +69,7 @@ bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
     }
     // * Check if we have already seen ele in past
     if (st.find(arr[j]) != st.end()) {
-        return true;
+      return true;
     }
     // * Add the element to set
     st.insert(arr[j]);
@@ -78,19 +78,38 @@ bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
   return false;
 }
 
+// bool containsNearbyDuplicate(std::vector<int> &arr, int k) {
+//   int n = arr.size();
+//   int i = 0, j = 0;
+//   while (j < n) {
+//     if (j != i && arr[i] == arr[j])
+//       return true;
+//     if (j - i + 1 > k) {
+//       i++;
+//     }
+//     j++;
+//   }
+//   return false;
+// }
+
 int main() {
   // int k = 3;
   // std::vector<int> arr = {1, 2, 3, 1};
+
   // int k = 2;
   // std::vector<int> arr = {1, 2, 3, 1, 2, 3};
+
   int k = 1;
   std::vector<int> arr = {1, 0, 1, 1};
+
   std::cout << "k " << k << std::endl;
   std::cout << "Input Array " << std::endl;
   printArr(arr);
+
   // bool is_duplicate = bruteForce(arr, k);
   bool is_duplicate = containsNearbyDuplicate(arr, k);
-  std::cout<<"Does array contains duplicate "<<is_duplicate<<std::endl;
+
+  std::cout << "Does array contains duplicate " << is_duplicate << std::endl;
   return 0;
 }
 

@@ -67,14 +67,14 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
 
 int main() {
   // * testcase 1
-  int minutes = 3;
-  std::vector<int> customers = {1, 0, 1, 2, 1, 1, 7, 5};
-  std::vector<int> grumpy = {0, 1, 0, 1, 0, 1, 0, 1};
+  // int minutes = 3;
+  // std::vector<int> customers = {1, 0, 1, 2, 1, 1, 7, 5};
+  // std::vector<int> grumpy = {0, 1, 0, 1, 0, 1, 0, 1};
 
   // * testcase 2
-  // int minutes = 1;
-  // std::vector<int> customers = {1};
-  // std::vector<int> grumpy = {0};
+  int minutes = 1;
+  std::vector<int> customers = {1};
+  std::vector<int> grumpy = {0};
 
   std::cout << "Grumpy " << std::endl;
   printArr(grumpy);

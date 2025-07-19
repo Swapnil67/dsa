@@ -1,18 +1,14 @@
 /**
- * * First Negative In Every Window
- * * You have been given an array of integers 'ARR' of size 'N'. You are also provided with a positive integer 'K'.
- * * Your task is to find the first negative element in every window (contiguous subarray) of length 'K'. 
- * * If there is no negative element in a window, then print 0 for that window.
+ * * Leetcode - 2653
+ * * Sliding Subarray Beauty
  * 
- * * Example 1
- * * Input  : nums = [5, -3, 2, 3, -4] and k = 2
- * * Output : [-3 -3 0 -4]
+ * * Given an integer array nums containing n integers, find the beauty of each subarray of size k.
+ * * The beauty of a subarray is the xth smallest integer in the subarray if it is negative, or 0 
+ * * if there are fewer than x negative integers.
+ * * Return an integer array containing n - k + 1 integers, which denote the beauty of the subarrays in order 
+ * * from the first index in the array.
  * 
- * * Example 2
- * * Input  : nums = [8 1 -2 2 -3 6 8 -1] and k = 3
- * * Output : [-2 -2 -2 -3 -3 -1 ]
- * 
- * * https://www.naukri.com/code360/problems/first-negative-in-every-window_759333
+ * * https://leetcode.com/problems/sliding-subarray-beauty/description/
 */
 
 #include <vector>
@@ -28,6 +24,9 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * TIME COMPLEXITY O(N * K)
+// * SPACE COMPLEXITY O(1)
 std::vector<int> bruteForce(std::vector<int> &nums, int k, int x) {
   std::vector<int> ans;
   int n = nums.size();
@@ -39,21 +38,22 @@ std::vector<int> bruteForce(std::vector<int> &nums, int k, int x) {
       temp.push_back(nums[j]);
     }
 
+    int val = 0;
     if (temp.size() >= x) {
-      // * O(KlogK)
-      std::sort(temp.begin(), temp.end());
-      int val = temp[x - 1] < 0 ? temp[x - 1] : 0;
-      ans.push_back(val);
-    } else {
-      ans.push_back(0);
+      std::sort(temp.begin(), temp.end());  // * O(KlogK)
+      val = temp[x - 1] <= 0 ? temp[x - 1] : 0;
     }
+    ans.push_back(val);
   }
 
   return ans;
 }
 
 
-
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Classic Sliding Window
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
   int n = nums.size();
   std::vector<int> ans;
@@ -66,13 +66,16 @@ std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
 
   int i = 0, j = 0;
   while (j < n) {
+    // * Update the number frequency
     mp[nums[j]]++;
     
+    // * Shrink the window
     if ((j - i + 1) > k) {
       mp[nums[i]]--;
       i++;
     }
 
+    // * Counting sort
     if ((j - i + 1) == k) {
       int f = 0, val = 0;
       for (int i = -50; i <= -1; ++i) {

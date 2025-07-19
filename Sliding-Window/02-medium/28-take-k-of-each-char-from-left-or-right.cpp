@@ -33,6 +33,7 @@ int takeCharacters(std::string s, int k) {
   for (char &ch : s) {
     char_freq[ch - 'a']++;
   }
+  // * {'a': 4, 'b': 3, 'c': 5}
 
   // * Not possible to delete 'k' characters
   if (char_freq[0] < k || char_freq[1] < k || char_freq[2] < k) {

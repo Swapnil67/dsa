@@ -19,10 +19,10 @@
  * * https://leetcode.com/problems/minimum-window-substring/description/
 */
 
-#include <iostream>
-#include <string>
 #include <vector>
+#include <string>
 #include <climits>
+#include <iostream>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
@@ -35,10 +35,12 @@ std::string bruteForce(std::string s, std::string t) {
   int start_i = -1, min_window_size = INT_MAX;
 
   for(int i = 0; i < n1; ++i) {
+
     std::vector<int> hash(256, 0);
-    int cur_count = 0;
-    for(char &ch : t)
+    for (char &ch : t)
       hash[ch]++;
+
+    int cur_count = 0;
     for(int j = i; j < n1; ++j) {
       if(hash[s[j]] > 0) {
         cur_count++;
@@ -72,32 +74,34 @@ std::string minWindow(std::string s, std::string t) {
   }
 
   // * calculate the frequency map for string 't'
-  std::vector<int> freq_map(256, 0);
+  std::vector<int> t_vec(256, 0);
   for (char &ch : t) {
-    freq_map[ch]++;
+    t_vec[ch]++;
   }
 
-  int count_required = 0, start_i = -1;
+  int countRequired = n2, start_i = -1;
   int i = 0, j = 0, min_window_size = INT_MAX;
   while(j < n1) {
     char ch = s[j];
-    if(freq_map[ch] > 0) {
-      count_required += 1;
+
+    if (t_vec[s[j]] > 0) {
+      countRequired--;
     }
-    freq_map[ch]--;
+    t_vec[s[j]]--;
 
     // * found substring now shrink the window
-    while(count_required == n2) {
+    while (countRequired == 0) {
       // * get the substring count
-      int cur_window_size = j - i + 1;
-      if(cur_window_size < min_window_size) {
+      // std::cout << i << " " << j << std::endl;
+      if((j - i + 1) < min_window_size) {
         start_i = i;
-        min_window_size = cur_window_size;
+        min_window_size = (j - i + 1);
       }
-      freq_map[s[i]]++; 
-      if(freq_map[s[i]] > 0) {
-        count_required -= 1;
-      }
+      
+      t_vec[s[i]]++;
+      if (t_vec[s[i]] > 0)
+        countRequired++;
+
       i++;
     }
     j++;
@@ -107,14 +111,13 @@ std::string minWindow(std::string s, std::string t) {
 
 int main() {
   // * testcase 1
-  // std::string s = "ADOBECODEBANC", t = "ABC";
+  std::string s = "ADOBECODEBANC", t = "ABC";
 
   // * testcase 2
   // std::string s = "flight", t = "it";
 
   // * testcase 3
-  // int max_cost = 0;
-  std::string s = "ninjas", t = "sin";
+  // std::string s = "ninjas", t = "sin";
 
 
   std::cout << "s: " << s << std::endl;
@@ -122,10 +125,11 @@ int main() {
 
   std::string ans = bruteForce(s, t);
   // std::string ans = minWindow(s, t);
+
   std::cout << "Minimum Window Substring: " << ans << std::endl;
 
   return 0;
 }
 
 // * Run the code
-// * $CXX --std=c++17 01-min-window-substring.cpp -o output && ./output
+// * g++ --std=c++17 02-min-window-substring.cpp -o output && ./output
