@@ -9,6 +9,10 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+
+
+// * -----------------------------------------------------------------------------
+
 // * 01 - Binary Search
 // int binarySearch(std::vector<int> arr, int target) {
 // TODO
@@ -39,11 +43,19 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 09 - Square Root of a number
+// int findSquareRoot(int n) {
+// TODO
+// }
+
+// * 10 - Kth Missing Positive Number 
+// int findKthMissingNumber(std::vector<int> arr, int k) {
+// TODO
+// }
 
 int main() {
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 practice.cpp -o output && ./output
-
+// * g++ --std=c++20 practice.cpp -o output && ./output

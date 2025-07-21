@@ -32,6 +32,7 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
+// * Upper Bound
 // * Smallest element greater than equal x
 // * TIME COMPLEXITY O(logn)
 int findCeil(std::vector<int> arr, int x) {
@@ -86,12 +87,12 @@ std::pair<int, int> getFloorAndCeil(std::vector<int>arr, int x) {
 
 int main() {
   // * testcase 1
-  int x = 5;
-  std::vector<int> arr = {1, 2, 3, 4, 8, 10, 10, 12, 19};
+  // int x = 5;
+  // std::vector<int> arr = {1, 2, 3, 4, 8, 10, 10, 12, 19};
 
   // * testcase 2
-  // int x = 2;
-  // std::vector<int> arr = {3, 4, 4, 7, 8, 10};
+  int x = 2;
+  std::vector<int> arr = {3, 4, 4, 7, 8, 10};
 
   printArr(arr);
   std::pair<int, int> ans = getFloorAndCeil(arr, x);
@@ -102,4 +103,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 05-find-floor-and-ceil.cpp -o output && ./output
+// * g++ --std=c++20 05-find-floor-and-ceil.cpp -o output && ./output

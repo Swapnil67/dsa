@@ -16,15 +16,17 @@
  * https://www.naukri.com/code360/problems/lower-bound_8165382
 */
 
+// ! First element not less than 'x'
+
 #include <vector>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
-  std::cout<<std::endl;
+  std::cout << std::endl;
 }
 
 
@@ -42,7 +44,7 @@ int lowerBoundBrute(std::vector<int> arr, int x) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
-// * Lower bound (Smallest element greater than x)
+// * Lower bound (Smallest element greater than or equal x)
 // * TIME COMPLEXITY O(logn)
 int findLowerBound(std::vector<int> arr, int x) {
   int n = arr.size();
@@ -50,6 +52,8 @@ int findLowerBound(std::vector<int> arr, int x) {
   int lowIdx = n;
   while(l <= r) {
     int m = l + (r - l) / 2;
+
+    // * find more smaller index
     if(arr[m] >= x) {
       lowIdx = m;
       r = m - 1;
@@ -64,12 +68,12 @@ int findLowerBound(std::vector<int> arr, int x) {
 
 int main() {
   // * testcase 1
-  // int x = 0;
-  // std::vector<int> arr = {1, 2, 2, 3};
+  int x = 0;
+  std::vector<int> arr = {1, 2, 2, 3};
 
   // * testcase 2
-  int x = 2;
-  std::vector<int> arr = {1, 2, 2, 3, 3, 5};
+  // int x = 2;
+  // std::vector<int> arr = {1, 2, 2, 3, 3, 5};
 
   std::cout<<"Input Array"<<std::endl;
   printArr(arr);

@@ -13,6 +13,8 @@
  * https://www.naukri.com/code360/problems/implement-upper-bound_8165383
 */
 
+// ! First element greater than 'x'
+
 /* 
  * The upper bound in a sorted array is the index of the first value that is greater than a given value. 
  * If the greater value does not exist then the answer is 'n', Where 'n' is the size of the array.
@@ -44,6 +46,7 @@ int upperBoundBrute(std::vector<int> arr, int x) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * Smallest element greater than x
 // * TIME COMPLEXITY O(logn)
 // * SPACE COMPLEXITY O(1)
 int findUpperBound(std::vector<int> arr, int x) {
@@ -54,7 +57,7 @@ int findUpperBound(std::vector<int> arr, int x) {
     int m = l + (r - l) / 2;
     if(arr[m] > x) {
       upperIdx = m;
-      r = m  - 1;
+      r = m - 1;
     }
     else {
       l = m + 1;

@@ -109,8 +109,8 @@ std::pair<int, int> firstAndLastOccurence(std::vector<int> arr, int k) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {0, 1, 1, 5};
   int k = 1;
+  std::vector<int> arr = {0, 1, 1, 5};
 
   // * testcase 2
   // std::vector<int> arr = {1, 3, 9, 15};
@@ -123,8 +123,8 @@ int main() {
   printArr(arr);
   // std::pair<int, int> ans = bruteForce(arr, k);
   std::pair<int, int> ans = firstAndLastOccurence(arr, k);
-  std::cout << "First Occurence of " << k << " is " << ans.first << std::endl;
-  std::cout << "Last Occurence of " << k << " is " << ans.second << std::endl;
+  std::cout << "First Occurence of '" << k << "' is at index " << ans.first << std::endl;
+  std::cout << "Last Occurence of '" << k << "' is at index " << ans.second << std::endl;
 
   return 0;
 }

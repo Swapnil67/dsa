@@ -65,8 +65,9 @@ int main() {
   int target = 6;
   std::vector<int> arr = {1, 2, 4, 7};
 
-  std::cout<<"Input Array"<<std::endl;
+  std::cout << "Input Array" << std::endl;
   printArr(arr);
+  
   // int insertIndex = bruteForce(arr, target);
   int insertIndex = findInsertIndex(arr, target);
   std::cout<<"Insert Index: "<<insertIndex<<std::endl;
