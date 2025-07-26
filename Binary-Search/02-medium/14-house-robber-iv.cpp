@@ -14,14 +14,21 @@ void printArr(std::vector<int> arr) {
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Dynamic Programming & Backtracking
+// TODO
 
-bool isValidCapability(std::vector<int> &nums, int &minCapability, int minHouses) {
+
+
+// * Checks if roober can rob from 'minHouses' which contains atleast 'amount' money
+bool isValidCapability(std::vector<int> &nums, int &amount, int minHouses) {
   int n = nums.size();
   for (int i = 0; i < n; ++i) {
-    if (minHouses > 0 && nums[i] <= minCapability) {
+    // * If current house money is less than or equal than amount then we can rob this house.
+    if (minHouses > 0 && nums[i] <= amount) {
       minHouses--;
-      i++;
+      i++; // * skip the adjacent house
     }
+
+    // * We have robbed the desired number of homes
     if (minHouses == 0)
       return true;
   }

@@ -25,7 +25,6 @@
 #include <iostream>
 #include <algorithm>
 
-
 void printArr(std::vector<int> arr) {
   int n = arr.size();
   for (int i = 0; i < n; i++) {
@@ -36,7 +35,7 @@ void printArr(std::vector<int> arr) {
 
 typedef long long ll;
 
-long long lowerBound(std::vector<int> &nums, int target, int l , int r) {
+ll lowerBound(std::vector<int> &nums, int target, int l , int r) {
   int n = nums.size();
   int ans = n;
   while (l <= r) {
@@ -76,8 +75,6 @@ long long bruteForce(std::vector<int> nums, int lower, int upper) {
     for (int j = i + 1; j < n; ++j) {
       int sum = nums[i] + nums[j];
       if (lower <= sum && sum <= upper) {
-        // if (i == 1)
-        //   std::cout << nums[i] << " + " << nums[j] << std::endl;
         pairs++;
       }
     }
@@ -96,9 +93,12 @@ long long countFairPairs(std::vector<int> nums, int lower, int upper) {
   for (int i = 0; i < n; ++i) {
     std::cout << "nums[i] = " << nums[i] << std::endl;
 
+    // * Count how many numbers are < than lower - nums[i]
     long long x = lowerBound(nums, lower - nums[i], i + 1, n - 1);
-    long long y = upperBound(nums, upper - nums[i], i + 1, n - 1);
     x = x - 1 - i;
+
+    // * Count how many numbers are <= than upper - nums[i]
+    long long y = upperBound(nums, upper - nums[i], i + 1, n - 1);
     y = y - 1 - i;
 
     // * Using SDL

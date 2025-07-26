@@ -76,13 +76,13 @@ int findPeakElement(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  std::vector<int> arr = {1, 2, 3, 4, 5};
   // * testcase 2
   // std::vector<int> arr = {5, 4, 3, 2, 1};
   // * testcase 3
   // std::vector<int> arr = {1, 10, 13, 7, 6, 5, 4, 2, 1, 0};
   // * testcase 4
-  std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
+  // std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
   printArr(arr);
   int peakEle = bruteForce(arr);
   // int peakEle = findPeakElement(arr);

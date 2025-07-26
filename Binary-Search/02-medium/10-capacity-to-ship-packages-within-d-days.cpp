@@ -37,16 +37,14 @@ bool findIsLeastPossibleWeight(std::vector<int> weights, int maximumDays, long l
   int daysTook = 1, totalWeight = 0;
   for (int i = 0; i < weights.size(); i++) {
     // std::cout << "totalWeight " << totalWeight << std::endl;
-    if(totalWeight + weights[i] > capacity) {
+    if (totalWeight + weights[i] > capacity) {
       daysTook++;
       totalWeight = weights[i];
-    }
-    else {
+    } else {
       totalWeight += weights[i];
     }
   }
-  if(daysTook <= maximumDays) return true;
-  return false;
+  return daysTook <= maximumDays;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -104,4 +102,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 04-capacity-to-ship-packages-within-d-days.cpp -o output && ./output
+// * g++ --std=c++17 10-capacity-to-ship-packages-within-d-days.cpp -o output && ./output

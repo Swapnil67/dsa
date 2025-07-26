@@ -81,12 +81,13 @@ int findSmallestDivisor(std::vector<int> arr, int threshold) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
-  // int threshold = 8;
+  int threshold = 8;
+  std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  std::vector<int> arr = {1, 2, 5, 9};
-  int threshold = 6;
+  // int threshold = 6;
+  // std::vector<int> arr = {1, 2, 5, 9};
+
   printArr(arr);
 
   // int smallestDivisor = bruteForce(arr, threshold);
@@ -97,4 +98,4 @@ int main() {
 
 
 // * Run the code
-// * g++ --std=c++17 03-smallest-divisor.cpp -o output && ./output
+// * g++ --std=c++20 13-smallest-divisor.cpp -o output && ./output

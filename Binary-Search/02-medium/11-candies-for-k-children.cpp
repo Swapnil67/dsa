@@ -41,6 +41,7 @@ void printArr(std::vector<int> arr) {
 bool checkIsChildrenSatisfied(std::vector<int> candies, long long k, int curCandies) {
   if (curCandies == 0)
     return true;
+    
   long long satisfiedChildren = 0;
   int n = candies.size();
   for (int i = 0; i < n; ++i) {
@@ -51,9 +52,7 @@ bool checkIsChildrenSatisfied(std::vector<int> candies, long long k, int curCand
     satisfiedChildren += (candies[i] / curCandies);
   }
 
-  if (satisfiedChildren >= k)
-    return true;
-  return false;
+  return satisfiedChildren >= k;;
 }
 
 int maximumCandies(std::vector<int> &candies, long long k) {
@@ -93,12 +92,12 @@ int main(void) {
   // std::vector<int> candies = {2, 5};
 
   // * testcase 3
-  long long k = 4;
-  std::vector<int> candies = {4, 7, 5};
+  // long long k = 4;
+  // std::vector<int> candies = {4, 7, 5};
 
   // * testcase 4
-  // long long k = 1;
-  // std::vector<int> candies = {1};
+  long long k = 1;
+  std::vector<int> candies = {1};
 
   std::cout << "Pile of candies" << std::endl;
   printArr(candies);
@@ -109,4 +108,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++17 11-candies-for-k-children.cpp -o output && ./output
+// * g++ --std=c++20 11-candies-for-k-children.cpp -o output && ./output

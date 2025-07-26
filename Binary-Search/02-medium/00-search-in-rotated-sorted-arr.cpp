@@ -5,8 +5,6 @@
 * Given the array nums after the possible rotation and an integer target, return the index of target
 * if it is in nums, or -1 if it is not in nums.
 
-! Array does not have duplicates
-
 * Example 1:
 * Input: nums = [4,5,6,7,0,1,2], target = 0
 * Output: 4
@@ -53,7 +51,6 @@ int findInRotatedSortedArray(std::vector<int> arr, int target) {
 
     // * Left part of array is sorted
     if(arr[l] <= arr[m]) {
-
       // * check if element is in left half
       // * arr[l] <= target <= arr[m]
       if (arr[l] <= target && arr[m] >= target) {
@@ -91,8 +88,8 @@ int main() {
 
   // * testcase 3
   // * This will fail
-  // int target = 1;
-  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
+  // int target = 0;
+  // std::vector<int> arr = {1, 0, 1, 1, 1};
 
   // int idx = bruteForce(arr, target);
   int idx = findInRotatedSortedArray(arr, target);

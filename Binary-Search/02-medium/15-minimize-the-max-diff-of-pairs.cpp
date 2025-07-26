@@ -1,3 +1,25 @@
+/*
+  * Leetcode - 2616
+  * Minimize the Maximum Difference of Pairs
+  * You are given a 0-indexed integer array nums and an integer p.
+  * Find p pairs of indices of nums such that the maximum difference amongst all the pairs is minimized.
+  * Also, ensure no index appears more than once amongst the p pairs.
+  *
+  * Return the minimum maximum difference among all p pairs. We define the maximum of an empty set to be zero.
+
+  * Example 1:
+  * Input: nums = [10,1,2,7,1,3], p = 2
+  * Output: 1
+  * Explanation: max(|nums[1] - nums[4]|, |nums[2] - nums[5]|) = max(0, 1) = 1. Therefore, we return 1.
+  
+  * Example 2:
+  * Input: nums = [4,2,1,2], p = 1
+  * Output: 0
+  * Explanation: |nums[1] - nums[3]| = 0. Therefore, we return 0.
+  *
+  * https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/
+*/
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -10,21 +32,18 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * A function to check abs difference of how many pairs is equal to pairDiff
+// * A function to check abs difference of how many pairs is '<=' pairDiff
 // * return true if we found no. of pairs greater than maxPairs
 bool isValid(std::vector<int> &nums, int maxPairs, int pairDiff) {
   int n = nums.size();
   int curPairs = 0;
-  int i = 0;
-  while (i < n - 1) {
+  for (int i = 0; i < n - 1; ++i) {
     if (curPairs >= maxPairs)
       return true;
     int curDiff = nums[i + 1] - nums[i];
-    if(curDiff <= pairDiff) {
-      i += 2;
+    if (curDiff <= pairDiff) {
       curPairs++;
-    } else {
-      i += 1;
+      i++;
     }
   }
 

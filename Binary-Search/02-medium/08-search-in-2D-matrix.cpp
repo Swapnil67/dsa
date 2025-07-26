@@ -55,11 +55,11 @@ bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
   int l = 0, r = rows - 1;
 
   // * Using lower bound find the row which we need to search for target element
-  int searchRow = r;
+  int possibleRow = r;
   while (l <= r) {
     int m = l + (r - l) / 2;
     if (matrix[m][cols - 1] >= target) {
-      searchRow = m;
+      possibleRow = m;
       r = m - 1;
     }
     else {
@@ -67,20 +67,16 @@ bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
     }
   }
 
-  // * Search the target element in that row
+  // * Search the target element in 'possibleRow'
   l = 0, r = cols - 1;
   while (l <= r) {
     int m = l + (r - l) / 2;
-    if (matrix[searchRow][m] == target) {
+    if (matrix[possibleRow][m] == target)
       return true;
-      r = m - 1;
-    }
-    else if(matrix[searchRow][m] > target) {
+    else if (matrix[possibleRow][m] > target)
       r = m - 1; 
-    }
-    else {
+    else 
       l = m + 1;
-    }
   } 
 
   return false;

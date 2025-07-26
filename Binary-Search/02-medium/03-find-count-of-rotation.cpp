@@ -82,10 +82,10 @@ int findKRotation(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {5, 6, 0, 1, 2};
+  // std::vector<int> arr = {5, 6, 0, 1, 2};
 
   // * testcase 2
-  // std::vector<int> arr = {2, 3, 4, 1};
+  std::vector<int> arr = {2, 3, 4, 1};
 
   printArr(arr);
 

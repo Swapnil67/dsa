@@ -18,7 +18,9 @@
 
 */
 
-#include<iostream>
+#include <vector>
+#include <climits>
+#include <iostream>
 
 // * ------------------------- Utility Functions -------------------------`
 
@@ -111,7 +113,7 @@ double bruteForce(std::vector<int> arr1, std::vector<int> arr2) {
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------`
 // * Not using extra array (Merged Array)
-// * TIME COMPLEXITY O(n1+n1) * O(N) 
+// * TIME COMPLEXITY O(n1 + n2) * O(N) 
 // * SPACE COMPLEXITY O(1)
 double betterApproach(std::vector<int> arr1, std::vector<int> arr2) {
   int n1 = arr1.size(), n2 = arr2.size();
@@ -120,9 +122,9 @@ double betterApproach(std::vector<int> arr1, std::vector<int> arr2) {
   std::vector<int> values = returnMedianPositions(arr1, arr2);
   int ele1 = values[0], ele2 = values[1];
 
-  if(n % 2 == 1) {
+  if (n % 2 == 1)
     return ele1;
-  }
+  
   return (double)((double)(ele1 + ele2) / 2.0);
 }
 
@@ -178,6 +180,7 @@ int main() {
   // std::vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
   // std::vector<int> nums1 = {7, 12, 14, 15}, nums2 = {1, 2, 3, 4, 9, 11};
   std::vector<int> nums1 = {1, 2}, nums2 = {3, 4};
+
   std::cout << "First Array" << std::endl;
   printArr(nums1);
   std::cout << "Second Array" << std::endl;
@@ -192,4 +195,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 10-median-of-two-sorted-arrays.cpp -o 10-median-of-two-sorted-arrays && ./10-median-of-two-sorted-arrays
+// * g++ --std=c++20 05-median-of-two-sorted-arrays.cpp -o output && ./output

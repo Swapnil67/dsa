@@ -94,9 +94,12 @@ std::vector<int> successfulPairs(std::vector<int> &spells, std::vector<int> &pot
 
   for (int i = 0; i < n; ++i) {
     int curSpell = spells[i];
+
+    // * Small but important optimization
+    // * spell = '1' cannot muliply with any potions[j] to give atleast 'success' 
     // * minPotion * curSpell >= success
     long long minPotion = std::ceil((1.0 * success) / curSpell);
-    if(minPotion > maxPotionVal) {
+    if (minPotion > maxPotionVal) {
       pairs.push_back(0);
       continue;
     }

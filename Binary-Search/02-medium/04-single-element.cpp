@@ -107,4 +107,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 04-single-element.cpp -o 04-single-element && ./04-single-element
+// * g++ --std=c++17 04-single-element.cpp -o output && ./output

@@ -42,7 +42,7 @@ void printArr(std::vector<int> arr) {
 bool isValidQuantities(std::vector<int> quantities, int stores, int maxQuantity) {
   for (int &products : quantities) {
     // stores -= std::ceil(quantities[i] / (maxQuantity * 1.0));
-    stores -= ((products + maxQuantity - 1) / maxQuantity);
+    stores -= ((products + maxQuantity - 1) / maxQuantity); // * alternative for ceil (faster than ceil)
     // std::cout << " --> " << (products + maxQuantity - 1) / maxQuantity << std::endl;
     if (stores < 0)
       return false;
@@ -72,11 +72,11 @@ int minimizedMaximum(std::vector<int> quantities, int stores) {
 }
 
 int main(void) {
-  int stores = 6;
-  std::vector<int> quantities = {11, 6};
+  // int stores = 6;
+  // std::vector<int> quantities = {11, 6};
 
-  // int stores = 7;
-  // std::vector<int> quantities = {15, 10, 10};
+  int stores = 7;
+  std::vector<int> quantities = {15, 10, 10};
 
   std::cout << "Product Quantities" << std::endl;
   printArr(quantities);

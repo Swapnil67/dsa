@@ -111,4 +111,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-koko-eating-banana.cpp -o output && ./output
+// * g++ --std=c++17 09-koko-eating-banana.cpp -o output && ./output

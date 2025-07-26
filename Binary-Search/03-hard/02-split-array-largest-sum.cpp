@@ -1,4 +1,5 @@
 /*
+* Leetcode - 410
 * Split Array Largest Sum
 * Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized.
 * Return the minimized largest sum of the split.
@@ -13,8 +14,10 @@
 * https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557
 */
 
-#include<iostream>
+#include <vector>
 #include <numeric>
+#include <iostream>
+#include <algorithm>
 
 // * ------------------------- Utility Functions -------------------------`
 
@@ -26,21 +29,19 @@ void printArr(std::vector<int> arr) {
   std::cout<<std::endl;
 }
 
-int isValidPartition(std::vector<int> arr, int maxSum, int maxPartitions) {
+int isValidPartition(std::vector<int> arr, int maxSum, int k) {
   int n = arr.size();
   long long curSum = 0;
-  int partitionsRequired = 1;
+  int splits = 1;
   for (int i = 0; i < n; i++) {
-    if(curSum + arr[i] <= maxSum) {
+    if (curSum + arr[i] <= maxSum) {
       curSum += arr[i];
-    }
-    else {
-      partitionsRequired++;
+    } else {
+      splits++;
       curSum = arr[i];
     }
   }
-  if(partitionsRequired > maxPartitions) return false;
-  return true;
+  return splits <= k;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
@@ -77,4 +78,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 11-split-array-largest-sum.cpp -o 11-split-array-largest-sum && ./11-split-array-largest-sum
+// * g++ --std=c++20 02-split-array-largest-sum.cpp -o output && ./output

@@ -39,8 +39,10 @@ bool isValid(std::vector<int> arr, int maxVal) {
   for (int i = 0; i < n - 1; ++i) {
     if (arr[i] > maxVal)
       return false;
+
+    // * how much we need to subtract to arr[i+1] element if we make arr[i] to maxVal
     long long buffer = maxVal - arr[i];
-    arr[i + 1] = arr[i + 1] - buffer;
+    arr[i + 1] = arr[i + 1] - buffer; // * subtract the buffer to arr[i+1]
   }
 
   return arr[n - 1] <= maxVal;
@@ -68,6 +70,7 @@ int minimizeArrayValue(std::vector<int> arr) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * Goal is to evenly distribute the value
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int minimizeArrayValue2(std::vector<int> arr) {
@@ -87,11 +90,14 @@ int minimizeArrayValue2(std::vector<int> arr) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> arr = {3, 7, 1, 6};
+  std::vector<int> arr = {3, 7, 1, 6};
+
   // * testcase 2
   // std::vector<int> arr = {10, 1};
+
   // * testcase 3
-  std::vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
+  // std::vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
+
   printArr(arr);
 
   // int ans = minimizeArrayValue(arr);
@@ -106,7 +112,7 @@ int main(void) {
 
 // * DRY RUN
 
-// * We are doing following two operations (simultaneouslt) on every pass
+// * We are doing following two operations (simultaneously) on every pass
 // * arr[i] = arr[i] - 1              - (i > 1 && i < n)
 // * arr[i - 1] = arr[i - 1] + 1          
 
@@ -118,9 +124,12 @@ int main(void) {
 // * 4 6 1 6
 // * 5 5
 
-// * i = 3
+// * i = 2
 // * 5 5 1 6
-// *     2 5          arr[3] = arr[3] - 1 & arr[2] = arr[2] + 1
+// *     5 2
+
+// * i = 3
+// * 5 5 5 2
 
 
 // * For i = 5 till i < n - 1

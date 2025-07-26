@@ -32,7 +32,9 @@
  * * The bag with the most number of balls has 2 balls, so your penalty is 2, and you should return 2.
  * 
  * * https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/description/
- */
+*/
+
+// ! Binary Search on Answers
 
 #include <vector>
 #include <climits>
@@ -47,20 +49,26 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// ! Binary Search on Answers
+/*
+* We can try solving this question by using max priority heap but it will fail for some case
+* eq: nums: {9}, maxOperations = 2; will fail with max heap approach
+* [2, 3, 4] => max heap after 2 operations. This gives the answer as '4' but correct answer is '3'.
+*/
 
-bool isValidPenalty(std::vector<int> nums, int operations, int currentPenalty) {
+
+// * Find how many operations does it takes of we divide nums[i] by the balls
+// * Find the total operations for all the bags of balls
+bool isValidPenalty(std::vector<int> nums, int maxOperations, int balls) {
   int n = nums.size();
-  int ans = INT_MIN;
   long long totalOps = 0;
   for (int &num : nums) {
-    int ops = num / currentPenalty;
-    if (num % currentPenalty == 0)
+    int ops = num / balls;
+    if (num % balls == 0)
       ops -= 1;
     totalOps += ops;
   }
-  std::cout << currentPenalty << " => " << totalOps << std::endl;
-  return totalOps <= operations;
+  std::cout << balls << " => " << totalOps << std::endl;
+  return totalOps <= maxOperations;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
@@ -101,11 +109,11 @@ int minimumSize(std::vector<int> &nums, int operations) {
 }
 
 int main(void) {
-  int maxOperations = 2;
-  std::vector<int> nums = {9};
+  // int maxOperations = 2;
+  // std::vector<int> nums = {9};
   
-  // int maxOperations = 4;
-  // std::vector<int> nums = {2, 4, 8, 2};
+  int maxOperations = 4;
+  std::vector<int> nums = {2, 4, 8, 2};
 
   std::cout << "Balls" << std::endl;
   printArr(nums);
@@ -121,3 +129,27 @@ int main(void) {
 // * Run the code
 // * g++ --std=c++20 19-min-limit-of-balls-in-bag.cpp -o output && ./output
 
+// * DRY RUN
+
+// * l = 1, r = 8
+// * m = 4
+// * [2 4 8 2]
+// * [0 0 1 0] = 1 operation (therefore r = m - 1)
+
+// * l = 1, r = 3
+// * m = 2
+// * [2 4 8 2]
+// * [0 1 2 0] = 3 operation (therefore r = m - 1)
+
+// * l = 1, r = 2
+// * m = 1
+// * [2 4 8 2]
+// * [2 4 8 2] = 16 operation (therefore r = m - 1)
+
+// * l = 2, r = 2
+// * m = 2
+// * [2 4 8 2]
+// * [0 1 2 0] = 3 operation (therefore r = m - 1)
+
+// * l = 2, r = 1
+// * Break the loop

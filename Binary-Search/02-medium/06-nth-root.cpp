@@ -78,13 +78,13 @@ int main() {
   // int n = 3, m = 27;
 
   // * testcase 2
-  // int n = 4, m = 69;
+  int n = 4, m = 69;
 
   // * testcase 3
   // int n = 9, m = 1953125;
 
   // * testcase 4
-  int n = 5, m = 32768;
+  // int n = 5, m = 32768;
 
   // int nthRoot = bruteForce(n, m);
   int nthRoot = findNthRoot(n, m);

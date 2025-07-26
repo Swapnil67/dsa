@@ -13,6 +13,8 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+// * ------------------------------------------------------------------
+
 // * 00 - Search In Rotated Sorted Array (Without duplicates)
 // int findInRotatedSortedArray(std::vector<int> arr, int target) {
 // TODO
@@ -48,9 +50,19 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 07 - Successful Pairs of Spells and Potions
+// std::vector<int> successfulPairs(std::vector<int> &spells, std::vector<int> &potions, long long success) {
+// TODO
+// }
+
+// * 08 - search-in-2D-matrix
+// bool searchMatrix(std::vector<std::vector<int>> matrix, int target) {
+// TODO
+// }
+
 // * 09 - Koko eating bananas
 // int findMinimumBananasToEat(std::vector<int> piles, int h) {
-// TODO
+// TODO 
 // }
 
 // * 10 - Capacity To Ship Packages Within D Days
@@ -64,19 +76,24 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 12 - Rose Garden
-// int minDays(std::vector<int> bloomDay, int flowersInAbouquet, int m) {
+// int findMinimumDaysToMakeBouquets(std::vector<int> bloomDay, int flowersInAbouquet, int bouquetsRequired) {
 // TODO
-// }
+// } 
 
 // * 13 - Smallest Divisor
 // int findSmallestDivisor(std::vector<int> arr, int threshold) {
 // TODO
 // } 
 
-// * 15 - Smallest Divisor
-// int minimizeMax(std::vector<int> arr, int p) {
+// * 14 - House Robber IV
+// int minCapability(std::vector<int>& nums, int k) {
 // TODO
-// } 
+// }
+
+// * 15 - Minimize the Maximum Difference of Pairs
+// int minimizeMax(std::vector<int>& nums, int p) {
+// TODO
+// }
 
 // * 16 - Minimized Maximum of Products Distributed to Any Store
 // int minimizedMaximum(std::vector<int> quantities, int stores) {
@@ -88,10 +105,35 @@ void printArr(std::vector<int> arr) {
 // TODO
 // } 
 
+// * 18 - Maximum Value at a Given Index in a Bounded Array
+// int maxValue(int n, int index, int maxSum) {
+// TODO
+// }
+
 // * 19 - Minimum Limit of Balls in a Bag
 // int minimumSize(std::vector<int> nums, int maxOperations) {
 // TODO
 // } 
+
+// * 20 - Minimum Time to Repair Cars
+// long long repairCars(std::vector<int> ranks, int cars) {
+// TODO
+// } 
+
+// * 21 - Count the Number of Fair Pairs
+// long long countFairPairs(std::vector<int> &nums, int lower, int upper) {
+// TODO
+// } 
+
+// * 22 - Maximum Number of Removable Characters
+// int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
+// TODO
+// }
+
+// * 23 - Most Beautiful Item for Each Query
+// int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
+// TODO
+// }
 
 int main() {
   return 0;
