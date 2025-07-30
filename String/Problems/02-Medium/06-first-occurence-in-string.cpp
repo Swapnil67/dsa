@@ -17,8 +17,9 @@
  * https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
 */
 
-#include<map>
-#include<iostream>
+#include <map>
+#include <vector>
+#include <iostream>
 
 template <typename Map>
 bool map_compare(Map const &lhs, Map const &rhs) {

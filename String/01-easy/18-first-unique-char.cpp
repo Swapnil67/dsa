@@ -17,6 +17,9 @@
  * * https://leetcode.com/problems/first-unique-character-in-a-string/description/
 */
 
+#include <iostream>
+
+
 // * ------------------------- APPROACH 1: BRUTE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
