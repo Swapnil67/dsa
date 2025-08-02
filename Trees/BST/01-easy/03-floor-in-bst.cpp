@@ -13,12 +13,12 @@
 *                       14
 
 * Example 1:
-* Input: root = [6,2,13,1,4,9,15,null,null,null,null,null,null,14], val = 8
+* Input: root = [6,2,13,1,4,9,15,null,null,null,null,null,null,14], val = 10
 * Output: 9
 
 * Example 2:
 * Input: root = [6,2,13,1,4,9,15,null,null,null,null,null,null,14], val = 16
-* Output: -1
+* Output: 15
 
 * https://www.naukri.com/code360/problems/floor-from-bst_920457
 */
@@ -51,19 +51,18 @@ void printArr(std::vector<T> arr) {
 
 // * TIME COMPLEXITY  O(logn)
 // * SPACE COMPLEXITY O(1)
-int findCeil(TreeNode* root, int val) {
+int findFloor(TreeNode* root, int val) {
   int ans = -1;
+
   while (root) {
     if (root->data == val)
       return val;
 
-    // * if cur node is > val then this is possible ceil
-    if (root && root->data > val)
+    if (root && root->data <= val)
       ans = root->data;
-
-    root = (val > root->data) ? root->right : root->left;
-
+    root = (root->data < val) ? root->right : root->left;
   }
+
   return ans;
 }
 
@@ -80,13 +79,13 @@ int main(void) {
   
   root->right->right->left = new TreeNode(14);
 
-  std::cout << "Ceil of 2: " << findCeil(root, 2) << std::endl;
-  std::cout << "Ceil of 5: " << findCeil(root, 5) << std::endl;
-  std::cout << "Ceil of 8: " << findCeil(root, 8) << std::endl;
-  std::cout << "Ceil of 16: " << findCeil(root, 16) << std::endl;
+  std::cout << "floor of 3: " << findFloor(root, 3) << std::endl;
+  std::cout << "floor of 10: " << findFloor(root, 10) << std::endl;
+  std::cout << "floor of 16: " << findFloor(root, 16) << std::endl;
+  std::cout << "floor of 8: " << findFloor(root, 8) << std::endl;
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 02-ceil-in-bst.cpp -o output && ./output
+// * g++ --std=c++20 03-floor-in-bst.cpp -o output && ./output
