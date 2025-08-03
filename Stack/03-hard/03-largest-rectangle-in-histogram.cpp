@@ -59,22 +59,21 @@ int bruteForce(std::vector<int> heights) {
   int n = heights.size();
   
   // * Find Next & Previous Smallest Elements
-  std::vector<int> nse(n, -1);
-  std::vector<int> pse(n, -1);
+  std::vector<int> nse(n, 6), pse(n, -1);
   getNextAndPreviousSmallerElements(heights, nse, pse);
   // printArr(nse);
   // printArr(pse);
   
-  int largestArea = -1;
+  // * calculate the maxArea using nse & pse of each building
+  int maxArea = -1;
   for (int i = 0; i < n; ++i) {
-    int curArea = heights[i] * (nse[i] - pse[i] - 1);
-    largestArea = std::max(largestArea, curArea);
+    int width = (nse[i] - pse[i] - 1);
+    int curArea = width * heights[i];
+    maxArea = std::max(maxArea, curArea);
   }
 
-  return largestArea;
+  return maxArea;
 }
-
-
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Use Next & Previous smaller elements
@@ -83,7 +82,7 @@ int bruteForce(std::vector<int> heights) {
 // * SPACE COMPLEXITY O(N)
 int largestRectangleArea(std::vector<int> heights) {
   int n = heights.size();
-  int largestRect = INT_MIN;
+  int maxArea = INT_MIN;
 
   std::stack<int> st;
   for (int i = 0; i < n; ++i) {
@@ -95,14 +94,14 @@ int largestRectangleArea(std::vector<int> heights) {
       int stackTop = st.top();
       st.pop();
 
-      int nextSmallerIdx = i;
-      int prevSmallerIdx = -1;
+      int nseIdx = i;       // * next smaller index for st.top() will be 'i'
+      int pseIdx = -1;      // * prev smaller index for st.top() will be prev st.top()
       if (!st.empty()) {
-        prevSmallerIdx = st.top();
+        pseIdx = st.top();
       }
 
-      int rect = heights[stackTop] * (nextSmallerIdx - prevSmallerIdx - 1);
-      largestRect = std::max(largestRect, rect);
+      int curArea = heights[stackTop] * (nseIdx - pseIdx - 1);
+      maxArea = std::max(maxArea, curArea);
     }
     st.push(i);
   }
@@ -116,16 +115,18 @@ int largestRectangleArea(std::vector<int> heights) {
     int stackTop = st.top();
     st.pop();
 
-    int prevSmallerIdx = -1;
+    int nseIdx = n;       // * next smaller index for st.top() will be 'n'
+    int pseIdx = -1;      // * prev smaller index for st.top() will be prev st.top()
     if (!st.empty()) {
-      prevSmallerIdx = st.top();
+      pseIdx = st.top();
     }
 
-    int rect = heights[stackTop] * (n - prevSmallerIdx - 1);
-    largestRect = std::max(largestRect, rect);
+    // * Calculate maxArea
+    int curArea = heights[stackTop] * ((nseIdx - pseIdx) - 1);
+    maxArea = std::max(maxArea, curArea);
   }
 
-  return largestRect;
+  return maxArea;
 }
 
 

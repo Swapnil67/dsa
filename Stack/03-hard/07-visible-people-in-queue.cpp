@@ -70,7 +70,6 @@ int main() {
   std::cout << "Heights" << std::endl;
   printArr(heights);
   
-  // std::vector<int> ans = bruteForce(heights);
   std::vector<int> ans = canSeePersonsCount(heights);
   printArr(ans);
 

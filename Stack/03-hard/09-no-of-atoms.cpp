@@ -17,7 +17,7 @@
  * * Output      : "K4N2O14S4"
  * * Explanation : The count of elements are {'K': 4, 'N': 2, 'O': 14, 'S': 4}.
  * 
- * https://leetcode.com/problems/parsing-a-boolean-expression/description/
+ * https://leetcode.com/problems/number-of-atoms/description/
 */
 
 
@@ -34,8 +34,7 @@ std::string countOfAtoms(std::string formula) {
 
   int i = 0;
   while (i < n) {
-    if(formula[i] == '(') {
-      // * push new map to stack top
+    if (formula[i] == '(') { // * push new map to stack top
       st.push(std::unordered_map<std::string, int>());
       i++;
     }
@@ -45,20 +44,18 @@ std::string countOfAtoms(std::string formula) {
 
       i++;
 
-      // * check number of atoms
-      std::string multiplerStr = "";
+      // * check number of atoms. Eg: (H2O)3
+      std::string multiplerStr = "";  
       while (i < n && isdigit(formula[i])) {
         multiplerStr += formula[i];
         i++;
       }
 
-      // * Add multipler to cur map
-      if(!multiplerStr.empty()) {
+      // * Add multipler to cur map. Eg: (H2O)3 => { H: 6, O: 3 }
+      if (!multiplerStr.empty()) {
         int multipler = std::stoi(multiplerStr);
-
         for(auto &it: cur) {
           std::string element = it.first;
-          int count = it.second;
           cur[element] *= multipler;
         }
       }
@@ -71,6 +68,7 @@ std::string countOfAtoms(std::string formula) {
       }
     }
     else {
+      // * start new chemical 
       std::string curChemical = "";
       curChemical.push_back(formula[i]);
       i++;
@@ -81,36 +79,33 @@ std::string countOfAtoms(std::string formula) {
         i++;
       }
 
-
       // * Get the count of atoms 
-      std::string curCountStr = "";
+      std::string atomsStr = "";
       while (i < n && isdigit(formula[i])) {
-        curCountStr.push_back(formula[i]);
+        atomsStr.push_back(formula[i]);
         i++;
       }
-
-      int curCountInteger = 1;
-      if (curCountStr.length()) {
-        curCountInteger = std::stoi(curCountStr);
+      // * convert atomsStr to integer 'atoms'
+      int atoms = 1;
+      if (atomsStr.length()) {
+        atoms = std::stoi(atomsStr);
       }
 
-      // std::cout << curChemical << ":" << curCountInteger << std::endl;
-
       // * push the element to the stack top map
-      st.top()[curChemical] += curCountInteger;
+      st.top()[curChemical] += atoms;
+
+      // std::cout << curChemical << ":" << atoms << std::endl;
     }
   }
 
-  std::map<std::string, int> sortedMap(begin(st.top()), end(st.top()));
+  // * Since the ans need to be in sorted order alphabetically
   std::string result = "";
+  std::map<std::string, int> sortedMap(begin(st.top()), end(st.top()));
 
-  for(auto &it: sortedMap) {
-    std::string element = it.first;
-    int count = it.second;
-
-    result += element;
-    if (count > 1)
-      result += std::to_string(count);
+  for (auto &it : sortedMap) {
+    result += it.first; // * Append the chemical component
+    if (it.second > 1)
+      result += std::to_string(it.second); // * Append the no. of atoms
   }
 
   return result;

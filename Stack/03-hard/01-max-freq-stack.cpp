@@ -92,7 +92,7 @@ int main() {
   fq->push(4);
   fq->push(5);
 
-  // fq->printFreqStack()
+  // fq->printFreqStack();
 
   int ans = fq->pop();
   printf("%d\n", ans);

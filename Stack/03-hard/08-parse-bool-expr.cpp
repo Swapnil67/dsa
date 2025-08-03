@@ -95,7 +95,6 @@ bool parseBoolExpr2(std::string expression) {
       continue;
 
     if (ch == ')') {
-      std::vector<char> vec;
       bool t = false, f = false;
       while (!st.empty() && st.top() != '(') {
         if (st.top() == 't')
@@ -105,16 +104,14 @@ bool parseBoolExpr2(std::string expression) {
         st.pop();
       }
 
-      // * pop the opening bracket
+      // * pop the opening bracket '('
       st.pop();
 
       // * Get the last operation
       char operation = st.top(); // * !, |, &
-      // * pop the last operation
+      st.pop();                  // * pop the last operation
 
-      st.pop();
-
-      if(operation == '!') {
+      if (operation == '!') {
         if (t) st.push('f');
         else st.push('t');
       }
@@ -126,8 +123,8 @@ bool parseBoolExpr2(std::string expression) {
         if (f) st.push('f');
         else st.push('t');
       }
-
-    } else {
+    }
+    else {
       st.push(ch);
     }
   }
