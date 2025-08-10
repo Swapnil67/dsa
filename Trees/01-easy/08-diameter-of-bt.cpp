@@ -1,6 +1,10 @@
 /*
 * Leetcode - 543
 * Diameter of Binary Tree
+*
+* The diameter of a binary tree is the length of the longest path between any two nodes in a tree. 
+* This path may or may not pass through the root.
+* The length of a path between two nodes is represented by the number of edges between them.
 
 * Example 1:
 *
@@ -44,14 +48,19 @@ void printArr(std::vector<T> arr) {
 };
 
 int diameterOfBinaryTree(TreeNode* root, int &diameter) {
-  if(!root) return 0;
+  if (!root)
+    return 0;
 
   // * calculate the left height
   int lh = diameterOfBinaryTree(root->left, diameter);
+
   // * calculate the right height
   int rh = diameterOfBinaryTree(root->right, diameter);
 
+  // * calculate max diamter
   diameter = std::max(diameter, lh + rh);
+
+  // * Add cur node to height
   return 1 + std::max(lh, rh);
 }
 

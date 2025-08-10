@@ -1,3 +1,11 @@
+/*
+* Leetcode - 145
+* Binary Tree Prostorder Traversal
+
+* https://leetcode.com/problems/binary-tree-postorder-traversal/description/
+* https://www.naukri.com/code360/problems/postorder-traversal_2035933
+*/
+
 #include <stack>
 #include <vector>
 #include <iostream>
@@ -130,7 +138,7 @@ void postOrderIterative3(TreeNode *root, std::vector<int> &ans) {
   TreeNode*cur = root; 
 
   while (cur || !st.empty()) {
-    if(cur) {
+    if (cur) {
       ans.push_back(cur->data);
       st.push(cur);
       cur = cur->right;
@@ -140,6 +148,34 @@ void postOrderIterative3(TreeNode *root, std::vector<int> &ans) {
       cur = cur->left;
     }
   } 
+
+  std::reverse(ans.begin(), ans.end());
+}
+
+// * Just reverse of Pre Order Traversal
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY 
+// *    O(n) - stack
+// *    O(n) - output array
+void postOrderIterative4(TreeNode *root, std::vector<int> &ans) {
+ if (!root)
+    return;
+
+  std::stack<TreeNode *> st;
+
+  TreeNode* cur = root;
+  st.push(root);
+  while (st.size()) {
+    TreeNode* topNode = st.top();
+    st.pop();
+
+    ans.push_back(topNode->data);
+    if (topNode->left)
+      st.push(topNode->left);
+      
+    if (topNode->right)
+      st.push(topNode->right);
+  }
 
   std::reverse(ans.begin(), ans.end());
 }

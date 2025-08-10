@@ -66,6 +66,7 @@ bool isSymmetricHelp(TreeNode* rootA, TreeNode* rootB) {
   if (rootA->data != rootB->data)
     return false;
 
+  // * Go in the opposite directions since its a mirror image
   return isSymmetricHelp(rootA->left, rootB->right) &&
          isSymmetricHelp(rootA->right, rootB->left);
 }

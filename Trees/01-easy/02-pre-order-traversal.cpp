@@ -1,3 +1,11 @@
+/*
+* Leetcode - 144
+* Binary Tree Preorder Traversal
+
+* https://leetcode.com/problems/binary-tree-preorder-traversal/description/
+* https://www.naukri.com/code360/problems/preorder-traversal_2035934
+*/
+
 #include <stack>
 #include <vector>
 #include <iostream>
@@ -31,44 +39,42 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void preOrder(TreeNode* node, std::vector<int> &ans) {
+void preOrderRecursive(TreeNode* node, std::vector<int> &ans) {
   if (node == nullptr)
     return;
 
   // std::cout << node->data << std::endl;
   ans.push_back(node->data);
-  preOrder(node->left, ans);
-  preOrder(node->right, ans);
+  preOrderRecursive(node->left, ans);
+  preOrderRecursive(node->right, ans);
 }
 
 
 // * DFS Iterative - (Stack)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
-std::vector<int> preOrderIterative(TreeNode* root) {
+void preOrderIterative(TreeNode* root, std::vector<int> &ans) {
   std::vector<int> ans;
   
   if (root == nullptr)
-    return ans;
+    return;
 
   std::stack<TreeNode *> st;
   st.push(root);
 
-  while(!st.empty()) {
+  while (!st.empty()) {
     TreeNode* node = st.top();
     st.pop();
 
     ans.push_back(node->data);
     // std::cout << node->data << std::endl;
-    if (node->right) {
-      st.push(node->right);
-    }
-    if (node->left) {
-      st.push(node->left);
-    }
-  }
 
-  return ans;
+    if (node->right)
+      st.push(node->right);
+    
+    if (node->left)
+      st.push(node->left);
+  }
 }
 
 int main(void) {
@@ -83,8 +89,8 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   std::vector<int> ans;
-  // preOrder(root, ans);
-  ans = preOrderIterative(root);
+  // preOrderRecursive(root, ans);
+  preOrderIterative(root, ans);
 
   printArr(ans);
   return 0;

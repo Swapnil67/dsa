@@ -40,10 +40,12 @@ int isBalanced(TreeNode *root) {
   if (!root)
     return 0;
 
+  // * calculate left height
   int lh = isBalanced(root->left);
   if (lh == -1)
     return -1;
 
+  // * calculate right height
   int rh = isBalanced(root->right);
   if (rh == -1)
     return -1;

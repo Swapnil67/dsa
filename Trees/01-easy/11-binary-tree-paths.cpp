@@ -11,7 +11,7 @@
 *              \          
 *               5       
 
-* Output: [ 1->2->5, 1->3 ]
+* Output: ["1->2->5", "1->3"]
 
 * https://leetcode.com/problems/binary-tree-paths/description/
 */
@@ -51,7 +51,7 @@ void rootToNode(TreeNode *root,  std::vector<std::string> &ans, std::string temp
 
   // * Go to the left
   if (root->left)
-  rootToNode(root->left, ans, temp + "->");
+    rootToNode(root->left, ans, temp + "->");
   
   // * Go to the right
   if (root->right)

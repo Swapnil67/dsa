@@ -1,3 +1,11 @@
+/*
+* Leetcode - 94
+* Binary Tree Inorder Traversal
+
+* https://leetcode.com/problems/binary-tree-inorder-traversal/description/
+* https://www.naukri.com/code360/problems/inorder-traversal_3839605
+*/
+
 #include <stack>
 #include <vector>
 #include <iostream>
@@ -50,40 +58,44 @@ std::vector<int> inOrderIterative(TreeNode* root) {
 
   std::stack<TreeNode *> st;
   TreeNode *node = root;
-  while (true) {
-    if (node != nullptr) {
-      st.push(node);
-      node = node->left;
+  while (root || st.size()) {
+    // * Go to extreme left
+    while (root) {
+      st.push(root);
+      root = root->left;
     }
-    else {
-      if (st.empty())
-        break;
-      TreeNode *temp = st.top();
-      st.pop();
-      ans.push_back(temp->data);
-      // std::cout << temp->data << std::endl;
-      node = temp->right;
-    }
+
+    root = st.top();
+    st.pop();
+
+    ans.push_back(root->data);
+
+    // * Go to right
+    root = root->right;
   }
 
   return ans;
 }
 
 int main(void) {
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
+  // * testcase 1
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
   
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
+  // root->left->left = new TreeNode(4);
+  // root->left->right = new TreeNode(5);
   
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(7);
+  // root->right->left = new TreeNode(6);
+  // root->right->right = new TreeNode(7);
 
+
+  // * testcase 2
+  TreeNode *root = new TreeNode(1);
+  root->right = new TreeNode(2);
+  root->right->left = new TreeNode(3);
 
   std::vector<int> ans;
-  // inOrder(root, ans);
-
   ans = inOrderIterative(root);
 
   printArr(ans);

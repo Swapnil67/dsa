@@ -43,7 +43,7 @@ void threeTraversal(TreeNode *root,
 
     // * increment 1 to 2
     // * then push left side of the tree
-    if(it.second == 1) {
+    if (it.second == 1) {
       preOrder.push_back(it.first->data);
       it.second++;
       st.push(it);

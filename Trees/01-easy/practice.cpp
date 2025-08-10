@@ -31,9 +31,9 @@ void printArr(std::vector<T> arr) {
 }
 
 // * 01A - In Order Recursive DFS
-// void inOrderRecursive(TreeNode *node) {
-  // TODO
-  // }
+// void inOrderRecursive(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
 
 // * 01B - In Order Iterative DFS
 // void inOrderIterative(TreeNode *root, std::vector<int> &ans) {
@@ -41,7 +41,7 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 02A - Pre Order Recursive DFS
-// void preOrderRecursive(TreeNode *node, std::vector<int> &ans) {
+// void preOrderRecursive(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
 
@@ -51,12 +51,12 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 03A - Post Order Recursive DFS
-// void postOrderRecursive(TreeNode *node, std::vector<int> &ans) {
+// void postOrderRecursive(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
 
 // * 03B - Post Order Iterative DFS
-// void postOrderIterative3(TreeNode *root, std::vector<int> &ans) {
+// void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
 
@@ -68,7 +68,7 @@ void printArr(std::vector<T> arr) {
 // {
 // TODO
 // }
-  
+
 
 // * 05A - Maximum Depth of Binary Tree
 // int maxDepthDFS(TreeNode *root) {
@@ -89,24 +89,38 @@ void printArr(std::vector<T> arr) {
 // int minDepthBFS(TreeNode *root) {
 // TODO
 // }
-
+  
 // * 07 - Balanced Binary Tree
 // int isBalanced(TreeNode *root) {
 // TODO
 // }
+  
+// * 08 - Diameter of Binary Tree
+// int diameterOfBinaryTree(TreeNode *root, int &diameter) {
+// TODO
+// }
+
+// * 09 - Same Tree
+// bool isSameTree(TreeNode* p, TreeNode* q) {
+// TODO
+// } 
+
+// * 09 - Same Tree
+// bool isSameTree(TreeNode* p, TreeNode* q) {
+// TODO
+// } 
+
+// * 10 - Symmetric Tree
+// bool isSymmetric(TreeNode* root) {
+// TODO
+// }
+
+// * 11 - Binary Tree Paths
+// void rootToNode(TreeNode* root, std::vector<std::string> &ans, std::string cur) {
+// TODO
+// }
 
 int main(void) {
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
-
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
-
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(7);
-
-
   return 0;
 }
 

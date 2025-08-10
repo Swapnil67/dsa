@@ -35,7 +35,7 @@ void printArr(std::vector<T> arr) {
 // * Using BFS
 int maxDepthBFS(TreeNode *root) {
   int level = 0;
-  if (root == nullptr)
+  if (!root)
     return level;
 
   std::queue<TreeNode *> q;
@@ -58,7 +58,7 @@ int maxDepthBFS(TreeNode *root) {
       if(node->right) 
         q.push(node->right);
     }
-    level++;
+    level++; // * Add this level to tree depth
   }
 
   return level;
@@ -66,10 +66,13 @@ int maxDepthBFS(TreeNode *root) {
 
 // * Using DFS
 int maxDepthDFS(TreeNode *root) {
-  if (root == nullptr)
+  if (!root)
     return 0;
   
+  // * calculate left height
   int lh = maxDepthDFS(root->left);
+
+  // * calculate right height
   int rh = maxDepthDFS(root->right);
 
   return 1 + std::max(lh, rh);
@@ -86,8 +89,8 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  // int depth = maxDepthBFS(root);
-  int depth = maxDepthDFS(root);
+  int depth = maxDepthBFS(root);
+  // int depth = maxDepthDFS(root);
   std::cout << "Maximum Depth: " << depth << std::endl;
 
   return 0;

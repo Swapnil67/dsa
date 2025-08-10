@@ -34,27 +34,27 @@ void printArr(std::vector<T> arr) {
 };
 
 // * Using BFS 
+// * As soon as e found the first leaf node we return.
 int minDepthBFS(TreeNode *root) {
-  if (root == nullptr)
+  if (!root)
     return 0;
   
-  int level = 1;
+  int level = 1;  // * Default 1 level
   std::queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
 
-    // * Process the complete level
     int n = q.size();
     // std::cout << n << std::endl;
-
+    
+    // * Process the complete level
     while (n--) {
       TreeNode *node = q.front();
       q.pop();
-      // std::cout << node->data << std::endl;
 
       // * Found the first leaf node
-      if (node->left == nullptr && node->right == nullptr)
+      if (!node->left && !node->right)
         return level;
         
       // * If exists left node then push
@@ -92,8 +92,8 @@ int main(void) {
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);
   
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
+  // root->left->left = new TreeNode(4);
+  // root->left->right = new TreeNode(5);
   
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
