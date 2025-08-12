@@ -4,12 +4,12 @@
  * A peak element is an element that is strictly greater than its neighbors.
  * 
  * Example 1:
- * Input: nums = [1,2,3,1]
- * Output: 2
+ * Input: nums = [1, 2, 3, 1]
+ * Output: 3
  * Explanation: Index 2 is peak element
 
  * Example 1:
- * Input: nums = [1,2,1,3,5,6,]
+ * Input: nums = [1, 2, 1, 3, 5, 6]
  * Output: 1 or 5
  * Explanation: Index 1 or 5 are peak elements
 
@@ -76,20 +76,22 @@ int findPeakElement(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  std::vector<int> arr = {1, 10, 13, 7, 6, 5, 4, 2, 1, 0};
   // * testcase 2
   // std::vector<int> arr = {5, 4, 3, 2, 1};
   // * testcase 3
-  // std::vector<int> arr = {1, 10, 13, 7, 6, 5, 4, 2, 1, 0};
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
   // * testcase 4
   // std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
+
   printArr(arr);
-  int peakEle = bruteForce(arr);
-  // int peakEle = findPeakElement(arr);
+
+  // int peakEle = bruteForce(arr);
+  int peakEle = findPeakElement(arr);
   std::cout << "Peak Element " << peakEle << std::endl;
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 05-peak-element.cpp -o 05-peak-element && ./05-peak-element
+// * g++ --std=c++17 05-peak-element.cpp -o output && ./output
 

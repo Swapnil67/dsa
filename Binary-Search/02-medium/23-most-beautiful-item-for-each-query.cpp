@@ -9,6 +9,14 @@
  * 
  * Return an array answer of the same length as queries where answer[j] is the answer to the jth query.
  * 
+ * Example 1: 
+ * Input: items = [[1,2],[3,2],[2,4],[5,6],[3,5]], queries = [1,2,3,4,5,6]
+ * Output: [2,4,5,5,6,6]
+ * 
+ * Example 2:
+ * Input: items = [[1,2],[1,2],[1,3],[1,4]], queries = [1]
+ * Output: [4]
+ * 
  * https://leetcode.com/problems/most-beautiful-item-for-each-query/description/
  */
 
@@ -50,7 +58,7 @@ std::vector<int> bruteForce(std::vector<std::vector<int>> items, std::vector<int
     int curQuery = queries[i];
     int curMax = 0;
     for (auto &it : items) {     // * O(m)  => 'm' is size of items
-      if(it[0] <= curQuery) {
+      if (it[0] <= curQuery) {
         curMax = std::max(curMax, it[1]);
       }
     }
@@ -65,21 +73,20 @@ int helper(std::vector<std::vector<int>> &items, int target) {
   int ans = 0;
   while (l <= r) {
     int m = l + (r - l) / 2;
-    // * if current item price is greater than target
-    if(items[m][0] > target) {
-      r = m - 1;
-    }
-    else {
-      // * if current item price is less than or equal target
+    // * if current item price is less than or equal target
+    if (items[m][0] <= target) {
       ans = std::max(ans, items[m][1]);
       l = m + 1;
+    } else {
+      // * if current item price is greater than target
+      r = m - 1;
     }
   }
 
   return ans;
 }
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Binary Search
 // * TIME COMPLEXITY O(n * log(n) + m * log(n))
 // * SPACE COMPLEXITY O(1)
@@ -88,6 +95,7 @@ std::vector<int> maximumBeauty(std::vector<std::vector<int>> items, std::vector<
   std::sort(items.begin(), items.end()); // * nlog(n)
 
   // * Pre Update the max beauty for each pair
+  // * To get the max beauty in constant time
   int maxBeautySeen = items[0][1];
   for (int i = 1; i < items.size(); ++i) { // * O(n)
     maxBeautySeen = std::max(items[i][1], maxBeautySeen);
@@ -121,6 +129,8 @@ int main(void) {
   // std::vector<int> ans = bruteForce(items, queries);
   std::vector<int> ans = maximumBeauty(items, queries);
   printArr(ans);
+  
+  return 0;
 }
 
 // * Run the code

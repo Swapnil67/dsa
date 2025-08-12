@@ -84,7 +84,6 @@ int main(void) {
   vector<vector<string>> ans = suggestedProducts(products, searchWord);
   printMatrix(ans);
 
-
   return 0;
 }
 

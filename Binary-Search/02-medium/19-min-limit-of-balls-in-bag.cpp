@@ -58,16 +58,18 @@ void printArr(std::vector<int> arr) {
 
 // * Find how many operations does it takes of we divide nums[i] by the balls
 // * Find the total operations for all the bags of balls
-bool isValidPenalty(std::vector<int> nums, int maxOperations, int balls) {
+bool isValidPenalty(std::vector<int> nums, int maxOperations, int maxBalls) {
   int n = nums.size();
   long long totalOps = 0;
-  for (int &num : nums) {
-    int ops = num / balls;
-    if (num % balls == 0)
-      ops -= 1;
-    totalOps += ops;
+  for (int &balls : nums) {
+    totalOps += (balls / maxBalls);
+
+    // * Since it can fit in one bag so no need to perform operation
+    if (balls % maxBalls == 0)
+      totalOps--;
   }
-  std::cout << balls << " => " << totalOps << std::endl;
+
+  std::cout << maxBalls << " => " << totalOps << std::endl;
   return totalOps <= maxOperations;
 }
 

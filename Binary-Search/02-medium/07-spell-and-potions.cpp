@@ -112,7 +112,7 @@ std::vector<int> successfulPairs(std::vector<int> &spells, std::vector<int> &pot
   return pairs;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   int success = 7;
   std::vector<int> spells = {5, 1, 3};

@@ -10,8 +10,8 @@
  * Find the minimum number of days required to make at least 'm' bouquets each containing 'k' roses.
  * Return -1 if it is not possible.
 
-* https://www.naukri.com/code360/problems/rose-garden_2248080
-* https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
+ * https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
+ * https://www.naukri.com/code360/problems/rose-garden_2248080
 */
 
 #include <vector>
@@ -109,7 +109,8 @@ int main() {
 
   // int minDays = bruteForce(days, k, m);
   int minDays = findMinimumDaysToMakeBouquets(bloomDays, flowersInAbouquet, bouquetsRequired);
-  std::cout << "Minimum days required to make " << bouquetsRequired << " bouquets containing " << flowersInAbouquet << " roses each is " << minDays << std::endl;
+  std::cout << "Minimum days required to make " << bouquetsRequired << " bouquets containing " << flowersInAbouquet << " roses each is " << minDays << " days." << std::endl;
+
   return 0;
 }
 

@@ -5,7 +5,8 @@
 #include <numeric>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> arr) {
   int n = arr.size();
   for (int i = 0; i < n; i++) {
     std::cout << arr[i] << " ";
@@ -36,12 +37,12 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 04 - Single element in a Sorted Array
-// int singleNonDuplicate(std::vector<int> arr) {
+// int singleNonDuplicate(std::vector<int> &arr) {
 // TODO
 // }
 
 // * 05 - Find Peak Element
-// int findPeakElement(std::vector<int> arr) {
+// int findPeakElement(std::vector<int> &arr) {
 // TODO
 // }
 
@@ -62,7 +63,7 @@ void printArr(std::vector<int> arr) {
 
 // * 09 - Koko eating bananas
 // int findMinimumBananasToEat(std::vector<int> piles, int h) {
-// TODO 
+// TODO
 // }
 
 // * 10 - Capacity To Ship Packages Within D Days
@@ -71,14 +72,14 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 11 - Maximum Candies Allocated to K Children
-// int maximumCandies(std::vector<int> candies, int k) {
+// int maximumCandies(std::vector<int> candies, long long k) {
 // TODO
 // }
 
 // * 12 - Rose Garden
 // int findMinimumDaysToMakeBouquets(std::vector<int> bloomDay, int flowersInAbouquet, int bouquetsRequired) {
 // TODO
-// } 
+// }
 
 // * 13 - Smallest Divisor
 // int findSmallestDivisor(std::vector<int> arr, int threshold) {
@@ -106,14 +107,15 @@ void printArr(std::vector<int> arr) {
 // } 
 
 // * 18 - Maximum Value at a Given Index in a Bounded Array
+// * Too Difficult problem Skip
 // int maxValue(int n, int index, int maxSum) {
 // TODO
 // }
 
 // * 19 - Minimum Limit of Balls in a Bag
 // int minimumSize(std::vector<int> nums, int maxOperations) {
-// TODO
-// } 
+// TODO 
+// }
 
 // * 20 - Minimum Time to Repair Cars
 // long long repairCars(std::vector<int> ranks, int cars) {
@@ -131,11 +133,22 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 23 - Most Beautiful Item for Each Query
-// int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
+// std::vector<int> maximumBeauty(std::vector<std::vector<int>> items, std::vector<int> queries) {
 // TODO
 // }
 
-int main() {
+// * 24 - Search Suggestions System
+// std::vector<std::vector<std::string>> suggestedProducts(std::vector<std::string> products,
+//                                                         std::string searchWord) {
+// TODO
+// }
+
+// * 25 - Minimum Speed to Arrive on Time
+// int minSpeedOnTime(std::vector<int>& dist, double hour) {
+// TODO
+// }
+
+int main(void) {
   return 0;
 }
 

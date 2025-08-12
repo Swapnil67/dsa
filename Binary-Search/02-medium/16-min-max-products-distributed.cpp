@@ -41,9 +41,10 @@ void printArr(std::vector<int> arr) {
 // * If we can distribute products in more stores than given the return false 
 bool isValidQuantities(std::vector<int> quantities, int stores, int maxQuantity) {
   for (int &products : quantities) {
-    // stores -= std::ceil(quantities[i] / (maxQuantity * 1.0));
+    // stores -= std::ceil((float)quantities[i] / (float)maxQuantity);
     stores -= ((products + maxQuantity - 1) / maxQuantity); // * alternative for ceil (faster than ceil)
     // std::cout << " --> " << (products + maxQuantity - 1) / maxQuantity << std::endl;
+    // * products were distributed in more than necessary stores
     if (stores < 0)
       return false;
   }
@@ -84,6 +85,7 @@ int main(void) {
 
   int ans = minimizedMaximum(quantities, stores);
   std::cout << "Maximum of Products Distributed to Any Store " << ans << std::endl;
+  
   return 0;
 }
 

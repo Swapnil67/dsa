@@ -84,8 +84,8 @@ int maximumCandies(std::vector<int> &candies, long long k) {
 
 int main(void) {
   // * testcase 1
-  // long long k = 3;
-  // std::vector<int> candies = {5, 8, 6};
+  long long k = 3;
+  std::vector<int> candies = {5, 8, 6};
 
   // * testcase 2
   // long long k = 11;
@@ -96,8 +96,8 @@ int main(void) {
   // std::vector<int> candies = {4, 7, 5};
 
   // * testcase 4
-  long long k = 1;
-  std::vector<int> candies = {1};
+  // long long k = 1;
+  // std::vector<int> candies = {1};
 
   std::cout << "Pile of candies" << std::endl;
   printArr(candies);

@@ -34,9 +34,9 @@
 int bruteForce(int n, int index, int maxSum) {
   for (int i = maxSum; i > 0; --i) {
     int curMaxSum = i;
-    int idx = index;
-
+    
     // * Find the left sum
+    int idx = index;
     int leftSum = 0;
     while (idx > 0) {
       // * This will make sure that adjacent ele to left have diff <= 1

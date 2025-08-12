@@ -50,7 +50,7 @@ ll lowerBound(std::vector<int> &nums, int target, int l , int r) {
   return ans;
 }
 
-long long upperBound(std::vector<int> &nums, int target, int l , int r) {
+ll upperBound(std::vector<int> &nums, int target, int l , int r) {
   int n = nums.size();
   int ans = n;
   while (l <= r) {
@@ -115,10 +115,8 @@ long long countFairPairs(std::vector<int> nums, int lower, int upper) {
   return ans;
 }
 
-
 ll helper(std::vector<int> &nums, int target) {
-  ll l = 0;
-  ll r = nums.size() - 1;
+  ll l = 0, r = nums.size() - 1;
   ll sum = 0;
   while (l < r) {
     if (nums[l] + nums[r] <= target) {
@@ -131,7 +129,6 @@ ll helper(std::vector<int> &nums, int target) {
   return sum;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Two Pointer Approach
 // * SPACE COMPLEXITY O(1)
@@ -141,14 +138,14 @@ long long countFairPairs2(std::vector<int> nums, int lower, int upper) {
 }
 
 int main(void) {
-  int lower = 3, upper = 6;
-  std::vector<int> nums = {0, 1, 7, 4, 4, 5};
+  // int lower = 3, upper = 6;
+  // std::vector<int> nums = {0, 1, 7, 4, 4, 5};
 
   // int lower = 11, upper = 11;
   // std::vector<int> nums = {1, 7, 9, 2, 5};
 
-  // int lower = 8, upper = 13;
-  // std::vector<int> nums = {1, 4, 5, 1, 7, 4, 20};
+  int lower = 8, upper = 13;
+  std::vector<int> nums = {1, 4, 5, 1, 7, 4, 20};
 
   std::cout << "Lower: " << lower << " & Upper: " << upper << std::endl;
   printArr(nums);

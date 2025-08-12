@@ -1,3 +1,38 @@
+/*
+ * Leetcode - 1870
+ * Minimum Speed to Arrive on Time 
+ * 
+ * You are given a floating-point number hour, representing the amount of time you have to reach the office. 
+ * To commute to the office, you must take n trains in sequential order. 
+ * You are also given an integer array dist of length n, where dist[i] describes the distance (in kilometers) 
+ * of the ith train ride.
+ * 
+ * Each train can only depart at an integer hour, so you may need to wait in between each train ride.
+ * 
+ * For example, if the 1st train ride takes 1.5 hours, you must wait for an additional 0.5 hours
+ * before you can depart on the 2nd train ride at the 2 hour mark.
+ * 
+ * Return the minimum positive integer speed (in kilometers per hour) that all the trains must 
+ * travel at for you to reach the office on time, or -1 if it is impossible to be on time.
+ * 
+ * Tests are generated such that the answer will not exceed 107 and hour will have at most two digits 
+ * after the decimal point.
+ * 
+ * Example 1:
+ * Input  :  dist = [1,3,2], hour = 6
+ * Output :  1
+ * 
+ * Example 2:
+ * Input  :  dist = [1,3,2], hour = 2.7
+ * Output :  3
+ * 
+ * Example 3:
+ * Input  :  dist = [1,3,2], hour = 1.9
+ * Output :  -1
+ * 
+ * https://leetcode.com/problems/minimum-speed-to-arrive-on-time/description/
+ */
+
 #include <vector>
 #include <math.h>
 #include <iostream>
@@ -15,21 +50,28 @@ void printArr(std::vector<int> arr) {
 bool isValidSpeed(std::vector<int> &dist, int &speed, double &maxHours) {
   int n = dist.size();
   double currentHrs = 0;
-  for (int i = 0; i < n; ++i) {
+
+  for (int i = 0; i < n - 1; ++i) {
     double km = (double)(dist[i]);
-    if(i + 1 < n) { 
-      currentHrs += std::ceil((double)km / (double)speed);
-    } else {
-      currentHrs += ((double)km / (double)speed);
-    }
-    // std::cout << std::ceil((double)km / (double)speed) << std::endl;
+    double hr = std::ceil((double)km / (double)speed);
+    // std::cout << dist[i] << " => " << hr << std::endl;
+    currentHrs += hr;
   }
-  std::cout << speed << " -> " << currentHrs << std::endl;
+  double hr = ((double)(dist[n - 1]) / (double)speed);
+  currentHrs += hr;
+  // std::cout << dist[n - 1] << " => " << hr << std::endl;
+
+  // std::cout << speed << " -> " << currentHrs << std::endl;
+  // std::cout << "------------------------------" << std::endl;
+
   return currentHrs <= maxHours;
 }
 
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
+// * TIME COMPLEXITY O(log(1e9-7)) * O(n)
+// * SPACE COMPLEXITY O(1)
 int minSpeedOnTime(std::vector<int>& dist, double hour) {
-  int l = 1, r = *std::max_element(dist.begin(), dist.end());
+  int l = 0, r = 1e9 - 7;
   int ans = -1;
   while (l <= r) {
     int m = l + (r - l) / 2;

@@ -79,8 +79,7 @@ int minimizeArrayValue2(std::vector<int> arr) {
   int res = -1;
   for (int i = 0; i < n; ++i) {
     sum += arr[i];
-    float arr_len = (i + 1) * 1.0;
-    int cur = std::ceil(sum / arr_len);
+    int cur = std::ceil((float)sum / (float)(i + 1)); // * Get the avg no.
     res = std::max(res, cur);
     std::cout << sum << " " << cur  << std::endl;
   }
@@ -90,13 +89,13 @@ int minimizeArrayValue2(std::vector<int> arr) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> arr = {3, 7, 1, 6};
+  // std::vector<int> arr = {3, 7, 1, 6};
 
   // * testcase 2
   // std::vector<int> arr = {10, 1};
 
   // * testcase 3
-  // std::vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
+  std::vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
 
   printArr(arr);
 

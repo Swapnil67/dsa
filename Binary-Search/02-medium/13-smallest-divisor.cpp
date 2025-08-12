@@ -35,8 +35,8 @@ void printArr(std::vector<int> arr) {
 
 bool findIsPossibleDivisor(std::vector<int> &arr, int &threshold, int &divisor) {
   int divisorSum = 0;
-  for (int i = 0; i < arr.size(); i++) {
-    divisorSum = divisorSum + std::ceil(arr[i] / (divisor * 1.0));
+  for(auto &x: arr) {
+    divisorSum = divisorSum + std::ceil((float)x / (float)(divisor));
   }
   // std::cout << "divisor " << divisor << " | " << "divisorSum " << divisorSum << std::endl;
   return divisorSum <= threshold;
@@ -68,11 +68,9 @@ int findSmallestDivisor(std::vector<int> arr, int threshold) {
   while (l <= r) {
     int m = l + (r - l) / 2;
     // * O(N)
-    bool isPossibleDivisor = findIsPossibleDivisor(arr, threshold, m);
-    if(isPossibleDivisor) {
+    if(findIsPossibleDivisor(arr, threshold, m)) {
       r = m - 1;
-    }
-    else {
+    } else {
       l = m + 1;
     }
   }
@@ -88,11 +86,13 @@ int main() {
   // int threshold = 6;
   // std::vector<int> arr = {1, 2, 5, 9};
 
+  std::cout << "Threshold " << threshold << std::endl;
   printArr(arr);
 
   // int smallestDivisor = bruteForce(arr, threshold);
   int smallestDivisor = findSmallestDivisor(arr, threshold);
   std::cout << "The smallest divisor is " << smallestDivisor << std::endl;
+
   return 0;
 }
 

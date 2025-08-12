@@ -47,9 +47,9 @@ int isSubsequence(std::string s, std::string p, std::vector<int> removable) {
     i++;
   }
 
-  std::cout << "Remove following indexes" << std::endl;
-  printArr(removable);
-  std::cout << "isSubsequence " << (j == n2) << std::endl;
+  // std::cout << "Remove following indexes" << std::endl;
+  // printArr(removable);
+  // std::cout << "isSubsequence " << (j == n2) << std::endl;
   return j == n2;
 }
 
@@ -58,9 +58,8 @@ int bruteForce(std::string s, std::string p, std::vector<int> removable) {
   int ans = 0;
   for (int i = 0; i < n; ++i) {
     std::vector<int> temp(removable.begin(), removable.begin() + i);
-    if (isSubsequence(s, p, temp)) {
+    if (isSubsequence(s, p, temp))
       ans = i;
-    }
   }
 
   return ans;
@@ -75,48 +74,55 @@ int isSubsequence2(std::string s, std::string p, std::vector<int> &removable, in
   int i = 0, j = 0;
   int n1 = s.size(), n2 = p.size();
   while (i < n1 && j < n2) {
-    if (rm[i] == 1) // * this character is removed, skip
+    // * this character is removed, skip
+    if (rm[i] == 1) {
+      i++;
       continue;
+    }
+
     if (s[i] == p[j])
       j++;
     i++;
   }
-  std::cout << j << " " << n2 << std::endl;
+  std::cout << "k " << k << std::endl;
+  // std::cout << j << " " << n2 << std::endl;
   return j == n2;
 }
 
 int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
   int n = removable.size();
   int ans = 0;
-  int l = 0, r = removable.size();
+  int l = 0, r = n - 1;
   while (l <= r) {
     int m = l + (r - l) / 2;
     if (isSubsequence2(s, p, removable, m)) {
+      ans = m;
       l = m + 1;
     } else {
       r = m - 1;
     }
   }
 
-  return r;
+  return ans;
 }
 
 int main(void) {
   // * testcase 1
-  std::string s = "abcacb", p = "ab";
-  std::vector<int> removable = {3, 1, 0};
+  // std::string s = "abcacb", p = "ab";
+  // std::vector<int> removable = {3, 1, 0};
 
   // * testcase 2
   // std::string s = "abcbddddd", p = "abcd";
   // std::vector<int> removable = {3, 2, 1, 4, 5, 6};
 
   // * testcase 3
-  // std::string s = "abcab", p = "abc";
-  // std::vector<int> removable = {0, 1, 2, 3, 4};
+  std::string s = "abcab", p = "abc";
+  std::vector<int> removable = {0, 1, 2, 3, 4};
 
   std::cout << "s: " << s << " p: " << p << std::endl;
   printArr(removable);
 
+  // int ans = bruteForce(s, p, removable);
   int ans = maximumRemovals(s, p, removable);
   std::cout << "Maximum Number of Removable Characters: " << ans << std::endl;
   return 0;

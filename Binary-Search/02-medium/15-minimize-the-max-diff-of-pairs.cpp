@@ -40,10 +40,12 @@ bool isValid(std::vector<int> &nums, int maxPairs, int pairDiff) {
   for (int i = 0; i < n - 1; ++i) {
     if (curPairs >= maxPairs)
       return true;
+
+    // * current pair difference
     int curDiff = nums[i + 1] - nums[i];
     if (curDiff <= pairDiff) {
-      curPairs++;
-      i++;
+      curPairs++;  
+      i++;          // * Go to next pair
     }
   }
 
@@ -52,6 +54,7 @@ bool isValid(std::vector<int> &nums, int maxPairs, int pairDiff) {
 }
 
 // * ------------------------- APPROACH : Optimal APPROACH -------------------------
+// * We need to check if we can find 'p' no. of pairs with difference <= minDiff using binary search
 // * TIME COMPLEXITY n * O(logm)
 // * SPACE COMPLEXITY O(1)
 int minimizeMax(std::vector<int> &nums, int p) {
@@ -63,12 +66,11 @@ int minimizeMax(std::vector<int> &nums, int p) {
 
   int ans = 0;
   while (l <= r) {           // * O(logm) 'm' = nums[n - 1] - nums[0]
-    int m = l + (r - l) / 2;
-    if(isValid(nums, p, m)) {   // * O(N)
+    int m = l + (r - l) / 2;    // * Assume this is min pair distance
+    if (isValid(nums, p, m)) {   // * O(N)
       ans = m;
-      r = m - 1;
-    }
-    else {
+      r = m - 1;                // * since we want to minimize the diff
+    } else {
       l = m + 1;
     }
   }
@@ -89,6 +91,7 @@ int main(void) {
 
   int ans = minimizeMax(nums, p);
   std::cout << "Answer: " << ans << std::endl;
+
   return 0;
 }
 

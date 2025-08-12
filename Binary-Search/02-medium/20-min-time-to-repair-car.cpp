@@ -93,6 +93,7 @@ int main(void) {
   
   long long ans = repairCars(ranks, cars);
   std::cout << "Max time to wait " << ans << std::endl;
+  
   return 0;
 }
 

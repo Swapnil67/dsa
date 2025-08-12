@@ -86,12 +86,12 @@ int findLeastPossileWeight(std::vector<int> weights, int maximumDays) {
 
 int main() {
   // * testcase 1
-  std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  int days = 5;
+  // std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  // int days = 5;
   
   // * testcase 2
-  // std::vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
-  // int days = 5;
+  std::vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
+  int days = 5;
 
   printArr(weights);
   // int leastWeight = bruteForce(weights, days);
