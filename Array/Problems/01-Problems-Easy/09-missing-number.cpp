@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 268
  * * Missing Number
  * * Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that
  * * is missing from the array.
@@ -18,7 +19,9 @@
  * * https://leetcode.com/problems/missing-number/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -27,25 +30,28 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+bool linearSearch(std::vector<int> &nums, int target) {
+  for (int i = 0; i < nums.size(); ++i) {
+    if (nums[i] == target)
+      return true;
+  }
+  return false;
+}
+
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 1; i <= n; i++) {
-    bool exists = false;
-    for (int j = 0; j < n; j++) {
-      if(arr[j] == i) {
-        exists = true;  
-        break;
-      }
-    }
-    if(exists == false) {
+int bruteForce(std::vector<int> &nums) {
+  int n = nums.size();
+
+  for(int i = 0; i <= n; ++i) {
+    if (!linearSearch(nums, i)) {
       return i;
     }
   }
-  return 0;
+
+  return -1;
 }
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------`
@@ -54,7 +60,8 @@ int bruteForce(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int betterApproach(std::vector<int> arr) {
   int n = arr.size();
-  if(n == 0) return -1;
+  if (n == 0)
+    return -1;
 
   int maxEle = *std::max_element(arr.begin(), arr.end());
 
@@ -91,8 +98,11 @@ int optimal(std::vector<int>arr) {
 
 int main() {
   // std::vector<int> arr = {3, 0, 1};
-  std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
-  // std::vector<int> arr = { 4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0 };
+  // std::vector<int> arr = {9, 6, 4, 2, 3, 5, 7, 0, 1};
+  std::vector<int> arr = { 4, 6, 7, 9, 2, 1, 8, 11, 10, 3, 0 };
+
+  printArr(arr);
+
   // int missingNumber = bruteForce(arr);
   // int missingNumber = betterApproach(arr);
   int missingNumber = optimal(arr);
@@ -101,4 +111,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 09-missing-number.cpp -o 09-missing-number && ./09-missing-number
+// * g++ --std=c++17 09-missing-number.cpp -o output && ./output

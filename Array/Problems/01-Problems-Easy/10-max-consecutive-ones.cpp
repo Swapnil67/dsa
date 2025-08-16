@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 485
  * * Max Consecutive Ones
  * * Given a binary array nums, return the maximum number of consecutive 1's in the array.
 
@@ -14,7 +15,8 @@
  * * https://www.naukri.com/code360/problems/maximum-consecutive-ones_3843993
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -23,7 +25,6 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * This is the only optimal approach
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int maxConsecutiveOnes(std::vector<int> arr) {

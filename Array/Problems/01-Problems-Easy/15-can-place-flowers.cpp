@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 605
  * * Can Place Flowers
  * * You have a long flowerbed in which some of the plots are planted, and some are not.
  * * However, flowers cannot be planted in adjacent plots.
@@ -18,6 +19,7 @@
  * * https://leetcode.com/problems/can-place-flowers/description/
 */
 
+#include <vector>
 #include<iostream>
 
 void printArr(std::vector<int> arr) {
@@ -69,4 +71,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 15-can-place-flowers.cpp -o 15-can-place-flowers && ./15-can-place-flowers
+// * g++ --std=c++17 15-can-place-flowers.cpp -o output && ./output

@@ -10,8 +10,8 @@
  * * https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/description/
 */
 
-#include<iostream>
-
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {
@@ -31,15 +31,18 @@ void bruteForce(std::vector<int> &arr) {
     return;
   }
   for (int i = 0; i < n; i++) {
-    if(i == n-1) {
+    if (i == n - 1) {
       arr[i] = -1;
       break;
     }
-    int greatest = arr[i+1];
+
+    int greatest = arr[i + 1];
     for (int j = i + 1; j < n; j++) {
       greatest = std::max(greatest, arr[j]);
     }
-    if(i == n-1) greatest = -1;
+    
+    if (i == n - 1)
+      greatest = -1;
     arr[i] = greatest;
   }
 }
@@ -68,4 +71,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 16-replace-elements-with-greatest.cpp -o 16-replace-elements-with-greatest && ./16-replace-elements-with-greatest
+// * g++ --std=c++17 16-replace-elements-with-greatest.cpp -o output && ./output

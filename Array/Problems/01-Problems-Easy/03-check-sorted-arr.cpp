@@ -1,5 +1,5 @@
 /**
- * *  Largest Element in the Array
+ * * Largest Element in the Array
  * * You have been given an array ‘a’ of ‘n’ non-negative integers.
  * * You have to check whether the given array is sorted in the non-decreasing order or not.
 
@@ -14,8 +14,8 @@
  * * https://www.naukri.com/code360/problems/ninja-and-the-sorted-check_6581957
 */
 
-
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 bool checkSorted(std::vector<int> arr) {
   bool isSorted = true;

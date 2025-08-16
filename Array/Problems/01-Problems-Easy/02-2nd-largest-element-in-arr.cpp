@@ -9,7 +9,9 @@
 
  * * https://www.naukri.com/code360/problems/largest-element-in-the-array-largest-element-in-the-array_5026279
 */
-#include<iostream>
+#include <vector>
+#include <climits>
+#include <iostream>
 
 // * Second Largest Element
 int findSecondLargestEle(std::vector<int> arr) {
@@ -35,12 +37,11 @@ int findSecondSmallestEle(std::vector<int> arr) {
 
   int smallest = arr[0], secondSmallest = INT_MAX;
 
-  for(int i=1; i<arr.size(); i++) {
-    if(arr[i] < smallest) {
+  for (int i = 1; i < arr.size(); i++) {
+    if (arr[i] < smallest) {
       secondSmallest = smallest;
       smallest = arr[i];
-    }
-    else if(arr[i] > smallest && arr[i] < secondSmallest) {
+    } else if(arr[i] > smallest && arr[i] < secondSmallest) {
       secondSmallest = arr[i];
     }
   }
@@ -49,17 +50,19 @@ int findSecondSmallestEle(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = { 1 };
+  std::vector<int> arr = {1};
+
   // * testcase 2
   // std::vector<int> arr = { 1,2,3,4,5 }; // * [4, 2]
+
   // * testcase 3
   // std::vector<int> arr = { 3,1,2,7,10 }; // * [7, 2]
 
 
   int secondLargest = findSecondLargestEle(arr);
-  std::cout<<"Second Largest Element "<<secondLargest<<std::endl;
+  std::cout << "Second Largest Element " << secondLargest << std::endl;
   int secondSmallest = findSecondSmallestEle(arr);
-  std::cout<<"Second Smallest Element "<<secondSmallest<<std::endl;
+  std::cout << "Second Smallest Element " << secondSmallest << std::endl;
 }
 
 // * Run the code

@@ -14,8 +14,9 @@
  * * https://www.naukri.com/code360/problems/left-rotate-an-array-by-one_5026278
 */
 
-#include<set>
-#include<iostream>
+#include <set>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {

@@ -24,8 +24,9 @@
  * * https://leetcode.com/problems/find-pivot-index/description/
 */
 
-#include<iostream>
-#include<numeric>
+#include <vector>
+#include <numeric>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

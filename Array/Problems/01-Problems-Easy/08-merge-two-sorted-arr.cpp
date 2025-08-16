@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 88
  * * Merge 2 Sorted Array
  * * Given two sorted arrays, ‘a’ and ‘b’, of size ‘n’ and ‘m’, respectively, return the union of the arrays.
  * * The union of two sorted arrays can be defined as an array consisting of the common and the distinct elements
@@ -9,11 +10,13 @@
  * * Input  : 'a '= [1, 2, 3, 4, 6], ‘b’ = [2, 3, 5]
  * * Output : [1, 2, 3, 4, 5, 6]
 
+ * * https://leetcode.com/problems/merge-sorted-array/description/
  * * https://www.naukri.com/code360/problems/sorted-array_6613259
 */
 
-#include<set>
-#include<iostream>
+#include <set>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   for(int i=0; i<arr.size(); i++) {

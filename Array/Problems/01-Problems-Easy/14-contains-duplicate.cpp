@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 217
  * * Contains Duplicate
  * * Given an integer array nums, return true if any value appears at least twice in the array, and return false if
  * * every element is distinct.
@@ -15,13 +16,14 @@
 */
 
 #include <set>
-#include <map>
+#include <vector>
 #include <iostream>
+#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  for (int i = 0; i < n; i++) {
+    std::cout << arr[i] << " ";
   }
   std::cout<<std::endl;
 }
@@ -31,7 +33,7 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(N) + O(N)
 // * SPACE COMPLEXITY O(N)
 bool bruteForce(std::vector<int> &nums) {
-  std::map<int, int> countMap;
+  std::unordered_map<int, int> countMap;
   int n = nums.size();
   for (int i = 0; i < n; i++) {
     countMap[nums[i]]++;

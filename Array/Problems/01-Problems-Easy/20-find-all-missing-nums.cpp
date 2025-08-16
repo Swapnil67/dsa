@@ -14,7 +14,8 @@
  * * https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

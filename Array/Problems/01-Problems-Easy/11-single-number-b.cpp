@@ -20,8 +20,9 @@
 
 // ! Array is sorted
 
-#include<map>
-#include<iostream>
+#include <map>
+#include <vector>
+#include <iostream>
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
@@ -50,16 +51,15 @@ int bruteForce(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(N/2)+1
 int betterApproach(std::vector<int> arr) {
   std::map<int, int> numMap;
-  int n = arr.size();
+
   // * O(NlogM)
-  for(int i=0; i<n; i++) {
-    numMap[arr[i]]++;
-  }
+  for (auto &x: arr)
+    numMap[x]++;
 
   // * O(N/2) + 1
-  for(auto it: numMap) {
-    if(it.second == 1) return it.first;
-  }
+  for (auto it : numMap)
+    if (it.second == 1)
+      return it.first;
 
   return 0;
 }
@@ -69,7 +69,7 @@ int betterApproach(std::vector<int> arr) {
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
 int optimalApproach(std::vector<int> arr) {
-  int l = 0, r = arr.size()-1;
+  int l = 0, r = arr.size() - 1;
 
   // * Boundary Cases
   if(r == 0)
@@ -80,18 +80,18 @@ int optimalApproach(std::vector<int> arr) {
     return arr[r];
   
   while(l <= r) {
-    int mid = l + (r - l) / 2;
+    int m = l + (r - l) / 2;
     // * Unique Element
-    if (arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]) {
-      return arr[mid];
+    if (arr[m] != arr[m + 1] && arr[m] != arr[m - 1]) {
+      return arr[m];
     }
 
-    // * Check which side to exclude
-    if ((mid % 2 == 0) && arr[mid] == arr[mid - 1]) || ((mid % 2 == 1) && arr[mid] == arr[mid + 1]) {
-      l = mid+1;
-    }
-    else {
-      r = mid-1;
+    if (((m % 2 == 0) && (arr[m] == arr[m + 1]) || ((m % 2 == 1) && (arr[m] == arr[m - 1]))))
+    {
+      // * standing of left side of single number
+      l = m + 1; 
+    } else {
+      r = m - 1;
     }
   }
   return 0;

@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 136
  * * Single Number
  * * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 
@@ -20,8 +21,9 @@
 
 // ! Array is not sorted
 
-#include<map>
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <unordered_map>
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
@@ -49,17 +51,16 @@ int bruteForce(std::vector<int> arr) {
 // * M = size of the map
 // * SPACE COMPLEXITY O(N/2)+1
 int betterApproach(std::vector<int> arr) {
-  std::map<int, int> numMap;
-  int n = arr.size();
+  std::unordered_map<int, int> numMap;
+
   // * O(NlogM)
-  for(int i=0; i<n; i++) {
-    numMap[arr[i]]++;
-  }
+  for (auto &x: arr)
+    numMap[x]++;
 
   // * O(N/2) + 1
-  for(auto it: numMap) {
-    if(it.second == 1) return it.first;
-  }
+  for (auto it : numMap)
+    if (it.second == 1)
+      return it.first;
 
   return 0;
 }

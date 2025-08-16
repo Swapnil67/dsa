@@ -1,21 +1,28 @@
 /**
+ * * Leetcode - 560
  * * Longest Subarray With Sum K
  * * You are given an array 'a' of size 'n' and an integer 'k'.
  * * Find the length of the longest subarray of 'a' whose sum is equal to 'k'.
 
  * * Example 1
- * * Input  : 'n’ = 7 ‘k’ = 3, ‘a’ = [1, 2, 3, 1, 1, 1, 1]
+ * * Input  : nums = [1, 2, 3, 1, 1, 1, 1], ‘k’ = 3
  * * Output : 3
 
- * * https://www.naukri.com/code360/problems/longest-subarray-with-sum-k_6682399
+ * * Example 2
+ * * Input  : nums = [1, 2, 3], k = 3
+ * * Output : 2
+
+ * * https://leetcode.com/problems/subarray-sum-equals-k/description/
  * * https://www.naukri.com/code360/problems/longest-subarray-with-sum-k_5713505
 */
 
 #include <map>
+#include <vector>
+#include <climits>
 #include <iostream>
 
 void printArr(std::vector<int> arr) {
-  for(int i=0; i<arr.size(); i++) {
+  for (int i = 0; i < arr.size(); i++) {
     std::cout << arr[i] << " ";
   }
   std::cout << std::endl;
@@ -75,8 +82,7 @@ int betterApproach(std::vector<int>arr, long long k) {
 
 
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
-// * Solution for positive and zeros elements in arrays
-// * Two Pointer
+// * Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1 )
 int optimalApproach(std::vector<int>arr, long long k) {
@@ -99,19 +105,24 @@ int optimalApproach(std::vector<int>arr, long long k) {
 
 
 int main() {
-  std::vector<int> arr = {1, 2, 3, 1, 1, 1, 1};
+  // * testcase 1
   int k = 3;
+  std::vector<int> arr = {1, 2, 3, 1, 1, 1, 1};
+
+  // * testcase 2
   // std::vector<int> arr = {2, 2, 4, 1, 2};
   // int k = 2;
   
   printArr(arr);
+
   // int longestSubArrLength = bruteForce(arr, k);
   int longestSubArrLength = betterApproach(arr, k);
   // int longestSubArrLength = optimalApproach(arr, k);
+
   std::cout<<"Sub array with max length "<<longestSubArrLength<<std::endl;
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 12-longest-subarray-with-sum-k.cpp -o 12-longest-subarray-with-sum-k && ./12-longest-subarray-with-sum-k
+// * g++ --std=c++17 12-longest-subarray-with-sum-k.cpp -o output && ./output

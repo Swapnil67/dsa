@@ -11,8 +11,10 @@
  * * https://www.naukri.com/code360/problems/reading_6845742
 */
 
-#include<map>
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -46,7 +48,7 @@ std::vector<int> bruteForce(std::vector<int>arr, int target) {
 std::vector<int> betterApproach(std::vector<int> arr, int target) {
   std::vector<int> ans;
   int n = arr.size();
-  std::map<int, int> eleMap;
+  std::unordered_map<int, int> eleMap;
   for (int i = 0; i < n; i++) {
     int rem = target - arr[i];
     if (eleMap.find(rem) != eleMap.end()) {
@@ -96,7 +98,6 @@ int main() {
   // * Note that this does not returs the index  
   // bool ans = optimalApproach(arr, target);
   // std::cout<<"Sum found "<<ans<<std::endl;
-
 
   return 0;
 }
