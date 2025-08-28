@@ -17,8 +17,8 @@
  * * https://leetcode.com/problems/assign-cookies/description/
 */
 
-#include <iostream>
 #include <vector>
+#include <iostream>
 #include <algorithm>
 
 // * ------------------------- Optimal APPROACH -------------------------`
@@ -40,11 +40,17 @@ int findContentChildren(std::vector<int> children, std::vector<int> cookies) {
 }
 
 int main() {
-  std::vector<int> children = {1, 2};
-  std::vector<int> cookies = {0, 0, 0, 1, 1, 3};
+  // * testcase 1
+  // std::vector<int> children = {1, 2};
+  // std::vector<int> cookies = {0, 0, 0, 1, 1, 3};
 
-  // std::vector<int> children = {10, 9, 8, 7};
-  // std::vector<int> cookies = {5, 6, 7, 8};
+  // * testcase 2
+  std::vector<int> children = {10, 9, 8, 7};
+  std::vector<int> cookies = {5, 6, 7, 8};
+
+  // * 7, 8, 9, 10
+  // * 5, 6, 7, 8
+
   int ans = findContentChildren(children, cookies);
   std::cout << ans << std::endl;
   return 0;

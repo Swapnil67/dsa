@@ -26,10 +26,17 @@ void swap(char& a, char& b) {
 std::string reverseString(std::string s) {
   int n = s.size();
   int l = 0, r = n - 1;
-  while (l < r) {
-      swap(s[l++], s[r--]);
-  }
+  while (l < r)
+    swap(s[l++], s[r--]);
   return s;
+}
+
+void reverseWord(std::string &str, int l, int r) {
+  while (l < r) {
+    swap(str[l], str[r]);
+    l++;
+    r--;
+  }
 }
 
 // * TIME COMPLEXITY (N)
@@ -39,31 +46,57 @@ std::string reverseWords(std::string s) {
   int c = 0;
   std::string ans = "";
   for (int i = 0; i < n; ++i) {
-    if(isspace(s[i])) {
-      std::string t = reverseString(s.substr(c, i - c));
-      // std::cout << c << " to " << i - 1 << " => " << ans << std::endl;
-      c = i + 1;
+    if (isspace(s[i])) {
+      std::string t = s.substr(c, i - c);
+      t = reverseString(t);
       ans += t;
       ans += " ";
+      // std::cout << c << " to " << i - 1 << " => " << t << std::endl;
+      c = i + 1;
     }
   }
 
   std::string t = reverseString(s.substr(c, n - c));
   ans += t;
+
   return ans;
 }
 
+// * Inplace Reverse
+std::string reverseWords(std::string s) {
+  int n = s.size();
+  int i = 0;
+  for (int j = 0; j < n; ++j) {
+    if (isspace(s[j])) {
+      // * Reverse word
+      reverseWord(s, i, j - 1);
+      i = j + 1;
+    }
+  }
+  
+  if(i < n) {
+    reverseWord(s, i, n - 1);
+  }
+
+  return s;
+}
+
+
 int main() {
   // * testcase 1
-  std::string s = "Let's take LeetCode contest";
+  // std::string s = "Let's take LeetCode contest";
+
   // * testcase 2
   // std::string s = "Roronoa Zoro";
+
   // * testcase 3
-  // std::string s = "Mr Ding";
+  std::string s = "Mr Ding";
 
   std::cout << s << std::endl;
   std::string ans = reverseWords(s);
   std::cout << ans << std::endl;
+
+  return 0;
 }
 
 // * Run the code

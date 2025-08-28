@@ -74,7 +74,8 @@ std::vector<int> applyOperations(std::vector<int>& nums) {
   return nums;
 }
 
-int main() {
+int main(void) {
+  
   std::vector<int> nums = {1, 2, 2, 1, 1, 0};
   std::cout << "Before Applying operations" << std::endl;
   printArr(nums);

@@ -19,6 +19,7 @@
  * * Input  : word = "substitution", abbr = "s55n";
  * * Output : 1
 
+ * * http://leetcode.com/problems/valid-word-abbreviation/description/
  * * https://neetcode.io/problems/valid-word-abbreviation
 */
 
@@ -35,14 +36,12 @@ bool validWordAbbreviation(std::string word, std::string abbr) {
       return false;
 
     if(isalpha(abbr[j])) {
-      if (word[i] == abbr[j]) {
-        i++, j++;
-      } else {
+      if (word[i] != abbr[j])
         return false;
-      }
+      i++, j++;
     } else {  
       int numLen = 0;
-      while(j < m && isdigit(abbr[j])) {
+      while (j < m && isdigit(abbr[j])) {
         numLen = numLen * 10 + (abbr[j] - '0');
         j++;
       }
@@ -53,13 +52,31 @@ bool validWordAbbreviation(std::string word, std::string abbr) {
   return i == n && j == m;
 }
 
-int main() {
-  std::string word = "apple", abbr = "a3e";
+bool validWordAbbreviation2(std::string &word, std::string &abbr) {
+  int n = word.size();
+  int i = 0;
+
+  for (char &c : abbr) {
+    if (isdigit(c)) {
+      i += c - '0';
+    } else {
+      std::cout << word[i] << " " << c << std::endl;
+      if (word[i] != c) 
+        return false;
+      i++;
+    }
+  }
+  return true;
+}
+
+
+int main(void) {
+  // std::string word = "apple", abbr = "a3e";
   // std::string word = "apple", abbr = "a4";
   // std::string word = "international", abbr = "i9l";
   // std::string word = "abbreviation", abbr = "abbreviation";
   // std::string word = "internationalization", abbr = "i18n";
-  // std::string word = "substitution", abbr = "s55n";
+  std::string word = "substitution", abbr = "s55n";
 
   bool ans = validWordAbbreviation(word, abbr);
   std::cout << "Valid word abbreviation: " << ans << std::endl;

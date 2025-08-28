@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 88
  * Merge Two Sorted Arrays
  * 
  * Example 1
@@ -12,11 +13,10 @@
  * https://leetcode.com/problems/merge-sorted-array/description/
 */
 
-#include <iostream>
 #include <vector>
+#include <iostream>
 
-template <typename T>
-void printArr(std::vector<T> arr) {
+void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
     std::cout << arr[i] << " ";
   }
@@ -24,7 +24,6 @@ void printArr(std::vector<T> arr) {
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
-
 // * Classic Merge Sort Algo
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
@@ -57,7 +56,6 @@ void mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) 
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-
 // * Merge sort but using one of input arr as output array
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

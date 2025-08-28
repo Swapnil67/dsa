@@ -52,7 +52,7 @@ int bruteForce(std::vector<int> arr) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int optimalApproach(std::vector<int> arr) {
+int removeDuplicates(std::vector<int> arr) {
   int n = arr.size();
   int i = 0, j = 1;
   while (j < n) {
@@ -67,13 +67,13 @@ int optimalApproach(std::vector<int> arr) {
 
 int main() {
   std::vector<int> arr = {1, 2, 2, 3, 3, 3, 4, 4, 5, 5};
-  std::cout<<"Input Vector "<<std::endl;
+  std::cout << "Input Vector " << std::endl;
   printArr(arr);
   // int uniqueElements = bruteForce(arr);
-  int uniqueElements = optimalApproach(arr);
+  int uniqueElements = removeDuplicates(arr);
   std::cout << "Unique Elements " << uniqueElements << std::endl;
 }
 
 
 // * Run the code
-// * g++ --std=c++17 04-remove-duplicates-arr.cpp -o output && ./output
+// * g++ --std=c++17 03-remove-duplicates-arr.cpp -o output && ./output

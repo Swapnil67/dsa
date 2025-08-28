@@ -28,11 +28,10 @@ void printArr(std::vector<T> arr) {
   std::cout << std::endl;
 }
 
-template <typename T>
-void swap(T &a, T &b) {
-  T temp = a;
-  a = b;
-  b = temp;
+void swap(int &a, int &b) {
+  a = a ^ b;
+  b = a ^ b;
+  a = a ^ b;
 }
 
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
@@ -99,6 +98,8 @@ int main() {
 
   std::cout << "After Sorting" << std::endl;
   printArr(ans);
+  
+  return 0;
 }
 
 // * Run the code

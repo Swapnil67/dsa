@@ -1,6 +1,5 @@
 /*
  * Leetcode - 455
- * 
  * Find First Palindromic String in the Array
  * Given an array of strings words, return the first palindromic string in the array. 
  * If there is no such string, return an empty string "".
@@ -23,7 +22,7 @@ void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
   std::cout << "[ "; 
   for (std::string s : strs) {
-    std::cout << s << ", ";
+    std::cout << '"' << s << '"' << ", ";
   }
   std::cout << "]" << std::endl;
 }

@@ -51,7 +51,7 @@ void moveZeroes(std::vector<int> &nums) {
   }
 }
 
-int main() {
+int main(void) {
   std::vector<int> arr = {1, 2, 0, 0, 2, 3};
   // std::vector<int> arr = {0, 0, 0, 1};
   // std::vector<int> arr = {8, 6, 9};

@@ -9,7 +9,6 @@
  * Example 2
  * Input  : nums1 = {{1, 2}, {2, 3}, {4, 5}}, nums2 = {{1, 4}, {3, 2}, {4, 1}}
  * Output : {{1, 6}, {2, 3}, {3, 2}, {4, 6}} 
- * Output : "rM gniD" 
 
  * https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/description/
 */
@@ -36,10 +35,12 @@ std::vector<std::vector<int>> mergeArrays(
   std::vector<std::vector<int>> ans;
   int i = 0, j = 0;
   while (i < nums1.size() && j < nums2.size()) {
-    if (nums1[i][0] == nums2[j][0]) {
+    int a = nums1[i][0];
+    int b = nums2[j][0];
+    if (a == b) {
       ans.push_back({nums1[i][0], nums1[i][1] + nums2[j][1]});
       i++, j++;
-    } else if(nums1[i][0] > nums2[j][0]) {
+    } else if(a > b) {
       ans.push_back({nums2[j]});
       j++;
     } else {

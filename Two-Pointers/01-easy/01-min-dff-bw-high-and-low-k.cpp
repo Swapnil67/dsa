@@ -1,4 +1,5 @@
 /*
+ * Leetcode - 1984
  * Minimum Difference Between Highest and Lowest of K Scores
  * You are given a 0-indexed integer array nums, where nums[i] represents the score of the ith student. 
  * You are also given an integer k.
@@ -18,9 +19,9 @@
  * https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/description/
 */
 
-#include <iostream>
 #include <vector>
 #include <climits>
+#include <iostream>
 #include <algorithm>
 
 void printArr(std::vector<int> arr) {
@@ -49,8 +50,8 @@ int minimumDifference(std::vector<int> arr, int k) {
 
 
 int main() {
-  // int k = 3;
-  int k = 2;
+  int k = 3;
+  // int k = 2;
   std::vector<int> nums = {9, 4, 1, 7};
   printArr(nums);
   int ans = minimumDifference(nums, k);

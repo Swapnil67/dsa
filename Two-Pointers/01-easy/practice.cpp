@@ -1,7 +1,7 @@
-#include<vector>
-#include<climits>
-#include<iostream>
-#include<algorithm>
+#include <vector>
+#include <climits>
+#include <iostream>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -41,17 +41,20 @@ void swap(T &a, T &b) {
   b = temp;
 }
 
+
+// * ------------------------------------------------------------------------ 
+
 // * 01 - Minimum Difference Between Highest and Lowest of K Scores
 // int minimumDifference(std::vector<int> &arr, int k) {
 // TODO
 // }
 
-// * 02 - Minimum Difference Between Highest and Lowest of K Scores
+// * 02 - Merge Two Sorted Arrays
 // void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
 // TODO
 // }
 
-// * 03 - Minimum Difference Between Highest and Lowest of K Scores
+// * 03 - Remove Duplicates from Sorted Array
 // int removeDuplicates(std::vector<int> &arr) {
 // TODO
 // }
@@ -61,19 +64,19 @@ void swap(T &a, T &b) {
 // TODO
 // }
 
-// * 05 - Assign Cookies
+// * 05 - Find First Palindromic String in the Array
 // std::string firstPalindrome(std::vector<std::string> &words) {
-// TODO Tonight
+// TODO
 // }
 
-// * 06 - Sort Array By Parity 
-// std::vector<int> sortArrayByParity(std::vector<int> &arr) {
-// TODO Tonight
+// * 06 - Sort Array By Parity
+// std::vector<int> sortArrayByParity(std::vector<int> &nums) {
+// TODO
 // }
 
-// * 07 - TODO
+// * 07 - Reverse Words in a String III
 // std::string reverseWords(std::string s) {
-// TODO Tonight
+// TODO
 // }
 
 // * 08 - Merge Two 2D Arrays by Summing Values
@@ -90,10 +93,35 @@ void swap(T &a, T &b) {
 
 // * 10 - Valid Word Abbreviation
 // bool validWordAbbreviation(std::string &word, std::string &abbr) {
-// TODO Submit Tonight
+// TODO
 // }
 
-int main() {
+// * 11 - Reverse Vowels of a String
+// bool reverseVowels(std::string &word, std::string &abbr) {
+// TODO
+// }
+
+// * 12 - Apply Operations to an Array
+// std::vector<int> applyOperations(std::vector<int>& nums) {
+// TODO
+// }
+
+// * 13 - Backspace String Compare
+// bool backspaceCompare(std::string word1, std::string word2) {
+// TODO
+// }
+
+// * 14 - Check If Two String Arrays are Equivalent
+// bool arrayStringsAreEqual(std::vector<std::string> &word1, std::vector<std::string> &word2) {
+// TODO
+// }
+
+// * 15 - Squares of a Sorted Array
+// std::vector<int> sortedSquares(std::vector<int> &nums) {
+// TODO
+// }
+
+int main(void) {
   return 0;
 }
 

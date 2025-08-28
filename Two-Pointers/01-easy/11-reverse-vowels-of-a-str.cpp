@@ -14,3 +14,65 @@
 
  * * https://leetcode.com/problems/reverse-vowels-of-a-string/description/
 */
+
+#include <iostream>
+
+void swap(char &a, char &b) {
+  char temp = a;
+  a = b;
+  b = temp;
+}
+
+bool isVowel(char ch) {
+  switch (ch) {
+  case 'a':
+  case 'e':
+  case 'i':
+  case 'o':
+  case 'u':
+  case 'A':
+  case 'E':
+  case 'I':
+  case 'O':
+  case 'U': {
+      return true;
+  }
+  default:
+      return false;
+  }
+
+  return false;
+}
+
+std::string reverseVowels(std::string s) {
+  int n = s.size();
+  int i = 0, j = n - 1;
+
+  while (i < j) {
+    if (isVowel(s[i]) && isVowel(s[j])) {
+      swap(s[i], s[j]);
+      i++;
+      j--;
+    }
+    if (!isVowel(s[i]))
+      i++;
+
+    if (!isVowel(s[j]))
+      j--;
+  }
+
+  return s;
+}
+
+int main(void) {
+  std::string s = "IceCreAm";
+  std::cout << "Input String" << std::endl;
+  std::cout << s << std::endl;
+  
+  std::string ans = reverseVowels(s);
+  std::cout << ans << std::endl;
+  return 0;
+}
+
+// * Run the code
+// * g++ -std=c++17 11-reverse-vowels-of-a-str.cpp -o output && ./output
