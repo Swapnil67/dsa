@@ -58,15 +58,16 @@ int numRescueBoats(std::vector<int>& people, int limit) {
 }
 
 int main() {
-  int limit = 6;
-  std::vector<int> arr = {5, 1, 4, 2};
+  // int limit = 6;
+  // std::vector<int> arr = {5, 1, 4, 2};
   
-  // int limit = 9;
-  // std::vector<int> arr = {3, 8, 7, 1, 4};
+  int limit = 9;
+  std::vector<int> arr = {3, 8, 7, 1, 4};
 
   printArr(arr);
   int ans = numRescueBoats(arr, limit);
   std::cout << "minimum number of boats to carry every given person " << ans << std::endl;
+
   return 0;
 }
 

@@ -1,8 +1,9 @@
 #include <map>
 #include <set>
-#include <math.h>
-#include <vector>
+#include <stack>
 #include <deque>
+#include <vector>
+#include <math.h>
 #include <climits>
 #include <iostream>
 #include <algorithm>
@@ -69,26 +70,24 @@ void printVectorString(std::vector<std::string> strs) {
   std::cout << "]" << std::endl;
 }
 
-// * ----------------------------------------------------------------
-
 // * 01 - Remove Duplicates from Sorted Array II
 // int removeDuplicates(std::vector<int> &arr) {
 // TODO
 // }
 
-// * 02 - med
+// * 02 - Two Sum II - Input Array Is Sorted
 // std::vector<int> findTwoSumSorted(std::vector<int> &arr, int target) {    
-// TODO TOMORROW
+// TODO
 // }
 
-// * 03 - med
-// std::vector<std::vector<int>> threeSum(std::vector<int> &arr, int target) {
-// TODO TOMORROW
+// * 03 - Three Sum
+// std::vector<std::vector<int>> threeSum(std::vector<int> &arr) {
+// TODO
 // }
 
-// * 04 - med
+// * 04 - Four Sum
 // std::vector<std::vector<int>> fourSum(std::vector<int> &arr, int target) {
-// TODO TOMORROW
+// TODO
 // }
 
 // * 05 - Container With Most Water
@@ -127,7 +126,7 @@ void printVectorString(std::vector<std::string> strs) {
 // }
 
 // * 12 - Partition Array According to Given Pivot
-// std::vector<int> pivotArray2(std::vector<int> arr, int pivot) {
+// std::vector<int> pivotArray(std::vector<int> arr, int pivot) {
 // TODO
 // }
 
@@ -166,7 +165,7 @@ void printVectorString(std::vector<std::string> strs) {
 // TODO
 // }
 
-// * 20 - Maximum Width Ramp
+// * 20 - Array With Elements Not Equal to Average of Neighbors 
 // std::vector<int> rearrangeArray(std::vector<int> &nums) {
 // TODO
 // }
@@ -175,6 +174,13 @@ void printVectorString(std::vector<std::string> strs) {
 // int matchPlayersAndTrainers(std::vector<int> players, std::vector<int> trainers) {
 // TODO
 // }
+
+// * 22 - String Compression
+// int compress(std::vector<char> &chars) {
+// TODO
+// }
+
+// * ----------------------------------------------------------------
 
 int main(void) {
   return 0;

@@ -89,6 +89,12 @@ void rotate(std::vector<int> &arr, int k) {
   // * Reverse from k to n
   reverse(arr, k, n - 1);
 
+
+  // * Or using SDL
+  // std::reverse(arr.begin(), arr.end());
+  // std::reverse(arr.begin(), arr.begin() + k);
+  // std::reverse(arr.begin() + k, arr.begin() + n);
+
 }
 
 int main() {
@@ -108,6 +114,7 @@ int main() {
   
   std::cout << "After Rotation" << std::endl;
   printArr(arr);
+  
   return 0;
 }
 

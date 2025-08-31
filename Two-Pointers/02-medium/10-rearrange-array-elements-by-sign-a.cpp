@@ -90,6 +90,7 @@ int main() {
   
   std::cout << "After Rearranging" << std::endl;
   printArr(ans);
+  
   return 0;
 }
 

@@ -35,7 +35,7 @@ std::string addSpaces(std::string s, std::vector<int> spaces) {
   return ans;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   std::string s = "LeetcodeHelpsMeLearn";
   std::vector<int> spaces = {8, 13, 15};

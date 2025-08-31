@@ -1,7 +1,12 @@
 /*
  * Leetcode - 962
  * Maximum Width Ramp
+ * A ramp in an integer array nums is a pair (i, j) for which i < j and nums[i] <= nums[j]. 
+ * The width of such a ramp is j - i.
  * 
+ * Given an integer array nums, return the maximum width of a ramp in nums.
+ * If there is no ramp in nums, return 0.
+
  * Example 1
  * * Input       : nums = [6,0,8,2,1,5]
  * * Output      : 4
@@ -17,7 +22,7 @@
  * * Output      : 1
  * * Explanation : The maximum width ramp is achieved at (i, j) = (0, 1): nums[0] = 2 and nums[1] = 2.
  * 
- * https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/
+ * https://leetcode.com/problems/maximum-width-ramp/description/
 */
 
 #include <stack>
@@ -77,8 +82,7 @@ int betterApproach(std::vector<int> &nums) {
 // * SPACE COMPLEXITY O(N)
 int maxWidthRampA(std::vector<int> &nums) {
   int n = nums.size();
-  int ans = INT_MIN;
-
+  
   // * Create a vector where for each element next greater element
   std::vector<int> maxToRight(n);
   int curMax = INT_MIN;
@@ -87,7 +91,8 @@ int maxWidthRampA(std::vector<int> &nums) {
     maxToRight[i] = curMax;
   }
   printArr(maxToRight);
-
+  
+  int ans = INT_MIN;
   int i = 0, j = 0;
   while (j < n) {
     if(nums[i] <= maxToRight[j]) {
@@ -104,10 +109,10 @@ int maxWidthRampA(std::vector<int> &nums) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> nums = {6, 0, 8, 2, 1, 5};
+  std::vector<int> nums = {6, 0, 8, 2, 1, 5};
 
   // * testcase 2
-  std::vector<int> nums = {9, 8, 1, 0, 1, 9, 4, 0, 4, 1};
+  // std::vector<int> nums = {9, 8, 1, 0, 1, 9, 4, 0, 4, 1};
   
   // * testcase 3
   // std::vector<int> nums = {2, 2, 1};
@@ -119,11 +124,12 @@ int main() {
 
   int ans = maxWidthRampA(nums);
   std::cout << "Maximum Width Ramp: " << ans << std::endl;
+
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 17-max-width-ramp.cpp -o output && ./output
+// * g++ --std=c++20 19-max-width-ramp.cpp -o output && ./output
 
 
 

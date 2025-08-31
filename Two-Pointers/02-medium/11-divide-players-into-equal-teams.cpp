@@ -55,9 +55,10 @@ long long dividePlayers(std::vector<int>& skill) {
   
   long long ans = 0;
   while (i < j) {
-    if((skill[i] + skill[j]) != chemistry) {
+    if ((skill[i] + skill[j]) != chemistry) {
       return -1;
     }
+
     ans = ans + (long long)(skill[i] * skill[j]);
     i += 1;
     j -= 1;
@@ -88,7 +89,7 @@ long long dividePlayers2(std::vector<int>& skill) {
     if (freq_vec[required] <= 0)
       return -1;
 
-    ans += (skill[i] * required);
+    ans += (long long)(skill[i] * required);
   }
 
   // * This is because we also add duplicate pairs while we traverse the whole array
@@ -110,6 +111,7 @@ int main() {
   // long long ans = dividePlayers(skill);
   long long ans = dividePlayers2(skill);
   std::cout << ans << std::endl;
+
   return 0;
 }
 

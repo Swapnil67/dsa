@@ -83,7 +83,7 @@ std::vector<int> rearrangeArray2(std::vector<int> &nums) {
   return ans;
 }
 
-int main() {
+int main(void) {
   std::vector<int> nums = {1, 2, 3, 4, 5};
   printArr(nums);
 

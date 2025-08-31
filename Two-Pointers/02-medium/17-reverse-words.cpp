@@ -14,8 +14,8 @@
  * Input  : s = "the sky is blue"
  * Output : "blue is sky the"
 
- * https://www.naukri.com/code360/problems/reverse-words_696444
  * https://leetcode.com/problems/reverse-words-in-a-string/ 
+ * https://www.naukri.com/code360/problems/reverse-words_696444
 */
 
 #include <sstream>

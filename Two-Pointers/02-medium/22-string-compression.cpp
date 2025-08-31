@@ -80,6 +80,8 @@ int main(void) {
   int ans = compress(chars);
   printArr(chars);
   std::cout << "String Compression " << ans << std::endl;
+
+  return 0;
 }
 
 // * Run the code

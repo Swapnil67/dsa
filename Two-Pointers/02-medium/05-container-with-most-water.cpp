@@ -55,6 +55,8 @@ int maxArea(std::vector<int> height) {
   while (j > i) {
     int cur_area = (j - i) * std::min(height[i], height[j]);
     max_area = std::max(max_area, cur_area);
+
+    // * keep the more height for finding 'greater area'
     if (height[i] > height[j])
       j--;
     else
@@ -68,9 +70,11 @@ int main() {
   // std::vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
   // std::vector<int> nums = {1, 1};
   printArr(nums);
+
   // int ans = bruteForce(nums);
   int ans = maxArea(nums);
   std::cout << "maximum amount of water a container can store : " << ans << std::endl;
+
   return 0;
 }
 

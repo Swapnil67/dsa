@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 15
  * * Three Sum
  * * You are given an array ‘ARR’ containing ‘N’ integers.
  * * Return all the unique triplets [ARR[i], ARR[j], ARR[k]] such that i != j, j != k and k != i and their 
@@ -12,8 +13,8 @@
  * * Input  : 'nums' = [0,1,1]
  * * Output : []
 
- * * https://www.naukri.com/code360/problems/three-sum_6922132
  * * https://leetcode.com/problems/3sum/description/
+ * * https://www.naukri.com/code360/problems/three-sum_6922132
 */
 
 #include <set>
@@ -98,7 +99,7 @@ std::vector<std::vector<int>> betterApproach(std::vector<int> arr) {
     std::set<int> st;
     for (int j = i + 1; j < n; j++) {
       int k = -(arr[i] + arr[j]);
-      if(st.find(k) != st.end()) {
+      if (st.count(k)) {
         // * found a triplet
         std::vector<int> temp = {arr[i], arr[j], k};
         sort(temp.begin(), temp.end());
@@ -154,13 +155,14 @@ std::vector<std::vector<int>> threeSum(std::vector<int> arr) {
 int main() {
   // std::vector<int> arr = {-1, 0, 1, 2, -1, -4};
   std::vector<int> arr = {-2, -2, -2, -1, -1, -1, 0, 0, 0, 2, 2, 2, 2};
-  std::cout<<"Input Array"<<std::endl;
+  std::cout << "Input Array" << std::endl;
   printArr(arr);
   // std::vector<std::vector<int>> ans = bruteForce(arr);
   // std::vector<std::vector<int>> ans = betterApproach(arr);
   std::vector<std::vector<int>> ans = threeSum(arr);
-  std::cout<<"Tripletes which gives 0 sum"<<std::endl;
+  std::cout << "Tripletes which gives 0 sum" << std::endl;
   printMatrix(ans);
+
   return 0;
 }
 

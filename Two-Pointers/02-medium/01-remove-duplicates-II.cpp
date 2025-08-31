@@ -66,16 +66,16 @@ int removeDuplicates(std::vector<int> &arr) {
     int c = 1;
     // * count the duplicates
     while ((j + 1) < n && arr[j] == arr[j + 1]) {
-        c += 1;
-        j += 1;
+        c++;
+        j++;
     }
 
     // * loop over duplicates
     for (int k = 0; k < std::min(2, c); ++k) {
         arr[i] = arr[j];
-        i += 1;
+        i++;
     }
-    j += 1;
+    j++;
   }
   return i;
 }

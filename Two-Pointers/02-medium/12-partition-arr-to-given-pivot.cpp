@@ -77,8 +77,6 @@ std::vector<int> pivotArray(std::vector<int> &arr, int pivot) {
     }
   }
 
-  // std::cout << less_than_pivot_cnt << " " << equal_to_pivot_cnt << std::endl;
-
   std::vector<int> ans(n);
   int i = 0;     // * Less than pivot
   int j = less_than_pivot_cnt;
@@ -146,6 +144,7 @@ int main() {
   // std::vector<int> ans = pivotArray(nums, pivot);
   std::vector<int> ans = pivotArray2(nums, pivot);
   printArr(ans);
+  
   return 0;
 }
 

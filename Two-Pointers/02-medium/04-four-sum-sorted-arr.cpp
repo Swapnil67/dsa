@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 18
  * * Four Sum
  * * Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
  * * 0 <= a, b, c, d < ‘N’ and a, b, c, and d are distinct.
@@ -148,11 +149,8 @@ std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
       int k = j + 1, l = n - 1;
       // * 2 pointers:
       while (k < l) {
-        long sum = arr[i];
-        sum += arr[j];
-        sum += arr[k];
-        sum += arr[l];
-        if(sum == target) {
+        long sum = arr[i] + arr[j] + arr[k] + arr[l];
+        if (sum == target) {
           std::vector<int> temp = {arr[i], arr[j], arr[k], arr[l]};
           ans.push_back(temp);
           k++, l--;
@@ -160,7 +158,7 @@ std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
             k++;
           while (k < l && arr[l] == arr[l + 1])
             l--;
-        } 
+        }
         else if(sum > target) l--;
         else k++;
       }

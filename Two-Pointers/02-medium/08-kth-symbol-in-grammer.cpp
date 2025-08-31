@@ -64,9 +64,11 @@ int kthGrammar(int n, int k) {
 }
 
 int main() {
-  int n = 4, k = 8;
+  int n = 4, k = 2;
+  std::cout << "n: " << n << " k: " << k << std::endl;
   int ans = kthGrammar(n, k);
   std::cout << "Answer " << ans << std::endl;
+
   return 0;
 }
 

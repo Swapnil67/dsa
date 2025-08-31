@@ -94,16 +94,21 @@ bool areSentencesSimilar(std::string s1, std::string s2) {
 
 int main() {
   // * testcase 1
-  std::string s1 = "My name is Haley", s2 = "My Haley";
+  // std::string s1 = "My name is Haley", s2 = "My Haley";
 
   // * testcase 2
   // std::string s1 = "of", s2 = "of course";
+
+  // * testcase 3
+  std::string s1 = "of", s2 = "A lot of words";
 
   std::cout << s1 << std::endl;
   std::cout << s2 << std::endl;
 
   bool ans = areSentencesSimilar(s1, s2);
   std::cout << "Is similar sentences: " << ans << std::endl;
+
+  return 0;
 }
 
 // * Run the code

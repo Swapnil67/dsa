@@ -33,19 +33,26 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
-  int n = colors.size();
-  int timeRequired = 0, prevMax = 0;
-  for (int i = 0; i < n; ++i) {
-
-    // * reset the prevMax if found alternating color
-    if (i > 0 && colors[i] != colors[i - 1]) {
-      prevMax = 0;
+  int n = neededTime.size();
+  int l = 0, time = 0;
+  for (int r = 1; r < n; ++r) {
+    if (colors[l] == colors[r]) {
+      if (neededTime[l] < neededTime[r]) {
+        time += neededTime[l];
+        l = r;
+      } else {
+        time += neededTime[r];
+      }
+    } else {
+      l = r;
     }
-    timeRequired = timeRequired + std::min(prevMax, neededTime[i]);
-    prevMax = std::max(prevMax, neededTime[i]);
   }
-  return timeRequired;
+
+  return time;
 }
 
 int main() {
@@ -58,18 +65,20 @@ int main() {
   // std::vector<int> neededTime = {1, 2, 3};
 
   // * testcase 3
-  // std::string colors = "aabaa";
-  // std::vector<int> neededTime = {1, 2, 3, 4, 1};
+  std::string colors = "aabaa";
+  std::vector<int> neededTime = {1, 2, 3, 4, 1};
   
   // * testcase 4
-  std::string colors = "aaabbbabbbb";
-  std::vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
+  // std::string colors = "aaabbbabbbb";
+  // std::vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
 
   std::cout << "Rope: " << colors << std::endl;
   printArr(neededTime);
 
   int time = minTimeToMakeRopeColorful(colors, neededTime);
   std::cout << time << std::endl;
+
+  return 0;
 }
 
 // * Run the code

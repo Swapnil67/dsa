@@ -48,12 +48,12 @@ int matchPlayersAndTrainers(std::vector<int> &players, std::vector<int> &trainer
 
 int main(void) {
   // * testcase 1
-  std::vector<int> players = {4, 7, 9};
-  std::vector<int> trainers = {8, 2, 5, 8};
+  // std::vector<int> players = {4, 7, 9};
+  // std::vector<int> trainers = {8, 2, 5, 8};
   
   // * testcase 2
-  // std::vector<int> players = {1, 1, 1};
-  // std::vector<int> trainers = {10};
+  std::vector<int> players = {1, 1, 1};
+  std::vector<int> trainers = {10};
 
   int ans = matchPlayersAndTrainers(players, trainers);
   std::cout << ans << std::endl;
