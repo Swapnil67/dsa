@@ -67,6 +67,7 @@ bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
         st.erase(arr[i]);
         i++;
     }
+    
     // * Check if we have already seen ele in past
     if (st.find(arr[j]) != st.end()) {
       return true;
@@ -96,11 +97,11 @@ int main() {
   // int k = 3;
   // std::vector<int> arr = {1, 2, 3, 1};
 
-  // int k = 2;
-  // std::vector<int> arr = {1, 2, 3, 1, 2, 3};
+  int k = 2;
+  std::vector<int> arr = {1, 2, 3, 1, 2, 3};
 
-  int k = 1;
-  std::vector<int> arr = {1, 0, 1, 1};
+  // int k = 1;
+  // std::vector<int> arr = {1, 0, 1, 1};
 
   std::cout << "k " << k << std::endl;
   std::cout << "Input Array " << std::endl;

@@ -35,30 +35,39 @@ int maxSumOfKSubarray(std::vector<int> arr, int window_size) {
   long long max_sum = 0, cur_sum = 0;
   while (j < n) {
     // * Check if window size exceeded
-    if(j - i + 1 > window_size) {
+    if (j - i + 1 > window_size) {
       cur_sum -= arr[i];
       i++;
     }
+
     cur_sum += arr[j];
+
     // * Calculate max_sum for window
     if (j - i + 1 == window_size) {
       max_sum = std::max(max_sum, cur_sum);
     }
+    
     j++;
   }
   return max_sum;
 }
 
 int main() {
-  int k = 2;
-  std::vector<int> arr = {100, 200, 300, 400};
-  // int k = 3;
-  // std::vector<int> arr = {1, 2, 3, 5, 6, 7};
+  // * testcase 1
+  // int k = 2;
+  // std::vector<int> arr = {100, 200, 300, 400};
+  
+  // * testcase 2
+  int k = 3;
+  std::vector<int> arr = {1, 2, 3, 5, 6, 7};
+
   std::cout << "k " << k << std::endl;
   std::cout << "Input Array " << std::endl;
   printArr(arr);
+
   int ans = maxSumOfKSubarray(arr, k);
   std::cout << "Maximum sum of subarray with " << k << " is " << ans << std::endl;
+
   return 0;
 }
 

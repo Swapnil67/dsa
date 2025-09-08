@@ -54,17 +54,19 @@ std::vector<int> bruteForce(std::vector<int>& code, int k) {
   while (i != n) {
     if (k < 0) {
       // * start from curr element till 'k' prev elements
-      for(int j = i - std::abs(k); j < i; ++j) {
+      for (int j = i - std::abs(k); j < i; ++j) {
         ans[i] += code[(j + n) % n];
+        // std::cout << code[(j + n) % n] << " ";
       }
-    }
-    else {
+    } else {
       // * start from next element till 'k' next elements
-      for(int j = i + 1; j <= i + k; ++j) {
+      for (int j = i + 1; j <= i + k; ++j) {
         ans[i] += code[j % n];
+        // std::cout << code[j % n] << " ";
       }
     }
     i++;
+    // std::cout << std::endl;
   }
 
   return ans;
@@ -112,11 +114,11 @@ std::vector<int> decrypt(std::vector<int>& code, int k) {
 }
 
 int main() {  
-  // int k = 3;
-  // std::vector<int> code = {5, 7, 1, 4};
+  int k = 3;
+  std::vector<int> code = {5, 7, 1, 4};
 
-  int k = -2;
-  std::vector<int> code = {2, 4, 9, 3};
+  // int k = -2;
+  // std::vector<int> code = {2, 4, 9, 3};
 
   std::cout << "code: " << std::endl;
   printArr(code);

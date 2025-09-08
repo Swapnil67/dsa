@@ -1,7 +1,7 @@
 /*
  * Leetcode - 121
  * Best Time to Buy and Sell Stock - i
- * You are given an array prices where prices[i] is the price of a given stock on the ith day.
+ * You are given an array `prices` where prices[i] is the price of a given stock on the ith day.
  * You want to maximize your profit by choosing a single day to buy one stock and choosing a different day
  * in the future to sell that stock.
 
@@ -34,7 +34,6 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested loop
 // * TIME COMPLEXITY O(N^2)
@@ -64,20 +63,20 @@ int maxProfit(std::vector<int>& prices) {
     return 0;
 
   int i = 0, j = 1;
-  int profit = 0;
+  int max_profit = 0;
 
   while (j < n) {
-    int curProfit = prices[j] - prices[i];
-    profit = std::max(profit, curProfit);
+    int cur_profit = prices[j] - prices[i];
+    max_profit = std::max(max_profit, cur_profit);
 
-    if(prices[i] > prices[j]) {
+    if (prices[i] > prices[j]) {
       i = j;
     }
 
     j++;
   }
 
-  return profit;
+  return max_profit;
 }
 
 int main(void) {

@@ -76,6 +76,7 @@ int main() {
   std::string blocks = "WBWBBBW";
   int ans = minimumRecolors(blocks, k);
   std::cout << "Minimum recolors for " << k << " Consecutive Black Blocks" << " is " << ans << std::endl;
+  
   return 0;
 }
 

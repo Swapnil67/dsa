@@ -2,6 +2,7 @@
 #include <climits>
 #include <iostream>
 #include <unordered_map>
+#include <unordered_set>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -28,6 +29,16 @@ void printArr(std::vector<int> arr) {
 
 // * 04 - Defuse the Bomb
 // std::vector<int> decrypt(std::vector<int> &code, int k) {
+// TODO
+// }
+
+// * 05 - Best Time to Buy and Sell Stock - i
+// int maxProfit(std::vector<int> &prices) {
+// TODO
+// }
+
+// * 06 - Best Time to Buy and Sell Stock - i
+// int minimumDifference(std::vector<int> &nums, int k) {
 // TODO
 // }
 
