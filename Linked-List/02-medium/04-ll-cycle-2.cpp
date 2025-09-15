@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 142
  * * Cycle Detection in a Singly Linked List
  * * You are given a singly linked list that may or may not contain a cycle. 
  * * You are supposed to return the node where the cycle begins, if a cycle exists, else return 'NULL'.
@@ -17,25 +18,23 @@
 
  * * https://leetcode.com/problems/linked-list-cycle-ii/description/
  * * https://www.naukri.com/code360/problems/linked-list-cycle-ii_1112628
- * * https://takeuforward.org/data-structure/starting-point-of-loop-in-a-linked-list/
- * * https://www.youtube.com/watch?v=2Kd0KKmmHFc&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=18
 */
 
+#include <map>
+#include <vector>
+#include <iostream>
 
-#include<map>
-#include<iostream>
-
-class Node {
+class ListNode {
   public: 
     int data;
-    Node* next;
+    ListNode* next;
 
-    Node(int d) {
+    ListNode(int d) {
       this->data = d;
       this->next = nullptr;
     }
 
-    Node(int d, Node* n) {
+    ListNode(int d, ListNode* n) {
       this->data = d;
       this->next = n;
     }
@@ -44,14 +43,14 @@ class Node {
 // * ------------------- Utility Functions ---------------------
 
 // * Array to LL
-Node* arrayToLL(std::vector<int>arr) {
+ListNode* arrayToLL(std::vector<int>arr) {
   if(!arr.size()) return nullptr;
 
-  Node* head = new Node(arr[0]);
-  Node* temp = head;
+  ListNode* head = new ListNode(arr[0]);
+  ListNode* temp = head;
 
   for(int i=1; i<arr.size(); i++) {
-    Node* newNode = new Node(arr[i]);
+    ListNode* newNode = new ListNode(arr[i]);
     temp->next = newNode;
     temp = newNode;
   }
@@ -60,8 +59,8 @@ Node* arrayToLL(std::vector<int>arr) {
 }
 
 // * Traverse the LL
-void printLL(Node* head) {
-  Node* temp = head;
+void printLL(ListNode* head) {
+  ListNode* temp = head;
   while(temp) {
     std::cout<<temp->data<<" ";
     temp = temp->next;
@@ -70,25 +69,34 @@ void printLL(Node* head) {
 }
 
 // * Make Loop in LL
-Node* makeLoop(Node* head) {
-  Node* temp = head;
+ListNode *makeLoop(ListNode *head) {
+  ListNode* temp = head;
   // * Go till temp's tail
-  while(temp->next) {
+  while (temp->next) {
     temp = temp->next;
   }
   temp->next = head->next; // * OR
   // temp->next = head;
   return head;
 }
+
+ListNode* findStartOfLoop(ListNode* head, ListNode* collisionNode){
+  ListNode* temp = head;
+  while (temp != collisionNode) {
+    temp = temp->next;
+    collisionNode = collisionNode->next;
+  }
+  return temp;
+}
  
 // * ------------------ Brute Force Approach ---------------------
 // * TIME COMPLEXITY O(N) + 2*O(logN)
 // * SPACE COMPLEXITY O(N)
-Node* bruteForce(Node* head) {
+ListNode* bruteForce(ListNode* head) {
   if(head == nullptr || head->next == nullptr) return nullptr;
 
-  Node* temp = head;
-  std::map<Node*, int> nodeMap;
+  ListNode* temp = head;
+  std::map<ListNode*, int> nodeMap;
   // * O(N)
   while(temp) {
     // * O(logN)
@@ -100,38 +108,31 @@ Node* bruteForce(Node* head) {
   return nullptr;
 }
 
-
 // * ------------------ Optimal Approach ---------------------
 // * Tortise & Hare algorithrm
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-Node* findStartOfLoop(Node* head, Node* collisionNode){
-  Node* temp = head;
-  while(temp != collisionNode) {
-    temp = temp->next;
-    collisionNode = collisionNode->next;
-  }
-  return temp;
-}
+ListNode* detectCycle(ListNode* head) {
+  if (!head || !head->next)
+    return nullptr;
 
-Node* optimal(Node* head) {
-  if(head == nullptr || head->next == nullptr) return nullptr;
-  Node* slow = head;
-  Node* fast = head;
+  ListNode* slow = head;
+  ListNode* fast = head;
 
-  while(fast && fast->next) {
+  while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next;
-    if(fast) {
+    if (fast) {
       fast = fast->next;
     }
-    if(slow == fast) {
+    
+    if (slow == fast) {
       break;
     };
   }
 
   // * If Loop
-  if(slow == fast) {
+  if (slow == fast) {
     return findStartOfLoop(head, fast);
   }
 
@@ -139,24 +140,24 @@ Node* optimal(Node* head) {
 }
 
 int main() {
-  std::vector<int> arr = { 1,2,3,4,5 };
-  Node* head = arrayToLL(arr);
+  std::vector<int> arr = {1, 2, 3, 4, 5};
+  ListNode* head = arrayToLL(arr);
   // printLL(head);
 
   // * Comment this for normal LL (Linear LL)
   head = makeLoop(head);
 
-  // Node *loopStart = bruteForce(head);
-  Node *loopStart = optimal(head);
+  // ListNode *loopStart = bruteForce(head);
+  ListNode *loopStart = detectCycle(head);
   if (loopStart == nullptr) {
     std::cout << "Linear Linked List" << std::endl;
-  }
-  else {
+  } else {
     std::cout << "Start of Loop " << loopStart->data<<std::endl;
   }
+  
   return 0;
 }
 
 
 // * Run the code
-// * g++ --std=c++17 05-ll-cycle-2.cpp -o 05-ll-cycle-2 && ./05-ll-cycle-2
+// * g++ --std=c++17 04-ll-cycle-2.cpp -o output && ./output

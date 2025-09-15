@@ -17,11 +17,8 @@
  * https://leetcode.com/problems/swap-nodes-in-pairs/
 */
 
-#include <stack>
 #include <vector>
 #include <iostream>
-
-// struct ListNode ListNode;
 
 struct ListNode {
   public:
@@ -72,20 +69,23 @@ ListNode *arrayToLL(std::vector<int> &arr) {
 // * B - head->next
 // * C - head->next->next
 
-// * B -> A -> C
+// * A -> B -> C     (Before Swap)
+// * B -> A -> C     (After Swap)
 ListNode *swapPairs(ListNode *head) {
   // * base case
   if (!head || !head->next)
     return head;
 
-  // * 2nd node in pair
+  // * Save 'B' for future
   ListNode* temp = head->next;
 
-  // * Do the same for next pair
+  // * A -> C
   head->next = swapPairs(head->next->next);
 
-  // * Point 2nd node to 1st one
+  // * B -> A
   temp->next = head;
+
+  // * return B
   return temp;  
 } 
 
@@ -108,3 +108,6 @@ int main(void) {
 // * g++ --std=c++20 21-swap-nodes-in-pairs.cpp -o output && ./output
 
 
+/*
+temp = 2
+*/

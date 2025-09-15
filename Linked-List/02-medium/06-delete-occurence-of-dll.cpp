@@ -12,29 +12,29 @@
  * * Input  : 10 <-> 10 -> NULL, k = 10
  * * Output : NULL
  
- * * https://www.youtube.com/watch?v=Mh0NH_SD92k&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=20
  * * https://www.naukri.com/code360/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list_8160461
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
-class Node {
+class DLListNode {
   public: 
     int data;
-    Node* next;
-    Node* prev;
+    DLListNode* next;
+    DLListNode* prev;
 
-    Node() {
+    DLListNode() {
       this->data = 0;
       this->next = NULL;
       this->prev = NULL;
     }
-    Node(int data) {
+    DLListNode(int data) {
         this->data = data;
         this->prev = NULL;
         this->next = NULL;
     }
-    Node (int data, Node *next, Node *prev) {
+    DLListNode (int data, DLListNode *next, DLListNode *prev) {
         this->data = data;
         this->prev = prev;
         this->next = next;
@@ -43,21 +43,21 @@ class Node {
 
 // * ------------------- Utility Functions ---------------------
 
-Node* arrayToDLL(std::vector<int> arr) {
+DLListNode* arrayToDLL(std::vector<int> arr) {
   if(!arr.size()) return nullptr;
-  Node* head = new Node(arr[0]);
-  Node* back = head;
+  DLListNode* head = new DLListNode(arr[0]);
+  DLListNode* back = head;
 
   for(int i=1; i<arr.size(); i++) {
-    Node* newNode = new Node(arr[i], nullptr, back);
+    DLListNode* newNode = new DLListNode(arr[i], nullptr, back);
     back->next = newNode;
     back = newNode;
   }
   return head;
 }
 
-void printDLL(Node* head) {
-  Node* temp = head;
+void printDLL(DLListNode* head) {
+  DLListNode* temp = head;
   while(temp) {
     std::cout<<temp->data<<" ";
     temp = temp->next;
@@ -67,49 +67,62 @@ void printDLL(Node* head) {
 
 // * TIME COMPLEXITY  O(N)
 // * SPACE COMPLEXITY O(1)
-Node* deleteOccurences(Node* head, int k) {
+DLListNode* deleteOccurences(DLListNode* head, int k) {
+  if (!head)
+    return nullptr;
 
-  if(head == nullptr) return nullptr;
-  if(head->next == nullptr && head->data == k) return nullptr;
+  // * only one node
+  if (!head->next && head->data == k)
+    return nullptr;
 
-  Node* temp = head;
-  while(temp) {
-    if(temp->data == k) {
+  // * If head node is 'k' then pre-remove it
+  while (head && head->data == k) {
+    head = head->next;
+  }
+
+  DLListNode* temp = head;
+  while (temp) {
+    if (temp->data == k) {
       // * Delete the node
 
-      Node* delNode = temp;
-      if(temp == head) {
+      DLListNode* delNode = temp;
+      if (temp == head) {
         // * Check if head
         head = head->next;
       }
-      Node* frontNode = temp->next;
-      Node* backNode = temp->prev;
+      DLListNode* front = temp->next;
+      DLListNode* back = temp->prev;
 
-      if(frontNode) frontNode->prev = backNode;
-      if(backNode) backNode->next = frontNode;
+      if (front)
+        front->prev = back;
+      if (back)
+        back->next = front;
 
       std::free(delNode);
-      temp = frontNode;
-    } else {
+      temp = front;
+    }
+    else
+    {
       temp = temp->next;
     }
   }
   return head;
 }
 
-int main() {  
-  std::vector<int> arr = { 2, 1, 2, 3, 2, 4, 5, 2 };
-  // std::vector<int> arr = { 2, 2, 2, 2 };
+int main() {
+  // std::vector<int> arr = {2, 1, 2, 3, 2, 4, 5, 2};
+  std::vector<int> arr = {2, 2, 2, 2};
   // std::vector<int> arr = { 2 };
-  Node* head = arrayToDLL(arr);
-  std::cout<<"Before Deleting"<<std::endl;
+  DLListNode* head = arrayToDLL(arr);
+  std::cout << "Before Deleting" << std::endl;
   printDLL(head);
 
-  std::cout<<"After Deleting"<<std::endl;
+  std::cout << "After Deleting" << std::endl;
   head = deleteOccurences(head, 2);
   printDLL(head);
+
+  return 0;
 }
 
-
 // * Run the code
-// * g++ --std=c++17 06-delete-occurence-of-dll.cpp -o 06-delete-occurence-of-dll && ./06-delete-occurence-of-dll
+// * g++ --std=c++17 06-delete-occurence-of-dll.cpp -o output && ./output

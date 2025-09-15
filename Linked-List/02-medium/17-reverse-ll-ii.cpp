@@ -65,7 +65,7 @@ ListNode* arrayToLL(std::vector<int> &arr) {
 }
 
 ListNode* reverseBetween(ListNode* head, int left, int right) {
-  if (head == nullptr || head->next == nullptr)
+  if (!head || !head->next)
     return head;
 
   if (left == right)
@@ -110,12 +110,12 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
 
 int main(void) {
   // * testcase 1
-  // int left = 2, right = 4;
-  // std::vector<int> nums = {1, 2, 3, 4, 5};
-  
+  int left = 2, right = 4;
+  std::vector<int> nums = {1, 2, 3, 4, 5};
+
   // * testcase 2
-  int left = 1, right = 2;
-  std::vector<int> nums = {3, 5};
+  // int left = 1, right = 2;
+  // std::vector<int> nums = {3, 5};
   
   ListNode* head = arrayToLL(nums);
   std::cout << "Linked List Before Reverse" << std::endl;

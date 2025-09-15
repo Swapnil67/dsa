@@ -57,7 +57,7 @@ void printLL(ListNode* head) {
   std::cout << "NULL" << std::endl;
 }
 
-ListNode* reversell(ListNode* head) {
+ListNode* reverseLL(ListNode* head) {
   if (head == nullptr || head->next == nullptr)
     return head;
 
@@ -75,34 +75,41 @@ ListNode* reversell(ListNode* head) {
 }
 
 ListNode* bruteForce(ListNode* h1, ListNode* h2) {
-  ListNode* l1 = reversell(h1);
-  ListNode* l2 = reversell(h2);
-  // printLL(l1);
-  // printLL(l2);
-  
-  ListNode* ans = nullptr;
+  ListNode *rev_h1 = reverseLL(h1);
+  ListNode *rev_h2 = reverseLL(h2);
+
+  // printLL(rev_h1);
+  // printLL(rev_h2);
+
   int carry = 0;
-  while (l1 || l2) {
-    int sum = carry;
-    if (l1)
-      sum += l1->data;
-    if (l2)
-      sum += l2->data;
+  ListNode *ans = new ListNode(-1);
+  ListNode *mover = ans;
+  while (rev_h1 || rev_h2) {
+    if (rev_h1)
+      carry += rev_h1->data;
 
-    ListNode *cur = new ListNode(sum % 10);
-    carry = sum / 10;
-    
-    // * Add ll in reverse order here
-    cur->next = ans;
-    ans = cur;
+    if (rev_h2)
+      carry += rev_h2->data;
 
-    if (l1)
-      l1 = l1->next;
-    if (l2)
-      l2 = l2->next;
+    ListNode *new_node = new ListNode(carry % 10);
+    mover->next = new_node;
+    mover = new_node;
+    carry = carry / 10;
+
+    if (rev_h1)
+      rev_h1 = rev_h1->next;
+
+    if (rev_h2)
+      rev_h2 = rev_h2->next;
   }
 
-  return ans;
+  if (carry) {
+    ListNode *new_node = new ListNode(carry);
+    mover->next = new_node;
+    mover = new_node;
+  }
+
+  return reverseLL(ans->next);
 }
 
 
@@ -172,7 +179,7 @@ int main() {
   printLL(n2_head);
 
   // ListNode* addHead = bruteForce(n1_head, n2_head);
-  ListNode* addHead = addTwoNumbers(n1_head, n2_head);
+  ListNode *addHead = addTwoNumbers(n1_head, n2_head);
   std::cout << "-----------------------------------------" << std::endl;
   printLL(addHead);
 

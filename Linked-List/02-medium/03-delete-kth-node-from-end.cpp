@@ -1,5 +1,5 @@
 /*
- * Delete Kth Node From End
+ * Delete Kth ListNode From End
 
  * You have been given a singly Linked List of 'N' nodes with integer data and an integer 'K'.
  * Your task is to remove the 'K'th node from the end of the given Linked List and return the head of the modified linked list.
@@ -19,24 +19,22 @@
  * 
  
  * https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912
- * https://www.youtube.com/watch?v=3kMKYQ2wNIU&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=10
- 
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
-
-class Node {
+class ListNode {
   public:
     int data;
-    Node* next;
+    ListNode* next;
 
-    Node(int d) {
+    ListNode(int d) {
       this->data = d;
       this->next = nullptr;
     }
 
-    Node(int d, Node* n) {
+    ListNode(int d, ListNode* n) {
       this->data = d;
       this->next = n;
     }
@@ -46,12 +44,12 @@ class Node {
 // * ------------------- Utility Functions ---------------------
 
 // * Convert array to LL
-Node* arrayToLL(std::vector<int> arr) {
+ListNode* arrayToLL(std::vector<int> arr) {
   if(arr.size() == 0) return nullptr;
-  Node* head = new Node(arr[0]);
-  Node* temp = head;
+  ListNode* head = new ListNode(arr[0]);
+  ListNode* temp = head;
   for(int i=1; i<arr.size(); i++) {
-    Node* newNode = new Node(arr[i]);
+    ListNode* newNode = new ListNode(arr[i]);
     temp->next = newNode;
     temp = newNode;
   }
@@ -59,8 +57,8 @@ Node* arrayToLL(std::vector<int> arr) {
 }
 
 // * Traverse the LL
-void printLL(Node* head) {
-  Node* temp = head;
+void printLL(ListNode* head) {
+  ListNode* temp = head;
   while(temp) {
     std::cout<<temp->data<<" ";
     temp = temp->next;
@@ -69,8 +67,8 @@ void printLL(Node* head) {
 }
 
 // * Count the LL
-int countLL(Node* head) {
-  Node* temp = head;
+int countLL(ListNode* head) {
+  ListNode* temp = head;
   int c = 0;
   while(temp) {
     c++;
@@ -82,18 +80,18 @@ int countLL(Node* head) {
 // * ------------------ Brute Force ---------------------
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-Node* removeLastKthNode(Node* head, int k) {
+ListNode* removeLastKthNode(ListNode* head, int k) {
   // * Count the LL Nodes
   int count = countLL(head);
 
   if(k > count || k <= 0) {
-    std::cout<<"Node doesn't exists"<<std::endl;
+    std::cout<<"ListNode doesn't exists"<<std::endl;
     return head;
   }
 
   if(count == k) {
     // * Remove Head
-    Node* newHead = head->next;
+    ListNode* newHead = head->next;
     free(head);
     return newHead;
   }
@@ -103,7 +101,7 @@ Node* removeLastKthNode(Node* head, int k) {
   std::cout<<"nodeIdx: "<<nodeIdx<<std::endl;
 
 
-  Node* temp = head;
+  ListNode* temp = head;
   // * Traverse to the node just before the one to delete
   while(nodeIdx != 0) {
     temp = temp->next;
@@ -111,7 +109,7 @@ Node* removeLastKthNode(Node* head, int k) {
   }
 
   // * Delete the Nth node from the end
-  Node* deleteNode = temp->next;
+  ListNode* deleteNode = temp->next;
   temp->next = temp->next->next;
   free(deleteNode);
 
@@ -121,10 +119,10 @@ Node* removeLastKthNode(Node* head, int k) {
 // * ------------------ Optimal Solution ---------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-Node* optimalSolution(Node* head, int k) {
+ListNode* optimalSolution(ListNode* head, int k) {
   // * Create two pointers, fast and slow
-  Node* fast = head;
-  Node* slow = head;
+  ListNode* fast = head;
+  ListNode* slow = head;
 
   // * Move the fast pointer N nodes ahead
   for(int i=0; i<k; i++) 
@@ -141,7 +139,7 @@ Node* optimalSolution(Node* head, int k) {
     slow = slow->next;
   }
 
-  Node* deleteNode = slow->next;
+  ListNode* deleteNode = slow->next;
   slow->next = slow->next->next;
   free(deleteNode);
 
@@ -152,16 +150,16 @@ Node* optimalSolution(Node* head, int k) {
 int main() {
   std::vector<int> arr = { 1,2,3,4,5,6 };
 
-  Node* head = arrayToLL(arr);
+  ListNode* head = arrayToLL(arr);
 
-  std::cout<<"------------ Before Removing Node From Linked List ------------"<<std::endl;
+  std::cout<<"------------ Before Removing ListNode From Linked List ------------"<<std::endl;
   printLL(head);
 
   int node;
   std::cout<<"Enter a node to delete: ";
   std::cin>>node;
 
-  std::cout<<"------------ After Removing Node From Linked List ------------"<<std::endl;
+  std::cout<<"------------ After Removing ListNode From Linked List ------------"<<std::endl;
   // head = removeLastKthNode(head, node);
   head = optimalSolution(head, node);
   printLL(head);

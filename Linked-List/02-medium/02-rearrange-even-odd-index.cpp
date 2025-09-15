@@ -1,37 +1,38 @@
 /*
- * Rearrange Odd and Even Places
+ * Leetcode - 328
+ * Rearrange Odd and Even Places (Indexes)
 
  * You are given the 'head' of a singly linked list. Your task is to group all the nodes with odd indices
  * together followed by the nodes with even indices, and return the reordered list’s head.
  * The first node is considered odd, and the second node is even, and so on.
 
- * Example 1
+ * Example 1:
  * head :  1 -> 3 -> 5 -> 7
  * Output: 1 -> 5 -> 3 -> 7
  * 
  
- * Example 1
+ * Example 2:
  * head : 2 -> 4 -> 6 -> 8 -> 10
  * Output: 2 -> 6 -> 10 -> 4 -> 8
  * 
  * 
- * https://www.youtube.com/watch?v=qf6qp7GzD5Q&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=7&pp=iAQB
- 
+ * https://leetcode.com/problems/odd-even-linked-list/description/
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
-class Node {
+class ListNode {
   public:
     int data;
-    Node* next;
+    ListNode* next;
 
-    Node(int d) {
+    ListNode(int d) {
       this->data = d;
       this->next = nullptr;
     }
 
-    Node(int d, Node* n) {
+    ListNode(int d, ListNode* n) {
       this->data = d;
       this->next = n;
     }
@@ -41,12 +42,12 @@ class Node {
 // * ------------------- Utility Functions ---------------------
 
 // * Convert array to LL
-Node* arrayToLL(std::vector<int> arr) {
+ListNode* arrayToLL(std::vector<int> arr) {
   if(arr.size() == 0) return nullptr;
-  Node* head = new Node(arr[0]);
-  Node* temp = head;
+  ListNode* head = new ListNode(arr[0]);
+  ListNode* temp = head;
   for(int i=1; i<arr.size(); i++) {
-    Node* newNode = new Node(arr[i]);
+    ListNode* newNode = new ListNode(arr[i]);
     temp->next = newNode;
     temp = newNode;
   }
@@ -54,15 +55,14 @@ Node* arrayToLL(std::vector<int> arr) {
 }
 
 // * Traverse the LL
-void printLL(Node* head) {
-  Node* temp = head;
-  while(temp) {
-    std::cout<<temp->data<<" ";
+void printLL(ListNode* head) {
+  ListNode* temp = head;
+  while (temp) {
+    std::cout << temp->data << " -> ";
     temp = temp->next;
   }
-  std::cout<<std::endl;
+  std::cout << "NULL" << std::endl;
 }
-
 
 // * Re Arrange Even and Odd Indices
 
@@ -70,9 +70,9 @@ void printLL(Node* head) {
 
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-Node* reArrangeEvenOdd(Node* head) {
+ListNode* bruteForce(ListNode* head) {
   std::vector<int> arr;
-  Node* temp = head;
+  ListNode* temp = head;
 
   // * Insert Odd index in arr O(N/2)
   while(temp) {
@@ -101,25 +101,50 @@ Node* reArrangeEvenOdd(Node* head) {
   }
 
   // * For debugging
-  // for(int i=0; i<arr.size(); i++) {
-  //   std::cout<<arr[i]<<" ";
+  // for (int i = 0; i < arr.size(); i++) {
+  //   std::cout << arr[i] << " ";
   // }
-  // std::cout<<std::endl;
+  // std::cout << std::endl;
 
   return head;
-} 
+}
+
+ListNode* betterApproach(ListNode* head) {
+  ListNode *odd_list = new ListNode(-1);
+  ListNode *odd_mover = odd_list;
+  ListNode *even_list = new ListNode(-1);
+  ListNode *even_mover = even_list;
+  
+  ListNode *temp = head;
+  int i = 0;
+  while (temp) {
+    ListNode *new_node = new ListNode(temp->data);
+    if (i % 2 == 0) {
+      even_mover->next = new_node;
+      even_mover = new_node;
+    } else {
+      odd_mover->next = new_node;
+      odd_mover = new_node;
+    }
+    temp = temp->next;
+    i++;
+  }
+
+  even_mover->next = odd_list->next;
+  return even_list->next;
+}
+
 
 // * ------------------ Optimal Solution ---------------------
 // * TIME COMPLEXITY O(N/2) * 2 = O(N)
 // * SPACE COMPLEXITY O(1)
-Node* reArrangeEvenOddOptimal(Node* head) {
-  if(head == NULL || head->next == NULL){
+ListNode* reArrangeEvenOddOptimal(ListNode* head) {
+  if (!head || !head->next)
     return head;
-  }
-
-  Node* odd = head;
-  Node* even = head->next;
-  Node* evenHead = head->next;
+  
+  ListNode* odd = head;
+  ListNode* even = head->next;
+  ListNode* evenHead = head->next;
 
   while(even != NULL && even->next != NULL) {
     odd->next = odd->next->next;
@@ -134,21 +159,23 @@ Node* reArrangeEvenOddOptimal(Node* head) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = { 1,2,3,4,5,6 };
+  std::vector<int> arr = {1, 2, 3, 4, 5, 6};
+
   // * testcase 2
-  // std::vector<int> arr = { 2,4,6,8,10 };
+  // std::vector<int> arr = {2, 4, 6, 8, 10};
 
   // * Create a Linked List
-  Node* head = arrayToLL(arr);
+  ListNode* head = arrayToLL(arr);
   std::cout<<"------------ Before Rearranging Linked List ------------"<<std::endl;
   printLL(head);
 
   // * Rearrange even and odd numbers
   std::cout<<"------------ After Rearranging Linked List ------------"<<std::endl;
-  // head = reArrangeEvenOdd(head);
+  // head = bruteForce(head);
+  // head = betterApproach(head);
   head = reArrangeEvenOddOptimal(head);
   printLL(head);
   return 0;
 }
 
-// * g++ -std=c++17 02-rearrange-even-odd-index.cpp -o 02-rearrange-even-index-odd
+// * g++ -std=c++17 02-rearrange-even-odd-index.cpp -o output && ./output

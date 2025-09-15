@@ -85,7 +85,7 @@ int lengthOfll(ListNode* head) {
 // * ------------------ Optimal Approach ---------------------
 // * TIME COMPLEXITY  O(K + N)
 // * SPACE COMPLEXITY O(1)
-std::vector<ListNode*> splitListToParts(ListNode* head, int k) {
+std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
   std::vector<ListNode*> ans(k, nullptr); 
   if (!head || k == 0)
     return ans;
@@ -99,7 +99,6 @@ std::vector<ListNode*> splitListToParts(ListNode* head, int k) {
 
   ListNode* prev = nullptr;
   ListNode* cur = head;
-  
 
   for (int i = 0; i < k; ++i) {
     ans[i] = cur;

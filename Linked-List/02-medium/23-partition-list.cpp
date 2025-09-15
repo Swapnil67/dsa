@@ -73,50 +73,44 @@ ListNode* partition(ListNode* head, int x) {
   // * Create a ll for nodes smaller than x
   ListNode *small = new ListNode(-1);
   ListNode *small_mover = small;
-  
+
   // * Create a ll for nodes greater or equal than x
   ListNode *big = new ListNode(-1);
   ListNode *big_mover = big;
-  
+
   ListNode *temp = head;
   while (temp) {
-    ListNode *newNode = new ListNode(temp->data);
-
     if (temp->data < x) {
-      small_mover->next = newNode;
-      small_mover = newNode;
+      small_mover->next = temp;
+      small_mover = temp;
     } else {
-      big_mover->next = newNode;
-      big_mover = newNode;
+      big_mover->next = temp;
+      big_mover = temp;
     }
-
     temp = temp->next;
   }
 
-  // * Append two ll
   small_mover->next = big->next;
-
-  // printLL(small);
-  // printLL(big);
-
+  big_mover->next = nullptr;
+  
   return small->next;
 }
 
 int main(void) {
   // * testcase 1
-  int x = 3;
-  std::vector<int> nums = {1, 4, 3, 2, 5, 2};
+  // int x = 3;
+  // std::vector<int> nums = {1, 4, 3, 2, 5, 2};
   
   // * testcase 2
-  // int x = 2;
-  // std::vector<int> nums = {2, 1};
+  int x = 2;
+  std::vector<int> nums = {2, 1};
 
-  ListNode* head = arrayToLL(nums);
+  ListNode *head = arrayToLL(nums);
   std::cout << "Linked List Before Partition" << std::endl;
   printLL(head);
 
   std::cout << "Linked List After Partition" << std::endl;
-  ListNode* ans = partition(head, x);
+  ListNode *ans = partition(head, x);
   printLL(ans);
 
   return 0;

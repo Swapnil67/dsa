@@ -85,8 +85,8 @@ ListNode* insertionSortList(ListNode* head) {
     }
 
     // * save the `nextNode` for next iteration
-    ListNode* nextNode = cur->next;
-    prev->next = cur->next;
+    ListNode* next_node = cur->next;
+    prev->next = next_node;
 
     // * From the start of list find the new Insert position for 'temp' node
     ListNode *temp2 = dummy;
@@ -96,7 +96,7 @@ ListNode* insertionSortList(ListNode* head) {
     cur->next = temp2->next;
     temp2->next = cur;
 
-    cur = nextNode;
+    cur = next_node;
   }
 
   return dummy->next;

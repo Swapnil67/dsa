@@ -113,7 +113,9 @@ public:
       node->next = headNext;
       headNext->prev = node;
 
+      // * point head next to new node
       head->next = node;
+      // * point new node prev to head
       node->prev = head;
     }
 

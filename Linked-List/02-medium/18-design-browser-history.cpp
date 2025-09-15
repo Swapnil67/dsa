@@ -21,21 +21,19 @@
 
 // ! Can also be solved using two stack method
 
-// struct ListNode ListNode;
-
-struct ListNode {
+struct DLListNode {
   public:
     std::string data;
-    ListNode* next;
-    ListNode* prev;
+    DLListNode* next;
+    DLListNode* prev;
 
-    ListNode(std::string val) {
+    DLListNode(std::string val) {
       data = val;
       next = nullptr;
       prev = nullptr;
     }
 
-    ListNode(std::string val, ListNode* back) {
+    DLListNode(std::string val, DLListNode* back) {
       data = val;
       next = nullptr;
       prev = back;
@@ -50,8 +48,8 @@ void printArr(std::vector<T> &arr) {
   printf("\n");
 }
 
-void printLL(ListNode* head) {
-  ListNode* temp = head;
+void printLL(DLListNode* head) {
+  DLListNode* temp = head;
   while (temp) {
     std::cout << temp->data << " -> ";
     temp = temp->next;
@@ -61,15 +59,15 @@ void printLL(ListNode* head) {
 
 class BrowserHistory {
 public:
-  ListNode* history; 
-  ListNode* cur; 
+  DLListNode* cur; 
+  DLListNode* history; 
   BrowserHistory(std::string homepage) {
-    history = new ListNode(homepage);
+    history = new DLListNode(homepage);
     cur = history;
   }
 
   void visit(std::string url) {
-    ListNode *page = new ListNode(url, cur);
+    DLListNode *page = new DLListNode(url, cur);
     cur->next = page;
     cur = page;
   }
@@ -79,23 +77,21 @@ public:
     if (!cur)
       return page;
 
-    while (steps) {
-      if (cur->prev)
-        cur = cur->prev;
-      else
-        break;
+    while (cur->prev) {
+      cur = cur->prev;
       steps--;
+      if (steps == 0)
+        break;
     }
     return cur->data;
   }
 
   std::string forward(int steps) {
-    while (steps) {
-      if (cur->next)
-        cur = cur->next;
-      else 
-        break;
+    while (cur->next) {
+      cur = cur->next;
       steps--;
+      if (steps == 0)
+        break;
     }
     return cur->data;
   }

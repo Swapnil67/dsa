@@ -58,8 +58,8 @@ ListNode* arrayToLL(std::vector<int> &arr) {
   ListNode *mover = head;
 
   int n = arr.size();
-  
-  for(int i = 1; i < n; ++i) {
+
+  for (int i = 1; i < n; ++i) {
     ListNode *node = new ListNode(arr[i]);
     mover->next = node;
     mover = node;
@@ -73,19 +73,19 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
   ListNode *cur = head->next;
 
   int i = 1;
-  int firstCriticalPoint = -1, prevCriticalPoint = 0;
-  int minNodes = INT_MAX;
+  int first_critical_point = -1, prev_critical_point = 0;
+  int min_nodes = INT_MAX;
 
   while (cur->next) {
     if ((cur->data > prev->data && cur->data > cur->next->data) ||
         (cur->data < prev->data && cur->data < cur->next->data)) {
 
-      if (firstCriticalPoint == -1) {
-        firstCriticalPoint = i;
+      if (first_critical_point == -1) {
+        first_critical_point = i;
       } else {
-        minNodes = std::min(minNodes, i - prevCriticalPoint);
+        min_nodes = std::min(min_nodes, i - prev_critical_point);
       }
-      prevCriticalPoint = i;
+      prev_critical_point = i;
     }
 
     prev = cur;
@@ -93,29 +93,30 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
     i++;
   }
 
-  // std::cout << firstCriticalPoint << " " << prevCriticalPoint << std::endl;
-  if (minNodes == INT_MAX)
+  // std::cout << first_critical_point << " " << prev_critical_point << std::endl;
+  if (min_nodes == INT_MAX)
     return {-1, -1};
-  
-  int maxNodes = prevCriticalPoint - firstCriticalPoint;
 
-  return {minNodes, maxNodes};
+  int max_nodes = prev_critical_point - first_critical_point;
+
+  return {min_nodes, max_nodes};
 }
-
 
 int main(void) {
   // std::vector<int> arr = {3, 1};
-  // std::vector<int> arr = {2, 3, 3, 2};
-  std::vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
+  std::vector<int> arr = {2, 3, 3, 2};
+  // std::vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
   // std::vector<int> arr = {1, 3, 2, 2, 3, 2, 2, 2, 7};
 
-  ListNode* head = arrayToLL(arr);
+  ListNode *head = arrayToLL(arr);
   std::cout << "Linked List" << std::endl;
   printLL(head);
 
   std::vector<int> ans = nodesBetweenCriticalPoints(head);
   std::cout << "Find the Minimum and Maximum Number of Nodes Between Critical Points" << std::endl;
   std::cout << '{' << ans[0] << ", " << ans[1] << '}' << std::endl;
+
+  return 0;
 }
 
 

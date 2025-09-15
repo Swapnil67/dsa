@@ -1,34 +1,35 @@
 /**
+ * * Leetcode - 2
  * * Add Two Numbers
  * * You are given two non-negative numbers 'num1' and 'num2' represented in the form of linked lists.
- * 
+ *
  * * Example 1
  * * 'num1' : 1 -> 2 -> 3 -> NULL
  * * 'num2' : 4 -> 5 -> 6 -> NULL
  * * Output: 5 -> 7 -> 9 -> NULL
- * 
+ *
  * * Example 2
  * * 'num1' : 0 -> 1 -> NULL
  * * 'num2' : 0 -> NULL
  * * Output: 0 -> 1 -> NULL
- * 
+ *
  * * https://leetcode.com/problems/add-two-numbers/
- * * https://takeuforward.org/data-structure/add-two-numbers-represented-as-linked-lists/
-*/
+ */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
-class Node {
+class ListNode {
   public:
   int data;
-  Node* next;
+  ListNode* next;
 
-  Node(int d) {
+  ListNode(int d) {
     this->data = d;
     this->next = NULL;
   }
 
-  Node(int d, Node* n) {
+  ListNode(int d, ListNode* n) {
     this->data = d;
     this->next = n;
   }
@@ -36,53 +37,56 @@ class Node {
 
 // * ------------------- Utility Functions ---------------------
 
-Node* arrayToLL(std::vector<int> arr) {
+ListNode* arrayToLL(std::vector<int> arr) {
   if(arr.size() == 0) {
     return NULL;
   }
 
-  Node* head = new Node(arr[0]);
-  Node* temp = head;
-  for(int i=1; i<arr.size(); i++) {
-    Node* newNode = new Node(arr[i]);
+  ListNode* head = new ListNode(arr[0]);
+  ListNode* temp = head;
+  for (int i = 1; i < arr.size(); i++) {
+    ListNode *newNode = new ListNode(arr[i]);
     temp->next = newNode;
     temp = newNode;
   }
   return head;
 }
 
-void printLL(Node* head) {
-  Node* temp = head;
-  while(temp != NULL) {
-    std::cout<<temp->data<<" ";
+void printLL(ListNode* head) {
+  ListNode* temp = head;
+  while (temp) {
+    std::cout << temp->data << " -> ";
     temp = temp->next;
   }
-  std::cout<<"\n";
+  std::cout << "NULL" << std::endl;
 }
 
 // * ------------------ Optimal FORCE ---------------------
 
 // * TIME COMPLEXITY O(max(h1, h1))
 // * SPACE COMPLEXITY O(max(h1, h1))
-Node* addTwoLL(Node* h1, Node* h2) {
-  Node* sumHead = new Node(0);
-  Node* temp = sumHead;
+ListNode* addTwoLL(ListNode* h1, ListNode* h2) {
+  ListNode* sumHead = new ListNode(0);
+  ListNode* temp = sumHead;
   int carry = 0;
-
-  while(h1 != NULL || h2 != NULL) {
+  while (h1 != NULL || h2 != NULL) {
     int sum = carry;
     if(h1) sum = sum + h1->data;
     if(h2) sum = sum + h2->data;
 
-    Node* curSum = new Node(sum%10);
+    ListNode *curSum = new ListNode(sum % 10);
     carry = sum / 10;
     temp->next = curSum;
     temp = curSum;
-    if(h1) h1 = h1->next;
-    if(h2) h2 = h2->next;
+    if (h1)
+      h1 = h1->next;
+    if (h2)
+      h2 = h2->next;
   }
+
+  // * check if carry set
   if(carry > 0) {
-    Node* carryNode = new Node(carry);
+    ListNode* carryNode = new ListNode(carry);
     temp->next = carryNode;
   }
 
@@ -91,25 +95,35 @@ Node* addTwoLL(Node* h1, Node* h2) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> num1 = { 1, 2, 3 };
-  // std::vector<int> num2 = { 4, 5, 9 };
+  // std::vector<int> nums1 = { 1, 2, 3 };
+  // std::vector<int> nums2 = { 4, 5, 9 };
 
   // * testcase 2
-  std::vector<int> num1 = { 0, 1 };
-  std::vector<int> num2 = { 0 };
+  // std::vector<int> nums1 = { 0, 1 };
+  // std::vector<int> nums2 = { 0 };
 
-  Node* n1_head = arrayToLL(num1);
-  Node* n2_head = arrayToLL(num2);
+  // * testcase 2
+  std::vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
+  std::vector<int> nums2 = {9, 9, 9, 9};
+
+  ListNode* n1_head = arrayToLL(nums1);
+  ListNode* n2_head = arrayToLL(nums2);
 
   std::cout<<"First Linked List"<<std::endl;
   printLL(n1_head);
   std::cout<<"Second Linked List"<<std::endl;
   printLL(n2_head);
 
-  Node* addHead = addTwoLL(n1_head, n2_head);
+  ListNode* addHead = addTwoLL(n1_head, n2_head);
   std::cout<<"-----------------------------------------"<<std::endl;
   // std::cout<<"Sum of two Linked List"<<std::endl;
   printLL(addHead);
+
+  return 0;
 }
 
 // * Note whenever there is a need for new LL, always create a dummyNode node and return dummyNode->next
+
+// * Run the code
+// * g++ --std=c++20 01-add-two-ll.cpp -o output && ./output
+

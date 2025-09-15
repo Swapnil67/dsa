@@ -139,19 +139,19 @@ ListNode* swapNodes(ListNode* head, int k) {
     return head;
 
   // * 2. Get the kth node from begining & end
-  int firstIdx = k - 1, lastIdx = (length - k - 1) + 1;
-  std::stack<ListNode*> st;
+  int first_idx = k - 1, last_idx = (length - k - 1) + 1;
+  std::stack<ListNode *> st;
   ListNode* temp = head;
   while (temp) {
-    if (firstIdx == 0) {
+    if (first_idx == 0) {
       node1 = temp;
     } 
-    if (lastIdx == 0) {
+    if (last_idx == 0) {
       node2 = temp;
     }
     temp = temp->next;
-    lastIdx--;
-    firstIdx--;
+    last_idx--;
+    first_idx--;
   }
 
   // * 3. Swap the two numbers

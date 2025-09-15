@@ -133,30 +133,30 @@ ListNode* rotateRight(ListNode* head, int k) {
   int n = length(head);
   k = k % n;
 
-  // * 2. Get to the tail of LL
-  ListNode* tail = head;
-  while(tail->next) {
+  // * 2. Go to the (n - k)th node in ll
+  int i = 1;
+  ListNode *temp = head;
+  while (i < n - k) {
+    i++;
+    temp = temp->next;
+  }
+
+  // * 3. Go to the tail of LL
+  ListNode *tail = temp;
+  while (tail->next) {
     tail = tail->next;
   }
 
-  // * 3. Point tail->next to the head
+  // * 4. Point tail to head of ll
   tail->next = head;
 
-  // * Go to the (n - k)th node
-  int i = 1;
-  ListNode* temp = head;
-  while (i < (n - k)) {
-    temp = temp->next;
-    i++;
-  }
-
-  // * 4. Save the new head
-  ListNode* newHead = temp->next;
+  // * 5. Save the new head
+  ListNode *new_head = temp->next;
 
   // * make (n - k)th node point to nullptr
   temp->next = nullptr;
 
-  return newHead;
+  return new_head;
 }
 
 int main(void) {

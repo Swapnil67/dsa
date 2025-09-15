@@ -1,5 +1,5 @@
 /*
- * Leetcode - 24
+ * Leetcode - 148
  * Sort List
  * 
  * Given a linked list, swap every two adjacent nodes and return its head. 
@@ -108,7 +108,6 @@ ListNode* findMiddle(ListNode* head) {
 }
 
 ListNode* mergeSort(ListNode* head1, ListNode* head2) {
-  
   ListNode *dummy = new ListNode(-1);
   ListNode *mover = dummy;
   
@@ -141,7 +140,10 @@ ListNode* mergeSort(ListNode* head1, ListNode* head2) {
 }
 
 // * ------------------ Optimal Approach ---------------------
-// * TIME COMPLEXITY  O(N) + O(NlogN) + O(N)
+// * Merge Sort
+// * TIME COMPLEXITY  O(NlogN)
+// *  - O(logn) for recursion
+// *  - O(n) for merging
 // * SPACE COMPLEXITY O(N)
 ListNode* sortList(ListNode* head) {
   if (!head || !head->next)

@@ -94,22 +94,43 @@ ListNode* bruteForce(ListNode* head, int n) {
     int val = st.top();
     st.pop();
     // * Exclude the nth element fron end
-    if (i == n)
+    if (i == n) 
       continue;
     ListNode* node = new ListNode(val);
     mover->next = node;
     mover = node;
   }
 
-  // * 3. Reverse the newly created LL
-  newHead = reverseLL(newHead->next);
-
-  return newHead;
+  // * 3. Reverse the newly created LL && return
+  return reverseLL(newHead->next);
 }
 
-// ListNode* removeNthFromEnd(ListNode* head, int n) {
+// * ------------------ APPROACH 2: Optimal Approach ---------------------
+// * Using Slow & fast pointers
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+  ListNode *slowp = head;
+  ListNode *fastp = head;
+
+  for (int i = 0; i < n; ++i) {
+    fastp = fastp->next;
+  }
+
+  if (!fastp)
+    return head->next;
     
-// }
+  while (fastp->next) {
+    slowp = slowp->next;
+    fastp = fastp->next;
+  }
+
+  ListNode* del_node = slowp->next;
+  slowp->next = slowp->next->next;
+  delete del_node;
+  return head;
+}
+
 
 int main(void) {
   // int n = 2;
@@ -125,9 +146,11 @@ int main(void) {
   std::cout << "Linked List" << std::endl;
   printLL(head);
 
-  ListNode *ans = bruteForce(head, n);
-  // ListNode *ans = removeNthFromEnd(head, n);
+  // ListNode *ans = bruteForce(head, n);
+  ListNode *ans = removeNthFromEnd(head, n);
   printLL(ans);
+
+  return 0;
 }
 
 

@@ -1,18 +1,18 @@
-/**
- * * Leetcode - 2130
- * * Maximum Twin Sum of a Linked List
- * * In a linked list of size n, where n is even, the ith node (0-indexed) of the linked list is 
- * * known as the twin of the (n-1-i)th node, if 0 <= i <= (n / 2) - 1.
+/*
+ * Leetcode - 2130
+ * Maximum Twin Sum of a Linked List
+ * In a linked list of size n, where n is even, the ith node (0-indexed) of the linked list is 
+ * known as the twin of the (n-1-i)th node, if 0 <= i <= (n / 2) - 1.
  * 
- * * Given the head of a linked list with even length, return the maximum twin sum of the linked list.
+ * Given the head of a linked list with even length, return the maximum twin sum of the linked list.
 
- * * Example 1
- * * Input  : head = [5,4,2,1]
- * * Output : 6
+ * Example 1
+ * Input  : head = [5, 4, 2, 1]
+ * Output : 6
 
- * * Example 2
- * * Input  : head = [4,2,2,3]
- * * Output : 7
+ * Example 2
+ * Input  : head = [4, 2, 2, 3]
+ * Output : 7
 
  * * https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/
 */
@@ -124,31 +124,31 @@ int pairSumStack(ListNode *head) {
     temp = temp->next;
   } 
   
-  int count = 0,  N = st.size();
   temp = head;
-  int maxSum = 0;
+  int max_sum = 0;
+  int count = 0,  N = st.size();
   while (count <= N / 2) {
-    maxSum = std::max(maxSum, temp->data + st.top());
+    max_sum = std::max(max_sum, temp->data + st.top());
     st.pop();
     count++;
     temp = temp->next;
   }
 
-  return maxSum;
+  return max_sum;
 }
 
 // * By reversing LL from the mid
 int pairSum(ListNode *head) {
   // * Go to the mid of LL
-  ListNode* slow = head;
-  ListNode* fast = head;
+  ListNode *slow = head;
+  ListNode *fast = head;
   while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next->next;
   }
 
-  ListNode* temp = head;
-  ListNode* mid = reverseLL(slow);
+  ListNode *temp = head;
+  ListNode *mid = reverseLL(slow);
 
   int curSum = 0, maxSum = 0;
   while (mid && temp != mid) {

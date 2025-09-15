@@ -47,7 +47,7 @@ void printLL(ListNode* head) {
   std::cout << "NULL" << std::endl;
 }
 
-ListNode* arrToLL(std::vector<int> &arr) {
+ListNode* arrayToLL(std::vector<int> &arr) {
   if (!arr.size())
     return nullptr;
 
@@ -64,6 +64,7 @@ ListNode* arrToLL(std::vector<int> &arr) {
 }
 
 // * ------------------ Brute Force ---------------------
+// * Using Extra Linked List
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
@@ -92,6 +93,7 @@ ListNode* bruteForce(ListNode* head) {
 }
 
 // * ------------------ Optimal Solution ---------------------
+// * Using In place method
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 ListNode* mergeNodes(ListNode* head) {
@@ -117,17 +119,18 @@ ListNode* mergeNodes(ListNode* head) {
 }
 
 int main(void) {
-  // std::vector<int> arr = {0, 3, 1, 0, 4, 5, 2, 0};
+  std::vector<int> arr = {0, 3, 1, 0, 4, 5, 2, 0};
   // std::vector<int> arr = {0, 1, 0, 3, 0, 2, 2, 0};
-  std::vector<int> arr = {0, 24, 14, 0};
+  // std::vector<int> arr = {0, 24, 14, 0};
 
-  ListNode* head = arrToLL(arr);
+  ListNode* head = arrayToLL(arr);
   std::cout << "Linked List" << std::endl;
   printLL(head);
 
   // ListNode* ans = bruteForce(head);
   ListNode* ans = mergeNodes(head);
   printLL(ans);
+
   return 0;
 }
 

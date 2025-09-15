@@ -11,8 +11,8 @@
  * * Output : [13, 8]
 
  * * Example 2
- * * Input  : head = [1,1,1,1]
- * * Output : [1,1,1,1]
+ * * Input  : head = [1, 1, 1, 1]
+ * * Output : [1, 1, 1, 1]
 
  * * https://leetcode.com/problems/remove-nodes-from-linked-list/description/
 */
@@ -71,6 +71,7 @@ ListNode* reverseLL(ListNode* node) {
 }
 
 ListNode* bruteForce(ListNode* head) {
+  // * Push on to stack in monotonic increasing way
   std::stack<int> st;
   ListNode* temp = head;
   while (temp) {
@@ -107,7 +108,9 @@ ListNode* removeNodes(ListNode* head) {
   temp = tail;
   while (temp) {
     while (temp->next && temp->data > temp->next->data) {
+      ListNode *del_node = temp->next;
       temp->next = temp->next->next;
+      delete del_node;
     }
     temp = temp->next;
   }
@@ -129,6 +132,8 @@ int main(void) {
   // ListNode *ans = bruteForce(head);
   ListNode *ans = removeNodes(head);
   printLL(ans);
+  
+  return 0;
 }
 
 
