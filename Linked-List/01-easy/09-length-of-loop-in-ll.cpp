@@ -14,8 +14,9 @@
  * * https://www.youtube.com/watch?v=I4g1qbkTPus&list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&index=16
 */
 
-#include<map>
-#include<iostream>
+#include <vector>
+#include <iostream>
+#include <unordered_map>
 
 class Node {
   public:
@@ -60,7 +61,7 @@ void printLL(Node* head) {
 // * Make Loop in LL
 Node* makeLoop(Node* head) {
   Node* temp = head;
-  while(temp->next) {
+  while (temp->next) {
     temp = temp->next;
   }
   temp->next = head->next;
@@ -71,19 +72,20 @@ Node* makeLoop(Node* head) {
 // * TIME COMPLEXITY O(N) + 2*O(logN)
 // * SPACE COMPLEXITY O(N)
 int bruteForce(Node* head) {
-  if(head == nullptr || head->next == nullptr) return nullptr;
+  if (head == nullptr || head->next == nullptr)
+    return 0;
 
   Node* temp = head;
   int timer = 0;
-  std::map<Node*, int> nodeMap;
+  std::unordered_map<Node *, int> nodeMap;
   Node* loopStart = nullptr;
   // * O(N)
-  while(temp) {
+  while (temp) {
     // * O(LogN)
-    if(nodeMap.find(temp) != nodeMap.end()) {
+    if (nodeMap.count(temp)) {
       loopStart = temp;
       return timer - nodeMap[temp];
-    } 
+    }
     // * O(LogN)
     nodeMap[temp] = timer++;
     temp = temp->next;
@@ -96,34 +98,35 @@ int bruteForce(Node* head) {
 // * Tortise & Hare algorithrm
 // * TIME COMPLEXITY O(N/2) + O(N)
 // * SPACE COMPLEXITY O(1)
-int optimal(Node* head) {
-  if(head == nullptr || head->next == nullptr) return nullptr;
+int lengthOfCycle(Node* head) {
+  if (head == nullptr || head->next == nullptr)
+    return 0;
 
   Node* slow = head;
   Node* fast = head;
 
   // * O(N/2)
-  while(fast && fast->next) {
+  while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next;
-    if(fast) {
+    if (fast)
       fast = fast->next;
-    }
-    if(slow == fast) {
+    
+    if (slow == fast)
       break;
-    }
   }
 
-  if(slow != fast) return 0;
+  if (slow != fast)
+    return 0;
 
   int c = 0;
   // * O(N)
-  while(slow) {
+  while (slow) {
     c++;
     slow = slow->next;
-    if(slow == fast) {
+    if (slow == fast)
       return c;
-    }
+    
   }
 
   return c;
@@ -137,7 +140,7 @@ int main() {
   head = makeLoop(head);
 
   // int loopCount = bruteForce(head);
-  int loopCount = optimal(head);
+  int loopCount = lengthOfCycle(head);
   std::cout<<"Length of loop "<<loopCount<<std::endl;
 
   return 0;

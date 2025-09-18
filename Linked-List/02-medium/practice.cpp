@@ -215,16 +215,6 @@ void swap(int &a, int &b) {
 //   }
 // };
 
-ListNode *middleOfLL(ListNode *head) {
-  ListNode *slow = head;
-  ListNode *fast = head->next;
-  while (fast && fast->next) {
-    slow = slow->next;
-    fast = fast->next->next;
-  }
-  return slow;
-}
-
 // * 21 - Swap Nodes in Pairs
 // ListNode *swapPairs(ListNode *head) {
 // TODO

@@ -2,11 +2,10 @@
 using namespace std;
 
 class Node {
-  public:
-    int data;
-    Node* next;
-    Node* tail;
-
+public:
+  int data;
+  Node *next;
+  Node *tail;
 
   // * Constructor
   Node(int d) {
@@ -22,8 +21,7 @@ class Node {
       next = NULL;
     }
     cout<<"Memory free for node with data "<<val<<endl;
-  } 
-
+  }
 };
 
 void insertAtHead(Node* &tail, int val) {

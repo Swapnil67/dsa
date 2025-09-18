@@ -1,7 +1,6 @@
-// * Remove duplicates from a sorted linked list.
+#include <map>
+#include <iostream>
 
-#include<iostream>
-#include<map>
 using namespace std;
 
 class Node {
@@ -76,7 +75,7 @@ void insertAfterELement(Node* &head, Node* &tail, int ele, int val) {
       return;
     }
     Node* new_node = new Node(val);
-    // cout<<cur->next<<" "<<cur->data<<endl;
+    // cout << cur->next << " " << cur->data << endl;
     new_node->next = cur->next;
     cur->next = new_node;
   }

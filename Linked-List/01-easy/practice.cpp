@@ -132,6 +132,16 @@ int getLLSize(Node* head) {
 // TODO
 // }
 
+// * 09A - Linked List Cycle
+// bool hasCycle(Node *head) {
+// TODO
+// }
+
+// * 09B - Find length of Loop
+// Node *lengthOfCycle(Node *head) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }

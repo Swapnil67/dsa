@@ -102,14 +102,12 @@ Node* middleNode(Node* head) {
   if(!head) return nullptr;
   if(head && head->next == nullptr) return head;
 
-  Node* slow = head;
-  Node* fast = head;
+  Node *slow = head;
+  Node *fast = head;
 
-  while(fast && fast->next) {
+  while (fast != nullptr && fast->next != nullptr) {
     slow = slow->next;
-    fast = fast->next;
-    if(fast == nullptr) return slow;
-    fast = fast->next;
+    fast = fast->next->next;
   }
 
   return slow;
