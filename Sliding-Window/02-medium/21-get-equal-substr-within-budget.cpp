@@ -85,7 +85,6 @@ int main() {
   // int max_cost = 0;
   // std::string s = "abcd", t = "acde";
 
-
   std::cout << "s: " << s << std::endl;
   std::cout << "t: " << t << std::endl;
 

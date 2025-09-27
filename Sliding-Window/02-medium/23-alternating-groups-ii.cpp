@@ -40,32 +40,27 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> &arr, int k) {
   // * Append k - 1 elements to the end of array (to make circular)
-  int temp = k - 1;
-  for (int i = 0; i < temp; ++i) {
+  for (int i = 0; i < k - 1; ++i) {
     arr.push_back(arr[i]);
   }
-  // printArr(arr);
-  
   int n = arr.size();
-  int ans = 0;
+  // printArr(arr);
+
+  int groups = 0;
   for (int i = 0; i <= n - k; ++i) {
-    bool isAlt = true;
-    int j = i;
-    for (; j < i + k; ++j) {
-      std::cout << arr[j] << " ";
-      if ((j - i) == k - 1)
-        break;
-      if (j < n && arr[j] == arr[j + 1]) {
-        isAlt = false;
+    int is_alt = 1;
+    for (int j = i; j < i + k; ++j) {
+      // std::cout << arr[j] << " ";
+      if (j > i && arr[j] == arr[j - 1]) {
+        is_alt = 0;
         break;
       }
     }
     // std::cout << std::endl;
-    if ((j - i) == k - 1 && isAlt)
-      ans++;
+    groups += is_alt;
   }
 
-  return ans;
+  return groups;
 }
 
 
@@ -81,9 +76,9 @@ int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
   }
   // printArr(arr);
 
-  int result = 0;
-  int i = 0 , j = 1;
   int n = arr.size();
+  int groups = 0;
+  int i = 0 , j = 1;
   while (j < n) {
     // * If j same as previous one then bring i to j
     if(arr[j] == arr[j - 1]) {
@@ -95,13 +90,13 @@ int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
     // * k window found
     if (j - i + 1 == k) {
       i += 1;
-      result += 1;
+      groups += 1;
     }
 
     j += 1;
   }
 
-  return result;
+  return groups;
 }
 
 
@@ -117,6 +112,7 @@ int main() {
   // int ans = bruteForce(arr, k);
   int ans = numberOfAlternatingGroups(arr, k);
   printf("Alternating consecutive tiles: %d\n", ans);
+
   return 0;
 }
 

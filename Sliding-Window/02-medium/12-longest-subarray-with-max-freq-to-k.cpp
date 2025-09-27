@@ -66,7 +66,7 @@ int maxSubarrayLength(std::vector<int>& arr, int k) {
     freq_map[arr[j]]++;
 
     // * Shrink the window
-    while (freq_map[arr[j]] > k) {
+    while (i < j && freq_map[arr[j]] > k) {
       freq_map[arr[i]]--;
       i++;
     }
@@ -83,12 +83,12 @@ int main() {
   // std::vector<int> arr = {1, 2, 3, 1, 2, 3, 1, 2};
 
   // * testcase 2
-  // int k = 1;
-  // std::vector<int> arr = {1, 2, 1, 2, 1, 2, 1, 2};
+  int k = 1;
+  std::vector<int> arr = {1, 2, 1, 2, 1, 2, 1, 2};
 
   // * testcase 3
-  int k = 4;
-  std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
+  // int k = 4;
+  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
 
   printf("At most frequency: %d\n", k);
   printf("Input Array\n");
@@ -102,4 +102,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX --std=c++20 12-longest-subarray-with-max-freq-to-k.cpp -o output && ./output
+// * g++ --std=c++20 12-longest-subarray-with-max-freq-to-k.cpp -o output && ./output

@@ -129,6 +129,7 @@ std::vector<int> resultsArray2(std::vector<int> &arr, int k) {
     }
     dq.push_back(arr[j]);
 
+    // * Check if we reached the 'k' window
     if (j >= k - 1) {
       if (dq.size() == k) {
         ans.push_back(dq.back());
@@ -145,16 +146,16 @@ std::vector<int> resultsArray2(std::vector<int> &arr, int k) {
 
 int main() {
   // * testcase 1
-  int k = 3;
-  std::vector<int> arr = {1, 2, 3, 4, 3, 2, 5};
+  // int k = 3;
+  // std::vector<int> arr = {1, 2, 3, 4, 3, 2, 5};
   
   // * testcase 2
   // int k = 4;
   // std::vector<int> arr = {2, 2, 2, 2, 2};
   
   // * testcase 3
-  // int k = 2;
-  // std::vector<int> arr = {3, 2, 3, 2, 3, 2};
+  int k = 2;
+  std::vector<int> arr = {3, 2, 3, 2, 3, 2};
 
   printArr(arr);
 
@@ -162,8 +163,8 @@ int main() {
   std::vector<int> ans = resultsArray(arr, k);
   std::cout << "Find the Power of K-Size Subarrays: " << std::endl;
   printArr(ans);
-  return 0;
 
+  return 0;
 }
 
 

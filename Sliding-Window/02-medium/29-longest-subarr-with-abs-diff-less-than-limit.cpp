@@ -52,6 +52,7 @@ int bruteForce(std::vector<int> nums, int limit) {
   for (int i = 0; i < n; ++i) {
     int cur_max_abs_diff = -1;
     for (int j = i; j < n; ++j) {
+      // * Max diff means that diff b/w largest and smallest elements
       cur_max_abs_diff = std::max(cur_max_abs_diff, std::abs(nums[i] - nums[j]));
       if (cur_max_abs_diff <= limit) {
         ans = std::max(ans, j - i + 1);
@@ -67,7 +68,7 @@ int bruteForce(std::vector<int> nums, int limit) {
 // * Min Heap = To find min element in subarray
 // * Max Heap = To find max element in subarray
 
-// * TIME COMPLEXITY O(n * log(n))
+// * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(N + N)
 int longestSubarray(std::vector<int> &nums, int limit) {
   int n = nums.size();
@@ -78,7 +79,7 @@ int longestSubarray(std::vector<int> &nums, int limit) {
   
   int i = 0, j = 0, ans = 0;
 
-  while(j < n) { // * O(n * log(n))
+  while(j < n) { // * O(nlogn)
 
     maxPq.push({nums[j], j});   // * Max ele will be at top of heap
     minPq.push({nums[j], j});   // * Min ele will be at top of heap
@@ -123,33 +124,33 @@ int longestSubarray(std::vector<int> &nums, int limit) {
 int longestSubarray2(std::vector<int> &nums, int limit) {
   int n = nums.size();
   std::deque<int> minDq, maxDq;
-  int i = 0, ans = 0;
-  for (int j = 0; j < n; ++j) {
+  int i = 0, j = 0, ans = 0;
+  while (j < n) {
     // * Maintain minDq (increasing)
-    while(!minDq.empty() && nums[j] < minDq.back()) {
+    while (!minDq.empty() && nums[j] < minDq.back()) {
       minDq.pop_back();
     }
     minDq.push_back(nums[j]);
 
     // * Maintain maxDq (decreasing)
-    while(!maxDq.empty() && nums[j] > maxDq.back()) {
+    while (!maxDq.empty() && nums[j] > maxDq.back()) {
       maxDq.pop_back();
     }
     maxDq.push_back(nums[j]);
 
     // * Shrink window if limit exceeded
-    while(maxDq.front() - minDq.front() > limit) {
-      if(maxDq.front() == nums[i]) {
+    while (maxDq.front() - minDq.front() > limit) {
+      if (maxDq.front() == nums[i])
         maxDq.pop_front();
-      }
-      if(minDq.front() == nums[i]) {
+
+      if (minDq.front() == nums[i])
         minDq.pop_front();
-      }
       i++;
     }
 
     ans = std::max(ans, j - i + 1);
-  } 
+    j++;
+  }
   return ans;
 }
 
@@ -180,24 +181,27 @@ int longestSubarray3(std::vector<int> &nums, int limit) {
 }
 
 int main() {
-  // * testcase 1
-  int limit = 4;
-  std::vector<int> nums = {8, 2, 4, 7};
+  // * testcase 1 (ans = 2)
+  // int limit = 4;
+  // std::vector<int> nums = {8, 2, 4, 7};
   
-  // * testcase 2
-  // int limit = 5;
-  // std::vector<int> nums = {10, 1, 2, 4, 7, 2};
+  // * testcase 2 (ans = 4)
+  int limit = 5; 
+  std::vector<int> nums = {10, 1, 2, 4, 7, 2};
   
-  // * testcase 3
+  // * testcase 3 (ans = 3)
   // int limit = 0;
   // std::vector<int> nums = {4, 2, 2, 2, 4, 4, 2, 2};
 
+  std::cout << "Limit: " << limit << std::endl;
+  std::cout << "Input array: ";
   printArr(nums);
 
   // int ans = bruteForce(nums, limit);
   // int ans = longestSubarray(nums, limit);
   int ans = longestSubarray2(nums, limit);
   std::cout << "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit: " << ans << std::endl;
+
   return 0;
 }
 

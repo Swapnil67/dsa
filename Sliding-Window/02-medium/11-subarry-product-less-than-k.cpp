@@ -84,7 +84,7 @@ int numSubarrayProductLessThanK(std::vector<int>& nums, int k) {
   return ans;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   int k = 100;
   std::vector<int> arr = {10, 5, 2, 6};

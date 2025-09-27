@@ -16,8 +16,8 @@
  * * https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/description/
 */
 
-#include <iostream>
 #include <climits>
+#include <iostream>
 #include <unordered_set>
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
@@ -75,12 +75,12 @@ int main() {
   // std::string s = "abciiidef";
 
   // * testcase 2
-  int k = 2;
-  std::string s = "aeiou";
+  // int k = 2;
+  // std::string s = "aeiou";
 
   // * testcase 3
-  // int k = 3;
-  // std::string s = "leetcode";
+  int k = 3;
+  std::string s = "leetcode";
 
   std::cout << "k: " << k << std::endl;
   std::cout << "Input String: " << s << std::endl;
@@ -88,6 +88,7 @@ int main() {
   // int ans = bruteForce(s, k);
   int ans = maxVowels(s, k);
   std::cout << "Maximum Number of Vowels: " << ans << std::endl;
+  
   return 0;
 }
 

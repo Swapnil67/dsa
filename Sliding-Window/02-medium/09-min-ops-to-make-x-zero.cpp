@@ -45,15 +45,14 @@ int minOperations2(std::vector<int> &arr, int x) {
   std::map<int, int> prefix_sum;
   prefix_sum[0] = -1;
   long long sum = 0;
-  for(int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; ++i) {
     sum += arr[i];
     prefix_sum[sum] = i;   // * storing sum in map
   }
 
   // * If total sum is less than x
-  if(sum < x) {
+  if (sum < x)
     return -1;
-  }
 
   long long target_sum = sum - x;
   // std::cout << "Total Sum: " << sum << " & Target Sum: " << target_sum << std::endl;
@@ -62,7 +61,7 @@ int minOperations2(std::vector<int> &arr, int x) {
   int j = 0, ans = -1;
   while (j < n) {
     cur_sum += arr[j];
-    long long check_sum = cur_sum - target_sum; 
+    long long check_sum = cur_sum - target_sum;
     // * check if we found 'check_sum' previously
     if (prefix_sum.find(check_sum) != prefix_sum.end()) {
       ans = std::max(ans, j - prefix_sum[check_sum]);
@@ -70,10 +69,7 @@ int minOperations2(std::vector<int> &arr, int x) {
     j++;
   }
 
-  if (ans < 0)
-    return -1;
-
-  return n - ans;
+  return ans < 0 ? -1 : n - ans;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
@@ -119,9 +115,11 @@ int main() {
   // * testcase 2
   // int x = 5;
   // std::vector<int> arr = {1, 1, 4, 2, 3};
+
   // * testcase 3
   // int x = 4;
   // std::vector<int> arr = {5, 6, 7, 8, 9};
+
   // * testcase 4
   int x = 10;
   std::vector<int> arr = {3, 2, 20, 1, 1, 3};

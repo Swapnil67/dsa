@@ -47,12 +47,12 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
     }
 
     // * Minutes window exceeded
-    if((j - i + 1) > minutes) {
+    if ((j - i + 1) > minutes) {
       // * if owner was grumpy at 'i' then remove those customers[i] from cur_unsatisfied_customers
-      if(grumpy[i]) {
+      if (grumpy[i])
         cur_unsatisfied_customers -= customers[i];
-      }
-      i += 1;
+
+      i++;
     }
 
     // * Max unsatisfied customer in window
@@ -60,7 +60,7 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
       max_unsatisfied_customers = std::max(max_unsatisfied_customers, cur_unsatisfied_customers);
     }
 
-    j += 1;
+    j++;
   }
   return max_unsatisfied_customers + already_satisfied_customers;
 }
@@ -83,6 +83,7 @@ int main() {
   
   int ans = maxSatisfied(customers, grumpy, minutes);
   std::cout << "Number of customers satisfied are " << ans << std::endl;
+
   return 0;
 }
 

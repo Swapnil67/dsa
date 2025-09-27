@@ -56,7 +56,7 @@ int bruteForce(std::vector<int> arr, int k) {
   for (int i = 0; i < n; ++i) {
     intervals.push_back({arr[i] - k, arr[i] + k});
   }
-  
+
   // * 2. Sort the intervals in ASC order
   std::sort(intervals.begin(), intervals.end()); // * o(nlogn)
 
@@ -135,7 +135,7 @@ int maximumBeauty2(std::vector<int> arr, int k) {
 
   int max_beauty = 0;
   int i = 0, j = 0;
-  while (i < n) {
+  while (j < n) {
     // * Shrink the window
     // * incr 'i' if arr[j] > (arr[i] + 2k) 
     if (arr[j] > (arr[i] + 2 * k)) {
@@ -143,8 +143,8 @@ int maximumBeauty2(std::vector<int> arr, int k) {
     }
 
     // * Find new max window
-    max_beauty = std::max(max_beauty, j - i);
-    i++;
+    max_beauty = std::max(max_beauty, (j - i + 1));
+    j++;
   }
 
   return max_beauty;
@@ -152,26 +152,26 @@ int maximumBeauty2(std::vector<int> arr, int k) {
 
 
 int main() {
-  // * testcase 1
-  // int k = 2;
-  // std::vector<int> arr = {4, 6, 1, 2};
+  // * testcase 1 (Ans = 3)
+  int k = 2;
+  std::vector<int> arr = {4, 6, 1, 2};
 
-  // * testcase 2
+  // * testcase 2 (Ans = 4)
   // int k = 10;
   // std::vector<int> arr = {1, 1, 1, 1};
 
-  // * testcase 3
-  int k = 2;
-  std::vector<int> arr = {3, 2, 3, 2, 3, 2};
+  // * testcase 3 (Ans = 6)
+  // int k = 2;
+  // std::vector<int> arr = {3, 2, 3, 2, 3, 2};
 
   printArr(arr);
 
-  int ans = bruteForce(arr, k);
+  // int ans = bruteForce(arr, k);
   // int ans = maximumBeauty(arr, k);
-  // int ans = maximumBeauty2(arr, k);
+  int ans = maximumBeauty2(arr, k);
   std::cout << "Maximum Beauty of an Array After Applying Operation: " << ans << std::endl;
-  return 0;
 
+  return 0;
 }
 
 // * Run the code

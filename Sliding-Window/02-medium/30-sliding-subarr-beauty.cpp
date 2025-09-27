@@ -49,9 +49,8 @@ std::vector<int> bruteForce(std::vector<int> &nums, int k, int x) {
   return ans;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Classic Sliding Window
+// * Classic Sliding Window + Counting Sort
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
@@ -100,16 +99,16 @@ int main(void) {
   // std::vector<int> nums = {1, -1, -3, -2, 3};
 
   // * testcase 2
-  // int k = 2, x = 2;
-  // std::vector<int> nums = {-1, -2, -3, -4, -5};
+  int k = 2, x = 2;
+  std::vector<int> nums = {-1, -2, -3, -4, -5};
 
   // * testcase 3
   // int k = 2, x = 1;
   // std::vector<int> nums = {-3, 1, 2, -3, 0, -3};
 
   // * testcase 3
-  int k = 9, x = 4;
-  std::vector<int> nums = {-14, 9, 13, -26, 47, -39, -49, -14, 29};
+  // int k = 9, x = 4;
+  // std::vector<int> nums = {-14, 9, 13, -26, 47, -39, -49, -14, 29};
 
   std::cout << "k = " << k << ", x = " << x << std::endl;
   std::cout << "Input Array" << std::endl;

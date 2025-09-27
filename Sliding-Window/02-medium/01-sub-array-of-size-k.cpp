@@ -121,8 +121,9 @@ int main() {
   // int ans = bruteForce(arr, k, threshold);
   int ans = numOfSubarrays(arr, k, threshold);
   std::cout << "Number of Sub-arrays of Size '" << k << "' and Average Greater than or Equal to '" << threshold << "' are " << ans << std::endl;
+
   return 0;
 }
 
 // * run the code
-// * $CXX --std=c++20 01-sub-array-of-size-k.cpp -o output && ./output
+// * g++ --std=c++20 01-sub-array-of-size-k.cpp -o output && ./output

@@ -31,21 +31,19 @@ int bruteForce(std::string s, int k) {
   for (int i = 0; i < n; ++i) {
     int max_freq = 0;
     std::vector<int> char_hash(26, 0);
-    for (int j = i; j < n; ++j) {
+    int j = i;
+    for (; j < n; ++j) {
       // * Incr the current character frequency
       char_hash[s[j] - 'A']++;
       // * check if max frequency of character changed
       max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
-      size_t len_of_substr = j - i + 1;
-      int replacements = len_of_substr - max_freq;
-      if (replacements <= k) {
-        max_len = std::max(max_len, (int)len_of_substr);
-      }
-      else {
+      int replacements = (j - i) - max_freq;
+      if (replacements >= k)
         break;
-      }
     }
+    max_len = std::max(max_len, (j - i));
   }
+
   return max_len;
 }
 
@@ -132,9 +130,9 @@ int main() {
   std::string s = "ABAB";
   
   std::cout << "Input String: " << s << std::endl;
-  // int ans = bruteForce(s, k);
+  int ans = bruteForce(s, k);
   // int ans = betterApproach(s, k);
-  int ans = characterReplacement(s, k);
+  // int ans = characterReplacement(s, k);
   std::cout << "Longest Repeating Character Replacement: " << ans << std::endl;
 
   return 0;
@@ -142,4 +140,4 @@ int main() {
 
 
 // * Run the code
-// * g++ --std=c++20 04-longest-repeating-char-replacement.cpp -o output && ./output
+// * g++ --std=c++20 17-longest-repeating-char-replacement.cpp -o output && ./output

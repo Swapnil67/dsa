@@ -73,10 +73,11 @@ bool checkInclusion(std::string s1, std::string s2) {
       s2_freq_vec[s2[i] - 'a']--;
       i++;
     }
-
+    
     // * compare two vectors
-    if (s1_freq_vec == s2_freq_vec)
+    if ((j - i + 1) > n1 && (s1_freq_vec == s2_freq_vec)) {
       return true;
+    }
 
     j++;
   }
@@ -98,6 +99,7 @@ int main() {
   bool ans = betterApproach(s1, s2);
   // bool ans = checkInclusion(s1, s2);
   std::cout << "Permutation in String: " << ans << std::endl;
+
   return 0;
 }
 

@@ -77,30 +77,30 @@ int bruteForce(std::vector<int> fruits) {
 int betterApproach(std::vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;
-  int fruitsCollected = 0;
-  std::unordered_map<int, int> fruitsFreq;
+  int fruits_collected = 0;
+  std::unordered_map<int, int> fruits_freq;
 
   while(j < n) {
-    fruitsFreq[fruits[j]]++;
+    fruits_freq[fruits[j]]++;
     
     // * Shrink window from left
     // * When we encounter more than two fruits
-    while (fruitsFreq.size() > 2) {
-      fruitsFreq[fruits[i]]--;
-      if(fruitsFreq[fruits[i]] == 0) {
-        fruitsFreq.erase(fruits[i]);
+    while (fruits_freq.size() > 2) {
+      fruits_freq[fruits[i]]--;
+      if(fruits_freq[fruits[i]] == 0) {
+        fruits_freq.erase(fruits[i]);
       }
       i++;
     }
 
     // * When we have two unique fruits
-    if(fruitsFreq.size() <= 2) {
-      fruitsCollected = std::max(fruitsCollected, j - i + 1);
+    if(fruits_freq.size() <= 2) {
+      fruits_collected = std::max(fruits_collected, j - i + 1);
     }
 
     j++;
   }
-  return fruitsCollected;
+  return fruits_collected;
 }
 
 
@@ -113,37 +113,38 @@ int betterApproach(std::vector<int> fruits) {
 int totalFruit(std::vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;
-  int fruitsCollected = 0;
-  std::unordered_map<int, int> fruitsFreq;
-  while(j < n) {
-    fruitsFreq[fruits[j]]++;
+  int fruits_collected = 0;
+  std::unordered_map<int, int> fruits_freq;
+  while (j < n) {
+    fruits_freq[fruits[j]]++;
 
     // * Shrink window from left
     // * When we encounter more than two fruits
-    if (fruitsFreq.size() > 2) {
-      fruitsFreq[fruits[i]]--;
-      if (fruitsFreq[fruits[i]] == 0) {
-        fruitsFreq.erase(fruits[i]);
+    if (fruits_freq.size() > 2) {
+      fruits_freq[fruits[i]]--;
+      if (fruits_freq[fruits[i]] == 0) {
+        fruits_freq.erase(fruits[i]);
       }
       i++;
     }
     else {
-      fruitsCollected = std::max(fruitsCollected, j - i + 1);
+      fruits_collected = std::max(fruits_collected, j - i + 1);
     }
     j++;
   }
 
-  return fruitsCollected;
+  return fruits_collected;
 }
+
 int main() {
   // * testcase 1
-  std::vector<int> fruits = {1, 2, 3, 2, 2};
+  // std::vector<int> fruits = {1, 2, 3, 2, 2};
 
   // * testcase 2
   // std::vector<int> fruits = {0, 1, 2, 2};
 
   // * testcase 2
-  // std::vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
+  std::vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
 
   printArr(fruits);
   
@@ -151,6 +152,7 @@ int main() {
   // int ans = betterApproach(fruits);
   int ans = totalFruit(fruits);
   std::cout << "Fruits into baskets: " << ans << std::endl;
+
   return 0;
 }
 

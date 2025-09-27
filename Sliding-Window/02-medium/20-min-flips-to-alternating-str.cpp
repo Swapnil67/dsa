@@ -47,7 +47,7 @@ int minFlips(std::string s) {
       alt2 += '0';
     }
   }
-  std::cout << "Alternating 1: " << alt1 << " Alternating 2: " << alt2 << std::endl;
+  // std::cout << "Alternating 1: " << alt1 << " Alternating 2: " << alt2 << std::endl;
 
   int i = 0, j = 0;
   int ans = INT_MAX;
@@ -88,10 +88,10 @@ int minFlips(std::string s) {
 
 int main() {
   // * testcase 1
-  // std::string s = "111000";
+  std::string s = "111000";
 
   // * testcase 2
-  std::string s = "01001001101";
+  // std::string s = "01001001101";
   
   // * testcase 3
   // std::string s = "010";
@@ -99,6 +99,7 @@ int main() {
   std::cout << "Input String: " << s << std::endl;
   int ans = minFlips(s);
   std::cout << "Minimum Number of Flips to Make the Binary String Alternating " << ans << std::endl;
+
   return 0;
 }
 

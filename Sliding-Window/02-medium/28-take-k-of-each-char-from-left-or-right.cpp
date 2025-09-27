@@ -62,13 +62,14 @@ int takeCharacters(std::string s, int k) {
 }
 
 int main() {
+
   // * testcase 1
-  // int k = 2;
-  // std::string s = "aabaaaacaabc";
+  int k = 2;
+  std::string s = "aabaaaacaabc";
   
   // * testcase 2
-  int k = 1;
-  std::string s = "a";
+  // int k = 1;
+  // std::string s = "a";
   
   // * testcase 3
   // int k = 1;
@@ -77,6 +78,7 @@ int main() {
   std::cout << "Input String: " << s << std::endl;
   int ans = takeCharacters(s, k);
   std::cout << "Minimum number of minutes needed: " << ans << std::endl;
+  
   return 0;
 }
 

@@ -52,7 +52,7 @@ int bruteForce(std::vector<int> arr, int k) {
   for (int i = 0; i <= n - k; ++i) {
     int cur_sum = 0;
     std::unordered_set<int> st;
-    for(int j = i; j < i + k; ++j) {
+    for (int j = i; j < i + k; ++j) {
       if(st.count(arr[j])) {
         // * found duplicate
         cur_sum = 0;
@@ -103,7 +103,7 @@ int subarraySum(std::vector<int> arr, int window_size) {
   return max_sum;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   int window_size = 3;
   std::vector<int> arr = {1, 5, 4, 2, 9, 9, 9};

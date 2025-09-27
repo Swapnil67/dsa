@@ -96,6 +96,7 @@ long long countOfSubstrings(std::string s, int k) {
     // * Shrink window from left
     while (consonants > k) {
       char ch = s[i];
+      // * check if ith char
       if (vowels.count(ch)) {
         vowels_map[ch]--;
         if (vowels_map[ch] == 0)
@@ -107,7 +108,7 @@ long long countOfSubstrings(std::string s, int k) {
     }
 
     // * Add the subarrays to ans
-    if (consonants == k && vowels_map.size() == 5) { // * Valid Window
+    if (consonants == k && vowels_map.size() == vowels.size()) { // * Valid Window
       // * because we want to include those subarrays to ans
       // * Eg: 
       // * a e i o u s a e s
@@ -135,9 +136,66 @@ long long countOfSubstrings(std::string s, int k) {
   return ans;
 }
 
+long long countOfSubstrings2(std::string s, int k) {
+  const std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+  int ans = 0;
+  int n = s.size();
+  std::vector<int> next_consonant(n, n);
+  int next_consonant_idx = n;
+  for (int i = n - 1; i >= 0; --i) {
+    next_consonant[i] = next_consonant_idx;
+    if (!vowels.count(s[i])) {
+      next_consonant_idx = i;
+    }
+  }
+
+  std::unordered_map<char, int> cur_vowels;
+  int cur_consonants = 0;
+  int i = 0, j = 0;
+  while (j < n) {
+    if (vowels.count(s[j])) {
+      cur_vowels[s[j]]++;
+    } else {
+      cur_consonants++;
+    }
+    
+    if(cur_consonants > k) {
+      if (vowels.count(s[i])) {
+        cur_vowels[s[i]]--;
+        if (cur_vowels[s[i]] == 0) {
+          cur_vowels.erase(s[i]);
+        }
+      } else {
+        cur_consonants--;
+      }
+      i++;
+    }
+
+    while (cur_consonants == k && cur_vowels.size() == vowels.size()) {
+      ans += (next_consonant[j] - j);
+      if (vowels.count(s[i])) {
+        cur_vowels[s[i]]--;
+        if (cur_vowels[s[i]] == 0) {
+          cur_vowels.erase(s[i]);
+        }
+      } else {
+        cur_consonants--;
+      }
+      i++;
+    }
+
+    j++;
+  }
+
+  return ans;
+}
+
 int main() {
   // int k = 1;
   // std::string word = "aeioqq"; 
+
+  int k = 0;
+  std::string word = "aeueio"; 
 
   // int k = 0;
   // std::string word = "aeiou"; 
@@ -148,14 +206,15 @@ int main() {
   // int k = 0;
   // std::string word = "aouiei"; 
 
-  int k = 2;
-  std::string word = "iqeaouqi"; 
+  // int k = 2;
+  // std::string word = "iqeaouqi"; 
 
   std::cout << word << std::endl;
 
   // long long ans = bruteForce(word, k);
-  long long ans = countOfSubstrings(word, k);
+  long long ans = countOfSubstrings2(word, k);
   std::cout << ans << std::endl;
+
   return 0;
 }
 

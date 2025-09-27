@@ -18,8 +18,8 @@
  * * https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
 */
 
+#include <vector>
 #include <iostream>
-#include <bits/stdc++.h>
 
 int bruteForce(std::string s) {
   int n = s.size();
@@ -61,29 +61,12 @@ int numberOfSubstrings(std::string s) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
-// * For every character there is substring that end which has all 3 characters
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-int numberOfSubstrings2(std::string s) {
-  int n = s.size();
-  int ans = 0;
-  std::vector<int> hash(3, -1);
-  for (int i = 0; i < n; ++i) {
-    hash[s[i] - 'a'] = i;
-    int window_min_idx = *(std::min_element(hash.begin(), hash.end()));
-    ans = ans + (window_min_idx + 1);
-  }
-  return ans;
-}
-
-
 int main() {
   // * testcase 1
-  // std::string s = "abcabc";
+  std::string s = "abcabc";
 
   // * testcase 2
-  std::string s = "aaacb";
+  // std::string s = "aaacb";
 
   std::cout << "Input String: " << s << std::endl;
   // int ans = bruteForce(s);
@@ -95,12 +78,3 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++20 16-substr-containing-3-char.cpp -o output && ./output
-
-// * a b c a b c
-// *       ^
-// *           ^
-
-// * ans = 0, 4, 3, 2, 1
-// * a = 0 1 0 1
-// * b = 0 1 0 1
-// * c = 0 1 0 1

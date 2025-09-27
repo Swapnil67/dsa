@@ -125,9 +125,10 @@ int main() {
   std::vector<int> arr = {2, 2, 2, 1, 2, 2, 1, 2, 2, 2};
   printArr(arr);
 
-  // int ans = numberOfSubarrays(arr, k);
-  int ans = numberOfSubarraysB(arr, k);
+  int ans = numberOfSubarrays(arr, k);
+  // int ans = numberOfSubarraysB(arr, k);
   std::cout << "Nice subarrays: " << ans << std::endl;
+
   return 0;
 }
 

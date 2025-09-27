@@ -22,9 +22,9 @@
  * * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
 */
 
-#include <unordered_map>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -114,7 +114,7 @@ int lengthOfLongestSubstring2(std::string s) {
   return ans;
 }
 
-int main() {
+int main(void) {
   // std::string s = "abcabcbb";
   // std::string s = "abba";
   std::string s = "tmmzuxt";

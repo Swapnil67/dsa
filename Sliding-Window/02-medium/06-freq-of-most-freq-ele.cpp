@@ -26,6 +26,9 @@
 
 // ! [HINT] => Mostly frequent element will be one of the array elements
 
+// ! After sort it will be easy to determine which number we want to increment
+// ! Eg [1,4,8,13] => for '8' we only focus on '1' & '4' similarly for '13' we focus on '1', '4', '8'
+
 #include <vector>
 #include <climits>
 #include <iostream>
@@ -70,7 +73,6 @@ int myBruteForce(std::vector<int> arr, int k) {
 
 
 // * -------------------------- Binary Search Approach
-
 int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefix_arr) {
   int l = 0, r = target_idx;
   int best_idx = target_idx;
@@ -102,9 +104,8 @@ int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefi
   return target_idx - best_idx + 1;
 }
 
-// * Sort the array & calculate prefix_sum for array
-// * After sort it will be easy to determine which number we want to increment
-// * Eg [1,4,8,13] => for '8' we only focus on '1' & '4' similarly for '13' we focus on '1', '4', '8'
+
+// ! Sort the array & calculate prefix_sum for array
 // * TIME COMPLEXITY O(N * nlogn)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int k) {
@@ -210,10 +211,12 @@ int main() {
   
   printArr(arr);
   
+  // int ans = myBruteForce(arr, k);
   // int ans = bruteForce(arr, k);
   // int ans = betterApproach(arr, k);
   int ans = maxFrequency(arr, k);
   std::cout << "Frequency of the Most Frequent Element: " << ans << std::endl;
+
   return 0;
 }
 

@@ -90,12 +90,12 @@ int main() {
   // std::vector<int> arr = {2, 3, 1, 2, 4, 3};
 
   // * testcase 2
-  // int target = 11;
-  // std::vector<int> arr = {1, 1, 1, 1, 1, 1, 1, 1};
+  int target = 11;
+  std::vector<int> arr = {1, 1, 1, 1, 1, 1, 1, 1};
 
   // * testcase 3
-  int target = 4;
-  std::vector<int> arr = {1, 4, 4};
+  // int target = 4;
+  // std::vector<int> arr = {1, 4, 4};
 
   std::cout<<"Input Array: ";
   printArr(arr);
@@ -104,8 +104,9 @@ int main() {
   // int ans = bruteForce(arr, target);
   int ans = minSubArrayLen(arr, target);
   std::cout << "Minimum Size Subarray Sum: " << ans << std::endl;
+
   return 0;
 }
 
 // * Run the code
-// * $CXX --std=c++20 07-min-size-subarray-sum.cpp -o output && ./output
+// * g++ --std=c++20 07-min-size-subarray-sum.cpp -o output && ./output

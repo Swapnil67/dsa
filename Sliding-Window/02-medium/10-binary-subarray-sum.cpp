@@ -27,6 +27,10 @@
  * * https://leetcode.com/problems/binary-subarrays-with-sum/description/
 */
 
+
+// ! Similar sum
+// ! Count the Number of Fair Pairs
+
 #include <vector>
 #include <iostream>
 #include <unordered_map>

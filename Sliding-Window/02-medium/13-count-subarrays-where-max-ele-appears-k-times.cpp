@@ -88,52 +88,22 @@ int countSubarrays(std::vector<int> &arr, int k) {
   return ans;
 }
 
-// ! This soln is little difficult to understand.
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
-// * Keep max_ele index vector 
-// * find the first_idx where count >= k
-// * ans += first_idx + 1 if count >= k
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(N)
-int countSubarrays2(std::vector<int> &arr, int k) {
-  int n = arr.size();
-  int ans = 0, count = 0;
-  int max_ele = *max_element(arr.begin(), arr.end());
-
-  std::vector<int> max_ele_idx_arr;
-  for(int i = 0; i < n; ++i) {
-    // * check if cur ele is max_ele
-    if (arr[i] == max_ele) {
-      count++;
-      max_ele_idx_arr.push_back(i); // * Add the index to arr
-    }
-
-    // * if count >= k then check the first_idx 
-    // * where first_idx to i has count >= k
-    if (count >= k) {
-      int first_idx = max_ele_idx_arr[max_ele_idx_arr.size() - k];
-      ans += first_idx + 1;
-    }
-  }
-  return ans;
-}
-
 int main() {
   // * testcase 1
   // int k = 2;
   // std::vector<int> arr = {1, 3, 2, 3, 3};
 
   // * testcase 1
-  // int k = 2;
-  // std::vector<int> arr = {1, 3, 2, 5, 1, 5};
+  int k = 2;
+  std::vector<int> arr = {1, 3, 2, 5, 1, 5};
 
   // * testcase 2
   // int k = 3;
   // std::vector<int> arr = {1, 4, 2, 1};
 
   // * testcase 3
-  int k = 4;
-  std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
+  // int k = 4;
+  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
 
   printf("Appear at least: %d\n", k);
   printf("Input Array\n");
@@ -141,7 +111,6 @@ int main() {
 
   // int ans = bruteForce(arr, k);
   int ans = countSubarrays(arr, k);
-  // int ans = countSubarrays2(arr, k);
   printf("Length of Longest Subarray With at Most %d Frequency is %d\n", k, ans);
 
   return 0;

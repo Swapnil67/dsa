@@ -56,15 +56,14 @@ int bruteForce(std::vector<int> arr, int k) {
   return max_ones;
 }
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Classic Sliding Window
-// * keep zero counter and keep the window of 'k' zeros
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int betterApproach(std::vector<int> arr, int k) {
+int longestOnes(std::vector<int> arr, int k) {
   int n = arr.size();
   int i = 0, j = 0;
-  int flips = 0, ans = 0;
+  int ans = 0;
 
   while(j < n) {
     if (arr[j] == 0)
@@ -83,31 +82,6 @@ int betterApproach(std::vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
-// * Classic Sliding Window
-// * keep zeros counter
-// * Only calculate 1's count if zeros counter is under 'k'
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-int longestOnes(std::vector<int> arr, int k) {
-  int n = arr.size();
-  int ans = 0;
-  int i = 0, j = 0;
-  while (j < n) {
-    if (arr[j] == 0)
-      k--;
-    if (k < 0) {
-      if (arr[i] == 0)
-        k++;
-      i++;
-    }
-    ans = std::max((j - i + 1), ans);
-    j++;
-  }
-  return ans;
-}
-
-
 int main() {
   // * testcase 1
   int k = 2;
@@ -120,9 +94,9 @@ int main() {
   printArr(arr);
   
   // int ans = bruteForce(arr, k);
-  // int ans = betterApproach(arr, k);
   int ans = longestOnes(arr, k);
   std::cout << " Max Consecutive Ones: " << ans << std::endl;
+  
   return 0;
 }
 
