@@ -67,7 +67,7 @@ std::string longestDiverseString(int a, int b, int c) {
       if (--count2 > 0)
         max_heap.push({count2, ch2});
         
-      max_heap.push({count, ch});
+      max_heap.push({count, ch}); // * don't forget the push first popped pair
     }
     else {
       ans += ch;
@@ -80,11 +80,17 @@ std::string longestDiverseString(int a, int b, int c) {
 }
 
 int main(void) {
+  // * testcase 1
   int a = 1, b = 1, c = 7;
+
+  // * testcase 2
   // int a = 7, b = 1, c = 0;
+
   std::cout << "a: " << a << " b: " << b << " c: " << c << std::endl;
+
   std::string ans = longestDiverseString(a, b, c);
   std::cout << "Longest Happy String: " << ans << std::endl;
+  
   return 0;
 }
 
