@@ -1,3 +1,19 @@
+/**
+ * * UnDirected Graph Cycle
+ * 
+ * * Example 1  :
+ * * Input      : V = 4, edges[][] = [[0, 1], [1, 2], [2, 3], [3, 3]]
+ * * Output     : true
+ * 
+ * * Example 2  :
+ * * Input      : V = 3, edges[][] = [[0, 1], [1, 2]]
+ * * Output     : false
+ * 
+ * * https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
+ * * https://www.naukri.com/code360/problems/detect-cycle-in-a-directed-graph_1062626
+ * 
+ */
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -61,7 +77,7 @@ bool dfs(std::vector<std::vector<int>> &edges,
 }
 
 // * DFS
-bool cycleDetectionDfs(std::vector<std::vector<int>> &edges) {
+bool cycleDetectionDFS(std::vector<std::vector<int>> &edges) {
   int V = edges.size();
   std::vector<bool> visited(V + 1, false);
   // return dfs(edges, visited, 0, -1);
@@ -103,7 +119,7 @@ bool bfs(std::vector<std::vector<int>> &adj,
 }
 
 // * BFS
-bool cycleDetectionBfs(std::vector<std::vector<int>> &edges) {
+bool cycleDetectionBFS(std::vector<std::vector<int>> &edges) {
   int V = edges.size();
   std::vector<bool> visited(V + 1, false);
 
@@ -125,21 +141,20 @@ bool cycleDetectionBfs(std::vector<std::vector<int>> &edges) {
 
 
 int main(void) {
-
   // * testcase 1
   std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}};
 
-  // * testcase 1
+  // * testcase 2
   // std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}};
 
-  // * testcase 2
+  // * testcase 3
   // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
 
   for (auto &vec : edges)
     printArr(vec);
 
-  // bool cycle = cycleDetectionDfs(edges);
-  bool cycle = cycleDetectionBfs(edges);
+  // bool cycle = cycleDetectionDFS(edges);
+  bool cycle = cycleDetectionBFS(edges);
   std::cout << "Cycle Detection In Undirected Graph: " << cycle << std::endl;
   return 0;
 }

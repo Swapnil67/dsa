@@ -14,6 +14,7 @@
  * 
  */
 
+#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -40,12 +41,15 @@ void printAdjList(std::vector<T> &adj) {
 }
 
 // * Function to construct an adjacency list from edge list
-std::vector<std::vector<int>> constructadj(int V, std::vector<std::vector<int>> &edges) {
+std::vector<std::vector<int>> constructadj(
+    int V,
+    std::vector<std::vector<int>> &edges,
+    std::vector<int> &indegree)
+{
   std::vector<std::vector<int>> adj(V);
-  for (auto &it : edges) {
-    // printArr(it);
-    // std::cout << it[0] << " -> " << it[1] << std::endl;
-    adj[it[0]].push_back(it[1]); // Directed edge from it[0] to it[1]
+  for (auto &it: edges) {
+    indegree[it[1]]++;
+    adj[it[0]].push_back(it[1]);
   }
   return adj;
 }
@@ -75,7 +79,8 @@ bool dfs(std::vector<std::vector<int>> &adj,
 
 bool cycleDetectionDfs(int V, std::vector<std::vector<int>> &edges) {
   // * construct the adjacency list
-  std::vector<std::vector<int>> adj = constructadj(V + 1, edges);
+  std::vector<int> indegree(V);
+  std::vector<std::vector<int>> adj = constructadj(V + 1, edges, indegree);
 
   // * For Debugging
   std::cout << "Adjacency List" << std::endl;
@@ -89,6 +94,57 @@ bool cycleDetectionDfs(int V, std::vector<std::vector<int>> &edges) {
   }
 
   return false;
+}
+
+
+bool bfs(std::vector<std::vector<int>> &adj,
+        std::vector<int> &indegree, int N)
+{
+  int count = 0;
+  
+  // * Push all the vertices with indegree = 0
+  std::queue<int> q;
+  for (int i = 0; i < indegree.size(); ++i) {
+    if (indegree[i] == 0) {
+      q.push(i);
+      count++;
+    }
+  }
+
+  // * Sinple BFS
+  while (!q.empty()) {
+    int u = q.front();
+    q.pop();
+
+    for (auto &v: adj[u]) {
+      indegree[v]--;
+      
+      if (indegree[v] == 0) {
+        count++;
+        q.push(v);
+      }
+    }
+  }
+
+  // std::cout << "N: " << N << ", Count: " << count << std::endl;
+
+  return count != N;
+}
+
+bool cycleDetectionBfs(int V, std::vector<std::vector<int>> &edges) {
+  int N = V * 2;
+  // * construct the adjacency list
+  std::vector<int> indegree(N, 0);
+  
+  std::vector<std::vector<int>> adj = constructadj(N, edges, indegree);
+  // * For Debugging
+  std::cout << "Adjacency List" << std::endl;
+  printAdjList(adj);
+
+  std::cout << "Indegree" << std::endl;
+  printArr(indegree);
+
+  return bfs(adj, indegree, N);
 }
 
 int main(void) {
@@ -107,7 +163,8 @@ int main(void) {
   for (auto &vec : edges)
     printArr(vec);
 
-  bool cycle = cycleDetectionDfs(V, edges);
+  // bool cycle = cycleDetectionDfs(V, edges);
+  bool cycle = cycleDetectionBfs(V, edges);
   std::cout << "Cycle Detection In Undirected Graph: " << cycle << std::endl;
   return 0;
 }

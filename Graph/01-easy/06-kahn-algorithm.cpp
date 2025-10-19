@@ -14,7 +14,7 @@
  * 
  */
 
-#include <stack>
+#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -42,56 +42,64 @@ void printAdjList(std::vector<T> &adj) {
   }
 }
 
-std::vector<std::vector<int>> constructadj(int V, std::vector<std::vector<int>> &edges) {
+std::vector<std::vector<int>> constructadj(
+    int V,
+    std::vector<std::vector<int>> &edges,
+    std::vector<int> &indegree)
+{
   std::vector<std::vector<int>> adj(V);
   for (auto &it: edges) {
+    // * a ---> b
     adj[it[0]].push_back(it[1]);
+    indegree[it[1]]++;
   }
   return adj;
 }
 
-// * Classic DFS traversal in Graph
-void dfs(std::vector<std::vector<int>> &adj, int u,
-         std::stack<int> &st,
-         std::vector<bool> &visited)
+// * Classic BFS traversal in Graph
+std::vector<int> bfs(
+    std::vector<std::vector<int>> &adj,
+    std::vector<int> &indegree)
 {
-  visited[u] = true;
+ 
+  // * Push all the vertices with indegree = 0
+  std::queue<int> q;
+  for (int i = 0; i < indegree.size(); ++i) {
+    if (indegree[i] == 0)
+      q.push(i);
+  }
 
-  for (auto &v : adj[u]) {
-    if (!visited[v]) {
-      dfs(adj, v, st, visited);
+  // * Classic BFS
+  std::vector<int> ans;
+  while (!q.empty()) {
+    int u = q.front();
+    ans.push_back(u);
+    q.pop();
+
+    for (auto &v : adj[u]) {
+      indegree[v]--;
+      if (indegree[v] == 0)
+        q.push(v);
     }
   }
 
-  st.push(u);
+  return ans;
 }
 
 std::vector<int> topologicalSort(int V, std::vector<std::vector<int>> &edges) {
 
   // * Create an Adjacency list from edges 
-  std::vector<std::vector<int>> adj = constructadj(V, edges);
+  std::vector<int> indegree(V);
+  std::vector<std::vector<int>> adj = constructadj(V, edges, indegree);
 
   // * For Debugging
   std::cout << "Adjacency List" << std::endl;
   printAdjList(adj);
 
-  std::stack<int> st;
-  
-  // * Classic DFS traversal in Graph
-  std::vector<bool> visited(V + 1, false);
-  for (int u = 0; u < V; ++u) {
-    if (!visited[u])
-      dfs(adj, u, st, visited);
-  }
+  std::cout << "Indegree" << std::endl;
+  printArr(indegree);
 
-  // * Create the ans from stack
-  std::vector<int> ans;
-  while(!st.empty()) {
-    ans.push_back(st.top());
-    st.pop();
-  }
-  
-  return ans;
+  return bfs(adj, indegree);
 }
 
 int main(void) {
@@ -103,7 +111,7 @@ int main(void) {
   // std::vector<std::vector<int>> edges = {{3, 0}, {1, 0}, {2, 0}}; 
 
   // * testcase 3
-  std::vector<std::vector<int>> edges = {{1, 3}, {2, 3}, {4, 1}, {4, 0}, {5, 0}, {5,2}};
+  std::vector<std::vector<int>> edges = {{1, 3}, {2, 3}, {4, 1}, {4, 0}, {5, 0}, {5, 2}};
 
   int V = edges.size();
   std::cout << "Edges: " << V << std::endl;
@@ -120,4 +128,4 @@ int main(void) {
 
 
 // * Run the code
-// * g++ --std=c++20 05-topological-sort.cpp -o output && ./output
+// * g++ --std=c++20 06-kahn-algorithm.cpp -o output && ./output
