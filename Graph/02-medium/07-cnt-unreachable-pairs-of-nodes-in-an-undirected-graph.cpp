@@ -68,10 +68,9 @@ void dfs(long long &size, int u, std::vector<bool> &visited, std::vector<std::ve
 }
 
 long long countPairsDFS(int n, std::vector<std::vector<int>> &edges) {
-  int e = edges.size(); // * Edges
-
   std::vector<bool> visited(n, false);
   
+  // * construct the adjacency list
   std::vector<std::vector<int>> adj = constructadj(n, edges);
   // * For Debugging
   std::cout << "Adjacency List" << std::endl;
@@ -84,8 +83,7 @@ long long countPairsDFS(int n, std::vector<std::vector<int>> &edges) {
       long long grp_size = 0;
       dfs(grp_size, i, visited, adj);
       res += grp_size * (cur_remaining - grp_size);
-      std::cout << "grp_size  " << grp_size << std::endl;
-      std::cout << "pairs  " << res << std::endl;
+      // std::cout << "grp_size  " << grp_size < ", pairs  " << res << std::endl;
       cur_remaining -= grp_size;
     }
   }

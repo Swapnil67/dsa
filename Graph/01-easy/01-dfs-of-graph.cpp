@@ -32,8 +32,7 @@ void solve(std::vector<std::vector<int>> &adj,
   visited[u] = true;
   result.push_back(u);
 
-  for (int i = 0; i < adj[u].size(); ++i) {
-    int v = adj[u][i];
+  for (auto &v: adj[u]) {
     if (!visited[v]) {
       solve(adj, v, visited, result);
     }
@@ -49,7 +48,12 @@ std::vector<int> dfs(std::vector<std::vector<int>> &adj) {
 }
 
 int main(void) {
-  std::vector<std::vector<int>> adj = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
+  // * testcase 1
+  // std::vector<std::vector<int>> adj = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
+
+  // * testcase 2
+  std::vector<std::vector<int>> adj = {{1, 2}, {0, 2}, {0, 1, 3, 4}, {2}, {2}};
+
   for (auto &vec : adj)
     printArr(vec);
 
@@ -61,4 +65,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 01-dfs-in-graph.cpp -o output && ./output
+// * g++ --std=c++20 01-dfs-of-graph.cpp -o output && ./output

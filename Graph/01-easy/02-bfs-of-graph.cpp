@@ -52,8 +52,8 @@ std::vector<int> solve(std::vector<std::vector<int>> &adj, int u,
 }
 
 std::vector<int> bfs(std::vector<std::vector<int>> &adj) {
-  int u = adj.size();
-  std::vector<bool> visited(u + 1, false);
+  int V = adj.size();
+  std::vector<bool> visited(V + 1, false);
   std::vector<int> result = solve(adj, 0, visited);
   return result;
 }

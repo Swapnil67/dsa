@@ -1,5 +1,5 @@
 /**
- * * UnDirected Graph Cycle
+ * * Undirected Graph Cycle
  * 
  * * Example 1  :
  * * Input      : V = 4, edges[][] = [[0, 1], [1, 2], [2, 3], [3, 3]]
@@ -43,20 +43,16 @@ void printAdjList(std::vector<T> &adj) {
 std::vector<std::vector<int>> constructadj(int V, std::vector<std::vector<int>> &edges) {
   std::cout << "V: " << V << std::endl;
   std::vector<std::vector<int>> adj(V + 1);
-  // for (int i = 0; i <= V; ++i) {
   for (auto &it : edges) {
-    // printArr(it);
-    // std::cout << it[0] << " -- " << it[1] << std::endl;
     adj[it[0]].push_back(it[1]);
     adj[it[1]].push_back(it[0]);
-    // std::cout << "-----------" << std::endl;
   }
   return adj;
 }
 
-bool dfs(std::vector<std::vector<int>> &edges,
-         std::vector<bool> &visited,
-         int u, int parent)
+bool dfs(int u, int parent,
+         std::vector<std::vector<int>> &edges,
+         std::vector<bool> &visited)
 {
   visited[u] = true;
   
@@ -64,11 +60,11 @@ bool dfs(std::vector<std::vector<int>> &edges,
     if (v == parent)
       continue;
 
-    if (visited[v] == true)
+    if (visited[v])
       return true;
     
     if (!visited[v]) {
-      if (dfs(edges, visited, v, u) == true)
+      if (dfs(v, u, edges, visited))
         return true;
     }
   }
@@ -77,12 +73,12 @@ bool dfs(std::vector<std::vector<int>> &edges,
 }
 
 // * DFS
+// * Use a parent pointer
 bool cycleDetectionDFS(std::vector<std::vector<int>> &edges) {
   int V = edges.size();
   std::vector<bool> visited(V + 1, false);
-  // return dfs(edges, visited, 0, -1);
-  for (int i = 0; i < V; ++i) {
-    if (!visited[i] && dfs(edges, visited, i, -1))
+  for (int u = 0; u < V; ++u) {
+    if (!visited[u] && dfs(u, -1, edges, visited))
       return true;
   }
   return false;
@@ -131,7 +127,7 @@ bool cycleDetectionBFS(std::vector<std::vector<int>> &edges) {
 
   for (int i = 0; i < V; ++i) {
     if (!visited[i] && bfs(adj, visited, i)) {
-      std::cout << i << std::endl;
+      // std::cout << i << std::endl;
       return true;
     }
   }
@@ -142,13 +138,13 @@ bool cycleDetectionBFS(std::vector<std::vector<int>> &edges) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}};
+  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}};
 
   // * testcase 2
   // std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
+  std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
 
   for (auto &vec : edges)
     printArr(vec);
@@ -156,6 +152,7 @@ int main(void) {
   // bool cycle = cycleDetectionDFS(edges);
   bool cycle = cycleDetectionBFS(edges);
   std::cout << "Cycle Detection In Undirected Graph: " << cycle << std::endl;
+
   return 0;
 }
 

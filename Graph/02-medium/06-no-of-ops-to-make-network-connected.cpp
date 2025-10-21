@@ -1,23 +1,27 @@
 /**
- * * Leetcode - 990
- * * Satisfiability of Equality Equations
+ * * Leetcode - 1319
+ * * Number of Operations to Make Network Connected
  *
- * * You are given an array of strings equations that represent relationships between variables where each
- * * string equations[i] is of length 4 and takes one of two different forms: "xi==yi" or "xi!=yi".
- * * Here, xi and yi are lowercase letters (not necessarily different) that represent one-letter variable names.
+ * * There are n computers numbered from 0 to n - 1 connected by ethernet cables connections forming a 
+ * * network where connections[i] = [ai, bi] represents a connection between computers ai and bi. 
+ * * Any computer can reach any other computer directly or indirectly through the network.
 
- * * Return true if it is possible to assign integers to variable names so as to satisfy all the given equations
- * * or false otherwise.
+ * * You are given an initial computer network connections. You can extract certain cables between two 
+ * * directly connected computers, and place them between any pair of disconnected computers to make 
+ * * them directly connected.
+
+ * * Return the minimum number of times you need to do this in order to make all the computers connected. 
+ * * If it is not possible, return -1.
 
  * * Example 1  :
- * * Input      : equations = ["a==b","b!=a"]
- * * Output     : false
+ * * Input      : n = 4, connections = [[0,1],[0,2],[1,2]]
+ * * Output     : 1
  * 
  * * Example 2  :
- * * Input      : equations = ["b==a","a==b"]
- * * Output     : true
+ * * Input      : n = 6, connections = [[0,1],[0,2],[0,3],[1,2],[1,3]]
+ * * Output     : 2
  * 
- * * https://leetcode.com/problems/satisfiability-of-equality-equations/description/
+ * * https://leetcode.com/problems/number-of-operations-to-make-network-connected
  */
 
 // ! DSU

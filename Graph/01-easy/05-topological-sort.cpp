@@ -18,7 +18,7 @@
 #include <vector>
 #include <iostream>
 
-// ! Topological sort will only take place in Directed Acyclic Graph
+// ! Topological sort will only take place in Directed Acyclic Graph (DAG)
 
 template <typename T>
 void printArr(std::vector<T> &arr) {

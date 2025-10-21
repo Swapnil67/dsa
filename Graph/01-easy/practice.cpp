@@ -1,3 +1,4 @@
+#include <queue>
 #include <vector>
 #include <iostream>
 #include <unordered_map>
@@ -24,21 +25,64 @@ void printAdjList(std::vector<T> &adj) {
   }
 }
 
-int main(void) {
-  // * testcase 1
-  int n = 3;
-  std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}};
-  
-  // * testcase 2
-  // int n = 7;
-  // std::vector<std::vector<int>> edges = {{0, 2}, {0, 5}, {2, 4}, {1, 6}, {5, 4}};
-  
-  // * testcase 3
-  // int n = 6;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {0, 3}, {1, 2}};
+// * Function to construct an adjacency list from edge list
+std::vector<std::vector<int>> constructadj(
+    int V,
+    std::vector<std::vector<int>> &edges,
+    std::vector<int> &indegree)
+{
+  std::vector<std::vector<int>> adj(V);
+  for (auto &it: edges) {
+    indegree[it[1]]++;
+    adj[it[0]].push_back(it[1]);
+  }
+  return adj;
+}
 
+// * 01 - DFS on Graph
+// std::vector<int> dfs(std::vector<std::vector<int>> &adj) {
+// TODO
+// }
+
+// * 02 - BFS on Graph
+// std::vector<int> bfs(std::vector<std::vector<int>> &adj) {
+// TODO
+// }
+
+// * 03A - Undirected Graph Cycle
+// bool cycleDetectionDFS(std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 03B - Undirected Graph Cycle
+// bool cycleDetectionBFS(std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 04A - directed Graph Cycle
+// bool cycleDetectionDFS(int V, std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 04B - directed Graph Cycle (Kahn's Algo)
+// bool cycleDetectionBFS(int V, std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 05 - Topological sort
+// std::vector<int> topologicalSort(int V, std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 06 - Kahn's Algorithm
+// std::vector<int> topologicalSort(int V, std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+int main(void) {
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 practice.cpp -o output && ./output
+
