@@ -17,10 +17,9 @@
 * Output: ans = [1, 2, 4, 6]
 
 * https://www.naukri.com/code360/problems/right-view_764605
+* https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 */
 
-#include <map>
-#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -50,15 +49,22 @@ void printArr(vector<int> arr) {
 }
 
 // * Recursive Pre Order Traversal (Root -> Left -> Right)
-void leftView(TreeNode *root, std::vector<int> &ans, int level) {
+void solve(TreeNode *root, std::vector<int> &ans, int level) {
   if (!root)
     return;
 
+  // * To get the first node from level
   if (level == ans.size())
     ans.push_back(root->data);
 
-  leftView(root->left, ans, level + 1);
-  leftView(root->right, ans, level + 1);
+  solve(root->left, ans, level + 1);
+  solve(root->right, ans, level + 1);
+}
+
+std::vector<int> leftView(TreeNode *root) {
+  std::vector<int> ans;
+  solve(root,ans,0);
+  return ans;
 }
 
 int main() {
@@ -73,11 +79,12 @@ int main() {
 
   root->right->right = new TreeNode(7);
   
-  std::vector<int> ans;
-  leftView(root, ans, 0);
+  std::vector<int> ans = leftView(root);
   printArr(ans);
+
+  return 0;
 }
 
 
 // * run the code
-// * g++ --std=c++17 08-left-view-bt.cpp -o output && ./output
+// * g++ --std=c++20 08-left-view-bt.cpp -o output && ./output

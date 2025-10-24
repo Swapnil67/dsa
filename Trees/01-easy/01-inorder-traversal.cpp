@@ -39,22 +39,21 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void inOrder(TreeNode* node, std::vector<int> &ans) {
+void inOrderRecursive(TreeNode* node, std::vector<int> &ans) {
   if (node == nullptr)
     return;
 
-  inOrder(node->left, ans);
+  inOrderRecursive(node->left, ans);
   ans.push_back(node->data);
-  inOrder(node->right, ans);
+  inOrderRecursive(node->right, ans);
 }
 
 // * DFS Iterative - (Stack)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
-std::vector<int> inOrderIterative(TreeNode* root) {
-  std::vector<int> ans;
+void inOrderIterative(TreeNode* root, std::vector<int> &ans) {
   if (root == nullptr)
-    return ans;
+    return;
 
   std::stack<TreeNode *> st;
   TreeNode *node = root;
@@ -73,30 +72,29 @@ std::vector<int> inOrderIterative(TreeNode* root) {
     // * Go to right
     root = root->right;
   }
-
-  return ans;
 }
 
 int main(void) {
   // * testcase 1
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(3);
+  TreeNode *root = new TreeNode(1);
+  root->left = new TreeNode(2);
+  root->right = new TreeNode(3);
   
-  // root->left->left = new TreeNode(4);
-  // root->left->right = new TreeNode(5);
+  root->left->left = new TreeNode(4);
+  root->left->right = new TreeNode(5);
   
-  // root->right->left = new TreeNode(6);
-  // root->right->right = new TreeNode(7);
+  root->right->left = new TreeNode(6);
+  root->right->right = new TreeNode(7);
 
 
   // * testcase 2
-  TreeNode *root = new TreeNode(1);
-  root->right = new TreeNode(2);
-  root->right->left = new TreeNode(3);
+  // TreeNode *root = new TreeNode(1);
+  // root->right = new TreeNode(2);
+  // root->right->left = new TreeNode(3);
 
   std::vector<int> ans;
-  ans = inOrderIterative(root);
+  inOrderRecursive(root, ans);
+  // inOrderIterative(root, ans);
 
   printArr(ans);
   return 0;

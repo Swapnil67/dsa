@@ -53,7 +53,6 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
-
 std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
   std::vector<std::vector<int>> ans;
   if (!root)
@@ -91,7 +90,6 @@ TreeNode *createBinaryTree(std::vector<std::vector<int>> &descriptions) {
   std::map<int, TreeNode *> hash;
   std::unordered_set<int> children; // * They can never be root of the tree
 
-  int n = descriptions.size();
   for(std::vector<int> &vec: descriptions) {
     int parent_val = vec[0];
     int child_val = vec[1];
@@ -128,8 +126,13 @@ TreeNode *createBinaryTree(std::vector<std::vector<int>> &descriptions) {
 }
 
 int main(void) {
+  // * testcase 1
+  // std::vector<std::vector<int>> descriptions = {{20, 15, 1}, {20, 17, 0}, {50, 20, 1}, {50, 80, 0}, {80, 19, 1}};
+
+  // * testcase 2
+  std::vector<std::vector<int>> descriptions = {{85, 82, 1}, {74, 85, 1}, {39, 70, 0}, {82, 38, 1}, {74, 39, 0}, {39, 13, 1}};
+
   std::cout << "----- Tree Description ------" << std::endl;
-  std::vector<std::vector<int>> descriptions = {{20, 15, 1}, {20, 17, 0}, {50, 20, 1}, {50, 80, 0}, {80, 19, 1}};
   for (auto &arr : descriptions)
     printArr(arr);
 

@@ -40,7 +40,7 @@ void printArr(std::vector<T> arr) {
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
 void preOrderRecursive(TreeNode* node, std::vector<int> &ans) {
-  if (node == nullptr)
+  if (!node)
     return;
 
   // std::cout << node->data << std::endl;
@@ -54,9 +54,7 @@ void preOrderRecursive(TreeNode* node, std::vector<int> &ans) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 void preOrderIterative(TreeNode* root, std::vector<int> &ans) {
-  std::vector<int> ans;
-  
-  if (root == nullptr)
+  if (!root)
     return;
 
   std::stack<TreeNode *> st;
@@ -89,8 +87,8 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   std::vector<int> ans;
-  // preOrderRecursive(root, ans);
-  preOrderIterative(root, ans);
+  preOrderRecursive(root, ans);
+  // preOrderIterative(root, ans);
 
   printArr(ans);
   return 0;

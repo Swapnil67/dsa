@@ -43,20 +43,28 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 }
 
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 bool rootToNode(TreeNode *root, int x, std::vector<int> &ans) {
   if (!root)
     return false;
 
+  // * Push the cur node to path vector
   ans.push_back(root->data);
 
+  // * Found the node
   if (root->data == x)
     return true;
 
+  // * If we found node in 'left' or 'right' return
   if (rootToNode(root->left, x, ans) ||
       rootToNode(root->right, x, ans))
     return true;
   
+  // * Remove the node from path vector
   ans.pop_back();
+
   return false;
 }
 
@@ -77,4 +85,4 @@ int main(void) {
 }
 
 // * run the code
-// * g++ --std=c++20 11-root-to-node.cpp -o output && ./output
+// * g++ --std=c++20 09-root-to-node.cpp -o output && ./output

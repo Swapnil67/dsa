@@ -2,7 +2,7 @@
 * Leetcode - 111
 * Minimum Depth of Binary Tree 
 
-* https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+* https://leetcode.com/problems/minimum-depth-of-binary-tree/description/
 */
 
 #include <queue>
@@ -34,7 +34,7 @@ void printArr(std::vector<T> arr) {
 };
 
 // * Using BFS 
-// * As soon as e found the first leaf node we return.
+// * As soon as we found the first leaf node we return.
 int minDepthBFS(TreeNode *root) {
   if (!root)
     return 0;
@@ -74,7 +74,7 @@ int minDepthBFS(TreeNode *root) {
 
 // * Using DFS 
 int minDepthDFS(TreeNode *root) {
-  if (root == nullptr)
+  if (!root)
     return 0;
 
   // * Leaf node
@@ -98,8 +98,8 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  // int depth = minDepthBFS(root);
-  int depth = minDepthDFS(root);
+  int depth = minDepthBFS(root);
+  // int depth = minDepthDFS(root);
   std::cout << "Minimum Depth: " << depth << std::endl;
 
   return 0;

@@ -1,7 +1,7 @@
 
 /*
 * Leetcode - 543
-* Bondary Traversal of tree
+* Boundary Traversal of tree
 
 * Example 1:
 * Input: 
@@ -15,6 +15,7 @@
 * Output: ans = [1, 2, 4, 5, 6, 7, 3]
 
 * https://leetcode.com/problems/boundary-of-binary-tree/description/
+* https://www.naukri.com/code360/problems/boundary-traversal_790725
 */
 
 #include <stack>
@@ -54,8 +55,10 @@ void addLeaves(TreeNode* root, std::vector<int> &ans) {
     ans.push_back(root->data);
     return;
   }
+
   if (root->left)
     addLeaves(root->left, ans);
+
   if (root->right)
     addLeaves(root->right, ans);
 }
@@ -75,9 +78,11 @@ void addLeftBoundary(TreeNode *root, std::vector<int> &res) {
 void addRightBoundary(TreeNode *root, std::vector<int> &res) {
   TreeNode *cur = root->right;
   std::stack<int> st;
+  
   while (cur) {
     if (!isLeaf(cur))
       st.push(cur->data);
+
     if (cur->right)
       cur = cur->right;
     else
@@ -138,6 +143,8 @@ int main() {
 
   std::vector<int> ans = boundaryTraversal(root);
   printArr(ans);
+
+  return 0;
 
 }
 

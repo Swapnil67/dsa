@@ -51,7 +51,11 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-// * BFS + Vector
+
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------`
+// * BFS + Vector sorting
+// * TIME COMPLEXITY O(level + wlogw) ('w' is sum of all nodes on each level)
+// * SPACE COMPLEXITY O(W)
 int bruteForce(TreeNode *root, int k) {
   std::queue<TreeNode *> q;
   q.push(root);
@@ -77,18 +81,22 @@ int bruteForce(TreeNode *root, int k) {
     level_sum_arr.push_back(level_sum);
   }
 
+  // * Sort the level sum array
   std::sort(level_sum_arr.begin(), level_sum_arr.end());
   printArr(level_sum_arr);
 
   return level_sum_arr[level_sum_arr.size() - k];
 }
 
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * BFS + Min Heap
-int betterApproach(TreeNode *root, int k) {
+// * TIME COMPLEXITY O(n + hlogk) ('h' height of tree & 'k' is no. of nodes in min_heap)
+// * SPACE COMPLEXITY O(k)
+int kthLargestLevelSum(TreeNode *root, int k) {
   std::queue<TreeNode *> q;
   q.push(root);
 
-  std::priority_queue<int> pq;
+  std::priority_queue<int> min_heap;
   std::vector<int> level_sum_arr;
   while (!q.empty()) { // * O(n)
     int n = q.size();
@@ -107,16 +115,12 @@ int betterApproach(TreeNode *root, int k) {
         q.push(node->right);
     }
 
-    pq.push(level_sum);  // * O(h*logk)
-    // std::cout << pq.size() << " -> " << pq.top() << std::endl;
+    min_heap.push(level_sum);  // * O(h * logk)
+    if (min_heap.size() > k)
+      min_heap.pop();
   }
 
-  while (k - 1) {
-    k--;
-    pq.pop();
-  }
-
-  return pq.size() < k ? -1 : pq.top();
+  return min_heap.size() < k ? -1 : min_heap.top();
 }
 
 int main(void) {
@@ -137,7 +141,7 @@ int main(void) {
   root->left->left->right = new TreeNode(6);
 
   // int ans = bruteForce(root, k);
-  int ans = betterApproach(root, k);
+  int ans = kthLargestLevelSum(root, k);
   std::cout << k << "th largest element in BT: " << ans << std::endl;
 
   return 0;

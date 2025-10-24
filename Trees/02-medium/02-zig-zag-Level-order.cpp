@@ -1,3 +1,16 @@
+/*
+ * Leetcode - 103
+ * Binary Tree Zigzag Level Order Traversal
+ * 
+ * Example 1:
+ * Input  : root = [3,9,20,null,null,15,7]
+ * Output : [[3],[20,9],[15,7]]
+ * 
+ * Example 2:
+ * Input  : root = [1]
+ * Output : [[1]]
+*/
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -77,7 +90,6 @@ std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
   q.push(root);
 
   while (!q.empty()) {
-
     int n = q.size();
     std::vector<int> cur(n);
 
@@ -86,11 +98,11 @@ std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
       q.pop();
       
       int idx = (leftToRight) ? i : (n - 1 - i);
-      // std::cout << node->data << " => " << idx << std::endl;
       cur[idx] = node->data;
 
       if (node->left)
         q.push(node->left);
+
       if (node->right)
         q.push(node->right);
     }
@@ -116,13 +128,21 @@ int main() {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
+  // * testcase 2
+  // TreeNode *root = new TreeNode(3);
+  // root->left = new TreeNode(9);
+  // root->right = new TreeNode(20);
+
+  // root->right->left = new TreeNode(15);
+  // root->right->right = new TreeNode(7);
+
   // std::vector<std::vector<int>> ans = zigzagLevelOrder(root);
   std::vector<std::vector<int>> ans = zigzagLevelOrder2(root);
-  for(auto it: ans) {
-    printArr(it);
-  }
+  std::cout << "Zigzag Level Order Traversal: " << std::endl;
+  for (auto &vec : ans)
+    printArr(vec);
 
 }
 
 // * run the code
-// * g++ --std=c++17 02-zig-zag-Level-order.cpp -o output && ./output
+// * g++ --std=c++20 02-zig-zag-Level-order.cpp -o output && ./output

@@ -34,13 +34,14 @@ void inOrderTraversal(TreeNode *root) {
   inOrderTraversal(root->right);
 }
 
-
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 // * DFS Approach
 // * Traverse => Right -> Left -> Root
 TreeNode* prev = nullptr;
 void flatten(TreeNode* root) {
-  // * Recursion Exit Condition
-  if (root == nullptr)
+  if (!root) // * Recursion Exit Condition
     return;
 
   flatten(root->right);
@@ -53,6 +54,9 @@ void flatten(TreeNode* root) {
 }
 
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 // * Stack Approach
 void flatten2(TreeNode* root) {
   if (!root)

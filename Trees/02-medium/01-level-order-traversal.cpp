@@ -1,3 +1,14 @@
+/*
+ * Leetcode - 102
+ * Binary Tree Level Order Traversal 
+ * 
+ * Example 1:
+ * Input  : root = [3,9,20,null,null,15,7]
+ * Output : [[3],[9,20],[15,7]]
+ * 
+ * https://leetcode.com/problems/binary-tree-level-order-traversal/
+*/
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -17,17 +28,14 @@ struct TreeNode {
   }
 };
 
-void printMatrix(std::vector<std::vector<int>> matrix) {
-  int r = matrix.size();
-  for (int i = 0; i < r; ++i) {
-    int c = matrix[i].size();
-    for (int j = 0; j < c; ++j) {
-      std::cout << matrix[i][j] << " ";
-    }
-    std::cout << std::endl;
-  }
-}
 
+template <typename T>
+void printArr(std::vector<T> arr) {
+  for (int i = 0; i < arr.size(); ++i) {
+    std::cout << arr[i] << " ";
+  }
+  std::cout << std::endl;
+}
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n)
@@ -64,6 +72,7 @@ std::vector<std::vector<int>> levelOrder(TreeNode *root) {
 }
 
 int main(void) {
+  // * testcase 1
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);
@@ -75,7 +84,10 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   std::vector<std::vector<int>> ans = levelOrder(root);
-  printMatrix(ans);
+
+  std::cout << "Level Order Traversal:" << std::endl;
+  for (auto &vec : ans)
+    printArr(vec);
 
   return 0;
 }

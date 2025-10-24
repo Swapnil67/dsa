@@ -13,6 +13,7 @@
 
 * Output: ans = [4, 2, 1, 3, 7]
 
+* https://www.geeksforgeeks.org/problems/top-view-of-binary-tree/1
 * https://www.naukri.com/code360/problems/top-view-of-binary-tree_799401
 */
 
@@ -46,10 +47,12 @@ void printArr(vector<int> arr) {
   cout << "]" << endl;
 }
 
+// * Vertical Order Traversal
 std::vector<int> topView(TreeNode *root) {
   std::vector<int> ans;
   if (!root)
     return ans;
+    
   std::map<int, int> nodes;
 
   // * { vertical, TreeNode* }
@@ -66,10 +69,12 @@ std::vector<int> topView(TreeNode *root) {
       nodes[p.first] = p.second->data;     // * Add vertical level to map
     }
 
+    // * Add left node to queue
     if (p.second->left) {
       q.push({p.first - 1, p.second->left});
     }
-
+    
+    // * Add right node to queue
     if (p.second->right) {
       q.push({p.first + 1, p.second->right});
     }
@@ -96,8 +101,10 @@ int main() {
 
   std::vector<int> ans = topView(root);
   printArr(ans);
+
+  return 0;
 }
 
 
 // * run the code
-// * g++ --std=c++17 05-top-view-bt.cpp -o output && ./output
+// * g++ --std=c++20 05-top-view-bt.cpp -o output && ./output

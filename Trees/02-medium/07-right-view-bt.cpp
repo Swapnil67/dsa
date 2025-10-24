@@ -1,11 +1,12 @@
 
 /*
+* Leetcode - 199
 * Right View of Binary tree
 
 * Example 1:
 * Input: 
 *
-*                   1
+*                  1
 *               /     \  
 *             2        3
 *           /  \        \  
@@ -16,12 +17,10 @@
 
 * Output: ans = [1, 3, 7, 6]
 
-* https://leetcode.com/problems/binary-tree-right-side-view/description/
+* https://leetcode.com/problems/binary-tree-right-side-view/
 * https://www.naukri.com/code360/problems/right-view_764605
 */
 
-#include <map>
-#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -51,15 +50,22 @@ void printArr(vector<int> arr) {
 }
 
 // * Recursive Pre Order Traversal (Root -> Right -> Left)
-void rightView(TreeNode *root, std::vector<int> &ans, int level) {
+void solve(TreeNode *root, std::vector<int> &ans, int level) {
   if (!root)
     return;
 
+  // * To get the last node from level
   if (level == ans.size())
     ans.push_back(root->data);
 
-  rightView(root->right, ans, level + 1);
-  rightView(root->left, ans, level + 1);
+  solve(root->right, ans, level + 1); // * First go to right
+  solve(root->left, ans, level + 1); // * Then check on left
+}
+
+std::vector<int> rightView(TreeNode *root) {
+  std::vector<int> ans;
+  solve(root, ans, 0);
+  return ans;
 }
 
 int main() {
@@ -74,11 +80,12 @@ int main() {
 
   root->right->right = new TreeNode(7);
 
-  std::vector<int> ans;
-  rightView(root, ans, 0);
+  std::vector<int> ans = rightView(root);
   printArr(ans);
+
+  return 0;
 }
 
 
 // * run the code
-// * g++ --std=c++17 07-right-view-bt.cpp -o output && ./output
+// * g++ --std=c++20 07-right-view-bt.cpp -o output && ./output

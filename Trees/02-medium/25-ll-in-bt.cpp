@@ -101,7 +101,7 @@ bool check(ListNode* head, TreeNode* root) {
   return check(head->next, root->left) || check(head->next, root->right);
 }
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH: Optimal APPROACH -------------------------`
 // * Recursion Leap of faith
 // * 'n' = bt nodes & 'm' = ll nodes
 // * TIME COMPLEXITY O(n * m)

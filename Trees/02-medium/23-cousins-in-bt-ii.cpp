@@ -12,11 +12,11 @@
 
 * Example 1:
 * Input: 
-*                   5             => 5
+*                   5             
 *               /      \     
-*             4         9         => 13
+*             4         9        
 *           /   \     /  \  
-*          1    10   x    7       => 18
+*          1    10   x    7 
 
 * Output: 
 *                   0        
@@ -79,6 +79,7 @@ std::vector<int> getTreeLevelSum(TreeNode *root) {
     while (n--) {
       TreeNode *node = q.front();
       q.pop();
+
       level_sum += node->data;
       if (node->left)
         q.push(node->left);
@@ -113,6 +114,7 @@ TreeNode *bruteForce(TreeNode *root) {
   while (!q.empty()) {
     int n = q.size();
     
+    // * Loop over the current level
     while (n--) {
       TreeNode *node = q.front();
       q.pop();
@@ -124,26 +126,23 @@ TreeNode *bruteForce(TreeNode *root) {
 
       // * Find the sum for left child
       if (node->left) {
-        node->left->data = level_sum_arr[cur_level] - (sibling_sum);
+        node->left->data = level_sum_arr[cur_level] - sibling_sum;
         q.push(node->left);
       }
       
       // * Find the sum for right child
       if (node->right) {
-        node->right->data = level_sum_arr[cur_level] - (sibling_sum);
+        node->right->data = level_sum_arr[cur_level] - sibling_sum;
         q.push(node->right);
       }
-
     }
-
-    cur_level++;
+    cur_level++; // * Incr the level
   }
-
   return root;
 }
 
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * Calculate level sum on the go
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
@@ -226,5 +225,5 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 23-cousins-in-bt.cpp -o output && ./output
+// * g++ --std=c++20 23-cousins-in-bt-ii.cpp -o output && ./output
 

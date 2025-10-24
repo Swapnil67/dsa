@@ -52,23 +52,28 @@ void printArr(std::vector<T> arr) {
 }
 
 // * Map the parent node of each node in hashmap
-void markParents(TreeNode* root, std::unordered_map<TreeNode*, TreeNode*> &parentMap) {
-  std::queue<TreeNode*> q;
+void markParents(TreeNode *root,
+                 std::unordered_map<TreeNode *, TreeNode *> &parent_map)
+{
+  std::queue<TreeNode *> q;
   q.push(root);
+
+  // * Level Order Traversal
   while (!q.empty()) {
     int n = q.size();
     while (n--) {
       TreeNode* parent = q.front();
       q.pop();
+      
       // * Map left node to its parent node
       if (parent->left) {
-        parentMap[parent->left] = parent;
+        parent_map[parent->left] = parent;
         q.push(parent->left);
       }
       
       // * Map right node to its parent node
       if (parent->right) {
-        parentMap[parent->right] = parent;
+        parent_map[parent->right] = parent;
         q.push(parent->right);
       }
     }
@@ -77,11 +82,11 @@ void markParents(TreeNode* root, std::unordered_map<TreeNode*, TreeNode*> &paren
 
 std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   // * 1. Map the parent node of each node in hashmap
-  std::unordered_map<TreeNode*, TreeNode*> parentMap;
-  markParents(root, parentMap);
+  std::unordered_map<TreeNode *, TreeNode *> parent_map;
+  markParents(root, parent_map);
 
   // * For debugging
-  // for(auto &it: parentMap) {
+  // for(auto &it: parent_map) {
   //   std::cout << it.first->data << " -> " << it.second->data << std::endl;
   // }
   
@@ -89,7 +94,8 @@ std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   // * Visited Map for keeping track of which is we already visited during traversal
   std::unordered_map<TreeNode*, bool> visitedMap;
   int distance = 0;
-  std::queue<TreeNode*> q;
+  
+  std::queue<TreeNode *> q;
   q.push(target);
   visitedMap[target] = true;
 
@@ -117,9 +123,9 @@ std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
       }
       
       // * Go to the parent if not previously visited
-      if(parentMap[current] && !visitedMap[parentMap[current]]) {
-        q.push(parentMap[current]);
-        visitedMap[parentMap[current]] = true;
+      if(parent_map[current] && !visitedMap[parent_map[current]]) {
+        q.push(parent_map[current]);
+        visitedMap[parent_map[current]] = true;
       }
     }
   }

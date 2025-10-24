@@ -28,7 +28,7 @@
 #### Height of a tree
 - Height of a root node
 
-# -----------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 
 #### Complete binary tree
 - A BT is a complete BT if all the levels are completely filled except
@@ -102,7 +102,7 @@ $$
 
 - Therefore we can say that x = O(n)
 
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------
 
 #### Min no of nodes possible in a binary tree of height 'h' ?
 - h + 1  (left or right skewed binary tree)
@@ -143,7 +143,6 @@ $$
         = 2^(h+1) - 1
         = (2^(h+1) - 1) / (2 - 1)
         = 2^(h+1) - 1 Nodes
-
 ```
 
 # -----------------------------------------------------------------------------
@@ -210,3 +209,8 @@ L-(h+1) = 2^0 + 2^1 + 2^2 + 2^3 + ..... + 2^h                    - Total nodes o
 #### Space Complexity
 - Number of Activation Records = No of levels in tree or Height of Tree
 - Number of Activation Records = O(height of tree)
+
+
+## BST
+- Inorder of BST is always sorted because BST has property that everything to the left will be smaller
+and everything to the right will be greater.

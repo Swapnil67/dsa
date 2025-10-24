@@ -51,11 +51,11 @@ int maxDepthBFS(TreeNode *root) {
       q.pop();
 
       // * If exists left node then push
-      if(node->left) 
-      q.push(node->left);
+      if (node->left)
+        q.push(node->left);
       
       // * If exists right node then push
-      if(node->right) 
+      if (node->right)
         q.push(node->right);
     }
     level++; // * Add this level to tree depth
@@ -89,8 +89,9 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  int depth = maxDepthBFS(root);
-  // int depth = maxDepthDFS(root);
+  // int depth = maxDepthBFS(root);
+  int depth = maxDepthDFS(root);
+
   std::cout << "Maximum Depth: " << depth << std::endl;
 
   return 0;

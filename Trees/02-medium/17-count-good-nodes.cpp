@@ -56,6 +56,7 @@ int goodNodes(TreeNode* root) {
 }
 
 int main(void) {
+  // * testcase 1
   TreeNode* root = new TreeNode(3);
   root->left = new TreeNode(1);
   root->right = new TreeNode(4);

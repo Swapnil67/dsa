@@ -52,7 +52,6 @@ public:
   }
 };
 
-
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
     std::cout << arr[i] << " ";
@@ -112,7 +111,8 @@ bool isCompleteTreeBFS(TreeNode* root) {
 }
 
 int countNodes(TreeNode* root) {
-  if(!root) return 0;
+  if (!root)
+    return 0;
   return 1 + countNodes(root->left) + countNodes(root->right);
 }
 
@@ -128,11 +128,11 @@ bool dfs(TreeNode* root, int i, int total_nodes) {
 }
 
 bool isCompleteTreeDFS(TreeNode* root) {
-  int count = countNodes(root);
-  // std::cout << "Total Nodes " << count << std::endl;
+  int total_nodes = countNodes(root);
+  // std::cout << "Total Nodes " << total_nodes << std::endl;
 
   int i = 1;
-  return dfs(root, i , count);
+  return dfs(root, i , total_nodes);
 }
 
 int main(void) {

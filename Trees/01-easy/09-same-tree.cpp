@@ -102,7 +102,6 @@ int main(void) {
   root2->left = new TreeNode(1);
   root2->right = new TreeNode(2);
   
-
   // bool ans = isSameTree(root, root2);
   bool ans = isSameTreeBFS(root, root2);
   std::cout << "Is same trees: " << ans << std::endl;

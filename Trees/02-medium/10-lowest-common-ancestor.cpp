@@ -2,7 +2,7 @@
 * Leetcode - 236
 * Lowest Common Ancestor of a Binary Tree
 
-*
+* Binary Tree:
 *                   3
 *               /       \  
 *             5          1
@@ -23,6 +23,7 @@
 * Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 7, q = 4
 * Output: 2
 
+* https://www.naukri.com/code360/problems/lca-of-binary-tree_920541
 * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
 */
 
@@ -102,26 +103,23 @@ TreeNode* bruteForce(TreeNode* root, TreeNode* p, TreeNode* q) {
   return new TreeNode(lca);
 }
 
-TreeNode *helper(TreeNode *root, TreeNode *p, TreeNode *q) {
-  // * If cur node is 'p' or 'q' or null the return cur node
-  if (root == NULL || root->data == p->data || root->data == q->data)
-    return root;
-  
-  TreeNode *left = helper(root->left, p, q);
-  TreeNode *right = helper(root->right, p, q);
-  // * Found our answer
-  if (left && right) {
-    return root;
-  }
-  return left != nullptr ? left : right;
-}
-
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-  TreeNode* lca = helper(root, p, q);
-  return lca;
+  // * If cur node is 'p' or 'q' or null the return cur node
+  if (!root || root->data == p->data || root->data == q->data)
+    return root;
+  
+  TreeNode *left = lowestCommonAncestor(root->left, p, q);
+  TreeNode *right = lowestCommonAncestor(root->right, p, q);
+
+  // * Found our answer
+  if (left && right) {
+    return root;
+  }
+
+  return left != nullptr ? left : right;
 }
 
 int main() {

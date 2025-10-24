@@ -1,8 +1,8 @@
 /*
-* Leetcode - 116
-* Populating Next Right Pointers in Each Node
+* Leetcode - 117
+* Populating Next Right Pointers in Each Node II
 
-* https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+* https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/
 */
 
 #include <queue>
@@ -24,42 +24,42 @@ struct TreeNode {
   }
 };
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
-// * BFS using queue
+
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
+// * BFS Brute 
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 TreeNode *connect_bfs_brute(TreeNode *root) {
   if (!root)
     return root;
 
-  std::queue<TreeNode *> q;
+  std::queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
     int n = q.size();
-    while (n) {
+
+    while (n--) {
       TreeNode *node = q.front();
       q.pop();
 
-      // * Connect of cur level has next node
-      if (n > 1)
+      if (n > 0) {
         node->next = q.front();
+      }
 
       if (node->left)
         q.push(node->left);
-
       if (node->right)
         q.push(node->right);
-
-      n--;
     }
   }
 
   return root;
 }
 
+
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
-// * BFS + dummy nodes
+// * BFS Optimal
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
 TreeNode *connect(TreeNode *root) {
@@ -103,12 +103,11 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  // connect_bfs_brute(root);
-  connect(root);
+  connect_bfs_brute(root);
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 27-populating-next-right-pointers-in-each-node.cpp -o output && ./output
+// * g++ --std=c++20 31-populating-next-right-pointers-in-each-node.cpp -o output && ./output
 

@@ -36,24 +36,33 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
-TreeNode *buildTreeHelper(std::vector<int> postorder, int postStart, int postEnd,
-                          std::vector<int> inorder, int inStart, int inEnd,
+void inOrderTraversal(TreeNode *root) {
+  if (!root)
+    return;
+  
+  inOrderTraversal(root->left);
+  std::cout << root->data << std::endl;
+  inOrderTraversal(root->right);
+}
+
+TreeNode *buildTreeHelper(std::vector<int> postorder, int post_start, int post_end,
+                          std::vector<int> inorder, int in_start, int in_end,
                           std::unordered_map<int, int> inMap)
 {
-  if (postStart > postEnd || inStart > inEnd)
+  if (post_start > post_end || in_start > in_end)
     return nullptr;
 
-  TreeNode *root = new TreeNode(postorder[postEnd]);
+  TreeNode *root = new TreeNode(postorder[post_end]);
 
   // * Find the position of this root in 'inorder' using 'inMap'
-  int inRoot = inMap[root->data];
-  int numsLeft = inRoot - inStart; // * How many nodes are on the left of the tree
+  int in_root_idx = inMap[root->data];
+  int nums_left = in_root_idx - in_start; // * How many nodes are on the left of the tree
 
-  root->left = buildTreeHelper(postorder, postStart, postStart + numsLeft - 1,
-                               inorder, inStart, inRoot - 1, inMap);
+  root->left = buildTreeHelper(postorder, post_start, post_start + nums_left - 1,
+                               inorder, in_start, in_root_idx - 1, inMap);
 
-  root->right = buildTreeHelper(postorder, postStart + numsLeft, postEnd - 1,
-                                inorder, inRoot + 1, inEnd, inMap);
+  root->right = buildTreeHelper(postorder, post_start + nums_left, post_end - 1,
+                                inorder, in_root_idx + 1, in_end, inMap);
   return root;
 }
 
@@ -71,15 +80,6 @@ TreeNode *buildTree(std::vector<int> &postorder, std::vector<int> &inorder) {
                                    inorder, 0, inorder.size() - 1, inMap);
 
   return root;
-}
-
-void inOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-  
-  inOrderTraversal(root->left);
-  std::cout << root->data << std::endl;
-  inOrderTraversal(root->right);
 }
 
 int main(void) {

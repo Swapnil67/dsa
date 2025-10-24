@@ -14,7 +14,8 @@
 * Output: ans = [4, 2, 1, 5, 6, 3, 7]
 
 * https://www.naukri.com/code360/problems/vertical-order-traversal_920533
-* https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/
+* https://leetcode.com/problems/binary-tree-vertical-order-traversal/
+* https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
 */
 
 #include <set>
@@ -48,6 +49,7 @@ void printArr(vector<int> arr) {
   cout << "]" << endl;
 }
 
+// * Using Level Order Traversal
 vector<vector<int>> verticalOrderTraversal(TreeNode *root) {
   vector<vector<int>> ans;
   if (!root)
@@ -62,19 +64,23 @@ vector<vector<int>> verticalOrderTraversal(TreeNode *root) {
   while (!todo.empty()) {
     pair<TreeNode *, pair<int, int>> el = todo.front();
     todo.pop();
-    int curVertical = el.second.first;
-    int curLevel = el.second.second;
-    nodes[curVertical][curLevel].insert(el.first->data);
 
-    int newLevel = el.second.second + 1;
-    if (el.first->left) {
-      int newVertical = curVertical - 1;
-      todo.push({el.first->left, {newVertical, newLevel}});
+    TreeNode* cur_node = el.first;
+    int cur_ver = el.second.first;      // * current vertical
+    int cur_level = el.second.second;   // * current level
+    
+    nodes[cur_ver][cur_level].insert(el.first->data);
+
+    int new_level = cur_level + 1; // * new level
+
+    // * push left node if exists
+    if (cur_node->left) {
+      todo.push({el.first->left, {cur_ver - 1, new_level}});
     }
 
-    if (el.first->right) {
-      int newVertical = curVertical + 1;
-      todo.push({el.first->right, {newVertical, newLevel}});
+    // * push right node if exists
+    if (cur_node->right) {
+      todo.push({el.first->right, {cur_ver + 1, new_level}});
     }
   }
 
@@ -102,11 +108,11 @@ int main() {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-
-  vector<vector<int>> ans = verticalOrderTraversal(root);
-  for (auto &p : ans) {
+  std::vector<std::vector<int>> ans = verticalOrderTraversal(root);
+  for (auto &p : ans)
     printArr(p);
-  }
+
+  return 0;
 }
 
 

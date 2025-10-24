@@ -1,7 +1,7 @@
 /*
 * Leetcode - 700
-* Ceil in a Binary Search Tree
-* Ceil of an integer is the closest integer greater than or equal to a given number.
+* Floor in a Binary Search Tree
+* Floor of an integer is the closest integer greater than or equal to a given number.
 
 *
 *                  6
