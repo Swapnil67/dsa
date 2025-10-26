@@ -18,9 +18,7 @@
  * https://leetcode.com/problems/process-tasks-using-servers/description/
 */
 
-#include <queue>
 #include <vector>
-#include <climits>
 #include <iostream>
 #include <algorithm>
 
@@ -42,18 +40,18 @@ std::string kthLargestNumber(std::vector<std::string>& nums, int k) {
     }
     return a.length() < b.length(); });
 
-  printArr(nums);
+  // printArr(nums);
   return nums[n - k];
 }
 
 int main(void) {
   // * testcase 1
-  // int k = 4;
-  // std::vector<std::string> nums = {"3", "6", "7", "10"};
+  int k = 4;
+  std::vector<std::string> nums = {"3", "6", "7", "10"};
 
   // * testcase 2
-  int k = 3;
-  std::vector<std::string> nums = {"2", "21", "12", "1"};
+  // int k = 3;
+  // std::vector<std::string> nums = {"2", "21", "12", "1"};
 
   std::cout << "K: " << k << std::endl;
   std::cout << "nums: ";

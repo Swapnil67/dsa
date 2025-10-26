@@ -8,8 +8,7 @@
  * For chosen indices i0, i1, ..., ik - 1, your score is defined as:
 
  * - The sum of the selected elements from nums1 multiplied with the minimum of the selected elements from nums2.
- * - It can defined simply as: (nums1[i0] + nums1[i1] +...+ nums1[ik - 1]) * min(nums2[i0] , 
- *   nums2[i1], ... ,nums2[ik - 1]).
+ * - It can defined simply as: (nums1[i0] + nums1[i1] +...+ nums1[ik - 1]) * min(nums2[i0], nums2[i1], ... ,nums2[ik - 1]).
  * 
  * Return the maximum possible score.
 
@@ -42,51 +41,35 @@ void printArr(std::vector<int> arr) {
 
 typedef std::priority_queue<long long, std::vector<long long>, std::greater<long long>> Min_Heap;
 
-void remove_from_heap(Min_Heap &min_heap, int num) {
-  std::vector<int> temp;
-  while (!min_heap.empty()) {
-    int x = min_heap.top();
-    min_heap.pop();
-    if (x == num)
-      break;
-    temp.push_back(x);
-  }
-
-  for (int &x : temp) {
-    min_heap.push(x);
-  }
-}
-
 long long solve(std::vector<int> &nums1,
-                std::vector<int> &nums2,
-                Min_Heap &min_heap,
-                int i, int sum, int cur_min,
-                int count, int &k)
+           std::vector<int> &nums2, int k,
+           int i, int cur_sum, int cur_min)
 {
-  if (count == k) {
-    std::cout << sum << " * " << cur_min << " = " << sum * cur_min << std::endl;
-    return sum * cur_min;
-  }
+  // std::cout << cur_sum << " " << cur_min << std::endl;
 
-  if (i >= nums1.size())
+  if (k == 0) {
+    return (cur_sum * cur_min);
+  }
+  
+  // std::cout << ans << std::endl;
+  if (i == nums1.size())
+    return INT_MIN;
+
+  if (cur_min == 0)
     return 0;
 
-  min_heap.push(nums2[i]);
-  long long take_i = solve(nums1, nums2, min_heap, i + 1, sum += nums1[i], min_heap.top(), count + 1, k);
-  
-  remove_from_heap(min_heap, nums2[i]);
-  long long not_take_i = solve(nums1, nums2, min_heap, i + 1, sum -= nums1[i], cur_min, count, k);
-
-  return (long long)std::max(take_i, not_take_i);
+  long long res = solve(nums1, nums2, k, i + 1, cur_sum, cur_min); // * not take
+  return std::max(res, solve(nums1, nums2, k - 1, i + 1, cur_sum + nums1[i], std::min(cur_min, nums2[i])));
 }
 
 // * ------------------------- Brute Force Approach -------------------------`
 // * Recursion & Backtracking
-// * TIME COMPLEXITY O(2^n * nlogn)
+// * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
 long long bruteForce(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
-  Min_Heap min_heap;
-  return solve(nums1, nums2, min_heap, 0, 0, INT_MAX, 0, k);
+  int cur_min = INT_MAX;
+  long long cur_sum = 0;
+  return solve(nums1, nums2, k, 0, cur_sum, cur_min);
 }
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -102,12 +85,13 @@ long long maxScore(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
   }
 
   // * Sort the pairs in DESC by 2nd element in pair
-  std::sort(begin(pairs), end(pairs), [](const auto &a, const auto &b) {
-    return a.second > b.second;
-  });
-  // for (auto &it : pairs) {
-  //   std::cout << it.second << " " << it.first << std::endl;
-  // }
+  std::sort(begin(pairs), end(pairs), [](const auto &a, const auto &b)
+            { return a.second > b.second; });
+            
+  // * For Debugging
+  for (auto &it : pairs) {
+    std::cout << it.first << " " << it.second << std::endl;
+  }
 
   Min_Heap min_heap;
   long long k_sum = 0, result = 0;
@@ -125,7 +109,7 @@ long long maxScore(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
     if (min_heap.size() == k) {
       result = std::max(result, k_sum * (long long)pair.second);
     }
-    // std::cout << "k_sum: " << k_sum << ", result: " << result << std::endl;
+    std::cout << "k_sum: " << k_sum << ", result: " << result << std::endl;
   }
 
   return result;
@@ -141,6 +125,11 @@ int main(void) {
   // int k = 1;
   // std::vector<int> nums1 = {4, 2, 3, 1, 1};
   // std::vector<int> nums2 = {7, 5, 10, 9, 6};
+
+  // * testcase 3
+  // int k = 3;
+  // std::vector<int> nums1 = {2, 1, 14, 12};
+  // std::vector<int> nums2 = { 11, 7, 13, 6};
 
   std::cout << "k: " << k << std::endl;
   std::cout << "nums1: ";

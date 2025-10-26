@@ -54,6 +54,7 @@ void debug(std::vector<int> &freq) {
 // * SPACE COMPLEXITY O(1)
 std::string bruteForce(std::string &s) {
   int n = s.size();
+  // * save the freq of each char in freq vector 
   std::vector<int> freq(26, 0);
   for (char &c : s) {
     freq[c - 'a']++;
@@ -70,7 +71,7 @@ std::string bruteForce(std::string &s) {
   while (res.size() < n) {
     int max_freq_idx = findMaxIndex(freq);
     char max_freq_char = 'a' + max_freq_idx;
-    std::cout << max_freq_idx << " " << max_freq_char << std::endl;
+    // std::cout << max_freq_idx << " " << max_freq_char << std::endl;
     res += max_freq_char;
     freq[max_freq_idx]--;
 
@@ -124,7 +125,7 @@ std::string reorganizeString(std::string &s) {
     max_heap.pop();
     res += p.second;
     p.first -= 1;
-    if (p.first == 0)
+    if (p.first == 0) // * Imp condition
       continue;
 
     // * second max freq char
@@ -141,10 +142,16 @@ std::string reorganizeString(std::string &s) {
 }
 
 int main(void) {
-  std::string s = "aab";
+  // * testcase 1
+  // std::string s = "aab";
+
+  // * testcase 2
+  std::string s = "aaab";
+
   std::cout << "Input String: " << s << std::endl;
 
-  std::string ans = reorganizeString(s);
+  std::string ans = bruteForce(s);
+  // std::string ans = reorganizeString(s);
   std::cout << "Reorganize String: " << ans << std::endl;
 
   return 0;

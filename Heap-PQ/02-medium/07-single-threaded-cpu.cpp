@@ -42,6 +42,7 @@ void printArr(std::vector<int> arr) {
 
 typedef std::pair<int, int> P;
 
+// * Sort the task in ASC order of start time
 std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
   int n = tasks.size();
 
@@ -62,20 +63,19 @@ std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
   std::vector<int> ans;
 
   long long current_time = 0, i = 0;
-  std::priority_queue<P, std::vector<P>, std::greater<>> pq;
+  std::priority_queue<P, std::vector<P>, std::greater<>> pq; // * {processing_time, index}
   while (i < n || !pq.empty()) {
     // * initial task time start
     if (pq.empty() && current_time < sorted_tasks[i][0]) {
       current_time = sorted_tasks[i][0];
     }
-
     // std::cout << current_time << std::endl;
     
     // * Here we are push all the task which can be given to cpu
     // * if they have arrived before the current_time  
     while (i < n && sorted_tasks[i][0] <= current_time) {
       // std::cout << "push: " << sorted_tasks[i][0] << std::endl;
-      pq.push({sorted_tasks[i][1], sorted_tasks[i][2]});
+      pq.push({sorted_tasks[i][1], sorted_tasks[i][2]}); // * {processing_time, index}
       i++;
     }
 
@@ -91,16 +91,21 @@ std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
 }
 
 int main(void) {
-  // std::vector<std::vector<int>> tasks = {{1, 2}, {2, 4}, {3, 2}, {4, 1}};
-  std::vector<std::vector<int>> tasks = {{7, 10}, {7, 12}, {7, 5}, {7, 4}, {7, 2}};
+  // * testcase 1
+  std::vector<std::vector<int>> tasks = {{1, 2}, {2, 4}, {3, 2}, {4, 1}};
+  
+  // * testcase 2
+  // std::vector<std::vector<int>> tasks = {{7, 10}, {7, 12}, {7, 5}, {7, 4}, {7, 2}};
+
   std::cout << "Tasks: " << std::endl;
   for (auto &vec : tasks)
     printArr(vec);
   
   std::vector<int> ans = cpuTasks(tasks);
-
   std::cout << "Process order index: " << std::endl;
   printArr(ans);
+
+  return 0;
 }
 
 // * Run the code

@@ -25,9 +25,7 @@
 
 #include <queue>
 #include <vector>
-#include <climits>
 #include <iostream>
-#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   std::cout << "[ ";

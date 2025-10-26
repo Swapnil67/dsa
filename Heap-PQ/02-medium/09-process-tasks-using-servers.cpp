@@ -49,12 +49,9 @@ std::vector<int> assignTasks(std::vector<int> &servers, std::vector<int> &tasks)
   int n = servers.size(), m = tasks.size();
 
   typedef std::pair<long long, long long> P;
-  std::priority_queue<P, std::vector<P>, std::greater<>> available;
-  std::priority_queue<std::vector<long long>,
-                      std::vector<std::vector<long long>>, std::greater<>>
-      unavailable;
 
-  // * Push all the servers to available min heap
+  // * 1. Push all the servers to available min heap
+  std::priority_queue<P, std::vector<P>, std::greater<>> available;
   for (int i = 0; i < n; ++i) {
     available.emplace(servers[i], i);
   }
@@ -65,6 +62,10 @@ std::vector<int> assignTasks(std::vector<int> &servers, std::vector<int> &tasks)
   //   available.pop();
   //   std::cout << p.first << " " << p.second << std::endl;
   // }
+
+  std::priority_queue<std::vector<long long>,
+                      std::vector<std::vector<long long>>, std::greater<>>
+      unavailable;
 
   long long time = 0;
   std::vector<int> ans(m);
@@ -97,10 +98,10 @@ int main(void) {
   // std::vector<int> servers = {3, 3, 2}, tasks = {1, 2, 3, 2, 1, 2};
   
   // * testcase 2
-  // std::vector<int> servers = {5, 1, 4, 3, 2}, tasks = {2, 1, 2, 4, 5, 2, 1};
+  std::vector<int> servers = {5, 1, 4, 3, 2}, tasks = {2, 1, 2, 4, 5, 2, 1};
   
   // * testcase 2
-  std::vector<int> servers = {10, 63, 95, 16, 85, 57, 83, 95, 6, 29, 71}, tasks = {70, 31, 83, 15, 32, 67, 98, 65, 56, 48, 38, 90, 5};
+  // std::vector<int> servers = {10, 63, 95, 16, 85, 57, 83, 95, 6, 29, 71}, tasks = {70, 31, 83, 15, 32, 67, 98, 65, 56, 48, 38, 90, 5};
 
   std::cout << "Servers: ";
   printArr(servers);

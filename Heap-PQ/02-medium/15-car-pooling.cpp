@@ -11,19 +11,18 @@
  * If there are multiple longest happy strings, return any of them. If there is no such string, return the empty string "".
 
  * Example 1
- * input  : a = 1, b = 1, c = 7
- * output : "ccaccbcc"
+ * input  : trips = [[2,1,5],[3,3,7]], capacity = 4
+ * output : false
 
  * Example 2
- * input  : a = 7, b = 1, c = 0
- * output : "aabaa"
+ * input  : trips = [[2,1,5],[3,3,7]], capacity = 5
+ * output : true
  * 
- * https://leetcode.com/problems/longest-happy-string/description/
+ * https://leetcode.com/problems/car-pooling/
 */
 
 #include <queue>
 #include <vector>
-#include <climits>
 #include <iostream>
 #include <algorithm>
 
@@ -41,8 +40,6 @@ void printArr(std::vector<int> arr) {
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(n)
 bool carPooling(std::vector<std::vector<int>> &trips, int capacity) {
-  int n = trips.size();
-
   // * Sort the trips by 'start' location
   std::sort(trips.begin(), trips.end(), [](const std::vector<int> &a, const std::vector<int> &b)
        { return a[1] < b[1]; });
@@ -52,8 +49,7 @@ bool carPooling(std::vector<std::vector<int>> &trips, int capacity) {
   std::priority_queue<P, std::vector<P>, std::greater<P>> min_heap;
 
   int passengers = 0;
-  for (int i = 0; i < n; ++i) {
-    std::vector<int> trip = trips[i];
+  for (auto& trip : trips) {
     int cur_passengers = trip[0], start = trip[1], end = trip[2];
 
     // std::cout << trips[i][1] << " " << trips[i][2] << std::endl;
@@ -77,12 +73,16 @@ bool carPooling(std::vector<std::vector<int>> &trips, int capacity) {
 
 int main(void) {
   // * testcase 1
-  int capacity = 4;
-  std::vector<std::vector<int>> trips = {{2, 1, 5}, {3, 3, 7}};
+  // int capacity = 4;
+  // std::vector<std::vector<int>> trips = {{2, 1, 5}, {3, 3, 7}};
 
   // * testcase 2
   // int capacity = 4;
   // std::vector<std::vector<int>> trips = {{4, 1, 2}, {3, 2, 4}};
+
+  // * testcase 2
+  int capacity = 24;
+  std::vector<std::vector<int>> trips = {{10, 5, 7}, {10, 3, 4}, {7, 1, 8}, {6, 3, 4}};
 
   std::cout << "Max seats: " << capacity << std::endl;
   std::cout << "Trips: " << std::endl;
