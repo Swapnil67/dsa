@@ -29,6 +29,8 @@
  * https://leetcode.com/problems/minimum-cost-to-hire-k-workers/description/
 */
 
+// ! Google, Apple
+
 #include <queue>
 #include <vector>
 #include <cfloat>
@@ -96,7 +98,7 @@ double bruteForce(std::vector<int>& quality, std::vector<int>& wage, int k) {
       continue;
 
     // * We only need 'k' workers
-    std::priority_queue<double, std::vector<double>> max_heap;
+    std::priority_queue<double> max_heap;
     double sum_wage = 0;
     for (double &wage : group) { // * O(klogk)
       sum_wage += wage;
@@ -153,6 +155,7 @@ double betterApproach(std::vector<int>& quality, std::vector<int>& wage, int k) 
     
     std::vector<double> group;
     for (int worker = 0; worker <= manager; ++worker) {
+      // * worker_wage = manger_ration * worker_quality
       double worker_wage = manager_ratio * ratios[worker].second;
       group.push_back(worker_wage);
     }
@@ -235,12 +238,12 @@ double mincostToHireWorkers(std::vector<int>& quality, std::vector<int>& wage, i
 
 int main(void) {
   // * testcase 1
-  int k = 2;
-  std::vector<int> quality = {10, 20, 5}, wage = {70, 50, 30};
+  // int k = 2;
+  // std::vector<int> quality = {10, 20, 5}, wage = {70, 50, 30};
 
   // * testcase 2
-  // int k = 3;
-  // std::vector<int> quality = {3, 1, 10, 10, 1}, wage = {4, 8, 2, 2, 7};
+  int k = 3;
+  std::vector<int> quality = {3, 1, 10, 10, 1}, wage = {4, 8, 2, 2, 7};
 
   std::cout << "Quality: ";
   printArr(quality);

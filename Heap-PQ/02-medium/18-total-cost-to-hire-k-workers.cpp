@@ -44,11 +44,19 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
+// * ------------------------- Optimal Approach -------------------------`
+// * Using two min_heap
+// * m - candidates count
+// * TIME COMPLEXITY O(k + n) * O(logm)
+// * SPACE COMPLEXITY O(n)
 long long totalCost(std::vector<int> &costs, int k, int candidates) {
   int n = costs.size();
   int i = 0, j = n - 1;
+
+  typedef long long ll;
+  std::priority_queue<ll, std::vector<ll>, std::greater<ll>> pq1, pq2;
+  
   int total_cost = 0;
-  std::priority_queue<int, std::vector<int>, std::greater<>> pq1, pq2;
   while (k > 0) {
 
     // * Put costs from start in pq1
@@ -65,7 +73,6 @@ long long totalCost(std::vector<int> &costs, int k, int candidates) {
 
     int cost1 = pq1.empty() ? INT_MAX : pq1.top();
     int cost2 = pq2.empty() ? INT_MAX : pq2.top();
-
     // std::cout << cost1 << "   " << cost2 << std::endl;
 
     if (cost1 <= cost2) {

@@ -37,11 +37,12 @@
  * https://leetcode.com/problems/find-median-from-data-stream/description/
 */
 
+// ! Amazon
+
 #include <queue>
 #include <vector>
 #include <climits>
 #include <iostream>
-#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   std::cout << "[ ";
@@ -51,15 +52,15 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Using min_heap & max_heap
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Using max_heap
 // * n = size of array
 // * m = maximum elements in nums
 // * TIME COMPLEXITY O(n x logn x logm)
 // * SPACE COMPLEXITY O(n)
 int minimumDeviation(std::vector<int> &nums) {
   int n = nums.size();
-  std::priority_queue<int, std::vector<int>> max_heap;    
+  std::priority_queue<int> max_heap;    
   int min_ele = INT_MAX;
   for (auto &x : nums) { // * O(nlogn)
     // * multiply the odd number by '2'
@@ -71,21 +72,24 @@ int minimumDeviation(std::vector<int> &nums) {
 
   int ans = INT_MAX;
   // * while top is even no.
-  while ((max_heap.top() % 2) == 0) {
-    // * get the max ele from heap
+  while (!max_heap.empty()) {
     int max_ele = max_heap.top();
-    // std::cout << max_ele << " " << min_ele << std::endl;
     max_heap.pop();
+    // std::cout << max_ele << " " << min_ele << std::endl;
     
     // * check the cur min deviation = (max_ele - min_ele)
-    ans = std::min(ans, (max_ele - min_ele)); 
+    ans = std::min(ans, (max_ele - min_ele));
 
-    // * check if min_ele changed
-    min_ele = std::min(min_ele, (max_ele / 2)); 
-    max_heap.push((max_ele / 2));
+    if ((max_ele % 2) == 1) // * found odd break the loop
+      break;
+
+    int next_ele = max_ele / 2;
+    min_ele = std::min(min_ele, next_ele);  // * check if min_ele changed
+    max_heap.push(next_ele);
   }
 
-  return std::min(ans, (max_heap.top() - min_ele));
+  // return std::min(ans, (max_heap.top() - min_ele));
+  return ans;
 };
 
 int main(void) {
@@ -93,7 +97,10 @@ int main(void) {
   // std::vector<int> nums = {1, 2, 3, 4};
 
   // * testcase 2
-  std::vector<int> nums = {4, 1, 5, 20, 3};
+  // std::vector<int> nums = {4, 1, 5, 20, 3};
+
+  // * testcase 3
+  std::vector<int> nums = {2, 10, 8};
 
   std::cout << "Input Array: " << std::endl;
   printArr(nums);

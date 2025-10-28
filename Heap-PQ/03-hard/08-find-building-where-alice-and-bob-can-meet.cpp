@@ -77,12 +77,14 @@ std::vector<int> bruteForce(std::vector<int> &heights,
   return ans;
 }
 
-#define pii std::pair<int, int>
 
-std::vector<int> leftmostBuildingQueries(
-    std::vector<int> &heights,
-    std::vector<std::vector<int>> &queries)
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
+std::vector<int> leftmostBuildingQueries(std::vector<int> &heights,
+                                         std::vector<std::vector<int>> &queries)
 {
+#define pii std::pair<int, int>
   int n = queries.size();
   std::vector<int> ans(n, -1);
 
@@ -102,12 +104,12 @@ std::vector<int> leftmostBuildingQueries(
   }
 
   // * For Debugging
-  // for (auto &g : groups) {
-  //   std::cout << g.first << std::endl;
-  //   for (auto &gp : g.second) {
-  //     std::cout << "    (" << gp.first << " " << gp.second << ")" << std::endl;
-  //   }
-  // }
+  for (auto &g : groups) {
+    std::cout << g.first << std::endl;
+    for (auto &gp : g.second) {
+      std::cout << "    (" << gp.first << " " << gp.second << ")" << std::endl;
+    }
+  }
 
   int m = heights.size();
   std::priority_queue<pii, std::vector<pii>, std::greater<>> min_heap;
@@ -129,12 +131,15 @@ std::vector<int> leftmostBuildingQueries(
 
 
 int main(void) {
+  // * testcase 1
   std::vector<int> heights = {6, 4, 8, 5, 2, 7};
   std::vector<std::vector<int>> queries = {{0, 1}, {0, 3}, {2, 4}, {3, 4}, {2, 2}};
-
+  
+  // * testcase 2
   // std::vector<int> heights = {5, 3, 8, 2, 6, 1, 4, 6};
   // std::vector<std::vector<int>> queries = {{0, 7}, {3, 5}, {5, 2}, {3, 0}, {1, 6}};
-
+  
+  // * testcase 3
   // std::vector<int> heights = {2, 1};
   // std::vector<std::vector<int>> queries = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
 

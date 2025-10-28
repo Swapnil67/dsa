@@ -21,6 +21,8 @@
  * https://leetcode.com/problems/find-median-from-data-stream/description/
 */
 
+// ! Google, Meta
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -54,14 +56,13 @@ public:
   
   double findMedian() {
     int n = nums.size();
-    if (n % 2 != 0) {
-      return (double)nums[(n / 2)];
-    }
-    int idx1 = (n / 2);
-    int idx2 = (n / 2) - 1;
+    int mid = (n / 2);
 
-    std::cout << nums[idx1] << " " << nums[idx2] << std::endl;
-    return (double)(nums[idx1] + nums[idx2]) / 2;
+    if (n % 2 != 0) 
+      return (double)nums[mid];
+
+    // std::cout << nums[mid] << " " << nums[mid - 1] << std::endl;
+    return (double)(nums[mid] + nums[mid - 1]) / 2;
   }
 };
 
@@ -118,13 +119,14 @@ public:
 int main(void) {
   // MedianFinderBrute *medianFinder = new MedianFinderBrute();
   MedianFinder *medianFinder = new MedianFinder();
+
   medianFinder->addNum(1);    // arr = [1]
-  // medianFinder->addNum(2);    // arr = [1, 2]
-  // double ans = medianFinder->findMedian(); // return 1.5 (i.e., (1 + 2) / 2)
-  // std::cout << "median: " << ans << std::endl;
-  // medianFinder->addNum(3);    // arr[1, 2, 3]
-  // ans = medianFinder->findMedian(); // return 2.0
-  // std::cout << "median: " << ans << std::endl;
+  medianFinder->addNum(2);    // arr = [1, 2]
+  double ans = medianFinder->findMedian(); // return 1.5 (i.e., (1 + 2) / 2)
+  std::cout << "median: " << ans << std::endl;
+  medianFinder->addNum(3);    // arr[1, 2, 3]
+  ans = medianFinder->findMedian(); // return 2.0
+  std::cout << "median: " << ans << std::endl;
 
   return 0;
 }

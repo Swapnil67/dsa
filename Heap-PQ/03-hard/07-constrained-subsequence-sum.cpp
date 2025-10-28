@@ -27,6 +27,8 @@
  * https://leetcode.com/problems/constrained-subsequence-sum/description/
 */
 
+// ! Google
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -61,6 +63,7 @@ int constrainedSubsetSum(std::vector<int>& nums, int k) {
     }
 
     int cur_max = std::max(nums[i], nums[i] + max_heap.top().first);
+    std::cout << cur_max << std::endl;
     max_heap.emplace(cur_max, i);
     res = std::max(res, cur_max);
   }

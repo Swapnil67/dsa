@@ -99,7 +99,9 @@ void printArr(std::vector<T> &arr) {
 // TODO: Solve this on leetcode
 
 // * 18 - Total Cost to Hire K Workers
-
+// long long totalCost(std::vector<int> &costs, int k, int candidates) {
+// TODO
+// }
 
 int main(void) {
   return 0;

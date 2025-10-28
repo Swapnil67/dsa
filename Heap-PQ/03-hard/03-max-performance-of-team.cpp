@@ -27,7 +27,10 @@
  *               That is, performance = (2 + 10 + 5) * min(5, 4, 7) = 68.
 
  * https://leetcode.com/problems/maximum-performance-of-a-team/description/
+ * https://www.naukri.com/code360/problems/maximum-performance-of-a-team_1402944
 */
+
+// ! Meta, uber
 
 #include <queue>
 #include <vector>
@@ -43,25 +46,22 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
-
-void solve(
-    int idx, int k,
-    int cur_sum, int min_efficiency,
-    int &ans,
-    std::vector<int> &speed,
-    std::vector<int> &efficiency)
+int solve(int i, int cur_sum, int cur_min,
+          std::vector<int> &speed,
+          std::vector<int> &efficiency, int k)
 {
-  ans = std::max(ans, (cur_sum * min_efficiency));
-  // std::cout << cur_sum << ", " << min_efficiency << " -> " << ans << std::endl;
-  if (k == 0 || idx >= speed.size()) {
-    return;
+  if (k == 0) {
+    return (cur_sum * cur_min);
   }
 
-  solve(idx + 1, k - 1, cur_sum + speed[idx], std::min(min_efficiency, efficiency[idx]), ans, speed, efficiency);
-  solve(idx + 1, k, cur_sum, min_efficiency, ans, speed, efficiency);
+  if (i > speed.size())
+    return INT_MIN;
+
+  int take = solve(i + 1, cur_sum + speed[i], std::min(cur_min, efficiency[i]), speed, efficiency, k - 1);
+  return std::max(take, solve(i + 1, cur_sum, cur_min, speed, efficiency, k));
 }
 
-// * ------------------------- Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force -------------------------`
 // * Recursion & Backtracking
 // * TIME COMPLEXITY O(2^n * nlogn)
 // * SPACE COMPLEXITY O(n)
@@ -69,11 +69,14 @@ int bruteForce(int n,
                    std::vector<int> &speed,
                    std::vector<int> &efficiency, int k)
 {
-  int ans = INT_MIN;
-  solve(0, k, 0, INT_MAX, ans, speed, efficiency);
-  return ans;
+  return solve(0, 0, INT_MAX, speed, efficiency, k);
 }
 
+
+// * ------------------------- Approach 2: Optimal Approach -------------------------`
+// * Recursion & Backtracking
+// * TIME COMPLEXITY O(2^n * nlogn)
+// * SPACE COMPLEXITY O(n)
 int maxPerformance(int n,
                    std::vector<int> &speed,
                    std::vector<int> &efficiency, int k)
@@ -112,12 +115,12 @@ int main(void) {
   // std::vector<int> speed = {2, 10, 3, 1, 5, 8}, efficiency = {5, 4, 3, 9, 7, 2};
 
   // * testcase 2
-  // int n = 6, k = 3;
-  // std::vector<int> speed = {2, 10, 3, 1, 5, 8}, efficiency = {5, 4, 3, 9, 7, 2};
+  int n = 6, k = 3;
+  std::vector<int> speed = {2, 10, 3, 1, 5, 8}, efficiency = {5, 4, 3, 9, 7, 2};
 
   // * testcase 3
-  int n = 6, k = 4;
-  std::vector<int> speed = {2, 10, 3, 1, 5, 8}, efficiency = {5, 4, 3, 9, 7, 2};
+  // int n = 6, k = 4;
+  // std::vector<int> speed = {2, 10, 3, 1, 5, 8}, efficiency = {5, 4, 3, 9, 7, 2};
 
   std::cout << "n: " << n << ", k: " << k << std::endl;
   std::cout << "Speed: ";
