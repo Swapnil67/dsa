@@ -20,8 +20,12 @@
  * * Output     : 3
  * 
  * * https://leetcode.com/problems/number-of-provinces/description/
+ * * https://www.naukri.com/code360/problems/find-the-number-of-states_1377943
+ * * https://www.geeksforgeeks.org/problems/number-of-provinces/1
  * 
  */
+
+// ! Google, Amazon, Microsoft, uber
 
 #include <queue>
 #include <vector>
@@ -50,17 +54,17 @@ void printAdjList(std::vector<T> &adj) {
   }
 }
 
-void dfsBrute(std::unordered_map<int, std::vector<int>> &adj,
-         int u,
-         std::vector<bool> &visited)
+void dfsBrute(
+    int u,
+    std::vector<bool> &visited,
+    std::unordered_map<int, std::vector<int>> &adj)
 {
-  // std::cout << u << std::endl;
   visited[u] = true;
 
   // * Visit neighbours
   for (int &v: adj[u]) {
     if (!visited[v])
-      dfsBrute(adj, v, visited);
+      dfsBrute(v, visited, adj);
   }
 }
 
@@ -69,8 +73,6 @@ void dfsBrute(std::unordered_map<int, std::vector<int>> &adj,
 // * SPACE COMPLEXITY O(v)
 int findCircleNumDfsBrute(std::vector<std::vector<int>> &isConnected) {
   int n = isConnected.size();
-
-  std::vector<bool> visited(n, false);
 
   // * make graph
   std::unordered_map<int, std::vector<int>> adj;
@@ -83,21 +85,23 @@ int findCircleNumDfsBrute(std::vector<std::vector<int>> &isConnected) {
     }
   }
 
+  // * Classic DFS
   int ans = 0;
+  std::vector<bool> visited(n, false);
   for (int i = 0; i < n; ++i) {
     if (!visited[i]) {
-      dfsBrute(adj, i, visited);
+      dfsBrute(i, visited, adj);
       ans++;
     }
   }
 
   return ans;
-
 }
 
-void dfs(std::vector<std::vector<int>> &isConnected,
-         int u,
-         std::vector<bool> &visited)
+void dfs(
+    int u,
+    std::vector<bool> &visited,
+    std::vector<std::vector<int>> &isConnected)
 {
   int n = isConnected.size();
   visited[u] = true;
@@ -105,7 +109,7 @@ void dfs(std::vector<std::vector<int>> &isConnected,
   // * Visit neighbours
   for (int v = 0; v < n; ++v) {
     if (!visited[v] && isConnected[u][v] == 1)
-      dfs(isConnected, v, visited);
+      dfs(v, visited, isConnected);
   }
 }
 
@@ -120,7 +124,7 @@ int findCircleNumDfs(std::vector<std::vector<int>> &isConnected) {
   int ans = 0;
   for (int i = 0; i < n; ++i) {
     if (!visited[i]) {
-      dfs(isConnected, i, visited);
+      dfs(i, visited, isConnected);
       ans++;
     }
   }
@@ -184,18 +188,18 @@ int findCircleNumBfs(std::vector<std::vector<int>> &isConnected) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> isConnected = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
+  std::vector<std::vector<int>> isConnected = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
   
   // * testcase 2
-  std::vector<std::vector<int>> isConnected = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+  // std::vector<std::vector<int>> isConnected = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 
   std::cout << "isConnected Cities: " << std::endl;
   for (auto &vec : isConnected)
     printArr(vec);
 
-  // int ans = findCircleNumDfsBrute(isConnected);
+  int ans = findCircleNumDfsBrute(isConnected);
   // int ans = findCircleNumDfs(isConnected);
-  int ans = findCircleNumBfs(isConnected);
+  // int ans = findCircleNumBfs(isConnected);
   std::cout << "Number of Provinces: " << ans << std::endl;
 
   return 0;
@@ -203,4 +207,4 @@ int main(void) {
 
 
 // * Run the code
-// * g++ --std=c++20 07-no-of-provinces.cpp -o output && ./output
+// * g++ --std=c++20 01-no-of-provinces.cpp -o output && ./output
