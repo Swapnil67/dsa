@@ -17,9 +17,7 @@
  * Input      : grid = [[1,0,0],[0,0,0],[0,0,0]]
  * Output     : 4
 
- * https://leetcode.com/problems/01-matrix/description/
- * https://www.naukri.com/code360/problems/distance-of-nearest-cell-having-1-in-a-binary-matrix_1169913
- * https://www.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1
+ * https://leetcode.com/problems/as-far-from-land-as-possible/
 */
 
 // ! BFS
