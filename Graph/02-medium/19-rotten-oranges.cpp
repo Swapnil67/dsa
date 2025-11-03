@@ -24,7 +24,14 @@
  * * Output     : 0
  * 
  * * https://leetcode.com/problems/rotting-oranges/description/
+ * * https://www.geeksforgeeks.org/problems/rotten-oranges2536/1
+ * * https://www.naukri.com/code360/problems/rotting-oranges_701655
 */
+
+
+// ! BFS - (Multi Source)
+
+// ! Apple, Amazon, Microsoft
 
 #include <queue>
 #include <vector>
@@ -80,22 +87,50 @@ bool dfs(int x, int y, std::vector<std::vector<int>> &grid) {
 // * ------------------------- Approach 1: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int orangesRotting(std::vector<std::vector<int>>& grid) {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
-  int minutes = 0;
+int orangesRotting(std::vector<std::vector<int>> &grid)
+{
+  int m = grid.size(), n = grid[0].size();
+  std::queue<std::pair<int, int>> q;
+  int fresh = 0;
 
-
-  for (int i = 0; i < m; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (grid[i][j] == 1) {
-        if (dfs(i, j, grid))
-          minutes++;
+  // * Add all the rotten oranges to queue
+  for (int r = 0; r < grid.size(); r++) {
+    for (int c = 0; c < grid[0].size(); c++) {
+      if (grid[r][c] == 1) {
+        fresh++;
+      } else if (grid[r][c] == 2) {
+        q.push({r, c});
       }
     }
   }
 
-  return minutes;
+  // * Out of bound check
+  const auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
+  };
+
+  int minutes = 0;
+  while (fresh > 0 && !q.empty()) {
+    int N = q.size();
+    while (N--) {
+      auto [r, c] = q.front();
+      q.pop();
+
+      for (auto &dir : dirs) {
+        int nr = r + dir[0];
+        int nc = c + dir[1];
+        // * Make all the fresh oranges in neighbour rotten
+        if (is_safe(nr, nc) && grid[nr][nc] == 1) {
+          grid[nr][nc] = 2;
+          q.push({nr, nc});
+          fresh--;
+        }
+      }
+    }
+    minutes++;
+  }
+
+  return fresh == 0 ? minutes : -1;
 }
 
 int main(void) {
