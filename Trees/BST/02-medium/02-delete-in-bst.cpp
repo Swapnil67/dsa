@@ -8,25 +8,24 @@
 * 1. Search for a node to remove.
 * 2. If the node is found, delete the node.
 
-*
+* Example 1:
 *                  5
 *               /     \  
 *             3        6
 *           /  \     /   \  
 *          2    4   x     7
-
-* Example 1:
-* Input: root = [5,3,6,2,4,null,7], key = 3
+* Input: root = [5, 3, 6, 2, 4, null, 7], key = 3
 *
 *                  5
 *               /     \  
 *             2        6
 *              \        \  
 *               4        7
-* Output: [4,2,7,1,3,5]
+* Output: [4, 2, 7, 1, 3, 5]
 
 * https://leetcode.com/problems/delete-node-in-a-bst/description/
 * https://www.naukri.com/code360/problems/delete-node-in-bst_920381
+* https://www.geeksforgeeks.org/problems/delete-a-node-from-bst/1
 */
 
 #include <vector>
@@ -83,6 +82,9 @@ TreeNode* helper(TreeNode* node) {
   return node->left;
 }
 
+// * Take the right child of del_node and attact it to the right most child in del_node->left tree
+// * and finally attach del_node->left to its parent
+
 // * TIME COMPLEXITY  O(logn) - (Height of tree)
 // * SPACE COMPLEXITY O(1)
 TreeNode* deleteNode(TreeNode* root, int key) {
@@ -129,8 +131,8 @@ int main(void) {
 
   // inOrder(root);
   
-  // int key = 3;
-  int key = 5;
+  int key = 3;
+  // int key = 5;
   
   TreeNode *ans = deleteNode(root, key);
   inOrder(ans);

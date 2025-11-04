@@ -53,7 +53,7 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 }
 
-
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY  O(logn) - (Height of tree)
 // * SPACE COMPLEXITY O(1)
 TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
@@ -61,11 +61,11 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     return nullptr;
 
   while (root) {
-    // * Move to right
+    // * both nodes are on the right of current node
     if (p->data > root->data && q->data > root->data) {
       root = root->right;
     }
-    // * Move to left
+    // * both nodes are on the left of current node
     else if (p->data < root->data && q->data < root->data) {
       root = root->left;
     }
@@ -97,6 +97,7 @@ int main(void) {
   if (lca) {
     std::cout << "Lowest Common Ancestor: " << lca->data << std::endl;
   }
+
   return 0;
 }
 

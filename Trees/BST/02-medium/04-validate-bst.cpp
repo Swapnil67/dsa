@@ -61,15 +61,22 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 }
 
-// * TIME COMPLEXITY  O(N)
-// * SPACE COMPLEXITY O(1) - Auxillary space for recursion
-bool isValidBST(TreeNode* root, long long minVal, long long maxVal) {
+bool dfs(TreeNode* root, long long min_val, long long max_val) {
   if (!root)
     return true;
-  if (root->data <= minVal || root->data >= maxVal)
+
+  if (root->data <= min_val || root->data >= max_val)
     return false;
-  return isValidBST(root->left, minVal, root->data) &&
-         isValidBST(root->right, root->data, maxVal);
+    
+  return dfs(root->left, min_val, root->data) &&
+         dfs(root->right, root->data, max_val);
+}
+
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * TIME COMPLEXITY  O(N)
+// * SPACE COMPLEXITY O(1) - Auxillary space for recursion
+bool isValidBST(TreeNode* root) {
+  return dfs(root, LONG_MIN, LONG_MAX);
 }
 
 int main(void) {
@@ -83,7 +90,7 @@ int main(void) {
   root->right->left = new TreeNode(3);
   root->right->right = new TreeNode(7);
 
-  bool ans = isValidBST(root, LONG_MIN, LONG_MAX);
+  bool ans = isValidBST(root);
   std::cout << "Is valid bst: " << ans << std::endl;
   return 0;
 }

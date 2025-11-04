@@ -1,11 +1,24 @@
 /*
-* Closest Binary Search Tree Value
+* Leetcode - 938
+* Range Sum of BST
 *
-* https://www.naukri.com/code360/problems/closest-element-in-bst_920449
-* https://www.geeksforgeeks.org/problems/find-the-closest-element-in-bst/1
+* Given the root node of a binary search tree and two integers low and high, 
+* return the sum of values of all nodes with a value in the inclusive range [low, high].
+*
+* Example : 1
+* Input   : root = [10,5,15,3,7,null,18], low = 7, high = 15
+* Output  : 32
+*
+* Example : 2
+* Input   : root = [10,5,15,3,7,13,18,1,null,6], low = 6, high = 10
+* Output  : 23
+
+* https://leetcode.com/problems/range-sum-of-bst/description/
+* https://www.naukri.com/code360/problems/range-sum-of-bst_1262280
+* https://www.geeksforgeeks.org/problems/range-sum-of-bst/1
 */
 
-// ! Adobe
+// ! Apple, Ola
 
 #include <vector>
 #include <climits>
@@ -70,6 +83,7 @@ void inorderOptimal(int& ans, TreeNode* root, int& l, int& r) {
   inorderOptimal(ans, root->right, l, r);
 }
 
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY  O(n)
 // * SPACE COMPLEXITY O(n)
 int bruteForce(TreeNode *root, int low, int high) {
@@ -89,6 +103,7 @@ int bruteForce(TreeNode *root, int low, int high) {
   return ans;
 }
 
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY  O(n)
 // * SPACE COMPLEXITY O(1)
 int rangeSumBST(TreeNode *root, int low, int high) {

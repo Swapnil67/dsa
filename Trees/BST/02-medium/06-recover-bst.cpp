@@ -20,6 +20,8 @@
 *                   3
 
 * https://leetcode.com/problems/recover-binary-search-tree/description/
+* https://www.naukri.com/code360/problems/fix-bst_873137
+* https://www.geeksforgeeks.org/problems/fixed-two-nodes-of-a-bst/1
 */
 
 #include <vector>
@@ -60,6 +62,7 @@ void inorder(TreeNode *root, std::vector<int> &arr) {
   inorder(root->right, arr);
 }
 
+// * Classic Inorder traversal
 void solve_brute(TreeNode *root, int &idx, std::vector<int> &arr) {
   if (!root)
     return;
@@ -72,34 +75,19 @@ void solve_brute(TreeNode *root, int &idx, std::vector<int> &arr) {
   solve_brute(root->right, idx, arr);
 }
 
-// * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
-// * TIME COMPLEXITY  O(n + nlogn)
-// * SPACE COMPLEXITY O(n)
-void bruteForce(TreeNode* root) {
-  std::vector<int> arr;
-  inorder(root, arr);
-  printArr(arr);
+TreeNode *prev;
+TreeNode *first;
+TreeNode *middle;
+TreeNode *last;
 
-  std::sort(arr.begin(), arr.end()); // * O(nlogn)
-  // printArr(arr);
-
-  int idx = 0;
-  solve_brute(root, idx, arr);
-}
-
-TreeNode *prev = new TreeNode(INT_MIN);
-TreeNode *first = nullptr;
-TreeNode *middle = nullptr;
-TreeNode *last = nullptr;
-
-void solve(TreeNode *root)
-{
+// * Classic Inorder traversal
+void solve(TreeNode *root) {
   if (!root)
     return;
 
   solve(root->left);
 
-  if (prev != NULL && (root->data < prev->data)) {
+  if (prev && (prev->data > root->data)) {
     if (!first) {
       first = prev;
       middle = root;
@@ -113,16 +101,36 @@ void solve(TreeNode *root)
   solve(root->right);
 }
 
+// * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
+// * TIME COMPLEXITY  O(n + nlogn)
+// * SPACE COMPLEXITY O(n)
+void bruteForce(TreeNode* root) {
+  // * 1. create a vector in inorder
+  std::vector<int> arr;
+  inorder(root, arr);
+  printArr(arr);
+  
+  // * 2. sort the tree
+  std::sort(arr.begin(), arr.end()); // * O(nlogn)
+  // printArr(arr);
+
+  int idx = 0;
+  solve_brute(root, idx, arr);
+}
+
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * use 3 helper pointers (first, middle, last) to check the violation
+// * TIME COMPLEXITY  O(n + nlogn)
+// * SPACE COMPLEXITY O(n)
 void recoverTree(TreeNode* root) {
+  // * helper pointers
+  first = middle = last = NULL;
+  prev = new TreeNode(INT_MIN);
   solve(root);
 
   if (first && last) {
-    // std::cout << "1" << std::en  dl;
     std::swap(first->data, last->data);
-  }
-
-  if (first && middle) {
-    // std::cout << "2" << std::endl;
+  } else if (first && middle) {
     std::swap(first->data, middle->data);
   }
 }

@@ -20,7 +20,8 @@
 * Output: 3
 
 * https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
-* https://www.naukri.com/code360/problems/delete-node-in-bst_920381
+* https://www.naukri.com/code360/problems/find-k-th-smallest-element-in-bst_1069333
+* https://www.geeksforgeeks.org/problems/find-k-th-smallest-element-in-bst/1
 */
 
 #include <stack>
@@ -67,6 +68,16 @@ void inOrder(TreeNode *root, std::vector<int> &vec) {
   inOrder(root->right, vec);
 }
 
+void inOrderRecursive(TreeNode *root, int k, std::stack<int> &st)
+{
+  if (!root)
+    return;
+  inOrderRecursive(root->left, k, st);
+  st.push(root->data);
+  if (st.size() > k)
+    st.pop();
+  inOrderRecursive(root->right, k, st);
+}
 
 // * TIME COMPLEXITY  O(N)
 // * SPACE COMPLEXITY O(N)
@@ -77,35 +88,12 @@ int bruteForce(TreeNode* root, int k) {
   return treeNodesVec[k - 1];
 }
 
-int inOrderIterative(TreeNode *root, int k) {
-  int n = 0;
-  TreeNode *cur = root;
-  std::stack<TreeNode *> st;
-  while (cur || st.size()) {
-    // * keep going to left
-    while (cur) {
-      st.push(cur);
-      cur = cur->left;
-    }
-
-    // * Process this element
-    cur = st.top();
-    st.pop();
-    n += 1;
-    if (n == k)
-      return cur->data;
-
-    // * Go to the right
-    cur = cur->right;
-  }
-
-  return -1;
-}
-
 // * TIME COMPLEXITY  O(N)
 // * SPACE COMPLEXITY O(N)
 int kthSmallest(TreeNode* root, int k) {
-  return inOrderIterative(root, k);
+  std::stack<int> st;
+  inOrderRecursive(root, k, st);
+  return st.top();
 }
 
 // * TIME COMPLEXITY  O(N)
@@ -113,8 +101,10 @@ int kthSmallest(TreeNode* root, int k) {
 int kthLargest(TreeNode* root, int k) {
   int size = 0;
   sizeOfTree(root, size);
-  std::cout << size << std::endl;
-  return inOrderIterative(root, (size - k));
+  // return inOrderIterative(root, (size - k));
+  std::stack<int> st;
+  inOrderRecursive(root, size - k, st);
+  return st.top();
 }
 
 int main(void) {
@@ -127,8 +117,8 @@ int main(void) {
 
   root->right->right = new TreeNode(7);
 
-  // int k = 3;
-  int k = 2;
+  int k = 3;
+  // int k = 2;
   
   // int ans = bruteForce(root, k);
   int ans = kthSmallest(root, k);

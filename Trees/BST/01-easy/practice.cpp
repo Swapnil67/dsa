@@ -50,6 +50,11 @@ void printArr(std::vector<T> arr) {
 // TODO
 // }
 
+// * 06 - Range Sum of BST
+// int rangeSumBST(TreeNode *root, int low, int high) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }
