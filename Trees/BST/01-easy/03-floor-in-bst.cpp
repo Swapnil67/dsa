@@ -21,6 +21,7 @@
 * Output: 15
 
 * https://www.naukri.com/code360/problems/floor-from-bst_920457
+* https://www.geeksforgeeks.org/problems/floor-in-bst/1
 */
 
 #include <vector>
@@ -58,8 +59,9 @@ int findFloor(TreeNode* root, int val) {
     if (root->data == val)
       return val;
 
-    if (root && root->data <= val)
+    if (root->data < val)
       ans = root->data;
+
     root = (root->data < val) ? root->right : root->left;
   }
 

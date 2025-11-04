@@ -15,7 +15,9 @@
 * Input: nums = [-10,-3,0,5,9]
 * Output: [0,-10,5,null,-3,null,9]
 
-* https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/
+* https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+* https://www.naukri.com/code360/problems/convert-sorted-array-to-bst_1264995
+* https://www.geeksforgeeks.org/problems/array-to-bst4443/1
 */
 
 #include <queue>
@@ -47,7 +49,6 @@ void printArr(std::vector<T> arr) {
 
 void levelOrder(TreeNode *root) {
   std::vector<std::vector<int>> ans;
-
   if (root == nullptr)
     return;
 
