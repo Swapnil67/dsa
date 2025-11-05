@@ -2,12 +2,26 @@
 * Leetcode - 112
 * Path Sum
 
-* Example 1:
-* Input: root = [3,4,5,1,2], subRoot = [4,1,2]
-* Output: true
+* Example 1   :
+* Input       : root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+* Output      : true
 
-* https://leetcode.com/problems/merge-two-binary-trees/description/
+* Example 2   :
+* Input       : root = [1,2,3], targetSum = 5
+* Output      : false
+
+* Example 3   :
+* Input       : root = [], targetSum = 0
+* Output      : false
+* Explanation : Since the tree is empty, there are no root-to-leaf paths.
+
+
+* https://leetcode.com/problems/path-sum/description/
+* https://www.naukri.com/code360/problems/path-sum_3170353/
+* https://www.geeksforgeeks.org/problems/root-to-leaf-path-sum/1
 */
+
+// ! Amazon, Meta
 
 #include <queue>
 #include <vector>
@@ -68,8 +82,10 @@ bool solve(TreeNode *node, int target_sum, int total) {
     return false;
   
   total += node->data;
-  if (total == target_sum) 
+  if (total == target_sum && !node->left && !node->right) {
+    // * Leaf node
     return true;
+  }
 
   return solve(node->left, target_sum, total) || solve(node->right, target_sum, total);
 }
@@ -98,6 +114,7 @@ int main(void) {
   
   bool ans = hasPathSum(root, target);
   std::cout << "Path Sum: " << ans << std::endl;
+
   return 0;
 }
 

@@ -1,8 +1,24 @@
 /*
 * Leetcode - 104
 * Maximum Depth of Binary Tree 
+*
+* Example 1:
+*                  1
+*               /     \  
+*             2        3
+*           /  \     /   \  
+*          4    4   6     7
+* Output: 3
+*
+* Example 2:
+*                  1
+*               /     \  
+*             x        3
+* Output: 2
 
 * https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+* https://www.naukri.com/code360/problems/maximum-depth-of-a-binary-tree_1090542
+* https://www.geeksforgeeks.org/problems/height-of-binary-tree/1
 */
 
 #include <queue>
@@ -69,11 +85,8 @@ int maxDepthDFS(TreeNode *root) {
   if (!root)
     return 0;
   
-  // * calculate left height
-  int lh = maxDepthDFS(root->left);
-
-  // * calculate right height
-  int rh = maxDepthDFS(root->right);
+  int lh = maxDepthDFS(root->left); // * calculate left height
+  int rh = maxDepthDFS(root->right); // * calculate right height
 
   return 1 + std::max(lh, rh);
 }

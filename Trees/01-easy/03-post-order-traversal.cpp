@@ -2,8 +2,19 @@
 * Leetcode - 145
 * Binary Tree Prostorder Traversal
 
+*
+* Example 1:
+*                  1
+*               /     \  
+*             2        3
+*           /  \     /   \  
+*          4    4   6     7
+
+* Output: [4, 5, 2, 6, 7, 3, 1]
+
 * https://leetcode.com/problems/binary-tree-postorder-traversal/description/
 * https://www.naukri.com/code360/problems/postorder-traversal_2035933
+* https://www.geeksforgeeks.org/problems/postorder-traversal/1
 */
 
 #include <stack>
@@ -41,13 +52,13 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void postOrderRecursive(TreeNode* node, std::vector<int> &ans) {
+void postOrderDFS(TreeNode* node, std::vector<int> &ans) {
   if (node == nullptr)
     return;
 
   // std::cout << node->data << std::endl;
-  postOrderRecursive(node->left, ans);
-  postOrderRecursive(node->right, ans);
+  postOrderDFS(node->left, ans);
+  postOrderDFS(node->right, ans);
   ans.push_back(node->data);
 }
 
@@ -67,8 +78,8 @@ void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
   while (st.size()) {
     TreeNode* topNode = st.top();
     st.pop();
-
     ans.push_back(topNode->data);
+
     if (topNode->left)
       st.push(topNode->left);
       
@@ -92,7 +103,7 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   std::vector<int> ans;
-  // postOrderRecursive(root, ans);
+  // postOrderDFS(root, ans);
   postOrderIterative(root, ans);
 
   printArr(ans);

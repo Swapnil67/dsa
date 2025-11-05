@@ -3,11 +3,11 @@
 * Balanced Binary Tree 
 
 * https://leetcode.com/problems/balanced-binary-tree/
+* https://www.naukri.com/code360/problems/is-height-balanced-binary-tree_975497
+* https://www.geeksforgeeks.org/problems/check-for-balanced-tree/1
 */
 
-#include <queue>
 #include <vector>
-#include <climits>
 #include <iostream>
 
 typedef struct TreeNode TreeNode;
@@ -67,8 +67,9 @@ int main(void) {
   // root->left->left->left = new TreeNode(5);
 
   int balanced = isBalanced(root);
-  // std::cout << balanced << std::endl;
-  std::cout << "is Balanced Binary Tree: " << (balanced >= 0 ? true : false) << std::endl;
+  bool ans = balanced >= 0;
+
+  std::cout << "is Balanced Binary Tree: " << ans << std::endl;
 
   return 0;
 }

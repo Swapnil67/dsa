@@ -19,7 +19,11 @@
 * Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 
 * https://leetcode.com/problems/diameter-of-binary-tree/
+* https://www.naukri.com/code360/problems/diameter-of-the-binary-tree_920552
+* https://www.geeksforgeeks.org/problems/diameter-of-binary-tree/1
 */
+
+// ! Paypal, Adobe, Amazon
 
 #include <vector>
 #include <iostream>
@@ -75,6 +79,7 @@ int main(void) {
   int diameter = 0;
   diameterOfBinaryTree(root, diameter);
   std::cout << "Diameter of Binary Tree: " << diameter << std::endl;
+  
   return 0;
 }
 

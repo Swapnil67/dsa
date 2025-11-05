@@ -18,6 +18,7 @@
 * Output: true
 
 * https://leetcode.com/problems/cousins-in-binary-tree/description/
+* https://www.naukri.com/code360/problems/cousins-of-given-node-in-binary-tree_873363
 */
 
 #include <queue>
@@ -48,6 +49,7 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 };
 
+
 void levelOrder(TreeNode *root) {
   if (root == nullptr)
     return;
@@ -58,8 +60,8 @@ void levelOrder(TreeNode *root) {
 
   while (!q.empty()) {
     std::vector<int> level;
-    int size = q.size();
-    for(int i = 0; i < size; ++i) {
+    int n = q.size();
+    while (n--) {
       TreeNode *node = q.front();
       q.pop();                    // * pop the front node
 
@@ -71,8 +73,8 @@ void levelOrder(TreeNode *root) {
       level.push_back(node->data);
       std::cout << node->data << " ";
     }
+    std::cout << std::endl;
   }
-  std::cout << std::endl;
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
@@ -91,7 +93,7 @@ bool isCousins(TreeNode* root, int x, int y) {
     TreeNode *y_node = nullptr;
     while (n--) {
       TreeNode* node = q.front();
-      std::cout<<node->data<<" ";
+      // std::cout << node->data << " ";
       q.pop();
 
       if (node->data == x) {
@@ -132,19 +134,19 @@ int main(void) {
   // root->left->left = new TreeNode(4);
 
   // * testcase 2
-  // int x = 4, y = 5;
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(3);
-  // root->left->right = new TreeNode(4);
-  // root->right->right = new TreeNode(5);
-
-  // * testcase 2
-  int x = 2, y = 3;
+  int x = 4, y = 5;
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);
   root->left->right = new TreeNode(4);
+  root->right->right = new TreeNode(5);
+
+  // * testcase 2
+  // int x = 2, y = 3;
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
+  // root->left->right = new TreeNode(4);
 
   std::cout << "x: " << x << ", y: " << y << std::endl;
   std::cout << "Input Tree: ";
@@ -152,6 +154,7 @@ int main(void) {
 
   bool ans = isCousins(root, x, y);
   std::cout << "Is Cousins: " << ans << std::endl;
+
   return 0;
 }
 

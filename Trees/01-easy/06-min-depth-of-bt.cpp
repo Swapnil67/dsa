@@ -2,7 +2,25 @@
 * Leetcode - 111
 * Minimum Depth of Binary Tree 
 
+* Example 1:
+*                  1
+*               /     \  
+*             2        3
+*           /  \     /   \  
+*          4    4   6     7
+* Output: 3
+*
+* Example 2:
+*                 1
+*               /   \  
+*              x     3
+*                  /   \  
+*                 x     7
+* Output: 3
+
 * https://leetcode.com/problems/minimum-depth-of-binary-tree/description/
+* https://www.naukri.com/code360/problems/minimum-depth-in-a-binary-tree_696332
+* https://www.geeksforgeeks.org/problems/minimum-depth-of-a-binary-tree/1
 */
 
 #include <queue>

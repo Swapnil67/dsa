@@ -8,7 +8,10 @@
 
 * https://leetcode.com/problems/subtree-of-another-tree/
 * https://www.naukri.com/code360/problems/subtree-of-another-tree_893071
+* https://www.geeksforgeeks.org/problems/check-if-subtree/1
 */
+
+// ! Meta, Amazon, Microsoft
 
 #include <vector>
 #include <iostream>
@@ -38,7 +41,7 @@ void printArr(std::vector<T> arr) {
 
 bool isSameTree(TreeNode *rootA, TreeNode *rootB) {
   if (!rootA || !rootB)
-    return (rootA == rootB);
+    return rootA == rootB;
 
   return (rootA->data == rootB->data &&
           isSameTree(rootA->left, rootB->left) &&
@@ -53,9 +56,11 @@ bool isSubtree(TreeNode* root, TreeNode* subRoot) {
   if (!root)
     return false;
 
+  // * Check from the root itself first
   if (isSameTree(root, subRoot))
     return true;
 
+  // * Now Check from root->left & root->right subtrees
   return (isSubtree(root->left, subRoot) ||
           isSubtree(root->right, subRoot));
 }
@@ -71,6 +76,9 @@ int main(void) {
   TreeNode *rootB = new TreeNode(3);
   rootB->left = new TreeNode(1);
   rootB->right = new TreeNode(2);
+
+  bool ans = isSubtree(rootA, rootB);
+  std::cout << "Subtree of Another Tree: " << ans << std::endl;
 
   return 0;
 }

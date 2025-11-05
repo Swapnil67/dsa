@@ -1,21 +1,33 @@
 /*
-* Leetcode - 543
-* Diameter of Binary Tree
+* Leetcode - 222
+* Count Complete Tree Nodes
+
+* Given the root of a complete binary tree, return the number of the nodes in the tree.
+
+* According to Wikipedia, every level, except possibly the last, is completely filled in a complete bt, 
+* and all nodes in the last level are as far left as possible. 
+* It can have between 1 and 2h nodes inclusive at the last level h.
+
+* Design an algorithm that runs in less than O(n) time complexity.
 
 * Example 1:
 *
 *                 1
-*               /  \  
-*             2     3
-*           /  \        
-*          4    5     
+*               /   \  
+*             2      3
+*           /  \    /
+*          4    5   6   
 
-* Input: root = [1,2,3,4,5]
-* Output: 3
+* Input: root = [1,2,3,4,5,6]
+* Output: 6
 * Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 
-* https://leetcode.com/problems/diameter-of-binary-tree/
+* https://leetcode.com/problems/count-complete-tree-nodes/description/
+* https://www.naukri.com/code360/problems/count-complete-binary-tree-nodes_982774
+* https://www.geeksforgeeks.org/problems/count-number-of-nodes-in-a-binary-tree/1
 */
+
+// ! Amazon, Microsoft, Meta
 
 #include <vector>
 #include <iostream>
@@ -77,10 +89,10 @@ int countRightHeight(TreeNode *root) {
   return height;
 }
 
-// * ------------------ Approach 1: Brute Force ---------------------
+// * ------------------ Approach 1: BRUTE FORCE ---------------------
 // * DFS Recursion
 // * TIME COMPLEXITY O(n)
-// * SPACE COMPLEXITY O(h)
+// * SPACE COMPLEXITY O(h) (height of tree)
 int bruteForce(TreeNode* root) {    
   int count = 0;
   inOrderDFS(root, count);
@@ -88,6 +100,7 @@ int bruteForce(TreeNode* root) {
 }
 
 // * ------------------ Approach 2: Optimal Approach ---------------------
+// * Count the left & right height from root node
 // * TIME COMPLEXITY O(logn)
 // * SPACE COMPLEXITY O(logn^2)
 int countNodes(TreeNode* root) {

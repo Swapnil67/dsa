@@ -28,6 +28,7 @@
 *          5    4        7
 
 * https://leetcode.com/problems/merge-two-binary-trees/description/
+* https://www.naukri.com/code360/problems/fasdf_1263729
 */
 
 #include <queue>
@@ -57,6 +58,7 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 };
 
+
 void levelOrder(TreeNode *root) {
   if (root == nullptr)
     return;
@@ -67,8 +69,8 @@ void levelOrder(TreeNode *root) {
 
   while (!q.empty()) {
     std::vector<int> level;
-    int size = q.size();
-    for(int i = 0; i < size; ++i) {
+    int n = q.size();
+    while (n--) {
       TreeNode *node = q.front();
       q.pop();                    // * pop the front node
 
@@ -78,10 +80,12 @@ void levelOrder(TreeNode *root) {
         q.push(node->right);
 
       level.push_back(node->data);
-      std::cout << node->data << std::endl;
+      std::cout << node->data << " ";
     }
+    std::cout << std::endl;
   }
 }
+
 
 TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
   if (!root1 && !root2)

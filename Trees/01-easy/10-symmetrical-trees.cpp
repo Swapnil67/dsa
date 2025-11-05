@@ -26,6 +26,7 @@
 
 * https://leetcode.com/problems/symmetric-tree/description/
 * https://www.naukri.com/code360/problems/tree-symmetricity_630426
+* https://www.geeksforgeeks.org/problems/symmetric-tree/1
 */
 
 #include <vector>
@@ -59,7 +60,7 @@ void printArr(std::vector<T> arr) {
 // * rootA -> root | left | right
 // * rootB -> root | right | left
 // * And Compare 
-bool isSymmetricHelp(TreeNode* rootA, TreeNode* rootB) {
+bool dfs(TreeNode* rootA, TreeNode* rootB) {
   if (!rootA || !rootB)
     return rootA == rootB;
 
@@ -67,15 +68,15 @@ bool isSymmetricHelp(TreeNode* rootA, TreeNode* rootB) {
     return false;
 
   // * Go in the opposite directions since its a mirror image
-  return isSymmetricHelp(rootA->left, rootB->right) &&
-         isSymmetricHelp(rootA->right, rootB->left);
+  return dfs(rootA->left, rootB->right) &&
+         dfs(rootA->right, rootB->left);
 }
 
 bool isSymmetric(TreeNode* root) {
   if (!root)
     return true;
   
-  return isSymmetricHelp(root->left, root->right);
+  return dfs(root->left, root->right);
 }
 
 int main(void) {

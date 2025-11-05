@@ -47,20 +47,27 @@ void printArr(std::vector<T> arr) {
 
 // * Note here the 'temp' passed by value so it won't have its previous value when it gets returned from
 // * function in recursion
-void rootToNode(TreeNode *root,  std::vector<std::string> &ans, std::string temp) {
+void dfs(TreeNode *root,  std::vector<std::string> &ans, std::string temp) {
   temp += std::to_string(root->data);
-
+  
   // * Go to the left
   if (root->left)
-    rootToNode(root->left, ans, temp + "->");
+    dfs(root->left, ans, temp + "->");
   
   // * Go to the right
   if (root->right)
-    rootToNode(root->right, ans, temp + "->");
+    dfs(root->right, ans, temp + "->");
     
   // * Add the path
   if (!root->left && !root->right)
     ans.push_back(temp);
+}
+
+std::vector<std::string> rootToNode(TreeNode *root) {
+  std::vector<std::string> ans;
+  std::string cur = "";
+  dfs(root, ans, "");
+  return ans;
 }
 
 
@@ -71,8 +78,7 @@ int main(void) {
 
   root->left->right = new TreeNode(5);
 
-  std::vector<std::string> ans;
-  rootToNode(root, ans, "");
+  std::vector<std::string> ans = rootToNode(root);
   printArr(ans);
 
   return 0;

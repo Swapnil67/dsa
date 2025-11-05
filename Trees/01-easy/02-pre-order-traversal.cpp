@@ -2,8 +2,19 @@
 * Leetcode - 144
 * Binary Tree Preorder Traversal
 
+*
+* Example 1:
+*                  1
+*               /     \  
+*             2        3
+*           /  \     /   \  
+*          4    4   6     7
+
+* Output: [1, 2, 4, 5, 3, 6, 7]
+
 * https://leetcode.com/problems/binary-tree-preorder-traversal/description/
 * https://www.naukri.com/code360/problems/preorder-traversal_2035934
+* https://www.geeksforgeeks.org/problems/preorder-traversal/1
 */
 
 #include <stack>
@@ -39,16 +50,15 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void preOrderRecursive(TreeNode* node, std::vector<int> &ans) {
+void preOrderDFS(TreeNode* node, std::vector<int> &ans) {
   if (!node)
     return;
 
   // std::cout << node->data << std::endl;
   ans.push_back(node->data);
-  preOrderRecursive(node->left, ans);
-  preOrderRecursive(node->right, ans);
+  preOrderDFS(node->left, ans);
+  preOrderDFS(node->right, ans);
 }
-
 
 // * DFS Iterative - (Stack)
 // * TIME COMPLEXITY O(n)
@@ -63,10 +73,11 @@ void preOrderIterative(TreeNode* root, std::vector<int> &ans) {
   while (!st.empty()) {
     TreeNode* node = st.top();
     st.pop();
-
     ans.push_back(node->data);
     // std::cout << node->data << std::endl;
 
+    // * since its a stack we'll store right node first and then left node
+    
     if (node->right)
       st.push(node->right);
     
@@ -87,7 +98,7 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   std::vector<int> ans;
-  preOrderRecursive(root, ans);
+  preOrderDFS(root, ans);
   // preOrderIterative(root, ans);
 
   printArr(ans);

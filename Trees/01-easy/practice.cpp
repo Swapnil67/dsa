@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <unordered_map>
 
 typedef struct TreeNode TreeNode;
 
@@ -30,36 +31,37 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 }
 
+void levelOrder(TreeNode *root) {
+  if (root == nullptr)
+    return;
 
-// * 08 - Diameter of Binary Tree
-// int diameterOfBinaryTree(TreeNode *root, int &diameter) {
-// TODO
-// }
+  // * Create the queue of TreeNode and push the root node
+  std::queue<TreeNode*> q;
+  q.push(root);
 
-// * 09 - Same Tree
-// bool isSameTree(TreeNode* p, TreeNode* q) {
-// TODO
-// } 
+  while (!q.empty()) {
+    std::vector<int> level;
+    int n = q.size();
+    while (n--) {
+      TreeNode *node = q.front();
+      q.pop();                    // * pop the front node
 
-// * 09 - Same Tree
-// bool isSameTree(TreeNode* p, TreeNode* q) {
-// TODO
-// } 
+      if (node->left)
+        q.push(node->left);
+      if (node->right)
+        q.push(node->right);
 
-// * 10 - Symmetric Tree
-// bool isSymmetric(TreeNode* root) {
-// TODO
-// }
-
-// * 11 - Binary Tree Paths
-// void rootToNode(TreeNode* root, std::vector<std::string> &ans, std::string cur) {
-// TODO
-// }
+      level.push_back(node->data);
+      std::cout << node->data << " ";
+    }
+    std::cout << std::endl;
+  }
+}
 
 // * ---------------------------------------------------------------------------------------
 
 // * 01A - In Order DFS
-// void inOrderRecursive(TreeNode *root, std::vector<int> &ans) {
+// void inOrderDFS(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
 
@@ -67,9 +69,9 @@ void printArr(std::vector<T> arr) {
 // void inOrderIterative(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
-
+  
 // * 02A - Pre Order Recursive DFS
-// void preOrderRecursive(TreeNode *root, std::vector<int> &ans) {
+// void preOrderDFS(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
 
@@ -79,7 +81,7 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 03A - Post Order Recursive DFS
-// void postOrderRecursive(TreeNode *root, std::vector<int> &ans) {
+// void postOrderDFS(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
 
@@ -107,35 +109,72 @@ void printArr(std::vector<T> arr) {
 // TODO
 // }
 
-// * 06A - Minimum Depth of Binary Tree
+// * 06A - Minimum Depth of Binary Tree (DFS)
 // int minDepthDFS(TreeNode *root) {
 // TODO
 // }
 
-// * 06B - Minimum Depth of Binary Tree
+// * 06B - Minimum Depth of Binary Tree (BFS)
 // int minDepthBFS(TreeNode *root) {
 // TODO
 // }
   
 // * 07 - Balanced Binary Tree
-int isBalanced(TreeNode *root) {
+// int isBalanced(TreeNode *root) {
+// TODO
+// }
 
-}
-  
+// * 08 - Diameter of Binary Tree
+// int diameterOfBinaryTree(TreeNode *root, int &diameter) {
+// TODO
+// }
+
+// * 09 - Same Tree
+// bool isSameTree(TreeNode* p, TreeNode* q) {
+// TODO
+// } 
+
+// * 10 - Symmetric Tree
+// bool isSymmetric(TreeNode* root) {
+// TODO
+// }
+
+// * 11 - Binary Tree Paths
+// std::vector<std::string> rootToNode(TreeNode* root) {
+// TODO
+// }
+
+// * 12 - Count Complete Tree Nodes
+// int countNodes(TreeNode* root) {
+// TODO
+// }
+
+// * 13 - Subtree of Another Tree
+// int isSubtree(TreeNode* root) {
+// TODO
+// }
+
+// * 14 - Merge Two Binary Trees
+// TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+// TODO
+// }
+
+// * 15 - Path Sum
+// bool hasPathSum(TreeNode* root, int targetSum) {
+// TODO
+// }
+
+// * 16 - Cousins in Binary Tree
+// bool isCousins(TreeNode* root, int x, int y) {
+// TODO
+// }
+
+// * 17 - Invert Binary Tree
+// TreeNode *invertTreeDFS(TreeNode *root) {
+// TODO
+// }
+
 int main(void) {
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
-
-  root->left->left = new TreeNode(4);
-
-  // * toggle this
-  // root->left->left->left = new TreeNode(5);
-
-  int balanced = isBalanced(root);
-  // std::cout << balanced << std::endl;
-  std::cout << "is Balanced Binary Tree: " << (balanced >= 0 ? true : false) << std::endl;
-
   return 0;
 }
 

@@ -2,8 +2,19 @@
 * Leetcode - 94
 * Binary Tree Inorder Traversal
 
+*
+* Example 1:
+*                  1
+*               /     \  
+*             2        3
+*           /  \     /   \  
+*          4    4   6     7
+
+* Output: [4, 2, 5, 1, 6, 3, 7]
+
 * https://leetcode.com/problems/binary-tree-inorder-traversal/description/
 * https://www.naukri.com/code360/problems/inorder-traversal_3839605
+* https://www.geeksforgeeks.org/problems/inorder-traversal/1
 */
 
 #include <stack>
@@ -39,13 +50,13 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void inOrderRecursive(TreeNode* node, std::vector<int> &ans) {
+void inOrderDFS(TreeNode* node, std::vector<int> &ans) {
   if (node == nullptr)
     return;
 
-  inOrderRecursive(node->left, ans);
+  inOrderDFS(node->left, ans);
   ans.push_back(node->data);
-  inOrderRecursive(node->right, ans);
+  inOrderDFS(node->right, ans);
 }
 
 // * DFS Iterative - (Stack)
@@ -66,7 +77,6 @@ void inOrderIterative(TreeNode* root, std::vector<int> &ans) {
 
     root = st.top();
     st.pop();
-
     ans.push_back(root->data);
 
     // * Go to right
@@ -93,7 +103,7 @@ int main(void) {
   // root->right->left = new TreeNode(3);
 
   std::vector<int> ans;
-  inOrderRecursive(root, ans);
+  inOrderDFS(root, ans);
   // inOrderIterative(root, ans);
 
   printArr(ans);
