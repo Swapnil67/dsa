@@ -104,7 +104,6 @@ int main(void) {
 
   // int depth = maxDepthBFS(root);
   int depth = maxDepthDFS(root);
-
   std::cout << "Maximum Depth: " << depth << std::endl;
 
   return 0;

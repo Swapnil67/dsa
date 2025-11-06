@@ -72,6 +72,7 @@ std::vector<std::string> rootToNode(TreeNode *root) {
 
 
 int main(void) {
+  // * testcase 1
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);

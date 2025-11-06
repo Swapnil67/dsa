@@ -82,8 +82,9 @@ bool solve(TreeNode *node, int target_sum, int total) {
     return false;
   
   total += node->data;
+
+  // * If sum matched target and is Leaf node
   if (total == target_sum && !node->left && !node->right) {
-    // * Leaf node
     return true;
   }
 

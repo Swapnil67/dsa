@@ -107,6 +107,7 @@ int main(void) {
   postOrderIterative(root, ans);
 
   printArr(ans);
+  
   return 0;
 }
 

@@ -51,21 +51,28 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 };
 
-int diameterOfBinaryTree(TreeNode* root, int &diameter) {
+// * Same as max depth of BT
+int dfs(TreeNode* root, int &diameter) {
   if (!root)
     return 0;
 
   // * calculate the left height
-  int lh = diameterOfBinaryTree(root->left, diameter);
+  int lh = dfs(root->left, diameter);
 
   // * calculate the right height
-  int rh = diameterOfBinaryTree(root->right, diameter);
+  int rh = dfs(root->right, diameter);
 
   // * calculate max diamter
   diameter = std::max(diameter, lh + rh);
 
   // * Add cur node to height
   return 1 + std::max(lh, rh);
+}
+
+int diameterOfBinaryTree(TreeNode* root) {
+  int d = 0;
+  dfs(root, d);
+  return d;
 }
 
 int main(void) {
@@ -76,8 +83,7 @@ int main(void) {
   root->left->left = new TreeNode(4);
   root->left->right = new TreeNode(5);
   
-  int diameter = 0;
-  diameterOfBinaryTree(root, diameter);
+  int diameter = diameterOfBinaryTree(root);
   std::cout << "Diameter of Binary Tree: " << diameter << std::endl;
   
   return 0;

@@ -127,6 +127,7 @@ int main(void) {
   std::cout << "Merged Root: " << std::endl;
   TreeNode *ans = mergeTrees(rootA, rootB);
   levelOrder(ans);
+  
   return 0;
 }
 

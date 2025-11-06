@@ -86,25 +86,25 @@ bool isSameTreeBFS(TreeNode *p, TreeNode *q) {
 int main(void) {
   // * testcase 1
   // * tree 1
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(3);
-  
-  // * tree 2
-  // TreeNode *root2 = new TreeNode(1);
-  // root2->left = new TreeNode(2);
-  // root2->right = new TreeNode(3);
-
-  // * testcase 2
-  // * tree 1
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
-  root->right = new TreeNode(1);
+  root->right = new TreeNode(3);
   
   // * tree 2
   TreeNode *root2 = new TreeNode(1);
-  root2->left = new TreeNode(1);
-  root2->right = new TreeNode(2);
+  root2->left = new TreeNode(2);
+  root2->right = new TreeNode(3);
+
+  // * testcase 2
+  // * tree 1
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(1);
+  
+  // * tree 2
+  // TreeNode *root2 = new TreeNode(1);
+  // root2->left = new TreeNode(1);
+  // root2->right = new TreeNode(2);
   
   // bool ans = isSameTree(root, root2);
   bool ans = isSameTreeBFS(root, root2);

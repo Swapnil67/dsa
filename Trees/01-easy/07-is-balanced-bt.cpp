@@ -68,7 +68,6 @@ int main(void) {
 
   int balanced = isBalanced(root);
   bool ans = balanced >= 0;
-
   std::cout << "is Balanced Binary Tree: " << ans << std::endl;
 
   return 0;

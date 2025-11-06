@@ -141,6 +141,7 @@ int main(void) {
   // int count = bruteForce(root);
   int count = countNodes(root);
   std::cout << "Count: " << count << std::endl;
+  
   return 0;
 }
 

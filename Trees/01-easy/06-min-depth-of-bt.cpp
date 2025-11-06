@@ -116,8 +116,8 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  int depth = minDepthBFS(root);
-  // int depth = minDepthDFS(root);
+  int depth = minDepthDFS(root);
+  // int depth = minDepthBFS(root);
   std::cout << "Minimum Depth: " << depth << std::endl;
 
   return 0;

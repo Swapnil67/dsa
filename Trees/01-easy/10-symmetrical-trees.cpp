@@ -81,23 +81,23 @@ bool isSymmetric(TreeNode* root) {
 
 int main(void) {
   // * testcase 1
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(2);
-
-  // root->left->left = new TreeNode(3);
-  // root->left->right = new TreeNode(4);
-
-  // root->right->left = new TreeNode(4);
-  // root->right->right = new TreeNode(3);
-
-  // * testcase 2
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(2);
-  
-  root->left->right = new TreeNode(3);
+
+  root->left->left = new TreeNode(3);
+  root->left->right = new TreeNode(4);
+
+  root->right->left = new TreeNode(4);
   root->right->right = new TreeNode(3);
+
+  // * testcase 2
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(2);
+  
+  // root->left->right = new TreeNode(3);
+  // root->right->right = new TreeNode(3);
 
   bool ans = isSymmetric(root);
   std::cout << "Is Symmetric Tree " << ans << std::endl;

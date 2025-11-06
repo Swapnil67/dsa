@@ -58,6 +58,7 @@ void levelOrder(TreeNode *root) {
   }
 }
 
+
 // * ---------------------------------------------------------------------------------------
 
 // * 01A - In Order DFS
@@ -69,7 +70,7 @@ void levelOrder(TreeNode *root) {
 // void inOrderIterative(TreeNode *root, std::vector<int> &ans) {
 // TODO
 // }
-  
+
 // * 02A - Pre Order Recursive DFS
 // void preOrderDFS(TreeNode *root, std::vector<int> &ans) {
 // TODO
@@ -87,7 +88,7 @@ void levelOrder(TreeNode *root) {
 
 // * 03B - Post Order Iterative DFS
 // void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO
+// TODO 
 // }
 
 // * 04 - All 3 traversals
@@ -118,7 +119,7 @@ void levelOrder(TreeNode *root) {
 // int minDepthBFS(TreeNode *root) {
 // TODO
 // }
-  
+
 // * 07 - Balanced Binary Tree
 // int isBalanced(TreeNode *root) {
 // TODO
@@ -126,13 +127,13 @@ void levelOrder(TreeNode *root) {
 
 // * 08 - Diameter of Binary Tree
 // int diameterOfBinaryTree(TreeNode *root, int &diameter) {
-// TODO
+// TODO  
 // }
-
+  
 // * 09 - Same Tree
 // bool isSameTree(TreeNode* p, TreeNode* q) {
 // TODO
-// } 
+// }
 
 // * 10 - Symmetric Tree
 // bool isSymmetric(TreeNode* root) {
@@ -150,7 +151,7 @@ void levelOrder(TreeNode *root) {
 // }
 
 // * 13 - Subtree of Another Tree
-// int isSubtree(TreeNode* root) {
+// bool isSubtree(TreeNode* root, TreeNode* subRoot) {
 // TODO
 // }
 
