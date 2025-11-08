@@ -22,9 +22,13 @@
  * * Output     : 2
  * 
  * * https://leetcode.com/problems/number-of-operations-to-make-network-connected
+ * * https://www.naukri.com/code360/problems/number-of-operations-to-make-graph-connected_1385179
+ * * https://www.geeksforgeeks.org/problems/minimize-connections/1
  */
 
 // ! DSU
+
+// ! Microsoft, Meta, Amazon
 
 #include <vector>
 #include <iostream>
@@ -92,12 +96,13 @@ int makeConnected(int n, std::vector<std::vector<int>> &connections) {
 
   // * 2. Classic DSU
   for (auto &vec : connections) {
-    int u_parent = find(vec[0], parent);
-    int v_parent = find(vec[1], parent);
+    int u = vec[0], v = vec[1];
+    int u_parent = find(u, parent);
+    int v_parent = find(v, parent);
 
     // * Merge into one set
     if (u_parent != v_parent) {
-      Union(vec[0], vec[1], parent, rank);
+      Union(u, v, parent, rank);
       n--;
     }
   }

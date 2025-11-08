@@ -54,18 +54,18 @@ void printArr(std::vector<T> &arr) {
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 int minimumEffortPath(std::vector<std::vector<int>>& heights) {
-  int m = heights.size();
-  int n = heights[0].size();
+  int m = heights.size(), n = heights[0].size();
 
   std::vector<std::vector<int>> res(m, std::vector<int>(n, INT_MAX));
   res[0][0] = 0;
 
+  // * pair = {distance, {x, y}}
   typedef std::pair<int, std::pair<int, int>> P;
   std::priority_queue<P, std::vector<P>, std::greater<>> min_heap;
   min_heap.push({0, {0, 0}});
 
-  auto is_safe = [&](const int&x, const int&y) {
-    return x >= 0 && x < m && y >= 0 && y < n;
+  auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
   };
 
   while (!min_heap.empty()) {
@@ -89,9 +89,9 @@ int minimumEffortPath(std::vector<std::vector<int>>& heights) {
     }
   }
  
-  // std::cout << "Distance Matrix" << std::endl;
-  // for (auto &vec : res)
-  //   printArr(vec); 
+  std::cout << "Distance Matrix" << std::endl;
+  for (auto &vec : res)
+    printArr(vec); 
 
   if (res[m - 1][n - 1] == INT_MAX)
     return -1;
@@ -102,13 +102,16 @@ int minimumEffortPath(std::vector<std::vector<int>>& heights) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
+  std::vector<std::vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
 
   // * testcase 2
-  std::vector<std::vector<int>> heights = {{1, 2, 3}, {3, 8, 4}, {5, 3, 5}};
+  // std::vector<std::vector<int>> heights = {{1, 2, 3}, {3, 8, 4}, {5, 3, 5}};
 
   // * testcase 3
   // std::vector<std::vector<int>> heights = {{1, 2, 1, 1, 1}, {1, 2, 1, 2, 1}, {1, 2, 1, 2, 1}, {1, 2, 1, 2, 1}, {1, 1, 1, 2, 1}};
+
+  // * testcase 3
+  // std::vector<std::vector<int>> heights = {{1, 10, 6, 7, 9, 10, 4, 9}};
 
   std::cout << "heights" << std::endl;
   for (auto &vec : heights)

@@ -1,6 +1,6 @@
 /*
  * Leetcode - 542
- * Path With Minimum Effort
+ * 01 Matrix
  * 
  * Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell.
 
@@ -58,34 +58,32 @@ std::vector<std::vector<int>> updateMatrix(std::vector<std::vector<int>>& mat) {
   std::queue<std::pair<int, int>> q;
 
   // * push all the co-ordinates which has element 0 to `q`
-  for (int i = 0; i < m; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (mat[i][j] == 0) {
-        result[i][j] = 0;
-        q.push({i, j});
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
+      if (mat[r][c] == 0) {
+        result[r][c] = 0;
+        q.push({r, c});
       }
     }
   }
 
   // * To check out of boundary
-  const auto is_safe = [&](const int &x, const int &y) {
-    return x >= 0 && x < m && y >= 0 && y < n;
+  const auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
   };
 
   // * Classic BFS
   while (!q.empty()) {
-    auto p = q.front();
+    auto [r, c] = q.front();
     q.pop();
-
-    int x = p.first, y = p.second;
 
     // * Go to adjacent cells
     for (auto &dir: dirs) {
-      int dx = x + dir[0];
-      int dy = y + dir[1];
-      if (is_safe(dx, dy) && result[dx][dy] == -1) {
-        result[dx][dy] = result[x][y] + 1;
-        q.push({dx, dy});
+      int n_r = r + dir[0];
+      int n_c = c + dir[1];
+      if (is_safe(n_r, n_c) && result[n_r][n_c] == -1) {
+          result[n_r][n_c] = result[r][c] + 1;
+          q.push({n_r, n_c});
       }
     }
   }

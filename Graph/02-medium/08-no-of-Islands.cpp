@@ -28,7 +28,11 @@
  * * Output     : 0
  * 
  * * https://leetcode.com/problems/number-of-islands/description/
+ * * https://www.naukri.com/code360/problems/find-number-of-islands_630512
+ * * https://www.geeksforgeeks.org/problems/find-the-number-of-islands/1
 */
+
+// ! Apple, Amazon, Uber
 
 #include <queue>
 #include <vector>
@@ -59,21 +63,20 @@ void printAdjList(std::vector<T> &adj) {
 }
 const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
-void dfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<vc>& grid) {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
+void dfs(int r, int c, std::vector<std::vector<int>> &visited, std::vector<vc>& grid) {
+  int m = grid.size(), n = grid[0].size();
 
   // * Edge cases
-  if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] == '0' || visited[x][y]) {
+  if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] == '0' || visited[r][c]) {
     return;
   }
 
-  visited[x][y] = 1;
+  visited[r][c] = 1;
 
   for (auto &dir : dirs) {
-    int new_x = x + dir[0]; 
-    int new_y = y + dir[1];
-    dfs(new_x, new_y, visited, grid);
+    int new_r = r + dir[0]; 
+    int new_c = c + dir[1];
+    dfs(new_r, new_c, visited, grid);
   }
 }
 
@@ -81,16 +84,15 @@ void dfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<vc>& 
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
 int numIslandsDFS(std::vector<vc>& grid) {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
+  int m = grid.size(), n = grid[0].size();
   int islands = 0;
 
   std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
 
-  for (int i = 0; i < m; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (grid[i][j] == '1' && !visited[i][j]) {
-        dfs(i, j, visited, grid);
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
+      if (grid[r][c] == '1' && !visited[r][c]) {
+        dfs(r, c, visited, grid);
         islands++;
       }
     }
@@ -100,8 +102,7 @@ int numIslandsDFS(std::vector<vc>& grid) {
 }
 
 void bfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<vc> &grid) {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
+  int m = grid.size(), n = grid[0].size();
   visited[x][y] = 1;
   std::queue<std::pair<int, int>> q;
   q.push({x, y});

@@ -101,16 +101,19 @@ std::vector<int> bfs(int n, std::vector<std::vector<int>> &adj, std::vector<int>
   return {};
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(V + E)
+// * SPACE COMPLEXITY O(V + E)
 std::vector<int> canFinish(int numCourses, std::vector<std::vector<int>> &prerequisites) {
 
   std::vector<int> indegree(numCourses, 0);
   std::vector<std::vector<int>> adj = contructadj(numCourses, prerequisites, indegree);
 
   // * For Debugging
-  // std::cout << "Adjacency List" << std::endl;
-  // printAdjList(adj);
-  // std::cout << "Indegree" << std::endl;
-  // printArr(indegree);
+  std::cout << "Adjacency List" << std::endl;
+  printAdjList(adj);
+  std::cout << "Indegree" << std::endl;
+  printArr(indegree);
 
   return bfs(numCourses, adj, indegree);
 }

@@ -24,6 +24,7 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -47,6 +48,17 @@ void printAdjList(std::vector<T> &adj) {
   }
 }
 
+// * Construct adjacency list for DFS
+std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
+  std::unordered_map<int, std::vector<int>> adj;
+  for (auto &it : edges) {
+    int a = it[0], b = it[1];
+    adj[b].push_back(a);
+  }
+  return adj;
+}
+
+// * Construct adjacency list for BFS
 std::vector<std::vector<int>> contructadj(
     int V,
     std::vector<std::vector<int>> &prerequisites,
@@ -91,9 +103,12 @@ bool bfs(int V, std::vector<std::vector<int>> &adj, std::vector<int> &indegree) 
   }
 
   // std::cout << "N: " << V << ", Count: " << count << std::endl;
-  return count == V; // * if not found cycle means we managed to finish all courses
+  return count == V; // * Not found cycle means we managed to finish all courses
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(V + E)
+// * SPACE COMPLEXITY O(V + E)
 bool canFinish(int numCourses, std::vector<std::vector<int>> &prerequisites) {
   std::vector<int> indegree(numCourses, 0);
   std::vector<std::vector<int>> adj = contructadj(numCourses, prerequisites, indegree);

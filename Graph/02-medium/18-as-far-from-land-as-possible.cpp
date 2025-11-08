@@ -45,9 +45,11 @@ void printArr(std::vector<T> &arr) {
 
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
+// * Multi Source BFS (Overwriting Input)
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
 int maxDistance(std::vector<std::vector<int>> &grid) {
-  int m = grid.size();
-  int n = grid[0].size();
+  int m = grid.size(), n = grid[0].size();
 
   std::queue<std::pair<int, int>> q;
   for (int r = 0; r < m; ++r) {
@@ -62,12 +64,13 @@ int maxDistance(std::vector<std::vector<int>> &grid) {
   while (!q.empty()) {
     auto [x, y] = q.front();
     q.pop();
+
     res = grid[x][y];
 
     for (auto &dir : dirs) {
       int dx = x + dir[0], dy = y + dir[1];
       if (dx >= 0 && dx < m && dy >= 0 && dy < n && grid[dx][dy] == 0) {
-        grid[dx][dy] = grid[x][y] + 1;
+        grid[dx][dy] = grid[x][y] + 1; // * overwite the distance
         q.push({dx, dy});
       } 
     }
@@ -81,9 +84,11 @@ int maxDistance(std::vector<std::vector<int>> &grid) {
   return res > 1 ? res - 1 : -1;
 }
 
+// * Multi Source BFS
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(N^2)
 int maxDistance2(std::vector<std::vector<int>> &grid) {
-  int m = grid.size();
-  int n = grid[0].size();
+  int m = grid.size(), n = grid[0].size();
 
   std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
   std::queue<std::pair<int, int>> q;
@@ -96,33 +101,27 @@ int maxDistance2(std::vector<std::vector<int>> &grid) {
     }
   }
 
-  const auto is_safe = [&](const int &x, const int &y) {
-    return x >= 0 && x < m && y >= 0 && y < n;
+  const auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
   };
 
   int res = -1;
   while (!q.empty()) {
+    res++;
     int N = q.size();
     while (N--) {
-      auto [x, y] = q.front();
+      auto [r, c] = q.front();
       q.pop();
-      res = grid[x][y];
-    
       for (auto &dir : dirs) {
-        int dx = x + dir[0], dy = y + dir[1];
-        if (is_safe(dx, dy) && grid[dx][dy] == 0) {
-          grid[dx][dy] = grid[x][y] + 1;
-          q.push({dx, dy});
+        int nr = r + dir[0], nc = c + dir[1];
+        if (is_safe(nr, nc) && !visited[nr][nc]) {
+          q.push({nr, nc});
+          visited[nr][nc] = true;
         } 
       }
     }
 
   }
-
-  // * For debugging
-  // std::cout << "Distance Grid" << std::endl;
-  // for (auto &vec : grid)
-  //   printArr(vec);
 
   return res > 1 ? res - 1 : -1;
 }

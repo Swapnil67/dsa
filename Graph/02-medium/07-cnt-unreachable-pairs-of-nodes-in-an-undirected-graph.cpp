@@ -38,50 +38,56 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+  for (auto &[key, vec] : adj) {
+    std::cout << key << " -> ";
+    printArr(vec);
   }
 }
 
-std::vector<std::vector<int>> constructadj(int n, std::vector<std::vector<int>> &edges) {
-  std::vector<std::vector<int>> adj(n);
+std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
+  std::unordered_map<int, std::vector<int>> adj;
   for (auto &it : edges) {
-    adj[it[0]].push_back(it[1]);
-    adj[it[1]].push_back(it[0]);
+    int u = it[0], v = it[1];
+    adj[u].push_back(v);
+    adj[v].push_back(u);
   }
   return adj;
 }
 
-void dfs(long long &size, int u, std::vector<bool> &visited, std::vector<std::vector<int>> &adj) {
+void dfs(
+    int u,
+    long long &size,
+    std::vector<bool> &visited,
+    std::unordered_map<int, std::vector<int>> &adj)
+{
   visited[u] = true;
   size += 1;
   
   for (auto &v : adj[u]) {
     if (!visited[v]) {
-      dfs(size, v, visited, adj);
+      dfs(v, size, visited, adj);
     }
   }
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 long long countPairsDFS(int n, std::vector<std::vector<int>> &edges) {
   std::vector<bool> visited(n, false);
   
   // * construct the adjacency list
-  std::vector<std::vector<int>> adj = constructadj(n, edges);
-  // * For Debugging
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
   std::cout << "Adjacency List" << std::endl;
-  printAdjList(adj);
+  printAdjList(adj); // * For Debugging
 
-  long long cur_remaining = n;
   long long res = 0;
+  long long cur_remaining = n;
   for (int i = 0; i < n; ++i) {
     if (!visited[i]) {
       long long grp_size = 0;
-      dfs(grp_size, i, visited, adj);
+      dfs(i, grp_size, visited, adj);
       res += grp_size * (cur_remaining - grp_size);
       // std::cout << "grp_size  " << grp_size < ", pairs  " << res << std::endl;
       cur_remaining -= grp_size;
@@ -89,6 +95,68 @@ long long countPairsDFS(int n, std::vector<std::vector<int>> &edges) {
   }
 
   return res;
+}
+
+int find(int x, std::vector<int> &parent) {
+  if (x == parent[x])
+    return x;
+  return parent[x] = find(parent[x], parent);
+}
+
+void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
+  int x_parent = find(x, parent);
+  int y_parent = find(y, parent);
+
+  if (x_parent == y_parent)
+    return;
+
+  if (rank[x_parent] > rank[y_parent]) {
+    parent[y_parent] = x_parent;
+  } else if (rank[y_parent] > rank[x_parent]) {
+    parent[x_parent] = y_parent;
+  } else {
+    parent[x_parent] = y_parent;
+    rank[y_parent]++;
+  }
+}
+
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+long long countPairsDSU(int n, std::vector<std::vector<int>> &edges) {
+  // * 1. Initialize rank and parent vectors
+  std::vector<int> rank(n, 1);
+  std::vector<int> parent(n);
+  for (int i = 0; i < n; ++i) {
+    parent[i] = i;
+  }
+
+  // * 2. Create Disjoint sets
+  for (auto &it: edges) {
+    int u = it[0], v = it[1];
+    Union(u, v, parent, rank);
+  }
+
+  // * 3. Save the parent frequency in map
+  std::unordered_map<int, int> mp;
+  for (int i = 0; i < n; ++i) {
+    int p = find(i, parent);
+    mp[p]++;
+  }
+  // * For Debugging
+  // for (auto &[p, freq]: mp) {
+  //   std::cout << p << ": " << freq << std::endl;
+  // }
+
+  // * 4. Find result
+  long long result = 0;
+  long long remaining_nodes = n;
+  for (auto &[p, freq]: mp) {
+    result += freq * (remaining_nodes - freq);
+    remaining_nodes -= freq;
+  }
+
+  return result;
 }
 
 int main(void) {
@@ -110,6 +178,7 @@ int main(void) {
     printArr(vec);
 
   long long ans = countPairsDFS(n, edges);
+  // long long ans = countPairsDSU(n, edges);
   std::cout << "Ans: " << ans << std::endl;
 
   return 0;

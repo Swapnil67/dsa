@@ -20,9 +20,9 @@
  * * Output     : 1
  * 
  * * https://leetcode.com/problems/keys-and-rooms/description/
+ * * https://www.naukri.com/code360/problems/rooms_1214959
 */
 
-#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -40,6 +40,7 @@ void printArr(std::vector<T> &arr) {
 
 void dfs(int room, std::vector<bool> &visited, std::vector<std::vector<int>> &rooms) {
   visited[room] = true;
+  
   for (auto &key : rooms[room]) {
     if (!visited[key]) {
       dfs(key, visited, rooms);
@@ -55,7 +56,8 @@ bool canVisitAllRooms(std::vector<std::vector<int>>& rooms) {
   // printArr(visited); // * For debugging
 
   for (bool v : visited) {
-    if (v == false) return false;
+    if (!v)
+      return false;
   }
   return true;
 }

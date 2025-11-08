@@ -16,9 +16,9 @@
  * * Output     : 1
  * 
  * * https://leetcode.com/problems/number-of-closed-islands/description/
+ * * https://www.geeksforgeeks.org/problems/find-number-of-closed-islands/1
 */
 
-#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -44,42 +44,38 @@ void printAdjList(std::vector<T> &adj) {
   }
 }
 
-const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
-
-bool dfs(int x, int y,
+bool dfs(int r, int c,
          std::vector<std::vector<int>> &grid)
 {
-  int m = grid.size();
-  int n = grid[0].size();
+  int m = grid.size(), n = grid[0].size();
 
-  if (x < 0 || x >= m || y < 0 || y >= n) // * out of bound
+  if (r < 0 || r >= m || c < 0 || c >= n) // * out of bound
     return false; // * not closed
 
-  if (grid[x][y] == 1) // * found water
+  if (grid[r][c] == 1) // * found water
     return true; // * closed
 
-  grid[x][y] = 1; // * mark visited
+  grid[r][c] = 1; // * mark visited
 
-  bool left_closed = dfs(x - 1, y, grid);
-  bool right_closed = dfs(x + 1, y, grid);
-  bool top_closed = dfs(x, y - 1, grid);
-  bool down_closed = dfs(x, y + 1, grid);
+  bool left_closed = dfs(r, c - 1, grid);
+  bool right_closed = dfs(r, c + 1, grid);
+  bool top_closed = dfs(r - 1, c, grid);
+  bool bottom_closed = dfs(r + 1, c, grid);
 
-  return left_closed && right_closed && top_closed && down_closed; 
+  return left_closed && right_closed && top_closed && bottom_closed; 
 }
 
 // * ------------------------- Approach 1: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(1)
 int closedIslandDFS(std::vector<std::vector<int>> &grid) {
-  int m = grid.size();
-  int n = grid[0].size();
+  int m = grid.size(), n = grid[0].size();
 
   int closed_islands = 0;
-  for (int i = 0; i < m; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (grid[i][j] == 0) {
-        if (dfs(i, j, grid))
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
+      if (grid[r][c] == 0) {
+        if (dfs(r, c, grid))
           closed_islands++;
       }
     }
@@ -90,19 +86,23 @@ int closedIslandDFS(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 1, 1, 0}, {1, 0, 1, 0, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 1, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 0}};
+  std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1, 0},
+                                        {1, 0, 0, 0, 0, 1, 1, 0},
+                                        {1, 0, 1, 0, 1, 1, 1, 0},
+                                        {1, 0, 0, 0, 0, 1, 0, 1},
+                                        {1, 1, 1, 1, 1, 1, 1, 0}};
 
   // * testcase 2
   // std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0}, {0, 1, 0, 1, 0}, {0, 1, 1, 1, 0}};
 
   // * testcase 3
-  std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1},
-                                        {1, 0, 0, 0, 0, 0, 1},
-                                        {1, 0, 1, 1, 1, 0, 1},
-                                        {1, 0, 1, 0, 1, 0, 1},
-                                        {1, 0, 1, 1, 1, 0, 1},
-                                        {1, 0, 0, 0, 0, 0, 1},
-                                        {1, 1, 1, 1, 1, 1, 1}};
+  // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1},
+  //                                       {1, 0, 0, 0, 0, 0, 1},
+  //                                       {1, 0, 1, 1, 1, 0, 1},
+  //                                       {1, 0, 1, 0, 1, 0, 1},
+  //                                       {1, 0, 1, 1, 1, 0, 1},
+  //                                       {1, 0, 0, 0, 0, 0, 1},
+  //                                       {1, 1, 1, 1, 1, 1, 1}};
 
   std::cout << "grid: " << std::endl;
   for (auto &vec : grid)

@@ -19,6 +19,7 @@
  * * Output     : 0
  * 
  * * https://leetcode.com/problems/max-area-of-island/description/
+ * * https://www.geeksforgeeks.org/problems/length-of-largest-region-of-1s-1587115620/1
 */
 
 #include <queue>
@@ -39,27 +40,52 @@ void printArr(std::vector<T> &arr) {
 
 const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
-void dfs(int x, int y, int &area,
+// * Using visited matrix
+void dfs(int r, int c, int &area,
          std::vector<std::vector<int>> &visited,
          std::vector<std::vector<int>> &grid)
 {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
+  int m = grid.size(), n = grid[0].size();
 
-  // * Edge cases
-  if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] == 0 || visited[x][y]) {
-    return;
+  // * Edge case
+  if (r < 0 || r >= m || c < 0 || c >= n || visited[r][c] ||
+      grid[r][c] == 0) {
+      return;
   }
 
-  visited[x][y] = 1;
+  visited[r][c] = 1; // * mark visited
 
-  if (grid[x][y] == 1)
-    area++;
+  if (grid[r][c] == 1) // * add to current area
+      area += 1;
 
-  for (auto &dir : dirs) {
-    int new_x = x + dir[0]; 
-    int new_y = y + dir[1];
-    dfs(new_x, new_y, area, visited, grid);
+  for (auto &dir : dirs) { // * go to neighbours
+    int n_r = r + dir[0];
+    int n_c = c + dir[1];
+    dfs(n_r, n_c, area, visited, grid);
+  }
+}
+
+// * Using visited matrix
+void dfs2(int r, int c, int &area,
+         std::vector<std::vector<int>> &visited,
+         std::vector<std::vector<int>> &grid)
+{
+  int m = grid.size(), n = grid[0].size();
+
+  // * Edge case
+  if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] == 0) {
+      return;
+  }
+
+  grid[r][c] = 0; // * mark visited
+
+  if (grid[r][c] == 1) // * add to current area
+      area += 1;
+
+  for (auto &dir : dirs) { // * go to neighbours
+    int n_r = r + dir[0];
+    int n_c = c + dir[1];
+    dfs2(n_r, n_c, area, visited, grid);
   }
 }
 
@@ -146,13 +172,13 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0}, {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
+  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0}, {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
 
   // * testcase 2
   // std::vector<std::vector<int>> grid = {{0, 0, 0, 0, 0, 0, 0, 0}};
 
   // * testcase 3
-  std::vector<std::vector<int>> grid = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
+  // std::vector<std::vector<int>> grid = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
 
   std::cout << "grid: " << std::endl;
   for (auto &vec : grid)

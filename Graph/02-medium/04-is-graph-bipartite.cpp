@@ -26,7 +26,11 @@
  * * Output     : true
  * 
  * * https://leetcode.com/problems/is-graph-bipartite/description/
- */
+ * * https://www.geeksforgeeks.org/problems/bipartite-graph/1
+ * * https://www.naukri.com/code360/problems/check-graph-is-bipartite-or-not_920551
+*/
+
+// ! microsoft, flipkart, samsung, meta
 
 #include <queue>
 #include <vector>
@@ -54,21 +58,22 @@ void printAdjList(std::vector<T> &adj) {
   }
 }
 
-bool dfs(int u, int cur_color,
-                    std::vector<int> &color,
-                    std::vector<std::vector<int>> &graph)
+bool dfs(int u,
+         int cur_color,
+         std::vector<int> &colors,
+         std::vector<std::vector<int>> &graph)
 {
-  color[u] = cur_color;
+  colors[u] = cur_color;
 
   for (int &v: graph[u]) {
     // * check if we came across same color
-    if (color[v] == color[u]) {
+    if (colors[v] == colors[u]) {
       return false;
     }
     
-    if (color[v] == -1) {
+    if (colors[v] == -1) {
       int new_color = 1 - cur_color;
-      if (!dfs(v, new_color, color, graph))
+      if (!dfs(v, new_color, colors, graph))
         return false;
     }
   }
@@ -85,8 +90,10 @@ bool isBipartiteDFS(std::vector<std::vector<int>> &graph)
 
   for (int u = 0; u < V; ++u) {
     if (color[u] == -1) {
-      if (dfs(u, 1, color, graph) == false)
+      if (dfs(u, 1, color, graph) == false) {
+        printArr(color);
         return false;
+      }
     }
   }
 
@@ -141,19 +148,19 @@ bool isBipartiteBFS(std::vector<std::vector<int>> &graph)
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> graph = {{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}};
+  std::vector<std::vector<int>> graph = {{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}};
 
   // * testcase 2
   // std::vector<std::vector<int>> graph = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
 
   // * testcase 3
-  std::vector<std::vector<int>> graph = {{}, {2, 4, 6}, {1, 4, 8, 9}, {7, 8}, {1, 2, 8, 9}, {6, 9}, {1, 5, 7, 8, 9}, {3, 6, 9}, {2, 3, 4, 6, 9}, {2, 4, 5, 6, 7, 8}};
+  // std::vector<std::vector<int>> graph = {{}, {2, 4, 6}, {1, 4, 8, 9}, {7, 8}, {1, 2, 8, 9}, {6, 9}, {1, 5, 7, 8, 9}, {3, 6, 9}, {2, 3, 4, 6, 9}, {2, 4, 5, 6, 7, 8}};
 
   std::cout << "Graph: " << std::endl;
   printAdjList(graph);
 
-  // bool ans = isBipartiteDFS(graph);
-  bool ans = isBipartiteBFS(graph);
+  bool ans = isBipartiteDFS(graph);
+  // bool ans = isBipartiteBFS(graph);
   std::cout << "Is Graph Bipartite: " << ans << std::endl;
 
   return 0;

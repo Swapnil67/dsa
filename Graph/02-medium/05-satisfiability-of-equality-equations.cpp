@@ -63,17 +63,19 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
   }
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 bool equationsPossible(std::vector<std::string>& equations) {
   int N = 26;
 
   // * Initialize rank and parent vectors
-  std::vector<int> rank(N), parent(N);
+  std::vector<int> rank(N, 0), parent(N);
   for (int i = 0; i < N; ++i) {
-    rank[i] = 0;
     parent[i] = i;
   }
 
-  //
+  // * Group all the '==' equation first
   for (auto &s : equations) {
     if (s[1] == '=') {
       int a = s[0] - 'a', b = s[3] - 'a';
@@ -82,6 +84,7 @@ bool equationsPossible(std::vector<std::string>& equations) {
     }
   }
   
+  // * Check if parent of '!=' equations are same
   for (auto &s : equations) {
     if (s[1] == '!') {
       int a = s[0] - 'a', b = s[3] - 'a';
