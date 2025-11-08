@@ -12,19 +12,20 @@
 *             7  4
 
 * Example 1:
-* Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+* Input: root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], p = 5, q = 1
 * Output: 3
 
 * Example 2:
-* Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+* Input: root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], p = 5, q = 4
 * Output: 5
 
 * Example 3:
-* Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 7, q = 4
+* Input: root = [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], p = 7, q = 4
 * Output: 2
 
-* https://www.naukri.com/code360/problems/lca-of-binary-tree_920541
 * https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/
+* https://www.naukri.com/code360/problems/lca-of-binary-tree_920541
+* https://www.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1
 */
 
 #include <vector>
@@ -116,6 +117,7 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 
   // * Found our answer
   if (left && right) {
+    
     return root;
   }
 
@@ -136,12 +138,17 @@ int main() {
   root->left->right->left = new TreeNode(7);
   root->left->right->right = new TreeNode(4);
   
+  // TreeNode *p = new TreeNode(5);
+  // TreeNode *q = new TreeNode(1);
+
   TreeNode *p = new TreeNode(5);
-  TreeNode *q = new TreeNode(1);
+  TreeNode *q = new TreeNode(2);
 
   // TreeNode *ans = bruteForce(root, p, q);
   TreeNode *ans = lowestCommonAncestor(root, p, q);
-  std::cout << "Lowest Common Ancestor of a Binary Tree " << ans->data << std::endl;
+  std::cout << "LCA of " << p->data << " & " << q->data << " is:  " << ans->data << std::endl;
+
+  return 0;
 }
 
 // * Run the code

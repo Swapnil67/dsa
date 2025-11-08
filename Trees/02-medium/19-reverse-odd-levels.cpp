@@ -26,6 +26,7 @@
 * Output: [1, 3, 2, 4, 5, 6, 7]
 
 * https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/description/
+* https://www.geeksforgeeks.org/problems/reverse-alternate-levels-of-a-perfect-binary-tree/1
 */
 
 #include <queue>
@@ -47,12 +48,17 @@ public:
   }
 };
 
-void printArr(std::vector<int> arr) {
+
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
@@ -89,7 +95,10 @@ std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 TreeNode* reverseOddLevelsBFS(TreeNode* root) {
-  std::queue<TreeNode*> q;
+  if (!root)
+    return root;
+
+  std::queue<TreeNode *> q;
   q.push(root);
 
   int is_odd_level = 0;
@@ -97,18 +106,18 @@ TreeNode* reverseOddLevelsBFS(TreeNode* root) {
     int n = q.size();
 
     // * Nodes of current level
-    std::vector<TreeNode*> level;
+    std::vector<TreeNode *> level;
 
     while (n--) {
-      TreeNode* front = q.front();
+      TreeNode* node = q.front();
       q.pop();
 
-      level.push_back(front);
+      level.push_back(node);
 
-      if (front->left)
-        q.push(front->left);
-      if (front->right)
-        q.push(front->right);
+      if (node->left)
+        q.push(node->left);
+      if (node->right)
+        q.push(node->right);
     }
 
     // * Reverse the odd level

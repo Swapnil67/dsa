@@ -119,27 +119,27 @@ std::vector<int> boundaryTraversal(TreeNode *root) {
 
 int main() {
   // * testcase 1
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(3);
+  TreeNode *root = new TreeNode(1);
+  root->left = new TreeNode(2);
+  root->right = new TreeNode(3);
 
-  // root->left->left = new TreeNode(4);
-  // root->left->right = new TreeNode(5);
+  root->left->left = new TreeNode(4);
+  root->left->right = new TreeNode(5);
 
-  // root->right->left = new TreeNode(6);
-  // root->right->right = new TreeNode(7);
+  root->right->left = new TreeNode(6);
+  root->right->right = new TreeNode(7);
 
   // * testcase 2
-  TreeNode *root = new TreeNode(10);
-  root->left = new TreeNode(5);
-  root->right = new TreeNode(20);
+  // TreeNode *root = new TreeNode(10);
+  // root->left = new TreeNode(5);
+  // root->right = new TreeNode(20);
 
-  root->left->left = new TreeNode(3);
-  root->left->right = new TreeNode(8);
-  root->left->right->left = new TreeNode(7);
+  // root->left->left = new TreeNode(3);
+  // root->left->right = new TreeNode(8);
+  // root->left->right->left = new TreeNode(7);
 
-  root->right->left = new TreeNode(18);
-  root->right->right = new TreeNode(25);
+  // root->right->left = new TreeNode(18);
+  // root->right->right = new TreeNode(25);
 
   std::vector<int> ans = boundaryTraversal(root);
   printArr(ans);

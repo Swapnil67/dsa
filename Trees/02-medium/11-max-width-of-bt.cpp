@@ -12,10 +12,6 @@
 *           /  \         \  
 *          5    3         9
 
-{1, 0}
-{3, 1}, {2, 2}
-{5, 3}, {3, }
-
 * Input: root = [1,3,2,5,3,null,9]
 * Output: 4
 
@@ -33,6 +29,8 @@
 * Output: 8
 
 * https://leetcode.com/problems/maximum-width-of-binary-tree/description/
+* https://www.naukri.com/code360/problems/maximum-width-of-a-binary-tree_981173
+* https://www.geeksforgeeks.org/problems/maximum-width-of-tree/1
 */
 
 #include <queue>
@@ -66,22 +64,24 @@ void printArr(std::vector<T> arr) {
 
 // * BFS
 int widthOfBinaryTree(TreeNode *root) {
+  int max_width = 0;
+  if (!root)
+    return max_width;
+
   std::queue<std::pair<TreeNode *, long long>> q;
   q.push({root, 0});
 
-  int max_width = 0;
   while (!q.empty()) {
     
     // * find the max_width in cur_level
     int L = (int)q.front().second, R = (int)q.back().second;
-    long long level_min = q.front().second; // * base value
     max_width = std::max(max_width, R - L + 1);
 
     long long level_min = q.front().second; // * base value
     
     // * Loop over the cur level
     size_t n = q.size();  
-    for (int i = 0; i < n; ++i) {
+    while (n--) {
       TreeNode* node = q.front().first;
       long long cur_id = q.front().second - level_min;
       q.pop();

@@ -92,12 +92,11 @@ int bruteForce(TreeNode *root, int k) {
 // * BFS + Min Heap
 // * TIME COMPLEXITY O(n + hlogk) ('h' height of tree & 'k' is no. of nodes in min_heap)
 // * SPACE COMPLEXITY O(k)
-int kthLargestLevelSum(TreeNode *root, int k) {
+long long kthLargestLevelSum(TreeNode *root, int k) {
   std::queue<TreeNode *> q;
   q.push(root);
 
-  std::priority_queue<int> min_heap;
-  std::vector<int> level_sum_arr;
+  std::priority_queue<long long, std::vector<long long>, std::greater<>> min_heap;
   while (!q.empty()) { // * O(n)
     int n = q.size();
     int level_sum = 0;
@@ -106,7 +105,7 @@ int kthLargestLevelSum(TreeNode *root, int k) {
       TreeNode* node = q.front();
       q.pop();
 
-      level_sum += node->data;
+      level_sum += (long long)node->data;
 
       if (node->left)
         q.push(node->left);
@@ -114,7 +113,7 @@ int kthLargestLevelSum(TreeNode *root, int k) {
       if (node->right)
         q.push(node->right);
     }
-
+    // std::cout << level_sum << std::endl;
     min_heap.push(level_sum);  // * O(h * logk)
     if (min_heap.size() > k)
       min_heap.pop();

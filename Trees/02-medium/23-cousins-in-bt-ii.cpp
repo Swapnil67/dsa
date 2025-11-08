@@ -103,7 +103,7 @@ TreeNode *bruteForce(TreeNode *root) {
 
   // * 1. Find the sum of each level
   std::vector<int> level_sum_arr = getTreeLevelSum(root);
-  printArr(level_sum_arr);
+  // printArr(level_sum_arr);
 
   // * 2. Level order traversal
   std::queue<TreeNode *> q;

@@ -6,7 +6,11 @@
  * * Output: [1,null,2,null,3,null,4,null,5,null,6]
  * 
  * * https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
+ * * https://www.naukri.com/code360/problems/flatten-binary-tree-to-linked-list_1112615
+ * * https://www.geeksforgeeks.org/problems/flatten-binary-tree-to-linked-list/1
 */
+
+// ! Meta, Apple
 
 #include <stack>
 #include <iostream>
@@ -35,10 +39,10 @@ void inOrderTraversal(TreeNode *root) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * TIME COMPLEXITY O(n)
-// * SPACE COMPLEXITY O(n)
 // * DFS Approach
 // * Traverse => Right -> Left -> Root
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 TreeNode* prev = nullptr;
 void flatten(TreeNode* root) {
   if (!root) // * Recursion Exit Condition
@@ -55,9 +59,9 @@ void flatten(TreeNode* root) {
 
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Stack Approach
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-// * Stack Approach
 void flatten2(TreeNode* root) {
   if (!root)
     return;

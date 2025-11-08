@@ -1,4 +1,3 @@
-
 #include <map>
 #include <set>
 #include <queue>
@@ -43,7 +42,6 @@ void inOrderTraversal(TreeNode* root) {
   inOrderTraversal(root->right);
 }
 
-
 void levelOrderTraversal(TreeNode *root) {
   if (!root)
     return;
@@ -69,6 +67,17 @@ void levelOrderTraversal(TreeNode *root) {
     std::cout << std::endl;
   }
 }
+
+
+// * 27 - Populating Next Right Pointers in Each Node I
+// bool isCompleteTreeBFS(TreeNode* root) {
+// TODO (Do this in leetcode)
+// }
+
+// * 28 - Find Duplicate Subtrees
+// std::vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
+// TODO
+// }
 
 // * ------------------------------------------------------------------------
 
@@ -108,12 +117,12 @@ void levelOrderTraversal(TreeNode *root) {
 // }
 
 // * 08 - left View of Binary tree
-// void leftView(TreeNode *root, std::vector<int> &ans, int level) {
+// std::vector<int> leftView(TreeNode *root) {
 // TODO
 // }
 
 // * 09 - Root to Node
-// bool rootToNode(TreeNode *root, int x, std::vector<int> &ans) {
+// std::vector<int> rootToNode(TreeNode *root, int x) {
 // TODO
 // }
 
@@ -202,57 +211,7 @@ void levelOrderTraversal(TreeNode *root) {
 // TODO
 // }
 
-// * 27 - Populating Next Right Pointers in Each Node
-// bool isCompleteTreeBFS(TreeNode* root) {
-// TODO (Do this in leetcode)
-// }
-
-// * 28 - Find Duplicate Subtrees
-std::string dfs(TreeNode *root, std::vector<TreeNode *> &ans, std::unordered_map<std::string, int> &mp) {
-  if (!root)
-    return "N";
-
-  std::string s = std::to_string(root->data) + "," +
-                  dfs(root->left, ans, mp) + "," +
-                  dfs(root->right, ans, mp);
-
-  if (mp[s] == 1)
-    ans.push_back(root);
-
-  mp[s]++;
-  
-  return s;
-}
-
-std::vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
-  std::vector<TreeNode *> ans;
-  std::unordered_map<std::string, int> mp;
-
-  dfs(root, ans, mp);
-
-  return ans;
-}
-
 int main(void) {
-  // * testcase 2
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
-  root->left->left = new TreeNode(4);
-  root->right->left = new TreeNode(2);
-  root->right->left->left = new TreeNode(4);
-  root->right->right = new TreeNode(4);
-
-  std::cout << "Input Binary Tree:" << std::endl;
-  levelOrderTraversal(root);
-
-  std::vector<TreeNode *> ans = findDuplicateSubtrees(root);
-  std::cout << "Duplicate Subtrees: " << std::endl;
-  for (auto &tree : ans) {
-    std::cout << "subtree: " << std::endl;
-    levelOrderTraversal(tree);
-  }
-
   return 0;
 }
 

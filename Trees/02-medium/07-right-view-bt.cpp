@@ -19,8 +19,10 @@
 
 * https://leetcode.com/problems/binary-tree-right-side-view/
 * https://www.naukri.com/code360/problems/right-view_764605
+* https://www.geeksforgeeks.org/problems/right-view-of-binary-tree/1
 */
 
+#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -50,7 +52,7 @@ void printArr(vector<int> arr) {
 }
 
 // * Recursive Pre Order Traversal (Root -> Right -> Left)
-void solve(TreeNode *root, std::vector<int> &ans, int level) {
+void dfs(TreeNode *root, std::vector<int> &ans, int level) {
   if (!root)
     return;
 
@@ -58,13 +60,44 @@ void solve(TreeNode *root, std::vector<int> &ans, int level) {
   if (level == ans.size())
     ans.push_back(root->data);
 
-  solve(root->right, ans, level + 1); // * First go to right
-  solve(root->left, ans, level + 1); // * Then check on left
+  dfs(root->right, ans, level + 1); // * First go to right
+  dfs(root->left, ans, level + 1); // * Then check on left
 }
 
-std::vector<int> rightView(TreeNode *root) {
+// * DFS
+std::vector<int> rightViewDFS(TreeNode *root) {
   std::vector<int> ans;
-  solve(root, ans, 0);
+  dfs(root, ans, 0);
+  return ans;
+}
+
+// * BFS
+std::vector<int> rightViewBFS(TreeNode *root) {
+  std::vector<int> ans;
+  if (!root)
+    return ans;
+
+  std::queue<TreeNode*> q;
+  q.push(root);
+
+  while (!q.empty()) {
+    int n = q.size();
+    std::vector<int> level;
+    while (n--) {
+      TreeNode *node = q.front();
+      q.pop();
+
+      level.push_back(node->data);
+
+      if (node->left)
+        q.push(node->left);
+
+      if (node->right)
+        q.push(node->right);
+    }
+    ans.push_back(level[level.size() - 1]);
+  }
+
   return ans;
 }
 
@@ -80,7 +113,8 @@ int main() {
 
   root->right->right = new TreeNode(7);
 
-  std::vector<int> ans = rightView(root);
+  std::vector<int> ans = rightViewDFS(root);
+  // std::vector<int> ans = rightViewBFS(root);
   printArr(ans);
 
   return 0;
@@ -89,3 +123,4 @@ int main() {
 
 // * run the code
 // * g++ --std=c++20 07-right-view-bt.cpp -o output && ./output
+

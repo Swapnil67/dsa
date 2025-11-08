@@ -58,29 +58,29 @@ vector<vector<int>> verticalOrderTraversal(TreeNode *root) {
   // * vertical | level | { nodes }
   map<int, map<int, multiset<int>>> nodes;
   // * node | { vertical, level }
-  queue<pair<TreeNode *, pair<int, int>>> todo;
-  todo.push({root, {0, 0}});
+  queue<pair<TreeNode *, pair<int, int>>> q;
+  q.push({root, {0, 0}});
 
-  while (!todo.empty()) {
-    pair<TreeNode *, pair<int, int>> el = todo.front();
-    todo.pop();
+  while (!q.empty()) {
+    pair<TreeNode *, pair<int, int>> el = q.front();
+    q.pop();
 
-    TreeNode* cur_node = el.first;
+    TreeNode* node = el.first;
     int cur_ver = el.second.first;      // * current vertical
     int cur_level = el.second.second;   // * current level
     
-    nodes[cur_ver][cur_level].insert(el.first->data);
+    nodes[cur_ver][cur_level].insert(node->data);
 
     int new_level = cur_level + 1; // * new level
 
     // * push left node if exists
-    if (cur_node->left) {
-      todo.push({el.first->left, {cur_ver - 1, new_level}});
+    if (node->left) {
+      q.push({node->left, {cur_ver - 1, new_level}});
     }
 
     // * push right node if exists
-    if (cur_node->right) {
-      todo.push({el.first->right, {cur_ver + 1, new_level}});
+    if (node->right) {
+      q.push({node->right, {cur_ver + 1, new_level}});
     }
   }
 

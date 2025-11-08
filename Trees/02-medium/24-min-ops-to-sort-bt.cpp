@@ -90,7 +90,7 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
-int findOps(std::vector<int> &arr, std::unordered_map<int, int> &idxMap) {
+int findOps(std::vector<int> &arr, std::unordered_map<int, int> &level_idx_mp) {
   // * create an actual sorted array
   std::vector<int> sorted_vec(arr.begin(), arr.end());
   std::sort(sorted_vec.begin(), sorted_vec.end());
@@ -103,14 +103,13 @@ int findOps(std::vector<int> &arr, std::unordered_map<int, int> &idxMap) {
       continue;  // * no swap required
 
     // * swap the indexes
-    int cur_idx = idxMap[sorted_vec[i]];  // * actual sorted index
-    idxMap[arr[i]] = cur_idx;
-    swap(arr[cur_idx], arr[i]);
+    int cur_idx = level_idx_mp[sorted_vec[i]];  // * actual sorted index
+    level_idx_mp[arr[i]] = cur_idx; // * this should be done first
+    swap(arr[cur_idx], arr[i]); // * then swap numbers
 
     swaps++;
   }
 
-  // std::cout << "cur ops: " << swaps << std::endl;
   return swaps;
 }
 
@@ -158,32 +157,32 @@ int minimumOperations(TreeNode *root) {
 
 int main(void) {
   // * testcase 1
-  // TreeNode* root = new TreeNode(1);
-  // root->left = new TreeNode(4);
-  // root->right = new TreeNode(3);
+  TreeNode* root = new TreeNode(1);
+  root->left = new TreeNode(4);
+  root->right = new TreeNode(3);
   
-  // root->left->left = new TreeNode(7);
-  // root->left->right = new TreeNode(6);
+  root->left->left = new TreeNode(7);
+  root->left->right = new TreeNode(6);
   
-  // root->right->left = new TreeNode(8);
-  // root->right->right = new TreeNode(5);
+  root->right->left = new TreeNode(8);
+  root->right->right = new TreeNode(5);
   
-  // root->right->left->left = new TreeNode(9);
-  // root->right->right->left = new TreeNode(10);
+  root->right->left->left = new TreeNode(9);
+  root->right->right->left = new TreeNode(10);
 
   // * testcase 2
-  TreeNode* root = new TreeNode(49);
-  root->left = new TreeNode(45);
-  root->right = new TreeNode(1);
+  // TreeNode* root = new TreeNode(49);
+  // root->left = new TreeNode(45);
+  // root->right = new TreeNode(1);
   
-  root->left->left = new TreeNode(20);
-  root->left->right = new TreeNode(46);
+  // root->left->left = new TreeNode(20);
+  // root->left->right = new TreeNode(46);
   
-  root->right->left = new TreeNode(15);
-  root->right->right = new TreeNode(39);
+  // root->right->left = new TreeNode(15);
+  // root->right->right = new TreeNode(39);
   
-  root->left->left->left = new TreeNode(27);
-  root->right->left->left = new TreeNode(25);
+  // root->left->left->left = new TreeNode(27);
+  // root->right->left->left = new TreeNode(25);
 
   std::cout << "Input Tree" << std::endl;
   levelOrderTraversal(root);

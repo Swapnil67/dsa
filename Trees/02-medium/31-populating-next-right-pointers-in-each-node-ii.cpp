@@ -109,5 +109,5 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 31-populating-next-right-pointers-in-each-node.cpp -o output && ./output
+// * g++ --std=c++20 31-populating-next-right-pointers-in-each-node-ii.cpp -o output && ./output
 

@@ -89,29 +89,31 @@ void markParents(TreeNode *root,
 }
 
 int amountOfTime(TreeNode* root, int start) {
-  
+  // * For counting burned time
+  int time = 0;
+
+  if (!root)
+    return time;
+
   // * 1. Map the parent node of each node in hashmap
-  TreeNode* startNode = nullptr;
+  TreeNode *startNode = nullptr;
   std::unordered_map<TreeNode *, TreeNode *> parent_map;
   markParents(root, parent_map, startNode, start);
   if (!startNode)
-    return 0;
+    return time;
 
   // * For debugging
   // for(auto &it: parent_map) {
   //   std::cout << it.first->data << " -> " << it.second->data << std::endl;
   // }
-  
-  
+
   // * Queue for BFS
   std::queue<TreeNode *> q;
   q.push(startNode); // * Push the initial starting node to queue
-  
+
   std::unordered_map<TreeNode *, bool> visited_map;
   visited_map[startNode] = true; // * Put the starting node in visited_map
 
-  // * For counting burned time
-  int time = 0;
 
   while (!q.empty()) {
     int n = q.size();
@@ -149,6 +151,7 @@ int amountOfTime(TreeNode* root, int start) {
 }
 
 int main(void) {
+  // * testcase 1
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(5);
   root->right = new TreeNode(3);

@@ -20,6 +20,7 @@
 * https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 */
 
+#include <queue>
 #include <vector>
 #include <iostream>
 
@@ -49,7 +50,7 @@ void printArr(vector<int> arr) {
 }
 
 // * Recursive Pre Order Traversal (Root -> Left -> Right)
-void solve(TreeNode *root, std::vector<int> &ans, int level) {
+void dfs(TreeNode *root, std::vector<int> &ans, int level) {
   if (!root)
     return;
 
@@ -57,13 +58,44 @@ void solve(TreeNode *root, std::vector<int> &ans, int level) {
   if (level == ans.size())
     ans.push_back(root->data);
 
-  solve(root->left, ans, level + 1);
-  solve(root->right, ans, level + 1);
+  dfs(root->left, ans, level + 1);
+  dfs(root->right, ans, level + 1);
 }
 
-std::vector<int> leftView(TreeNode *root) {
+// * DFS
+std::vector<int> leftViewDFS(TreeNode *root) {
   std::vector<int> ans;
-  solve(root,ans,0);
+  dfs(root,ans,0);
+  return ans;
+}
+
+// * BFS
+std::vector<int> leftViewBFS(TreeNode *root) {
+  std::vector<int> ans;
+  if (!root)
+    return ans;
+
+  std::queue<TreeNode*> q;
+  q.push(root);
+
+  while (!q.empty()) {
+    int n = q.size();
+    std::vector<int> level;
+    while (n--) {
+      TreeNode *node = q.front();
+      q.pop();
+
+      level.push_back(node->data);
+
+      if (node->left)
+        q.push(node->left);
+
+      if (node->right)
+        q.push(node->right);
+    }
+    ans.push_back(level[0]);
+  }
+
   return ans;
 }
 
@@ -79,7 +111,8 @@ int main() {
 
   root->right->right = new TreeNode(7);
   
-  std::vector<int> ans = leftView(root);
+  std::vector<int> ans = leftViewDFS(root);
+  // std::vector<int> ans = leftViewBFS(root);
   printArr(ans);
 
   return 0;

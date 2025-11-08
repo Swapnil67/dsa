@@ -103,9 +103,9 @@ bool check(ListNode* head, TreeNode* root) {
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------`
 // * Recursion Leap of faith
-// * 'n' = bt nodes & 'm' = ll nodes
-// * TIME COMPLEXITY O(n * m)
-// * SPACE COMPLEXITY O(n + m)
+// * 'n' = bt nodes & 'L' = ll nodes & 'H' = Height of tree
+// * TIME COMPLEXITY O(n * Min(L,H))
+// * SPACE COMPLEXITY O(n + Min(L,H))
 bool isSubPath(ListNode* head, TreeNode* root) {
   if (!root)
     return false;
@@ -143,4 +143,3 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 25-ll-in-bt.cpp -o output && ./output
-

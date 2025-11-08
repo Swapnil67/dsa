@@ -108,6 +108,5 @@ int main() {
   return 0;
 }
 
-
 // * run the code
 // * g++ --std=c++20 06-bottom-view-bt.cpp -o output && ./output

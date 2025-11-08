@@ -53,34 +53,30 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
-std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
-  std::vector<std::vector<int>> ans;
+void levelOrderTraversal(TreeNode *root) {
   if (!root)
-    return ans;
+    return;
 
-  std::queue<TreeNode*> q;
+  std::queue<TreeNode *> q;
   q.push(root);
 
   while(!q.empty()) {
     int n = q.size();
-
-    int is_odd_level = 0;
-    std::vector<int> temp;
-    while(n--) {
-      TreeNode* front = q.front();
+    // * traverse the whole level
+    while (n--) {
+      TreeNode *node = q.front();
       q.pop();
 
-      temp.push_back(front->data);
-      if (front->left)
-        q.push(front->left);
-      if (front->right)
-        q.push(front->right);
+      std::cout << node->data << " ";
+
+      if (node->left)
+        q.push(node->left);
+
+      if (node->right)
+        q.push(node->right);
     }
-
-    ans.push_back(temp);
+    std::cout << std::endl;
   }
-
-  return ans;
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
@@ -127,10 +123,10 @@ TreeNode *createBinaryTree(std::vector<std::vector<int>> &descriptions) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> descriptions = {{20, 15, 1}, {20, 17, 0}, {50, 20, 1}, {50, 80, 0}, {80, 19, 1}};
+  std::vector<std::vector<int>> descriptions = {{20, 15, 1}, {20, 17, 0}, {50, 20, 1}, {50, 80, 0}, {80, 19, 1}};
 
   // * testcase 2
-  std::vector<std::vector<int>> descriptions = {{85, 82, 1}, {74, 85, 1}, {39, 70, 0}, {82, 38, 1}, {74, 39, 0}, {39, 13, 1}};
+  // std::vector<std::vector<int>> descriptions = {{85, 82, 1}, {74, 85, 1}, {39, 70, 0}, {82, 38, 1}, {74, 39, 0}, {39, 13, 1}};
 
   std::cout << "----- Tree Description ------" << std::endl;
   for (auto &arr : descriptions)
@@ -138,9 +134,7 @@ int main(void) {
 
   std::cout << "\n----- Binary Tree ------" << std::endl;
   TreeNode* root = createBinaryTree(descriptions);
-  std::vector<std::vector<int>> ans = bfsTraversal(root);
-  for (auto &vec : ans)
-    printArr(vec);
+  levelOrderTraversal(root);
 
   return 0;
 }

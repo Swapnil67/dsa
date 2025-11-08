@@ -37,7 +37,7 @@ public:
   }
 };
 
-void goodNodesHelper(TreeNode* root, int &ans, int curMaxVal) {
+void dfs(TreeNode* root, int &ans, int curMaxVal) {
   if (!root)
     return;
 
@@ -45,13 +45,18 @@ void goodNodesHelper(TreeNode* root, int &ans, int curMaxVal) {
     ans++;
 
   curMaxVal = std::max(curMaxVal, root->data);
-  goodNodesHelper(root->left, ans, curMaxVal);
-  goodNodesHelper(root->right, ans, curMaxVal);
+  dfs(root->left, ans, curMaxVal);
+  dfs(root->right, ans, curMaxVal);
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * DFS Approach
+// * Pre order traversal
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n) [recursion stack space]
 int goodNodes(TreeNode* root) {
   int ans = 0;
-  goodNodesHelper(root, ans, root->data);
+  dfs(root, ans, root->data);
   return ans;
 }
 

@@ -19,6 +19,7 @@
 
 * https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
 * https://www.naukri.com/code360/problems/print-nodes-at-distance-k-from-a-given-node_842560
+* https://www.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1
 */
 
 #include <queue>
@@ -80,6 +81,7 @@ void markParents(TreeNode *root,
   }
 }
 
+// * BFS
 std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   // * 1. Map the parent node of each node in hashmap
   std::unordered_map<TreeNode *, TreeNode *> parent_map;
@@ -93,19 +95,18 @@ std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   // * 2. Do any type of traversal on tree 
   // * Visited Map for keeping track of which is we already visited during traversal
   std::unordered_map<TreeNode*, bool> visitedMap;
-  int distance = 0;
+  visitedMap[target] = true;
   
   std::queue<TreeNode *> q;
   q.push(target);
-  visitedMap[target] = true;
-
+  
+  int distance = 0;
   while (!q.empty()) {
-    int n = q.size();
-    // std::cout << n << std::endl;
     if (distance++ == k)
       break;
 
     // * Loop over the current level
+    int n = q.size();
     while (n--) {
       TreeNode* current = q.front();
       q.pop();
@@ -155,6 +156,7 @@ int main(void) {
   root->left->right->right = new TreeNode(4);
 
   int k = 2;
+  std::cout << "All nodes at distance " << k << ": ";
   std::vector<int> ans = distanceK(root, root->left, k);
   printArr(ans);
 

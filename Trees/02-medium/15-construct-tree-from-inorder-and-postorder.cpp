@@ -6,6 +6,8 @@
  * * Output: [3,9,20,null,null,15,7]
  * 
  * * https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
+ * * https://www.naukri.com/code360/problems/construct-binary-tree-from-inorder-and-postorder-traversal_1266106
+ * * https://www.geeksforgeeks.org/problems/tree-from-postorder-and-inorder/1
 */
 
 #include <vector>
@@ -52,6 +54,8 @@ TreeNode *buildTreeHelper(std::vector<int> postorder, int post_start, int post_e
   if (post_start > post_end || in_start > in_end)
     return nullptr;
 
+  std::cout << post_start << " " << post_end << " | " << in_start << " " << in_end << std::endl;
+
   TreeNode *root = new TreeNode(postorder[post_end]);
 
   // * Find the position of this root in 'inorder' using 'inMap'
@@ -85,6 +89,12 @@ TreeNode *buildTree(std::vector<int> &postorder, std::vector<int> &inorder) {
 int main(void) {
   std::vector<int> postorder = {9, 15, 7, 20, 3},
                    inorder = {9, 3, 15, 20, 7};
+
+  std::cout << "Postorder: ";
+  printArr(postorder);
+  
+  std::cout << "Inorder: ";
+  printArr(inorder);
 
   TreeNode *root = buildTree(postorder, inorder);
   inOrderTraversal(root);

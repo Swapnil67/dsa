@@ -43,10 +43,7 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 }
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-bool rootToNode(TreeNode *root, int x, std::vector<int> &ans) {
+bool dfs(TreeNode *root, int x, std::vector<int> &ans) {
   if (!root)
     return false;
 
@@ -58,27 +55,37 @@ bool rootToNode(TreeNode *root, int x, std::vector<int> &ans) {
     return true;
 
   // * If we found node in 'left' or 'right' return
-  if (rootToNode(root->left, x, ans) ||
-      rootToNode(root->right, x, ans))
+  if (dfs(root->left, x, ans) ||
+      dfs(root->right, x, ans))
     return true;
-  
+
   // * Remove the node from path vector
   ans.pop_back();
 
   return false;
 }
 
+// * ------------------------- APPROACH: Optimal APPROACH -------------------------`
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+std::vector<int> rootToNode(TreeNode *root, int x) {
+  std::vector<int> ans;
+  bool res = dfs(root, x, ans);
+  // std::cout << res << std::endl;
+  return ans;  
+}
+
 int main(void) {
+  // * testcase 1
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);
-
   root->left->right = new TreeNode(5);
 
   int node = 5;
 
-  std::vector<int> ans;
-  rootToNode(root, node, ans);
+  std::vector<int> ans = rootToNode(root, node);
+  std::cout << "Root To Node: ";
   printArr(ans);
 
   return 0;

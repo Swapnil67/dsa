@@ -1,11 +1,19 @@
-/**
- * * Leetcode - 105
- * * Construct Binary Tree from Preorder and Inorder Traversal
+/*
+ * Leetcode - 105
+ * Construct Binary Tree from Preorder and Inorder Traversal
  * 
+ * * Input: 
+ *                   3
+ *                 /   \  
+ *               9     20
+ *                    /  \  
+ *                  15    7
  * * Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
  * * Output: [3,9,20,null,null,15,7]
  * 
  * * https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
+ * * https://www.naukri.com/code360/problems/construct-a-binary-tree-from-preorder-and-inorder-traversal_920539
+ * * https://www.geeksforgeeks.org/problems/construct-tree-1/1
 */
 
 #include <vector>
@@ -51,6 +59,7 @@ TreeNode *helper(std::vector<int> preorder, int pre_start, int pre_end,
 {
   if (pre_start > pre_end || in_start > in_end)
     return nullptr;
+  // std::cout << pre_start << " " << pre_end << " | " << in_start << " " << in_end << std::endl;
 
   TreeNode *root = new TreeNode(preorder[pre_start]);
 
@@ -88,6 +97,12 @@ int main(void) {
   // * testcase 1
   std::vector<int> preorder = {3, 9, 20, 15, 7},
                    inorder = {9, 3, 15, 20, 7};
+
+  std::cout << "Preorder: ";
+  printArr(preorder);
+  
+  std::cout << "Inorder: ";
+  printArr(inorder);
 
   TreeNode *root = buildTree(preorder, inorder);
   inOrderTraversal(root);

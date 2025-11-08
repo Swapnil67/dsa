@@ -116,12 +116,12 @@ int main(void) {
   // root->right->right = new TreeNode(7);
   
   // * testcase 2
-  // TreeNode* root = new TreeNode(1);
-  // root->left = new TreeNode(2);
+  TreeNode* root = new TreeNode(1);
+  root->left = new TreeNode(2);
   
   // * testcase 3
-  TreeNode* root = new TreeNode(1);
-  root->right = new TreeNode(2);
+  // TreeNode* root = new TreeNode(1);
+  // root->right = new TreeNode(2);
 
   std::string ans = tree2str(root);
   std::cout << ans << std::endl;

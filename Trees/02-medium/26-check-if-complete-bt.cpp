@@ -30,12 +30,13 @@
 * Output: false
 
 * https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/
+* https://www.naukri.com/code360/problems/check-whether-binary-tree-is-complete_1280147
+* https://www.geeksforgeeks.org/problems/complete-binary-tree/1
 */
 
 #include <queue>
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 
 typedef struct TreeNode TreeNode;
 
@@ -129,10 +130,10 @@ bool dfs(TreeNode* root, int i, int total_nodes) {
 
 bool isCompleteTreeDFS(TreeNode* root) {
   int total_nodes = countNodes(root);
-  // std::cout << "Total Nodes " << total_nodes << std::endl;
+  std::cout << "Total Nodes " << total_nodes << std::endl;
 
   int i = 1;
-  return dfs(root, i , total_nodes);
+  return dfs(root, i, total_nodes);
 }
 
 int main(void) {

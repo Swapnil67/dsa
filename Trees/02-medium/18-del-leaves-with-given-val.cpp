@@ -13,6 +13,7 @@
 *              After removing, new nodes become leaf nodes with value (target = 2) (Picture in center).
 * 
 * https://leetcode.com/problems/delete-leaves-with-a-given-value/description/
+* https://www.naukri.com/code360/problems/delete-leaf-nodes-with-value-x_630465
 */
 
 #include <iostream>
