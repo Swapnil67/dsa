@@ -131,6 +131,7 @@ int main(void) {
   root->right->left->right->left = new TreeNode(1);
   root->right->left->right->right = new TreeNode(3);
 
+  std::cout << "Input Linked List" << std::endl;
   std::vector<int> arr = {4, 2, 8};
   ListNode *head = arrayToLL(arr);
   printLL(head);
