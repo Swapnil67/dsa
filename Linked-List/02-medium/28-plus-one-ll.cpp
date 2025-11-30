@@ -64,19 +64,62 @@ void printLL(ListNode* head) {
   std::cout << "NULL" << std::endl;
 }
 
+ListNode *reverse_ll(ListNode *head) {
+  ListNode *tail = nullptr;
+  ListNode *temp = head;
+
+  while (temp) {
+    ListNode *front = temp->next;
+    temp->next = tail;
+    tail = temp;
+    temp = front;
+  }
+
+  return tail;
+}
+
 // * ------------------ Optimal ---------------------
 
 // * TIME COMPLEXITY O(max(h1, h1))
 // * SPACE COMPLEXITY O(max(h1, h1))
-ListNode* addOne(ListNode* h1) {
+ListNode* addOne(ListNode* head) {
+  if (!head)
+    return head;
+
+  ListNode* rev = reverse_ll(head);
+  ListNode* temp = rev;
+  ListNode* prev = temp;
+
+  int val = temp->data;
+  
+  temp->data = (val + 1) % 10;
+  int carry = (val + 1) / 10;
+  temp = temp->next; // * go to next node
+
+  while (carry && temp) { // * if carry 
+    int val = temp->data;
+    // std::cout << val << std::endl;
+    temp->data = (val + 1) % 10;
+    carry = (val + 1) / 10;
+    prev = temp;
+    temp = temp->next;
+  }
+
+  // * Append the carry to ll
+  if (carry > 0) {
+    prev->next = new ListNode(carry);
+  }
+
+  // * Reverse and return the answer
+  return reverse_ll(rev);
 }
 
 int main() {
   // * testcase 1
-  // std::vector<int> nums1 = { 1, 2, 3 };
+  // std::vector<int> nums1 = {1, 2, 3};
 
   // * testcase 2
-  // std::vector<int> nums1 = { 0, 1 };
+  // std::vector<int> nums1 = {9, 9};
 
   // * testcase 2
   std::vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
@@ -96,5 +139,5 @@ int main() {
 // * Note whenever there is a need for new LL, always create a dummyNode node and return dummyNode->next
 
 // * Run the code
-// * g++ --std=c++20 01-add-two-ll.cpp -o output && ./output
+// * g++ --std=c++20 28-plus-one-ll.cpp -o output && ./output
 
