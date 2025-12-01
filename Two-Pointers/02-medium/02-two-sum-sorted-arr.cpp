@@ -20,6 +20,8 @@
  * Output : [1, 2]
  * 
  * https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
+ * https://www.naukri.com/code360/problems/two-sum_4244495
+ * https://www.geeksforgeeks.org/problems/two-sum-in-sorted-array/1
 */
 
 #include <iostream>

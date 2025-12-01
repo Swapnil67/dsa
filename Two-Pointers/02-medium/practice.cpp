@@ -70,30 +70,6 @@ void printVectorString(std::vector<std::string> strs) {
   std::cout << "]" << std::endl;
 }
 
-// * 01 - Remove Duplicates from Sorted Array II
-// int removeDuplicates(std::vector<int> &arr) {
-// TODO
-// }
-
-// * 02 - Two Sum II - Input Array Is Sorted
-// std::vector<int> findTwoSumSorted(std::vector<int> &arr, int target) {    
-// TODO
-// }
-
-// * 03 - Three Sum
-// std::vector<std::vector<int>> threeSum(std::vector<int> &arr) {
-// TODO
-// }
-
-// * 04 - Four Sum
-// std::vector<std::vector<int>> fourSum(std::vector<int> &arr, int target) {
-// TODO
-// }
-
-// * 05 - Container With Most Water
-// int maxArea(std::vector<int> &height) {
-// TODO
-// }
 
 // * 06 - Number of Subsequences That Satisfy the Given Sum Condition
 // int numSubseq(std::vector<int> arr, int target) {
@@ -181,6 +157,31 @@ void printVectorString(std::vector<std::string> strs) {
 // }
 
 // * ----------------------------------------------------------------
+
+// * 01 - Remove Duplicates from Sorted Array II
+// int removeDuplicates(std::vector<int> &nums) {
+// TODO
+// }
+
+// * 02 - Two Sum II - Input Array Is Sorted
+// std::vector<int> findTwoSumSorted(std::vector<int> &arr, int target) {    
+// TODO
+// }
+
+// * 03 - Three Sum
+// std::vector<std::vector<int>> threeSum(std::vector<int> &nums) {
+// TODO
+// }
+
+// * 04 - Four Sum
+// std::vector<std::vector<int>> fourSum(std::vector<int> &arr, int target) {
+// TODO
+// }
+
+// * 05 - Container With Most Water
+// int maxArea(std::vector<int> &height) {
+// TODO
+// }
 
 int main(void) {
   return 0;

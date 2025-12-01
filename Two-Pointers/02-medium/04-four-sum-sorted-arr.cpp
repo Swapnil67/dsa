@@ -13,8 +13,9 @@
  * * Input  : 'nums' = [2,2,2,2,2], target = 8
  * * Output : [[2,2,2,2]]
 
- * * https://www.naukri.com/code360/problems/4sum_5713771
  * * https://leetcode.com/problems/4sum/
+ * * https://www.naukri.com/code360/problems/4sum_5713771
+ * * https://www.geeksforgeeks.org/problems/find-all-four-sum-numbers1732/1
 */
 
 #include <set>
@@ -151,8 +152,7 @@ std::vector<std::vector<int>> fourSum(std::vector<int> arr, int target) {
       while (k < l) {
         long sum = arr[i] + arr[j] + arr[k] + arr[l];
         if (sum == target) {
-          std::vector<int> temp = {arr[i], arr[j], arr[k], arr[l]};
-          ans.push_back(temp);
+          ans.push_back({arr[i], arr[j], arr[k], arr[l]});
           k++, l--;
           while (k < l && arr[k] == arr[k - 1])
             k++;
