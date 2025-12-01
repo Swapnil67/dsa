@@ -74,6 +74,10 @@ ListNode* reverseLL(ListNode* head) {
   return tail;
 }
 
+// * ------------------ APPROACH 1: BRUTE FORCE ---------------------
+// * Reverse both h1 & h2 and then perform addtion operation
+// * TIME COMPLEXITY O(max(h1, h1))
+// * SPACE COMPLEXITY O(max(h1, h1))
 ListNode* bruteForce(ListNode* h1, ListNode* h2) {
   ListNode *rev_h1 = reverseLL(h1);
   ListNode *rev_h2 = reverseLL(h2);
@@ -85,22 +89,20 @@ ListNode* bruteForce(ListNode* h1, ListNode* h2) {
   ListNode *ans = new ListNode(-1);
   ListNode *mover = ans;
   while (rev_h1 || rev_h2) {
-    if (rev_h1)
+    if (rev_h1) {
       carry += rev_h1->data;
+      rev_h1 = rev_h1->next;
+    }
 
-    if (rev_h2)
+    if (rev_h2) {
       carry += rev_h2->data;
+      rev_h2 = rev_h2->next;
+    }
 
     ListNode *new_node = new ListNode(carry % 10);
     mover->next = new_node;
     mover = new_node;
     carry = carry / 10;
-
-    if (rev_h1)
-      rev_h1 = rev_h1->next;
-
-    if (rev_h2)
-      rev_h2 = rev_h2->next;
   }
 
   if (carry) {

@@ -67,7 +67,6 @@ void printLL(ListNode* head) {
 // * Re Arrange Even and Odd Indices
 
 // * ------------------ Brute Force ---------------------
-
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
@@ -75,7 +74,7 @@ ListNode* bruteForce(ListNode* head) {
   ListNode* temp = head;
 
   // * Insert Odd index in arr O(N/2)
-  while(temp) {
+  while (temp) {
     arr.push_back(temp->data);
     if(temp->next == nullptr) {
       break;
@@ -138,13 +137,13 @@ ListNode* betterApproach(ListNode* head) {
 // * ------------------ Optimal Solution ---------------------
 // * TIME COMPLEXITY O(N/2) * 2 = O(N)
 // * SPACE COMPLEXITY O(1)
-ListNode* reArrangeEvenOddOptimal(ListNode* head) {
+ListNode* oddEvenList(ListNode* head) {
   if (!head || !head->next)
     return head;
   
   ListNode* odd = head;
   ListNode* even = head->next;
-  ListNode* evenHead = head->next;
+  ListNode* even_head = head->next;
 
   while(even != NULL && even->next != NULL) {
     odd->next = odd->next->next;
@@ -153,7 +152,7 @@ ListNode* reArrangeEvenOddOptimal(ListNode* head) {
     odd = odd->next;
     even = even->next;
   }  
-  odd->next = evenHead;
+  odd->next = even_head;
   return head;
 }
 
@@ -173,7 +172,7 @@ int main() {
   std::cout<<"------------ After Rearranging Linked List ------------"<<std::endl;
   // head = bruteForce(head);
   // head = betterApproach(head);
-  head = reArrangeEvenOddOptimal(head);
+  head = oddEvenList(head);
   printLL(head);
   return 0;
 }

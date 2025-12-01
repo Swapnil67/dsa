@@ -77,21 +77,17 @@ public:
     if (!cur)
       return page;
 
-    while (cur->prev) {
+    while (steps && cur->prev) {
       cur = cur->prev;
       steps--;
-      if (steps == 0)
-        break;
     }
     return cur->data;
   }
 
   std::string forward(int steps) {
-    while (cur->next) {
+    while (steps && cur->next) {
       cur = cur->next;
       steps--;
-      if (steps == 0)
-        break;
     }
     return cur->data;
   }
@@ -99,8 +95,8 @@ public:
 };
 
 int main(void) {
-  BrowserHistory* browser = new BrowserHistory("google.com");
-  browser->visit("facebook.com");
+  BrowserHistory* browser = new BrowserHistory("xbox.com");
+  browser->visit("test.com");
   browser->visit("tsoding.com");
   std::cout << browser->cur->data << std::endl;
   browser->back(2);

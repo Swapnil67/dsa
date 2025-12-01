@@ -73,19 +73,19 @@ ListNode* bruteForce(ListNode* head) {
     return ans;
 
   ans = new ListNode(head->next->data);
+  ListNode *mover = ans;
+  
   ListNode *temp = head->next->next;
-  ListNode *ansMover = ans;
-
   while (temp) {
     if (temp->data == 0) {
-      if (temp->next) {
+      if (temp->next) { // * To prevent adding the last zero to ans ll
         ListNode *node = new ListNode(0);
-        ansMover->next = node;
-        ansMover = node;
+        mover->next = node;
+        mover = node;
       }
     }
 
-    ansMover->data += temp->data;
+    mover->data += temp->data;
     temp = temp->next;
   }
 
@@ -97,16 +97,14 @@ ListNode* bruteForce(ListNode* head) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 ListNode* mergeNodes(ListNode* head) {
-  ListNode *ans = nullptr;
   if (!head)
-    return ans;
+    return head;
 
   ListNode *temp = head->next;
-  
   while (temp) {
     ListNode *cur = temp;
     while (temp && temp->data != 0) {
-      if (temp != cur) {
+      if (temp != cur) { // * Initially both are pointing at same node
         cur->data += temp->data;
       }
       temp = temp->next;

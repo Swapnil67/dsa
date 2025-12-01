@@ -13,6 +13,8 @@
  * Output : [2,0,1]
 
  * https://leetcode.com/problems/rotate-list/description/
+ * https://www.geeksforgeeks.org/problems/rotate-a-linked-list/1
+ * https://www.naukri.com/code360/problems/rotate-linked-list_920454
 */
 
 #include <vector>
@@ -140,6 +142,7 @@ ListNode* rotateRight(ListNode* head, int k) {
     i++;
     temp = temp->next;
   }
+  std::cout << temp->data << std::endl;
 
   // * 3. Go to the tail of LL
   ListNode *tail = temp;
@@ -152,7 +155,6 @@ ListNode* rotateRight(ListNode* head, int k) {
 
   // * 5. Save the new head
   ListNode *new_head = temp->next;
-
   // * make (n - k)th node point to nullptr
   temp->next = nullptr;
 
@@ -162,12 +164,12 @@ ListNode* rotateRight(ListNode* head, int k) {
 int main(void) {
   // * testcase 1
   // int k = 2;
-  // int k = 3;
-  // std::vector<int> nums = {1, 2, 3, 4, 5};
+  int k = 3;
+  std::vector<int> nums = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  int k = 4;
-  std::vector<int> nums = {0, 1, 2};
+  // int k = 4;
+  // std::vector<int> nums = {0, 1, 2};
 
   ListNode* head = arrayToLL(nums);
   std::cout << "Linked List Before Rotating" << std::endl;

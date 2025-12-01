@@ -161,9 +161,15 @@ int pairSum(ListNode *head) {
 }
 
 int main(void) {
+  // * testcase 1
   // std::vector<int> nums = {5, 4, 2, 1};
+
+  // * testcase 2
   // std::vector<int> nums = {4, 2, 2, 3};
+
+  // * testcase 3
   std::vector<int> nums = {47, 22, 81, 46, 94, 95, 90, 22, 55, 91, 6, 83, 49, 65, 10, 32, 41, 26, 83, 99, 14, 85, 42, 99, 89, 69, 30, 92, 32, 74, 9, 81, 5, 9};
+  
   ListNode* head = arrayToLL(nums);
   printLL(head);
 

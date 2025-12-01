@@ -22,7 +22,7 @@
 
 #include <vector>
 #include <iostream>
-#include <unordered_map>
+#include <unordered_set>
 
 // struct ListNode ListNode;
 
@@ -77,24 +77,23 @@ ListNode* modifiedList(std::vector<int>& nums, ListNode* head) {
     return head;
 
   // * create a map of nums
-  std::unordered_map<int, int> cache;
+  std::unordered_set<int> st;
   for (auto &x : nums)
-    cache[x]++;
+    st.insert(x);
 
-  // * Handle head 
-  while (head && cache[head->data]) {
-    ListNode* temp = head;
+  // * Handle head
+  while (head && st.count(head->data)) {
     head = head->next;
-    delete temp; // * remove hanging pointer
   }
 
   ListNode* cur = head;
-  while(cur && cur->next) {
-    if (cache[cur->next->data]) {
-      ListNode* temp = cur->next;
+  while (cur && cur->next) {
+    if (st.count(cur->next->data)) { // * If next node in st then delete it
+      ListNode *temp = cur->next;
       cur->next = cur->next->next;
       delete temp; // * remove hanging pointer
-    } else {
+    }
+    else { // * Go to next node
       cur = cur->next;
     }
   }
@@ -104,12 +103,15 @@ ListNode* modifiedList(std::vector<int>& nums, ListNode* head) {
 
 
 int main(void) {
-  // std::vector<int> nums = {1, 2, 3};
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // * testcase 1
+  std::vector<int> nums = {1, 2, 3};
+  std::vector<int> arr = {1, 2, 3, 4, 5};
 
-  std::vector<int> nums = {1};
-  std::vector<int> arr = {1, 2, 1, 2, 1, 2};
+  // * testcase 2
+  // std::vector<int> nums = {1};
+  // std::vector<int> arr = {1, 2, 1, 2, 1, 2};
 
+  // * testcase 3
   // std::vector<int> nums = {1, 7, 6, 2, 4};
   // std::vector<int> arr = {3, 7, 1, 8, 1};
 

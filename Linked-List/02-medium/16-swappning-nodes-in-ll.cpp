@@ -77,31 +77,40 @@ int lengthOfLL(ListNode* head) {
   return c;
 }
 
-ListNode* bruteForce(ListNode* head, int k) {
-  ListNode* first = nullptr;
-  int firstVal = -1;
-  ListNode* second = nullptr;
-  int secondVal = -1;
+void swap(int &x, int &y) {
+  int temp = x;
+  x = y;
+  y = temp;
+}
 
+// * ------------------ Optimal Solution ---------------------
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(1)
+ListNode* bruteForce(ListNode* head, int k) {
   // * Get the kth node from begining
   int t = k - 1;
-  std::stack<ListNode*> st;
-  ListNode* temp = head;
+  int first_val = -1;
+  ListNode *first = nullptr;
+  std::stack<ListNode *> st;
+  ListNode *temp = head;
   while (temp) {
     if (t == 0) {
       first = temp;
-      firstVal = first->data;
+      first_val = first->data;
     }
     st.push(temp);
     temp = temp->next;
     t--;
   }
 
+  // * Get the kth node from end
   t = k - 1;
+  int second_val = -1;
+  ListNode *second = nullptr;
   while (!st.empty()) {
     if (t == 0) {
       second = st.top();
-      secondVal = second->data;
+      second_val = second->data;
     }
     t--;
     st.pop();
@@ -110,12 +119,13 @@ ListNode* bruteForce(ListNode* head, int k) {
   // std::cout << "First: " << first->data << std::endl;
   // std::cout << "Second: " << second->data << std::endl;
 
+  // * Loop over the ll and change the values of kth nodes from start & end.
   temp = head;
   while (temp) {
     if (temp == first) {
-      temp->data = secondVal;
+      temp->data = second_val;
     } else if(temp == second) {
-      temp->data = firstVal;
+      temp->data = first_val;
     }
     temp = temp->next;
   }
@@ -123,12 +133,9 @@ ListNode* bruteForce(ListNode* head, int k) {
   return head;
 }
 
-void swap(int &x, int &y) {
-  int temp = x;
-  x = y;
-  y = temp;
-}
-
+// * ------------------ Optimal Solution ---------------------
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(1)
 ListNode* swapNodes(ListNode* head, int k) {
   ListNode *node1 = nullptr;
   ListNode *node2 = nullptr;
@@ -139,19 +146,17 @@ ListNode* swapNodes(ListNode* head, int k) {
     return head;
 
   // * 2. Get the kth node from begining & end
-  int first_idx = k - 1, last_idx = (length - k - 1) + 1;
-  std::stack<ListNode *> st;
+  int i = 0;
   ListNode* temp = head;
   while (temp) {
-    if (first_idx == 0) {
+    if (i == k) {
       node1 = temp;
     } 
-    if (last_idx == 0) {
+    if (i == (length - k + 1)) {
       node2 = temp;
     }
+    i++;
     temp = temp->next;
-    last_idx--;
-    first_idx--;
   }
 
   // * 3. Swap the two numbers
@@ -161,17 +166,20 @@ ListNode* swapNodes(ListNode* head, int k) {
 }
 
 int main(void) {
+  // * testcase 1
   // int k = 2;
   // std::vector<int> nums = {1, 2, 3, 4, 5};
-
+  
+  // * testcase 2
   int k = 5;
   std::vector<int> nums = {7, 9, 6, 6, 7, 8, 3, 0, 9, 5};
+
   ListNode* head = arrayToLL(nums);
   std::cout << "Linked List Before Swap" << std::endl;
   printLL(head);
   
-  // head = bruteForce(head, k);
-  head = swapNodes(head, k);
+  head = bruteForce(head, k);
+  // head = swapNodes(head, k);
   std::cout << "Linked List After Swap" << std::endl;
   printLL(head);
 

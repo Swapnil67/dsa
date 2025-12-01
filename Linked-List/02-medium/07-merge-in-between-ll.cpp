@@ -45,7 +45,7 @@ void printLL(ListNode* head) {
   std::cout << "NULL" << std::endl;
 }
 
-ListNode* arrToLL(std::vector<int> &arr) {
+ListNode* arrayToLL(std::vector<int> &arr) {
   if (!arr.size())
     return nullptr;
 
@@ -99,9 +99,10 @@ int main(void) {
   // std::vector<int> list1 = {0, 1, 2, 3, 4, 5, 6};
   // std::vector<int> list2 = {1000000, 1000001, 1000002, 1000003, 1000004};
 
-  ListNode* head1 = arrToLL(list1);
-  ListNode* head2 = arrToLL(list2);
+  ListNode* head1 = arrayToLL(list1);
+  ListNode* head2 = arrayToLL(list2);
 
+  std::cout << "a: " << a << ", b: " << b << std::endl;
   std::cout << "Linked List 1" << std::endl;
   printLL(head1);
   std::cout << "Linked List 2" << std::endl;

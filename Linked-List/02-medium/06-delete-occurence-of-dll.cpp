@@ -1,5 +1,6 @@
 /**
  * * Delete all occurrences of a given key in a doubly linked list
+ * 
  * * A DLL is a data structure that consists of sequentially linked nodes, and the nodes have reference to both
  * * the previous and the next nodes in the sequence of nodes.
  *
@@ -7,12 +8,12 @@
  * * Input  : 10 <-> 4 <-> 10 <-> 3 <-> 5 <-> 20 <-> 10 -> NULL, k = 10
  * * Output : 4 <-> 3 <-> 5 <-> 20 -> NULL
  
- *
  * * Example 2
  * * Input  : 10 <-> 10 -> NULL, k = 10
  * * Output : NULL
  
  * * https://www.naukri.com/code360/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list_8160461
+ * * https://www.geeksforgeeks.org/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list/1
 */
 
 #include <vector>
@@ -82,23 +83,25 @@ DLListNode* deleteOccurences(DLListNode* head, int k) {
 
   DLListNode* temp = head;
   while (temp) {
-    if (temp->data == k) {
-      // * Delete the node
 
-      DLListNode* delNode = temp;
+    if (temp->data == k) { // * Delete the node
+
+      DLListNode* del_node = temp;
       if (temp == head) {
         // * Check if head
         head = head->next;
       }
+
       DLListNode* front = temp->next;
       DLListNode* back = temp->prev;
 
       if (front)
         front->prev = back;
+
       if (back)
         back->next = front;
 
-      std::free(delNode);
+      std::free(del_node);
       temp = front;
     }
     else
@@ -110,9 +113,15 @@ DLListNode* deleteOccurences(DLListNode* head, int k) {
 }
 
 int main() {
+  // * testcase 1
   // std::vector<int> arr = {2, 1, 2, 3, 2, 4, 5, 2};
-  std::vector<int> arr = {2, 2, 2, 2};
-  // std::vector<int> arr = { 2 };
+
+  // * testcase 2
+  // std::vector<int> arr = {2, 2, 2, 2};
+
+  // * testcase 3
+  std::vector<int> arr = {2};
+
   DLListNode* head = arrayToDLL(arr);
   std::cout << "Before Deleting" << std::endl;
   printDLL(head);

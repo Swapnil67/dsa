@@ -1,171 +1,208 @@
-/*
- * Delete Kth ListNode From End
-
- * You have been given a singly Linked List of 'N' nodes with integer data and an integer 'K'.
- * Your task is to remove the 'K'th node from the end of the given Linked List and return the head of the modified linked list.
-
- * You are given the 'head' of a singly linked list. Your task is to group all the nodes with odd indices
- * together followed by the nodes with even indices, and return the reordered list’s head.
- * The first node is considered odd, and the second node is even, and so on.
-
- * Example 1
- * Input  : 1 -> 2 -> 3 -> 4 -> 'NULL'  and  'K' = 2
- * Output : 1 -> 2 -> 4 -> 'NULL'
+/**
+ * * Leetcode - 19
+ * * Remove Nth Node From End of List
  * 
- 
- * Example 2
- * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 'NULL'  and  'K' = 3
- * Output : 1 -> 2 -> 3 -> 5 -> 6 -> 'NULL'
- * 
- 
- * https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912
+ * * Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+ * * Example 1
+ * * Input  : head = [1,2,3,4,5], n = 2
+ * * Output : [1,2,3,5]
+
+ * * Example 2
+ * * Input  : head = [1], n = 1
+ * * Output : []
+
+ * * Example 3
+ * * Input  : head = [1,2], n = 1
+ * * Output : [1]
+
+ * * https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+ * * https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912
 */
 
+// ! Microsoft, Amazon, Meta, Oracle
+
+#include <stack>
 #include <vector>
 #include <iostream>
 
-class ListNode {
+// struct ListNode ListNode;
+
+struct ListNode {
   public:
     int data;
     ListNode* next;
 
-    ListNode(int d) {
-      this->data = d;
-      this->next = nullptr;
+    ListNode(int val) {
+      data = val;
+      next = nullptr;
     }
-
-    ListNode(int d, ListNode* n) {
-      this->data = d;
-      this->next = n;
-    }
-
 };
 
-// * ------------------- Utility Functions ---------------------
-
-// * Convert array to LL
-ListNode* arrayToLL(std::vector<int> arr) {
-  if(arr.size() == 0) return nullptr;
-  ListNode* head = new ListNode(arr[0]);
+void printLL(ListNode* head) {
   ListNode* temp = head;
-  for(int i=1; i<arr.size(); i++) {
-    ListNode* newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
+  while (temp) {
+    std::cout << temp->data << " -> ";
+    temp = temp->next;
   }
+  std::cout << "NULL" << std::endl;
+}
+
+ListNode* arrayToLL(std::vector<int> &arr) {
+  ListNode *head = new ListNode(arr[0]);
+  ListNode *mover = head;
+
+  int n = arr.size();
+  
+  for(int i = 1; i < n; ++i) {
+    ListNode *node = new ListNode(arr[i]);
+    mover->next = node;
+    mover = node;
+  }
+
   return head;
 }
 
-// * Traverse the LL
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while(temp) {
-    std::cout<<temp->data<<" ";
+int count_ll(ListNode *head) {
+  ListNode *temp = head;
+  int i = 0;
+  while (temp) {
+    i += 1;
     temp = temp->next;
   }
-  std::cout<<std::endl;
+  return i;
 }
 
-// * Count the LL
-int countLL(ListNode* head) {
-  ListNode* temp = head;
-  int c = 0;
-  while(temp) {
-    c++;
-    temp = temp->next;
+ListNode* reverseLL(ListNode* node) {
+  // * Reverse the node LL
+  ListNode* tail = nullptr;
+  while (node) {
+    ListNode* front = node->next;
+    node->next = tail;
+    tail = node;
+    node = front;
   }
-  return c;
+  return tail;
 }
 
-// * ------------------ Brute Force ---------------------
+// * ------------------ APPROACH 1: Brute Force ---------------------
+// * Using Stack
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-ListNode* removeLastKthNode(ListNode* head, int k) {
-  // * Count the LL Nodes
-  int count = countLL(head);
-
-  if(k > count || k <= 0) {
-    std::cout<<"ListNode doesn't exists"<<std::endl;
-    return head;
-  }
-
-  if(count == k) {
-    // * Remove Head
-    ListNode* newHead = head->next;
-    free(head);
-    return newHead;
-  }
-
-  int nodeIdx = (count - k) - 1;
-  std::cout<<"count: "<<count<<std::endl;
-  std::cout<<"nodeIdx: "<<nodeIdx<<std::endl;
-
-
+ListNode* bruteForce(ListNode* head, int n) {
+  // * 1. Push all elements to the stack
+  std::stack<int> st;
   ListNode* temp = head;
-  // * Traverse to the node just before the one to delete
-  while(nodeIdx != 0) {
+  while (temp) {
+    st.push(temp->data);
     temp = temp->next;
-    nodeIdx--;
+  }
+
+  // * 2. Pop the stack elements and create a new LL from that
+  ListNode* new_head = new ListNode(-1);
+  ListNode* mover = new_head;
+
+  int i = 0;
+  while (!st.empty()) {
+    i++;
+
+    int val = st.top();
+    st.pop();
+
+    // * Exclude the nth element fron end
+    if (i == n) 
+      continue;
+
+    ListNode* node = new ListNode(val);
+    mover->next = node;
+    mover = node;
+  }
+
+  // * 3. Reverse the newly created LL && return
+  return reverseLL(new_head->next);
+}
+
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+  if (!head)
+      return head;
+
+  int cnt = count_ll(head);
+
+  if (cnt == n) { // * Since we are removing from end
+      // * Remove Head
+      ListNode* new_head = head->next;
+      delete head;
+      return new_head;
+  }
+  
+  ListNode* temp = head;
+
+  // * Traverse to the node just before the one to delete
+  int node_idx = (cnt - n) - 1;
+  while (node_idx != 0) {
+      temp = temp->next;
+      node_idx--;
   }
 
   // * Delete the Nth node from the end
-  ListNode* deleteNode = temp->next;
+  ListNode* delete_node = temp->next;
   temp->next = temp->next->next;
-  free(deleteNode);
+  delete delete_node;
 
-  return head;
-} 
-
-// * ------------------ Optimal Solution ---------------------
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-ListNode* optimalSolution(ListNode* head, int k) {
-  // * Create two pointers, fast and slow
-  ListNode* fast = head;
-  ListNode* slow = head;
-
-  // * Move the fast pointer N nodes ahead
-  for(int i=0; i<k; i++) 
-    fast = fast->next;
-
-  // * If fastp becomes NULL,
-  // * the Nth node from the end is the head
-  if (fast == NULL)
-      return head->next;
-
-  // * Move both pointers until fast reaches the end
-  while(fast->next != nullptr) {
-    fast = fast->next;
-    slow = slow->next;
-  }
-
-  ListNode* deleteNode = slow->next;
-  slow->next = slow->next->next;
-  free(deleteNode);
-
-  std::cout<<slow->data<<std::endl;
   return head;
 }
 
-int main() {
-  std::vector<int> arr = { 1,2,3,4,5,6 };
+// * ------------------ APPROACH 2: Optimal Approach ---------------------
+// * Using Slow & fast pointers
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+  ListNode *slowp = head;
+  ListNode *fastp = head;
+
+  // * Move fast pointer 'n' steps
+  for (int i = 0; i < n; ++i) {
+    fastp = fastp->next;
+  }
+
+  if (!fastp)
+    return head->next;
+    
+  // * Move both pointers 1 step
+  while (fastp->next) {
+    slowp = slowp->next;
+    fastp = fastp->next;
+  }
+
+  ListNode* del_node = slowp->next;
+  slowp->next = slowp->next->next;
+  delete del_node;
+  return head;
+}
+
+
+int main(void) {
+  // int n = 2;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
+
+  // int n = 1;
+  // std::vector<int> arr = {1};
+
+  int n = 1;
+  std::vector<int> arr = {1, 2};
 
   ListNode* head = arrayToLL(arr);
-
-  std::cout<<"------------ Before Removing ListNode From Linked List ------------"<<std::endl;
+  std::cout << "Linked List" << std::endl;
   printLL(head);
 
-  int node;
-  std::cout<<"Enter a node to delete: ";
-  std::cin>>node;
-
-  std::cout<<"------------ After Removing ListNode From Linked List ------------"<<std::endl;
-  // head = removeLastKthNode(head, node);
-  head = optimalSolution(head, node);
-  printLL(head);
+  // ListNode *ans = bruteForce(head, n);
+  ListNode *ans = removeNthFromEnd(head, n);
+  printLL(ans);
 
   return 0;
 }
 
+
 // * Run the code
-// * g++ --std=c++17 03-delete-kth-node-from-end.cpp -o 03-delete-kth-node-from-end && ./03-delete-kth-node-from-end
+// * g++ --std=c++20 14-remove-nth-node-from-end.cpp -o output && ./output
+

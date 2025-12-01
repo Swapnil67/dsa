@@ -13,7 +13,11 @@
  * The functions get and put must each run in O(1) average time complexity.
 
  * https://leetcode.com/problems/lru-cache/description/
+ * https://www.geeksforgeeks.org/problems/lru-cache/1
+ * https://www.naukri.com/code360/problems/lru-cache-implementation_670276
 */
+
+// ! Microsoft, Amazon
 
 #include <vector>
 #include <iostream>
@@ -89,8 +93,8 @@ public:
 class LRUCache {
 public:
     int n;
-    ListNode* head = new ListNode(-1, -1);
-    ListNode* tail = new ListNode(-1, -1);
+    ListNode *head = new ListNode(-1, -1);
+    ListNode *tail = new ListNode(-1, -1);
     std::unordered_map<int, ListNode*> cache;
 
     LRUCache(int capacity) {
@@ -109,9 +113,9 @@ public:
     }
 
     void insertAtHead(ListNode* node) {
-      ListNode* headNext = head->next;
-      node->next = headNext;
-      headNext->prev = node;
+      ListNode* head_next = head->next;
+      node->next = head_next;
+      head_next->prev = node;
 
       // * point head next to new node
       head->next = node;
@@ -146,9 +150,8 @@ public:
           deleteNode(node);
           insertAtHead(node);
         } else {
-            // * Cache is full remove LRU node
-            // std::cout << "cache size: " << cache.size() << std::endl;
-            if (n == cache.size()) {
+          // std::cout << "cache size: " << cache.size() << std::endl;
+          if (n == cache.size()) { // * Cache is full remove LRU node
                 ListNode* node = tail->prev;
                 // std::cout << "Erase node: " << node->data << std::endl;
                 cache.erase(node->key);

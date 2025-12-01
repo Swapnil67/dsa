@@ -1,6 +1,6 @@
 /**
  * * Leetcode - 142
- * * Cycle Detection in a Singly Linked List
+ * * Linked List Cycle II
  * * You are given a singly linked list that may or may not contain a cycle. 
  * * You are supposed to return the node where the cycle begins, if a cycle exists, else return 'NULL'.
  * 
@@ -19,6 +19,8 @@
  * * https://leetcode.com/problems/linked-list-cycle-ii/description/
  * * https://www.naukri.com/code360/problems/linked-list-cycle-ii_1112628
 */
+
+// ! Microsoft
 
 #include <map>
 #include <vector>
@@ -80,27 +82,31 @@ ListNode *makeLoop(ListNode *head) {
   return head;
 }
 
-ListNode* findStartOfLoop(ListNode* head, ListNode* collisionNode){
+ListNode* findStartOfLoop(ListNode* head, ListNode* fast){
   ListNode* temp = head;
-  while (temp != collisionNode) {
+  while (temp != fast) {
     temp = temp->next;
-    collisionNode = collisionNode->next;
+    fast = fast->next;
   }
   return temp;
 }
- 
+
 // * ------------------ Brute Force Approach ---------------------
-// * TIME COMPLEXITY O(N) + 2*O(logN)
+// * TIME COMPLEXITY O(N) + (2 * O(logN))
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
-  if(head == nullptr || head->next == nullptr) return nullptr;
+  if (!head || !head->next)
+    return nullptr;
 
   ListNode* temp = head;
   std::map<ListNode*, int> nodeMap;
+
   // * O(N)
   while(temp) {
     // * O(logN)
-    if(nodeMap.find(temp) != nodeMap.end()) return temp;
+    if (nodeMap.find(temp) != nodeMap.end())
+      return temp;
+
     // * O(logN)
     nodeMap[temp] = 1;
     temp = temp->next;

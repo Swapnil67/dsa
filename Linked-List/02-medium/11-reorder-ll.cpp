@@ -66,6 +66,19 @@ ListNode* arrayToLL(std::vector<int> &arr) {
   return head;
 }
 
+ListNode* reverse_ll(ListNode* head) {
+  ListNode *tail = nullptr;
+  ListNode *temp = head;
+  
+  while (temp) {
+    ListNode *front = temp->next;
+    temp->next = tail;
+    tail = temp;
+    temp = front;
+  }
+
+  return tail;
+}
 
 // * ------------------ APPROACH 1: Optimal Approach ---------------------
 // * By reversing from mid to end of ll
@@ -78,33 +91,26 @@ void reorderList(ListNode* head) {
   // * Get to the mid of ll
   ListNode* slow = head; 
   ListNode* fast = head;
-  while (fast && fast->next != nullptr) {
+  while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next->next;
   }
-  // printLL(slow);
 
-  // * Reverse from the mid to end of ll
-  ListNode *current = slow;
-  ListNode* tail = nullptr;
-  while (current) {
-    ListNode* front = current->next;
-    current->next = tail;
-    tail = current;
-    current = front;
-  }
-  // printLL(tail);
+  // * now slow will point at the middle node
+  ListNode* rev = reverse_ll(slow->next);
+  // printLL(rev);
 
+  slow->next = nullptr; // * make two ll here
+  // printLL(head);
+  
   ListNode* temp = head;
-  ListNode* rev = tail;
-
-  while (rev->next != nullptr) {
-    ListNode* tempNext = temp->next;
-    ListNode* revNext = rev->next;
+  while (rev) {
+    ListNode *temp_next = temp->next;
+    ListNode *rev_next = rev->next;
     temp->next = rev;
-    rev->next = tempNext;
-    temp = tempNext;
-    rev = revNext;
+    rev->next = temp_next;
+    temp = temp_next;
+    rev = rev_next;
   }
 }
 
@@ -177,16 +183,19 @@ void reorderList3(ListNode* head) {
 
 
 int main(void) {
+  // * testcase 1
   // std::vector<int> arr = {1, 2, 3, 4};
+
+  // * testcase 2
   std::vector<int> arr = {1, 2, 3, 4, 5};
 
   ListNode *head = arrayToLL(arr);
   std::cout << "Linked List" << std::endl;
   printLL(head);
 
-  // reorderList(head);
+  reorderList(head);
   // reorderList2(head);
-  reorderList3(head);
+  // reorderList3(head);
   
   printLL(head);
 

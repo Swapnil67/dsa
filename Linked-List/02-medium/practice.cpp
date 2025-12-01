@@ -99,11 +99,23 @@ DLListNode<T> *arrayToDLL(std::vector<T> &arr) {
   return head;
 }
 
+template <typename T>
+void printDLL(DLListNode<T> *head) {
+  DLListNode<T> *temp = head;
+  while (temp)
+  {
+    std::cout << temp->data << " ";
+    temp = temp->next;
+  }
+  std::cout << std::endl;
+}
+
 void swap(int &a, int &b) {
   int temp = a;
   a = b;
   b = temp;
 }
+// * --------------------------------------------------------------------------------
 
 // * 01 - Add Two Numbers
 // ListNode *addTwoLL(ListNode *head1, ListNode *head2) {
@@ -131,13 +143,13 @@ void swap(int &a, int &b) {
 // }
 
 // * 06 - Delete all occurrences of a given key in a doubly linked list
-// DLListNode *deleteOccurences(DLListNode *head, int k) {
+// DLListNode<int> *deleteOccurences(DLListNode<int> *head, int k) {
 // TODO
 // }
 
 // * 07 - Merge In Between Linked Lists
 // ListNode *mergeInBetween(ListNode *list1, int a, int b, ListNode *list2) {
-// TODO
+// TODO 
 // }
 
 // * 08 - Merge Nodes in Between Zeros
@@ -170,8 +182,8 @@ void swap(int &a, int &b) {
 // TODO
 // }
 
-// * 14 - Remove Nth Node From End of List
-// ListNode *removeNthFromEnd(ListNode *head, int n) {
+// * 14 - Linked List Components
+// int numComponents(ListNode *head, std::vector<int> &nums) {
 // TODO
 // }
 
@@ -191,13 +203,7 @@ void swap(int &a, int &b) {
 // }
 
 // * 18 - Design Browser History
-// class BrowserHistory {
-// public:
-//   BrowserHistory(std::string homepage) {}
-//   void visit(std::string url) {}
-//   std::string back(int steps) {}
-//   std::string forward(int steps) {}
-// };
+// TODO (Do this on leetcode)
 
 // * 19 - Add Two Numbers II
 // ListNode *addTwoNumbers(ListNode *nums1, ListNode *nums2) {
@@ -205,15 +211,7 @@ void swap(int &a, int &b) {
 // }
 
 // * 20 - LRU Cache
-// class LRUCache {
-// public:
-//   LRUCache(int capacity) {
-//   }
-//   int get(int key) {
-//   }
-//   void put(int key, int value) {
-//   }
-// };
+// TODO (Do this on leetcode)
 
 // * 21 - Swap Nodes in Pairs
 // ListNode *swapPairs(ListNode *head) {
@@ -236,16 +234,7 @@ void swap(int &a, int &b) {
 // }
 
 // * 25 - Design Circular Queue
-// class MyCircularQueue {
-// public:
-//     MyCircularQueue(int k) {}
-//     bool enQueue(int value) {}
-//     bool deQueue() {}
-//     int Front() {}
-//     int Rear() {}
-//     bool isEmpty() {}
-//     bool isFull() {}
-// };
+// TODO (Do this on leetcode)
 
 // * 26 - Insertion Sort List
 // ListNode* insertionSortList(ListNode* head) {
@@ -257,9 +246,18 @@ void swap(int &a, int &b) {
 // TODO
 // }
 
+// * 28 - Add 1 to a Linked List Number
+// ListNode* addOne(ListNode* head) {
+// TODO
+// }
+
+// * 29 - Design Circular Deque
+// TODO (Do this on leetcode)
+
 int main(void) {
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 practice.cpp -o output && ./output
+

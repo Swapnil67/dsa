@@ -86,16 +86,15 @@ int lengthOfll(ListNode* head) {
 // * TIME COMPLEXITY  O(K + N)
 // * SPACE COMPLEXITY O(1)
 std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
-  std::vector<ListNode*> ans(k, nullptr); 
+  std::vector<ListNode *> ans(k, nullptr);
   if (!head || k == 0)
     return ans;
-    
+
   // * 1. Find the length of ll
   int total = lengthOfll(head);
 
   int nodes_per_bucket = total / k;
   int extra_nodes = total % k;
-  int cur_nodes = 0;
 
   ListNode* prev = nullptr;
   ListNode* cur = head;
@@ -103,10 +102,10 @@ std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
   for (int i = 0; i < k; ++i) {
     ans[i] = cur;
 
-    // * Fill the remaining nodes
-    int remaining_nodes = nodes_per_bucket + ((extra_nodes > 0) ? 1 : 0);
-    std::cout << remaining_nodes << std::endl;
-    for (int j = 0; j < remaining_nodes; ++j) {
+    // * Total nodes for this kth split
+    int nodes = nodes_per_bucket + ((extra_nodes > 0) ? 1 : 0);
+    // std::cout << nodes << std::endl;
+    while (nodes--) {
       prev = cur;
       cur = cur->next;
     }

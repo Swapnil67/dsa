@@ -19,6 +19,8 @@
  * * https://www.naukri.com/code360/problems/delete-middle-node_763267?leftPanelTabValue=PROBLEM
 */
 
+// ! Microsoft
+
 #include <vector>
 #include <iostream>
 
@@ -80,26 +82,24 @@ int countLL(ListNode* head) {
 // * SPACE COMPLEXITY O(1)
 ListNode* bruteForce(ListNode* head) {
   if (!head || !head->next)
-    return head;
+    return nullptr;
 
   ListNode* temp = head;
   // * O(N)
-  int ll_count = countLL(head);
-  int midIdx = (ll_count / 2) + 1;
-  int c = 1;
+  int c = countLL(head);
+  
   // * O(N/2)
-  while(temp) {
-    if(c == midIdx-1) {
-      ListNode* delNode = temp->next;
-      temp->next = temp->next->next;
-      std::free(delNode);
-      return head;
-    }
-    c++;
+  ListNode *temp = head;
+  int mid_idx = (c / 2) - 1;
+  while (mid_idx != 0) {
     temp = temp->next;
+    mid_idx -= 1;
   }
 
-  return nullptr;
+  ListNode *del_node = temp->next;
+  temp->next = temp->next->next;
+  delete del_node;
+  return head;
 }
 
 // * ------------------ Optimal Approach ---------------------

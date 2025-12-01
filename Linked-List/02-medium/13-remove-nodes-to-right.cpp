@@ -58,7 +58,7 @@ ListNode* arrayToLL(std::vector<int> &arr) {
   return head;
 }
 
-ListNode* reverseLL(ListNode* node) {
+ListNode* reverse_ll(ListNode* node) {
   // * Reverse the node LL
   ListNode* tail = nullptr;
   while (node) {
@@ -70,11 +70,15 @@ ListNode* reverseLL(ListNode* node) {
   return tail;
 }
 
+// * ------------------ Brute Force Approach ---------------------
+// * Monotonic stack
+// * TIME COMPLEXITY O(N) + O(N) = O(2N)
+// * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
-  // * Push on to stack in monotonic increasing way
+  // * Push on to stack in monotonic decreasing way
   std::stack<int> st;
   ListNode* temp = head;
-  while (temp) {
+  while (temp) { // * O(N)
     while (!st.empty() && st.top() < temp->data) {
       st.pop();
     }
@@ -82,9 +86,10 @@ ListNode* bruteForce(ListNode* head) {
     temp = temp->next;
   }
 
+  // * Create a ll from stack elements
   ListNode *ans = new ListNode(-1);
   ListNode* mover = ans;
-  while (!st.empty()) {
+  while (!st.empty()) { // * O(N)
     // std::cout << st.top() << std::endl;
     ListNode *node = new ListNode(st.top());
     mover->next = node;
@@ -94,29 +99,31 @@ ListNode* bruteForce(ListNode* head) {
   ans = ans->next;
 
   // * Reverse the ans LL
-  ListNode* tail = reverseLL(ans);
+  ListNode* tail = reverse_ll(ans);
 
   return tail;
 }
 
+// * ------------------ Optimal Approach ---------------------
+// * Reverse LL
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 ListNode* removeNodes(ListNode* head) {
   ListNode *temp = head;
 
   // * Reverse the temp LL
-  ListNode* tail = reverseLL(temp);
+  ListNode* tail = reverse_ll(temp);
 
   temp = tail;
   while (temp) {
     while (temp->next && temp->data > temp->next->data) {
-      ListNode *del_node = temp->next;
       temp->next = temp->next->next;
-      delete del_node;
     }
     temp = temp->next;
   }
 
   // * Reverse the temp LL
-  tail = reverseLL(tail);
+  tail = reverse_ll(tail);
 
   return tail;
 }

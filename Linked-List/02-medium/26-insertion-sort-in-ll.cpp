@@ -14,9 +14,11 @@
  * Output : [1,2,3,4]
 
  * https://leetcode.com/problems/insertion-sort-list/description/
+ * https://www.geeksforgeeks.org/problems/insertion-sort-for-singly-linked-list/1
 */
 
 #include <vector>
+#include <climits>
 #include <iostream>
 
 struct ListNode {
@@ -71,7 +73,7 @@ ListNode* insertionSortList(ListNode* head) {
   if (!head || !head->next)
     return head;
 
-  ListNode *dummy = new ListNode(-1);
+  ListNode *dummy = new ListNode(INT_MIN);
   dummy->next = head;
 
   ListNode* prev = dummy;

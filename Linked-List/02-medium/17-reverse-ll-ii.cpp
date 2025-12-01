@@ -65,44 +65,44 @@ ListNode* arrayToLL(std::vector<int> &arr) {
 }
 
 ListNode* reverseBetween(ListNode* head, int left, int right) {
-  if (!head || !head->next)
+  if (!head || !head->next || left == right)
     return head;
 
-  if (left == right)
-    return head;
-
-  ListNode* dummy = new ListNode(-1);
+  ListNode *dummy = new ListNode(-1);
   dummy->next = head;
-    
-  ListNode* cur = head;
-  ListNode* leftPrev = dummy;
+
+  ListNode *cur = head;
+  ListNode *left_prev = dummy;
 
   // * 1. Get to the left node position
   int l = left;
   while (l - 1) {
-    leftPrev = cur;
+    left_prev = cur;
     cur = cur->next;
     l--;
   }
 
-  // * Now cur = "left", leftPrev = "node before left"
+  // * Now cur = "left", left_prev = "node before left"
   // * 2. Reverse from left to right
   ListNode* tail = nullptr;
   int n = right - left + 1;
   while (n) {
-    ListNode* front = cur->next;
+    ListNode *front = cur->next;
     cur->next = tail;
     tail = cur;
     cur = front;
     n -= 1;
   }
-  // std::cout << leftPrev->data << std::endl;
+  // std::cout << left_prev->data << std::endl;
   // std::cout << cur->data << std::endl;
 
+  // * 'cur' is at right + 1 postion
+  // * 'tail' is at right postion
+
   // * 3. Update the pointers
-  if (leftPrev) {
-    leftPrev->next->next = cur;
-    leftPrev->next = tail;
+  if (left_prev) {
+    left_prev->next->next = cur;
+    left_prev->next = tail;
   }
 
   return dummy->next;

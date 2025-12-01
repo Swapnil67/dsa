@@ -69,28 +69,34 @@ ListNode* arrayToLL(std::vector<int> &arr) {
 }
 
 std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+  if (!head || !head->next)
+    return {};
+
   ListNode *prev = head;
   ListNode *cur = head->next;
 
   int i = 1;
-  int first_critical_point = -1, prev_critical_point = 0;
+  int first_critical_point = -1, prev_critical_point = -1;
   int min_nodes = INT_MAX;
 
   while (cur->next) {
-    if ((cur->data > prev->data && cur->data > cur->next->data) ||
-        (cur->data < prev->data && cur->data < cur->next->data)) {
+    bool local_minima =
+        prev->data > cur->data && cur->next->data > cur->data;
+    bool local_maxima =
+        prev->data < cur->data && cur->next->data < cur->data;
 
+    if (local_minima || local_maxima) { // * check if local minima or local maxima
       if (first_critical_point == -1) {
         first_critical_point = i;
       } else {
         min_nodes = std::min(min_nodes, i - prev_critical_point);
       }
-      prev_critical_point = i;
+      prev_critical_point = i;  // * keep the last critical point
     }
 
+    i++;
     prev = cur;
     cur = cur->next;
-    i++;
   }
 
   // std::cout << first_critical_point << " " << prev_critical_point << std::endl;
@@ -104,8 +110,8 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
 
 int main(void) {
   // std::vector<int> arr = {3, 1};
-  std::vector<int> arr = {2, 3, 3, 2};
-  // std::vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
+  // std::vector<int> arr = {2, 3, 3, 2};
+  std::vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
   // std::vector<int> arr = {1, 3, 2, 2, 3, 2, 2, 2, 7};
 
   ListNode *head = arrayToLL(arr);

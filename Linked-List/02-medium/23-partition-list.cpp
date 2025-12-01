@@ -16,7 +16,11 @@
  * * Output : [1,2]
 
  * https://leetcode.com/problems/partition-list/
+ * https://www.naukri.com/code360/problems/partition-list_1235224
+ * https://www.geeksforgeeks.org/problems/partition-a-linked-list-around-a-given-value/1
 */
+
+// ! Microsoft, Apple, Adobe
 
 #include <vector>
 #include <iostream>
@@ -98,12 +102,12 @@ ListNode* partition(ListNode* head, int x) {
 
 int main(void) {
   // * testcase 1
-  // int x = 3;
-  // std::vector<int> nums = {1, 4, 3, 2, 5, 2};
+  int x = 3;
+  std::vector<int> nums = {1, 4, 3, 2, 5, 2};
   
   // * testcase 2
-  int x = 2;
-  std::vector<int> nums = {2, 1};
+  // int x = 2;
+  // std::vector<int> nums = {2, 1};
 
   ListNode *head = arrayToLL(nums);
   std::cout << "Linked List Before Partition" << std::endl;

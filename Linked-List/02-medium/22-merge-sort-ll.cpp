@@ -15,7 +15,11 @@
  * * Output : [2,1,3]
 
  * https://leetcode.com/problems/sort-list/description/
+ * https://www.geeksforgeeks.org/problems/sort-a-linked-list/1
+ * https://www.naukri.com/code360/problems/sort-linked-list_920517
 */
+
+// ! Amazon, Paypal
 
 #include <vector>
 #include <iostream>
@@ -107,32 +111,32 @@ ListNode* findMiddle(ListNode* head) {
   return slow;
 }
 
-ListNode* mergeSort(ListNode* head1, ListNode* head2) {
+ListNode* mergeSort(ListNode* h1, ListNode* h2) {
   ListNode *dummy = new ListNode(-1);
   ListNode *mover = dummy;
   
-  while (head1 && head2) {
-    if (head1->data < head2->data) {
-      mover->next = head1;
-      mover = head1;
-      head1 = head1->next;
+  while (h1 && h2) {
+    if (h1->data < h2->data) {
+      mover->next = h1;
+      mover = h1;
+      h1 = h1->next;
     } else {
-      mover->next = head2;
-      mover = head2;
-      head2 = head2->next;
+      mover->next = h2;
+      mover = h2;
+      h2 = h2->next;
     }
   }
 
-  while (head1) {
-    mover->next = head1;
-    mover = head1;
-    head1 = head1->next;
+  while (h1) {
+    mover->next = h1;
+    mover = h1;
+    h1 = h1->next;
   }
 
-  while (head2) {
-    mover->next = head2;
-    mover = head2;
-    head2 = head2->next;
+  while (h2) {
+    mover->next = h2;
+    mover = h2;
+    h2 = h2->next;
   }
 
   // printLL(dummy);
@@ -155,6 +159,9 @@ ListNode* sortList(ListNode* head) {
   mid->next = nullptr;
   ListNode *leftHead = head;
 
+  printLL(leftHead);
+  printLL(rightHead);
+  std::cout << "------------------------------------" << std::endl;
   // std::cout << leftHead->data << " " << rightHead->data << std::endl;
 
   // * recursively divide in half
@@ -167,7 +174,10 @@ ListNode* sortList(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {4, 2, 1, 3};
+  // std::vector<int> nums = {4, 2, 1, 3};
+
+  // * testcase 2
+  std::vector<int> nums = {-1, 5, 3, 4, 0};
 
   ListNode* head = arrayToLL(nums);
   std::cout << "Linked List Before Sorting" << std::endl;
@@ -181,6 +191,6 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 22-sort-ll.cpp -o output && ./output
+// * g++ --std=c++20 22-merge-sort-ll.cpp -o output && ./output
 
 

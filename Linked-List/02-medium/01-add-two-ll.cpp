@@ -14,6 +14,7 @@
  * * Output: 0 -> 1 -> NULL
  *
  * * https://leetcode.com/problems/add-two-numbers/
+ * * https://www.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1
  */
 
 #include <vector>
@@ -71,17 +72,21 @@ ListNode* addTwoLL(ListNode* h1, ListNode* h2) {
   int carry = 0;
   while (h1 != NULL || h2 != NULL) {
     int sum = carry;
-    if(h1) sum = sum + h1->data;
-    if(h2) sum = sum + h2->data;
 
-    ListNode *curSum = new ListNode(sum % 10);
-    carry = sum / 10;
-    temp->next = curSum;
-    temp = curSum;
-    if (h1)
+    if (h1) {
+      sum = sum + h1->data;
       h1 = h1->next;
-    if (h2)
+    }
+
+    if (h2) {
+      sum = sum + h2->data;
       h2 = h2->next;
+    }
+
+    ListNode *node = new ListNode(sum % 10);
+    carry = sum / 10;
+    temp->next = node;
+    temp = node;
   }
 
   // * check if carry set

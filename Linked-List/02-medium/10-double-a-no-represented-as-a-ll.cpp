@@ -57,7 +57,7 @@ ListNode* arrayToLL(std::vector<int> &arr) {
   return head;
 }
 
-ListNode* reverseLL(ListNode* head) {
+ListNode* reverse_ll(ListNode* head) {
   if (!head || !head->next)
     return head;
 
@@ -79,7 +79,7 @@ ListNode* doubleIt(ListNode* head) {
   if (!head)
       return nullptr;
 
-  ListNode* rev_head = reverseLL(head);
+  ListNode* rev_head = reverse_ll(head);
   ListNode* temp = rev_head;
 
   int carry = 0;
@@ -103,7 +103,7 @@ ListNode* doubleIt(ListNode* head) {
     prev = prev->next;
   }
 
-  return reverseLL(rev_head);
+  return reverse_ll(rev_head);
 }
 
 int main(void) {
