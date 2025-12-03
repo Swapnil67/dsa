@@ -26,6 +26,7 @@
  * Output    : 1
 
  * https://leetcode.com/problems/snakes-and-ladders/
+ * https://www.naukri.com/code360/problems/snake-and-ladder_630458
 */
 
 #include <queue>
@@ -45,22 +46,6 @@ void printArr(std::vector<T> &arr) {
       std::cout << ", ";
   }
   std::cout << "]" << std::endl;
-}
-
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
-
-std::unordered_map<int, std::pair<int, int>> cache_coordinates(std::vector<std::vector<int>>& board) {
-  int m = board[0].size(), n = board.size(); // * rows == cols
-  std::unordered_map<int, std::pair<int, int>> cache;
-  int val = 1;
-  for (int r = m - 1; r >= 0; --r) {
-    for (int c = 0; c < n; ++c) {
-      cache[val] = {r, c};
-      val += 1;
-    }
-  }
-  return cache;
 }
 
 std::pair<int, int> intToPos(int square, int n) {
@@ -101,10 +86,11 @@ int snakesAndLadders(std::vector<std::vector<int>>& board) {
           next_square = board[r][c];
         }
 
+        if (next_square == dest) 
+          return steps + 1;
+
         // * not visited
         if (board[r][c] != 0) {
-          if (next_square == dest) 
-            return steps + 1;
           board[r][c] = 0; // * mark visited
           q.push(next_square);
         }
@@ -114,7 +100,7 @@ int snakesAndLadders(std::vector<std::vector<int>>& board) {
     steps += 1;
   }
 
-  return 0;
+  return -1; // * could not reach dest cell
 }
 
 int main(void) {
@@ -127,7 +113,7 @@ int main(void) {
                                         {-1, 15, -1, -1, -1, -1}};
   std::cout << "-------- Board -------- " << std::endl;
   for (auto &vec : board)
-  printArr(vec);
+    printArr(vec);
   
   int steps = snakesAndLadders(board);
   std::cout << "Steps: " << steps << std::endl;

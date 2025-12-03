@@ -77,7 +77,7 @@ int shortestBridge(std::vector<std::vector<int>>& grid) {
 
   std::queue<std::pair<int, int>> q;
 
-  // * Do DFS on 1st Island
+  // * Do DFS on 1st Island and save all the land nodes to queue
   bool found = false;
   for (int r = 0; r < n; ++r) {
     if (found)
@@ -98,7 +98,8 @@ int shortestBridge(std::vector<std::vector<int>>& grid) {
   //   q.pop();
   // }
 
-  // * From all the nodes of 1st island do BSF to 2nd Island
+  // * From all the land nodes of 1st island do BSF to 2nd Island
+  // * i.e., find the shortest from 1st -> 2nd island
   int min_dist = 0;
   while (!q.empty()) {
     int N = q.size();
