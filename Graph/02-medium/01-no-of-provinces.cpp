@@ -44,16 +44,6 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
-// * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
-  }
-}
-
 void dfsBrute(
     int u,
     std::vector<bool> &visited,
@@ -68,8 +58,23 @@ void dfsBrute(
   }
 }
 
+void dfs(
+    int u,
+    std::vector<bool> &visited,
+    std::vector<std::vector<int>> &isConnected)
+{
+  int n = isConnected.size();
+  visited[u] = true;
+
+  // * Visit neighbours
+  for (int v = 0; v < n; ++v) {
+    if (!visited[v] && isConnected[u][v] == 1)
+      dfs(v, visited, isConnected);
+  }
+}
+
 // * ------------------------- Brute Force Approach -------------------------`
-// * TIME COMPLEXITY O(v + e)
+// * TIME COMPLEXITY  O(N) + O(V + 2E) ~ O(N)
 // * SPACE COMPLEXITY O(v)
 int findCircleNumDfsBrute(std::vector<std::vector<int>> &isConnected) {
   int n = isConnected.size();
@@ -98,24 +103,9 @@ int findCircleNumDfsBrute(std::vector<std::vector<int>> &isConnected) {
   return ans;
 }
 
-void dfs(
-    int u,
-    std::vector<bool> &visited,
-    std::vector<std::vector<int>> &isConnected)
-{
-  int n = isConnected.size();
-  visited[u] = true;
-
-  // * Visit neighbours
-  for (int v = 0; v < n; ++v) {
-    if (!visited[v] && isConnected[u][v] == 1)
-      dfs(v, visited, isConnected);
-  }
-}
-
 // * ------------------------- Optimal Approach -------------------------`
 // * Using DFS
-// * TIME COMPLEXITY O(v + e)
+// * TIME COMPLEXITY O(N) + O(V + 2E) ~ O(N)
 // * SPACE COMPLEXITY O(1)
 int findCircleNumDfs(std::vector<std::vector<int>> &isConnected) {
   int n = isConnected.size();
@@ -132,13 +122,14 @@ int findCircleNumDfs(std::vector<std::vector<int>> &isConnected) {
   return ans;
 }
 
-void bfs(std::unordered_map<int, std::vector<int>> &adj,
-         int u,
-         std::vector<bool> &visited)
+void bfs(
+    int u,
+    std::vector<bool> &visited,
+    std::unordered_map<int, std::vector<int>> &adj)
 {
   std::queue<int> q;
-
   q.push(u);
+  
   visited[u] = true;
 
   // * Visit neighbours
@@ -178,7 +169,7 @@ int findCircleNumBfs(std::vector<std::vector<int>> &isConnected) {
   int ans = 0;
   for (int u = 0; u < n; ++u) {
     if (!visited[u]) {
-      bfs(adj, u, visited);
+      bfs(u, visited, adj);
       ans++;
     }
   }
@@ -204,7 +195,6 @@ int main(void) {
 
   return 0;
 }
-
 
 // * Run the code
 // * g++ --std=c++20 01-no-of-provinces.cpp -o output && ./output

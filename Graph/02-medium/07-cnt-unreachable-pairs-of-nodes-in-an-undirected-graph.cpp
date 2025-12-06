@@ -21,6 +21,10 @@
  * * https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/
 */
 
+// ! DSU
+
+// ! Microsoft
+
 #include <vector>
 #include <iostream>
 #include <unordered_map>
@@ -71,32 +75,6 @@ void dfs(
   }
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(N)
-long long countPairsDFS(int n, std::vector<std::vector<int>> &edges) {
-  std::vector<bool> visited(n, false);
-  
-  // * construct the adjacency list
-  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
-  std::cout << "Adjacency List" << std::endl;
-  printAdjList(adj); // * For Debugging
-
-  long long res = 0;
-  long long cur_remaining = n;
-  for (int i = 0; i < n; ++i) {
-    if (!visited[i]) {
-      long long grp_size = 0;
-      dfs(i, grp_size, visited, adj);
-      res += grp_size * (cur_remaining - grp_size);
-      // std::cout << "grp_size  " << grp_size < ", pairs  " << res << std::endl;
-      cur_remaining -= grp_size;
-    }
-  }
-
-  return res;
-}
-
 int find(int x, std::vector<int> &parent) {
   if (x == parent[x])
     return x;
@@ -120,9 +98,37 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
   }
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(N)
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * DFS (More Easy)
+// * TIME COMPLEXITY O(N + E)
+// * SPACE COMPLEXITY O(N + E)
+long long countPairsDFS(int n, std::vector<std::vector<int>> &edges) {
+  std::vector<bool> visited(n, false);
+  
+  // * construct the adjacency list
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
+  std::cout << "Adjacency List" << std::endl;
+  printAdjList(adj); // * For Debugging
+
+  long long res = 0;
+  long long total_nodes = n;
+  for (int i = 0; i < n; ++i) {
+    if (!visited[i]) {
+      long long grp_size = 0;
+      dfs(i, grp_size, visited, adj);
+      res += grp_size * (total_nodes - grp_size);
+      // std::cout << "grp_size  " << grp_size < ", pairs  " << res << std::endl;
+      total_nodes -= grp_size;
+    }
+  }
+
+  return res;
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * DSU
+// * TIME COMPLEXITY O(N + E)
+// * SPACE COMPLEXITY O(N + E)
 long long countPairsDSU(int n, std::vector<std::vector<int>> &edges) {
   // * 1. Initialize rank and parent vectors
   std::vector<int> rank(n, 1);
@@ -138,6 +144,7 @@ long long countPairsDSU(int n, std::vector<std::vector<int>> &edges) {
   }
 
   // * 3. Save the parent frequency in map
+  // * {parent, freq}
   std::unordered_map<int, int> mp;
   for (int i = 0; i < n; ++i) {
     int p = find(i, parent);

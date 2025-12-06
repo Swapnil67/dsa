@@ -19,16 +19,13 @@
  * https://www.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1
 */
 
-// ! BFS
+// ! Multi Source BFS
 
 // ! Google, Amazon
 
 #include <queue>
 #include <vector>
-#include <climits>
 #include <iostream>
-#include <algorithm>
-#include <unordered_map>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -96,7 +93,10 @@ int main(void) {
   // std::vector<std::vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {1, 1, 1}};
+  // std::vector<std::vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {1, 1, 1}};
+
+  // * testcase 3
+  std::vector<std::vector<int>> mat = {{0, 1, 1}, {1, 1, 1}, {1, 1, 1}};
 
   std::cout << "mat" << std::endl;
   for (auto &vec : mat)

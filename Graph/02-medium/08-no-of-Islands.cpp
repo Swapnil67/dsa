@@ -32,7 +32,7 @@
  * * https://www.geeksforgeeks.org/problems/find-the-number-of-islands/1
 */
 
-// ! Apple, Amazon, Uber
+// ! Meta, Microsoft, Google, Apple, Amazon, Uber
 
 #include <queue>
 #include <vector>
@@ -67,16 +67,18 @@ void dfs(int r, int c, std::vector<std::vector<int>> &visited, std::vector<vc>& 
   int m = grid.size(), n = grid[0].size();
 
   // * Edge cases
-  if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] == '0' || visited[r][c]) {
-    return;
-  }
+  const auto is_safe = [&](const int &row, const int &col) {
+    return row >= 0 && row < m && col >= 0 && col < n;
+  };
 
   visited[r][c] = 1;
 
   for (auto &dir : dirs) {
-    int new_r = r + dir[0]; 
-    int new_c = c + dir[1];
-    dfs(new_r, new_c, visited, grid);
+    int dr = r + dir[0]; 
+    int dc = c + dir[1];
+    if (is_safe(dr, dc) && !visited[dr][dc] && grid[dr][dc] == '1') {
+      dfs(dr, dc, visited, grid);
+    }
   }
 }
 
@@ -87,6 +89,7 @@ int numIslandsDFS(std::vector<vc>& grid) {
   int m = grid.size(), n = grid[0].size();
   int islands = 0;
 
+  // * Matrix to mark a cell visited
   std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
 
   for (int r = 0; r < m; ++r) {

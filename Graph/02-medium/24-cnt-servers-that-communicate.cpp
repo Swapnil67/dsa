@@ -1,7 +1,6 @@
 #include<vector>
 #include<iostream>
 #include<unordered_map>
-#include<map>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -84,44 +83,6 @@ int countServersBrute(std::vector<std::vector<int>>& grid) {
 }
 
 // * ------------------------- Approach 2: Better Approach -------------------------
-// * Save the server count on each row and col in separate array
-// * TIME COMPLEXITY O(m * n)
-// * SPACE COMPLEXITY O(m * n)
-int countServersBetter(std::vector<std::vector<int>>& grid) {
-  int ROWS = grid.size(), COLS = grid[0].size();
-
-  std::vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
-  std::vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
-
-  for (int r = 0; r < ROWS; ++r) {
-    for (int c = 0; c < COLS; ++c) {
-      if (grid[r][c] == 1) {
-        row_servers_cnt[r] += 1;
-        col_servers_cnt[c] += 1;
-      }
-    }
-  }
-
-  // * For debugging
-  // std::cout << "Servers count in each row & col" << std::endl;
-  // printArr(row_servers_cnt);
-  // printArr(col_servers_cnt);
-  
-  int res = 0;
-  for (int r = 0; r < ROWS; ++r) {
-    for (int c = 0; c < COLS; ++c) {
-      // * If either of current row & col has more than 1 server
-      if (grid[r][c] == 1 && std::max(row_servers_cnt[r], col_servers_cnt[c]) > 1) {
-        res += 1;
-      }
-    }
-  }
-
-  return res;
-}
-
-
-// * ------------------------- Approach 3: Better Approach -------------------------
 // * Using DSU
 // * TIME COMPLEXITY O(m ∗ n ∗ Alpha(m ∗ n))
 // * SPACE COMPLEXITY O(m * n)
@@ -133,7 +94,7 @@ int countServers(std::vector<std::vector<int>>& grid) {
 
   std::vector<int> rank(ROWS * COLS, 1);
   std::vector<int> parent(ROWS * COLS);
-  for (int i = 0; i < ROWS * COLS; ++i) {
+  for (int i = 0; i < (ROWS * COLS); ++i) {
     parent[i] = i;
   }
 
@@ -171,6 +132,44 @@ int countServers(std::vector<std::vector<int>>& grid) {
 }
 
 
+// * ------------------------- Approach 3: Better Approach -------------------------
+// * More easy
+// * Save the server count on each row and col in separate array
+// * TIME COMPLEXITY O(m * n)
+// * SPACE COMPLEXITY O(m * n)
+int countServersBetter(std::vector<std::vector<int>>& grid) {
+  int ROWS = grid.size(), COLS = grid[0].size();
+
+  std::vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
+  std::vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
+
+  for (int r = 0; r < ROWS; ++r) {
+    for (int c = 0; c < COLS; ++c) {
+      if (grid[r][c] == 1) {
+        row_servers_cnt[r] += 1;
+        col_servers_cnt[c] += 1;
+      }
+    }
+  }
+
+  // * For debugging
+  std::cout << "Servers count in each row & col" << std::endl;
+  printArr(row_servers_cnt);
+  printArr(col_servers_cnt);
+  
+  int res = 0;
+  for (int r = 0; r < ROWS; ++r) {
+    for (int c = 0; c < COLS; ++c) {
+      // * If either of current row & col has more than 1 server
+      if (grid[r][c] == 1 && std::max(row_servers_cnt[r], col_servers_cnt[c]) > 1) {
+        res += 1;
+      }
+    }
+  }
+
+  return res;
+}
+
 
 int main(void) {
   // * testcase 1
@@ -180,18 +179,24 @@ int main(void) {
   // std::vector<std::vector<int>> grid = {{1, 0}, {1, 1}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> grid = {{1, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}};
+  std::vector<std::vector<int>> grid = {{1, 1, 0, 0},
+                                        {0, 0, 1, 0},
+                                        {0, 0, 1, 0},
+                                        {0, 0, 0, 1}};
 
   // * testcase 4
-  std::vector<std::vector<int>> grid = {{0, 0, 0, 1, 0, 0, 0, 0, 0, 0}, {1, 0, 1, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0, 0, 1, 0, 0}};
+  // std::vector<std::vector<int>> grid = {{0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  //                                       {1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+  //                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+  //                                       {0, 1, 0, 0, 0, 0, 0, 1, 0, 0}};
 
   std::cout << "grid: " << std::endl;
   for (auto &vec : grid)
     printArr(vec);
 
   // int ans = countServersBrute(grid);
-  // int ans = countServersBetter(grid);
-  int ans = countServers(grid);
+  int ans = countServersBetter(grid);
+  // int ans = countServers(grid);
   std::cout << "Ans: " << ans << std::endl;
 
   return 0;

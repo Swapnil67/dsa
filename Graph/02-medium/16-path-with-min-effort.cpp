@@ -53,6 +53,13 @@ void printArr(std::vector<T> &arr) {
 
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
+
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Using Dijkstra Algorithm
+// * m = no of rows
+// * n = no of cols
+// * TIME COMPLEXITY O(m * n * log(m * n))
+// * SPACE COMPLEXITY O(m * n)
 int minimumEffortPath(std::vector<std::vector<int>>& heights) {
   int m = heights.size(), n = heights[0].size();
 
@@ -70,20 +77,19 @@ int minimumEffortPath(std::vector<std::vector<int>>& heights) {
 
   while (!min_heap.empty()) {
     int d = min_heap.top().first;
-    std::pair<int, int> node = min_heap.top().second;
+    auto [r, c] = min_heap.top().second;
     min_heap.pop();
 
-    int x = node.first, y = node.second;
     for (auto &dir : dirs) {
-      int dx = x + dir[0], dy = y + dir[1];
-      if (is_safe(dx, dy)) {
+      int dr = r + dir[0], dc = c + dir[1];
+      if (is_safe(dr, dc)) {
         // * abs diff b/w two heights
-        int w = std::abs(heights[dx][dy] - heights[x][y]);
-        int max_diff = std::max(w, d);
+        int w = std::abs(heights[dr][dc] - heights[r][c]);
 
-        if (res[dx][dy] > max_diff) {
-          res[dx][dy] = max_diff;
-          min_heap.push({max_diff, {dx, dy}});
+        int max_diff = std::max(w, d); // * we need the max diff
+        if (res[dr][dc] > max_diff) {
+          res[dr][dc] = max_diff;               // * update distance vector
+          min_heap.push({max_diff, {dr, dc}});  // * add to pq
         }
       }
     }
@@ -102,7 +108,7 @@ int minimumEffortPath(std::vector<std::vector<int>>& heights) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
+  // std::vector<std::vector<int>> heights = {{1, 2, 2}, {3, 8, 2}, {5, 3, 5}};
 
   // * testcase 2
   // std::vector<std::vector<int>> heights = {{1, 2, 3}, {3, 8, 4}, {5, 3, 5}};
@@ -110,8 +116,11 @@ int main(void) {
   // * testcase 3
   // std::vector<std::vector<int>> heights = {{1, 2, 1, 1, 1}, {1, 2, 1, 2, 1}, {1, 2, 1, 2, 1}, {1, 2, 1, 2, 1}, {1, 1, 1, 2, 1}};
 
-  // * testcase 3
+  // * testcase 4
   // std::vector<std::vector<int>> heights = {{1, 10, 6, 7, 9, 10, 4, 9}};
+
+  // * testcase 5
+  std::vector<std::vector<int>> heights = {{1, 8, 8}, {3, 8, 9}, {5, 3, 5}};
 
   std::cout << "heights" << std::endl;
   for (auto &vec : heights)

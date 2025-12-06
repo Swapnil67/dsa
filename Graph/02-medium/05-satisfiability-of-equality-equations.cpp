@@ -108,10 +108,10 @@ int main(void) {
   // std::vector<std::string> equations = {"a==b", "b==a"};
   
   // * testcase 3
-  // std::vector<std::string> equations = {"a==b", "b!=c", "c==a"};
-  
+  std::vector<std::string> equations = {"a==b", "b!=c", "c==a"};
+
   // * testcase 4
-  std::vector<std::string> equations = {"c==c", "b==d", "x!=z"};
+  // std::vector<std::string> equations = {"c==c", "b==d", "x!=z"};
 
   std::cout << "Equations: " << std::endl;
   printArr(equations);

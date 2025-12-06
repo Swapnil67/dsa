@@ -28,9 +28,10 @@
  * * https://leetcode.com/problems/is-graph-bipartite/description/
  * * https://www.geeksforgeeks.org/problems/bipartite-graph/1
  * * https://www.naukri.com/code360/problems/check-graph-is-bipartite-or-not_920551
+ * * https://www.naukri.com/code360/problems/is-bipartite_3849884
 */
 
-// ! microsoft, flipkart, samsung, meta
+// ! Microsoft, Flipkart, Samsung, Meta, Uber
 
 #include <queue>
 #include <vector>
@@ -81,32 +82,15 @@ bool dfs(int u,
   return true;
 }
 
-bool isBipartiteDFS(std::vector<std::vector<int>> &graph)
-{
-  int V = graph.size();
-
-  // * red = 1, green = 0
-  std::vector<int> color(V + 1, -1);
-
-  for (int u = 0; u < V; ++u) {
-    if (color[u] == -1) {
-      if (dfs(u, 1, color, graph) == false) {
-        printArr(color);
-        return false;
-      }
-    }
-  }
-
-  return true;
-}
-
-bool bfs(int cur, int cur_color,
-         std::vector<int> &color,
-         std::vector<std::vector<int>> &graph)
+bool bfs(
+    int cur,
+    std::vector<int> &color,
+    std::vector<std::vector<int>> &graph)
 {
   std::queue<int> q;
   q.push(cur);
-  color[cur] = cur_color;
+
+  color[cur] = 1; // * starting color
 
   while (!q.empty()) {
     int u = q.front();
@@ -129,6 +113,24 @@ bool bfs(int cur, int cur_color,
   return true;
 }
 
+bool isBipartiteDFS(std::vector<std::vector<int>> &graph)
+{
+  int V = graph.size();
+
+  // * red = 1, green = 0
+  std::vector<int> color(V + 1, -1);
+
+  for (int u = 0; u < V; ++u) {
+    if (color[u] == -1) {
+      if (dfs(u, 1, color, graph) == false) {
+        // printArr(color);
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
 
 bool isBipartiteBFS(std::vector<std::vector<int>> &graph)
 {
@@ -138,7 +140,7 @@ bool isBipartiteBFS(std::vector<std::vector<int>> &graph)
 
   for (int u = 0; u < V; ++u) {
     if (color[u] == -1) {
-      if (bfs(u, 1, color, graph) == false)
+      if (!bfs(u, color, graph))
         return false;
     }
   }

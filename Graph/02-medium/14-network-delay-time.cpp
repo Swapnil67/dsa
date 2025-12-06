@@ -76,30 +76,28 @@ std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<i
 }
 
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * Using Dijkstra Algorithm
 // * v = no of vertices
 // * e = no of edges
 // * TIME COMPLEXITY O(E*Log(V))
 // * SPACE COMPLEXITY O(E + V)
 int networkDelayTime(std::vector<std::vector<int>>& times, int n, int k) {
-
   std::unordered_map<int, std::vector<pii>> adj = constructadj(times);
 
-  // * pair = {distance, {x, y}}
+  // * pair = {distance, v}
   std::priority_queue<pii, std::vector<pii>, std::greater<>> min_heap; 
   min_heap.push(std::make_pair(0, k));
 
   std::vector<int> distance(n + 1, INT_MAX);
   distance[k] = 0;
 
+  // * Go to it's neighbour
   while (!min_heap.empty()) {
-    int w1 = min_heap.top().first;
-    int node = min_heap.top().second;
+    auto [w1, u] = min_heap.top();
     min_heap.pop();
 
-    for (auto &p: adj[node]) {
-      int v = p.first, w2 = p.second;
+    for (auto &[v, w2]: adj[u]) {
       if (distance[v] > w1 + w2) {
         distance[v] = w1 + w2;
         min_heap.push({w1 + w2, v});
@@ -107,7 +105,7 @@ int networkDelayTime(std::vector<std::vector<int>>& times, int n, int k) {
     }
   } 
 
-  // printArr(distance);
+  // printArr(distance); // * For debugging
 
   // * Return the max distance
   int min_time = INT_MIN;

@@ -20,6 +20,8 @@
  * * https://leetcode.com/problems/possible-bipartition/description/
 */
 
+// ! Microsoft, Flipkart, Samsung
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -100,12 +102,12 @@ bool possibleBipartition(int n, std::vector<std::vector<int>> &dislikes) {
 
 int main(void) {
   // * testcase 1
-  int n = 4;
-  std::vector<std::vector<int>> dislikes = {{1, 2}, {1, 3}, {2, 4}};
+  // int n = 4;
+  // std::vector<std::vector<int>> dislikes = {{1, 2}, {1, 3}, {2, 4}};
   
   // * testcase 2
-  // int n = 3;
-  // std::vector<std::vector<int>> dislikes = {{1, 2}, {1, 3}, {2, 3}};
+  int n = 3;
+  std::vector<std::vector<int>> dislikes = {{1, 2}, {1, 3}, {2, 3}};
 
   std::cout << "n: " << n << std::endl;
   std::cout << "dislikes: " << std::endl;

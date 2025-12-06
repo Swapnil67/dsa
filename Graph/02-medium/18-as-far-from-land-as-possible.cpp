@@ -2,7 +2,9 @@
  * Leetcode - 1162
  * As Far from Land as Possible
  * 
- * Given an n x n grid containing only values 0 and 1, where 0 represents water and 1 represents land, 
+ * Given an n x n grid containing only values 0 and 1,
+ * - 0 = water 
+ * - 1 = land
  * find a water cell such that its distance to the nearest land cell is maximized, and return the distance. 
  * If no land or water exists in the grid, return -1.
  * 
@@ -60,19 +62,23 @@ int maxDistance(std::vector<std::vector<int>> &grid) {
     }
   }
 
+  auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
+  };
+
   int res = -1;
   while (!q.empty()) {
-    auto [x, y] = q.front();
+    auto [r, c] = q.front();
     q.pop();
 
-    res = grid[x][y];
+    res = grid[r][c];
 
     for (auto &dir : dirs) {
-      int dx = x + dir[0], dy = y + dir[1];
-      if (dx >= 0 && dx < m && dy >= 0 && dy < n && grid[dx][dy] == 0) {
-        grid[dx][dy] = grid[x][y] + 1; // * overwite the distance
-        q.push({dx, dy});
-      } 
+      int dr = r + dir[0], dc = c + dir[1];
+      if (is_safe(dr, dc) && grid[dr][dc] == 0) {
+        grid[dr][dc] = grid[r][c] + 1; // * overwrite the distance
+        q.push({dr, dc});
+      }
     }
   }
 
@@ -123,7 +129,7 @@ int maxDistance2(std::vector<std::vector<int>> &grid) {
 
   }
 
-  return res > 1 ? res - 1 : -1;
+  return res > 0 ? res : -1;
 }
 
 int main(void) {
@@ -138,6 +144,7 @@ int main(void) {
     printArr(vec);
 
   int ans = maxDistance(grid);
+  // int ans = maxDistance2(grid);
   std::cout << "Max Distance: " << ans << std::endl;
 
   return 0;

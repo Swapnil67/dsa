@@ -80,6 +80,11 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
   }
 }
 
+// * Intuition
+// * To connect 'n' nodes we need 'n-1' edges
+// * Eg: n = 2, edges = 1
+// * Eg: n = 3, edges = 2
+// * Eg: n = 4, edges = 3
 int makeConnected(int n, std::vector<std::vector<int>> &connections) {
   int e = connections.size(); // * Edges
 

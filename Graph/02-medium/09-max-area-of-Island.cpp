@@ -22,6 +22,8 @@
  * * https://www.geeksforgeeks.org/problems/length-of-largest-region-of-1s-1587115620/1
 */
 
+// ! Meta, Microsoft, Google, Apple, Amazon, Uber
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -65,7 +67,7 @@ void dfs(int r, int c, int &area,
   }
 }
 
-// * Using visited matrix
+// * Using grid as matrix
 void dfs2(int r, int c, int &area,
          std::vector<std::vector<int>> &visited,
          std::vector<std::vector<int>> &grid)
@@ -114,33 +116,28 @@ int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
 
 int bfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<std::vector<int>> &grid)
 {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
+  int m = grid.size(), n = grid[0].size();
 
   std::queue<std::pair<int, int>> q;
   q.push({x, y});
-  visited[x][y] = 1;
-  int area = 1;
+  int area = 0;
+
+  const auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
+  };
 
   while (!q.empty()) {
-    auto p = q.front();
+    auto [r, c] = q.front();
     q.pop();
 
-    int row = p.first, col = p.second;
+    area++;
+    visited[r][c] = 1;
 
     // * Traverse in neighbours and mark them it it's a land
     for (auto &dir : dirs) {
-      int nx = row + dir[0];
-      int ny = col + dir[1];
-
-      if (nx < 0 || nx >= m || ny < 0 || ny >= n || grid[nx][ny] == 0) {
-        continue;
-      }
-
-      if (!visited[nx][ny]) {
-        visited[nx][ny] = 1;
+      int nx = r + dir[0], ny = c + dir[1];
+      if (is_safe(nx, ny) && grid[nx][ny] == 1 && !visited[nx][ny]) {
         q.push({nx, ny});
-        area++;
       }
     }
   }
@@ -158,10 +155,11 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
 
   std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
 
-  for (int i = 0; i < m; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (grid[i][j] == 1 && !visited[i][j]) {
-        int cur_area = bfs(i, j, visited, grid);
+  // * Loop over grid and do BFS on islands
+  for (int r = 0; r < m; ++r) {
+    for (int c = 0; c < n; ++c) {
+      if (grid[r][c] == 1 && !visited[r][c]) {
+        int cur_area = bfs(r, c, visited, grid);
         max_area = std::max(max_area, cur_area);
       }
     }
@@ -172,7 +170,14 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0}, {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
+  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                                        {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
 
   // * testcase 2
   // std::vector<std::vector<int>> grid = {{0, 0, 0, 0, 0, 0, 0, 0}};

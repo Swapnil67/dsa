@@ -37,11 +37,11 @@ int findChampion(int n, std::vector<std::vector<int>>& edges) {
   int champ = -1;
   for (int i = 0; i < n; ++i) { // * O(N)
     if (indegree[i] == 0) {
-      if (champ == -1) {
-        champ = i;
-      } else {
+      // * only one can be champion
+      if (champ != -1) {
         return -1;
       }
+      champ = i;
     }
   }
 

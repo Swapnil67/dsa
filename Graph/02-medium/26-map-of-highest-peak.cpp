@@ -40,11 +40,11 @@ void printArr(std::vector<T> &arr) {
   int n = arr.size();
   std::cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    std::cout << arr[i];
     if (i != n - 1)
       std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};

@@ -34,24 +34,41 @@ public:
   }
 };
 
-void dfs(Node *node, Node *clone_node,
-         std::unordered_map<Node *, Node *> &nodes) {
+// * Follow up question
+class Graph {
+public:
+  std::vector<Node *> roots;
+  Graph() {
+    roots = std::vector<Node *>();
+  }
+};
 
+void dfs(Node *&node,
+         Node *&clone_node,
+         std::unordered_map<Node *, Node *> &nodes_mp)
+{
+  // * Visit neighbours
   for (auto &ngbr : node->neighbors) {
     // * cannot find clone node of ngbr so we create new node
-    if (nodes.find(ngbr) == nodes.end()) {
+    if (nodes_mp.find(ngbr) == nodes_mp.end()) {
       Node *clone_ngbr = new Node(ngbr->val);
-      nodes[ngbr] = clone_ngbr;
+      nodes_mp[ngbr] = clone_ngbr;
+
       clone_node->neighbors.push_back(clone_ngbr);
-      dfs(ngbr, clone_ngbr, nodes);
+      dfs(ngbr, clone_ngbr, nodes_mp);
     }
     else {
       // * assign already created ngbr node
-      clone_node->neighbors.push_back(nodes[ngbr]);
+      clone_node->neighbors.push_back(nodes_mp[ngbr]);
     }
   }
 }
 
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * N = Total no of nodes in graph
+// * E = Total no of edges in graph
+// * TIME COMPLEXITY O(N + E)
+// * SPACE COMPLEXITY O(N)
 Node *cloneGraph(Node *node) {
   if (!node)
     return node;
@@ -59,10 +76,11 @@ Node *cloneGraph(Node *node) {
   // * clone the given node
   Node *clone = new Node(node->val);
 
-  std::unordered_map<Node *, Node *> nodes;
-  nodes[node] = clone;
+  // * Create an unordered_map to prevent creating duplicate nodes
+  std::unordered_map<Node *, Node *> nodes_mp;
+  nodes_mp[node] = clone;
 
-  dfs(node, clone, nodes);
+  dfs(node, clone, nodes_mp);
 
   return clone;
 }

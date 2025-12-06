@@ -2,8 +2,9 @@
  * * Leetcode - 1254
  * * Number of Closed Islands
  *
- * * Given a 2D grid consists of 0s (land) and 1s (water).  An island is a maximal 4-directionally connected
- * * group of 0s and a closed island is an island totally (all left, top, right, bottom) surrounded by 1s.
+ * * Given a 2D grid consists of 0s (land) and 1s (water).  
+ * * An island is a maximal 4-directionally connected group of 0s and a closed island is an island totally 
+ * * (all left, top, right, bottom) surrounded by 1s.
  * 
  * * Return the number of closed islands.
 
@@ -34,16 +35,6 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
-// * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
-  }
-}
-
 bool dfs(int r, int c,
          std::vector<std::vector<int>> &grid)
 {
@@ -57,10 +48,10 @@ bool dfs(int r, int c,
 
   grid[r][c] = 1; // * mark visited
 
-  bool left_closed = dfs(r, c - 1, grid);
-  bool right_closed = dfs(r, c + 1, grid);
-  bool top_closed = dfs(r - 1, c, grid);
-  bool bottom_closed = dfs(r + 1, c, grid);
+  bool left_closed    = dfs(r, c - 1, grid);
+  bool right_closed   = dfs(r, c + 1, grid);
+  bool top_closed     = dfs(r - 1, c, grid);
+  bool bottom_closed  = dfs(r + 1, c, grid);
 
   return left_closed && right_closed && top_closed && bottom_closed; 
 }
@@ -74,9 +65,8 @@ int closedIslandDFS(std::vector<std::vector<int>> &grid) {
   int closed_islands = 0;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
-      if (grid[r][c] == 0) {
-        if (dfs(r, c, grid))
-          closed_islands++;
+      if (grid[r][c] == 0 && dfs(r, c, grid)) {
+        closed_islands++;
       }
     }
   }
@@ -86,14 +76,14 @@ int closedIslandDFS(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1, 0},
-                                        {1, 0, 0, 0, 0, 1, 1, 0},
-                                        {1, 0, 1, 0, 1, 1, 1, 0},
-                                        {1, 0, 0, 0, 0, 1, 0, 1},
-                                        {1, 1, 1, 1, 1, 1, 1, 0}};
+  // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1, 0},
+  //                                       {1, 0, 0, 0, 0, 1, 1, 0},
+  //                                       {1, 0, 1, 0, 1, 1, 1, 0},
+  //                                       {1, 0, 0, 0, 0, 1, 0, 1},
+  //                                       {1, 1, 1, 1, 1, 1, 1, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0}, {0, 1, 0, 1, 0}, {0, 1, 1, 1, 0}};
+  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0}, {0, 1, 0, 1, 0}, {0, 1, 1, 1, 0}};
 
   // * testcase 3
   // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1},

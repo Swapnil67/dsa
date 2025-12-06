@@ -23,9 +23,12 @@
  * * https://leetcode.com/problems/course-schedule-ii/
  */
 
+// ! Meta, Amazon, Microsoft, Google
+
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -40,23 +43,19 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+  for (auto &[key, vec] : adj) {
+    std::cout << key << " -> ";
+    printArr(vec);
   }
 }
 
-std::vector<std::vector<int>> contructadj(
-    int V,
-    std::vector<std::vector<int>> &prerequisites,
-    std::vector<int> &indegree)
+std::unordered_map<int, std::vector<int>> contructadj(
+    std::vector<int> &indegree,
+    std::vector<std::vector<int>> &edges)
 {
-  std::vector<std::vector<int>> adj(V);
-
-  for (auto &it: prerequisites) {
+  std::unordered_map<int, std::vector<int>> adj;
+  for (auto &it: edges) {
     int a = it[0], b = it[1];
     // * b ---> a
     adj[b].push_back(a);
@@ -66,7 +65,12 @@ std::vector<std::vector<int>> contructadj(
   return adj;
 }
 
-std::vector<int> bfs(int n, std::vector<std::vector<int>> &adj, std::vector<int> &indegree) {
+// * Topological Sort
+std::vector<int> bfs(
+    int n,
+    std::vector<int> &indegree,
+    std::unordered_map<int, std::vector<int>> adj)
+{
 
   int count = 0;
   std::queue<int> q;
@@ -107,7 +111,7 @@ std::vector<int> bfs(int n, std::vector<std::vector<int>> &adj, std::vector<int>
 std::vector<int> canFinish(int numCourses, std::vector<std::vector<int>> &prerequisites) {
 
   std::vector<int> indegree(numCourses, 0);
-  std::vector<std::vector<int>> adj = contructadj(numCourses, prerequisites, indegree);
+  std::unordered_map<int, std::vector<int>> adj = contructadj(indegree, prerequisites);
 
   // * For Debugging
   std::cout << "Adjacency List" << std::endl;
@@ -115,7 +119,7 @@ std::vector<int> canFinish(int numCourses, std::vector<std::vector<int>> &prereq
   std::cout << "Indegree" << std::endl;
   printArr(indegree);
 
-  return bfs(numCourses, adj, indegree);
+  return bfs(numCourses, indegree, adj);
 }
 
 int main(void) {

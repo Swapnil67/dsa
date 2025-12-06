@@ -74,7 +74,6 @@ int main(void) {
   for (auto &vec : rooms)
     printArr(vec);
 
-
   std::cout << "Can visit all rooms: " << ans << std::endl;
   return 0;
 }

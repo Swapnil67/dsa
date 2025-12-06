@@ -57,10 +57,8 @@ std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<i
 std::vector<int> shortestPath(int m, int n, std::vector<std::vector<int>> &edges) {
   // * 1. Create a Adjacency List
   std::unordered_map<int, std::vector<pii>> adj = constructadj(edges);
-
-  // * For debugging
-  std::cout << "Adjacency List" << std::endl;
-  printAdjList(adj);
+  // std::cout << "Adjacency List" << std::endl;
+  // printAdjList(adj); // * For debugging
 
   std::vector<int> parent_vec(n + 1);
   std::vector<int> distance(n + 1, INT_MAX);
@@ -70,21 +68,21 @@ std::vector<int> shortestPath(int m, int n, std::vector<std::vector<int>> &edges
   min_heap.push({0, 1});
 
   while (!min_heap.empty()) {
-    int w1 = min_heap.top().first;
-    int parent = min_heap.top().second;
+    auto [w1, u] = min_heap.top();
     min_heap.pop();
-
-    for (auto &p: adj[parent]) {
-      int v = p.first, w2 = p.second;
+    // std::cout << "Parent: " << parent << std::endl;
+    for (auto &[v, w2]: adj[u]) {
       if (distance[v] > w1 + w2) { 
+        // std::cout << "\tv: " << v << ", & w: " << w1 + w2 << std::endl;
         distance[v] = w1 + w2;
         min_heap.push({w1 + w2, v});
-        parent_vec[v] = parent;
+        parent_vec[v] = u;
       }
     }
   }
 
-  // printArr(parent_vec);
+  printArr(distance);
+  printArr(parent_vec);
 
   // * Did not reach the node
   if (distance[n] == INT_MAX)

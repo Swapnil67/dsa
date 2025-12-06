@@ -4,12 +4,12 @@
  *
  * * You are given an m x n grid where each cell can have one of three values:
  * * - 0 representing an empty cell,
- * * - 1 representing a fresh orange, or
+ * * - 1 representing a fresh_oranges orange, or
  * * - 2 representing a rotten orange.
  *
- * * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+ * * Every minute, any fresh_oranges orange that is 4-directionally adjacent to a rotten orange becomes rotten.
 
- * * Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1.
+ * * Return the minimum number of minutes that must elapse until no cell has a fresh_oranges orange. If this is impossible, return -1.
 
  * * Example 1  :
  * * Input      : grid = [[2,1,1],[1,1,0],[0,1,1]]
@@ -62,47 +62,30 @@ void printAdjList(std::vector<T> &adj) {
 }
 const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
-bool dfs(int x, int y, std::vector<std::vector<int>> &grid) {
-  int m = grid.size(); 
-  int n = grid[0].size(); 
-
-  // * Edge cases
-  if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != 2) {
-    return false;
-  }
-
-  if (grid[x][y] == 2)
-    return true;
-
-  for (auto &dir : dirs) {
-    int new_x = x + dir[0]; 
-    int new_y = y + dir[1];
-    if (dfs(new_x, new_y, grid))
-      return true;
-  }
-
-  return false;
-}
-
 // * ------------------------- Approach 1: Optimal -------------------------
+// * Multi Source BFS
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
 int orangesRotting(std::vector<std::vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
   std::queue<std::pair<int, int>> q;
-  int fresh = 0;
-
+  
   // * Add all the rotten oranges to queue
+  int fresh_oranges = 0;
   for (int r = 0; r < grid.size(); r++) {
     for (int c = 0; c < grid[0].size(); c++) {
       if (grid[r][c] == 1) {
-        fresh++;
+        fresh_oranges++;
       } else if (grid[r][c] == 2) {
         q.push({r, c});
       }
     }
   }
+
+  // * There are no fresh oranges
+  if (fresh_oranges == 0)
+    return 0;
 
   // * Out of bound check
   const auto is_safe = [&](const int &r, const int &c) {
@@ -110,7 +93,7 @@ int orangesRotting(std::vector<std::vector<int>> &grid)
   };
 
   int minutes = 0;
-  while (fresh > 0 && !q.empty()) {
+  while (fresh_oranges > 0 && !q.empty()) {
     int N = q.size();
     while (N--) {
       auto [r, c] = q.front();
@@ -119,18 +102,18 @@ int orangesRotting(std::vector<std::vector<int>> &grid)
       for (auto &dir : dirs) {
         int nr = r + dir[0];
         int nc = c + dir[1];
-        // * Make all the fresh oranges in neighbour rotten
+        // * Make all the fresh_oranges oranges in neighbour rotten
         if (is_safe(nr, nc) && grid[nr][nc] == 1) {
           grid[nr][nc] = 2;
           q.push({nr, nc});
-          fresh--;
+          fresh_oranges--;
         }
       }
     }
     minutes++;
   }
 
-  return fresh == 0 ? minutes : -1;
+  return fresh_oranges == 0 ? minutes : -1;
 }
 
 int main(void) {

@@ -1,5 +1,5 @@
 /**
- * * Leetcode - 684
+* * Leetcode - 684
  * * Redundant Connection
  *
  * * In this problem, a tree is an undirected graph that is connected and has no cycles.
@@ -144,11 +144,11 @@ std::vector<int> findRedundantConnectionDFS(std::vector<std::vector<int>> &edges
   for (auto &edge: edges) { // * O(N)
     int u = edge[0], v = edge[1];
 
-    // * If we are able to connect from u -> v in our current adj then it means current 'it' is a redudant connection
+    // * If we are able to connect from u -> v in our current adj then it 
+    // * means that current 'edge' is a redudant connection.
     if (adj.find(u) != adj.end() &&
         adj.find(v) != adj.end() &&
-        dfs(u, v, visited, adj))
-    { // * O(N)
+        dfs(u, v, visited, adj)) { // * O(N)
       return edge;
     }
 
@@ -188,7 +188,7 @@ std::vector<int> findRedundantConnectionBFS(std::vector<std::vector<int>> &edges
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * Using DSU
+// * Using DSU [Most Optimal]
 // * TIME COMPLEXITY O(N * alpha(n))
 // * SPACE COMPLEXITY O(N)
 std::vector<int> findRedundantConnectionDSU(std::vector<std::vector<int>> &edges) {
@@ -218,10 +218,10 @@ std::vector<int> findRedundantConnectionDSU(std::vector<std::vector<int>> &edges
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> edges = {{1, 2}, {1, 3}, {2, 3}};
+  std::vector<std::vector<int>> edges = {{1, 2}, {1, 3}, {2, 3}};
   
   // * testcase 2
-  std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1,5}};
+  // std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1,5}};
 
   std::cout << "Edges: " << std::endl;
   for (auto &vec : edges)
