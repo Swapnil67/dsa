@@ -45,7 +45,7 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
-// * Construct adjacency list for BFS
+// * Construct adjacency list for BFS with indegree
 std::unordered_map<int, std::vector<int>> constructadj(
     std::vector<int> &indegree,
     std::vector<std::vector<int>> &edges)
@@ -72,6 +72,7 @@ int largestPathValue(std::string &colors, std::vector<std::vector<int>> &edges) 
   std::vector<std::vector<int>> t(N, std::vector<int>(26, 0));
   std::queue<int> q;
 
+  // * Push nodes with indegree == 0 to queue
   for (int i = 0; i < N; ++i) {
     if (indegree[i] == 0) {
       t[i][colors[i] - 'a'] = 1;
@@ -88,8 +89,10 @@ int largestPathValue(std::string &colors, std::vector<std::vector<int>> &edges) 
     ans = std::max(ans, t[u][colors[u] - 'a']);
 
     for (auto &v : adj[u]) {
+      int cur_color = colors[v] - 'a';
+      // * Find the color values for 'v' node
       for (int c = 0; c < 26; ++c) {
-        t[v][c] = std::max(t[v][c], t[u][c] + (colors[v] - 'a' == c));
+        t[v][c] = std::max(t[v][c], t[u][c] + (cur_color == c));
       }
       indegree[v]--;
       if (indegree[v] == 0) {
@@ -103,7 +106,7 @@ int largestPathValue(std::string &colors, std::vector<std::vector<int>> &edges) 
   //   printArr(vec);
   // }
 
-  if (count_nodes < N)
+  if (count_nodes < N) // * cycle in graph
     return -1;
   return ans;
 }

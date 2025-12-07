@@ -35,6 +35,7 @@
 #include <map>
 #include <queue>
 #include <vector>
+#include <climits>
 #include <iostream>
 #include <unordered_map>
 #include <unordered_set>
@@ -50,14 +51,14 @@ void printArr(std::vector<T> &arr) {
   }
   std::cout << "]" << std::endl;
 }
-typedef std::pair<int, int> P;
 
+typedef std::pair<int, int> P;
 
 void printMap(std::map<int, std::vector<P>> &adj) {
   for (auto &[key, vec] : adj) {
     std::cout << key << " -> ";
     for (auto &it: vec) {
-      std::cout << "(" << it.first << " " << it.second << ") ";
+      std::cout << "(" << it.first << " " << it.second << "), ";
     }
     std::cout << std::endl;
   }
@@ -67,6 +68,16 @@ void printAdjList2(std::unordered_map<int, std::vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
     std::cout << key << " -> ";
     printArr(vec);
+  }
+}
+
+void printAdjList(std::unordered_map<int, std::vector<P>> &adj) {
+  for (auto &[u, vec]: adj) {
+    std::cout << u << " -> ";
+    for (auto &it : vec) {
+      std::cout << "(" << it.first << " " << it.second << "), ";
+    }
+    std::cout << std::endl;
   }
 }
 
@@ -140,24 +151,79 @@ std::vector<int> findAllPeople(int n, int first_person, std::vector<std::vector<
   return res;
 }
 
+// * ------------------------- APPROACH: Optimal  -------------------------`
+// * Easy to understand
+// * TIME COMPLEXITY  O(V + E) * 26
+// * SPACE COMPLEXITY O(V + E)
+std::vector<int> findAllPeople2(int n, int first_person, std::vector<std::vector<int>> &meetings) {
+  // * 1. Create a Adj list {person1: {person2, time}}
+  std::unordered_map<int, std::vector<P>> adj;
+  for (auto &it : meetings) {
+    int u = it[0], v = it[1], time = it[2];
+    adj[u].push_back({v, time});
+    adj[v].push_back({u, time});
+  }
+  printAdjList(adj); // * For Debugging
+
+  // * People who already know the secret
+  std::vector<int> secret_time(n, INT_MAX);
+  secret_time[0] = 0;
+  secret_time[first_person] = 0;
+
+  // * BFS
+  std::queue<P> q;
+  q.push({0, 0});             // * People who already know the secret
+  q.push({first_person, 0});  // * People who already know the secret
+
+  while (!q.empty()) {
+    int N = q.size();
+    while (N--) {
+      auto [person1, time] = q.front();
+      q.pop();
+
+      for (auto &[person2, time2] : adj[person1]) {
+        // * Person2 doesn't knows the secret and there meeting is in future time
+        // * So person1 will share the secret with person2 in that meeting
+        if (time2 >= time && secret_time[person2] > time2) {
+          secret_time[person2] = time2;
+          q.push({person2, time2});
+        }
+      }
+    }  
+  }
+  
+  std::vector<int> ans;
+  for (int i = 0; i < n; ++i) {
+    if (secret_time[i] != INT_MAX)
+      ans.push_back(i);
+  }
+  return ans;
+}
+
 int main(void) {
   // * testcase 1
   // int n = 6, firstPerson = 1;
-  // std::vector<std::vector<int>> edges = {{1, 2, 5}, {2, 3, 8}, {1, 5, 10}};
+  // std::vector<std::vector<int>> meetings = {{1, 2, 5}, {2, 3, 8}, {1, 5, 10}};
   
   // * testcase 2
-  int n = 4, firstPerson = 3;
-  std::vector<std::vector<int>> edges = {{3, 1, 3}, {1, 2, 2}, {0, 3, 3}};
+  // int n = 4, firstPerson = 3;
+  // std::vector<std::vector<int>> meetings = {{3, 1, 3}, {1, 2, 2}, {0, 3, 3}};
 
   // * testcase 3
   // int n = 5, firstPerson = 1;
-  // std::vector<std::vector<int>> edges = {{3, 4, 2}, {1, 2, 1}, {2, 3, 1}};
+  // std::vector<std::vector<int>> meetings = {{3, 4, 2}, {1, 2, 1}, {2, 3, 1}};
 
-  std::cout << "-------- edges -------- " << std::endl;
-  for (auto &vec : edges)
+  // * testcase 3 (Dry Run)
+  int n = 4, firstPerson = 2;
+  std::vector<std::vector<int>> meetings = {{0, 1, 4}, {1, 3, 3}, {2, 1, 2}};
+
+  std::cout << "First Person " << firstPerson << std::endl;
+  std::cout << "-------- Meetings -------- " << std::endl;
+  for (auto &vec : meetings)
     printArr(vec);
 
-  std::vector<int> ans = findAllPeople(n, firstPerson, edges);
+  // std::vector<int> ans = findAllPeople(n, firstPerson, meetings);
+  std::vector<int> ans = findAllPeople2(n, firstPerson, meetings);
   std::cout << "People who know secret: ";
   printArr(ans);
 
@@ -166,3 +232,15 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 06-find-all-people-with-secret.cpp -o output && ./output
+
+// * DRY Run (Testcase 4)
+/*
+* Adj Matrix
+* Person1 -> (Person2, Time)
+* 0 -> (1 4)  
+* 1 -> (0 4), (3 3), (2 2) 
+* 2 -> (1 2) 
+* 3 -> (1 3) 
+* 
+*
+*/

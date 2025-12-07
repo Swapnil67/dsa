@@ -1,29 +1,24 @@
 /*
- * Leetcode - 2872
- * Maximum Number of K-Divisible Components
+ * Leetcode - 773
+ * Sliding Puzzle
  *
- * There is an undirected tree with n nodes labeled from 0 to n - 1. 
- * You are given the integer n and a 2D integer array edges of length n - 1, where edges[i] = [ai, bi] 
- * indicates that there is an edge between nodes ai and bi in the tree.
+ * On an 2 x 3 board, there are five tiles labeled from 1 to 5, and an empty square represented by 0. 
+ * A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.
  * 
- * You are also given a 0-indexed integer array values of length n, where values[i] is the value associated with
- * the ith node, and an integer k.
+ * The state of the board is solved if and only if the board is [[1,2,3],[4,5,0]].
  * 
- * A valid split of the tree is obtained by removing any set of edges, possibly empty, from the tree such that the 
- * resulting components all have values that are divisible by k, where the value of a connected component is the sum 
- * of the values of its nodes.
- * 
- * Return the maximum number of components in any valid split.
+ * Given the puzzle board board, return the least number of moves required so that the state of the
+ * board is solved. If it is impossible for the state of the board to be solved, return -1.
 
- * * Example 1  :
- * * Input      : board = [[1,2,3],[4,0,5]]
- * * Output     : 2
+ * Example 1  :
+ * Input      : board = [[1,2,3],[4,0,5]]
+ * Output     : 2
  * 
- * * Example 2  :
- * * Input      : board = [[1,2,3],[5,4,0]]
- * * Output     : 3
+ * Example 2  :
+ * Input      : board = [[1,2,3],[5,4,0]]
+ * Output     : 3
  * 
- * https://leetcode.com/problems/maximum-number-of-k-divisible-components/
+ * https://leetcode.com/problems/sliding-puzzle/description/
  * 
  */
 
@@ -49,7 +44,7 @@ void printArr(std::vector<T> &arr) {
 
 // * ------------------------- APPROACH: Optimal  -------------------------`
 // * TIME COMPLEXITY  O(6!)
-// * The puzzle has 6 ! = 720 possible permutations of the board, as there are 6 tiles, 
+// * The puzzle has 6! = 720 possible permutations of the board, as there are 6 tiles, 
 // * including the blank tile (0). In the worst case, BFS explores all permutations.
 // * SPACE COMPLEXITY O(6!)
 int slidingPuzzle(std::vector<std::vector<int>> &board) {
@@ -62,11 +57,13 @@ int slidingPuzzle(std::vector<std::vector<int>> &board) {
       start += std::to_string(board[r][c]);
     }
   }
+  std::cout << "Start: " << start << std::endl;
 
   std::queue<std::string> q;
   q.push(start);
   
-  std::string target = "123450";
+  const std::string target = "123450";
+
   // * Save all the possible cell zero can be swapped with into a map
   std::unordered_map<int, std::vector<int>> mp = {
       {0, {1, 3}},
@@ -74,7 +71,8 @@ int slidingPuzzle(std::vector<std::vector<int>> &board) {
       {2, {1, 5}},
       {3, {0, 4}},
       {4, {1, 3, 5}},
-      {5, {2, 4}}};
+      {5, {2, 4}},
+  };
 
   std::unordered_set<std::string> visited;
   visited.insert(start);
@@ -107,13 +105,13 @@ int slidingPuzzle(std::vector<std::vector<int>> &board) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> board = {{1, 2, 3}, {4, 0, 5}};
+  std::vector<std::vector<int>> board = {{1, 2, 3}, {4, 0, 5}};
 
   // * testcase 2
   // std::vector<std::vector<int>> board = {{1, 2, 3}, {5, 4, 0}};
 
-  // * testcase 2
-  std::vector<std::vector<int>> board = {{4, 1, 2}, {5, 0, 3}};
+  // * testcase 3
+  // std::vector<std::vector<int>> board = {{4, 1, 2}, {5, 0, 3}};
 
   std::cout << "-------- board -------- " << std::endl;
   for (auto &vec : board)

@@ -38,14 +38,13 @@ void printArr(std::vector<T> &arr) {
 }
 
 
-
 // * ------------------------- APPROACH: Optimal  -------------------------`
 // * Replace every char of work with 'a-z' char
-// * hit -> ait, bit, cit, .... hot ... zit
+// * hit -> ait, bit, cit, .... hit ... zit
+// * hit -> hat, hbt, hct, .... hot ... hzt
 // * hot -> aot, bot, cot, .... lot ... zot
 // * lot -> loa, lob, loc, .... log ... lot
 // * log -> aog, bog, cog
-
 
 // * N = word list size
 // * W = size of each word size

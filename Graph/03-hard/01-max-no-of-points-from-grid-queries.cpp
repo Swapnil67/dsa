@@ -70,32 +70,28 @@ void dfs(
   }
 }
 
-int bfs(
-    int query,
-    std::vector<std::vector<int>> &grid)
+int bfs(int query, std::vector<std::vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
 
-  int points = 0;
   std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
   visited[0][0] = true;
-
+  
   std::queue<std::pair<int, int>> q;
   q.push({0, 0});
+  
+  int points = 0;
   while (!q.empty()) {
     int N = q.size();
     while (N--) {
       auto [r, c] = q.front();
       q.pop();
 
-      if (grid[r][c] > query)
-        continue;
-
       points++;
 
       for (auto &dir : dirs) {
         int dr = r + dir[0], dc = c + dir[1];
-        if (check_not_oob(dr, dc, grid) && !visited[dr][dc]) {
+        if (check_not_oob(dr, dc, grid) && !visited[dr][dc] && grid[r][c] < query) {
           q.push({dr, dc});
           visited[dr][dc] = true;
         }
@@ -103,14 +99,16 @@ int bfs(
     }
   }
 
+  // std::cout << "Query: " << query << ", Points: " << points << std::endl;
+
   return points;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------
+// * ------------------------- APPROACH 1: Brute Force DFS -------------------------
 // ! TLE
 // * TIME COMPLEXITY  O(N) + O(V + 2E) ~ O(N)
 // * SPACE COMPLEXITY O(v)
-std::vector<int> bruteForce(std::vector<int> &queries, std::vector<std::vector<int>> &grid) {
+std::vector<int> bruteForceDFS(std::vector<int> &queries, std::vector<std::vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   
   int Q = queries.size();
@@ -126,7 +124,7 @@ std::vector<int> bruteForce(std::vector<int> &queries, std::vector<std::vector<i
   return ans;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------
+// * ------------------------- APPROACH 1: Brute Force BFS -------------------------
 // ! TLE
 // * TIME COMPLEXITY  O(N) + O(V + 2E) ~ O(N)
 // * SPACE COMPLEXITY O(v)
@@ -136,43 +134,40 @@ std::vector<int> bruteForceBFS(std::vector<int> &queries, std::vector<std::vecto
   int Q = queries.size();
   std::vector<int> ans(Q);
   for (int i = 0; i < Q; ++i) {
-    std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
-    int points = 0;
-    if (queries[i] > grid[0][0]) {
-      points = bfs(queries[i], grid);
-    }
-    ans[i] = points;
+    ans[i] = bfs(queries[i], grid);
   }
   return ans;
 }
 
 // * ------------------------- APPROACH 2: Optimal  -------------------------`
 // * Sort the queries array
-// * TIME COMPLEXITY  O(Q(logQ) + m * nlog(m*n))
+// * TIME COMPLEXITY  O(klogk) + (m * n) * log(m * n)
 // * Notice that we won't visit any cell more than once (we mark them visited). 
 // * Total cells = m * n and heap can have m * n cells in worst case
 // * SPACE COMPLEXITY O(m * n)
 std::vector<int> maxPoints(std::vector<int> &queries, std::vector<std::vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   
-  int Q = queries.size();
-  std::vector<std::pair<int, int>> sorted_queries;
   // * 1. Sort the queries array & store the index so that we don't lose original index
-  for (int i = 0; i < Q; ++i) {
+  int k = queries.size();
+  std::vector<std::pair<int, int>> sorted_queries;
+  for (int i = 0; i < k; ++i) {
     sorted_queries.push_back({queries[i], i});
   }
-  std::sort(begin(sorted_queries), end(sorted_queries));  // * Q(logQ)
+  std::sort(begin(sorted_queries), end(sorted_queries));  // * O(klogk)
 
+  // * 2. Create a visited boolean matrix
   std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
   visited[0][0] = true;
 
+  // * 3. Priority Queue BFS
   typedef std::pair<int, std::pair<int, int>> P;
   std::priority_queue<P, std::vector<P>, std::greater<>> min_heap;
   min_heap.push({grid[0][0], {0, 0}});
   
   int points = 0;
-  std::vector<int> ans(Q, 0);
-  for (int i = 0; i < Q; ++i) {
+  std::vector<int> ans(k, 0);
+  for (int i = 0; i < k; ++i) {
     auto [query, idx] = sorted_queries[i];
     // std::cout << query << std::endl;
 
@@ -216,8 +211,9 @@ int main(void) {
   for (auto &vec : grid)
     printArr(vec);
   
-  // std::vector<int> ans = bruteForce(queries, grid);
-  std::vector<int> ans = maxPoints(queries, grid);
+  // std::vector<int> ans = bruteForceDFS(queries, grid);
+  std::vector<int> ans = bruteForceBFS(queries, grid);
+  // std::vector<int> ans = maxPoints(queries, grid);
   std::cout << "-------- Answer -------- " << std::endl;
   printArr(ans);
 

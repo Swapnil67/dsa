@@ -26,8 +26,7 @@
  * * Input      : n = 5, relations = [[1,5],[2,5],[3,5],[3,4],[4,5]], time = [1,2,3,4,5]
  * * Output     : 12
  * 
- * https://leetcode.com/problems/find-all-people-with-secret/description/
- * 
+ * https://leetcode.com/problems/parallel-courses-iii
  */
 
 // ! Topological Sort
@@ -45,13 +44,12 @@ void printArr(std::vector<T> &arr) {
   int n = arr.size();
   std::cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    std::cout << arr[i];
     if (i != n - 1)
       std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
-typedef std::pair<int, int> P;
 
 void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
@@ -104,8 +102,9 @@ int minimumTime(int n, std::vector<int> &time, std::vector<std::vector<int>> &re
 
     // * Go to all next courses possible
     for (auto &next_course: adj[course]) {
-      // * Finishing next_course of v will depend on the maximum time of its pre-requisites course
-      max_course_time[next_course] = std::max(max_course_time[next_course], max_course_time[course] + time[next_course]);
+      // * Finishing `next_course` will depend on the max time of its pre-requisites course
+      max_course_time[next_course] = std::max(max_course_time[next_course],
+                                              max_course_time[course] + time[next_course]);
       // std::cout << next_course << " -> " << max_course_time[next_course] << std::endl;
       indegree[next_course]--;
       if (indegree[next_course] == 0) {
@@ -142,4 +141,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 08-parallel-courses-III.cpp -o output && ./output
+// * g++ --std=c++20 09-parallel-courses-III.cpp -o output && ./output

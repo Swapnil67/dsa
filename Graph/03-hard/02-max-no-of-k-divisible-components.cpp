@@ -105,14 +105,14 @@ int maxKDivisibleComponents(int n, int k, std::vector<int> &values, std::vector<
 
 int main(void) {
   // * testcase 1
-  int n = 5, k = 6;
-  std::vector<int> values = {1, 8, 1, 4, 4};
-  std::vector<std::vector<int>> edges = {{0, 2}, {1, 2}, {1, 3}, {2, 4}};
+  // int n = 5, k = 6;
+  // std::vector<int> values = {1, 8, 1, 4, 4};
+  // std::vector<std::vector<int>> edges = {{0, 2}, {1, 2}, {1, 3}, {2, 4}};
 
   // * testcase 2
-  // int n = 7, k = 3;
-  // std::vector<int> values = {3};
-  // std::vector<std::vector<int>> edges = {{0,1},{0,2},{1,3},{1,4},{2,5},{2,6}};
+  int n = 7, k = 3;
+  std::vector<int> values = {3};
+  std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 3}, {1, 4}, {2, 5}, {2, 6}};
 
   std::cout << "Values: ";
   printArr(values);
