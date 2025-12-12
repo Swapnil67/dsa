@@ -31,8 +31,8 @@ void printArr(std::vector<int> arr) {
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(n)
-// * SPACE COMPLEXITY O(1)
 int findMaxConsecutiveOnes(std::vector<int> &nums) {
+// * SPACE COMPLEXITY O(1)
   int n = nums.size();
   int ans = 0;
   int i = 0, j = 0, flips = 1;
