@@ -55,6 +55,8 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
+typedef std::pair<int, int> pii;
+
 const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
 // * check out of bound
@@ -64,7 +66,7 @@ bool check_not_oob(const int &row, const int &col, std::vector<std::vector<int>>
 }
 
 // * Multi Source BFS
-// * We need to go to the cell where distance from thief is greater than on equal to min_dist (Safeness factor)
+// * We need to go to the cells where distance from thief is greater than on equal to min_dist (Safeness factor)
 bool bfs(int &min_dist, std::vector<std::vector<int>> &dist) {
   int m = dist.size(), n = dist[0].size();
   if (dist[0][0] < min_dist) { // * Starting cell is not within the safeness factor
@@ -102,7 +104,7 @@ std::vector<std::vector<int>> distanceGrid(std::vector<std::vector<int>> &grid) 
   int m = grid.size(), n = grid[0].size();
 
   std::vector<std::vector<int>> dist(m, std::vector<int>(n, INT_MAX));
-  std::queue<std::pair<int, int>> q;
+  std::queue<pii> q;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) { // * Found thief
@@ -122,7 +124,7 @@ std::vector<std::vector<int>> distanceGrid(std::vector<std::vector<int>> &grid) 
         int dr = r + dir[0], dc = c + dir[1];
         if (check_not_oob(dr, dc, grid) && dist[dr][dc] == INT_MAX) {
           dist[dr][dc] = dist[r][c] + 1;
-          q.push({dr, dc});
+          q.push(std::make_pair(dr, dc));
         }
       }
     }

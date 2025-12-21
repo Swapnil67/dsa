@@ -119,16 +119,16 @@ int networkDelayTime(std::vector<std::vector<int>>& times, int n, int k) {
 
 int main(void) {
   // * testcase 1
-  // int k = 2, n = 4;
-  // std::vector<std::vector<int>> times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
+  int k = 2, n = 4;
+  std::vector<std::vector<int>> times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
 
   // * testcase 2
   // int n = 2, k = 1;
   // std::vector<std::vector<int>> times = {{1, 2, 1}};
   
   // * testcase 3
-  int n = 2, k = 2;
-  std::vector<std::vector<int>> times = {{1, 2, 1}};
+  // int n = 2, k = 2;
+  // std::vector<std::vector<int>> times = {{1, 2, 1}};
 
   std::cout << "k: " << k << ", n: " << n << std::endl;
   std::cout << "Times" << std::endl;

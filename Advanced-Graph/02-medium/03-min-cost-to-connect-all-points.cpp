@@ -26,7 +26,7 @@
 
 // ! MST
 
-// ! Google
+// ! Google, Meta
 
 #include <queue>
 #include <vector>
@@ -92,7 +92,6 @@ int prims_algorithm(int &V, std::unordered_map<int, std::vector<pii>> &adj) {
 // * TIME COMPLEXITY O(E*Log(V))
 // * SPACE COMPLEXITY O(E + V)
 int minCostConnectPoints(std::vector<std::vector<int>>& points) {
-
   // * 1. Create an Adj list
   std::unordered_map<int, std::vector<pii>> adj;
   int V = points.size();
@@ -117,7 +116,7 @@ int main(void) {
   std::vector<std::vector<int>> points = {{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> points = {{3,12},{-2,5},{-4,1}}
+  // std::vector<std::vector<int>> points = {{3, 12}, {-2, 5}, {-4, 1}};
 
   std::cout << "Points" << std::endl;
   for (auto &vec : points)

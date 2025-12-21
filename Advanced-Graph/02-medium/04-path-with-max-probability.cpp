@@ -90,7 +90,7 @@ double maxProbability(
 {
   // * 1. Construct adj
   std::unordered_map<int, std::vector<pif>> adj = constructadj(succProb, edges);
-  printAdjList(adj);
+  // printAdjList(adj); // * For debugging
 
   std::vector<double> dist(n, 0.0);
   dist[start] = 1.0; // * Prob to reach start is 100% i.e. Probability = 1

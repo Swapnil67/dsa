@@ -60,8 +60,8 @@ void printAdjList(std::unordered_map<int, std::vector<std::pair<int, int>>> &adj
 
 // * ------------------------- Approach 2: Optimal -------------------------
 // * BFS + Dijkstra's Algorithm
-// * TIME COMPLEXITY O(m * n)
-// * SPACE COMPLEXITY O(m * n) + O(m + n)
+// * TIME COMPLEXITY O(E+Vlogv)
+// * SPACE COMPLEXITY O(V + E)
 int findCheapestPrice(
   int n, 
   int src, int dst, int k,
@@ -102,7 +102,7 @@ int findCheapestPrice(
     if (stops > k)
       break;
   }
-  printArr(dist);
+  // printArr(dist);
 
   return dist[dst] == INT_MAX ? -1: dist[dst];
 }

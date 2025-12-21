@@ -36,7 +36,11 @@
 *                 - City 4 -> [City 1, City 2, City 3] 
 *
 * https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description
+* https://www.geeksforgeeks.org/problems/city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/0
+* https://www.naukri.com/code360/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance_1264289
 */
+
+// ! uber
 
 #include <queue>
 #include <vector>
@@ -71,7 +75,7 @@ int findTheCity(int n, int &distanceThreshold, std::vector<std::vector<int>> &ed
   // * Count the min dist from every 'V' to every other 'V'
   // * Distance to itself will be 0
   for (int i = 0; i < n; ++i)
-  dist[i][i] = 0;
+    dist[i][i] = 0;
   
   for (int via = 0; via < n; ++via) {
     for (int i = 0; i < n; ++i) {
@@ -79,6 +83,7 @@ int findTheCity(int n, int &distanceThreshold, std::vector<std::vector<int>> &ed
         if (dist[i][via] == INT_MAX || dist[via][j] == INT_MAX)
           continue;
 
+        // * dist[1][0] = dist[1][0] + dist[0][0] (eg: going via 0)
         dist[i][j] = std::min(dist[i][j], (dist[i][via] + dist[via][j]));
       }
     }
@@ -125,4 +130,4 @@ int main(void) {
 
 
 // * Run the code
-// * g++ --std=c++20 09-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance.cpp -o output && ./output
+// * g++ --std=c++20 09-find-the-city-with-the-smallest-no-of-neighbors-at-a-threshold-distance.cpp -o output && ./output

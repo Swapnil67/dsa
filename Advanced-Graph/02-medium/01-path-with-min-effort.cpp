@@ -71,7 +71,8 @@ int minimumEffortPath(std::vector<std::vector<int>>& heights) {
   std::priority_queue<P, std::vector<P>, std::greater<>> min_heap;
   min_heap.push({0, {0, 0}});
 
-  auto is_safe = [&](const int &r, const int &c) {
+  // * out of bound check lamda
+  const auto is_safe = [&](const int &r, const int &c) {
     return r >= 0 && r < m && c >= 0 && c < n;
   };
 
@@ -95,9 +96,10 @@ int minimumEffortPath(std::vector<std::vector<int>>& heights) {
     }
   }
  
-  std::cout << "Distance Matrix" << std::endl;
-  for (auto &vec : res)
-    printArr(vec); 
+  // * For debugging
+  // std::cout << "Distance Matrix" << std::endl;
+  // for (auto &vec : res)
+  //   printArr(vec); 
 
   if (res[m - 1][n - 1] == INT_MAX)
     return -1;
