@@ -1,6 +1,7 @@
 /*
  * Leetcode - 1190
  * Reverse Substrings Between Each Pair of Parentheses
+ * 
  * You are given a string s that consists of lower case English letters and brackets.
 
  * * Example 1
@@ -18,9 +19,15 @@
  * https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/description/
 */
 
+// ! Amazon, Meta
+
 #include <stack>
 #include <iostream>
 
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
+// * Using stack
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(N)
 std::string reverseParentheses(std::string s) {
   int n = s.size();
   std::stack<char> st;
@@ -48,6 +55,7 @@ std::string reverseParentheses(std::string s) {
     }
   }
 
+  // * build the answer string
   std::string ans = "";
   while (!st.empty()) {
     ans = st.top() + ans;
@@ -56,12 +64,43 @@ std::string reverseParentheses(std::string s) {
   return ans;
 }
 
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
+// * Using string as stack
+// * TIME COMPLEXITY O(N) 
+// * SPACE COMPLEXITY O(1)
+std::string reverseParentheses2(std::string s) {
+  std::string ans = "";
+  for (char &ch : s) {
+    if (ch == ')') {
+      std::string temp = "";
+      while (!ans.empty() && ans.back() != '(') {
+        temp += ans.back();
+        ans.pop_back();
+      }
+      ans.pop_back(); // * pop -> '('
+
+      for(char &c: temp)
+        ans.push_back(c);
+
+    } else {
+      ans.push_back(ch);
+    }
+  }
+
+  return ans;
+}
+
 int main() {
+  // * testcase 1
   // std::string s = "(u(love)i)";
+
+  // * testcase 2
   std::string s = "(ed(et(oc))el)";
+  
   std::cout << s << std::endl;
 
-  std::string ans = reverseParentheses(s);
+  // std::string ans = reverseParentheses(s);
+  std::string ans = reverseParentheses2(s);
   std::cout << ans << std::endl;
   
   return 0;

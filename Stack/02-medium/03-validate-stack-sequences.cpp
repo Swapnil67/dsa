@@ -1,23 +1,26 @@
 /*
  * Leetcode - 946
  * Validate Stack Sequences
+ * 
  * Given two integer arrays pushed and popped each with distinct values, return true if this could have 
  * been the result of a sequence of push and pop operations on an initially empty stack, or false otherwise.
  * 
- * * Example 1
- * * Input  : pushed = [1,2,3,4,5], popped = [4,5,3,2,1]
- * * Output : true
+ * Example 1
+ * Input  : pushed = [1,2,3,4,5], popped = [4,5,3,2,1]
+ * Output : true
 
- * * Example 2
- * * Input  : pushed = [1,2,3,4,5], popped = [4,3,5,1,2]
- * * Output : false
+ * Example 2
+ * Input  : pushed = [1,2,3,4,5], popped = [4,3,5,1,2]
+ * Output : false
 
 * https://leetcode.com/problems/validate-stack-sequences/description/
 */
 
-#include<iostream>
-#include<stack>
-#include<vector>
+// ! Amazon
+
+#include <stack>
+#include <vector>
+#include <iostream>
 
 void printArr(std::vector<int> &arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -48,10 +51,10 @@ int main() {
   // std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 5, 3, 2, 1};
   
   // * testcase 2
-  // std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 3, 5, 1, 2};
+  std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 3, 5, 1, 2};
 
   // * testcase 3
-  std::vector<int> pushed = {2, 1, 0}, popped = {1, 2, 0};
+  // std::vector<int> pushed = {2, 1, 0}, popped = {1, 2, 0};
 
   std::cout << "Pushed Array: " << std::endl;
   printArr(pushed);
@@ -65,4 +68,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ 03-validate-stack-sequences.cpp -o output && ./output 
+// * g++ --std=c++20 03-validate-stack-sequences.cpp -o output && ./output 

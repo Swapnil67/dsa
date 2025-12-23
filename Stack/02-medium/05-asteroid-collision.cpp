@@ -24,12 +24,14 @@
  * * Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
  * 
  * https://leetcode.com/problems/asteroid-collision/description/
+ * https://www.naukri.com/code360/problems/asteroid-collision_10870970 
 */
 
-#include <iostream>
+// ! Google, Microsoft, Amazon, Meta, Apple, Adobe, Uber, Flipkart, Goldman Sachs
+
 #include <stack>
 #include <vector>
-#include <algorithm>
+#include <iostream>
 
 void printArr(std::vector<int> &arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -66,13 +68,12 @@ std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
     }
   }
 
-  std::vector<int> ans;
-  while(!st.empty()) {
-    ans.push_back(st.top());
+  n = st.size();
+  std::vector<int> ans(n);
+  for (int i = n - 1; i >= 0; --i) {
+    ans[i] = st.top();
     st.pop();
   }
-
-  reverse(ans.begin(), ans.end());
   return ans;
 }
 
@@ -109,9 +110,41 @@ std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
   return ans;
 }
 
+// * ------------------------- APPROACH 1C: Optimal Approach -------------------------`
+// * With Zero as a weightless object moving in right (code360)
+std::vector<int> asteroidCollision3(std::vector<int> &ast) {
+  int n = ast.size();
+  std::stack<int> s;
+  for (int i = 0; i < n; i++) {
+    if (ast[i] > 0 || s.empty()) {
+      s.push(ast[i]);
+    } 
+    else {
+      while (!s.empty() and s.top() > 0 and s.top() < abs(ast[i])) {
+        s.pop();
+      }
+      if (!s.empty() and s.top() == abs(ast[i])) {
+        s.pop();
+      } else {
+        if (s.empty() || s.top() <= 0) {
+          s.push(ast[i]);
+        }
+      }
+    }
+  }
+
+  std::vector<int> ans(s.size());
+  for (int i = (int)s.size() - 1; i >= 0; --i) {
+    ans[i] = s.top();
+    s.pop();
+  }
+  return ans;
+}
+
+
 int main() {
   // * testcase 1
-  std::vector<int> asteroids = {5, 10, -5};
+  // std::vector<int> asteroids = {5, 10, -5};
 
   // * testcase 2
   // std::vector<int> asteroids = {8, -8};
@@ -120,7 +153,7 @@ int main() {
   // std::vector<int> asteroids = {10, 2, -5};
 
   // * testcase 4
-  // std::vector<int> asteroids = {-2, -1, 1, 2};
+  std::vector<int> asteroids = {-2, -1, 1, 2};
 
   // * testcase 5
   // std::vector<int> asteroids = {-2, -2, 1, -1};

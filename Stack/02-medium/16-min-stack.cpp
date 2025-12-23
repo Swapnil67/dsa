@@ -1,6 +1,7 @@
 /*
-* Min Stack
-* Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+  * Min Stack
+  * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
   * MinStack() initializes the stack object.
   * void push(int val) pushes the element val onto the stack.
   * void pop() removes the element on the top of the stack.
@@ -11,10 +12,47 @@
 * https://leetcode.com/problems/min-stack/
 */
 
-#include<vector>
-#include<climits>
-#include<iostream>
+#include <stack>
+#include <vector>
+#include <climits>
+#include <iostream>
 
+// * Using stack with pair of {num, min_element}
+class MinStackBrute {
+  public: 
+    std::stack<std::pair<int, int>> st;
+    MinStackBrute() {
+    }
+
+    void push(int val) {
+      if (st.empty()) {
+        st.push({val, val});
+      } else {
+        int last_min = st.top().second;
+        st.push({val, std::min(val, last_min)});
+      }
+    }
+    
+    void pop() {
+      if (st.empty()) 
+        return;
+
+      return st.pop();
+    }
+    
+    int top() {
+      if (st.empty()) {
+        return 0;
+      }
+      return st.top().first;
+    }
+    
+    int getMin() {
+      return st.top().second;
+    }
+};
+
+// * Using Vector as stack
 class MinStack {
   public: 
     int s_top;
@@ -28,7 +66,7 @@ class MinStack {
 
     void push(int val) {
       s_top += 1;
-      stack[s_top] = (val);
+      stack[s_top] = val;
       if (val <= last_min)
         last_min = val;
     }
@@ -49,7 +87,7 @@ class MinStack {
     }
     
     int top() {
-      if(s_top == -1) {
+      if (s_top == -1) {
         return 0;
       }
       return stack[s_top];
@@ -87,4 +125,4 @@ int main() {
 }
 
 // * Run the code
-// * $CXX 12-min-stack.cpp -o output && ./output
+// * g++ --std=c++20 16-min-stack.cpp -o output && ./output

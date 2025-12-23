@@ -1,5 +1,6 @@
 /*
  * Sum of Subarray Maximum
+ *
  * Given an array of integers arr, find the sum of min(b), where b ranges over every (contiguous) subarray of arr. 
  * Since the answer may be large, return the answer modulo 109 + 7.
 
@@ -117,10 +118,10 @@ int sumSubarrayMaxs(std::vector<int> nums) {
 int main() {
   std::cout << "Input Array" << std::endl;
   // * testcase 1
-  // std::vector<int> nums = {1, 1};      // * Edge case
+  std::vector<int> nums = {1, 1};      // * Edge case
 
   // * testcase 2
-  std::vector<int> nums = {3, 1, 2, 4};
+  // std::vector<int> nums = {3, 1, 2, 4};
 
   // * testcase 3
   // std::vector<int> nums = {11, 81, 94, 43, 3};

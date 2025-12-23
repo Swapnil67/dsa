@@ -1,18 +1,22 @@
 /*
  * Leetcode - 22
  * Generate Parentheses
+ * 
  * Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
  * 
- * * Example 1
- * * Input  : n = 3
- * * Output : ["((()))","(()())","(())()","()(())","()()()"]
+ * Example 1
+ * Input  : n = 3
+ * Output : ["((()))","(()())","(())()","()(())","()()()"]
 
- * * Example 2
- * * Input  : n = 1
- * * Output : ["()"]
+ * Example 2
+ * Input  : n = 1
+ * Output : ["()"]
 
  * https://leetcode.com/problems/generate-parentheses/description/
+ * https://www.geeksforgeeks.org/problems/generate-all-possible-parentheses/1
 */
+
+// ! Google, Microsoft, Amazon, Meta, Oracle, Adobe, Apple
 
 #include <stack>
 #include <vector>
@@ -45,14 +49,13 @@ bool isValidParentheses(std::string s) {
 
 // * TIME COMPLEXITY O(2^2N) ~ O(2^N)
 // * Using Recursion & Backtracking
-void backtrackingBrute(std::vector<std::string> &ans, std::string &s, int n)
-{
+void backtrackingBrute(std::vector<std::string> &ans, std::string &s, int n) {
   if (s.size() == 2 * n) {
-    if(isValidParentheses(s)) {
+    if (isValidParentheses(s))
       ans.push_back(s);
-    }
     return;
   }
+
   s.push_back('(');
   backtrackingBrute(ans, s, n);
   s.pop_back();
@@ -118,4 +121,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ 04-generate-parantheses.cpp -o output && ./output
+// * g++ --std=c++20 04-generate-parantheses.cpp -o output && ./output

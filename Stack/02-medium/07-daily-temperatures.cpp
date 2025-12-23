@@ -78,19 +78,21 @@ std::vector<int> dailyTemperatures(std::vector<int> &temperatures) {
 
 int main() {
   // * testcase 1
-  std::vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
+  // std::vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
 
   // * testcase 2
   // std::vector<int> temperatures = {30, 40, 50, 60};
 
   // * testcase 3
-  // std::vector<int> temperatures = {30, 60, 90};
+  std::vector<int> temperatures = {30, 60, 90};
 
+  std::cout << "Daily Temperatures" << std::endl;
   printArr(temperatures);
 
   // std::vector<int> ans = bruteForce(temperatures);
   std::vector<int> ans = dailyTemperatures(temperatures);
   printArr(ans);
+
   return 0;
 }
 

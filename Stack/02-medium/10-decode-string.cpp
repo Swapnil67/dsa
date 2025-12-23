@@ -35,9 +35,7 @@ std::string decodeString(std::string s) {
         temp = st.top() + temp;
         st.pop();
       }
-
-      // * pop the '[' bracket
-      st.pop();
+      st.pop(); // * pop the '[' bracket
 
       // * Get the number
       std::string num_str = "";
@@ -51,11 +49,9 @@ std::string decodeString(std::string s) {
       for(int j = 0; j < std::stoi(num_str); ++j) {
         temp2 += temp;
       }
-
       // * Push the result string back to stack
-      for(char &c : temp2) {
+      for (char &c : temp2)
         st.push(c);
-      }
 
       // std::cout << num_str << " -> " << temp << " = " << temp2 << std::endl;
     }
@@ -74,8 +70,13 @@ std::string decodeString(std::string s) {
 }
 
 int main() {
+  // * testcase 1
   std::string s = "3[a]2[bc]";
+
+  // * testcase 2
   // std::string s = "3[a2[c]]";
+
+  // * testcase 3
   // std::string s = "2[abc]3[cd]ef";
 
   std::cout << "Input String: " << s << std::endl;

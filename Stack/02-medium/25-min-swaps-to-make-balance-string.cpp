@@ -21,6 +21,8 @@
 
  * https://www.naukri.com/code360/problems/minimum-number-of-swaps-for-bracket-balancing_1115682
  * https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/
+ * https://www.geeksforgeeks.org/problems/minimum-swaps-for-bracket-balancing2704/1
+ * 
 */
 
 // ! Google, Amazon, Facebook
@@ -34,6 +36,7 @@
 // * i.e. if there are 3 closing bracket and 1 swap is made then the remaining will be 1 bracket
 // * therefore we divide maxClosing brackets by 2
 
+// * Only contain a stack with '[' brackets
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int minSwaps(std::string s) {
@@ -47,27 +50,26 @@ int minSwaps(std::string s) {
       st.push(c);
     }
   }
-  if (st.empty())
-    return 0;
-  return (st.size() + 1) / 2;
+
+  return st.empty() ? 0 : (st.size() + 1) / 2;
 }
 
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int minSwaps(std::string s) {
-  int closingBrakets = 0, maxClosing = 0;
+  int closing = 0, max_closing = 0;
   int n = s.size();
   for (int i = 0; i < n; ++i) {
     if (s[i] == ']') {
-      closingBrakets += 1;
+      closing += 1;
     }
     else {
-      closingBrakets -= 1;
+      closing -= 1;
     }
-    maxClosing = std::max(maxClosing, closingBrakets);
+    max_closing = std::max(max_closing, closing);
   }
-  // std::cout << maxClosing << std::endl;
-  return (maxClosing + 1) / 2;
+  // std::cout << max_closing << std::endl;
+  return (max_closing + 1) / 2;
 }
 
 int main() {

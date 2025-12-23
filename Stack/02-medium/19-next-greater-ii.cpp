@@ -1,6 +1,7 @@
 /*
  * Leetcode - 503
  * Next Greater II
+ * 
  * Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), 
  * return the next greater number for every element in nums.
  * 
@@ -12,8 +13,10 @@
  * * Input       : nums = [1,2,1]
  * * Output      : [2,-1,2]
  * 
- * https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/
+ * https://leetcode.com/problems/next-greater-element-ii/
 */
+
+// ! Amazon, Flipkart, Microsoft
 
 #include <stack>
 #include <vector>
@@ -35,35 +38,59 @@ void printStack(std::stack<int> st) {
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
-// * Nested Loop
+// * Double the array virtually
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> bruteForce(std::vector<int> arr) {
   int n = arr.size();
 
-  std::vector<int> nextGreaterVec(n, -1);
+  std::vector<int> nge(n, -1);
   for (int i = 0; i < n; ++i) {
     // * This will double the array hypothetically
-    for (int j = i - 1; j <= i + n - 1; ++j) {
+   for (int j = i; j < i + n; ++j) {
       int idx = j % n;
       if (arr[idx] > arr[i]) {
-        nextGreaterVec[i] = arr[idx];
+        nge[i] = arr[idx];
         break;
       }
     }
   }
 
-  return nextGreaterVec;
+  return nge;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Using Monotonic Stack
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * Double the array virtually + Monotonic Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> nextGreaterElement(std::vector<int> arr) {
+std::vector<int> nextGreaterElementA(std::vector<int> arr) {
   int n = arr.size();
 
-  std::vector<int> nextGreaterVec(n, -1);
+  std::vector<int> nge(n, -1);
+  std::stack<int> st;
+
+  // * hypothetically increase the size of array 
+  for (int i = 0; i < n + n - 1; ++i) {
+      // * the element represented by stack top is STRICTLY SMALLER than the current element
+      while (!st.empty() && arr[st.top()] < arr[i % n]) {
+        nge[st.top()] = arr[i % n];
+        st.pop();
+      }
+
+      st.push(i % n);
+  }
+
+  return nge;
+}
+
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * Using Monotonic Stack (little Magic)
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+std::vector<int> nextGreaterElementB(std::vector<int> arr) {
+  int n = arr.size();
+
+  std::vector<int> nge(n, -1);
   std::stack<int> st;
 
   // * run the outer loop two times
@@ -71,25 +98,30 @@ std::vector<int> nextGreaterElement(std::vector<int> arr) {
     for (int i = 0; i < n; ++i) {
        // * the element represented by stack top is STRICTLY SMALLER than the current element
       while (!st.empty() && arr[st.top()] < arr[i]) {
-        nextGreaterVec[st.top()] = arr[i];
+        nge[st.top()] = arr[i];
         st.pop();
       }
-  
       st.push(i);
     }
-    printStack(st);
+    // printStack(st);
   }
 
-  return nextGreaterVec;
+  return nge;
 }
 
 int main(void) {
-  std::vector<int> arr = {1, 2, 3, 4, 3};
+  // * testcase 1
+  // std::vector<int> arr = {1, 2, 3, 4, 3};
+
+  // * testcase 2
+  std::vector<int> arr = {1, 2, 1};
+
   std::cout << "Input Array:" << std::endl;
   printArr(arr);
 
   // std::vector<int> ans = bruteForce(arr);
-  std::vector<int> ans = nextGreaterElement(arr);
+  // std::vector<int> ans = nextGreaterElementA(arr);
+  std::vector<int> ans = nextGreaterElementB(arr);
 
   std::cout << "Next Greater Elements:" << std::endl;
   printArr(ans);

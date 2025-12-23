@@ -21,9 +21,11 @@
 */
 
 // ! Monotonic Stack
+// ! Microsoft, Google, Amazon, Meta, Bloomberg
 
-#include <iostream>
+#include <stack>
 #include <vector>
+#include <iostream>
 #include <algorithm>
 
 void printArr(std::vector<int> &arr) {
@@ -33,11 +35,10 @@ void printArr(std::vector<int> &arr) {
   printf("\n");
 }
 
-
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n * logn)
 // * SPACE COMPLEXITY O(n)
-int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
+int carFleetOld(int target, std::vector<int> &position, std::vector<int> &speed) {
   int n = position.size();
   
   // * Pairs of <position, speed>
@@ -76,6 +77,37 @@ int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
   return fleet;
 }
 
+
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * More easy to understand
+// * Monotonic Stack
+// * TIME COMPLEXITY O(NlogN)
+// * SPACE COMPLEXITY O(N)
+int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
+  int n = position.size();
+
+  std::vector<std::pair<int, double>> cars;
+  for (int i = 0; i < n; i++) {
+    double time = (double)(target - position[i]) / speed[i];
+    cars.push_back({position[i], time});
+  }
+
+  // sort cars by positions descending(target ke pass wali pahle)
+  sort(cars.rbegin(), cars.rend());
+
+  std::stack<double> st;
+  for (auto &car : cars) {
+    double time = car.second;
+
+    // New fleet condition
+    if (st.empty() || time > st.top()) {
+      st.push(time);
+    }
+    // else: same fleet --> isme kuch nhi karna
+  }
+  return st.size();
+}
+
 int main() {
   // * testcase 1
   // int target = 12;
@@ -92,6 +124,7 @@ int main() {
 
   int fleets = carFleet(target, position, speed);
   std::cout << "Car Fleets: " << fleets << std::endl;
+
   return 0;
 }
 

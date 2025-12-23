@@ -43,21 +43,22 @@ int minAddToMakeValid(std::string s) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int minAddToMakeValid2(std::string s) {
-  int balance = 0;
-  for (int i = 0; i < s.size(); ++i) {
-    char ch = s[i];
-    if(ch == ')') {
-      if (i > 0 && s[i - 1] == '(') {
-        balance--;
-      } else {
-        balance++;
-      }
-    } else {
-      balance++;
+  int stack_size = 0;
+  int open = 0;
+  for (char &ch : s) {
+    if (ch == '(') {
+      stack_size++;
+    }
+    else {
+      // * closing bracket
+      if (stack_size > 0)
+        stack_size--;
+      else
+        open++;
     }
   }
 
-  return balance;
+  return stack_size + open;
 }
 
 int main() {

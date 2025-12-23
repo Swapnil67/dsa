@@ -1,6 +1,7 @@
 /*
  * 132 Pattern
  * Leetcode - 456
+ * 
  * Given an array of n integers nums, a 132 pattern is a subsequence of three integers
  * nums[i], nums[j] and nums[k] such that i < j < k and nums[i] < nums[k] < nums[j].
  * 
@@ -20,11 +21,12 @@
 */
 
 // ! Monotonic Stack
+// ! Meta, Amazon, Google
 
-#include <iostream>
-#include <vector>
 #include <stack>
+#include <vector>
 #include <climits>
+#include <iostream>
 
 void printArr(std::vector<int> &arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -58,7 +60,7 @@ bool bruteForce(std::vector<int> nums) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-bool bruteForce(std::vector<int> nums) {
+bool betterApproach(std::vector<int> nums) {
   int n = nums.size();
 
   int num_i = nums[0];      // * keep 'i' value as pointer
@@ -84,8 +86,10 @@ bool find132pattern(std::vector<int> nums) {
   int num3 = INT_MIN; 
   std::stack<int> st;
 
-  // * consider nums[j] as the largest element (i.e., n2)
-  for (int j = n - 1; j > 0; --j) {
+  // * consider st.top() as the largest element (i.e., num2)
+  // * consider nums[j] as num1
+
+  for (int j = n - 1; j >= 0; --j) {
 
     // * found nums[i] element
     if (nums[j] < num3) {
@@ -113,13 +117,16 @@ int main() {
   
   // * testcase 3
   std::vector<int> nums = {-1, 3, 2, 0};
-  
+
+  std::cout << "Input nums: " << std::endl;
   printArr(nums);
 
   // bool ans = bruteForce(nums);
-
+  // bool ans = betterApproach(nums);
   bool ans = find132pattern(nums);
+  
   std::cout << "132 Pattern: " << ans << std::endl;
+
   return 0;  
 }
 

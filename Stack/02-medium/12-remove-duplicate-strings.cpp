@@ -75,7 +75,7 @@ std::string removeDuplicates2(std::string s, int k) {
   int n = s.size();
   std::vector<std::pair<char, int>> st;
   for(char ch: s) {
-    if(!st.size() || st.back().first != ch) {
+    if (st.empty() || st.back().first != ch) {
       // * New character
       st.push_back({ch, 1});
     }
@@ -85,45 +85,15 @@ std::string removeDuplicates2(std::string s, int k) {
     }
 
     // * if ch count gets equal to 'k'
-    if(st.back().second == k) {
+    if (st.back().second == k) {
       st.pop_back();
     }
   }
   // std::cout << st.size() << std::endl;
 
   std::string ans = "";
-  for (auto x : st) {
-    ans.append(x.second, x.first);
-  }
-
-  return ans;
-}
-
-// * My Solution
-// ! this fails on testcase 4 but the answer is right it's just that order is different
-// ! since here we are using unordered_map this changes the order of o/p
-std::string removeDuplicates3(std::string s, int k) {
-  int n = s.size();
-  std::unordered_map<char, int> freqHash;
-  for(char &ch: s) {
-    freqHash[ch]++;
-    if (freqHash[ch] >= k) {
-      while (freqHash[ch] == 0)
-        freqHash[ch]--;
-      freqHash.erase(ch);
-    }
-  }
-
-  for(auto it: freqHash) {
-    std::cout << it.first << " -> " << it.second << std::endl;
-  }
-
-  std::string ans = "";
-  for(auto it: freqHash) {
-    while(it.second > 0) {
-      ans = it.first + ans;
-      it.second--;
-    }
+  for (auto &it : st) {
+    ans.append(it.second, it.first);
   }
 
   return ans;
@@ -147,7 +117,7 @@ int main() {
   std::string s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy";
 
   std::cout << "Input String: " << s << std::endl;
-  std::string ans = removeDuplicates3(s, k);
+  std::string ans = removeDuplicates2(s, k);
   std::cout << "Ans: " << ans << std::endl;
 
   return 0;

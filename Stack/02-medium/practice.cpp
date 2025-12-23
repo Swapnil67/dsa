@@ -6,13 +6,18 @@
 #include <sstream>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 template <typename T>
@@ -23,11 +28,9 @@ void printStack(std::stack<T> st) {
   }
 }
 
-void reverseArr(std::vector<int> &arr, int i, int j)
-{
+void reverseArr(std::vector<int> &arr, int i, int j) {
   int n = arr.size();
-  while (i < j)
-  {
+  while (i < j) {
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
@@ -35,7 +38,6 @@ void reverseArr(std::vector<int> &arr, int i, int j)
     j--;
   }
 }
-
 
 // * ------------------------------------------------
 
@@ -45,7 +47,7 @@ void reverseArr(std::vector<int> &arr, int i, int j)
 // }
 
 // * 02 - Removing Stars From a String
-// std::string removeStars2(std::string s) {
+// std::string removeStars(std::string s) {
 // TODO
 // }
 
@@ -65,9 +67,7 @@ void reverseArr(std::vector<int> &arr, int i, int j)
 // }
 
 // * 06 - Online Stock Span
-// class StockSpanner {
-// TODO
-// };
+// ! Solve this on leetcode platform
 
 // * 07 - Daily Temperatures
 // std::vector<int> dailyTemperatures(std::vector<int> temperatures) {
@@ -91,20 +91,137 @@ void reverseArr(std::vector<int> &arr, int i, int j)
 
 // * 11 - Remove k digits
 // std::string removeKdigits(std::string num, int k) {
-// TODO
+// TODO  
 // }
 
 // * 12 - Remove All Adjacent Duplicates in String II
 // std::string removeDuplicates(std::string s, int k) {
 // TODO
-// 
+// }
 
 // * 13 - 132 Pattern
 // bool find132pattern(std::vector<int> &nums) {
 // TODO
 // }
 
-int main() {
+// * 14A - Sum of Subarray Minimums
+// long long sumSubarrayMins(std::vector<int> &arr) {
+// TODO
+// }
+
+// * 14B - Sum of Subarray Maximums
+// long long sumSubarrayMaxs(std::vector<int> arr) {
+// TODO
+// }
+
+// * 15 - Reverse Substrings Between Each Pair of Parentheses
+// std::string reverseParentheses(std::string s) {
+// TODO
+// }
+
+// * 16 - Min Stack 
+// class MinStack {
+// TODO
+// };
+
+// * 17 - Maximum Width Ramp
+// int maxWidthRampB(std::vector<int> nums) {
+// TODO
+// };
+
+// * 18 - Flatten Nested List Iterator
+// ! Solve this on leetcode platform
+
+// * 19 - Next Greater II
+// std::vector<int> nextGreaterElement(std::vector<int> arr) {
+// TODO
+// };
+
+// * 20 - Minimum Add to Make Parentheses Valid
+// int minAddToMakeValid(std::string s) {
+// TODO
+// }
+
+// * 21 - Basic Calculator II
+// int calculate(std::string s) {
+// TODO
+// }
+
+// * 22 - Sum of Subarray Ranges 
+// long long subArrayRanges2(std::vector<int>& nums) {
+// TODO
+// }
+
+// * 23 - Find Permutation
+// std::vector<int> findPermutation(std::string s) {
+// TODO
+// }
+
+// * 24 - Construct Smallest Number From DI String
+// std::string smallestNumber(std::string pattern) {
+// TODO
+// }
+
+// * 25 - Minimum Swaps To Make Balance String
+// int minSwaps(std::string s) {
+// TODO
+// }
+
+// * 26 - Minimum Insertions to Balance a Parentheses String
+// int minInsertions(std::string s) {
+// TODO
+// }
+
+// * 27 - Minimum Remove to Make Valid Parentheses
+std::string minRemoveToMakeValid(std::string s) {
+  int n = s.size();
+  std::stack<int> st;
+  std::unordered_set<int> remove_set;
+  for (int i = 0; i < n; ++i) {
+    char c = s[i];
+    if (c == '(') {
+      st.push(i);
+    } else if (c == ')') {
+      if (st.empty()) {
+        remove_set.insert(i);
+      } else {
+        st.pop();
+      }
+    }
+  }
+
+  while (!st.empty()) {
+    remove_set.insert(st.top());
+    st.pop();
+  }
+
+  std::string ans = "";
+  for (int i = 0; i < n; ++i) {
+    if (remove_set.count(i))
+      continue;
+    ans += s[i];
+  }
+
+  return ans;
+}
+
+int main(void) {
+  // * testcase 1
+  // std::string s = "lee(t(c)o)de)";
+
+  // * testcase 2
+  // std::string s = "a)b(c)d";
+
+  // * testcase 3
+  // std::string s = "))((";
+
+  // * testcase 4
+  std::string s = ")())m(s)(";
+
+  std::cout << "Input string: " << s << std::endl;
+  std::string ans = minRemoveToMakeValid(s);
+  std::cout << "Ans: " << ans << std::endl;
+
   return 0;
 }
 
