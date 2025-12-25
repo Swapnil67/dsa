@@ -21,74 +21,12 @@
 #include<vector>
 #include<iostream>
 
-char solve(std::vector<char> &arr, char operation) {
-  if (operation == '!') {
-    return arr[0] == 't' ? 'f' : 't';
-  }
-
-  bool ans = false;
-  if (operation == '&')
-    ans = true;
-  for(int i = 0; i < arr.size(); ++i) {
-    bool cur = true;
-    if (arr[i] == 'f')
-      cur = false;
-
-    if(operation == '|') {
-      if (cur)
-        return true;
-      ans = ans | cur;
-    } 
-    else if(operation == '&') {
-      ans = ans & cur;
-    }
-  }
-
-  return ans == 0 ? 'f' : 't';
-}
-
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
-// * Using Stack
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(N)
-bool parseBoolExpr(std::string expression) {
-  std::stack<char> st;
-  for(char &ch: expression) {
-    if (ch == ',')
-      continue;
-
-    if (ch == ')') {
-      std::vector<char> vec;
-      while (!st.empty() && st.top() != '(') {
-        vec.push_back(st.top());
-        st.pop();
-      }
-
-      // * pop the opening bracket
-      st.pop();
-
-      // * Get the last operation
-      char operation = st.top(); // * !, |, &
-      // * pop the last operation
-
-      st.pop();
-
-      st.push(solve(vec, operation));
-    } else {
-      st.push(ch);
-    }
-  }
-
-  return st.top() == 'f' ? false : true;
-}
-
-
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Using Stack (More Simple)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-bool parseBoolExpr2(std::string expression) {
+bool parseBoolExpr(std::string expression) {
   std::stack<char> st;
   for(char &ch: expression) {
     if (ch == ',')
@@ -115,11 +53,11 @@ bool parseBoolExpr2(std::string expression) {
         if (t) st.push('f');
         else st.push('t');
       }
-      else if(operation == '|') {
+      else if (operation == '|') {
         if (t) st.push('t');
         else st.push('f');
       }
-      else if(operation == '&') {
+      else if (operation == '&') {
         if (f) st.push('f');
         else st.push('t');
       }
@@ -133,15 +71,21 @@ bool parseBoolExpr2(std::string expression) {
 }
 
 int main(void) {
+  // * testcase 1
   // std::string expression = "!(f)";
+
+  // * testcase 2
   // std::string expression = "&(|(f))";
+
+  // * testcase 3
   // std::string expression = "|(f,f,f,t)";
+
+  // * testcase 4
   std::string expression = "!(&(f,t))";
 
   std::cout << "Expression: " << expression << std::endl;
 
-  // bool ans = parseBoolExpr(expression);
-  bool ans = parseBoolExpr2(expression);
+  bool ans = parseBoolExpr(expression);
   std::cout << ans << std::endl;
 }
 

@@ -1,6 +1,7 @@
 /*
  * Leetcode - 895
  * Maximum Frequency Stack
+ * 
  * Implement the FreqStack class:
  * - FreqStack() constructs an empty frequency stack.
  * - void push(int val) pushes an integer val onto the top of the stack.
@@ -22,42 +23,42 @@
 class FreqStack {
 private: 
   // * Map to track frequency of each element
-  std::unordered_map<int, int> freqMap;
+  std::unordered_map<int, int> freq_map;
 
   // * Map to store stacks of elements for each frequency level
-  std::unordered_map<int, std::stack<int>> freqStack; // * Hashmap of stack
+  std::unordered_map<int, std::stack<int>> freq_stack; // * Hashmap of stack
 
   // * Track the maximum frequency
-  int maxFreq;
+  int max_freq;
 public:
 
     FreqStack() {
-      maxFreq = 0;
+      max_freq = 0;
     }
     
     void push(int val) {
       // * Increment the frequency of val
-      int freq = freqMap[val]++;
+      int freq = freq_map[val]++;
 
       // * Add val to the stack at its frequency level
-      freqStack[freq].push(val);
+      freq_stack[freq].push(val);
 
-      // * Update maxFreq if needed
-      maxFreq = std::max(maxFreq, freq);
+      // * Update max_freq if needed
+      max_freq = std::max(max_freq, freq);
     }
     
     int pop() {
       // * Get the top element from the stack with highest frequency
-      int val = freqStack[maxFreq].top();
-      freqStack[maxFreq].pop();
+      int val = freq_stack[max_freq].top();
+      freq_stack[max_freq].pop();
 
       // * Decrement the frequency of the popped element
-      freqMap[val]--;
+      freq_map[val]--;
 
-      // * If the stack at maxFreq is empty, decrement maxFreq
-      if (freqStack[maxFreq].size() == 0) {
-        maxFreq--;
-      }
+      // * If the stack at max_freq is empty, decrement max_freq
+      if (freq_stack[max_freq].empty())
+        max_freq--;
+      
       return val;
     }
 
@@ -72,13 +73,13 @@ public:
 
     // * For debugging
     void printFreqStack() {
-      for(auto it: freqMap) {
+      for(auto it: freq_map) {
         printf("-> %d\n", it.second);
-        std::stack st = freqStack[it.second];
+        std::stack st = freq_stack[it.second];
         printStack(st);
         printf("\n");
       }
-      printf("Max Freq: %d\n", maxFreq);
+      printf("Max Freq: %d\n", max_freq);
     }
 };
 

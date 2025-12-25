@@ -42,59 +42,48 @@ std::string countOfAtoms(std::string formula) {
       std::unordered_map<std::string, int> cur = st.top(); 
       st.pop();  // * pop the map from top of stack
 
-      i++;
+      i++; // * go to next character
 
       // * check number of atoms. Eg: (H2O)3
-      std::string multiplerStr = "";  
+      int atoms = 0;
       while (i < n && isdigit(formula[i])) {
-        multiplerStr += formula[i];
+        atoms = (atoms * 10) + (formula[i] - '0');
         i++;
       }
-
       // * Add multipler to cur map. Eg: (H2O)3 => { H: 6, O: 3 }
-      if (!multiplerStr.empty()) {
-        int multipler = std::stoi(multiplerStr);
-        for(auto &it: cur) {
-          std::string element = it.first;
-          cur[element] *= multipler;
+      if (atoms > 0) {
+        for (auto &[ele, cnt] : cur) {
+          cur[ele] *= atoms;
         }
       }
 
       // * merge the cur map with map on stack top
-      for (auto &it : cur) {
-        std::string element = it.first;
-        int count = it.second;
-        st.top()[element] += count;
+      for (auto &[ele, cnt] : cur) {
+        st.top()[ele] += cnt;
       }
     }
     else {
       // * start new chemical 
-      std::string curChemical = "";
-      curChemical.push_back(formula[i]);
+      std::string cur_chemical = "";
+      cur_chemical.push_back(formula[i]);
       i++;
 
       // * check if next char is 'alphabet' and in lower case
       while (i < n && isalpha(formula[i]) && islower(formula[i])) {
-        curChemical.push_back(formula[i]);
+        cur_chemical.push_back(formula[i]);
         i++;
       }
 
       // * Get the count of atoms 
-      std::string atomsStr = "";
+      int atoms = 0;
       while (i < n && isdigit(formula[i])) {
-        atomsStr.push_back(formula[i]);
+        atoms = (atoms * 10) + (formula[i] - '0');
         i++;
       }
-      // * convert atomsStr to integer 'atoms'
-      int atoms = 1;
-      if (atomsStr.length()) {
-        atoms = std::stoi(atomsStr);
-      }
-
+      atoms = (atoms == 0) ? 1 : atoms;
       // * push the element to the stack top map
-      st.top()[curChemical] += atoms;
-
-      // std::cout << curChemical << ":" << atoms << std::endl;
+      st.top()[cur_chemical] += atoms;
+      // std::cout << cur_chemical << ":" << atoms << std::endl;
     }
   }
 
@@ -112,9 +101,18 @@ std::string countOfAtoms(std::string formula) {
 }
 
 int main() {
+  // * testcase 1
   // std::string formula = "H2O";
+
+  // * testcase 2
   // std::string formula = "Mg(OH)2";
-  std::string formula = "K4(ON(SO3)2)2";
+
+  // * testcase 3
+  // std::string formula = "K4(ON(SO3)2)2";
+
+  // * testcase 4
+  std::string formula = "H11He49NO35B7N46Li20";
+
   std::cout << "Input formula: " << formula << std::endl;
 
   std::string ans = countOfAtoms(formula);

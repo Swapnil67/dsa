@@ -16,7 +16,6 @@
  * https://leetcode.com/problems/largest-rectangle-in-histogram/description/
 */
 
-#include <climits>
 #include <stack>
 #include <vector>
 #include <iostream>
@@ -28,8 +27,10 @@ void printArr(std::vector<int> &arr) {
   printf("\n");
 }
 
-void getNextAndPreviousSmallerElements(std::vector<int> arr,
-                                       std::vector<int> &nse, std::vector<int> &pse)
+void getNextAndPreviousSmallerElements(
+    std::vector<int> arr,
+    std::vector<int> &nse,
+    std::vector<int> &pse)
 {
   int n = arr.size();
 
@@ -50,7 +51,6 @@ void getNextAndPreviousSmallerElements(std::vector<int> arr,
   }
 }
 
-
 // * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Use Next & Previous smaller elements
 // * TIME COMPLEXITY O(2N)
@@ -59,20 +59,20 @@ int bruteForce(std::vector<int> heights) {
   int n = heights.size();
   
   // * Find Next & Previous Smallest Elements
-  std::vector<int> nse(n, 6), pse(n, -1);
+  std::vector<int> nse(n, n), pse(n, -1);
   getNextAndPreviousSmallerElements(heights, nse, pse);
   // printArr(nse);
   // printArr(pse);
   
-  // * calculate the maxArea using nse & pse of each building
-  int maxArea = -1;
+  // * calculate the max_area using nse & pse of each building
+  int max_area = -1;
   for (int i = 0; i < n; ++i) {
     int width = (nse[i] - pse[i] - 1);
-    int curArea = width * heights[i];
-    maxArea = std::max(maxArea, curArea);
+    int cur_area = width * heights[i];
+    max_area = std::max(max_area, cur_area);
   }
 
-  return maxArea;
+  return max_area;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
@@ -82,7 +82,7 @@ int bruteForce(std::vector<int> heights) {
 // * SPACE COMPLEXITY O(N)
 int largestRectangleArea(std::vector<int> heights) {
   int n = heights.size();
-  int maxArea = INT_MIN;
+  int max_area = 0;
 
   std::stack<int> st;
   for (int i = 0; i < n; ++i) {
@@ -91,17 +91,17 @@ int largestRectangleArea(std::vector<int> heights) {
     // * its pse will be st.top() element
     while (!st.empty() && heights[st.top()] >= heights[i]) {
       // * find the area of element of top of stack
-      int stackTop = st.top();
+      int top = st.top();
       st.pop();
 
-      int nseIdx = i;       // * next smaller index for st.top() will be 'i'
-      int pseIdx = -1;      // * prev smaller index for st.top() will be prev st.top()
+      int nse_idx = i;       // * next smaller index for st.top() will be 'i'
+      int pse_idx = -1;      // * prev smaller index for st.top() will be prev st.top()
       if (!st.empty()) {
-        pseIdx = st.top();
+        pse_idx = st.top();
       }
 
-      int curArea = heights[stackTop] * (nseIdx - pseIdx - 1);
-      maxArea = std::max(maxArea, curArea);
+      int cur_area = heights[top] * (nse_idx - pse_idx - 1);
+      max_area = std::max(max_area, cur_area);
     }
     st.push(i);
   }
@@ -112,21 +112,21 @@ int largestRectangleArea(std::vector<int> heights) {
   // * Handle all untouched elements on stack
   // * Here for all elements the nse will be n & pse will be st.top()
   while (!st.empty()) {
-    int stackTop = st.top();
+    int top = st.top();
     st.pop();
 
-    int nseIdx = n;       // * next smaller index for st.top() will be 'n'
-    int pseIdx = -1;      // * prev smaller index for st.top() will be prev st.top()
+    int nse_idx = n;       // * next smaller index for st.top() will be 'n'
+    int pse_idx = -1;      // * prev smaller index for st.top() will be prev st.top()
     if (!st.empty()) {
-      pseIdx = st.top();
+      pse_idx = st.top();
     }
 
-    // * Calculate maxArea
-    int curArea = heights[stackTop] * ((nseIdx - pseIdx) - 1);
-    maxArea = std::max(maxArea, curArea);
+    // * Calculate max_area
+    int cur_area = heights[top] * ((nse_idx - pse_idx) - 1);
+    max_area = std::max(max_area, cur_area);
   }
 
-  return maxArea;
+  return max_area;
 }
 
 

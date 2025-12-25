@@ -6,19 +6,23 @@
  * subarray of nums with a sum of at least k. If there is no such subarray, return -1.
 
  * Example 1
- * * Input       : nums = [1], k = 1
- * * Output      : 1
+ * Input       : nums = [1], k = 1
+ * Output      : 1
 
  * Example 2
- * * Input       : nums = [1,2], k = 4
- * * Output      : -1
+ * Input       : nums = [1,2], k = 4
+ * Output      : -1
 
  * Example 3
- * * Input       : nums = [2,-1,2], k = 3
- * * Output      : 3
+ * Input       : nums = [2,-1,2], k = 3
+ * Output      : 3
  * 
  * https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/description/
+ * https://www.naukri.com/code360/problems/shortest-subarray-with-sum-at-least-k_975374
+ * 
 */
+
+// ! Apple, Paypal, Paytm
 
 #include <deque>
 #include <vector>
@@ -27,11 +31,16 @@
 
 using namespace std;
 
-void printArr(vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  printf("\n");
+  std::cout << " ]" << std::endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
@@ -47,7 +56,7 @@ int bruteForce(std::vector<int> arr, int k) {
       cur_sum += arr[j];
       if(cur_sum >= k) {
         ans = std::min((j - i + 1), ans);
-        break;
+        break; // * since we want smallest so we break 
       }
     }
   }
@@ -71,7 +80,7 @@ int shortestSubarray(std::vector<int>& nums, int k) {
 
   while (j < n) {
     // * keep calculating the prefix array
-    if(j == 0) {
+    if (j == 0) {
       prefixSums[j] = nums[j];
     } else {
       prefixSums[j] = prefixSums[j - 1] + nums[j];
@@ -80,17 +89,15 @@ int shortestSubarray(std::vector<int>& nums, int k) {
     if (prefixSums[j] >= k) {
       ans = std::min(ans, j + 1);
     }
-
+    
     // * shrink the window
-    // * Check if subracting from dq front elements will keep the following true
-    // * prefix_sum >= k
     while (!dq.empty() && prefixSums[j] - prefixSums[dq.front()] >= k) {
       ans = std::min(ans, j - dq.front());
       dq.pop_front();
     }
 
     // * Maintain monotonicity by removing indices with larger prefix sums
-    // * strictly increasing
+    // * strictly increasing prefix sum
     while (!dq.empty() && prefixSums[dq.back()] >= prefixSums[j]) {
       dq.pop_back();
     }
@@ -103,18 +110,25 @@ int shortestSubarray(std::vector<int>& nums, int k) {
 }
 
 int main() {
-  // * testcase 1
+  // * testcase 1 (Ans 3)
   // int k = 3;
   // std::vector<int> nums = {2, -1, 2};
 
-  // * testcase 2
+  // * testcase 2 (Ans -1)
   // int k = 4;
   // std::vector<int> nums = {1, 2};
   
-  // * testcase 3
-  int k = 167;
-  std::vector<int> nums = {84, -37, 32, 40, 95};
+  // * testcase 3 (Ans 3)
+  // int k = 167;
+  // std::vector<int> nums = {84, -37, 32, 40, 95};
+  
+  // * testcase 3 (Ans 1)
+  int k = 19;
+  std::vector<int> nums = {77, 19, 35, 10, -14};
 
+  std::cout << "k: " << k << std::endl;
+  std::cout << "Input nums: ";
+  printArr(nums);
 
   // int ans = bruteForce(nums, k);
   int ans = shortestSubarray(nums, k);
@@ -124,4 +138,4 @@ int main() {
 }
 
 // * run the code
-// * g++ --std=c++17 05-shortest-subarry-with-sum-atleast-k.cpp -o output && ./output
+// * g++ --std=c++20 05-shortest-subarry-with-sum-atleast-k.cpp -o output && ./output

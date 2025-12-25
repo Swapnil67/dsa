@@ -9,10 +9,14 @@
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  printf("\n");
+  std::cout << " ]" << std::endl;
 }
 
 void printStack(std::stack<int> st) {
@@ -23,6 +27,8 @@ void printStack(std::stack<int> st) {
   }
 }
 
+// * ------------------------------------------------------------------------------------
+
 // * 01 - Maximum Frequency Stack
 // class FreqStack {
 // public:
@@ -32,9 +38,10 @@ void printStack(std::stack<int> st) {
 // };
 
 // * 02 - Robot Collisions
-// std::vector<int> survivedRobotsHealths(std::vector<int> &positions,
-//                                        std::vector<int> &healths,
-//                                        std::string directions)
+// std::vector<int> survivedRobotsHealths(
+//     std::vector<int> &positions,
+//     std::vector<int> &healths,
+//     std::string directions)
 // {
 // TODO
 // }
@@ -60,12 +67,12 @@ void printStack(std::stack<int> st) {
 // }
 
 // * 07 - Number of Visible People in a Queue
-// std::vector<int> canSeePersonsCount(std::vector<int> &heights) {
+// std::vector<int> canSeePersonsCount(std::vector<int>& heights) {
 // TODO
 // }
 
 // * 08 - Parsing A Boolean Expression
-// bool parseBoolExpr(std::string expression) {
+// bool parseBoolExpr(std::string &expression) {
 // TODO
 // }
 
@@ -80,3 +87,4 @@ int main(void) {
 
 // * run the code
 // * g++ --std=c++20 -g practice.cpp -o output && ./output
+

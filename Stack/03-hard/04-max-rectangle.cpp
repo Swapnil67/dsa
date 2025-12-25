@@ -20,9 +20,20 @@
 */
 
 #include <stack>
-#include <climits>
 #include <vector>
 #include <iostream>
+
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
+  }
+  std::cout << " ]" << std::endl;
+}
 
 // * Print the matrix
 void printMatrix(std::vector<std::vector<char>> matrix) {
@@ -40,7 +51,7 @@ void printMatrix(std::vector<std::vector<char>> matrix) {
 // * From largest rectangle in 1D array
 int largestRectangleArea(std::vector<int> heights) {
   int n = heights.size();
-  int largestRect = INT_MIN;
+  int largest_rect = 0;
 
   std::stack<int> st;
   for (int i = 0; i < n; ++i) {
@@ -49,17 +60,17 @@ int largestRectangleArea(std::vector<int> heights) {
     // * its pse will be st.top() element
     while (!st.empty() && heights[st.top()] >= heights[i]) {
       // * find the area of element of top of stack
-      int stackTop = st.top();
+      int top = st.top();
       st.pop();
 
-      int nextSmallerIdx = i;
-      int prevSmallerIdx = -1;
+      int nse_idx = i;
+      int pse_idx = -1;
       if (!st.empty()) {
-        prevSmallerIdx = st.top();
+        pse_idx = st.top();
       }
 
-      int rect = heights[stackTop] * (nextSmallerIdx - prevSmallerIdx - 1);
-      largestRect = std::max(largestRect, rect);
+      int rect = heights[top] * (nse_idx - pse_idx - 1);
+      largest_rect = std::max(largest_rect, rect);
     }
     st.push(i);
   }
@@ -70,51 +81,61 @@ int largestRectangleArea(std::vector<int> heights) {
   // * Handle all untouched elements on stack
   // * Here for all elements the nse will be n & pse will be st.top()
   while (!st.empty()) {
-    int stackTop = st.top();
+    int top = st.top();
     st.pop();
 
-    int prevSmallerIdx = -1;
+    int nse_idx = n;       // * next smaller index for st.top() will be 'n'
+    int pse_idx = -1;      // * prev smaller index for st.top() will be prev st.top()
     if (!st.empty()) {
-      prevSmallerIdx = st.top();
+      pse_idx = st.top();
     }
 
-    int rect = heights[stackTop] * (n - prevSmallerIdx - 1);
-    largestRect = std::max(largestRect, rect);
+    int rect = heights[top] * (nse_idx - pse_idx - 1);
+    largest_rect = std::max(largest_rect, rect);
   }
 
-  return largestRect;
+  return largest_rect;
 }
 
 int maximalRectangle(std::vector<std::vector<char>> &matrix) {
-  int n = matrix[0].size();
-  
+  int rows = matrix.size();
+  int cols = matrix[0].size();
+
   // * Get the first row from matrix 
-  std::vector<int> heights(n);
-  for(int i = 0; i < n; ++i) {
+  std::vector<int> heights(cols, 0);
+  for(int i = 0; i < cols; ++i) {
     heights[i] = matrix[0][i] - '0';
   }
+  // printArr(heights); // * For debugging
+  int max_area = largestRectangleArea(heights);
   
-  int maxArea = largestRectangleArea(heights);
-  
-  int r = matrix.size();
-  for (int row = 1; row < r; ++row) {
-    for (int col = 0; col < n; ++col) {
-      heights[col] += matrix[row][col] - '0';
+  for (int i = 1; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+      if (matrix[i][j] == '0') {
+        heights[j] = 0;
+      } else {
+        heights[j] = heights[j] + matrix[i][j] - '0';
+      }
     }
-    maxArea = std::max(maxArea, largestRectangleArea(heights));
+    // printArr(heights); // * For debugging
+    max_area = std::max(max_area, largestRectangleArea(heights));
   }
 
-  return maxArea;
+  return max_area;
 }
 
 int main() {
-  std::cout << "Vector Matrix" << std::endl;
+  // * testcase 1
   std::vector<std::vector<char>> matrix = {
       {'1', '0', '1', '0', '0'},
       {'1', '0', '1', '1', '1'},
       {'1', '1', '1', '1', '1'},
       {'1', '0', '0', '1', '0'}};
 
+  // * testcase 2
+  // std::vector<std::vector<char>> matrix = {{'0', '1'}, {'1', '0'}};
+
+  std::cout << "Vector Matrix" << std::endl;
   printMatrix(matrix);
 
   int ans = maximalRectangle(matrix);
@@ -123,4 +144,4 @@ int main() {
 }
 
 // * run the code
-// * g++ --std=c++17 04-max-rectangle.cpp -o output && ./output
+// * g++ --std=c++20 04-max-rectangle.cpp -o output && ./output

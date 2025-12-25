@@ -1,7 +1,9 @@
 /*
  * Leetcode - 224
  * Basic Calculator
- * Given a string s representing a valid expression, implement a basic calculator to evaluate it, and return the result of the evaluation.
+ * 
+ * Given a string s representing a valid expression, implement a basic calculator to evaluate it, 
+ * and return the result of the evaluation.
  * 
  * Example: 1
  * Input: s = "1 + 1"
@@ -18,6 +20,8 @@
  * https://leetcode.com/problems/basic-calculator/description/
 */
 
+// ! Google, Meta, Airbnb
+
 #include <stack>
 #include <iostream>
 
@@ -27,50 +31,60 @@ int calculate(std::string s) {
   std::stack<char> st;
 
   int sign = 1;
-  int number = 0;
-  int result = 0;
+  int num = 0;
+  int res = 0;
   for (char &ch : s) {
     if (isdigit(ch)) {
-      number = number * 10 + (ch - '0');
+      num = num * 10 + (ch - '0');
     }
     else if (ch == '-' || ch == '+') {
-      // * Add the cur number to result with sign
-      result += (number * sign);
-      number = 0;   // * reset the cur number
+      // * Add the cur num to res with sign
+      res += (num * sign);
+      num = 0;   // * reset the cur num
       sign = ch == '+' ? 1 : -1;
     }
     else if (ch == '(') {
-      st.push(result);    // * Push the result on to stack
-      st.push(sign);      // * Push the sign on to stack
-      result = 0;         // * Reset the result
-      number = 0;         // * Reset the number
-      sign = 1;           // * Reset the sign
+      st.push(res);  // * Push the cur res on to stack
+      st.push(sign); // * Push the sign on to stack
+      res = 0;       // * Reset the cur res
+      num = 0;       // * Reset the num
+      sign = 1;      // * Reset the sign
     }
     else if (ch == ')') {
-      // * Add the cur number to result with sign
-      result += (number * sign);
-      number = 0;
+      // * Add the cur num to res with sign
+      res += (num * sign);
+      num = 0;
 
-      // * Add the sign to cur result
+      // * Add the sign to cur res
       int stack_sign = st.top();
       st.pop();
-      result *= stack_sign;
+      res *= stack_sign;
 
-      // * Add the prev result to cur result
+      // * Add the prev res to cur res
       int last_result = st.top();
       st.pop();
-      result += last_result;
+      res += last_result;
     }
   }
 
-  // * Add number to result
-  result += (number * sign);
-  return result;
+  // * Add num to res
+  res += (num * sign);
+  return res;
 }
 
 int main() {
-  std::string s = " 2-1 + 2 ";
+  // * testcase 1
+  // std::string s = " 2-1 + 2 ";
+
+  // * testcase 2
   // std::string s = "(1+(4+5+2)-3)+(6+8)";
+
+  // * testcase 3
+  // std::string s = "10 - (4+5+2)-3+(6+8)";
+
+  // * testcase 4
+  std::string s = "(1+(4+5+2)-3)+(6+8)";
+
   std::cout << "Expression: " << s << std::endl;
   
   int ans = calculate(s);

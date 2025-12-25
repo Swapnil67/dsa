@@ -33,27 +33,35 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include <numeric> // Required for std::iota
+#include <numeric> // * Required for std::iota
 
 using namespace std;
 
-void printArr(vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  printf("\n");
+  std::cout << " ]" << std::endl;
 }
-
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Using Stack
 // * TIME COMPLEXITY O(N) + O(nlogn)
 // * SPACE COMPLEXITY O(N)
-vector<int> survivedRobotsHealths(vector<int> &positions, vector<int> &healths, string directions) {
+std::vector<int> survivedRobotsHealths(
+    std::vector<int> &positions,
+    std::vector<int> &healths,
+    string directions)
+{
   int n = positions.size();
 
-  // * This will fil the vector with 0 - n
-  vector<int> actual_idx_vec(n);
+  // * This will fill the std::vector with 0 - n
+  std::vector<int> actual_idx_vec(n);
   iota(begin(actual_idx_vec), end(actual_idx_vec), 0);
   
   // * Sort the robot index according to position vector
@@ -63,7 +71,7 @@ vector<int> survivedRobotsHealths(vector<int> &positions, vector<int> &healths, 
   sort(begin(actual_idx_vec), end(actual_idx_vec), lamda); // * O(nlogn)
   // printArr(actual_idx_vec);
   
-  stack<int> st;
+  std::stack<int> st;
   for (int &cur_idx : actual_idx_vec) { 
     // * Any idx is visited atmost twice
     if (directions[cur_idx] == 'R') {
@@ -74,16 +82,14 @@ vector<int> survivedRobotsHealths(vector<int> &positions, vector<int> &healths, 
         int top_idx = st.top();
         st.pop();
 
-        if(healths[top_idx] > healths[cur_idx]) {
-          healths[top_idx] -= 1;
+        if (healths[top_idx] > healths[cur_idx]) {
           healths[cur_idx] = 0;    // * cur got destoryed
+          healths[top_idx] -= 1;
           st.push(top_idx);
-        }
-        else if(healths[top_idx] < healths[cur_idx]) {
+        } else if (healths[top_idx] < healths[cur_idx]) {
           healths[cur_idx] -= 1;
           healths[top_idx] = 0;   // * Top robot got destoryed
-        }
-        else {
+        } else {
           // * both robots have same health (both destoryed)
           healths[top_idx] = 0;
           healths[cur_idx] = 0;
@@ -92,7 +98,7 @@ vector<int> survivedRobotsHealths(vector<int> &positions, vector<int> &healths, 
     }
   }
 
-  vector<int> ans;
+  std::vector<int> ans;
   for (int i = 0; i < n; ++i) {
     if (healths[i] > 0)
       ans.push_back(healths[i]);
@@ -102,20 +108,20 @@ vector<int> survivedRobotsHealths(vector<int> &positions, vector<int> &healths, 
 }
 
 int main() {
-  // vector<int> positions = {5,4,3,2,1}, healths = {2,17,9,15,10};
+  // std::vector<int> positions = {5,4,3,2,1}, healths = {2,17,9,15,10};
   // std::string directions = "RRRRR";
 
-  // vector<int> positions = {1, 2, 5, 6}, healths = {10, 10, 11, 11};
+  // std::vector<int> positions = {1, 2, 5, 6}, healths = {10, 10, 11, 11};
   // std::string directions = "RLRL";
 
-  // vector<int> positions = {3, 5, 2, 6}, healths = {10, 10, 15, 12};
-  // std::string directions = "RLRL";
+  std::vector<int> positions = {3, 5, 2, 6}, healths = {10, 10, 15, 12};
+  std::string directions = "RLRL";
 
-  // vector<int> positions = {3, 47}, healths = {46, 26};
+  // std::vector<int> positions = {3, 47}, healths = {46, 26};
   // std::string directions = "LR";
 
-  vector<int> positions = {4, 37, 23}, healths = {50, 15, 49};
-  std::string directions = "RLR";
+  // std::vector<int> positions = {4, 37, 23}, healths = {50, 15, 49};
+  // std::string directions = "RLR";
 
   printf("Positions: ");
   printArr(positions);
@@ -123,7 +129,7 @@ int main() {
   printArr(healths);
   std::cout << "Direction: " << directions << std::endl;
 
-  vector<int> ans = survivedRobotsHealths(positions, healths, directions);
+  std::vector<int> ans = survivedRobotsHealths(positions, healths, directions);
   printArr(ans);
   return 0;
 }

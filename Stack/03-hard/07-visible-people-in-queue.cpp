@@ -1,6 +1,7 @@
 /*
  * Leetcode - 1944
  * Number of Visible People in a Queue
+ * 
  * There are n people standing in a queue, and they numbered from 0 to n - 1 in left to right order. 
  * You are given an array heights of distinct integers where heights[i] represents the height of the ith person.
  * 
@@ -21,6 +22,8 @@
  * 
  * https://leetcode.com/problems/number-of-visible-people-in-a-queue/
 */
+
+// ! Google, Meta, Microsoft, Amazon, Rippling, Oracle
 
 #include <stack>
 #include <vector>
@@ -45,7 +48,7 @@ std::vector<int> canSeePersonsCount(std::vector<int>& heights) {
   int visible = 0;
   std::stack<int> st;
   for (int i = n - 1; i >= 0; --i) {
-    // * If st.top() has smaller height then pop that height and incr visible count
+    // * If st.top() has smaller height than current then pop that height and incr visible count
     while (!st.empty() && st.top() < heights[i]) {
       st.pop();
       visible++;
