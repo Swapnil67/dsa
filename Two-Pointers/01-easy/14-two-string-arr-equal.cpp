@@ -27,67 +27,46 @@ void printVectorString(std::vector<std::string> strs) {
   std::cout << "]" << std::endl;
 }
 
-std::string getValidString(std::vector<std::string> word_arr) {
-  std::string s = "";
-  for(std::string str : word_arr) {
-    s += str;
-  }
-  return s;
-}
-
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Create string from input array
 // * TIME COMPLEXITY O(n + m)
 // * SPACE COMPLEXITY O(n)
 bool bruteForce(std::vector<std::string> word1, std::vector<std::string> word2) {
-  std::string s = getValidString(word1);
-  std::string t = getValidString(word2);
-  std::cout << "Word 1: " << s << ", Word 2: " << t << std::endl;
-  return s == t;
+  std::string s1 = "";
+  for (auto &w : word1)
+    s1 += w;
+  std::string s2 = "";
+  for (auto &w : word2)
+    s2 += w;
+  return (s1 == s2);
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-// * loop from end k string
-// * TIME COMPLEXITY O(n) + O(m)
+// * n1 - size of word1, n2 - size of word2
+// * TIME COMPLEXITY O(n1) + O(n2)
 // * SPACE COMPLEXITY O(1)
 bool arrayStringsAreEqual(std::vector<std::string> word1, std::vector<std::string> word2) {
   int n1 = word1.size(), n2 = word2.size();
-  int w1 = 0, w2 = 0; // * Index of word
-  int i = 0, j = 0;   // * Index of char
-
-  while (w1 < n1 && w2 < n2) {
-    printf("%d %d & %d %d\n", w1, i, w2, j);
-    if (i < word1[w1].size() && j < word2[w2].size()) {
-      if (word1[w1][i] != word2[w2][j]) {
-        return false;
-      }
-      i += 1;
-      j += 1;
+  int i = 0, j = 0; 
+  int m = 0, n = 0; // * Index of word
+  while (m < n1 && n < n2) {
+    if (i >= word1[m].size()) {
+      m += 1;
+      i = 0; // * reset word index
     }
-    else {
-       // * i goes out of bound
-      if (i >= word1[w1].size() && w1 < n1) {
-        w1 += 1;
-        i = 0;
-      }
-      // * j goes out of bound
-      if (j >= word2[w2].size() && w2 < n2) {
-        w2 += 1;
-        j = 0;
-      }
+    
+    if (j >= word2[n].size()) {
+      n += 1;
+      j = 0; // * reset word index
     }
-  }
 
-  std::cout << "i: " << i << ",\tj: " << j << std::endl;
-  std::cout << "w1: " << w1 << ",\tw2: " << w2 << std::endl;
-
-  // * Check if both arrays have ended
-  if(w1 != n1 || w2 != n2) {
-    return false;
+    if (m < n1 && n < n2 && word1[m][i] != word2[n][j]) {
+      return false;
+    }
+    i++, j++;
   }
-  return true;
+  return (m >= n1 && n >= n2);
 }
-
 
 int main() {
   // * testcase 1

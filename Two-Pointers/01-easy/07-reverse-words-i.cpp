@@ -73,16 +73,15 @@ std::string reverseWords(std::string s) {
       i = j + 1;
     }
   }
-  
-  if(i < n) {
+
+  // * Reverse the last word in 's'
+  if (i < n) {
     reverseWord(s, i, n - 1);
   }
-
   return s;
 }
 
-
-int main() {
+int main(void) {
   // * testcase 1
   // std::string s = "Let's take LeetCode contest";
 

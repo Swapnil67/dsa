@@ -3,11 +3,16 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 void printMatrix(std::vector<std::vector<int>> matrix) {
@@ -121,12 +126,22 @@ void swap(T &a, T &b) {
 // TODO
 // }
 
+// * 16 - Remove Element
+// int removeElement(int val, std::vector<int> &nums) {
+// TODO
+// }
+
+// * 17 - Sort Array By Parity II
+// std::vector<int> sortArrayByParityII(std::vector<int> &nums) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }
 
 // * Run the code
-// * g++ -std=c++17 practice.cpp -o output && ./output
+// * g++ -std=c++20 practice.cpp -o output && ./output
 
 
 

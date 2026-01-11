@@ -1,20 +1,22 @@
-/**
- * * Leetcode - 26
- * * Remove Duplicates from Sorted Array
- * * You are given a sorted integer array 'arr' of size 'n'.
- * * You need to remove the duplicates from the array such that each element appears only once.
+/*
+ * Leetcode - 26
+ * Remove Duplicates from Sorted Array
+ * You are given a sorted integer array 'arr' of size 'n'.
+ * You need to remove the duplicates from the array such that each element appears only once.
 
- * * Example 1
- * * Input  : ‘n’ = 5, ‘a’ = [1 2 2 2 3].
- * * Output : [1 2 3]
+ * Example 1
+ * Input  : ‘n’ = 5, ‘a’ = [1 2 2 2 3].
+ * Output : [1 2 3]
  * 
- * * Example 2
- * * Input  : ‘n’ = 10, ‘a’ = [1 2 2 3 3 3 4 4 5 5]
- * * Output : [1 2 3 4 5]
+ * Example 2
+ * Input  : ‘n’ = 10, ‘a’ = [1 2 2 3 3 3 4 4 5 5]
+ * Output : [1 2 3 4 5]
 
- * * https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
- * * https://www.naukri.com/code360/problems/remove-duplicates-from-sorted-array_1102307
+ * https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+ * https://www.naukri.com/code360/problems/remove-duplicates-from-sorted-array_1102307
 */
+
+// ! Amazon, Meta, Google, MIcrosoft, Apple, Uber
 
 #include <set>
 #include <vector>

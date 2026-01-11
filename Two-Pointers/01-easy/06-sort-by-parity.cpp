@@ -16,6 +16,8 @@
  * https://leetcode.com/problems/sort-array-by-parity/description/
 */
 
+// ! Amazon, Meta, Google, MIcrosoft, Apple
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -86,15 +88,18 @@ std::vector<int> sortArrayByParity2(std::vector<int> nums) {
 }
 
 int main() {
+  // * testcase 1
   std::vector<int> arr = {3, 1, 2, 4};
+
+  // * testcase 2
   // std::vector<int> arr = {0, 1, 2};
 
   std::cout << "Before Sorting" << std::endl;
   printArr(arr);
   
   // std::vector<int> ans = bruteForce(arr);
-  // std::vector<int> ans = sortArrayByParity(arr);
-  std::vector<int> ans = sortArrayByParity2(arr);
+  std::vector<int> ans = sortArrayByParity(arr);
+  // std::vector<int> ans = sortArrayByParity2(arr);
 
   std::cout << "After Sorting" << std::endl;
   printArr(ans);
@@ -103,4 +108,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 06-sort-by-parity.cpp -o output && ./output
+// * g++ --std=c++20 06-sort-by-parity.cpp -o output && ./output

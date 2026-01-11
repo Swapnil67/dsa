@@ -23,6 +23,8 @@
  * * https://neetcode.io/problems/valid-word-abbreviation
 */
 
+// ! Amazon, Meta, Google, Apple
+
 #include <iostream>
 
 // * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
@@ -78,6 +80,7 @@ int main(void) {
   // std::string word = "internationalization", abbr = "i18n";
   std::string word = "substitution", abbr = "s55n";
 
+  std::cout << "Word: " << word << ", Abbr: " << abbr << std::endl;
   bool ans = validWordAbbreviation(word, abbr);
   std::cout << "Valid word abbreviation: " << ans << std::endl;
   return 0;

@@ -52,8 +52,13 @@ std::vector<int> sortedSquares(std::vector<int>& nums) {
 }
 
 int main(void) {
+  // * testcase 1
   // std::vector<int> nums = {-4, -1, 0, 3, 10};
+
+  // * testcase 2
   std::vector<int> nums = {-7, -3, 2, 3, 11};
+
+  std::cout << "Input Nums: " << std::endl;
   printArr(nums);
   
   std::vector<int> ans = sortedSquares(nums);

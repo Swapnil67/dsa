@@ -1,6 +1,7 @@
 /*
  * Leetcode - 844
  * Backspace String Compare
+ * 
  * Given two strings s and t, return true if they are equal when both are typed into empty text editors.
  * '#' means a backspace character.
  * Note that after backspacing an empty text, the text will continue empty.
@@ -23,8 +24,8 @@
  * https://leetcode.com/problems/backspace-string-compare/description/
 */
 
-#include<stack>
-#include<iostream>
+#include <stack>
+#include <iostream>
 
 std::string getValidString(std::string s) {
   int n = s.size();
@@ -95,6 +96,37 @@ bool backspaceCompare(std::string s, std::string t) {
   return true;
 }
 
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * Two Pointer Approach
+// * TIME COMPLEXITY O(n) 
+// * SPACE COMPLEXITY O(1)
+bool backspaceCompare2(std::string s, std::string t) {
+  int n1 = s.size(), n2 = t.size();
+  int i = n1 - 1, j = n2 - 1;
+  int back = 0;
+  while (true) {
+    back = 0;
+    while (i >= 0 && (back > 0 || s[i] == '#')) {
+      back += (s[i] == '#') ? 1 : -1;
+      i--;
+    }
+
+    back = 0;
+    while (j >= 0 && (back > 0 || t[j] == '#')) {
+      back += (t[j] == '#') ? 1 : -1;
+      j--;
+    }
+
+    if (i >= 0 && j >= 0 && s[i] == t[j]) {
+      i--, j--;
+    }
+    else {
+      break;
+    }
+  }
+  return i == -1 && j == -1; // * OR
+  // return i < 0 && j < 0;
+}
 
 int main() {
   // * testcase 1

@@ -93,17 +93,19 @@ int main() {
   int m = 3, n = 3;
   std::vector<int> nums1 = {2, 2, 3, 0, 0, 0};
   std::vector<int> nums2 = {1, 5, 6};
+
   std::cout << "Before Merging" << std::endl;
   std::cout<<"nums1: ";
   printArr(nums1);
   std::cout<<"nums2: ";
   printArr(nums2);
   
-  std::cout << "After Merging" << std::endl;
   // mergeBrute(nums1, m, nums2, n);
   merge(nums1, m, nums2, n);
+
+  std::cout << "After Merging" << std::endl;
   printArr(nums1);
 }
 
 // * Run the code
-// * g++ --std=c++17 02-merge-sorted-arr.cpp -o output && ./output
+// * g++ --std=c++20 02-merge-sorted-arr.cpp -o output && ./output

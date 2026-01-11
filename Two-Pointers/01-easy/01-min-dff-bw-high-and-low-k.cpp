@@ -36,8 +36,10 @@ void printArr(std::vector<int> arr) {
 // * Space Complexity = O(1)
 int minimumDifference(std::vector<int> arr, int k) {
   int n = arr.size();
+  // * Step 1. Sort the given array
   std::sort(arr.begin(), arr.end());
-  // printArr(arr);
+
+  // * Step 2. Loop over the window
   int l = 0, r = k - 1;
   int res = INT_MAX;
   while(r < n) {
