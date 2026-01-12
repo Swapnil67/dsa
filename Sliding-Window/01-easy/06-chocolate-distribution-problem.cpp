@@ -99,7 +99,7 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++17 07-chocolate-distribution-problem.cpp -o output && ./output
+// * g++ --std=c++17 06-chocolate-distribution-problem.cpp -o output && ./output
 
 // * 3, 4, 1, 9, 56, 7, 9, 11
 
