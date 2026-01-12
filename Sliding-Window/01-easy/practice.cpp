@@ -1,16 +1,24 @@
+// * Sliding Window Easy
+
 #include <vector>
 #include <climits>
 #include <iostream>
 #include <unordered_map>
 #include <unordered_set>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
+  
+// * -------------------------------------------------------------------------------------------
 
 // * 01 - Contains Duplicate II
 // bool containsNearbyDuplicate(std::vector<int> &arr, int k) {
@@ -32,12 +40,12 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
-// * 05 - Best Time to Buy and Sell Stock - i
-// int maxProfit(std::vector<int> &prices) {
+// * 05 - Minimum Difference Between Highest and Lowest of K Scores
+// int minimumDifference(std::vector<int> &nums, int k) {
 // TODO
 // }
 
-// * 06 - Best Time to Buy and Sell Stock - i
+// * 06 - Chocolate Distribution Problem
 // int minimumDifference(std::vector<int> &nums, int k) {
 // TODO
 // }

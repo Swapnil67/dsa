@@ -1,20 +1,20 @@
-/**
- * * Max Sum Subarray of size K
- * * Given an array of integers arr[] and a number k. Return the maximum sum of a subarray of size k.
+/*
+ * Max Sum Subarray of size K
+ * Given an array of integers arr[] and a number k. Return the maximum sum of a subarray of size k.
  * 
- * * Example 1
- * * Input  : nums = [100, 200, 300, 400], k = 2
- * * Output : 700
+ * Example 1
+ * Input  : nums = [100, 200, 300, 400], k = 2
+ * Output : 700
 
- * * Example 2
- * * Input  : nums = [100, 200, 300, 400], k = 4
- * * Output : 1000
+ * Example 2
+ * Input  : nums = [100, 200, 300, 400], k = 4
+ * Output : 1000
 
- * * Example 3
- * * Input  : nums = [100, 200, 300, 400], k = 1
- * * Output : 400
+ * Example 3
+ * Input  : nums = [100, 200, 300, 400], k = 1
+ * Output : 400
 
- * * https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
+ * https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
 */
 
 #include <vector>

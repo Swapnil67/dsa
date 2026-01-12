@@ -35,14 +35,22 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
+// * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------`
+// * Sliding window Approach
+// * TIME COMPLEXITY O(NlogN)
+// * SPACE COMPLEXITY O(N)
 int findMinDiff(std::vector<int> &a, int m) {
   int n = a.size();
   sort(begin(a), end(a)); // * O(nlogn)
@@ -63,6 +71,23 @@ int findMinDiff(std::vector<int> &a, int m) {
   return cur_min;
 }
 
+// * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------`
+// * Sliding window Approach
+// * TIME COMPLEXITY O(NlogN)
+// * SPACE COMPLEXITY O(N)
+int findMinDiff(std::vector<int> &a, int m) {
+  int n = a.size();
+  sort(begin(a), end(a));
+
+  int i = 0, j = m - 1;
+  int ans = INT_MAX;
+  while (j < n) {
+    ans = std::min(ans, a[j] - a[i]);
+    i++, j++;
+  }
+  return ans;
+}
+
 int main(void) {
   int m = 5;
   std::vector<int> arr = {3, 4, 1, 9, 56, 7, 9, 12};
@@ -72,6 +97,9 @@ int main(void) {
   int ans = findMinDiff(arr, m);
   std::cout << ans << std::endl;
 }
+
+// * Run the code
+// * g++ --std=c++17 07-chocolate-distribution-problem.cpp -o output && ./output
 
 // * 3, 4, 1, 9, 56, 7, 9, 11
 

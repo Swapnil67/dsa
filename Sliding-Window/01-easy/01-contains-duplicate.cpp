@@ -20,10 +20,12 @@
  * * https://www.naukri.com/code360/problems/check-duplicate_763405
 */
 
-#include <map>
+// ! Amazon, Google, Meta, Microsoft, Apple, Adobe
+
 #include <vector>
 #include <iostream>
 #include <unordered_set>
+#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -39,11 +41,11 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(N)
 bool bruteForce(std::vector<int> &arr, int &k) {
   int n = arr.size();
-  std::map<int, int> hash_map;
+  std::unordered_map<int, int> hash_map;
   for (int i = 0; i < n; i++) {
     int val = arr[i];
     // * check if value already seen
-    if(hash_map.count(val)) {
+    if (hash_map.count(val)) {
       // * Check the condition valid within window of 'k'
       if (std::abs(i - hash_map[val]) <= k)
         return true;
@@ -60,7 +62,7 @@ bool bruteForce(std::vector<int> &arr, int &k) {
 // * SPACE COMPLEXITY O(N)
 bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
   int n = arr.size(), i = 0, j = 0;
-  std::unordered_set<int> st; 
+  std::unordered_set<int> st;
   while (j < n) {
     // * Check is in window
     if (std::abs(i - j) > k) {
@@ -69,9 +71,10 @@ bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
     }
     
     // * Check if we have already seen ele in past
-    if (st.find(arr[j]) != st.end()) {
+    if (st.count(arr[j])) {
       return true;
     }
+
     // * Add the element to set
     st.insert(arr[j]);
     j++;
@@ -94,17 +97,17 @@ bool containsNearbyDuplicate(std::vector<int> &arr, int &k) {
 // }
 
 int main() {
-  // int k = 3;
-  // std::vector<int> arr = {1, 2, 3, 1};
+  int k = 3;
+  std::vector<int> arr = {1, 2, 3, 1};
 
-  int k = 2;
-  std::vector<int> arr = {1, 2, 3, 1, 2, 3};
+  // int k = 2;
+  // std::vector<int> arr = {1, 2, 3, 1, 2, 3};
 
   // int k = 1;
   // std::vector<int> arr = {1, 0, 1, 1};
 
-  std::cout << "k " << k << std::endl;
-  std::cout << "Input Array " << std::endl;
+  std::cout << "k: " << k << std::endl;
+  std::cout << "Input Array: ";
   printArr(arr);
 
   // bool is_duplicate = bruteForce(arr, k);
@@ -115,4 +118,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-contains-duplicate.cpp -o output && ./output
+// * g++ --std=c++20 01-contains-duplicate.cpp -o output && ./output

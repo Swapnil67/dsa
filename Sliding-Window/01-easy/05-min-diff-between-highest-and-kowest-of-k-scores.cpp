@@ -19,15 +19,17 @@
  * Input: nums = [9,4,1,7], k = 2
  * Output: 2
  * Explanation: 
- *     -> 9 - 4 = 5
- *     -> 9 - 1 = 8
- *     -> 9 - 7 = 2
- *     -> 4 - 1 = 3
- *     -> 4 - 7 = 3
- *     -> 1 - 7 = 6
+ *              -> 9 - 4 = 5
+ *              -> 9 - 1 = 8
+ *              -> 9 - 7 = 2
+ *              -> 4 - 1 = 3
+ *              -> 4 - 7 = 3
+ *              -> 1 - 7 = 6
 
  * https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/description/
 */
+
+// ! Amazon, Google, Bloomberg
 
 #include <vector>
 #include <climits>
