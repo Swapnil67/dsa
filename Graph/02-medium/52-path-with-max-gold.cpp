@@ -42,23 +42,6 @@ void printArr(std::vector<T> &arr) {
   }
   std::cout << "]" << std::endl;
 }
-
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
-  for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
-    printArr(vec);
-  }
-}
-
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
-  for (auto &it : edges) {
-    int u = it[0], v = it[1];
-    adj[u].push_back(v);
-    adj[v].push_back(u);
-  }
-  return adj;
-}
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 int dfs(int r, int c, std::vector<std::vector<int>> &grid) {
@@ -84,6 +67,7 @@ int dfs(int r, int c, std::vector<std::vector<int>> &grid) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
+// * DFS + Backtracking
 // * Go to every gold node and do DFS from there
 // * TIME COMPLEXITY O(m * n) * O(4^(m * n))
 // * SPACE COMPLEXITY O(4^(m * n))
@@ -115,7 +99,6 @@ int main(void) {
   for (auto &vec : grid)
     printArr(vec);
 
-  // std::vector<int> ans = bruteForce(n, grid);
   int ans = getMaximumGold(grid);
   std::cout << "Maximum Gold: " << ans << std::endl;
 
