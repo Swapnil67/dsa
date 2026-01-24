@@ -24,13 +24,13 @@
 * Explanation : Deepest leaf nodes are ['7', '4'] depth is '3' and their LCA is '2'
 
 * Example 2:
-*                    3        
-*               /         \     
-*             5            1
-*           /  \          /  \ 
-*          6   '2'       0   8
-*             /   \     /      
-*           '7'   '4'  '10'
+*                   '3'        
+*               /        \     
+*             5           1
+*           /  \         /  \ 
+*          6    2       0   8
+*             /  \     /      
+*           '7'  '4' '10'
 
 * Input       : root = [3,5,1,6,2,0,8,null,null,7,4]
 * Output      : [3,5,1,6,2,0,8,null,null,7,4]
@@ -39,7 +39,7 @@
 * https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description
 */
 
-// ! Google
+// ! Google, Meta
 
 #include <queue>
 #include <vector>
@@ -58,6 +58,13 @@ public:
     data = val;
     left = nullptr;
     right = nullptr;
+  }
+
+  ~TreeNode() {
+    if (left)
+      delete left;
+    if (right)
+      delete right;
   }
 };
 
@@ -132,7 +139,7 @@ std::pair<int, TreeNode*> dfs2(TreeNode *root)
 {
   // * Found null or node with max depth
   if (!root)
-    return {0, nullptr};
+    return {0, root};
 
   auto [left_depth, left] = dfs2(root->left);
   auto [right_depth, right] = dfs2(root->right);
@@ -144,7 +151,7 @@ std::pair<int, TreeNode*> dfs2(TreeNode *root)
   else if(left_depth > right_depth) { // * left depth is more
     return {1 + left_depth, left};
   }
-  return {1 + right_depth, right};    // * right depth is more
+  return {1 + right_depth, right}; // * right depth is more
 }
 
 // * ------------------------- APPROACH: BRUTE FORCE APPROACH -------------------------
@@ -205,7 +212,6 @@ int main(void) {
   // TreeNode* ans = bruteForce(root);
   TreeNode* ans = lcaDeepestLeaves(root);
   levelOrderTraversal(ans);
-
 
   return 0;
 }

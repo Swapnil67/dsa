@@ -51,6 +51,33 @@ void printArr(vector<int> arr) {
   cout << "]" << endl;
 }
 
+
+void levelOrderTraversal(TreeNode *root) {
+  if (!root)
+    return;
+
+  std::queue<TreeNode *> q;
+  q.push(root);
+
+  while(!q.empty()) {
+    int n = q.size();
+    // * traverse the whole level
+    while (n--) {
+      TreeNode *node = q.front();
+      q.pop();
+
+      std::cout << node->data << " ";
+
+      if (node->left)
+        q.push(node->left);
+
+      if (node->right)
+        q.push(node->right);
+    }
+    std::cout << std::endl;
+  }
+}
+
 // * Recursive Pre Order Traversal (Root -> Right -> Left)
 void dfs(TreeNode *root, std::vector<int> &ans, int level) {
   if (!root)
@@ -71,23 +98,26 @@ std::vector<int> rightViewDFS(TreeNode *root) {
   return ans;
 }
 
-// * BFS
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Using Level Order Traversal
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 std::vector<int> rightViewBFS(TreeNode *root) {
   std::vector<int> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode*> q;
+  std::queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
     int n = q.size();
-    std::vector<int> level;
-    while (n--) {
+    for (int i = 0; i < n; ++i) {
       TreeNode *node = q.front();
       q.pop();
 
-      level.push_back(node->data);
+      if (i == n - 1)
+        ans.push_back(node->data);
 
       if (node->left)
         q.push(node->left);
@@ -95,9 +125,51 @@ std::vector<int> rightViewBFS(TreeNode *root) {
       if (node->right)
         q.push(node->right);
     }
-    ans.push_back(level[level.size() - 1]);
   }
 
+  return ans;
+}
+
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Variant1: Print Both Left & right side view in clockwise order (Do not repeat root node)
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
+std::vector<int> rightViewVariant1(TreeNode *root) {
+  std::vector<int> ans;
+  if (!root)
+    return ans;
+
+  std::queue<TreeNode *> q;
+  q.push(root);
+
+  std::vector<int> left_side;
+  std::vector<int> right_side;
+
+  while (!q.empty()) {
+    int n = q.size();
+    for (int i = 0; i < n; ++i) {
+      TreeNode *node = q.front();
+      q.pop();
+
+      if (i == 0)
+        left_side.push_back(node->data);
+      if (i == n - 1)
+        right_side.push_back(node->data);
+
+      if (node->left)
+        q.push(node->left);
+
+      if (node->right)
+        q.push(node->right);
+    }
+  }
+
+  // * Merge two left_side & right_side clockwise
+  for (int i = left_side.size() - 1; i >= 0; --i)
+    ans.push_back(left_side[i]);
+  for (int i = 1; i < right_side.size(); ++i)
+    ans.push_back(right_side[i]);
+  
   return ans;
 }
 
@@ -113,8 +185,13 @@ int main() {
 
   root->right->right = new TreeNode(7);
 
-  std::vector<int> ans = rightViewDFS(root);
+  std::cout << "Input Tree" << std::endl;
+  levelOrderTraversal(root);
+
+  std::cout << "Right view of the BT" << std::endl;
+  // std::vector<int> ans = rightViewDFS(root);
   // std::vector<int> ans = rightViewBFS(root);
+  std::vector<int> ans = rightViewVariant1(root);
   printArr(ans);
 
   return 0;

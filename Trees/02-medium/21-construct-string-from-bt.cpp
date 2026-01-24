@@ -84,19 +84,14 @@ std::string tree2str(TreeNode* root) {
 
   std::string left_str = tree2str(root->left);
   std::string right_str = tree2str(root->right);
-
-  // * no children
-  if (!root->left && !root->right) {
+  
+  if (!root->left && !root->right) { // * no children
     return ans;   // * single node in tree    
   }
-
-  // * does not have left node
-  if (!root->left) {
+  else if (!root->left) { // * does not have left node
     return ans + "()" + "(" + right_str + ")";
   }
-  
-  // * does not have right node
-  if (!root->right) {
+  else if (!root->right) { // * does not have right node
     return ans + "(" + left_str + ")";
   }
 
@@ -105,19 +100,19 @@ std::string tree2str(TreeNode* root) {
 
 int main(void) {
   // * testcase 1
-  // TreeNode* root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(3);
-  
-  // root->left->left = new TreeNode(4);
-  // root->left->right = new TreeNode(5);
-  
-  // root->right->left = new TreeNode(6);
-  // root->right->right = new TreeNode(7);
-  
-  // * testcase 2
   TreeNode* root = new TreeNode(1);
   root->left = new TreeNode(2);
+  root->right = new TreeNode(3);
+  
+  root->left->left = new TreeNode(4);
+  root->left->right = new TreeNode(5);
+  
+  root->right->left = new TreeNode(6);
+  root->right->right = new TreeNode(7);
+  
+  // * testcase 2
+  // TreeNode* root = new TreeNode(1);
+  // root->left = new TreeNode(2);
   
   // * testcase 3
   // TreeNode* root = new TreeNode(1);

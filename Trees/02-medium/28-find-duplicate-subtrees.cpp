@@ -89,52 +89,16 @@ void preorder(TreeNode *root, std::vector<TreeNode *> &subTree) {
   preorder(root->right, subTree);
 }
 
-bool same(TreeNode *node1, TreeNode *node2) {
-  if (!node1 && !node2)
+bool same(TreeNode *p, TreeNode *q) {
+  if (!p && !q)
     return true;
 
-  if (!node1 || !node2)
+  if (!p || !q)
     return false;
 
-  return (node1->data == node2->data) &&
-         same(node1->left, node2->left) &&
-         same(node1->right, node2->right);
-}
-
-
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
-// * Nested Loop
-// * TIME COMPLEXITY O(n^3)
-// * SPACE COMPLEXITY O(n)
-std::vector<TreeNode *> bruteForce(TreeNode *root) {
-  std::vector<TreeNode *> ans;
-  
-  // * 1. Save all nodes into a vector
-  std::vector<TreeNode *> subTree;
-  preorder(root, subTree);
-  
-  // * 2. Compare each subtree with another
-  int n = subTree.size();
-  std::unordered_set<TreeNode *> seen;
-  for (int i = 0; i < n; ++i) {
-    if (seen.count(subTree[i]))
-        continue;
-
-    for (int j = i + 1; j < n; ++j) {
-      if (seen.count(subTree[j]))
-        continue;
-
-      if (same(subTree[i], subTree[j])) {
-        if (!seen.count(subTree[i])) {
-          ans.push_back(subTree[i]);
-          seen.insert(subTree[i]);
-        }
-        seen.insert(subTree[j]);
-      }
-    }
-  }
-
-  return ans;
+  return (p->data == q->data) &&
+         same(p->left, q->left) &&
+         same(p->right, q->right);
 }
 
 std::string dfs(
@@ -158,6 +122,46 @@ std::string dfs(
   return s;
 }
 
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
+// * Nested Loop
+// * TIME COMPLEXITY O(n^3)
+// * SPACE COMPLEXITY O(n)
+std::vector<TreeNode *> bruteForce(TreeNode *root) {
+  std::vector<TreeNode *> ans;
+
+  // * 1. Save all nodes into a vector
+  std::vector<TreeNode *> subTree;
+  preorder(root, subTree);
+
+  // * 2. Compare each subtree with another
+  int n = subTree.size();
+  std::unordered_set<TreeNode *> seen;
+  for (int i = 0; i < n; ++i) {
+    if (seen.count(subTree[i]))
+      continue;
+
+    for (int j = i + 1; j < n; ++j) {
+      if (seen.count(subTree[j]))
+        continue;
+
+      if (same(subTree[i], subTree[j])) {
+        if (!seen.count(subTree[i])) {
+          ans.push_back(subTree[i]);
+          seen.insert(subTree[i]);
+        }
+        seen.insert(subTree[j]);
+      }
+    }
+  }
+
+  return ans;
+}
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
+// * DFS
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 std::vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
   std::vector<TreeNode *> res;
   std::unordered_map<std::string, int> mp;
@@ -181,11 +185,18 @@ int main(void) {
   root->right->left->left = new TreeNode(4);
   root->right->right = new TreeNode(4);
 
+  // * testcase 1
+  // TreeNode *root = new TreeNode(2);
+  // root->left = new TreeNode(1);
+  // root->right = new TreeNode(11);
+  // root->left->left = new TreeNode(11);
+  // root->right->left = new TreeNode(1);
+
   std::cout << "Input Binary Tree:" << std::endl;
   levelOrderTraversal(root);
 
-  std::vector<TreeNode *> ans = bruteForce(root);
-  // std::vector<TreeNode *> ans = findDuplicateSubtrees(root);
+  // std::vector<TreeNode *> ans = bruteForce(root);
+  std::vector<TreeNode *> ans = findDuplicateSubtrees(root);
   std::cout << "Duplicate Subtrees: " << std::endl;
   for (auto &tree : ans) {
     std::cout << "subtree: " << std::endl;

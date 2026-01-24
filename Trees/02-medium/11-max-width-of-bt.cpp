@@ -33,6 +33,8 @@
 * https://www.geeksforgeeks.org/problems/maximum-width-of-tree/1
 */
 
+// ! Meta, Amazon, Flipkart
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -61,8 +63,43 @@ void printArr(std::vector<T> arr) {
   }
   std::cout << "]" << std::endl;
 }
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * Might go out of 'long long' range if input is too big.
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+int bruteForce(TreeNode *root) {
+  std::queue<std::pair<TreeNode *, int>> q;
+  q.push({root, 0});
 
+  int ans = 0;
+  while (!q.empty()) {
+    int n = q.size();
+    int first = -1, last = -1;
+    for (int i = 0; i < n; ++i) {
+      auto [node, idx] = q.front();
+      q.pop();
+
+      if (i == 0)
+        first = idx;
+      if (i == n - 1)
+        last = idx;
+
+      if (node->left) {
+        q.push({node->left, ((2 * idx) + 1)});
+      }
+      if (node->right) {
+        q.push({node->right, ((2 * idx) + 2)});
+      }
+    }
+    ans = std::max(ans, (last - first + 1));
+  }
+  return ans;
+}
+
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * BFS
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 int widthOfBinaryTree(TreeNode *root) {
   int max_width = 0;
   if (!root)
@@ -72,7 +109,6 @@ int widthOfBinaryTree(TreeNode *root) {
   q.push({root, 0});
 
   while (!q.empty()) {
-    
     // * find the max_width in cur_level
     int L = (int)q.front().second, R = (int)q.back().second;
     max_width = std::max(max_width, R - L + 1);
@@ -82,15 +118,16 @@ int widthOfBinaryTree(TreeNode *root) {
     // * Loop over the cur level
     size_t n = q.size();  
     while (n--) {
-      TreeNode* node = q.front().first;
-      long long cur_id = q.front().second - level_min;
+      auto [node, idx] = q.front();
       q.pop();
 
+      long long next_id = idx - level_min;
+
       if (node->left)
-        q.push({node->left, (cur_id * 2l + 1l)});
+        q.push({node->left, (next_id * 2l + 1l)});
 
       if (node->right)
-        q.push({node->right, (cur_id * 2l + 2l)});
+        q.push({node->right, (next_id * 2l + 2l)});
     }
 
   }
@@ -99,6 +136,7 @@ int widthOfBinaryTree(TreeNode *root) {
 }
 
 int main(void) {
+  // * testcase 1
   TreeNode *root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);
@@ -109,6 +147,7 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
+  // int width = bruteForce(root);
   int width = widthOfBinaryTree(root);
   std::cout << "Maximum Width of Binary Tree " << width << std::endl;
   return 0;

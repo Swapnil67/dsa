@@ -7,7 +7,21 @@
 * Note that once you delete a leaf node with value target, if its parent node becomes a leaf node and has the value target, 
 * it should also be deleted (you need to continue doing that until you cannot).
 
-* Input: root = [1,2,3,2,null,2,4], target = 2
+ * Example 1:
+ * Input: 
+ *              1
+ *           /     \
+ *          2       3
+ *        /  \    /   \
+ *       2    x  2     4
+ 
+ * Input: root = [1,2,3,2,null,2,4], target = 2
+ * Output: 
+ *             1
+ *               \
+ *                 3
+ *                  \
+ *                   4
 * Output: [1,null,3,null,4]
 * Explanation: Leaf nodes in green with value (target = 2) are removed (Picture in left). 
 *              After removing, new nodes become leaf nodes with value (target = 2) (Picture in center).
@@ -15,6 +29,8 @@
 * https://leetcode.com/problems/delete-leaves-with-a-given-value/description/
 * https://www.naukri.com/code360/problems/delete-leaf-nodes-with-value-x_630465
 */
+
+// ! Google, Amazon
 
 #include <iostream>
 
@@ -36,10 +52,10 @@ public:
 TreeNode* removeLeafNodes(TreeNode* root, int target) {
   // * Base Case
   if (!root)
-    return nullptr;
+    return root;
 
-  root->left = removeLeafNodes(root->left, target);    // * solve for left subtree
-  root->right = removeLeafNodes(root->right, target);    // * solve for right subtree
+  root->left = removeLeafNodes(root->left, target);   // * solve for left subtree
+  root->right = removeLeafNodes(root->right, target); // * solve for right subtree
 
   // * If leaf node then check is this the target node
   if (!root->left && !root->right && root->data == target)
@@ -49,6 +65,7 @@ TreeNode* removeLeafNodes(TreeNode* root, int target) {
 }
 
 int main(void) {
+  // * Testcase 1
   TreeNode* root = new TreeNode(1);
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);

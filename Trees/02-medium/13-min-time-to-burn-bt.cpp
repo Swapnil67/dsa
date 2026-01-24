@@ -173,4 +173,3 @@ int main(void) {
 
 // * run the code
 // * g++ --std=c++20 13-min-time-to-burn-bt.cpp -o output && ./output
-

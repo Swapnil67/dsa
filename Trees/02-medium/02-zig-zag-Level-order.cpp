@@ -9,7 +9,11 @@
  * Example 2:
  * Input  : root = [1]
  * Output : [[1]]
+ * 
+ * https://www.naukri.com/code360/problems/zig-zag-traversal_1062662
 */
+
+// ! Amazon, Flipkart
 
 #include <queue>
 #include <vector>
@@ -40,6 +44,33 @@ void printArr(std::vector<T> arr) {
   }
   std::cout << "]" << std::endl;
 }
+
+void levelOrderTraversal(TreeNode *root) {
+  if (!root)
+    return;
+
+  std::queue<TreeNode *> q;
+  q.push(root);
+
+  while(!q.empty()) {
+    int n = q.size();
+    // * traverse the whole level
+    while (n--) {
+      TreeNode *node = q.front();
+      q.pop();
+
+      std::cout << node->data << " ";
+
+      if (node->left)
+        q.push(node->left);
+
+      if (node->right)
+        q.push(node->right);
+    }
+    std::cout << std::endl;
+  }
+}
+
 
 std::vector<std::vector<int>> zigzagLevelOrder(TreeNode *root) {
   std::vector<std::vector<int>> ans;
@@ -77,18 +108,19 @@ std::vector<std::vector<int>> zigzagLevelOrder(TreeNode *root) {
   return ans;
 }
 
+
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
   std::vector<std::vector<int>> ans;
-  if (root == nullptr)
-      return ans;
+  if (!root)
+    return ans;
 
-  // * 1 = L -> R
-  // * 0 = R -> L
-  int leftToRight = 1;
-
-  std::queue<TreeNode*> q;
+  std::queue<TreeNode *> q;
   q.push(root);
 
+  int reverse = 1;
   while (!q.empty()) {
     int n = q.size();
     std::vector<int> cur(n);
@@ -97,7 +129,7 @@ std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
       TreeNode *node = q.front();
       q.pop();
       
-      int idx = (leftToRight) ? i : (n - 1 - i);
+      int idx = (reverse) ? i : (n - 1 - i);
       cur[idx] = node->data;
 
       if (node->left)
@@ -107,9 +139,7 @@ std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
         q.push(node->right);
     }
 
-    // std::cout << std::endl;
-
-    leftToRight = !leftToRight;
+    reverse = !reverse; // * toggle reverse 
     ans.push_back(cur);
   }
 
@@ -118,23 +148,26 @@ std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
 
 int main() {
   // * testcase 1
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
 
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
+  // root->left->left = new TreeNode(4);
+  // root->left->right = new TreeNode(5);
 
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(7);
+  // root->right->left = new TreeNode(6);
+  // root->right->right = new TreeNode(7);
 
   // * testcase 2
-  // TreeNode *root = new TreeNode(3);
-  // root->left = new TreeNode(9);
-  // root->right = new TreeNode(20);
+  TreeNode *root = new TreeNode(3);
+  root->left = new TreeNode(9);
+  root->right = new TreeNode(20);
 
-  // root->right->left = new TreeNode(15);
-  // root->right->right = new TreeNode(7);
+  root->right->left = new TreeNode(15);
+  root->right->right = new TreeNode(7);
+
+  std::cout << "Input Tree:" << std::endl;
+  levelOrderTraversal(root);
 
   // std::vector<std::vector<int>> ans = zigzagLevelOrder(root);
   std::vector<std::vector<int>> ans = zigzagLevelOrder2(root);
@@ -142,6 +175,7 @@ int main() {
   for (auto &vec : ans)
     printArr(vec);
 
+  return 0;
 }
 
 // * run the code

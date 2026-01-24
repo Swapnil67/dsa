@@ -101,7 +101,7 @@ std::vector<TreeNode *> solve_brute(int n) {
     std::vector<TreeNode *> fbt_right = solve_brute(n - i - 1);
 
     // * Here we will try all the possibilites from left & right side
-    for (auto &fbt_l : fbt_left) {
+    for (auto &fbt_l : fbt_left) { // * Loop over the possible root nodes indexs
       for (auto &fbt_r : fbt_right) {
         TreeNode *root = new TreeNode(0);
         root->left = fbt_l;
@@ -155,14 +155,16 @@ std::vector<TreeNode *> solve(int n, std::unordered_map<int, std::vector<TreeNod
   return ans;
 }
 
-// * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
+// * Recursion
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N) 
 std::vector<TreeNode *> bruteForce(int n) {
   return solve_brute(n);
 }
 
-// * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
+// * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------
+// * Recursion + Memoization
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N) 
 std::vector<TreeNode *> allPossibleFBT(int n) {
@@ -185,6 +187,7 @@ int main(void) {
 // * Run the code
 // * g++ --std=c++20 45-all-possible-full-bt.cpp -o output && ./output
 
+// * Intuition
 /* 
  * Case 1
  * root

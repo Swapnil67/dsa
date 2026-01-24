@@ -2,6 +2,13 @@
  * * Leetcode - 114
  * * Flatten Binary Tree to Linked List
  * 
+ * * Example 1:
+ * *             1
+ * *           /    \
+ * *          2      5
+ * *        /   \     \
+ * *       3    4      6
+ * 
  * * Input: root = [1,2,5,3,4,null,6]
  * * Output: [1,null,2,null,3,null,4,null,5,null,6]
  * 
@@ -38,23 +45,29 @@ void inOrderTraversal(TreeNode *root) {
   inOrderTraversal(root->right);
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
-// * DFS Approach
-// * Traverse => Right -> Left -> Root
-// * TIME COMPLEXITY O(n)
-// * SPACE COMPLEXITY O(n)
-TreeNode* prev = nullptr;
-void flatten(TreeNode* root) {
+TreeNode* solve(TreeNode* root, TreeNode* &prev) {
   if (!root) // * Recursion Exit Condition
     return;
 
-  flatten(root->right);
-  flatten(root->left);
+  solve(root->right, prev);
+  solve(root->left, prev);
 
   root->right = prev;
   root->left = nullptr;
 
   prev = root;
+  return root;
+}
+
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * DFS Approach
+// * Traverse => Right -> Left -> Root
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
+TreeNode* flatten(TreeNode* root) {
+  TreeNode* prev = nullptr;
+  solve(root, prev);
+  return root;
 }
 
 
@@ -73,7 +86,7 @@ void flatten2(TreeNode* root) {
     TreeNode* cur = st.top();
     st.pop();
 
-    // * push right to stac
+    // * push right to stack
     if (cur->right)
       st.push(cur->right);
     
@@ -97,8 +110,8 @@ int main(void) {
  
   root->right->right = new TreeNode(6);
 
-  // flatten(root);
-  flatten2(root);
+  flatten(root);
+  // flatten2(root);
   inOrderTraversal(root);
 
   return 0;

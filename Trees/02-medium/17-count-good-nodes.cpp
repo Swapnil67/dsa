@@ -38,12 +38,13 @@ public:
 };
 
 void dfs(TreeNode* root, int &ans, int curMaxVal) {
-  if (!root)
+  if (!root) // * Base case
     return;
 
   if (root->data >= curMaxVal)
     ans++;
 
+  // * Update the max_val in current path
   curMaxVal = std::max(curMaxVal, root->data);
   dfs(root->left, ans, curMaxVal);
   dfs(root->right, ans, curMaxVal);

@@ -126,7 +126,6 @@ int main(void) {
   std::cout << "Input Binary Tree:" << std::endl;
   levelOrderTraversal(root);
 
-
   std::vector<int> ans = largestValues(root);
   printArr(ans);
 

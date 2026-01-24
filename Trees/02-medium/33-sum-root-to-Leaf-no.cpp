@@ -32,8 +32,6 @@
 #include <queue>
 #include <vector>
 #include <iostream>
-#include <unordered_set>
-#include <unordered_map>
 
 typedef struct TreeNode TreeNode;
 
@@ -90,14 +88,15 @@ void dfs(TreeNode* root, int &sum, std::string cur) {
     return;
 
   cur.push_back(root->data + '0');
+  dfs(root->left, sum, cur);
+  dfs(root->right, sum, cur);
+
+  // * At leaf node
   if (!root->left && !root->right) {
     // std::cout << cur << std::endl;
     sum += std::stoi(cur);
     return;
   }
-  
-  dfs(root->left, sum, cur);
-  dfs(root->right, sum, cur);
 
   cur.pop_back();
 }

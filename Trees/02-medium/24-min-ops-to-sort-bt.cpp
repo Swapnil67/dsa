@@ -123,6 +123,7 @@ int minimumOperations(TreeNode *root) {
   if (!root)
     return ans;
 
+  // * BFS  
   std::queue<TreeNode *> q;
   q.push(root);
 

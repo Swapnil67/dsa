@@ -161,28 +161,20 @@ TreeNode* replaceValueInTree(TreeNode* root) {
       TreeNode *node = q.front();
       q.pop();
 
-
-      // * Calculate the next level sum
-      if (node->left) {
-        next_level_sum += node->left->data;
-      }
-
-      if (node->right) {
-        next_level_sum += node->right->data;
-      }
-
       // * Calculate the sibling sum
       int sibling_sum = node->left ? node->left->data : 0;
       sibling_sum += node->right ? node->right->data : 0;
-
+      
       // * update the sibling sum as node value
       if (node->left) {
+        next_level_sum += node->left->data;
         node->left->data = sibling_sum;
         q.push(node->left);
       }
       
       // * update the sibling sum as node value
       if (node->right) {
+        next_level_sum += node->right->data;
         node->right->data = sibling_sum;
         q.push(node->right);
       }
@@ -200,8 +192,6 @@ TreeNode* replaceValueInTree(TreeNode* root) {
 
 int main(void) {
   // * testcase 1
-  int k = 2;
-
   TreeNode* root = new TreeNode(5);
   root->left = new TreeNode(4);
   root->right = new TreeNode(9);

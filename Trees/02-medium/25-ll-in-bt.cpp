@@ -94,14 +94,12 @@ bool check(ListNode* head, TreeNode* root) {
   if (!root) // * traversed whole bt
     return false;
 
-  if (root->data != head->data) {
-    return false;
-  }
-
-  return check(head->next, root->left) || check(head->next, root->right);
+  return root->data == head->data &&
+             check(head->next, root->left) ||
+         check(head->next, root->right);
 }
 
-// * ------------------------- APPROACH: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH: Optimal APPROACH -------------------------
 // * Recursion Leap of faith
 // * 'n' = bt nodes & 'L' = ll nodes & 'H' = Height of tree
 // * TIME COMPLEXITY O(n * Min(L,H))

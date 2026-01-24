@@ -46,6 +46,8 @@
 #include <unordered_set>
 #include <unordered_map>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -62,19 +64,22 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 void levelOrderTraversal(TreeNode *root) {
   if (!root)
     return;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while(!q.empty()) {
@@ -84,7 +89,7 @@ void levelOrderTraversal(TreeNode *root) {
       TreeNode *node = q.front();
       q.pop();
 
-      std::cout << node->data << " ";
+      cout << node->data << " ";
 
       if (node->left)
         q.push(node->left);
@@ -92,14 +97,14 @@ void levelOrderTraversal(TreeNode *root) {
       if (node->right)
         q.push(node->right);
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
-// * Builds a Adj list from graph
+// * Builds a Adj list from graph & Save the leave nodes to set
 void makeGraph(TreeNode *root, TreeNode *prev,
-               std::unordered_set<TreeNode *> &leaves,
-               std::unordered_map<TreeNode *, std::vector<TreeNode *>> &adj)
+               unordered_set<TreeNode *> &leaves,
+               unordered_map<TreeNode *, vector<TreeNode *>> &adj)
 {
   if (!root)
     return;
@@ -118,19 +123,56 @@ void makeGraph(TreeNode *root, TreeNode *prev,
   makeGraph(root->right, root, leaves, adj);
 }
 
+// ! TLE
+int bfs_brute(int &distance, TreeNode *leaf,
+              unordered_set<TreeNode *> &leaves,
+              unordered_map<TreeNode *, vector<TreeNode *>> &adj)
+{
+
+  int pairs = 0;
+  if (!leaf)
+    return pairs;
+
+  queue<pair<TreeNode *, int>> q;
+  q.push({leaf, 0});
+
+  unordered_set<TreeNode *> visited;
+  visited.insert(leaf);
+
+  while (!q.empty()) {
+    auto [node, dist] = q.front();
+    q.pop();
+
+    if (node != leaf && leaves.count(node)) {
+      if (dist <= distance) {
+        pairs += 1;
+      }
+    }
+
+    for (auto &ngbr : adj[node]) {
+      if (!visited.count(ngbr)) {
+        visited.insert(ngbr);
+        q.push({ngbr, dist + 1});
+      }
+    }
+  }
+
+  return pairs;
+}
+
 // * BFS Traversal
-int bfs(int d, TreeNode *root,
-        std::unordered_set<TreeNode*> &leaves,
-        std::unordered_map<TreeNode *, std::vector<TreeNode *>> &adj)
+int bfs(int distance, TreeNode *root,
+        unordered_set<TreeNode *> &leaves,
+        unordered_map<TreeNode *, vector<TreeNode *>> &adj)
 {
   int good_pairs = 0;
   if (!root)
     return good_pairs;
 
-  std::unordered_set<TreeNode *> visited;
+  unordered_set<TreeNode *> visited;
   visited.insert(root);
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   int level = 0;
@@ -148,16 +190,15 @@ int bfs(int d, TreeNode *root,
         // * Visit neighbours
         for (auto& ngbr : adj[node]) {
             if (!visited.count(ngbr)) {
-                // * Mark node as visited
-                visited.insert(ngbr);
-                q.push(ngbr);
+              visited.insert(ngbr); // * Mark node as visited
+              q.push(ngbr);
             }
         }
     }
 
     level += 1;
 
-    if (level > d)
+    if (level > distance)
         break;
   }
 
@@ -175,13 +216,13 @@ int countPairs(TreeNode* root, int distance) {
     return good_pairs;
 
   // * 1. convert tree to a UDG
-  std::unordered_map<TreeNode *, std::vector<TreeNode *>> adj;
-  std::unordered_set<TreeNode *> leaves;
+  unordered_map<TreeNode *, vector<TreeNode *>> adj;
+  unordered_set<TreeNode *> leaves;
   makeGraph(root, NULL, leaves, adj);
 
   // * 2. Do BFS from leaf to other leaf nodes
   for (auto &leaf : leaves) {
-    // std::cout << leaf->data << std::endl;
+    // cout << leaf->data << endl;
     // * BFS to another leaf node
     int cur_pairs = bfs(distance, leaf, leaves, adj);
     good_pairs += cur_pairs;
@@ -208,11 +249,11 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
   int ans = countPairs(root, distance);
-  std::cout << "Number of Good Leaf Nodes Pairs: " << ans << std::endl;
+  cout << "Number of Good Leaf Nodes Pairs: " << ans << endl;
 
   return 0;
 }

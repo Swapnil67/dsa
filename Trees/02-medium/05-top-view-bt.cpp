@@ -57,15 +57,13 @@ std::vector<int> topView(TreeNode *root) {
   std::map<int, int> nodes;
 
   // * { vertical, TreeNode* }
-  std::queue<std::pair<int, TreeNode*>> q;
+  std::queue<std::pair<int, TreeNode *>> q;
   q.push({0, root});
 
   // * level order traversal
   while (!q.empty()) {
-    std::pair<int, TreeNode *> p = q.front();
+    auto [cur_ver, node] = q.front();
     q.pop();
-    TreeNode *node = p.second;
-    int cur_ver = p.first;
 
     // std::cout << cur_ver << std::endl;
     if (!nodes.count(cur_ver)) {
@@ -102,6 +100,7 @@ int main() {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
+  std::cout << "Top View of BT:" << std::endl;
   std::vector<int> ans = topView(root);
   printArr(ans);
 

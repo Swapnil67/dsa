@@ -57,7 +57,6 @@ TreeNode *connect_bfs_brute(TreeNode *root) {
   return root;
 }
 
-
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * BFS Optimal
 // * TIME COMPLEXITY O(n)
@@ -68,6 +67,7 @@ TreeNode *connect(TreeNode *root) {
 
   TreeNode* head = root;
   while (head) {
+    // * dummy pointer points at the starting node of each level
     TreeNode *dummy = new TreeNode(0);
     TreeNode *temp = dummy;
 
@@ -75,18 +75,15 @@ TreeNode *connect(TreeNode *root) {
     while (head) {
       if (head->left) {
         temp->next = head->left;
-        temp = temp->next;
+        temp = temp->next; // * here dummy moves to next level
       }
-
       if (head->right) {
         temp->next = head->right;
-        temp = temp->next;
+        temp = temp->next; // * here dummy moves to next level
       }
-
       head = head->next;
     }
-
-    head = dummy->next;
+    head = dummy->next;  // * Go to the left most node on next level
   }
 
   return root;
@@ -103,7 +100,8 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  connect_bfs_brute(root);
+  // connect_bfs_brute(root);
+  connect(root);
 
   return 0;
 }

@@ -14,9 +14,13 @@
 
 * Output: ans = [1, 2, 4, 5, 6, 7, 3]
 
+* https://neetcode.io/problems/boundary-of-binary-tree
 * https://leetcode.com/problems/boundary-of-binary-tree/description/
 * https://www.naukri.com/code360/problems/boundary-traversal_790725
+* https://www.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1
 */
+
+// ! Meta, Amazon, Google, Uber, Adobe, Microsoft
 
 #include <stack>
 #include <vector>
@@ -93,9 +97,11 @@ void addRightBoundary(TreeNode *root, std::vector<int> &res) {
     res.push_back(st.top());
     st.pop();
   }
-
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 std::vector<int> boundaryTraversal(TreeNode *root) {
   std::vector<int> ans;
   if (!root)
@@ -119,35 +125,33 @@ std::vector<int> boundaryTraversal(TreeNode *root) {
 
 int main() {
   // * testcase 1
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
 
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
+  // root->left->left = new TreeNode(4);
+  // root->left->right = new TreeNode(5);
 
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(7);
+  // root->right->left = new TreeNode(6);
+  // root->right->right = new TreeNode(7);
 
   // * testcase 2
-  // TreeNode *root = new TreeNode(10);
-  // root->left = new TreeNode(5);
-  // root->right = new TreeNode(20);
+  TreeNode *root = new TreeNode(10);
+  root->left = new TreeNode(5);
+  root->right = new TreeNode(20);
 
-  // root->left->left = new TreeNode(3);
-  // root->left->right = new TreeNode(8);
-  // root->left->right->left = new TreeNode(7);
+  root->left->left = new TreeNode(3);
+  root->left->right = new TreeNode(8);
+  root->left->right->left = new TreeNode(7);
 
-  // root->right->left = new TreeNode(18);
-  // root->right->right = new TreeNode(25);
+  root->right->left = new TreeNode(18);
+  root->right->right = new TreeNode(25);
 
   std::vector<int> ans = boundaryTraversal(root);
   printArr(ans);
 
   return 0;
-
 }
-
 
 // * run the code
 // * g++ --std=c++17 03-boundary-traversal.cpp -o output && ./output

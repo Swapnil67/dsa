@@ -69,7 +69,10 @@ std::vector<int> leftViewDFS(TreeNode *root) {
   return ans;
 }
 
-// * BFS
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Using Level Order Traversal
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 std::vector<int> leftViewBFS(TreeNode *root) {
   std::vector<int> ans;
   if (!root)
@@ -111,6 +114,7 @@ int main() {
 
   root->right->right = new TreeNode(7);
   
+  std::cout << "Left view of the BT" << std::endl;
   std::vector<int> ans = leftViewDFS(root);
   // std::vector<int> ans = leftViewBFS(root);
   printArr(ans);

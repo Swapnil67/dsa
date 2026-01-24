@@ -87,8 +87,13 @@ TreeNode *buildTree(std::vector<int> &postorder, std::vector<int> &inorder) {
 }
 
 int main(void) {
+  // * testcase 1
   std::vector<int> postorder = {9, 15, 7, 20, 3},
                    inorder = {9, 3, 15, 20, 7};
+
+  // * testcase 2
+  // std::vector<int> preorder = {-1},
+  //                  inorder = {-1};
 
   std::cout << "Postorder: ";
   printArr(postorder);
@@ -103,3 +108,14 @@ int main(void) {
 
 // * run the code
 // * g++ --std=c++20 15-construct-tree-from-inorder-and-postorder.cpp -o output && ./output
+
+/*
+* 
+*                                 [__ __ __ __ __ __ __ __ __ __]
+*                                  ps                         pe
+* 
+* nums_left = 3
+*  ps = 0, & pe = ps + nums_left - 1                                        ps = ps + nums_left, pe = pe - 1
+*  [__ __ __ __ __ __ __ __ __ __]                                         [__ __ __ __ __ __ __ __ __ __]
+*   ps    pe                                                                         ps             pe
+*/

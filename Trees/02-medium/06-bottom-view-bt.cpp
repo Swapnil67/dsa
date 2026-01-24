@@ -49,7 +49,10 @@ void printArr(vector<int> arr) {
   cout << "]" << endl;
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * Vertical Order Traversal
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 std::vector<int> bottomView(TreeNode *root) {
   std::vector<int> ans;
   if (!root)
@@ -102,6 +105,7 @@ int main() {
   root->left->right->left = new TreeNode(8);
   root->left->right->right = new TreeNode(9);
 
+  std::cout << "Bottom View of BT:" << std::endl;
   std::vector<int> ans = bottomView(root);
   printArr(ans);
 

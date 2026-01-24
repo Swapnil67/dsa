@@ -41,6 +41,8 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -57,20 +59,19 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
-
 
 void levelOrderTraversal(TreeNode *root) {
   if (!root)
     return;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while(!q.empty()) {
@@ -80,7 +81,7 @@ void levelOrderTraversal(TreeNode *root) {
       TreeNode *node = q.front();
       q.pop();
 
-      std::cout << node->data << " ";
+      cout << node->data << " ";
 
       if (node->left)
         q.push(node->left);
@@ -88,20 +89,23 @@ void levelOrderTraversal(TreeNode *root) {
       if (node->right)
         q.push(node->right);
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
-TreeNode *dfs(TreeNode *root, std::unordered_set<int> &del_st, std::vector<TreeNode *> &ans) {
+TreeNode *dfs(TreeNode *root, unordered_set<int> &del_st, vector<TreeNode *> &ans) {
   if (!root)
-    return nullptr;
+    return root;
 
-  dfs(root->left, del_st, ans);
-  dfs(root->right, del_st, ans);
+  root->left = dfs(root->left, del_st, ans);
+  root->right = dfs(root->right, del_st, ans);
 
   if (del_st.count(root->data)) {
-    ans.push_back(root->left);
-    ans.push_back(root->right);
+    if (root->left)
+      ans.push_back(root->left);
+    if (root->right)
+      ans.push_back(root->right);
+    return nullptr;
   }
 
   return root;
@@ -110,12 +114,12 @@ TreeNode *dfs(TreeNode *root, std::unordered_set<int> &del_st, std::vector<TreeN
 // * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<TreeNode *> delNodes(TreeNode *root, std::vector<int> &to_delete) {
-  std::vector<TreeNode *> ans;
+vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
+  vector<TreeNode *> ans;
   if (!root)
     return ans;
 
-  std::unordered_set<int> del_st(begin(to_delete), end(to_delete));
+  unordered_set<int> del_st(begin(to_delete), end(to_delete));
   dfs(root, del_st, ans);
 
   // * Insert root if its not present in delete set
@@ -137,12 +141,12 @@ int main(void) {
   
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
-  std::vector<int> to_delete = {3, 5};
-  std::cout << "Input BT" << std::endl;
+  vector<int> to_delete = {3, 5};
+  cout << "Input BT" << endl;
   levelOrderTraversal(root);
 
   // * testcase 2
-  std::vector<TreeNode *> ans = delNodes(root, to_delete);
+  vector<TreeNode *> ans = delNodes(root, to_delete);
   for (auto &tree : ans)
     levelOrderTraversal(tree);
 

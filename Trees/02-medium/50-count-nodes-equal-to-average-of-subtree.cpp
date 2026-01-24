@@ -120,13 +120,12 @@ std::pair<int, int> solve(TreeNode *root, int &ans) {
   auto [left_sum, left_cnt] = solve(root->left, ans);
   auto [right_sum, right_cnt] = solve(root->right, ans);
 
-  int total_sum = root->data + left_sum + right_sum;
-  int total_cnt = 1 + left_cnt + right_cnt;
-  int avg = (total_sum / total_cnt);
-  if (avg == root->data)
+  int cur_sum = root->data + left_sum + right_sum; // * current sum of subtree.
+  int cur_count = 1 + left_cnt + right_cnt;        // * current count of subtree.
+  if ((cur_sum / cur_count) == root->data)
     ans += 1;
 
-  return {total_sum, total_cnt};
+  return {cur_sum, cur_count};
 }
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------

@@ -55,7 +55,7 @@ void inOrderTraversal(TreeNode *root) {
 
 TreeNode *helper(std::vector<int> preorder, int pre_start, int pre_end,
                           std::vector<int> inorder, int in_start, int in_end,
-                          std::unordered_map<int, int> inMap)
+                          std::unordered_map<int, int> in_idx_mp)
 {
   if (pre_start > pre_end || in_start > in_end)
     return nullptr;
@@ -63,15 +63,15 @@ TreeNode *helper(std::vector<int> preorder, int pre_start, int pre_end,
 
   TreeNode *root = new TreeNode(preorder[pre_start]);
 
-  // * Find the position of this root in 'inorder' using 'inMap'
-  int in_root_idx = inMap[root->data];
+  // * Find the position of this root in 'inorder' using 'in_idx_mp'
+  int in_root_idx = in_idx_mp[root->data];
   int numsLeft = in_root_idx - in_start; // * How many nodes are on the left of the tree
 
   root->left = helper(preorder, pre_start + 1, pre_start + numsLeft,
-                               inorder, in_start, in_root_idx - 1, inMap);
+                               inorder, in_start, in_root_idx - 1, in_idx_mp);
 
   root->right = helper(preorder, pre_start + numsLeft + 1, pre_end,
-                                inorder, in_root_idx + 1, in_end, inMap);
+                                inorder, in_root_idx + 1, in_end, in_idx_mp);
 
   return root;
 }
@@ -82,13 +82,13 @@ TreeNode *buildTree(std::vector<int> &preorder, std::vector<int> &inorder) {
     return nullptr;
 
   // * Map of inorder val to index
-  std::unordered_map<int, int> inMap;
+  std::unordered_map<int, int> in_idx_mp;
   for (int i = 0; i < in_size; ++i) {
-    inMap[inorder[i]] = i;
+    in_idx_mp[inorder[i]] = i;
   }
 
   TreeNode *root = helper(preorder, 0, pre_size - 1,
-                          inorder, 0, in_size - 1, inMap);
+                          inorder, 0, in_size - 1, in_idx_mp);
 
   return root;
 }
@@ -97,6 +97,10 @@ int main(void) {
   // * testcase 1
   std::vector<int> preorder = {3, 9, 20, 15, 7},
                    inorder = {9, 3, 15, 20, 7};
+
+  // * testcase 2
+  // std::vector<int> preorder = {-1},
+  //                  inorder = {-1};
 
   std::cout << "Preorder: ";
   printArr(preorder);

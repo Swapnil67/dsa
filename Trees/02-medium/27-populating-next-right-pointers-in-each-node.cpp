@@ -9,16 +9,16 @@
 #include <vector>
 #include <iostream>
 
-typedef struct TreeNode TreeNode;
+typedef struct Node Node;
 
-struct TreeNode {
+struct Node {
   public:
     int data;
-    TreeNode* left;
-    TreeNode* right;
-    TreeNode* next;
+    Node* left;
+    Node* right;
+    Node* next;
   
-  TreeNode(int val) {
+  Node(int val) {
     data = val;
     left = right = next = nullptr;
   }
@@ -28,17 +28,17 @@ struct TreeNode {
 // * BFS using queue
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-TreeNode *connect_bfs_brute(TreeNode *root) {
+Node *connect_bfs_brute(Node *root) {
   if (!root)
     return root;
 
-  std::queue<TreeNode *> q;
+  std::queue<Node *> q;
   q.push(root);
 
   while (!q.empty()) {
     int n = q.size();
     while (n) {
-      TreeNode *node = q.front();
+      Node *node = q.front();
       q.pop();
 
       // * Connect of cur level has next node
@@ -62,14 +62,14 @@ TreeNode *connect_bfs_brute(TreeNode *root) {
 // * BFS + dummy nodes
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
-TreeNode *connect(TreeNode *root) {
+Node *connect(Node *root) {
   if (!root)
     return root;
 
-  TreeNode* head = root;
+  Node* head = root;
   while (head) {
-    TreeNode *dummy = new TreeNode(0);
-    TreeNode *temp = dummy;
+    Node *dummy = new Node(0);
+    Node *temp = dummy;
 
     // * loop over the current level
     while (head) {
@@ -95,13 +95,13 @@ TreeNode *connect(TreeNode *root) {
 int main(void) {
   // * testcase 1
   // * tree 1
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(7);
+  Node *root = new Node(1);
+  root->left = new Node(2);
+  root->right = new Node(3);
+  root->left->left = new Node(4);
+  root->left->right = new Node(5);
+  root->right->left = new Node(6);
+  root->right->right = new Node(7);
 
   // connect_bfs_brute(root);
   connect(root);

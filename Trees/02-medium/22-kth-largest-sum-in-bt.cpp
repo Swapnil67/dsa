@@ -89,10 +89,14 @@ int bruteForce(TreeNode *root, int k) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-// * BFS + Min Heap
+// * BFS + Min Heap (It will have 'k' largest levels)
 // * TIME COMPLEXITY O(n + hlogk) ('h' height of tree & 'k' is no. of nodes in min_heap)
 // * SPACE COMPLEXITY O(k)
 long long kthLargestLevelSum(TreeNode *root, int k) {
+  if (!root)
+    return -1;
+
+  // * BFS
   std::queue<TreeNode *> q;
   q.push(root);
 

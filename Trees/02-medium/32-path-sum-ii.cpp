@@ -84,39 +84,42 @@ void levelOrderTraversal(TreeNode *root) {
 
 void dfs(
     TreeNode *root,
-    int cur_sum,
+    int &cur_sum,
     int &target_sum,
-    std::vector<int> cur,
+    std::vector<int> &path,
     std::vector<std::vector<int>> &ans)
 {
   if (!root)
     return;
 
   cur_sum += root->data;
-  cur.push_back(root->data);
-
+  path.push_back(root->data);
+  
   // * Found Root to Leaf which matches target sum
   if (cur_sum == target_sum && !root->left && !root->right) {
-    ans.push_back(cur);
-    return;
+    ans.push_back(path);
   }
-
-  dfs(root->left, cur_sum, target_sum, cur, ans);
-  dfs(root->right, cur_sum, target_sum, cur, ans);
-
-  cur.pop_back();
+  
+  dfs(root->left, cur_sum, target_sum, path, ans);
+  dfs(root->right, cur_sum, target_sum, path, ans);
+  
   cur_sum -= root->data;
+  path.pop_back();
 }
 
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * DFS
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 std::vector<std::vector<int>> pathSum(TreeNode *root, int target_sum) {
   std::vector<std::vector<int>> ans;
-  std::vector<int> cur;
-  dfs(root, 0, target_sum, cur, ans);
+  if (!root)
+    return ans;
+
+  std::vector<int> path;
+  int cur_sum = 0;
+  dfs(root, cur_sum, target_sum, path, ans);
   return ans;
 }
 
@@ -136,7 +139,6 @@ int main(void) {
 
   std::cout << "Input Binary Tree:" << std::endl;
   levelOrderTraversal(root);
-
 
   std::vector<std::vector<int>> ans = pathSum(root, target_sum);
   std::cout << "Path Sum: " << std::endl;

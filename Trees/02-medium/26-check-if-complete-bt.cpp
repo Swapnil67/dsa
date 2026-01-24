@@ -86,6 +86,24 @@ void levelOrderTraversal(TreeNode *root) {
   }
 }
 
+int countNodes(TreeNode* root) {
+  if (!root)
+    return 0;
+  return 1 + countNodes(root->left) + countNodes(root->right);
+}
+
+bool dfs(TreeNode* root, int i, int &total_nodes) {
+  if (!root)
+    return true;
+
+  if (i > total_nodes)
+    return false;
+
+  return dfs(root->left, (2 * i), total_nodes) &&
+         dfs(root->right, (2 * i + 1), total_nodes);
+}
+
+// * BFS
 bool isCompleteTreeBFS(TreeNode* root) {
   std::queue<TreeNode *> q;
   q.push(root);
@@ -111,23 +129,7 @@ bool isCompleteTreeBFS(TreeNode* root) {
   return true;
 }
 
-int countNodes(TreeNode* root) {
-  if (!root)
-    return 0;
-  return 1 + countNodes(root->left) + countNodes(root->right);
-}
-
-bool dfs(TreeNode* root, int i, int total_nodes) {
-  if (!root)
-    return true;
-
-  if (i > total_nodes)
-    return false;
-
-  return dfs(root->left, (2 * i), total_nodes) &&
-         dfs(root->right, (2 * i + 1), total_nodes);
-}
-
+// * DFS
 bool isCompleteTreeDFS(TreeNode* root) {
   int total_nodes = countNodes(root);
   std::cout << "Total Nodes " << total_nodes << std::endl;

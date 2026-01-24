@@ -15,6 +15,8 @@
 * https://www.naukri.com/code360/problems/path-in-a-tree_3843990
 */
 
+// ! Amazon, Google, Meta, Microsoft
+
 #include <vector>
 #include <iostream>
 
@@ -26,11 +28,17 @@ public:
   TreeNode *left;
   TreeNode *right;
 
-  TreeNode(int val)
-  {
+  TreeNode(int val) {
     data = val;
     left = nullptr;
     right = nullptr;
+  }
+
+  ~TreeNode() {
+    if (left)
+      delete left;
+    if (right)
+      delete right;
   }
 };
 
@@ -55,8 +63,7 @@ bool dfs(TreeNode *root, int x, std::vector<int> &ans) {
     return true;
 
   // * If we found node in 'left' or 'right' return
-  if (dfs(root->left, x, ans) ||
-      dfs(root->right, x, ans))
+  if (dfs(root->left, x, ans) || dfs(root->right, x, ans))
     return true;
 
   // * Remove the node from path vector
@@ -93,3 +100,19 @@ int main(void) {
 
 // * run the code
 // * g++ --std=c++20 09-root-to-node.cpp -o output && ./output
+
+
+/*
+* -------------------------------- Recursion Tree ---------------------------------
+* target = 5;
+*                                   dfs(1, 5, {1}) (ans = {1, 2, 5})
+*                                       |
+*                                       |
+*          (return = true)     /                  \ (return = false)
+*                             /                    \ 
+*                    dfs(2, 5, {1,2})         dfs(3, 5, {1,3}) 
+*                       /        \ 
+*   (return = false)   /          \ (return = true)
+*                     /            \ 
+*                   NULL         dfs(3, 5, {1,2,5}) 
+*/
