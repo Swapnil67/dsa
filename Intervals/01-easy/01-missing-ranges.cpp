@@ -67,6 +67,8 @@ vector<vector<int>> findMissingRanges(vector<int> &nums, int lower, int upper) {
   if (upper > nums[n - 1]) {
     ans.push_back(vector<int>{nums[n - 1] + 1, upper});
   }
+
+  return ans;
 }
 
 int main(void) {
@@ -78,9 +80,17 @@ int main(void) {
   // std::vector<int> nums = {-1};
   // int lower = -1, upper = -1;
 
+  std::cout << "nums: ";
+  printArr(nums);
+  std::cout << "Lower: " << lower << ", Upper: " << upper << std::endl;
+
+  std::vector<std::vector<int>> ans = findMissingRanges(nums, lower, upper);
+  std::cout << "Missing Ranges:" << std::endl;
+  for (auto &vec : ans)
+    printArr(vec);
 
   return 0;
 }
  
 // * Run the code
-// * g++ --std=c++20 practice.cpp -o output && ./output
+// * g++ --std=c++20 01-missing-ranges.cpp -o output && ./output
