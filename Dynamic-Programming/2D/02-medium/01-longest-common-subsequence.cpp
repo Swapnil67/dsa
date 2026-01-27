@@ -72,7 +72,7 @@ int bruteForce(string s1, string s2) {
 // * m - size of s1, n - size of s2
 // * Recursion + Memoization (Top Down)
 // * TIME COMPLEXITY  O(m * n)
-// * SPACE COMPLEXITY O(m * n) 
+// * SPACE COMPLEXITY O(m * n) + O(m + n) (Auxillary Stack Space)
 int longestCommonSubsequence(string s1, string s2) {
   vector<vector<int>> dp(1001, vector<int>(1001, -1));
   return solve_dp(s1, s2, 0, 0, dp);
@@ -86,10 +86,10 @@ int longestCommonSubsequence(string s1, string s2) {
 int longestCommonSubsequence2(string s1, string s2) {
   int m = s1.size(), n = s2.size();
 
-  vector<vector<int>> t(m + 1, vector<int>(n + 1));
+  vector<vector<int>> t(m + 1, vector<int>(n + 1)); // * states
   for (int i = 0; i < m + 1; ++i) {
     for (int j = 0; j < n + 1; ++j) {
-      if (i == 0 || j == 0) {
+      if (i == 0 || j == 0)  { // * either length of s1 or s2 is zero
         t[i][j] = 0;
       }
       else if (s1[i - 1] == s2[j - 1]) {
@@ -100,6 +100,9 @@ int longestCommonSubsequence2(string s1, string s2) {
       }
     }
   }
+
+  for (auto &vec : t)
+    printArr(vec);
 
   return t[m][n];
 }
