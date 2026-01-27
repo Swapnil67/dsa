@@ -128,8 +128,8 @@ int main(void) {
     printArr(vec);
 
   // bool isFound = bruteForce(matrix, target);
-  bool isFound = betterApproach(matrix, target);
-  // bool isFound = searchMatrix(matrix, target);
+  // bool isFound = betterApproach(matrix, target);
+  bool isFound = searchMatrix(matrix, target);
   std::cout << "Target Found: " << isFound << std::endl;
   return 0;
 }

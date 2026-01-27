@@ -17,8 +17,11 @@
 #include <stack>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 // ! Topological sort will only take place in Directed Acyclic Graph (DAG)
+
+// ! Flipkart, Morgan Stanley, Accolite, Amazon, Microsoft
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -33,33 +36,35 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
   int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+  for (auto &[key, vec] : adj) {
+    std::cout << key << " -> ";
+    printArr(vec);
   }
 }
 
-std::vector<std::vector<int>> constructadj(int V, std::vector<std::vector<int>> &edges) {
-  std::vector<std::vector<int>> adj(V);
+std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
+  std::unordered_map<int, std::vector<int>> adj;
   for (auto &it: edges) {
-    adj[it[0]].push_back(it[1]);
+    int u = it[0], v = it[1];
+    adj[u].push_back(v);
   }
   return adj;
 }
 
 // * Classic DFS traversal in Graph
-void dfs(std::vector<std::vector<int>> &adj, int u,
-         std::stack<int> &st,
-         std::vector<bool> &visited)
+void dfs(
+    int u,
+    std::stack<int> &st,
+    std::vector<bool> &visited,
+    std::unordered_map<int, std::vector<int>> &adj)
 {
   visited[u] = true;
 
   for (auto &v : adj[u]) {
     if (!visited[v]) {
-      dfs(adj, v, st, visited);
+      dfs(v, st, visited, adj);
     }
   }
 
@@ -69,19 +74,19 @@ void dfs(std::vector<std::vector<int>> &adj, int u,
 std::vector<int> topologicalSort(int V, std::vector<std::vector<int>> &edges) {
 
   // * Create an Adjacency list from edges 
-  std::vector<std::vector<int>> adj = constructadj(V, edges);
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
 
   // * For Debugging
   std::cout << "Adjacency List" << std::endl;
   printAdjList(adj);
 
   std::stack<int> st;
+  std::vector<bool> visited(V + 1, false);
   
   // * Classic DFS traversal in Graph
-  std::vector<bool> visited(V + 1, false);
-  for (int u = 0; u < V; ++u) {
+  for (int u = 0; u <= V; ++u) {
     if (!visited[u])
-      dfs(adj, u, st, visited);
+      dfs(u, st, visited, adj);
   }
 
   // * Create the ans from stack

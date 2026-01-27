@@ -21,6 +21,8 @@
  * * https://leetcode.com/problems/max-consecutive-ones-iii/description/
 */
 
+// ! Amazon, Google, Meta, Microsoft, IBM, Adobe, Apple, Oracle
+
 #include <vector>
 #include <iostream>
 
@@ -91,6 +93,7 @@ int main() {
   // int k = 3;
   // std::vector<int> arr = {0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1};
 
+  std::cout << "Input Array: " << std::endl;
   printArr(arr);
   
   // int ans = bruteForce(arr, k);

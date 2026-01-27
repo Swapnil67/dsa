@@ -41,12 +41,12 @@ void printArr(std::vector<int> arr) {
 
 typedef std::priority_queue<long long, std::vector<long long>, std::greater<long long>> Min_Heap;
 
-long long solve(std::vector<int> &nums1,
-           std::vector<int> &nums2, int k,
-           int i, int cur_sum, int cur_min)
+long long solve(int i, int cur_sum,
+                int cur_min, int k,
+                std::vector<int> &nums1,
+                std::vector<int> &nums2)
 {
   // std::cout << cur_sum << " " << cur_min << std::endl;
-
   if (k == 0) {
     return (cur_sum * cur_min);
   }
@@ -58,8 +58,8 @@ long long solve(std::vector<int> &nums1,
   if (cur_min == 0)
     return 0;
 
-  long long res = solve(nums1, nums2, k, i + 1, cur_sum, cur_min); // * not take
-  return std::max(res, solve(nums1, nums2, k - 1, i + 1, cur_sum + nums1[i], std::min(cur_min, nums2[i])));
+  long long res = solve(i + 1, cur_sum, cur_min, k, nums1, nums2); // * not take
+  return std::max(res, solve(i + 1, cur_sum + nums1[i], std::min(cur_min, nums2[i]), k - 1, nums1, nums2));
 }
 
 // * ------------------------- Brute Force Approach -------------------------`
@@ -67,9 +67,7 @@ long long solve(std::vector<int> &nums1,
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
 long long bruteForce(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
-  int cur_min = INT_MAX;
-  long long cur_sum = 0;
-  return solve(nums1, nums2, k, 0, cur_sum, cur_min);
+  return solve(0, 0, INT_MAX, k, nums1, nums2);
 }
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -85,9 +83,9 @@ long long maxScore(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
   }
 
   // * Sort the pairs in DESC by 2nd element in pair
+  // * since I need min from nums2 
   std::sort(begin(pairs), end(pairs), [](const auto &a, const auto &b)
             { return a.second > b.second; });
-            
   // * For Debugging
   for (auto &it : pairs) {
     std::cout << it.first << " " << it.second << std::endl;
@@ -117,9 +115,9 @@ long long maxScore(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
 
 int main(void) {
   // * testcase 1
-  int k = 3;
-  std::vector<int> nums1 = {1, 3, 3, 2};
-  std::vector<int> nums2 = {2, 1, 3, 4};
+  // int k = 3;
+  // std::vector<int> nums1 = {1, 3, 3, 2};
+  // std::vector<int> nums2 = {2, 1, 3, 4};
 
   // * testcase 2
   // int k = 1;
@@ -127,9 +125,9 @@ int main(void) {
   // std::vector<int> nums2 = {7, 5, 10, 9, 6};
 
   // * testcase 3
-  // int k = 3;
-  // std::vector<int> nums1 = {2, 1, 14, 12};
-  // std::vector<int> nums2 = { 11, 7, 13, 6};
+  int k = 3;
+  std::vector<int> nums1 = {2, 1, 14, 12};
+  std::vector<int> nums2 = { 11, 7, 13, 6};
 
   std::cout << "k: " << k << std::endl;
   std::cout << "nums1: ";
@@ -137,8 +135,8 @@ int main(void) {
   std::cout << "nums2: ";
   printArr(nums2);
 
-  // long long ans = bruteForce(nums1, nums2, k);
-  long long ans = maxScore(nums1, nums2, k);
+  long long ans = bruteForce(nums1, nums2, k);
+  // long long ans = maxScore(nums1, nums2, k);
 
   std::cout << "Maximum Subsequence Score " << ans << std::endl;
 

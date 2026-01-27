@@ -16,6 +16,8 @@
  * https://leetcode.com/problems/reorganize-string/description/
 */
 
+// ! Amazon, Tesla
+
 #include <queue>
 #include <vector>
 #include <climits>
@@ -79,10 +81,12 @@ std::string bruteForce(std::string &s) {
       continue;
 
     int temp = freq[max_freq_idx];
-    freq[max_freq_idx] = INT_MIN;
+    freq[max_freq_idx] = INT_MIN; // * To get next max occuring char
+
     int second_max_freq_idx = findMaxIndex(freq);
     char second_max_freq_char = 'a' + second_max_freq_idx;
-    std::cout << second_max_freq_idx << " " << second_max_freq_char << std::endl;
+    // std::cout << second_max_freq_idx << " " << second_max_freq_char << std::endl;
+
     res += second_max_freq_char;
     freq[second_max_freq_idx]--;
     freq[max_freq_idx] = temp;
@@ -91,7 +95,7 @@ std::string bruteForce(std::string &s) {
   return res;
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * using max_heap
 // * k is the number of distinct characters in the input string s (maximum 26)
 // * TIME COMPLEXITY O(nlogk)
@@ -106,10 +110,10 @@ std::string reorganizeString(std::string &s) {
   // * If duplicates are more than (n/2)
   int n = s.size();
   int max_freq = *std::max_element(freq.begin(), freq.end());
-  if(max_freq > (n + 1) / 2) {
+  if (max_freq > (n + 1) / 2) {
     return "";
   }
-  
+
   // * Fill the max_heap
   std::priority_queue<std::pair<int, char>> max_heap;
   for (int i = 0; i < 26; ++i) {

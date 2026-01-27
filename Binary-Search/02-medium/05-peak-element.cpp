@@ -14,6 +14,7 @@
  * Explanation: Index 1 or 5 are peak elements
 
  * https://leetcode.com/problems/find-peak-element/description/
+ * https://leetcode.com/problems/peak-index-in-a-mountain-array
  * https://www.naukri.com/code360/problems/find-peak-element_1081482
 */
 
@@ -74,13 +75,16 @@ int findPeakElement(std::vector<int> arr) {
   return -1;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   std::vector<int> arr = {1, 10, 13, 7, 6, 5, 4, 2, 1, 0};
+
   // * testcase 2
   // std::vector<int> arr = {5, 4, 3, 2, 1};
+
   // * testcase 3
   // std::vector<int> arr = {1, 2, 3, 4, 5};
+
   // * testcase 4
   // std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
 
@@ -93,5 +97,5 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 05-peak-element.cpp -o output && ./output
+// * g++ --std=c++20 05-peak-element.cpp -o output && ./output
 

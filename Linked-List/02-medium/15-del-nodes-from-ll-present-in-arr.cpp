@@ -76,26 +76,22 @@ ListNode* modifiedList(std::vector<int>& nums, ListNode* head) {
   if (!nums.size())
     return head;
 
-  // * create a map of nums
-  std::unordered_set<int> st;
-  for (auto &x : nums)
-    st.insert(x);
+  // * Push the nums to set
+  std::unordered_set<int> st(begin(nums), end(nums)); // * O(N)
 
   // * Handle head
   while (head && st.count(head->data)) {
     head = head->next;
   }
 
-  ListNode* cur = head;
-  while (cur && cur->next) {
-    if (st.count(cur->next->data)) { // * If next node in st then delete it
-      ListNode *temp = cur->next;
-      cur->next = cur->next->next;
-      delete temp; // * remove hanging pointer
+  ListNode* temp = head;
+  while (temp) {
+    while (temp->next && st.count(temp->next->data)) {
+      ListNode *delNode = temp->next;
+      temp->next = temp->next->next;
+      delete delNode;
     }
-    else { // * Go to next node
-      cur = cur->next;
-    }
+    temp = temp->next;
   }
 
   return head;

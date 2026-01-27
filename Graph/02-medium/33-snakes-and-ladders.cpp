@@ -32,9 +32,10 @@
 #include <queue>
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 
 // ! BFS
+
+// ! Meta
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -59,6 +60,7 @@ std::pair<int, int> intToPos(int square, int n) {
 }
 
 // * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * Since we need a shortest path we'll use BFS approach 
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)
 int snakesAndLadders(std::vector<std::vector<int>>& board) {

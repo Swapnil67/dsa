@@ -39,6 +39,13 @@ struct TreeNode {
     data = val;
     left = right = nullptr;
   }
+
+  ~TreeNode() {
+    if (left)
+      delete left;
+    if (right)
+      delete right;
+  }
 };
 
 template <typename T>
@@ -59,10 +66,13 @@ int findFloor(TreeNode* root, int val) {
     if (root->data == val)
       return val;
 
-    if (root->data < val)
+    if (root->data < val) {
       ans = root->data;
-
-    root = (root->data < val) ? root->right : root->left;
+      root = root->right;
+    }
+    else {
+      root = root->left;
+    }
   }
 
   return ans;

@@ -14,6 +14,13 @@ struct TreeNode {
     data = val;
     left = right = nullptr;
   }
+
+  ~TreeNode() {
+    if (left)
+      delete left;
+    if (right)
+      delete right;
+  }
 };
 
 template <typename T>

@@ -22,8 +22,8 @@
 * https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/
 */
 
-#include <vector>
 #include <queue>
+#include <vector>
 #include <iostream>
 #include <algorithm>
 
@@ -35,8 +35,8 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// ! TLE
 // * TIME COMPLEXITY O(N^2) + O(slog(s))
 // * SPACE COMPLEXITY O(N)
 int bruteForce(std::vector<int>& nums, int k) {
@@ -57,8 +57,8 @@ int bruteForce(std::vector<int>& nums, int k) {
   return distanceVec[k - 1];
 }
 
-
 // * ------------------------- APPROACH 2: BETTER APPROACH -------------------------`
+// ! TLE
 // * kth Smallest = Max Heap
 // * TIME COMPLEXITY O(N^2 * log(k))
 // * SPACE COMPLEXITY O(k)
@@ -97,8 +97,7 @@ int smallestDistancePair2(std::vector<int> &nums, int k) {
   int idx = 0;
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
-      int absDiff = std::abs(nums[i] - nums[j]);
-      pairsDiff[idx] = absDiff;
+      pairsDiff[idx] = std::abs(nums[i] - nums[j]);
       idx++;
     }
   }
@@ -111,7 +110,7 @@ int smallestDistancePair2(std::vector<int> &nums, int k) {
 
 // * ------------------------- APPROACH 3B: Optimal APPROACH -------------------------`
 // * Count every possible abs diff of pair in a vector
-// * Eg: Nums = {1,6,1} & k - 3, therefore pairsCnt = {0: 1, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0}
+// * Eg: Nums = {1,6,1} & k = 3, therefore pairsCnt = {0: 1, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0}
 // * TIME COMPLEXITY O(N^2) + O(maxEle)
 // * SPACE COMPLEXITY O(maxEle)
 int smallestDistancePair(std::vector<int> &nums, int k) {

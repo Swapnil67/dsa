@@ -83,7 +83,9 @@ int main(void) {
   //                                       {1, 1, 1, 1, 1, 1, 1, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0}, {0, 1, 0, 1, 0}, {0, 1, 1, 1, 0}};
+  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0},
+                                        {0, 1, 0, 1, 0},
+                                        {0, 1, 1, 1, 0}};
 
   // * testcase 3
   // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1},

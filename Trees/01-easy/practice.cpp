@@ -58,53 +58,6 @@ void levelOrder(TreeNode *root) {
   }
 }
 
-
-// * ---------------------------------------------------------------------------------------
-
-// * 01A - In Order DFS
-// void inOrderDFS(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 01B - In Order Iterative DFS
-// void inOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 02A - Pre Order Recursive DFS
-// void preOrderDFS(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 02B - Pre Order Iterative DFS
-// void preOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 03A - Post Order Recursive DFS
-// void postOrderDFS(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 03B - Post Order Iterative DFS
-// void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO 
-// }
-
-// * 04 - All 3 traversals
-// void threeTraversal(TreeNode *root,
-//                     std::vector<int> &preOrder,
-//                     std::vector<int> &inOrder,
-//                     std::vector<int> &postOrder)
-// {
-// TODO
-// }
-
-// * 05A - Maximum Depth of Binary Tree (DFS)
-// int maxDepthDFS(TreeNode *root) {
-// TODO
-// }
-
 // * 05B - Maximum Depth of Binary Tree (BFS)
 // int maxDepthBFS(TreeNode *root) {
 // TODO
@@ -172,6 +125,52 @@ void levelOrder(TreeNode *root) {
 
 // * 17 - Invert Binary Tree
 // TreeNode *invertTreeDFS(TreeNode *root) {
+// TODO
+// }
+
+// * ---------------------------------------------------------------------------------------
+
+// * 01A - In Order DFS
+// void inOrderDFS(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
+
+// * 01B - In Order Iterative
+// void inOrderIterative(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
+
+// * 02A - Pre Order Recursive DFS
+// void preOrderDFS(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
+
+// * 02B - Pre Order Iterative
+// void preOrderIterative(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
+
+// * 03A - Post Order Recursive DFS
+// void postOrderDFS(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
+
+// * 03B - Post Order Iterative
+// void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
+// TODO
+// }
+
+// * 04 - All 3 traversals
+// void threeTraversal(TreeNode *root,
+//                     std::vector<int> &preOrder,
+//                     std::vector<int> &inOrder,
+//                     std::vector<int> &postOrder)
+// {
+// TODO
+// }
+
+// * 05A - Maximum Depth of Binary Tree (DFS)
+// int maxDepthDFS(TreeNode *root) {
 // TODO
 // }
 

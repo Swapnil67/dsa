@@ -108,6 +108,9 @@ ListNode* bruteForce(ListNode* head) {
   return head;
 }
 
+// * ------------------ Better Approach ---------------------
+// * TIME COMPLEXITY O(2N)
+// * SPACE COMPLEXITY O(N)
 ListNode* betterApproach(ListNode* head) {
   ListNode *odd_list = new ListNode(-1);
   ListNode *odd_mover = odd_list;
@@ -133,7 +136,6 @@ ListNode* betterApproach(ListNode* head) {
   return even_list->next;
 }
 
-
 // * ------------------ Optimal Solution ---------------------
 // * TIME COMPLEXITY O(N/2) * 2 = O(N)
 // * SPACE COMPLEXITY O(1)
@@ -146,6 +148,7 @@ ListNode* oddEvenList(ListNode* head) {
   ListNode* even_head = head->next;
 
   while(even != NULL && even->next != NULL) {
+    // * Note this order matters
     odd->next = odd->next->next;
     even->next = even->next->next;
 

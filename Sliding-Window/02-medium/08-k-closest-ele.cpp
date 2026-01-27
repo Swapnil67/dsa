@@ -1,28 +1,34 @@
-/**
- * * Leetcode - 658
- * * Find K Closest Elements
- * * Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. 
- * * The result should also be sorted in ascending order.
+/*
+ * Leetcode - 658
+ * Find K Closest Elements
  * 
- * * An integer a is closer to x than an integer b if:
- * * |a - x| < |b - x|, or
- * * |a - x| == |b - x| and a < b
+ * Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. 
+ * The result should also be sorted in ascending order.
+ * 
+ * An integer a is closer to x than an integer b if:
+ * |a - x| < |b - x|, or
+ * |a - x| == |b - x| and a < b
 
- * * Example 1
- * * Input: arr = [1, 2, 3, 4, 5], k = 4, x = 3
- * * Output : [1, 2, 3, 4]
+ * Example 1
+ * Input: arr = [1, 2, 3, 4, 5], k = 4, x = 3
+ * Output : [1, 2, 3, 4]
  * 
- * * Example 2
- * * Input  :  arr = [1, 1, 2, 3, 4, 5], k = 4, x = -1
- * * Output : [1, 1, 2, 3]
+ * Example 2
+ * Input  :  arr = [1, 1, 2, 3, 4, 5], k = 4, x = -1
+ * Output : [1, 1, 2, 3]
  * 
- * * https://leetcode.com/problems/find-k-closest-elements/description/
+ * https://leetcode.com/problems/find-k-closest-elements/description/
+ * https://www.naukri.com/code360/problems/find-k-closest-elements_1263702
+ * https://www.geeksforgeeks.org/problems/k-closest-elements3619/1
 */
+
+// ! Meta, Uber, Amazon, Paypal, flipkart
 
 #include <deque>
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
@@ -31,12 +37,14 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
+typedef std::pair<int, int> pii;
+
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Push the difference of first k elements to deque
 // * TIME COMPLEXITY O(N * k)
 // * SPACE COMPLEXITY O(N)
 std::vector<int> bruteForce(std::vector<int> &arr, int k, int x) {
-  std::deque<std::pair<int, int>> dq;
+  std::deque<pii> dq;
   int n = arr.size();
   for (int i = 0; i < n; ++i) {
     if (dq.size() < k) {
@@ -54,34 +62,36 @@ std::vector<int> bruteForce(std::vector<int> &arr, int k, int x) {
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Using max_heap
-// * TIME COMPLEXITY O(logN)
-// * SPACE COMPLEXITY O(1)
+// * TIME COMPLEXITY O(nlogn)
+// * SPACE COMPLEXITY O(n)
 std::vector<int> betterApproach(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
+  std::priority_queue<pii> max_heap;
 
-  typedef std::pair<int, int> P;
-  std::priority_queue<P> max_heap;
-
-  // * Pusht the abs diff with 'x' to max_heap
+  // * Push the abs diff with 'x' to max_heap
   for (auto &num : arr) {
-    max_heap.push({num - x, num});
+    max_heap.push({std::abs(num - x), num});
     if (max_heap.size() > k)
       max_heap.pop();
   }
 
+  // * Save the ans to array
   std::vector<int> ans;
   while (max_heap.size()) {
-    P p = max_heap.top();
+    auto p = max_heap.top();
     ans.push_back(p.second);
     max_heap.pop();
   }
+
+  // * sort the ans
+  std::sort(ans.begin(), ans.end());
 
   return ans;
 }
 
 // * f(m) = abs(arr[m] - x)
-// * 1st number in window will always be closer to x than the last+1 element
-// * g(m) = f(m) <= f(m+k)
+// * 1st no in window will always be closer to x than the last+1 element
+// * g(m) = f(m) <= f(m + k)
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Sliding Window + Binary Search
@@ -90,40 +100,39 @@ std::vector<int> betterApproach(std::vector<int> &arr, int k, int x) {
 // * SPACE COMPLEXITY O(1)
 std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
+
   // * 'r' is little restricted becoz m + k should not become greater than n
   int l = 0, r = n - k;
   // * binary search
   while (l < r) {
     int m = (l + r) / 2; // * m is the starting point of window of size k
-
     // printf("arr[%d] = %d & arr[%d + k] = %d\n", m, arr[m], m, arr[m + k]);
     // * start of window is not smaller than one outside of window
     if (x - arr[m] > arr[m + k] - x) {
       l = m + 1;
     }
     else {
-      // * f(m) <= f(m+k) (True)
+      // * f(m) <= f(m + k) (True)
       r = m;
     }
   }
   return std::vector(arr.begin() + l, arr.begin() + l + k);
 }
 
-
 int main() {
-
   // * testcase 1
-  int k = 4, x = 3;
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  // int k = 4, x = 3;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int k = 4, x = -1;
   // std::vector<int> arr = {1, 1, 2, 3, 4, 5};
 
   // * testcase 2
-  // int k = 1, x = 9;
-  // std::vector<int> arr = {1, 1, 1, 10, 10, 10};
+  int k = 1, x = 9;
+  std::vector<int> arr = {1, 1, 1, 10, 10, 10};
 
+  std::cout << "K: " << k << ", X: " << x << std::endl;
   printf("Input Array: ");
   printArr(arr);
 

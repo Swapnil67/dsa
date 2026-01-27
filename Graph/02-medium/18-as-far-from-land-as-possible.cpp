@@ -81,7 +81,6 @@ int maxDistance(std::vector<std::vector<int>> &grid) {
       }
     }
   }
-
   // * For debugging
   // std::cout << "Distance Grid" << std::endl;
   // for (auto &vec : grid)

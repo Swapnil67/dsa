@@ -76,13 +76,14 @@ void dfs(int u, int &edges, int &vertices,
   }
 }
 
-void bfs(int node, int &edges, int &vertices,
+void bfs(int node,
+         int &edges, int &vertices,
          std::vector<bool> &visited,
          std::unordered_map<int, std::vector<int>> adj)
 {
   std::queue<int> q;
   q.push(node);
-  visited[node] = true;
+  visited[node] = true; // * mark visited
 
   while (!q.empty()) {
     auto u = q.front();
@@ -93,15 +94,16 @@ void bfs(int node, int &edges, int &vertices,
 
     for (auto &v: adj[u]) {
       if (!visited[v]) {
-        visited[v] = true;
+        visited[v] = true; // * mark visited
         q.push(v);
       }
     }
   }
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Calculate count of vertices & edges for each subgraph and check if the following formula is valid
+// * V * (V - 1) == E
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
 int countCompleteComponentsDFS(int n, std::vector<std::vector<int>>& edges) {
@@ -119,7 +121,7 @@ int countCompleteComponentsDFS(int n, std::vector<std::vector<int>>& edges) {
       dfs(u, e, v,visited, adj);
       int edges = (v * (v - 1)) / 2;
       // std::cout << "u: " << u << ", e: " << e << ", v: " << v << std::endl;
-      if (edges == e / 2)
+      if (edges == e / 2) // * Here we did 'e/2' becoz we count 2 edge for ever node since our graph is undirected
         ans++;
     }
   }
@@ -128,6 +130,8 @@ int countCompleteComponentsDFS(int n, std::vector<std::vector<int>>& edges) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Calculate count of vertices & edges for each subgraph and check if the following formula is valid
+// * V * (V - 1) == E
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
 int countCompleteComponentsBFS(int n, std::vector<std::vector<int>>& edges) {
@@ -141,7 +145,7 @@ int countCompleteComponentsBFS(int n, std::vector<std::vector<int>>& edges) {
   for (int u = 0; u < n; ++u) {
     if (!visited[u]) {
       int e = 0, v = 0;
-      bfs(u, e, v,visited, adj);
+      bfs(u, e, v, visited, adj);
       // std::cout << "u: " << u << ", e: " << e << ", v: " << v << std::endl;
       if ((v * (v - 1)) == e)
         ans++;

@@ -114,11 +114,9 @@ int betterApproach(std::vector<int> &nums, int &k) {
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------`
 // ! This is optimal for +ve & 0s
-// * Prefix Sum HashMap
-// * TIME COMPLEXITY 
-// *   Ordered Map    - O(nlogn) - (No Collisions)
-// *   UnOrdered Map  - O(n^2)   - (Collisions)
-// * SPACE COMPLEXITY O(n)
+// * Two Pointer + Sliding Window
+// * TIME COMPLEXITY  O(n)
+// * SPACE COMPLEXITY O(1)
 int longestSubarray(std::vector<int> &nums, int &k) {
   int n = nums.size();
   int max_len = 0;
@@ -131,11 +129,12 @@ int longestSubarray(std::vector<int> &nums, int &k) {
       sum -= nums[i];
       i++;
     }
-    std::cout << sum << std::endl;
+    // std::cout << sum << std::endl;
     
     if (sum == k) {
       max_len = std::max(max_len, (j - i + 1));
     }
+
     j++;
   }
 

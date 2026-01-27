@@ -1,26 +1,31 @@
-/**
- * * Leetcode - 
- * * Longest Substring with At Most K Distinct Characters
- * * You are given a string 'str' and an integer ‘K’.
- * * Your task is to find the length of the largest substring with at most ‘K’ distinct characters.
+/*
+ * Leetcode - ?
+ * Longest Substring with At Most K Distinct Characters
+ 
+ * You are given a string 'str' and an integer ‘K’.
+ * Your task is to find the length of the largest substring with at most ‘K’ distinct characters.
 
- * * Example 1
- * * Input  : s = "abbbbbbc", k = 2
- * * Output : 7
- * * Explanation: substring "abbbbbb"
+ * Example 1
+ * Input  : s = "abbbbbbc", k = 2
+ * Output : 7
+ * Explanation: substring "abbbbbb"
 
- * * Example 2
- * * Input  : s = "bbbbb", k = 1
- * * Output : 5
- * * Explanation: substring "bbbbb"
+ * Example 2
+ * Input  : s = "bbbbb", k = 1
+ * Output : 5
+ * Explanation: substring "bbbbb"
 
- * * https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
- * * https://www.naukri.com/code360/problems/distinct-characters_2221410
+ * https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
+ * https://neetcode.io/problems/longest-substring-with-at-most-k-distinct-characters/
+ * https://www.naukri.com/code360/problems/distinct-characters_2221410
+ * https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/10
 */
 
-#include <map>
+// ! Amazon, Google, Meta, Microsoft, Oracle, Apple, BitGo
+
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -38,7 +43,7 @@ int bruteForce(std::string s, int k) {
   int n = s.size();
   int max_len = 0;
   for (int i = 0; i < n; ++i) {
-    std::map<int, int> freq_map;
+    std::unordered_map<int, int> freq_map;
     for (int j = i; j < n; ++j) {
       freq_map[s[j]]++;
       if (freq_map.size() > k) {
@@ -61,7 +66,7 @@ int bruteForce(std::string s, int k) {
 int betterApproach(std::string s, int k) {
   int n = s.size();
   int i = 0, j = 0, max_len = 0;
-  std::map<int, int> freq_map;
+  std::unordered_map<int, int> freq_map;
   while(j < n) {
     freq_map[s[j]]++;
 
@@ -93,8 +98,8 @@ int betterApproach(std::string s, int k) {
 int kDistinctChars(std::string s, int k) {
   int n = s.size();
   int i = 0, j = 0, max_len = 0;
-  std::map<int, int> freq_map;
-  while(j < n) {
+  std::unordered_map<int, int> freq_map;
+  while (j < n) {
     freq_map[s[j]]++;
 
     // * Keep frequency map with k distinct elements
@@ -117,9 +122,11 @@ int kDistinctChars(std::string s, int k) {
 }
 
 int main() {
+  // * testcase 1
   // int k = 2;
   // std::string s = "abbbbbbc";
-
+  
+  // * testcase 2
   int k = 8;
   std::string s = "fitmgntcesze";
 

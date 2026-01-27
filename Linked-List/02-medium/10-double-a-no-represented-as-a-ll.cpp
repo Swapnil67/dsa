@@ -5,15 +5,15 @@
  * You are given the head of a non-empty linked list representing a non-negative integer without leading zeroes.
  * Return the head of the linked list after doubling it.
 
- * * Example 1
- * * Input  : head = [1, 8, 9]
- * * Output : [3, 7, 8]
+ * Example 1
+ * Input  : head = [1, 8, 9]
+ * Output : [3, 7, 8]
 
- * * Example 2
- * * Input  : head = [9, 9, 9]
- * * Output : [1, 9, 9, 8]
+ * Example 2
+ * Input  : head = [9, 9, 9]
+ * Output : [1, 9, 9, 8]
 
- * * https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/
+ * https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/
 */
 
 #include <vector>
@@ -77,27 +77,25 @@ ListNode* reverse_ll(ListNode* head) {
 
 ListNode* doubleIt(ListNode* head) {
   if (!head)
-      return nullptr;
+    return head;
 
+  // * Reverse initial Linked list
   ListNode* rev_head = reverse_ll(head);
   ListNode* temp = rev_head;
 
   int carry = 0;
-  ListNode* dummy = new ListNode(-1);
-  ListNode* mover = dummy;
   ListNode* prev = head;
   while (temp) {
-    int num = carry;
-
-    num = carry + temp->data * 2;
+    int num = carry + temp->data * 2;
     carry = num / 10;
 
     temp->data = num % 10;
 
-    prev = temp;
+    prev = temp; // * Use this if we have a carry after traversing the complete ll (Testcase 2)
     temp = temp->next;
   }
 
+  // * Add the extra carry node
   if (carry) {
     prev->next = new ListNode(carry);
     prev = prev->next;

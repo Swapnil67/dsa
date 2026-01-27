@@ -1,22 +1,25 @@
-/**
- * * Leetcode 881
- * * Boats to Save People
- * * You are given an array people where people[i] is the weight of the ith person, 
- * * and an infinite number of boats where each boat can carry a maximum weight of limit. 
- * * Each boat carries at most two people at the same time, provided the sum of the weight of those people 
- * * is at most limit.
- * * Return the minimum number of boats to carry every given person.
-
- * * Example 1
- * * Input  : nums = [3, 2, 2, 1], limit = 3
- * * Output : 3
+/*
+ * Leetcode 881
+ * Boats to Save People
  * 
- * * Example 2
- * * Input  : nums = [5, 1, 4, 2], limit = 6
- * * Output : 2
+ * You are given an array people where people[i] is the weight of the ith person, 
+ * and an infinite number of boats where each boat can carry a maximum weight of limit.
+ *  
+ * Each boat carries at most two people at the same time, provided the sum of the weight of those people 
+ * is at most limit. i.e. (weight of two people <= limit)
+ * 
+ * Return the minimum number of boats to carry every given person.
 
- * * https://leetcode.com/problems/boats-to-save-people/description/
- * * https://www.naukri.com/code360/problems/minimum-boats-to-cross-river_1402321
+ * Example 1
+ * Input  : nums = [3, 2, 2, 1], limit = 3
+ * Output : 3
+ 
+ * Example 2
+ * Input  : nums = [5, 1, 4, 2], limit = 6
+ * Output : 2
+
+ * https://leetcode.com/problems/boats-to-save-people/description/
+ * https://www.naukri.com/code360/problems/minimum-boats-to-cross-river_1402321
 */
 
 #include <vector>
@@ -58,14 +61,19 @@ int numRescueBoats(std::vector<int>& people, int limit) {
 }
 
 int main() {
-  // int limit = 6;
-  // std::vector<int> arr = {5, 1, 4, 2};
+  // * testcase 1
+  int limit = 6;
+  std::vector<int> people = {5, 1, 4, 2};
   
-  int limit = 9;
-  std::vector<int> arr = {3, 8, 7, 1, 4};
+  // * testcase 2
+  // int limit = 9;
+  // std::vector<int> people = {3, 8, 7, 1, 4};
 
-  printArr(arr);
-  int ans = numRescueBoats(arr, limit);
+  std::cout << "limit: " << limit << std::endl;
+  std::cout << "People: ";
+  printArr(people);
+
+  int ans = numRescueBoats(people , limit);
   std::cout << "minimum number of boats to carry every given person " << ans << std::endl;
 
   return 0;

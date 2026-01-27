@@ -1,28 +1,28 @@
-/**
- * * Leetcode - 2064
- * * Minimized Maximum of Products Distributed to Any Store
+/*
+ * Leetcode - 2064
+ * Minimized Maximum of Products Distributed to Any Store
  * 
- * * You are given an integer n indicating there are n specialty retail stores. 
- * * There are m product types of varying amounts, which are given as a 0-indexed integer array quantities, 
- * * where quantities[i] represents the number of products of the ith product type.
+ * You are given an integer n indicating there are 'n' specialty retail stores. 
+ * There are 'm' product types of varying amounts, which are given as a 0-indexed integer array `quantities`, 
+ * where `quantities[i]` represents the number of products of the ith product type.
 
- * * You need to distribute all products to the retail stores following these rules:
- * * - A store can only be given at most one product type but can be given any amount of it.
- * * - After distribution, each store will have been given some number of products (possibly 0).
- * * Let x represent the maximum number of products given to any store. You want x to be as small as possible, 
- * * i.e., you want to minimize the maximum number of products that are given to any store.
+ * You need to distribute all products to the retail stores following these rules:
+ * - A store can only be given at most one product type but can be given any amount of it.
+ * - After distribution, each store will have been given some number of products (possibly 0).
+ * Let x represent the maximum number of products given to any store. You want x to be as small as possible, 
+ * i.e., you want to minimize the maximum number of products that are given to any store.
 
- * * Example 1:
- * * Input       : n = 6, quantities = [11,6]
- * * Output      : 3
- * * Explanation : max(2, 3, 3, 3, 3, 3) = 3
+ * Example 1:
+ * Input       : n = 6, quantities = [11,6]
+ * Output      : 3
+ * Explanation : max(2, 3, 3, 3, 3, 3) = 3
 
- * * Example 2:
- * * Input       : n = 7, quantities = [15,10,10]
- * * Output      : 5
- * * Explanation : max(5, 5, 5, 5, 5, 5, 5) = 5
+ * Example 2:
+ * Input       : n = 7, quantities = [15,10,10]
+ * Output      : 5
+ * Explanation : max(5, 5, 5, 5, 5, 5, 5) = 5
  
- * * https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/description/
+ * https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/description/
  */
 
 #include <vector>
@@ -56,12 +56,10 @@ bool isValidQuantities(std::vector<int> quantities, int stores, int maxQuantity)
 // * SPACE COMPLEXITY O(1)
 int minimizedMaximum(std::vector<int> quantities, int stores) {
   int n = quantities.size();
-  int maxQuantities = *std::max_element(quantities.begin(), quantities.end());
-  int l = 1, r = maxQuantities;
+  int l = 1, r = *std::max_element(begin(quantities), end(quantities));
   int ans = 0;
   while (l <= r) {
     int m = l + (r - l) / 2;
-    std::cout << m << std::endl;
     if (isValidQuantities(quantities, stores, m)) {
       ans = m;
       r = m - 1;
@@ -73,15 +71,15 @@ int minimizedMaximum(std::vector<int> quantities, int stores) {
 }
 
 int main(void) {
-  // int stores = 6;
-  // std::vector<int> quantities = {11, 6};
+  int stores = 6;
+  std::vector<int> quantities = {11, 6};
 
-  int stores = 7;
-  std::vector<int> quantities = {15, 10, 10};
+  // int stores = 7;
+  // std::vector<int> quantities = {15, 10, 10};
 
+  std::cout << "Stores: " << stores << std::endl;
   std::cout << "Product Quantities" << std::endl;
   printArr(quantities);
-  std::cout << "Stores: " << stores << std::endl;
 
   int ans = minimizedMaximum(quantities, stores);
   std::cout << "Maximum of Products Distributed to Any Store " << ans << std::endl;

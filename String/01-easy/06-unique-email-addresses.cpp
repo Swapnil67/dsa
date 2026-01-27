@@ -1,24 +1,26 @@
-/**
- * * Unique Email Addresses
- * * Every valid email consists of a local name and a domain name, separated by the '@' sign.
- * * Besides lowercase letters, the email may contain one or more '.' or '+'.
+/*
+ * Leetcode - 929
+ * Unique Email Addresses
+ * Every valid email consists of a local name and a domain name, separated by the '@' sign.
+ * Besides lowercase letters, the email may contain one or more '.' or '+'.
 
- * * Example 1
- * * Input  : emails = ["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com",
- * *                    "testemail+david@lee.tcode.com"]
- * * Output : 2
- * * Explanation: "testemail@leetcode.com" and "testemail@lee.tcode.com" actually receive mails.
+ * Example 1
+ * Input  : emails = ["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com",
+ *                    "testemail+david@lee.tcode.com"]
+ * Output : 2
+ * Explanation: "testemail@leetcode.com" and "testemail@lee.tcode.com" actually receive mails.
 
- * * Example 2
- * * Input  : emails = ["a@leetcode.com","b@leetcode.com","c@leetcode.com"]
- * * Output : 3
+ * Example 2
+ * Input  : emails = ["a@leetcode.com","b@leetcode.com","c@leetcode.com"]
+ * Output : 3
 
- * * https://leetcode.com/problems/unique-email-addresses/description/
+ * https://leetcode.com/problems/unique-email-addresses/description/
 */
 
-#include<unordered_set>
-#include<string>
-#include<iostream>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <unordered_set>
 
 void printVectorString(std::vector<std::string> strs) {
   int n = strs.size();
@@ -50,7 +52,7 @@ std::string isValidEmail(std::string email) {
 // * SPACE COMPLEXITY O(N)          [N - number of emails]
 int numUniqueEmails(std::vector<std::string> emails) {
   std::unordered_set<std::string> emailSet;
-  for(std::string e : emails) {
+  for (std::string e : emails) {
     std::string ans = isValidEmail(e);
     // std::cout << ans << std::endl;
     emailSet.insert(ans);
@@ -64,7 +66,8 @@ int main() {
 
   std::vector<std::string> emails = {"a@leetcode.com", "b@leetcode.com", "c@leetcode.com"};
   printVectorString(emails);
-  int validEmails = bruteForce(emails);
+
+  int validEmails = numUniqueEmails(emails);
   std::cout << "Valid Emails " << validEmails << std::endl;
 
   return 0;

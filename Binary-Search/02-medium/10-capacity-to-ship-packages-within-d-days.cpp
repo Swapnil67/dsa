@@ -1,6 +1,7 @@
 /*
 * Leetcode - 1011
 * Capacity To Ship Packages Within D Days
+*
 * You are the owner of a Shipment company. You use conveyor belts to ship packages from one port to another. 
 * The weights of the packages are given in an array 'weights'.
 * The packages must be shipped within 'd' days.
@@ -14,6 +15,10 @@
 * Input: weights = [5, 4, 5, 2, 3, 4, 5, 6], days = 5
 * Output: least-weight = 9
 
+* Example 3:
+* Input: weights = [1, 2, 3, 1, 1], days = 4
+* Output: least-weight = 3
+
 * https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/
 * https://www.naukri.com/code360/problems/capacity-to-ship-packages-within-d-days_1229379
 
@@ -24,24 +29,28 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 // * O(N) 
-bool findIsLeastPossibleWeight(std::vector<int> weights, int maximumDays, long long capacity) {  
+bool findIsLeastPossibleWeight(std::vector<int> weights, int maximumDays, long long capacity) {
   int daysTook = 1, totalWeight = 0;
-  for (int i = 0; i < weights.size(); i++) {
+  for (auto &w : weights) {
     // std::cout << "totalWeight " << totalWeight << std::endl;
-    if (totalWeight + weights[i] > capacity) {
+    if (totalWeight + w > capacity) {
       daysTook++;
-      totalWeight = weights[i];
+      totalWeight = w;
     } else {
-      totalWeight += weights[i];
+      totalWeight += w;
     }
   }
   return daysTook <= maximumDays;
@@ -86,14 +95,21 @@ int findLeastPossileWeight(std::vector<int> weights, int maximumDays) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   // int days = 5;
+  // std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   
   // * testcase 2
-  std::vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
-  int days = 5;
+  // int days = 5;
+  // std::vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
+  
+  // * testcase 3
+  int days = 4;
+  std::vector<int> weights = {1, 2, 3, 1, 1};
 
+  std::cout << "days: " << days << std::endl;
+  std::cout << "Weights: ";
   printArr(weights);
+
   // int leastWeight = bruteForce(weights, days);
   int leastWeight = findLeastPossileWeight(weights, days);
   std::cout << "Ship should take atleast " << leastWeight << " weights to transfer all weights in " << days << " days." << std::endl;
@@ -102,4 +118,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 10-capacity-to-ship-packages-within-d-days.cpp -o output && ./output
+// * g++ --std=c++20 10-capacity-to-ship-packages-within-d-days.cpp -o output && ./output

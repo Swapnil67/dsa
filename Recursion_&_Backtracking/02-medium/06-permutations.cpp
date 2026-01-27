@@ -14,12 +14,13 @@
  * input  : nums = [0,1]
  * output : [[0,1],[1,0]]
  * 
- * https://leetcode.com/problems/permutations/description/
+ * https://leetcode.com/problems/permutations/
+ * https://www.naukri.com/code360/problems/permuatations_892989
+ * https://www.naukri.com/code360/problems/permutations-of-a-string_985254
 */
 
 #include <vector>
 #include <iostream>
-#include <unordered_set>
 
 void printArr(std::vector<int> arr) {
   std::cout << "[ ";
@@ -30,9 +31,9 @@ void printArr(std::vector<int> arr) {
 }
 
 void helper(std::vector<int> arr,
-            std::vector<int> temp,
+            std::vector<int> &temp,
             std::vector<std::vector<int>> &ans,
-            std::unordered_set<int> &hash) {
+            std::vector<bool> &used) {
   // * Base case
   if (temp.size() == arr.size()) {
     ans.push_back(temp);
@@ -41,15 +42,16 @@ void helper(std::vector<int> arr,
 
   for (int i = 0; i < arr.size(); ++i) {
     // * If not previously taken then take
-    if (hash.find(arr[i]) == hash.end()) {
-      temp.push_back(arr[i]);
-      hash.insert(arr[i]);
+    if (used[i])
+      continue;
 
-      helper(arr, temp, ans, hash);
-  
-      temp.pop_back();
-      hash.erase(arr[i]);
-    }
+    temp.push_back(arr[i]);
+    used[i] = true;
+
+    helper(arr, temp, ans, used);
+
+    temp.pop_back();
+    used[i] = false;
   }
 }
 
@@ -57,15 +59,18 @@ void helper(std::vector<int> arr,
 // * TIME COMPLEXITY O(n * n!)
 // * SPACE COMPLEXITY O(n * n!)
 std::vector<std::vector<int>> permutations(std::vector<int> &arr) {
+  int n = arr.size();
   std::vector<std::vector<int>> ans;
-  std::unordered_set<int> hash;
   std::vector<int> temp;
-  helper(arr, temp, ans, hash);
+  std::vector<bool> used(n);
+  
+  helper(arr, temp, ans, used);
   return ans;
 }
 
 int main(void) {
   std::vector<int> arr = {1, 2, 3};
+  std::cout << "Input Array: ";
   printArr(arr);
 
   std::vector<std::vector<int>> ans = permutations(arr);

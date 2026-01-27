@@ -95,4 +95,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 06-rearrange-array-elements-by-sign-a.cpp -o output && ./output
+// * g++ --std=c++17 10-rearrange-array-elements-by-sign-a.cpp -o output && ./output

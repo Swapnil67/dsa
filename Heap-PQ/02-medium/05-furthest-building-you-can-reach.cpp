@@ -118,7 +118,6 @@ int furthestBuilding(std::vector<int>& heights, int bricks, int ladders) {
 
   int i = 0;  
   while (i < n) {
-    
     if (heights[i + 1] <= heights[i]) {
       i++;
     } else {

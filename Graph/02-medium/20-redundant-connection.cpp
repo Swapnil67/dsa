@@ -148,7 +148,8 @@ std::vector<int> findRedundantConnectionDFS(std::vector<std::vector<int>> &edges
     // * means that current 'edge' is a redudant connection.
     if (adj.find(u) != adj.end() &&
         adj.find(v) != adj.end() &&
-        dfs(u, v, visited, adj)) { // * O(N)
+        dfs(u, v, visited, adj))
+    { // * O(N)
       return edge;
     }
 

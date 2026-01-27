@@ -88,10 +88,10 @@ int minFlips(std::string s) {
 
 int main() {
   // * testcase 1
-  std::string s = "111000";
+  // std::string s = "111000";
 
   // * testcase 2
-  // std::string s = "01001001101";
+  std::string s = "01001001101";
   
   // * testcase 3
   // std::string s = "010";

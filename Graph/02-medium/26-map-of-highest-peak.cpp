@@ -98,10 +98,10 @@ std::vector<std::vector<int>> highestPeak(std::vector<std::vector<int>>& mat) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> isWater = {{0, 1}, {0, 0}};
+  std::vector<std::vector<int>> isWater = {{0, 1}, {0, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> isWater = {{0, 0, 1}, {1, 0, 0}, {0, 0, 0}};
+  // std::vector<std::vector<int>> isWater = {{0, 0, 1}, {1, 0, 0}, {0, 0, 0}};
 
   std::cout << "isWater" << std::endl;
   for (auto &vec : isWater)

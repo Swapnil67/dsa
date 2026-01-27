@@ -1,19 +1,23 @@
-/**
- * * First Negative In Every Window
- * * You have been given an array of integers 'ARR' of size 'N'. You are also provided with a positive integer 'K'.
- * * Your task is to find the first negative element in every window (contiguous subarray) of length 'K'. 
- * * If there is no negative element in a window, then print 0 for that window.
+/*
+ * First Negative In Every Window
+ *
+ * You have been given an array of integers 'ARR' of size 'N'. You are also provided with a positive integer 'K'.
+ * Your task is to find the first negative element in every window (contiguous subarray) of length 'K'. 
+ * If there is no negative element in a window, then print 0 for that window.
  * 
- * * Example 1
- * * Input  : nums = [5, -3, 2, 3, -4] and k = 2
- * * Output : [-3 -3 0 -4]
+ * Example 1 :
+ * Input     : nums = [5, -3, 2, 3, -4] and k = 2
+ * Output    : [-3 -3 0 -4]
  * 
- * * Example 2
- * * Input  : nums = [8 1 -2 2 -3 6 8 -1] and k = 3
- * * Output : [-2 -2 -2 -3 -3 -1 ]
+ * Example 2 :
+ * Input     : nums = [8 1 -2 2 -3 6 8 -1] and k = 3
+ * Output    : [-2 -2 -2 -3 -3 -1 ]
  * 
- * * https://www.naukri.com/code360/problems/first-negative-in-every-window_759333
+ * https://www.naukri.com/code360/problems/first-negative-in-every-window_759333
+ * https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1
 */
+
+// ! Amazon
 
 #include <deque>
 #include <vector>
@@ -62,9 +66,9 @@ std::vector<int> firstNegative(std::vector<int> arr, int k) {
     if (arr[j] < 0)
       dq.push_back(arr[j]);
 
-    // * Shrink the window & Pop from queue
+    // * Shrink the window & Pop from queue if ith ele is -ve
     if (j - i + 1 > k) {
-      if (arr[i] < 0 && !dq.empty())
+      if (arr[i] < 0 && !dq.empty()) 
         dq.pop_front();
       i++;
     }

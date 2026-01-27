@@ -112,19 +112,19 @@ int maximumDetonationDFS(std::vector<std::vector<int>> &edges) {
         continue;
 
       ll x2 = (ll)edges[j][0], y2 = (ll)edges[j][1];
+      ll dx = (x2 - x1), dy = (y2 - y1);
       // * caculate distance b/w two coordinates
-      ll d_sqr = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+      ll d_sqr = (dx * dx) + (dy * dy);
       // std::cout << r_sqr << " " << d_sqr << std::endl;
       if (r_sqr >= d_sqr) {
         adj[i].push_back(j);
       }
     }
   }
-  printAdjList(adj); // * For Debugging
-
-  int max_bombs = 0;
-
+  // printAdjList(adj); // * For Debugging
+  
   // * 2. DFS for every ith bomb and check how far it can reach
+  int max_bombs = 0;
   for (int i = 0; i < n; ++i) {
     std::vector<bool> visited(n, false);
     int bombs = 0;

@@ -61,6 +61,7 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
 bool bfs(int node, std::vector<int> &color, std::unordered_map<int, std::vector<int>> &adj) {
   std::queue<int> q;
   q.push(node);
+  
   color[node] = 1; // * red
 
   while (!q.empty()) {

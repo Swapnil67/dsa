@@ -20,6 +20,8 @@
  * * https://www.naukri.com/code360/problems/reverse-list-in-k-groups_983644
 */
 
+// ! Microsoft
+
 #include <vector>
 #include <iostream>
 
@@ -80,7 +82,7 @@ ListNode* getKthNode(ListNode* head, int k) {
   return temp;
 }
 
-ListNode *reverseLL(ListNode *head) {
+ListNode *reverse_ll(ListNode *head) {
   if (!head || !head->next)
     return head;
 
@@ -100,9 +102,6 @@ ListNode *reverseLL(ListNode *head) {
 // * TIME COMPLEXITY  O(n)
 // * SPACE COMPLEXITY O(1)
 ListNode* kReverse(ListNode* head, int k) {
-  
-  ListNode *prevNode = nullptr;
-  
   // * Initialize a pointer to track the
   // * last node of the previous group
   ListNode *dummy = new ListNode(-1);
@@ -113,7 +112,7 @@ ListNode* kReverse(ListNode* head, int k) {
   while (temp) {
     ListNode *cur = temp;
 
-    // * go to k-1 node
+    // * go to (k - 1)th node
     for (int i = 0; i < k - 1; ++i) {
       if (cur)
         cur = cur->next;
@@ -125,7 +124,9 @@ ListNode* kReverse(ListNode* head, int k) {
 
       // * Reverse the current group
       cur->next = nullptr;
-      ListNode *rev_cur = reverseLL(temp);
+      ListNode *rev_cur = reverse_ll(temp);
+      printLL(rev_cur);
+      std::cout << prev_head->data << std::endl;
 
       // * Point the prev_head -> next_k_group
       prev_head->next = rev_cur;
@@ -146,7 +147,7 @@ ListNode* kReverse(ListNode* head, int k) {
 int main() {  
   // * testcase 1
   int k = 2;
-  std::vector<int> arr = { 1,2,3,4,5 };
+  std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int k = 3;

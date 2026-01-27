@@ -33,13 +33,13 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-bool findIsPossibleDivisor(std::vector<int> &arr, int &threshold, int &divisor) {
-  int divisorSum = 0;
-  for(auto &x: arr) {
-    divisorSum = divisorSum + std::ceil((float)x / (float)(divisor));
+bool findIsPossibleDivisor(std::vector<int> &nums, int &threshold, int &divisor) {
+  int divisor_sum = 0;
+  for(auto &x: nums) {
+    divisor_sum = divisor_sum + std::ceil((float)x / (float)(divisor));
   }
-  // std::cout << "divisor " << divisor << " | " << "divisorSum " << divisorSum << std::endl;
-  return divisorSum <= threshold;
+  // std::cout << "divisor " << divisor << " | " << "divisor_sum " << divisor_sum << std::endl;
+  return divisor_sum <= threshold;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -53,7 +53,8 @@ int bruteForce(std::vector<int> arr, int threshold) {
   for (int i = start; i <= end; i++) {
     // * O(N)
     bool isPossibleDivisor = findIsPossibleDivisor(arr, threshold, i);
-    if(isPossibleDivisor) return i;
+    if (isPossibleDivisor)
+      return i;
   }
   return -1;
 }
@@ -62,15 +63,15 @@ int bruteForce(std::vector<int> arr, int threshold) {
 // * TIME COMPLEXITY O(log(Max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int findSmallestDivisor(std::vector<int> arr, int threshold) {
-  int maxEle = *std::max_element(arr.begin(), arr.end());
-  int l = 1, r = maxEle;
+  int l = 1, r = *std::max_element(arr.begin(), arr.end());;
   // * O(log(Max))
   while (l <= r) {
     int m = l + (r - l) / 2;
     // * O(N)
-    if(findIsPossibleDivisor(arr, threshold, m)) {
+    if (findIsPossibleDivisor(arr, threshold, m)) {
       r = m - 1;
-    } else {
+    }
+    else {
       l = m + 1;
     }
   }
@@ -79,12 +80,12 @@ int findSmallestDivisor(std::vector<int> arr, int threshold) {
 
 int main() {
   // * testcase 1
-  int threshold = 8;
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  // int threshold = 8;
+  // std::vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  // int threshold = 6;
-  // std::vector<int> arr = {1, 2, 5, 9};
+  int threshold = 6;
+  std::vector<int> arr = {1, 2, 5, 9};
 
   std::cout << "Threshold " << threshold << std::endl;
   printArr(arr);

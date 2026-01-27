@@ -29,8 +29,8 @@ int checkRoot(int m, int mid, int power) {
       return 1;
     }
   }
-  
-  if(nthRoot == (long long)m) {
+
+  if (nthRoot == (long long)m) {
     return 0;
   }
 
@@ -60,16 +60,18 @@ int bruteForce(int n, int m) {
 int findNthRoot(int n, int m) {
   int ans = -1;
   long long l = 1, r = m;
+
   while(l <= r) {
     int mid = l + (r - l) / 2;
     int val = checkRoot(m, mid, n);
     if (val == 0)
       return mid;
-    else if (val == 1)
+    else if (val == 1) // * Root is greater
       r = mid - 1;
-    else
+    else // * Root is smaller
       l = mid + 1;
   }
+  
   return -1;
 }
 
@@ -78,17 +80,18 @@ int main() {
   // int n = 3, m = 27;
 
   // * testcase 2
-  int n = 4, m = 69;
+  // int n = 4, m = 69;
 
   // * testcase 3
   // int n = 9, m = 1953125;
 
   // * testcase 4
-  // int n = 5, m = 32768;
+  int n = 5, m = 32768;
 
   // int nthRoot = bruteForce(n, m);
   int nthRoot = findNthRoot(n, m);
   std::cout << n << " Root of " << m << " is " << nthRoot << std::endl;
+
   return 0;
 }
 

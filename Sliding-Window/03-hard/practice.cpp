@@ -1,8 +1,11 @@
+#include <set>
 #include <deque>
 #include <vector>
 #include <climits>
 #include <iostream>
+#include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();
@@ -27,9 +30,20 @@ void printArr(std::vector<int> arr) {
 // TODO
 // }
 
+// * 04 - Minimum Number of Operations to Make Array Continuous
+// int minOperations(std::vector<int>& nums) {
+// TODO
+// }
+ 
+// * 05 - Shortest Subarray with Sum at Least K
+// int shortestSubarray(std::vector<int> &nums, int k) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 practice.cpp -o output && ./output 
+// * g++ --std=c++20 practice.cpp -o output && ./output
+

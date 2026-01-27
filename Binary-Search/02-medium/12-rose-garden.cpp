@@ -24,33 +24,36 @@ std::vector<int> findMinMax(std::vector<int> arr) {
   return {mn, mx};
 }
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout<<std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 bool findIsPossibleDay(std::vector<int> days, int roses, int bouquetsRequired, int day) {
-  int totalFlowers = 0, totalBouquets = 0;
+  int cur_flowers = 0, cur_bouquets = 0;
   for (int i = 0; i < days.size(); i++) {
-    if(days[i] <= day) {
-      totalFlowers++;
-    }
-    else {
-      totalBouquets += (totalFlowers / roses);
-      totalFlowers = 0;
+    if (days[i] <= day) {
+      cur_flowers++;
+    } else {
+      cur_bouquets += (cur_flowers / roses);
+      cur_flowers = 0;
     }
   }
-  totalBouquets = totalBouquets + (totalFlowers / roses);
-  std::cout << "Days " << day << " no of Bouquets " << totalBouquets << std::endl;
-  return totalBouquets >= bouquetsRequired;
+  cur_bouquets += (cur_flowers / roses);
+  // std::cout << "Days " << day << " no of Bouquets " << cur_bouquets << std::endl;
+  return cur_bouquets >= bouquetsRequired;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 int bruteForce(std::vector<int> days, int roses, int bouquets) {
-  if (days.size() < roses * bouquets)
+  if (days.size() < (long)(roses * bouquets))
     return -1;
 
   std::vector<int> initialVal = findMinMax(days);
@@ -65,6 +68,7 @@ int bruteForce(std::vector<int> days, int roses, int bouquets) {
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 int findMinimumDaysToMakeBouquets(std::vector<int> days, int roses, int bouquets) {
+  // * Don't have enough flowers to make bouquets
   if (days.size() < roses * bouquets)
     return -1;
 
@@ -88,10 +92,10 @@ int findMinimumDaysToMakeBouquets(std::vector<int> days, int roses, int bouquets
   return ans;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
-  std::vector<int> bloomDays = {1, 2, 1, 2, 7, 2, 2, 3, 1};
-  int flowersInAbouquet = 3, bouquetsRequired = 2;
+  // std::vector<int> bloomDays = {1, 2, 1, 2, 7, 2, 2, 3, 1};
+  // int flowersInAbouquet = 3, bouquetsRequired = 2;
 
   // * testcase 2
   // std::vector<int> bloomDays = {7, 7, 7, 7, 13, 11, 12, 7};
@@ -102,8 +106,8 @@ int main() {
   // int bouquetsRequired = 3, flowersInAbouquet = 1;
 
   // * testcase 4
-  // std::vector<int> bloomDays = {1, 1, 1, 1};
-  // int bouquetsRequired = 1, flowersInAbouquet = 1;
+  std::vector<int> bloomDays = {1, 1, 1, 1};
+  int bouquetsRequired = 1, flowersInAbouquet = 1;
 
   printArr(bloomDays);
 
@@ -115,4 +119,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 12-rose-garden.cpp -o 02-rose-garden && ./02-rose-garden
+// * g++ --std=c++17 12-rose-garden.cpp -o output && ./output

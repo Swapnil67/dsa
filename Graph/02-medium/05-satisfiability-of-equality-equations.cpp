@@ -103,15 +103,15 @@ bool equationsPossible(std::vector<std::string>& equations) {
 int main(void) {
   // * testcase 1
   // std::vector<std::string> equations = {"a==b", "b!=a"};
-  
+
   // * testcase 2
   // std::vector<std::string> equations = {"a==b", "b==a"};
-  
+
   // * testcase 3
-  std::vector<std::string> equations = {"a==b", "b!=c", "c==a"};
+  // std::vector<std::string> equations = {"a==b", "b!=c", "c==a"};
 
   // * testcase 4
-  // std::vector<std::string> equations = {"c==c", "b==d", "x!=z"};
+  std::vector<std::string> equations = {"c==c", "b==d", "x!=z"};
 
   std::cout << "Equations: " << std::endl;
   printArr(equations);
@@ -121,7 +121,6 @@ int main(void) {
 
   return 0;
 }
-
 
 // * Run the code
 // * g++ --std=c++20 05-satisfiability-of-equality-equations.cpp -o output && ./output

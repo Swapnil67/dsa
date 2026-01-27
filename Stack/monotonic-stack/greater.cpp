@@ -33,8 +33,7 @@ std::vector<int> nextGreaterElement(std::vector<int> arr) {
     // * the element represented by stack top is STRICTLY SMALLER than the current element
     while (!st.empty() && arr[st.top()] < arr[i]) {
       // * pop out the top of the stack, it represents the index of the item
-      int stackTop = st.top();
-      nextGreater[stackTop] = i;
+      nextGreater[st.top()] = i;
       st.pop();
     } 
 

@@ -32,9 +32,12 @@
 */
 
 #include <vector>
+#include <numeric>
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
+
+// ! Meta, Google
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -48,15 +51,6 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
-// * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
-  }
-}
 
 int find(int x, std::vector<int> &parent) {
   if (x == parent[x])
@@ -89,9 +83,7 @@ std::vector<std::vector<std::string>> accountsMerge(std::vector<std::vector<std:
   // * 1. Initialize rank and parent vectors
   std::vector<int> rank(n + 1, 1);
   std::vector<int> parent(n + 1);
-  for (int i = 0; i <= n; i++) {
-    parent[i] = i;
-  }
+  std::iota(begin(parent), end(parent), 0);
 
   // * 2. Mark parents for each mail id
   std::unordered_map<std::string, int> mail_parent_mp;
@@ -106,7 +98,6 @@ std::vector<std::vector<std::string>> accountsMerge(std::vector<std::vector<std:
       }
     }
   }
-
   // * For Debugging
   for (auto &it: mail_parent_mp) {
     std::cout << it.first << ": " << it.second << std::endl;
@@ -161,6 +152,7 @@ int main(void) {
   std::cout << "Merged accounts: " << std::endl;
   for (auto &vec : ans)
     printArr(vec);
+    
   return 0;
 }
 

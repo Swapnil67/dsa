@@ -17,6 +17,7 @@
 // * A-Z [65-90]
 // * a-z [97-122]
 
+// ! Meta, Google,  Amazon, Microsoft, Tiktok, Apple
 
 #include<string>
 #include<iostream>
@@ -28,14 +29,14 @@ bool validPalindromeUntil(std::string str, int l, int r) {
     if (str[l++] != str[r--])
       return false;
   }
-  return true;
+  return true;    
 }
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-bool findIsValidPalindrome(std::string str) {
-  int l = 0, r = str.size()-1;
+bool findIsValidPalindrome(std::string &str) {
+  int l = 0, r = str.size() - 1;
   // * O(N)
   while(l < r) {
     if (str[l++] != str[r--]) {
@@ -48,8 +49,11 @@ bool findIsValidPalindrome(std::string str) {
 int main() {
   // * testcase 1
   // std::string str = "abca";
+
   // * testcase 2
   std::string str = "abc";
+
+  std::cout << "Input string: ";
   std::cout << str << std::endl;
   bool isValid = findIsValidPalindrome(str);
   std::cout << "Is Valid Palindrome " << isValid << std::endl;

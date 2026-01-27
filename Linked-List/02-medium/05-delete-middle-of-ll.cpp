@@ -103,6 +103,7 @@ ListNode* bruteForce(ListNode* head) {
 }
 
 // * ------------------ Optimal Approach ---------------------
+// * Tortise & Hare algorithrm
 // * TIME COMPLEXITY  O(N/2)
 // * SPACE COMPLEXITY O(1)
 ListNode* deleteMiddle(ListNode* head) {
@@ -124,9 +125,10 @@ ListNode* deleteMiddle(ListNode* head) {
   }
 
   // * Here slow is at mid - 1 index in ll
-  ListNode* freeNode = slow->next;
+  ListNode* del_node = slow->next;
   slow->next = slow->next->next;
-  std::free(freeNode);
+  std::free(del_node);
+
   return head;
 } 
 

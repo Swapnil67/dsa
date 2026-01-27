@@ -25,7 +25,7 @@
  * 
  */
 
-// ! Google, Amazon, Microsoft, uber
+// ! Google, Apple, Amazon, Microsoft, uber, Walmart
 
 #include <queue>
 #include <vector>
@@ -73,13 +73,13 @@ void dfs(
   }
 }
 
-// * ------------------------- Brute Force Approach -------------------------`
+// * ------------------------- Brute Force Approach -------------------------
 // * TIME COMPLEXITY  O(N) + O(V + 2E) ~ O(N)
 // * SPACE COMPLEXITY O(v)
 int findCircleNumDfsBrute(std::vector<std::vector<int>> &isConnected) {
   int n = isConnected.size();
 
-  // * make graph
+  // * make Adjacency graph
   std::unordered_map<int, std::vector<int>> adj;
   for (int i = 0; i < n; ++i) {
     for (int j = 0; j < n; ++j) {

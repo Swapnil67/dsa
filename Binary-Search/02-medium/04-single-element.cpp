@@ -17,6 +17,8 @@
 * https://www.naukri.com/code360/problems/unique-element-in-sorted-array_1112654
 */
 
+// ! Amazon, Meta, Google, MIcrosoft, Apple, Uber, Flipkart, IBM
+
 #include <vector>
 #include <iostream>
 
@@ -94,8 +96,8 @@ int singleNonDuplicate(std::vector<int> arr) {
 }
 
 int main() {
-  std::vector<int> arr = {1};
-  // std::vector<int> arr = {1, 1, 2, 3, 3, 4, 4, 8, 8};
+  // std::vector<int> arr = {1};
+  std::vector<int> arr = {1, 1, 2, 3, 3, 4, 4, 8, 8};
   // std::vector<int> arr = {1, 2, 2, 3, 3};
   // std::vector<int> arr = {1, 1, 2, 2, 3};
   printArr(arr);

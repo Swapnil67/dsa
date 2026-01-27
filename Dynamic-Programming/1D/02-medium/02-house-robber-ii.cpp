@@ -35,12 +35,11 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
-int dfs_brute(int i, std::vector<int> &nums) {
-  int n = nums.size();
+int dfs_brute(int i, int n, std::vector<int> &nums) {
   if (i >= n)
     return 0;
-  int steal = nums[i] + dfs_brute(i + 2, nums);
-  int skip = dfs_brute(i + 1, nums);
+  int steal = nums[i] + dfs_brute(i + 2, n, nums);
+  int skip = dfs_brute(i + 1, n, nums);
   return std::max(steal, skip);
 }
 
@@ -61,7 +60,10 @@ int dfs(int i, int n, std::vector<int> &nums, std::vector<int> &cache) {
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(2^n) 
 int bruteForce(std::vector<int> nums) {
-  return dfs_brute(0, nums);
+  int n = nums.size();
+  int res1 = dfs_brute(0, n - 1, nums);
+  int res2 = dfs_brute(1, n, nums);
+  return std::max(res1, res2);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------`
@@ -72,6 +74,7 @@ int betterApproach(std::vector<int> nums) {
   int n = nums.size();
   if (n == 1)
     return nums[0];
+
   if (n == 2)
     return std::max(nums[0], nums[1]);
 
@@ -80,7 +83,7 @@ int betterApproach(std::vector<int> nums) {
   int first = dfs(0, n - 2, nums, cache);
 
   // * case 2: Start from 1st house
-  cache.clear();
+  std::fill(cache.begin(), cache.end(), -1);
   int second = dfs(1, n - 1, nums, cache);
   return std::max(first, second);
 }
@@ -104,10 +107,11 @@ int rob(std::vector<int> nums) {
     int steal = nums[i - 1] + ((i - 2 >= 0) ? dp[i - 2] : 0);
     dp[i] = std::max(steal, skip);
   }
+  printArr(dp);
   int res1 = dp[n - 1];
 
   // * case 2: Start from 2nd house & take the last house
-  dp.clear();
+  std::fill(dp.begin(), dp.end(), 0);
   dp[0] = 0;
   dp[1] = 0;
   for (int i = 2; i <= n; ++i) {
@@ -115,6 +119,7 @@ int rob(std::vector<int> nums) {
     int steal = nums[i - 1] + ((i - 2 >= 0) ? dp[i - 2] : 0);
     dp[i] = std::max(steal, skip);
   }
+  printArr(dp);
   int res2 = dp[n];
 
   return std::max(res1, res2);
@@ -125,7 +130,7 @@ int main(void) {
   // std::vector<int> nums = {1, 2, 3, 1};
 
   // * testcase 2
-  // std::vector<int> nums = {2, 7, 9, 3, 1};
+  std::vector<int> nums = {2, 7, 9, 3, 1};
 
   // * testcase 3
   // std::vector<int> nums = {2};
@@ -134,18 +139,18 @@ int main(void) {
   // std::vector<int> nums = {2, 5};
 
   // * testcase 5
-  std::vector<int> nums = {2, 1, 1, 2};
+  // std::vector<int> nums = {2, 1, 1, 2};
 
   std::cout << "Input nums: ";
   printArr(nums);
 
-  // int ans = bruteForce(nums);
+  int ans = bruteForce(nums);
   // int ans = betterApproach(nums);
-  int ans = rob(nums);
+  // int ans = rob(nums);
   std::cout << "found: " << ans << std::endl;
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 01-house-robber.cpp -o output && ./output 
+// * g++ --std=c++20 02-house-robber-ii.cpp -o output && ./output 

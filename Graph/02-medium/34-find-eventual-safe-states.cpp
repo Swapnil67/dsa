@@ -41,6 +41,7 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
+// * Detect Cycle in DG
 bool dfs(
     int u,
     std::vector<bool> &visited,
@@ -52,9 +53,10 @@ bool dfs(
 
   for (auto& v : graph[u]) {
     if (!visited[v] && dfs(v, visited, in_recursion, graph)) {
-        return true;
-    } else if (in_recursion[v]) {
-        return true;
+      return true; // * Found cycle return from here also to stop recursion calls.
+    }
+    else if (in_recursion[v]) { // * cycle detected
+      return true;
     }
   }
 
@@ -65,8 +67,8 @@ bool dfs(
 // * ------------------------- APPROACH : Optimal Approach -------------------------`
 // * Cycle detection in Directed Graph
 // * 
-// * TIME COMPLEXITY O(n x n)
-// * SPACE COMPLEXITY O(n x n)
+// * TIME COMPLEXITY O(V + E)
+// * SPACE COMPLEXITY O(V + E)
 std::vector<int> eventualSafeNodes(std::vector<std::vector<int>>& graph) {
     std::vector<int> ans;
     int n = graph.size();
@@ -85,6 +87,7 @@ std::vector<int> eventualSafeNodes(std::vector<std::vector<int>>& graph) {
     // * In cycle detection the `in_recursion` array will contain following values
     // * True Vertices = They have cycle 
     // * False Vertices = They don't have cycle 
+    // printArr(in_recursion);
     
     for (int i = 0; i < n; ++i) {
       if (!in_recursion[i]) {

@@ -52,10 +52,16 @@ void printArr(std::vector<T> &arr) {
   std::cout << " ]" << std::endl;
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------
+// * n = no. of slots (We have 10)
+// * w = no. of wheels (we have 4)
+// * TIME COMPLEXITY O(n^w)
+// * SPACE COMPLEXITY O(n^w)
 int openLock(std::vector<std::string> &deadends, std::string target) {
-  
+  // * For checking deadends
   std::unordered_set<std::string> dead_st(begin(deadends), end(deadends));
 
+  // * Edge case
   std::string start = "0000";
   if (dead_st.count(start))
     return -1;
@@ -74,17 +80,20 @@ int openLock(std::vector<std::string> &deadends, std::string target) {
       if (s == target) // * Reached target
         return level;
 
+      // * Change all 4 wheels on lock 
       for (int i = 0; i < 4; ++i) {
         char ch = s[i];
         char dec = ch == '0' ? '9' : ch - 1;
         char inc = ch == '9' ? '0' : ch + 1;
 
+        // * decr the cur wheel in lock and check
         s[i] = dec;
         if (!dead_st.count(s)) {
           dead_st.insert(s);
           q.push(s);
         }
-
+        
+        // * incr the cur wheel in lock and check
         s[i] = inc;
         if (!dead_st.count(s)) {
           dead_st.insert(s);
@@ -116,10 +125,11 @@ int main(void) {
 // * Run the code
 // * g++ --std=c++20 57-open-the-lock.cpp -o output && ./output
 
+
 /*
-    Similar Question :  1. Word Ladder (Leetcode) 
-                        2. Gene Mutation (Leetcode)
-                        3. Sequential Digits (Leetcode)
-                        4. Print all Jumping Numbers smaller than or equal to a given value (GFG)
+* Similar Question :     1. Word Ladder (Leetcode) 
+*                        2. Gene Mutation (Leetcode)
+*                        3. Sequential Digits (Leetcode)
+*                        4. Print all Jumping Numbers smaller than or equal to a given value (GFG)
 */
 

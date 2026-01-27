@@ -7,6 +7,7 @@
 * Output : [0, 2, 4, 3, 1]
 *
 * https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+* https://www.naukri.com/code360/problems/dfs-traversal_630462
 */
 
 #include <vector>
@@ -14,11 +15,14 @@
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 void solve(std::vector<std::vector<int>> &adj,

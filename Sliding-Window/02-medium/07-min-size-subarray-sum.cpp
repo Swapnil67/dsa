@@ -65,16 +65,16 @@ int bruteForce(std::vector<int> arr, int target) {
 // * SPACE COMPLEXITY O(1)
 int minSubArrayLen(std::vector<int> arr, int target) {
   int n = arr.size();
-  int ans = INT_MAX, curSum = 0;
+  int ans = INT_MAX, sum = 0;
   int i = 0, j = 0;
   while (j < n) {
-    curSum += arr[j];
+    sum += arr[j];
 
-    // * While curSum >= target shrink window and store new subarray size
-    while (i < j && curSum >= target) {
+    // * While sum >= target shrink window and store new subarray size
+    while (i < j && sum >= target) {
       // * Shrink the window
       ans = std::min(ans, j - i + 1);
-      curSum -= arr[i];
+      sum -= arr[i];
       i++;
     }
 

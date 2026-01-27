@@ -1,25 +1,28 @@
-/**
- * * Leetcode - 2439
- * * Minimize Maximum of Array
- * * You are given a 0-indexed array nums comprising of n non-negative integers.
- * * In one operation, you must:
+/*
+ * Leetcode - 2439
+ * Minimize Maximum of Array
  * 
- * * Choose an integer i such that 1 <= i < n and nums[i] > 0.
- * * - Decrease nums[i] by 1.
- * * - Increase nums[i - 1] by 1.
- * *  Return the minimum possible value of the maximum integer of nums after performing any number of operations.
+ * You are given a 0-indexed array nums comprising of n non-negative integers.
+ * In one operation, you must:
  * 
- * * Example 1:
- * * Input       : nums = [3,7,1,6]
- * * Output      : 5
- * * Explanation : 
- * * One set of optimal operations is as follows:
- * * - Choose i = 1, and nums becomes [4,6,1,6].
- * * - Choose i = 3, and nums becomes [4,6,2,5].
- * * - Choose i = 1, and nums becomes [5,5,2,5].
+ * Choose an integer i such that 1 <= i < n and nums[i] > 0.
+ * - Decrease nums[i] by 1.
+ * - Increase nums[i - 1] by 1.
+ *  Return the minimum possible value of the maximum integer of nums after performing any number of operations.
+ * 
+ * Example 1   :
+ * Input       : nums = [3, 7, 1, 6]
+ * Output      : 5
+ * Explanation : 
+ * One set of optimal operations is as follows:
+ * - Choose i = 1, and nums becomes [4,6,1,6].
+ * - Choose i = 3, and nums becomes [4,6,2,5].
+ * - Choose i = 1, and nums becomes [5,5,2,5].
  
- * * https://leetcode.com/problems/minimize-maximum-of-array/description/
+ * https://leetcode.com/problems/minimize-maximum-of-array/description/
  */
+
+// ! Meta
 
 #include <vector>
 #include <math.h>
@@ -34,30 +37,31 @@ void printArr(std::vector<int> arr) {
   std::cout << std::endl;
 }
 
-bool isValid(std::vector<int> arr, int maxVal) {
-  int n = arr.size();
+bool isValid(std::vector<int> nums, int maxVal) {
+  int n = nums.size();
   for (int i = 0; i < n - 1; ++i) {
-    if (arr[i] > maxVal)
+    if (nums[i] > maxVal)
       return false;
 
-    // * how much we need to subtract to arr[i+1] element if we make arr[i] to maxVal
-    long long buffer = maxVal - arr[i];
-    arr[i + 1] = arr[i + 1] - buffer; // * subtract the buffer to arr[i+1]
+    // * how much we need to subtract to nums[i+1] element if we make nums[i] to maxVal
+    long long buffer = maxVal - nums[i];
+    nums[i + 1] = nums[i + 1] - buffer; // * subtract the buffer to nums[i+1]
   }
 
-  return arr[n - 1] <= maxVal;
+  return nums[n - 1] <= maxVal;
 }
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
+// * Binary Search On Answers
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(1)
-int minimizeArrayValue(std::vector<int> arr) {
-  int n = arr.size();
-  int l = 0, r = *std::max_element(arr.begin(), arr.end());
+int minimizeArrayValue(std::vector<int> nums) {
+  int l = 1, r = *std::max_element(begin(nums), end(nums));
   int ans = 0;
-  while(l <= r) {
+  while (l <= r) {
+    // * We need to check if every element in array is <= to the 'm'.
     int m = l + (r - l) / 2;
-    if (isValid(arr, m)) {
+    if (isValid(nums, m)) {
       ans = m;
       r = m - 1;
     }
@@ -89,18 +93,19 @@ int minimizeArrayValue2(std::vector<int> arr) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> arr = {3, 7, 1, 6};
+  std::vector<int> arr = {3, 7, 1, 6};
 
   // * testcase 2
   // std::vector<int> arr = {10, 1};
 
   // * testcase 3
-  std::vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
+  // std::vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
 
+  std::cout << "Input Array: ";
   printArr(arr);
 
-  // int ans = minimizeArrayValue(arr);
-  int ans = minimizeArrayValue2(arr);
+  int ans = minimizeArrayValue(arr);
+  // int ans = minimizeArrayValue2(arr);
   std::cout << "Minimize Maximum of Array " << ans << std::endl;
 
   return 0;
@@ -115,34 +120,21 @@ int main(void) {
 // * arr[i] = arr[i] - 1              - (i > 1 && i < n)
 // * arr[i - 1] = arr[i - 1] + 1          
 
-// * i = 0
-// * 3 7 1 6
-// * 4 6
-
-// * i = 1
-// * 4 6 1 6
-// * 5 5
-
-// * i = 2
-// * 5 5 1 6
-// *     5 2
-
-// * i = 3
-// * 5 5 5 2
-
-
-// * For i = 5 till i < n - 1
-
-// * i = 0
-// * 3 7 1 6
-// * 2 5
-
-// * i = 1
-// * 4 6 1 6
-// * 2 5 
-
-// * i = 2
-// * 4 6 1 6
-// * 2 5 5 2
+/*
+* i = 0
+*        4   3   6   2 => [4,3,6,2] -> [5,2,6,2]
+*       +1|  -1|  
+*        5   2    
+*        
+* i = 1
+*        5   2   6   2 => [5,2,6,2] -> [5,5,3,2]  
+*           +3| -3| 
+*        5   5   3   2
+*        
+* i = 2
+*        5   5   3   2 => [5,5,3,2] -> [5,5,5,0]
+*               +2| -2|
+*                5   0
+*/
 
 // * Max ele = 5

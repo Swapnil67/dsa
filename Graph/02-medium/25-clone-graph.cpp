@@ -102,3 +102,4 @@ int main(void) {
   node_three->neighbors = three_ngbr;
   node_four->neighbors = four_ngbr;
 }
+

@@ -102,8 +102,12 @@ int findKthMissingNumber(std::vector<int> arr, int k) {
 }
 
 int main() {
-  int k = 5;
-  std::vector<int> arr = {2, 3, 4, 7, 11};
+  // int k = 5;
+  // std::vector<int> arr = {2, 3, 4, 7, 11};
+
+  int k = 2;
+  std::vector<int> arr = {1, 2, 3, 4};
+
   printArr(arr);
   // int missingNumber = bruteForce(arr, k);
   int missingNumber = findKthMissingNumber(arr, k);

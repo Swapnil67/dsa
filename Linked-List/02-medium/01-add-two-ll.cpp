@@ -1,21 +1,24 @@
-/**
- * * Leetcode - 2
- * * Add Two Numbers
- * * You are given two non-negative numbers 'num1' and 'num2' represented in the form of linked lists.
+/*
+ * Leetcode - 2
+ * Add Two Numbers
+ * 
+ * You are given two non-negative numbers 'num1' and 'num2' represented in the form of linked lists.
  *
- * * Example 1
- * * 'num1' : 1 -> 2 -> 3 -> NULL
- * * 'num2' : 4 -> 5 -> 6 -> NULL
- * * Output: 5 -> 7 -> 9 -> NULL
+ * Example 1
+ * 'num1' : 1 -> 2 -> 3 -> NULL
+ * 'num2' : 4 -> 5 -> 6 -> NULL
+ * Output: 5 -> 7 -> 9 -> NULL
  *
- * * Example 2
- * * 'num1' : 0 -> 1 -> NULL
- * * 'num2' : 0 -> NULL
- * * Output: 0 -> 1 -> NULL
+ * Example 2
+ * 'num1' : 0 -> 1 -> NULL
+ * 'num2' : 0 -> NULL
+ * Output: 0 -> 1 -> NULL
  *
- * * https://leetcode.com/problems/add-two-numbers/
- * * https://www.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1
- */
+ * https://leetcode.com/problems/add-two-numbers/
+ * https://www.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1
+*/
+
+// ! Amazon, Google, Meta, Microsoft, Adobe, Uber, ByteDance
 
 #include <vector>
 #include <iostream>
@@ -62,8 +65,45 @@ void printLL(ListNode* head) {
   std::cout << "NULL" << std::endl;
 }
 
-// * ------------------ Optimal FORCE ---------------------
+// * ------------------ APPROACH 2: Brute Force ---------------------
+// * TIME COMPLEXITY O(max(h1, h1))
+// * SPACE COMPLEXITY O(max(h1, h1))
+ListNode* bruteForce(ListNode* head) {
+  if (!head)
+    return head;
 
+  // * Step 1. Create a vector from given LL
+  ListNode* temp = head;
+  std::vector<int> arr;
+  while (temp) {
+    arr.push_back(temp->data);
+    temp = temp->next;
+  }
+
+  // * Step 2. Separate even & odd indices nodes from arr
+  std::vector<int> even_arr, odd_arr;
+  for (int i = 1; i <= arr.size(); ++i) {
+    if (i % 2 == 0)
+      even_arr.push_back(arr[i - 1]);
+    else
+      odd_arr.push_back(arr[i - 1]);
+  }
+  for (auto &x : even_arr) {
+    odd_arr.push_back(x);
+  }
+
+  // * Step 3. Make a LL from array
+  ListNode* ans = new ListNode(-1);
+  ListNode* mover = ans;
+  for (int i = 0; i < odd_arr.size(); ++i) {
+    ListNode *node = new ListNode(odd_arr[i]);
+    mover->next = node;
+    mover = node;
+  }
+  return ans->next;
+}
+
+// * ------------------ APPROACH 1: Optimal ---------------------
 // * TIME COMPLEXITY O(max(h1, h1))
 // * SPACE COMPLEXITY O(max(h1, h1))
 ListNode* addTwoLL(ListNode* h1, ListNode* h2) {

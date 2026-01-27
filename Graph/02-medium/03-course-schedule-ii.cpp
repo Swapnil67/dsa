@@ -50,22 +50,7 @@ void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
   }
 }
 
-std::unordered_map<int, std::vector<int>> contructadj(
-    std::vector<int> &indegree,
-    std::vector<std::vector<int>> &edges)
-{
-  std::unordered_map<int, std::vector<int>> adj;
-  for (auto &it: edges) {
-    int a = it[0], b = it[1];
-    // * b ---> a
-    adj[b].push_back(a);
-    indegree[a]++;
-  }
-
-  return adj;
-}
-
-// * Topological Sort
+// * Kahn's Algo
 std::vector<int> bfs(
     int n,
     std::vector<int> &indegree,
@@ -106,19 +91,28 @@ std::vector<int> bfs(
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Kahn's Algo
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
 std::vector<int> canFinish(int numCourses, std::vector<std::vector<int>> &prerequisites) {
-
   std::vector<int> indegree(numCourses, 0);
-  std::unordered_map<int, std::vector<int>> adj = contructadj(indegree, prerequisites);
+
+  // * Step 1. Create a Adj list with indegree
+  std::unordered_map<int, std::vector<int>> adj;
+  for (auto &it: prerequisites) {
+    int a = it[0], b = it[1];
+    // * b ---> a
+    adj[b].push_back(a);
+    indegree[a]++;
+  }
 
   // * For Debugging
-  std::cout << "Adjacency List" << std::endl;
-  printAdjList(adj);
-  std::cout << "Indegree" << std::endl;
-  printArr(indegree);
+  // std::cout << "Adjacency List" << std::endl;
+  // printAdjList(adj);
+  // std::cout << "Indegree" << std::endl;
+  // printArr(indegree);
 
+  // * Step 2. Kahn's Algo
   return bfs(numCourses, indegree, adj);
 }
 

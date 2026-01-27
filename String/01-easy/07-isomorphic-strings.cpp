@@ -1,4 +1,5 @@
 /**
+ * * Leetcode - 205
  * * Isomorphic Strings
  * * Given two strings s and t, determine if they are isomorphic.
 
@@ -22,9 +23,9 @@
  * * https://www.naukri.com/code360/problems/check-if-two-given-strings-are-isomorphic-to-each-other_1117636
 */
 
-#include<string>
-#include<iostream>
-#include<unordered_map>
+#include <string>
+#include <iostream>
+#include <unordered_map>
 
 // * TIME COMPLEXITY O(S)
 /*
@@ -32,8 +33,7 @@
 */
 // * SPACE COMPLEXITY O(s + t)
 bool isIsomorphic(std::string s, std::string t) {
-  std::unordered_map<char, char> st_map;
-  std::unordered_map<char, char> ts_map;
+  std::unordered_map<char, char> st_map, ts_map;
 
   int n1 = s.size();
   for (int i = 0; i < n1; ++i) {

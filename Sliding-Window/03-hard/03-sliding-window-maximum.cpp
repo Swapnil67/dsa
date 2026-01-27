@@ -24,6 +24,7 @@
 
  * * https://leetcode.com/problems/sliding-window-maximum/description/
  * * https://www.naukri.com/code360/problems/sliding-window-maximum_980226
+ * * https://www.naukri.com/code360/problems/maximum-of-all-subarrays-of-size-k_1170789 
 */
 
 #include <vector>
@@ -45,9 +46,9 @@ void printArr(std::vector<int> &arr) {
 std::vector<int> bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
   std::vector<int> ans;
-  for(int i = 0; i < n; ++i) {
+  for (int i = 0; i <= n - k; ++i) {
     int cur_max = INT_MIN;
-    for(int j = i; (k + i <= n && j < (k + i)); ++j) {
+    for (int j = i; j < i + k; ++j) {
       cur_max = std::max(cur_max, arr[j]);
     }
     if (cur_max != INT_MIN)
@@ -55,7 +56,6 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
   }
   return ans;
 }
-
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * Monotonic Deque
@@ -77,6 +77,7 @@ std::vector<int> maxSlidingWindow(std::vector<int> arr, int k) {
     // * Shrink the window
     if ((j - i + 1) > k) {
       // * Remove from the front of deque
+      // * since we are using queue ds 'i' element might be at queue front
       if (arr[i] == dq.front())
         dq.pop_front();
       i++;

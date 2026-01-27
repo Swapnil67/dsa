@@ -46,63 +46,32 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
-  for (auto &it : edges) {
-    int u = it[0], v = it[1];
-    adj[u].push_back(v);
-    adj[v].push_back(u);
-  }
-  return adj;
-}
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
-int dfs(int r, int c, std::vector<std::vector<int>> &grid) {
-  int m = grid.size(), n = grid[0].size();
-  
-  const auto is_safe = [&](const int &row, const int &col) {
-    return row >= 0 && row < m && col >= 0 && col < n;
-  };
-  
-  int original_value = grid[r][c];
-  grid[r][c] = 0;
-
-  int max_gold = 0;
-  for (auto &dir: dirs) { // * Go to all 4 directions
-    int dr = r + dir[0], dc = c + dir[1];
-    if (is_safe(dr, dc) && grid[dr][dc] != 0) {
-      max_gold = std::max(max_gold, dfs(dr, dc, grid));
-    }
-  }
-
-  grid[r][c] = original_value;
-  return original_value + max_gold;
-}
-
 bool dfs_bob(
     int u, int time,
-    std::vector<bool> &visited,
-    std::unordered_map<int, int> &bob_time_map,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    unordered_map<int, int> &bob_time_map,
+    unordered_map<int, vector<int>> &adj)
 {
   visited[u] = true;
   bob_time_map[u] = time;
@@ -118,22 +87,22 @@ bool dfs_bob(
     }
   }
 
-  bob_time_map.erase(u);
+  bob_time_map.erase(u); // * Remove the node from bob path
   return false;
 }
 
 void dfs_alice(
     int u, int time,
     int income, int &max_alice_income,
-    std::vector<bool> &visited,
-    std::vector<int> &amount,
-    std::unordered_map<int, int> &bob_time_map,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    vector<int> &amount,
+    unordered_map<int, int> &bob_time_map,
+    unordered_map<int, vector<int>> &adj)
 {
   visited[u] = true;
 
   // * Check if bob never reached this node or bob reached after alice
-  if (bob_time_map.find(u) == bob_time_map.end() || time < bob_time_map[u]) {
+  if (bob_time_map.count(u) == 0 || time < bob_time_map[u]) {
     income += amount[u];
   } else if (time == bob_time_map[u]) {
     income += (amount[u] / 2);
@@ -141,7 +110,7 @@ void dfs_alice(
 
   // * Alice reached any leaf node & it should not be the starting node [For Alice Starting Node = 0]
   if (adj[u].size() == 1 && u != 0) { // * update the max_alice_income for alice
-    max_alice_income = std::max(max_alice_income, income);
+    max_alice_income = max(max_alice_income, income);
   }
   
   // * Go to it's neighbours
@@ -154,22 +123,25 @@ void dfs_alice(
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
 // * DFS for both Bob & Alice
-// * TIME COMPLEXITY 
-// * SPACE COMPLEXITY 
-int getMaximumGold(int bob, std::vector<int> amount, std::vector<std::vector<int>> &edges) {
-  int n = amount.size();
-
+// * TIME COMPLEXITY   O(n)
+// * SPACE COMPLEXITY  O(n) 
+int mostProfitablePath(int bob, vector<int> amount, vector<vector<int>> &edges) {
   // * 1. Create Adj List
-  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
-  printAdjList(adj);
+  unordered_map<int, vector<int>> adj;
+  for (auto &it : edges) {
+    int u = it[0], v = it[1];
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
+  // printAdjList(adj); // * For Debugging
 
   // * 2. DFS on bob for finding time to reach each node till 0
-  std::unordered_map<int, int> bob_time_map;
-  int time = 0;
-  std::vector<bool> visited(n, false);
-  dfs_bob(bob, time, visited, bob_time_map, adj);
+  int n = amount.size();
+  vector<bool> visited(n, false);
+  unordered_map<int, int> bob_time_map;
+  dfs_bob(bob, 0, visited, bob_time_map, adj);
   // for (auto &[k, v]: bob_time_map) { // * For Debugging
-  //   std::cout << "node: " << k <<  ", Time: " << v << std::endl;
+  //   cout << "node: " << k <<  ", Time: " << v << endl;
   // }
   
   // * 3. DFS on alice for finding max_income to reach any leaf node
@@ -183,27 +155,27 @@ int getMaximumGold(int bob, std::vector<int> amount, std::vector<std::vector<int
 int main(void) {
   // * testcase 1
   // int bob = 3;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {1, 3}, {3, 4}};
-  // std::vector<int> amount = {-2, 4, 2, -4, 6};
+  // vector<vector<int>> edges = {{0, 1}, {1, 2}, {1, 3}, {3, 4}};
+  // vector<int> amount = {-2, 4, 2, -4, 6};
   
   // * testcase 2
   // int bob = 1;
-  // std::vector<std::vector<int>> edges = {{0, 1}};
-  // std::vector<int> amount = {-7280, 2350};
+  // vector<vector<int>> edges = {{0, 1}};
+  // vector<int> amount = {-7280, 2350};
   
   // * testcase 2
   int bob = 3;
-  std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
-  std::vector<int> amount = {-5644, -6018, 1188, -8502};
+  vector<vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
+  vector<int> amount = {-5644, -6018, 1188, -8502};
 
-  std::cout << "Amount: ";
+  cout << "Amount: ";
   printArr(amount);
-  std::cout << "------------ Edges -------------" << std::endl;
+  cout << "------------ Edges -------------" << endl;
   for (auto &vec : edges)
     printArr(vec);
 
-  int ans = getMaximumGold(bob, amount, edges);
-  std::cout << "Maximum Gold: " << ans << std::endl;
+  int ans = mostProfitablePath(bob, amount, edges);
+  cout << "Maximum Gold: " << ans << endl;
 
   return 0;
 }

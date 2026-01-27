@@ -1,21 +1,24 @@
-/**
- * * Leetcode 424
- * * Longest Repeating Character Replacement
- * * You are given a string s and an integer k. You can choose any character of the string and change it
- * * to any other uppercase English character. You can perform this operation at most k times.
+/*
+ * Leetcode 424
+ * Longest Repeating Character Replacement
  * 
- * * Example 1
- * * Input  : s = "ABAB", k = 2
- * * Output : 4
- * * Explanation: Replace the two 'A's with two 'B's or vice versa.
+ * You are given a string s and an integer k. You can choose any character of the string and change it
+ * to any other uppercase English character. You can perform this operation at most k times.
+ * 
+ * Example 1
+ * Input  : s = "ABAB", k = 2
+ * Output : 4
+ * Explanation: Replace the two 'A's with two 'B's or vice versa.
 
- * * Example 2
- * * Input  : s = "AABABBA", k = 1
- * * Output : 4
- * * Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
+ * Example 2
+ * Input  : s = "AABABBA", k = 1
+ * Output : 4
+ * Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
 
- * * https://leetcode.com/problems/longest-repeating-character-replacement/description/
+ * https://leetcode.com/problems/longest-repeating-character-replacement/description/
 */
+
+// ! Google, Meta, Microsoft, Apple, Uber, Flipkart, Goldman Sachs
 
 #include <vector>
 #include <iostream>
@@ -122,12 +125,12 @@ int characterReplacement(std::string s, int k) {
 
 int main() {
   // * testcase 1
-  // int k = 1;
-  // std::string s = "AABABBA";
+  int k = 1;
+  std::string s = "AABABBA";
   
   // * testcase 2
-  int k = 2;
-  std::string s = "ABAB";
+  // int k = 2;
+  // std::string s = "ABAB";
   
   std::cout << "Input String: " << s << std::endl;
   int ans = bruteForce(s, k);

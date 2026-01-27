@@ -21,6 +21,9 @@
  * 
  * https://leetcode.com/problems/task-scheduler/
 */
+
+// ! Google, Meta
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -34,17 +37,18 @@ void printArr(std::vector<char> arr) {
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Using max_heap
+// * Greedly try to finish those tasks first whose frequency is more
+// * We'll use max_heap for storing freq of each task.
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(26)
 int leastInterval(std::vector<char>& tasks, int n) {
-  // * map task to freq
+  // * Step 1. map task to freq
   std::vector<int> mp(26, 0);
   for (char &t : tasks) {
     mp[t - 'A']++;
   }
 
-  // * Push all the task freq to max_heap
+  // * Step 2. Push all the task freq to max_heap
   std::priority_queue<int> max_heap; // * max-size = 26 
   for (int i = 0; i < 26; ++i) { 
     if (mp[i] > 0)
@@ -53,28 +57,27 @@ int leastInterval(std::vector<char>& tasks, int n) {
 
   int intervals = 0;
   while (!max_heap.empty()) {
+    std::vector<int> pending; // * pending tasks freq
 
-    std::vector<int> temp; // * current tasks freq
-
-    // * we can only perform upto (n + 1) tasks
+    // * we'll take (n + 1) tasks from our pq;
     for (int i = 0; i <= n; ++i) {
       if (!max_heap.empty()) {
         int freq = max_heap.top();
         // std::cout << freq << std::endl;
         max_heap.pop();
         freq--;
-        temp.push_back(freq);
+        pending.push_back(freq);
       }
     }
 
     // * Push the updated tasks freq again in max_heap
-    for (int &f : temp) {
+    for (int &f : pending) {
       if (f > 0)
         max_heap.push(f);
     }
 
     if (max_heap.empty()) { // * Edge case
-      intervals += temp.size();
+      intervals += pending.size();
     } else {
       intervals += n + 1; // * (here +1 is for idle time for next task)
     }

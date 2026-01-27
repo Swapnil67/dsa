@@ -1,6 +1,7 @@
 /*
  * Leetcode - 445
  * Add Two Numbers II
+ * 
  * You are given two non-empty linked lists representing two non-negative integers. 
  * The most significant digit comes first and each of their nodes contains a single digit. 
  * Add the two numbers and return the sum as a linked list.
@@ -15,6 +16,8 @@
  *
  * https://leetcode.com/problems/add-two-numbers-ii/description/
 */
+
+// ! Amazon, Google, Meta, Microsoft, Bloomberg, ByteDance
 
 #include <stack>
 #include <vector>
@@ -79,9 +82,17 @@ ListNode* reverseLL(ListNode* head) {
 // * TIME COMPLEXITY O(max(h1, h1))
 // * SPACE COMPLEXITY O(max(h1, h1))
 ListNode* bruteForce(ListNode* h1, ListNode* h2) {
+  // * Edge Cases
+  if (!h1 && !h2)
+    return h1;
+  if (!h1 && h2)
+    return h2;
+  if (h1 && !h2)
+    return h1;
+
+  // * Reverse both linked list
   ListNode *rev_h1 = reverseLL(h1);
   ListNode *rev_h2 = reverseLL(h2);
-
   // printLL(rev_h1);
   // printLL(rev_h2);
 
@@ -106,9 +117,7 @@ ListNode* bruteForce(ListNode* h1, ListNode* h2) {
   }
 
   if (carry) {
-    ListNode *new_node = new ListNode(carry);
-    mover->next = new_node;
-    mover = new_node;
+    mover->next = new ListNode(carry);
   }
 
   return reverseLL(ans->next);

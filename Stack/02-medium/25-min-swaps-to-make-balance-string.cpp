@@ -25,7 +25,7 @@
  * 
 */
 
-// ! Google, Amazon, Facebook
+// ! Google, Amazon, Meta
 
 #include <stack>
 #include <iostream>

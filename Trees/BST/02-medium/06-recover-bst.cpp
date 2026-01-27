@@ -44,13 +44,17 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
+
 
 void inorder(TreeNode *root, std::vector<int> &arr) {
   if (!root)

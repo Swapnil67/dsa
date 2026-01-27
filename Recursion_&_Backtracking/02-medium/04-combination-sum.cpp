@@ -22,11 +22,11 @@
  * output : [[2,2,2,2],[2,3,3],[3,5]]
  * 
  * https://leetcode.com/problems/combination-sum/description/
+ * https://www.naukri.com/code360/problems/combination-sum_981296
 */
 
 #include <vector>
 #include <iostream>
-#include <algorithm>
 
 void printArr(std::vector<int> arr) {
   std::cout << "[ ";
@@ -36,7 +36,7 @@ void printArr(std::vector<int> arr) {
   std::cout << "]" << std::endl;
 }
 
-void solve(std::vector<int> &candidates,
+void solve(std::vector<int> &nums,
            int i,
            int target,
            std::vector<int> &temp,
@@ -50,15 +50,16 @@ void solve(std::vector<int> &candidates,
     return;
   }
 
-  if (i >= candidates.size())
+  if (i >= nums.size())
     return;
 
-  temp.push_back(candidates[i]);
-  solve(candidates, i, target - candidates[i], temp, ans);
+  temp.push_back(nums[i]);
+  solve(nums, i, target - nums[i], temp, ans);
 
   temp.pop_back();
-  solve(candidates, i + 1, target, temp, ans);
+  solve(nums, i + 1, target, temp, ans);
 }
+
 
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -75,9 +76,17 @@ std::vector<std::vector<int>> combinationSum(std::vector<int> &candidates, int t
 }
 
 int main(void) {
-  int target = 7;
-  std::vector<int> candidates = {2, 3, 6, 7};
+  
+  // * testcase 1
+  // int target = 7;
+  // std::vector<int> candidates = {2, 3, 6, 7};
+
+  // * testcase 2
+  int target = 14;
+  std::vector<int> candidates = {13, 3, 2, 17};
+
   std::cout << "target: " << target << std::endl;
+  std::cout << "Candidates: ";
   printArr(candidates);
 
   std::vector<std::vector<int>> ans = combinationSum(candidates, target);

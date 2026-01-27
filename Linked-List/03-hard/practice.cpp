@@ -50,21 +50,38 @@ ListNode *arrayToLL(std::vector<int> &nums) {
   return head;
 }
 
+int count_ll(ListNode *head) {
+  ListNode *temp = head;
+  int c = 0;
+  while (temp) {
+    c++;
+    temp = temp->next;
+  }
+  return c;
+}
+
+ListNode *reverse_ll(ListNode *head)
+{
+  ListNode *tail = nullptr;
+  ListNode *temp = head;
+  while (temp)
+  {
+    ListNode *front = temp->next;
+    temp->next = tail;
+    tail = temp;
+    temp = front;
+  }
+
+  return tail;
+}
+
 // * 01 - Reverse List In K Groups
 // ListNode *kReverse(ListNode *head, int k) {
 // TODO
 // }
 
 // * 02 - LFU Cache
-// class LFUCache {
-// public:
-//     LFUCache(int capacity) {
-//     }
-//     int get(int key) {
-//     }
-//     void put(int key, int value) {
-//     }
-// };
+// TODO (Do this on leetcode)
 
 // * 03 - Merge k Sorted Lists
 // ListNode *mergeKLists(std::vector<ListNode *> &lists) {

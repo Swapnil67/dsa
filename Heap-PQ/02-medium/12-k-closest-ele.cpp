@@ -24,11 +24,16 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  printf("\n");
+  std::cout << " ]" << std::endl;
 }
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
@@ -38,6 +43,7 @@ void printArr(std::vector<int> arr) {
 std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
   int n = arr.size();
 
+  // * max_heap = {diff, num}
   std::priority_queue<std::pair<int, int>> max_heap;
 
   // * Push the abs diff with 'x' to max_heap

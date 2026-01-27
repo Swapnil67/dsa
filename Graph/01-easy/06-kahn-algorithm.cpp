@@ -17,6 +17,7 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 // ! Topological sort will only take place in Directed Acyclic Graph (DAG)
 
@@ -33,36 +34,32 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
   int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+  for (auto &[key, vec] : adj) {
+    std::cout << key << " -> ";
+    printArr(vec);
   }
 }
 
-std::vector<std::vector<int>> constructadj(
-    int V,
-    std::vector<std::vector<int>> &edges,
-    std::vector<int> &indegree)
+std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges,
+                                                       std::vector<int> &indegree)
 {
-  std::vector<std::vector<int>> adj(V);
+  std::unordered_map<int, std::vector<int>> adj;
   for (auto &it: edges) {
-    // * a ---> b
-    adj[it[0]].push_back(it[1]);
-    indegree[it[1]]++;
+    int u = it[0], v = it[1];
+    indegree[v]++;
+    adj[u].push_back(v);
   }
   return adj;
 }
 
 // * Classic BFS traversal in Graph
-std::vector<int> bfs(
-    std::vector<std::vector<int>> &adj,
-    std::vector<int> &indegree)
+std::vector<int> bfs(std::vector<int> &indegree,
+                     std::unordered_map<int, std::vector<int>> &adj)
 {
  
-  // * Push all the vertices with indegree = 0
+  // * 1. Push all the vertices with indegree = 0
   std::queue<int> q;
   for (int i = 0; i < indegree.size(); ++i) {
     if (indegree[i] == 0)
@@ -89,8 +86,8 @@ std::vector<int> bfs(
 std::vector<int> topologicalSort(int V, std::vector<std::vector<int>> &edges) {
 
   // * Create an Adjacency list from edges 
-  std::vector<int> indegree(V);
-  std::vector<std::vector<int>> adj = constructadj(V, edges, indegree);
+  std::vector<int> indegree(V + 1);
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges, indegree);
 
   // * For Debugging
   std::cout << "Adjacency List" << std::endl;
@@ -99,7 +96,7 @@ std::vector<int> topologicalSort(int V, std::vector<std::vector<int>> &edges) {
   std::cout << "Indegree" << std::endl;
   printArr(indegree);
 
-  return bfs(adj, indegree);
+  return bfs(indegree, adj);
 }
 
 int main(void) {

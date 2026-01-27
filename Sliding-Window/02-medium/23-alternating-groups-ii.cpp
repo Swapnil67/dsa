@@ -101,12 +101,20 @@ int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
 
 
 int main() {
+  // * testcase 1
   int k = 3;
   std::vector<int> arr = {0, 1, 0, 1, 0};
+
+  // * testcase 2
   // int k = 6;
   // std::vector<int> arr = {0, 1, 0, 0, 1, 0, 1};
+
+  // * testcase 3
   // int k = 4;
   // std::vector<int> arr = {1, 1, 0, 1};
+
+  std::cout << "K: " << k << std::endl;
+  std::cout << "Input Array: ";
   printArr(arr);
 
   // int ans = bruteForce(arr, k);

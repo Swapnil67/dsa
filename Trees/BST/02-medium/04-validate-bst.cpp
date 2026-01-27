@@ -72,7 +72,7 @@ bool dfs(TreeNode* root, long long min_val, long long max_val) {
          dfs(root->right, root->data, max_val);
 }
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY  O(N)
 // * SPACE COMPLEXITY O(1) - Auxillary space for recursion
 bool isValidBST(TreeNode* root) {

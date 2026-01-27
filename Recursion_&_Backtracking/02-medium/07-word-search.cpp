@@ -56,9 +56,6 @@ bool find(std::vector<std::vector<char>> &board,
   if (i < 0 || j < 0 || i >= m || j >= n || board[i][j] != word[idx])
     return false;
 
-  if (board[i][j] != word[idx])
-    return false;
-
   char temp = board[i][j];
   board[i][j] = '$'; // * visited
 
@@ -94,11 +91,18 @@ bool exist(std::vector<std::vector<char>> &board, std::string &word) {
 }
 
 int main(void) {
+  // * testcase 1
   // std::string word = "ABCCED";
+
+  // * testcase 2
   // std::string word = "SEE";
+
+  // * testcase 3
   std::string word = "ABCB";
+
+  std::cout << "Search Word: " << word << std::endl;
+
   std::vector<std::vector<char>> board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
-  std::cout << "Word: " << word << std::endl;
   for (auto &vec : board)
     printArr(vec);
 

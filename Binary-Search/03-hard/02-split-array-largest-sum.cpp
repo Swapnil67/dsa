@@ -66,14 +66,16 @@ int splitArray(std::vector<int> a, int k) {
 
 int main() {
   std::cout << "Split Array Largest Sum" << std::endl;
-  // int k = 2;
-  // std::vector<int> arr = {7, 2, 5, 10, 8};
+  int k = 2;
+  std::vector<int> arr = {7, 2, 5, 10, 8};
 
-  int k = 3;
-  std::vector<int> arr = {1, 4, 4};
+  // int k = 3;
+  // std::vector<int> arr = {1, 4, 4};
+  
   printArr(arr);
   int ans = splitArray(arr, k);
   std::cout << "Largest minimum sum is " << ans << std::endl;
+  
   return 0;
 }
 

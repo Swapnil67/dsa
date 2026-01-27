@@ -34,27 +34,29 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges) {
     int u = it[0], v = it[1];
     adj[u].push_back(v);
@@ -63,11 +65,11 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
   return adj;
 }
 
-int bfs(int &n, int &root, std::unordered_map<int, std::vector<int>> &adj) {
-  std::queue<int> q;
+int bfs(int &n, int &root, unordered_map<int, vector<int>> &adj) {
+  queue<int> q;
   q.push(root);
 
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
   visited[root] = true;
 
   int level = 0;
@@ -94,31 +96,33 @@ int bfs(int &n, int &root, std::unordered_map<int, std::vector<int>> &adj) {
 }
 
 // * ------------------------- APPROACH: Brute Force -------------------------
+// ! TLE
 // * Find MHTs for all possible nodes for 1 to n
 // * n = num of nodes
 // * V = num of vertices
 // * E = num of edges
 // * TIME COMPLEXITY O(n) * O(V + E)
 // * SPACE COMPLEXITY O(n) * O(V + E)
-std::vector<int> bruteForce(int n, std::vector<std::vector<int>> &edges) {
+vector<int> bruteForce(int n, vector<vector<int>> &edges) {
   // * 1. Create a default adj list
-  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
+  unordered_map<int, vector<int>> adj = constructadj(edges);
   // printAdjList(adj);
 
-  std::vector<int> ans;
+  vector<int> ans;
   int min_height = INT_MAX;
-  std::unordered_map<int, std::vector<int>> height_mp;
+  unordered_map<int, vector<int>> height_mp;
 
   // * 2. Find Minimum height for all possible roots and save it to map
-  for (int i = 0; i < n; ++i) {
-    int height = bfs(n, i, adj);
-    min_height = std::min(min_height, height);
-    height_mp[height].push_back(i);
+  for (int u = 0; u < n; ++u) {
+    int height = bfs(n, u, adj);
+    std::cout << "u: " << u << ", height: " << height << std::endl;
+    min_height = min(min_height, height);
+    height_mp[height].push_back(u);
   }
   
   // * For Debugging
   // for (auto &[height, vec]: height_mp) {
-  //   std::cout << "Height: " << height << std::endl;
+  //   cout << "Height: " << height << endl;
   //   printArr(vec);
   // }
   return height_mp[min_height];
@@ -134,10 +138,10 @@ std::vector<int> bruteForce(int n, std::vector<std::vector<int>> &edges) {
 // * E = num of edges
 // * TIME COMPLEXITY O(n) * O(V + E)
 // * SPACE COMPLEXITY O(n) * O(V + E)
-std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>> &edges) {
+vector<int> findMinHeightTrees(int n, vector<vector<int>> &edges) {
   // * 1. Create a default adj list with indegree
-  std::vector<int> indegree(n, 0);
-  std::unordered_map<int, std::vector<int>> adj;
+  vector<int> indegree(n, 0);
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges) {
     int u = it[0], v = it[1];
     // * since its undirected we need to add indegree for both
@@ -146,24 +150,31 @@ std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>> &edges)
     adj[u].push_back(v);
     adj[v].push_back(u);
   }
+  // printArr(indegree);
   // printAdjList(adj);
 
   // * Kahn's Algo
-  std::queue<int> q;
+  queue<int> q;
   for (int i = 0; i < n; ++i) {
-    if (indegree[i] == 1)
+    // * Since we are excluding leaf nodes
+    if (indegree[i] == 1) {
+      // std::cout << i << std::endl;
       q.push(i);
+    }
   }
 
-  while (n > 2) {
+  while (n > 2) { // * we'll have atmost two roots possible
     int N = q.size();
     n -= N;
-
+    std::cout << n << std::endl;
+    
     while (N--) {
       int u = q.front();
       q.pop();
+      // std::cout << "u: " << u << std::endl;
 
       for (auto &v: adj[u]) {
+        // std::cout << v << std::endl;
         indegree[v]--;
         if (indegree[v] == 1)
           q.push(v);
@@ -171,7 +182,7 @@ std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>> &edges)
     }
   }
 
-  std::vector<int> ans;
+  vector<int> ans;
   while (!q.empty()) {
     ans.push_back(q.front());
     q.pop();
@@ -182,20 +193,20 @@ std::vector<int> findMinHeightTrees(int n, std::vector<std::vector<int>> &edges)
 
 int main(void) {
   // * testcase 1
-  int n = 4;
-  std::vector<std::vector<int>> edges = {{1, 0}, {1, 2}, {1, 3}};
+  // int n = 4;
+  // vector<vector<int>> edges = {{1, 0}, {1, 2}, {1, 3}};
 
   // * testcase 2
-  // int n = 6;
-  // std::vector<std::vector<int>> edges = {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
+  int n = 6;
+  vector<vector<int>> edges = {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
 
-  std::cout << "------------ edges -------------" << std::endl;
+  cout << "------------ edges -------------" << endl;
   for (auto &vec : edges)
     printArr(vec);
 
-  // std::vector<int> ans = bruteForce(n, edges);
-  std::vector<int> ans = findMinHeightTrees(n, edges);
-  std::cout << "Minimum Height Trees root: " << std::endl;
+  // vector<int> ans = bruteForce(n, edges);
+  vector<int> ans = findMinHeightTrees(n, edges);
+  cout << "Minimum Height Trees root: " << endl;
   printArr(ans);
 
   return 0;

@@ -16,6 +16,8 @@
  * * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
 */
 
+// ! Amazon, LinkedIn, Turo
+
 #include <vector>
 #include <iostream>
 
@@ -36,10 +38,11 @@ int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
   int ans = 0;
   for(int i = 0; i <= n - k; ++i) {
     int cur_sum = 0;
-    for (int j = i; j < i + k; ++j) {
+    for (int j = i; j < i + k; ++j) { // * loop over k-size window
       cur_sum += arr[j];
     }
-    if (cur_sum / k >= threshold)
+
+    if ((cur_sum / k) >= threshold)
       ans += 1;
   }
   return ans;
@@ -56,7 +59,7 @@ int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
   long long sum = 0;
   while (j < n) {
     // * check the window execeeds
-    if(j - i + 1 > k) {
+    if((j - i + 1) > k) {
       sum -= arr[i];
       i++;
     }

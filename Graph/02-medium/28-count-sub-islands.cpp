@@ -24,6 +24,8 @@
  * https://leetcode.com/problems/count-sub-islands/description/
 */
 
+// ! Amazon, Meta, Google, Microsoft
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -42,25 +44,31 @@ void printArr(std::vector<T> &arr) {
 
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-bool dfs(
-    int r, int c,
-    std::vector<std::vector<int>> &grid1,
-    std::vector<std::vector<int>> &grid2)
-{
-  int m = grid1.size(), n = grid1[0].size();;
-  if (r < 0 || r >= m || c < 0 || c >= n || grid2[r][c] == 0)
-    return true;
-
-  grid2[r][c] = 0; // * mark visited by making the cell water
-
-  bool res = (grid1[r][c] == 1);      // * grid1 cell should also be land
-  res &= dfs(r, c - 1, grid1, grid2);
-  res &= dfs(r, c + 1, grid1, grid2);
-  res &= dfs(r - 1, c, grid1, grid2);
-  res &= dfs(r + 1, c, grid1, grid2);
-
-  return res;
+// * check out of bound
+bool check_not_oob(const int &r, const int &c, std::vector<std::vector<int>> &grid) {
+  int m = grid.size(), n = grid[0].size();
+  return r >= 0 && r < m && c >= 0 && c < n;
 }
+
+
+void dfs(int r, int c, std::vector<std::vector<int>>& grid1,
+        std::vector<std::vector<int>>& grid2, bool& ans) {
+  int m = grid1.size(), n = grid1[0].size();
+  if (grid1[r][c] == 0) {
+      ans = false;
+  }
+
+  grid2[r][c] = 0;// * mark visited by making the cell water
+
+  // * Visit the ngbr
+  for (auto &dir : dirs) {
+    int dr = r + dir[0], dc = c + dir[1];
+    if (check_not_oob(dr, dc, grid2) && grid2[dr][dc] == 1) {
+      dfs(dr, dc, grid1, grid2, ans);
+    }
+  }
+}
+
 
 bool bfs(
     int row, int col,
@@ -68,11 +76,6 @@ bool bfs(
     std::vector<std::vector<int>> &grid2)
 {
   int m = grid1.size(), n = grid1[0].size();
-
-  // * check out of bound
-  const auto is_safe = [&](const int &r, const int &c) {
-    return r >= 0 && r < m && c >= 0 && c < n;
-  };
 
   std::queue<std::pair<int, int>> q;
   q.push({row, col});
@@ -91,7 +94,7 @@ bool bfs(
     // * Visit the ngbr
     for (auto &dir: dirs) {
       int dr = r + dir[0], dc = c + dir[1];
-      if (is_safe(dr, dc) && grid2[dr][dc] == 1) { // * traverse grid2 cells
+      if (check_not_oob(dr, dc, grid2) && grid2[dr][dc] == 1) { // * traverse grid2 cells
         grid2[dr][dc] = 0; // * mark visited by making the cell water
         q.push({dr, dc});
       }
@@ -112,7 +115,9 @@ int countSubIslandsDFS(std::vector<std::vector<int>> &grid1, std::vector<std::ve
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (grid2[r][c] == 1) {
-        sub_islands += dfs(r, c, grid1, grid2);
+        bool ans = true;
+        dfs(r, c, grid1, grid2, ans);
+        sub_islands += ans;
       }
     }
   }

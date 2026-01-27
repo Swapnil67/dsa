@@ -93,6 +93,7 @@ void dfs2(int r, int c, int &fishes,
 }
 
 // * ------------------------- Approach 1: Optimal -------------------------
+// * Using visited vector
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
 int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
@@ -116,6 +117,7 @@ int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
 }
 
 // * ------------------------- Approach 2: Optimal -------------------------
+// * Using Grid as visited vector
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(1)
 int maxAreaOfIslandDFS2(std::vector<std::vector<int>>& grid) {

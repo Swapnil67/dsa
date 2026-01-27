@@ -1,10 +1,12 @@
-/**
+/*
  * * Leetcode - 948
  * * Bag of Tokens
- * * You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer array tokens, 
- * * where each tokens[i] denotes the value of token 'i'.
- * * Your goal is to maximize the total score by strategically playing these tokens. In one move, 
- * * you can play an unplayed token in one of the two ways (but not both for the same token):
+ * 
+ * You start with an initial power of power, an initial score of 0, and a bag of tokens given as an integer 
+ * array tokens, where each tokens[i] denotes the value of token 'i'.
+ * 
+ * Your goal is to maximize the total score by strategically playing these tokens. In one move, 
+ * you can play an unplayed token in one of the two ways (but not both for the same token):
  * 
  * * Face-up: 
  * * - If your current power is at least tokens[i], you may play token[i], losing tokens[i] power and gaining 1 score.
@@ -48,9 +50,7 @@ int bagOfTokensScore(std::vector<int> tokens, int power) {
   int n = tokens.size();
   int i = 0, j = n - 1;
 
-  int score = 0;
-  int max_score = 0; // * initially
-
+  int score = 0, max_score = 0;
   while(i <= j) {
     // std::cout << power << std::endl;
     // * Increase the score by reducing power
@@ -76,11 +76,11 @@ int bagOfTokensScore(std::vector<int> tokens, int power) {
 }
 
 int main() {
-  // int power = 200;
-  // std::vector<int> tokens = {100, 200, 300, 400};
+  int power = 200;
+  std::vector<int> tokens = {100, 200, 300, 400};
 
-  int power = 150;
-  std::vector<int> tokens = {200, 100};
+  // int power = 150;
+  // std::vector<int> tokens = {200, 100};
 
   std::cout << "Power: " << power << std::endl;
   std::cout << "Tokens: ";

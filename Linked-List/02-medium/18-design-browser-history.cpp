@@ -8,10 +8,10 @@
  * * Example 1
  * Input :  
  *   ["BrowserHistory","visit","visit","visit","back","back","forward","visit","forward","back","back"]
- *   [["leetcode.com"],["google.com"],["facebook.com"],["youtube.com"],[1],[1],[1],["linkedin.com"],[2],[2],[7]]
+ *   [["leetcode.com"],["tsoding.com"],["facebook.com"],["youtube.com"],[1],[1],[1],["linkedin.com"],[2],[2],[7]]
 
  * Output :
- * [null,null,null,null,"facebook.com","google.com","facebook.com",null,"linkedin.com","google.com","leetcode.com"]
+ * [null,null,null,null,"facebook.com","tsoding.com","facebook.com",null,"linkedin.com","tsoding.com","leetcode.com"]
 
  * https://leetcode.com/problems/design-browser-history/description/
 */
@@ -60,10 +60,8 @@ void printLL(DLListNode* head) {
 class BrowserHistory {
 public:
   DLListNode* cur; 
-  DLListNode* history; 
   BrowserHistory(std::string homepage) {
-    history = new DLListNode(homepage);
-    cur = history;
+    cur = new DLListNode(homepage);
   }
 
   void visit(std::string url) {
@@ -73,9 +71,8 @@ public:
   }
 
   std::string back(int steps) {
-    std::string page = "";
     if (!cur)
-      return page;
+      return "";
 
     while (steps && cur->prev) {
       cur = cur->prev;
@@ -85,6 +82,9 @@ public:
   }
 
   std::string forward(int steps) {
+    if (!cur)
+      return "";
+
     while (steps && cur->next) {
       cur = cur->next;
       steps--;

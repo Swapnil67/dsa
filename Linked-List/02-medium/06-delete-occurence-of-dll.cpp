@@ -1,20 +1,22 @@
-/**
- * * Delete all occurrences of a given key in a doubly linked list
+/*
+ * Delete all occurrences of a given key in a doubly linked list
  * 
- * * A DLL is a data structure that consists of sequentially linked nodes, and the nodes have reference to both
- * * the previous and the next nodes in the sequence of nodes.
+ * A DLL is a data structure that consists of sequentially linked nodes, and the nodes have reference to both
+ * the previous and the next nodes in the sequence of nodes.
  *
- * * Example 1
- * * Input  : 10 <-> 4 <-> 10 <-> 3 <-> 5 <-> 20 <-> 10 -> NULL, k = 10
- * * Output : 4 <-> 3 <-> 5 <-> 20 -> NULL
+ * Example 1
+ * Input  : 10 <-> 4 <-> 10 <-> 3 <-> 5 <-> 20 <-> 10 -> NULL, k = 10
+ * Output : 4 <-> 3 <-> 5 <-> 20 -> NULL
  
- * * Example 2
- * * Input  : 10 <-> 10 -> NULL, k = 10
- * * Output : NULL
+ * Example 2
+ * Input  : 10 <-> 10 -> NULL, k = 10
+ * Output : NULL
  
- * * https://www.naukri.com/code360/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list_8160461
- * * https://www.geeksforgeeks.org/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list/1
+ * https://www.naukri.com/code360/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list_8160461
+ * https://www.geeksforgeeks.org/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list/1
 */
+
+// ! Qualcomm
 
 #include <vector>
 #include <iostream>
@@ -70,20 +72,21 @@ void printDLL(DLListNode* head) {
 // * SPACE COMPLEXITY O(1)
 DLListNode* deleteOccurences(DLListNode* head, int k) {
   if (!head)
-    return nullptr;
+    return head;
 
   // * only one node
   if (!head->next && head->data == k)
-    return nullptr;
+    return head;
 
   // * If head node is 'k' then pre-remove it
   while (head && head->data == k) {
+    DLListNode* del_node = head;
     head = head->next;
+    delete del_node;
   }
 
   DLListNode* temp = head;
   while (temp) {
-
     if (temp->data == k) { // * Delete the node
 
       DLListNode* del_node = temp;
@@ -104,8 +107,7 @@ DLListNode* deleteOccurences(DLListNode* head, int k) {
       std::free(del_node);
       temp = front;
     }
-    else
-    {
+    else {
       temp = temp->next;
     }
   }

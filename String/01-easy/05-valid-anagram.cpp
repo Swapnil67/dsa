@@ -16,9 +16,9 @@
  * * https://www.naukri.com/code360/problems/anagram-pairs_626517
 */
 
-
-#include<iostream>
-#include<unordered_map>
+#include <vector>
+#include <iostream>
+#include <unordered_map>
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Hashmap
@@ -26,18 +26,18 @@
 // * SPACE COMPLEXITY O(s)
 bool bruteForce(std::string s, std::string t) {
   std::unordered_map<char, int> charMap;
-  for(char ch : s) {
+  for (char &ch : s)
     charMap[ch]++;
+
+  for (char &ch : t) {
+    if (!charMap.count(ch))
+      return false;
+
+    charMap[ch]--;
+    if (charMap[ch] < 0)
+      return false;
   }
 
-  for(char ch : t) {
-    if (charMap.find(ch) != charMap.end() && charMap[ch] > 0) {
-      charMap[ch]--;
-    }
-    else {
-      return false;
-    }
-  }
   return true;
 }
 
@@ -47,26 +47,30 @@ bool bruteForce(std::string s, std::string t) {
 // * SPACE COMPLEXITY O(1)
 bool validAnagram(std::string s, std::string t) {
   std::vector<int> alphabets(26, 0);
-  for (char ch : s) {
-    int idx = (int)ch - (int)'a';
-    alphabets[idx]++;
-  }
+  for (char &ch : s)
+    alphabets[ch - 'a']++;
 
-  for (char ch : t) {
-    int idx = (int)ch - (int)'a';
+  for (char &ch : t) {
+    int idx = ch - 'a';
+
     if (alphabets[idx] <= 0)
       return false;
+
     alphabets[idx]--;
   }
+
   return true;
 }
 
 int main() {
   // * testcase 1
   // std::string s = "anagram", t = "nagaram";
+
   // * testcase 2
   std::string s = "aacc", t = "ccac";
+
   std::cout << "s = " << s << " t = " << t << std::endl;
+
   // bool isValid = bruteForce(s, t);
   bool isValid = validAnagram(s, t);
   std::cout << "Is valid anagram " << isValid << std::endl;
@@ -74,4 +78,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 05-valid-anagram.cpp -o 05-valid-anagram && ./05-valid-anagram
+// * g++ --std=c++17 05-valid-anagram.cpp -o output && ./output

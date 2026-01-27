@@ -22,7 +22,7 @@
  * https://www.geeksforgeeks.org/problems/stickler-theif-1587115621/1
 */
 
-// * Amazon, Paytm, Walmart, Google, Flipkart, LinkedIn, Airbnb
+// ! Amazon, Paytm, Walmart, Google, Flipkart, LinkedIn, Airbnb
 
 #include <vector>
 #include <iostream>
@@ -58,14 +58,14 @@ int dfs(int i, std::vector<int> &nums, std::vector<int> &cache) {
   return cache[i] = std::max(steal, skip);
 }
 
-// * ------------------------- Approach: Brute Force Approach -------------------------`
+// * ------------------------- Approach: Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(2^n) 
 int bruteForce(std::vector<int> nums) {
   return dfs_brute(0, nums);
 }
 
-// * ------------------------- Approach: Better Approach -------------------------`
+// * ------------------------- Approach: Better Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) 
 int betterApproach(std::vector<int> nums) {
@@ -73,7 +73,7 @@ int betterApproach(std::vector<int> nums) {
   return dfs(0, nums, cache);
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) 
 int rob(std::vector<int> nums) {
@@ -85,8 +85,8 @@ int rob(std::vector<int> nums) {
   dp[0] = 0;       // * 0 house
   dp[1] = nums[0]; // * 1 house
   for (int i = 2; i <= n; ++i) {
-    int steal = nums[i - 1] + dp[i - 2];
     int skip = dp[i - 1];
+    int steal = nums[i - 1] + dp[i - 2];
     dp[i] = std::max(skip, steal);
   }
   // printArr(dp); // * For debugging
@@ -102,10 +102,10 @@ int main(void) {
   // std::vector<int> nums = {2, 7, 9, 3, 1};
 
   // * testcase 3
-  // std::vector<int> nums = {2};
-
-  // * testcase 4
   // std::vector<int> nums = {2, 5};
+  
+  // * testcase 4
+  // std::vector<int> nums = {2};
 
   // * testcase 5
   std::vector<int> nums = {2, 1, 1, 2};

@@ -45,6 +45,7 @@ void printMatrix(vector<vector<string>>&mat) {
 // * TIME COMPLEXITY O(n * m)
 // * SPACE COMPLEXITY O(1)
 vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
+  
   std::sort(products.begin(), products.end()); // * O(nlogn)
   // printArr(products);
 
@@ -63,6 +64,7 @@ vector<vector<string>> suggestedProducts(vector<string>& products, string search
       r--;
     }
 
+    // std::cout << l << " " << r << std::endl;
     // * Get the suggestion from l pointer (3 or less than 3)
     int sliceTill = std::min(3, r - l + 1);
     // std::cout << sliceTill << std::endl;
@@ -75,14 +77,17 @@ vector<vector<string>> suggestedProducts(vector<string>& products, string search
 
 int main(void) {
   // * testcase 1
-  string searchWord = "mouse";
-  vector<string> products = {"mobile", "mouse", "moneypot", "monitor", "mousepad"};
+  std::string searchWord = "mouse";
+  std::vector<std::string> products = {"mobile", "mouse", "moneypot", "monitor", "mousepad"};
 
+  std::cout << "Products: ";
   printArr(products);
-  cout << "Search Word: " << searchWord << endl;
+  std::cout << "Search Word: " << searchWord << std::endl;
 
-  vector<vector<string>> ans = suggestedProducts(products, searchWord);
-  printMatrix(ans);
+  std::vector<std::vector<std::string>> ans = suggestedProducts(products, searchWord);
+  std::cout << "Search Suggestions: " << std::endl;
+  for (auto &words : ans)
+    printArr(words);
 
   return 0;
 }

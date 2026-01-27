@@ -108,6 +108,7 @@ int main(void) {
   std::cout << "Linked List 2" << std::endl;
   printLL(head2);
 
+  std::cout << "\n -------- Merged Linked List --------" << std::endl;
   head1 = mergeInBetween(head1, a, b, head2);
   printLL(head1);
 

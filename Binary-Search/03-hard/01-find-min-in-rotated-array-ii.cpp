@@ -70,11 +70,12 @@ int main() {
   // * testcase 3
   // std::vector<int> arr = {3, 1, 3, 3};
   // * testcase 3
-  std::vector<int> arr = {-1,-1,-1,-1};
+  std::vector<int> arr = {-1, -1, -1, -1};
   printArr(arr);
 
   int minimum = findMinimum(arr);
   std::cout << "Find Minimum " << minimum << std::endl;
+  
   return 0;
 }
 

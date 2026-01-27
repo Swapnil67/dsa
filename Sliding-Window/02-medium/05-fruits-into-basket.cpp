@@ -1,17 +1,17 @@
-/**
- * * Leetcode - 904
- * * Fruit Into Baskets
+/*
+ * Leetcode - 904
+ * Fruit Into Baskets
  * 
- * * Example 1
- * * Input  : fruits = [1,2,1]
- * * Output : 3
- * * Explanation: We can pick from all 3 trees.
+ * Example 1
+ * Input  : fruits = [1,2,1]
+ * Output : 3
+ * Explanation: We can pick from all 3 trees.
  * 
- * * Example 2
- * * Input  : fruits = [0,1,2,2]
- * * Output : 3
- * * Explanation: We can pick from trees [1,2,2].
- * * If we had started at the first tree, we would only pick from trees [0,1].
+ * Example 2
+ * Input  : fruits = [0,1,2,2]
+ * Output : 3
+ * Explanation: We can pick from trees [1,2,2].
+ *              If we had started at the first tree, we would only pick from trees [0,1].
  * 
  * * Example 3
  * * Input  : fruits = [1,2,3,2,2]
@@ -28,19 +28,24 @@
  * * https://www.naukri.com/code360/problems/fruits-and-baskets_985356
 */
 
+// ! Amazon, Microsoft
+
 #include <vector>
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
-
-
+  
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Keep two fruits variable f1 & f2
 // * TIME COMPLEXITY O(N^2)
@@ -87,14 +92,13 @@ int betterApproach(std::vector<int> fruits) {
     // * When we encounter more than two fruits
     while (fruits_freq.size() > 2) {
       fruits_freq[fruits[i]]--;
-      if(fruits_freq[fruits[i]] == 0) {
+      if (fruits_freq[fruits[i]] == 0)
         fruits_freq.erase(fruits[i]);
-      }
       i++;
     }
 
     // * When we have two unique fruits
-    if(fruits_freq.size() <= 2) {
+    if (fruits_freq.size() <= 2) {
       fruits_collected = std::max(fruits_collected, j - i + 1);
     }
 

@@ -24,20 +24,6 @@
 
 // * Amazon, Adobe, Flipkart, Microsoft, Google, Meta, Apple, Uber, Tiktok
 
-bool solve(int steps, int n, int &ans, std::vector<int> &dp) {
-  if (steps > n) // * base case
-    return false;
-
-  if (steps == n) {
-    ans += 1;
-    return true;
-  }
-
-  solve(steps + 1, n, ans, dp);
-  solve(steps + 2, n, ans, dp);
-  return false;
-}
-
 int dfs_brute(int n, int i) {
   if (i >= n)
     return i == n;
@@ -45,6 +31,7 @@ int dfs_brute(int n, int i) {
   return dfs_brute(n, i + 1) + dfs_brute(n, i + 2);
 }
 
+// * Top Down Recursion
 int dfs(int n, int i, std::vector<int> &cache) {
   if (i >= n)
     return i == n;
@@ -53,16 +40,6 @@ int dfs(int n, int i, std::vector<int> &cache) {
     return cache[i];
 
   return cache[i] = dfs(n, i + 1, cache) + dfs(n, i + 2, cache);
-}
-
-int dfs2(int n, int i, std::vector<int> &dp) {
-  if (i >= n)
-    return i == n;
-
-  if (dp[i] != -1)
-    return dp[i];
-
-  return dp[i] = dfs(n, i + 1, dp) + dfs(n, i + 2, dp);
 }
 
 // * Plain Recursion

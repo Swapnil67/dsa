@@ -21,6 +21,11 @@
  * https://leetcode.com/problems/car-pooling/
 */
 
+// ! Google, Meta, Amazon, Microsoft, Bloomberg, Flipkart
+
+// * Same as Meeting Room III
+
+#include <map>
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -44,7 +49,7 @@ bool carPooling(std::vector<std::vector<int>> &trips, int capacity) {
   std::sort(trips.begin(), trips.end(), [](const std::vector<int> &a, const std::vector<int> &b)
        { return a[1] < b[1]; });
 
-  // * Heap of (destination, passengers)  
+  // * Min Heap of (destination, passengers)  
   typedef std::pair<int, int> P;
   std::priority_queue<P, std::vector<P>, std::greater<P>> min_heap;
 
@@ -71,6 +76,46 @@ bool carPooling(std::vector<std::vector<int>> &trips, int capacity) {
   return true;
 }
 
+
+// * ------------------------- Optimal Approach -------------------------`
+// * using map
+// * TIME COMPLEXITY O(nlogn)
+// * SPACE COMPLEXITY O(n)
+bool carPooling2(std::vector<std::vector<int>> &trips, int capacity) {
+  std::map<int, int> mp;
+  for (auto &trip: trips) {
+    mp[trip[1]] += trip[0];
+    mp[trip[2]] -= trip[0];
+  }
+
+  for (auto &it: mp) {
+    // std::cout << it.first << " " << it.second << std::endl;
+    capacity -= it.second;
+    // std::cout << "capacity: " << capacity << std::endl;
+    if (capacity < 0)
+      return false;
+  }
+  return true;
+}
+
+
+// * ------------------------- Optimal Approach -------------------------`
+// * using array
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
+bool carPooling3(std::vector<std::vector<int>> &trips, int capacity) {
+  std::vector<int> stops(1001, 0);
+  for (auto &t : trips) {
+    stops[t[1]] += t[0];
+    stops[t[2]] -= t[0];
+  }
+
+  for (int i = 0; capacity >= 0 && i < 1001; ++i) {
+      capacity -= stops[i];
+  }
+  return capacity >= 0;
+}
+
 int main(void) {
   // * testcase 1
   // int capacity = 4;
@@ -89,7 +134,9 @@ int main(void) {
   for (auto &trip : trips)
     printArr(trip);
 
-  bool ans = carPooling(trips, capacity);
+  // bool ans = carPooling(trips, capacity);
+  // bool ans = carPooling2(trips, capacity);
+  bool ans = carPooling3(trips, capacity);
   std::cout << "Answer " << ans << std::endl;
 
   return 0;

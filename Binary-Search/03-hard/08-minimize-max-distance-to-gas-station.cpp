@@ -1,5 +1,6 @@
 /*
 * Minimize Max Distance to Gas Station 
+*
 * You are given a sorted array ‘arr’ of length ‘n’, which contains positive integer positions of ‘n’
 * gas stations on the X-axis. You are also given an integer ‘k’.
 * You have to place 'k' new gas stations on the X-axis.
@@ -8,10 +9,11 @@
 * Let 'dist' be the maximum value of the distance between adjacent gas stations after adding 'k' new gas stations.
 
 * Example 1:
-* Input: books = ‘n' = 7 , ‘k’=6, ‘arr’ = {1,2,3,4,5,6,7}
+* Input: books = ‘n' = 7 , ‘k’ = 6, ‘arr’ = {1,2,3,4,5,6,7}
 * Output: 0.5
 * Explanation: We can place 6 gas stations at 1.5, 2.5, 3.5, 4.5, 5.5, 6.5. 
 
+* https://leetcode.com/problems/minimize-max-distance-to-gas-station/description/
 * https://www.naukri.com/code360/problems/minimise-max-distance_7541449
 */
 

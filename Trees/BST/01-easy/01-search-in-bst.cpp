@@ -72,12 +72,11 @@ int main(void) {
   int val = 5;
 
   TreeNode *ans = searchBST(root, val);
-  if(ans) {
-    std::cout << ans->data << std::endl;
-  } else {
+  if (!ans) {
     std::cout << "Node not found" << std::endl;
   }
-
+  std::cout << ans->data << std::endl;
+  
   return 0;
 }
 

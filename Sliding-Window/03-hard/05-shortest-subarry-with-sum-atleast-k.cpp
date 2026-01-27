@@ -16,9 +16,16 @@
  * Example 3
  * * Input       : nums = [2,-1,2], k = 3
  * * Output      : 3
+
+ * Example 4
+ * * Input       : nums = [17,85,93,-45,-21], k = 150
+ * * Output      : 2
  * 
  * https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/description/
 */
+
+
+// ! Similar to : Minimum Size Subarray Sum
 
 #include <deque>
 #include <vector>
@@ -60,9 +67,7 @@ int bruteForce(std::vector<int> arr, int k) {
 int shortestSubarray(std::vector<int>& nums, int k) {
   int n = nums.size();
 
-  int j = 0;
-  int curSum = 0;
-  int ans = INT_MAX;
+  int j = 0, ans = INT_MAX;
 
   // * monotonic increasing 
   std::deque<int> dq;
@@ -76,6 +81,7 @@ int shortestSubarray(std::vector<int>& nums, int k) {
       prefixSums[j] = prefixSums[j - 1] + nums[j];
     }
 
+    // * Check if cur sum is atleast 'k'
     if (prefixSums[j] >= k) {
       ans = std::min(ans, j + 1);
     }
@@ -93,7 +99,6 @@ int shortestSubarray(std::vector<int>& nums, int k) {
     while (!dq.empty() && prefixSums[j] <= prefixSums[dq.back()]) {
       dq.pop_back();
     }
-
     dq.push_back(j);
 
     j++;
@@ -104,8 +109,14 @@ int shortestSubarray(std::vector<int>& nums, int k) {
 
 
 int main() {
-  int k = 3;
-  std::vector<int> nums = {2, -1, 2};
+  // int k = 3;
+  // std::vector<int> nums = {2, -1, 2};
+
+  int k = 167;
+  std::vector<int> nums = {84, -37, 32, 40, 95};
+
+  std::cout << "Input Array: " << std::endl;
+  printArr(nums);
 
   // int ans = bruteForce(nums, k);
   int ans = shortestSubarray(nums, k);

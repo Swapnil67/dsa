@@ -1,17 +1,17 @@
-/**
- * * Grumpy Bookstore Owner
+/*
+ * Grumpy Bookstore Owner
  * 
- * * Example 1
- * * Input  : customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], minutes = 3
- * * Output : 16
- * * Explanation: The bookstore owner keeps themselves not grumpy for the last 3 minutes.
- * * The maximum number of customers that can be satisfied = 1 + 1 + 1 + 1 + 7 + 5 = 16.
+ * Example 1
+ * Input  : customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], minutes = 3
+ * Output : 16
+ * Explanation: The bookstore owner keeps themselves not grumpy for the last 3 minutes.
+ * The maximum number of customers that can be satisfied = 1 + 1 + 1 + 1 + 7 + 5 = 16.
  * 
- * * Example 2
- * * Input  : customers = [1], grumpy = [0], minutes = 1
- * * Output : 1
+ * Example 2
+ * Input  : customers = [1], grumpy = [0], minutes = 1
+ * Output : 1
  * 
- * * https://leetcode.com/problems/grumpy-bookstore-owner/description/
+ * https://leetcode.com/problems/grumpy-bookstore-owner/description/
 */
 
 #include <vector>
@@ -89,3 +89,12 @@ int main() {
 
 // * run the code
 // * g++ --std=c++20 22-grumpy-bookstore-owner.cpp -o output && ./output
+
+// * [1,0,1,2,1,1,7,5]
+// * [0,1,0,1,0,1,0,1]
+// *            i     
+// *                j
+
+// * g  = 6
+// * mg = 6
+// * c  = 11

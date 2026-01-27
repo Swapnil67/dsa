@@ -14,8 +14,10 @@
  * output : [[],[0]]
  * 
  * https://leetcode.com/problems/subsets-ii/description/
+ * https://www.naukri.com/code360/problems/unique-subsets_3625236
 */
 
+#include <set>
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -26,6 +28,32 @@ void printArr(std::vector<int> arr) {
     std::cout << arr[i] << " ";
   }
   std::cout << "]" << std::endl;
+}
+
+
+void helperBrute(std::vector<int> &nums,
+                 std::vector<int> temp, int idx,
+                 std::set<std::vector<int>> &ans_set)
+{
+  if (idx >= nums.size()) {
+    ans_set.insert(temp);
+    return;
+  }
+
+  temp.push_back(nums[idx]);
+  helperBrute(nums, temp, idx + 1, ans_set);
+
+  temp.pop_back();
+  helperBrute(nums, temp, idx + 1, ans_set);
+}
+
+// * ------------------------- Brute Force Approach -------------------------`
+std::vector<std::vector<int>> bruteForce(std::vector<int> &nums) {
+  std::set<std::vector<int>> st;
+  std::vector<int> temp;
+  helperBrute(nums, temp, 0, st);
+  std::vector<std::vector<int>> ans(st.begin(), st.end());
+  return ans;
 }
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -41,12 +69,13 @@ void helper(std::vector<int> &nums, int i, std::vector<int> &temp, std::vector<s
   temp.push_back(nums[i]); // * take
   helper(nums, i + 1, temp, ans);
 
-  temp.pop_back();  // * Not take
 
   // * All subsets that don't include nums[i]
   while (i + 1 < nums.size() && nums[i] == nums[i + 1]) {
     i += 1;
   }
+
+  temp.pop_back();  // * Not take
   helper(nums, i + 1, temp, ans);
 
 }
@@ -61,10 +90,16 @@ std::vector<std::vector<int>> subsets(std::vector<int> &nums) {
 }
 
 int main(void) {
+  // * testcase 1
   std::vector<int> nums = {1, 2, 2};
+
+  // * testcase 2
+  // std::vector<int> nums = {1, 2, 2, 3};
+
   std::cout<<"Input nums: ";
   printArr(nums);
   
+  // std::vector<std::vector<int>> ans = bruteForce(nums);
   std::vector<std::vector<int>> ans = subsets(nums);
   std::cout << "Subsets: " << std::endl;
   for (auto &vec : ans)

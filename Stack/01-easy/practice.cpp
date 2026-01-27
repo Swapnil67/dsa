@@ -61,34 +61,11 @@ void printStack(std::stack<T> st) {
 // }
 
 // * 14 - Final Prices With a Special Discount in a Shop
-std::vector<int> finalPrices(std::vector<int> &prices) {
-  int n = prices.size();
-  std::vector<int> ans = prices;
-
-  std::stack<int> st;
-  for (int i = 0; i < n; ++i) {
-    int num = prices[i];
-    while (!st.empty() && prices[st.top()] > num) {
-      ans[st.top()] = prices[st.top()] - num;
-      st.pop();
-    }
-
-    st.push(i);
-  }
-
-  return ans;
-}
+// std::vector<int> finalPrices(std::vector<int> &prices) {
+// TODO
+// }
 
 int main() {
-  std::cout << "Prices before discount" << std::endl;
-  std::vector<int> prices = {1, 2, 3, 4, 5};
-  printArr(prices);
-
-  std::cout << "Prices after discount" << std::endl;
-  // std::vector<int> discounts = bruteForce(prices);
-  std::vector<int> discounts = finalPrices(prices);
-  printArr(discounts);
-
   return 0;
 }
 

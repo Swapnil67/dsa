@@ -31,7 +31,7 @@
 
 // ! Multi Source BFS
 
-// ! Uber, Meta, Amazon
+// ! Uber, Meta, Amazon, Google, Spotify, Microsoft, Tiktok
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -90,13 +90,19 @@ void islandsAndTreasure(std::vector<std::vector<int>>& grid) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {
-      {2147483647, -1, 0, 2147483647},
-      {2147483647, 2147483647, 2147483647, -1},
-      {2147483647, -1, 2147483647, -1},
-      {0, -1, 2147483647, 2147483647}};
+  // std::vector<std::vector<int>> grid = {
+  //     {2147483647, -1, 0, 2147483647},
+  //     {2147483647, 2147483647, 2147483647, -1},
+  //     {2147483647, -1, 2147483647, -1},
+  //     {0, -1, 2147483647, 2147483647}};
 
-  std::cout << "-------- Grid Before -------- " << std::endl;
+  // * testcase 2
+  std::vector<std::vector<int>> grid = {
+      {0, -1},
+      {2147483647, 2147483647}};
+
+  std::cout
+      << "-------- Grid Before -------- " << std::endl;
   for (auto &vec : grid)
   printArr(vec);
   

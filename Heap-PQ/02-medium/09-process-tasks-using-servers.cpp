@@ -31,6 +31,8 @@
  * https://leetcode.com/problems/process-tasks-using-servers/description/
 */
 
+// ! Google
+
 #include <queue>
 #include <vector>
 #include <climits>
@@ -48,46 +50,45 @@ void printArr(std::vector<int> arr) {
 std::vector<int> assignTasks(std::vector<int> &servers, std::vector<int> &tasks) {
   int n = servers.size(), m = tasks.size();
 
-  typedef std::pair<long long, long long> P;
+  typedef long long ll;
+  typedef std::pair<ll, ll> P;
 
   // * 1. Push all the servers to available min heap
-  std::priority_queue<P, std::vector<P>, std::greater<>> available;
+  std::priority_queue<P, std::vector<P>, std::greater<>> free;
   for (int i = 0; i < n; ++i) {
-    available.emplace(servers[i], i);
+    free.emplace(servers[i], i);
   }
 
   // * for debugging
-  // while (!available.empty()) {
-  //   P p = available.top();
-  //   available.pop();
+  // while (!free.empty()) {
+  //   P p = free.top();
+  //   free.pop();
   //   std::cout << p.first << " " << p.second << std::endl;
   // }
 
-  std::priority_queue<std::vector<long long>,
-                      std::vector<std::vector<long long>>, std::greater<>>
-      unavailable;
+  std::priority_queue<std::vector<ll>, std::vector<std::vector<ll>>, std::greater<>> busy;
 
   long long time = 0;
   std::vector<int> ans(m);
   for (int i = 0; i < m; ++i) {
-    time = std::max(time, (long long)i);
+    time = std::max(time, (ll)i);
 
-    // * If there is no available server 
-    if (available.empty()) { // * check testcase 3
-      time = unavailable.top()[0];
+    // * If there is no free server 
+    if (free.empty()) { // * check testcase 3
+      time = busy.top()[0];
     }
 
-    // * Find servers whose tasks are finished and push them to `available` heap
-    while (!unavailable.empty() && unavailable.top()[0] <= time) {
-      auto server = unavailable.top();
-      unavailable.pop();
-      available.emplace(server[1], server[2]);
+    // * Find servers whose tasks are finished and push them to `free` heap
+    while (!busy.empty() && busy.top()[0] <= time) {
+      auto server = busy.top();
+      busy.pop();
+      free.emplace(server[1], server[2]);
     }
 
-    auto [weight, index] = available.top();
-    available.pop();
+    auto [weight, index] = free.top();
+    free.pop();
     ans[i] = index;
-    unavailable.push({(time + (long long)tasks[i]), weight, index});
+    busy.push({(time + (long long)tasks[i]), weight, index});
   }
 
   return ans;

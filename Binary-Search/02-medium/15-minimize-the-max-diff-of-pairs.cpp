@@ -1,6 +1,7 @@
 /*
   * Leetcode - 2616
   * Minimize the Maximum Difference of Pairs
+  * 
   * You are given a 0-indexed integer array nums and an integer p.
   * Find p pairs of indices of nums such that the maximum difference amongst all the pairs is minimized.
   * Also, ensure no index appears more than once amongst the p pairs.
@@ -20,41 +21,50 @@
   * https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/
 */
 
+// ! Meta, Microsoft
+
+// ! Binary Search on Answers
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
-// * A function to check abs difference of how many pairs is '<=' pairDiff
-// * return true if we found no. of pairs greater than maxPairs
-bool isValid(std::vector<int> &nums, int maxPairs, int pairDiff) {
+// * A function to check abs difference of how many pairs is '<=' max_pair_diff
+// * returns `true` if we found no. of pairs greater than `required_pairs`
+bool isValid(std::vector<int> &nums, int required_pairs, int max_pair_diff) {
   int n = nums.size();
-  int curPairs = 0;
+  int cur_pairs = 0;
+
   for (int i = 0; i < n - 1; ++i) {
-    if (curPairs >= maxPairs)
+    if (cur_pairs >= required_pairs)
       return true;
 
     // * current pair difference
-    int curDiff = nums[i + 1] - nums[i];
-    if (curDiff <= pairDiff) {
-      curPairs++;  
+    int cur_diff = nums[i + 1] - nums[i];
+    if (cur_diff <= max_pair_diff) {
+      cur_pairs++;  
       i++;          // * Go to next pair
     }
   }
 
-  // std::cout << curPairs << " " << maxPairs << std::endl;
-  return curPairs >= maxPairs;
+  // std::cout << cur_pairs << " " << required_pairs << std::endl;
+  return cur_pairs >= required_pairs;
 }
 
 // * ------------------------- APPROACH : Optimal APPROACH -------------------------
-// * We need to check if we can find 'p' no. of pairs with difference <= minDiff using binary search
+// * We need to check if we can find 'p' no. of pairs with difference <= max_pair_diff using binary search
 // * TIME COMPLEXITY n * O(logm)
 // * SPACE COMPLEXITY O(1)
 int minimizeMax(std::vector<int> &nums, int p) {
@@ -69,7 +79,7 @@ int minimizeMax(std::vector<int> &nums, int p) {
     int m = l + (r - l) / 2;    // * Assume this is min pair distance
     if (isValid(nums, p, m)) {   // * O(N)
       ans = m;
-      r = m - 1;                // * since we want to minimize the diff
+      r = m - 1;                // * since we need minimum difference
     } else {
       l = m + 1;
     }
@@ -87,6 +97,8 @@ int main(void) {
   // int p = 1;
   // std::vector<int> nums = {4, 2, 1, 2};
 
+  std::cout << "P: " << p << std::endl;
+  std::cout << "Input Nums: ";
   printArr(nums);
 
   int ans = minimizeMax(nums, p);

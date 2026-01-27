@@ -1,23 +1,23 @@
-/**
- * * Leetcode - 1208
- * * Get Equal Substrings Within Budget
+/*
+ * Leetcode - 1208
+ * Get Equal Substrings Within Budget
  * 
- * * Example 1
- * * Input  : s = "abcd", t = "bcdf", maxCost = 3
- * * Output : 3
- * * Explanation: "abc" of s can change to "bcd". That costs 3, so the maximum length is 3.
+ * Example 1
+ * Input  : s = "abcd", t = "bcdf", maxCost = 3
+ * Output : 3
+ * Explanation: "abc" of s can change to "bcd". That costs 3, so the maximum length is 3.
 
- * * Example 2
- * * Input  : s = "abcd", t = "cdef", maxCost = 3
- * * Output : 1
- * * Explanation: Each character in s costs 2 to change to character in t,  so the maximum length is 1.
+ * Example 2
+ * Input  : s = "abcd", t = "cdef", maxCost = 3
+ * Output : 1
+ * Explanation: Each character in s costs 2 to change to character in t,  so the maximum length is 1.
  * 
- * * Example 3
- * * Input  : s = "abcd", t = "acde", maxCost = 0
- * * Output : 1
- * * Explanation: You cannot make any change, so the maximum length is 1.
+ * Example 3
+ * Input  : s = "abcd", t = "acde", maxCost = 0
+ * Output : 1
+ * Explanation: You cannot make any change, so the maximum length is 1.
  * 
- * * https://leetcode.com/problems/get-equal-substrings-within-budget/description/
+ * https://leetcode.com/problems/get-equal-substrings-within-budget/description/
 */
 
 #include <iostream>
@@ -50,9 +50,9 @@ int bruteForce(std::string s, std::string t, int max_cost) {
 // * SPACE COMPLEXITY O(1)
 int equalSubstring(std::string s, std::string t, int max_cost) {  
   int n = s.length();
+  
   int i = 0, j = 0;
   int ans = 0, cur_cost = 0;
-
   while(j < n) {
     // * Add the abs difference to current cost
     cur_cost += std::abs(t[j] - s[j]);
@@ -74,23 +74,23 @@ int equalSubstring(std::string s, std::string t, int max_cost) {
 int main() {
 
   // * testcase 1
-  int max_cost = 3;
-  std::string s = "abcd", t = "bcdf";
+  // int max_cost = 3;
+  // std::string s = "abcd", t = "bcdf";
 
   // * testcase 2
   // int max_cost = 3;
   // std::string s = "abcd", t = "cdef";
 
   // * testcase 3
-  // int max_cost = 0;
-  // std::string s = "abcd", t = "acde";
+  int max_cost = 0;
+  std::string s = "abcd", t = "acde";
 
   std::cout << "s: " << s << std::endl;
   std::cout << "t: " << t << std::endl;
 
   // int ans = bruteForce(s, t, max_cost);
   int ans = equalSubstring(s, t, max_cost);
-  std::cout << ans << " Equal Substrings Within Budget" << std::endl;
+  std::cout << "Equal Substrings Within Budget: " << ans << std::endl;
 
   return 0;
 }

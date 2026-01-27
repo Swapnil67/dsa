@@ -18,7 +18,7 @@
  * Output: [4]
  * 
  * https://leetcode.com/problems/most-beautiful-item-for-each-query/description/
- */
+*/
 
 #include <vector>
 #include <iostream>
@@ -68,17 +68,17 @@ std::vector<int> bruteForce(std::vector<std::vector<int>> items, std::vector<int
   return ans;
 }
 
-int helper(std::vector<std::vector<int>> &items, int target) {
+int helper(std::vector<std::vector<int>> &items, int cur_query) {
   int l = 0, r = items.size() - 1;
   int ans = 0;
   while (l <= r) {
     int m = l + (r - l) / 2;
-    // * if current item price is less than or equal target
-    if (items[m][0] <= target) {
+    // * if current item price is less than or equal cur_query
+    if (items[m][0] <= cur_query) {
       ans = std::max(ans, items[m][1]);
       l = m + 1;
     } else {
-      // * if current item price is greater than target
+      // * if current item price is greater than cur_query
       r = m - 1;
     }
   }
@@ -88,10 +88,9 @@ int helper(std::vector<std::vector<int>> &items, int target) {
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Binary Search
-// * TIME COMPLEXITY O(n * log(n) + m * log(n))
+// * TIME COMPLEXITY O(nlog(n) + m * log(n))
 // * SPACE COMPLEXITY O(1)
 std::vector<int> maximumBeauty(std::vector<std::vector<int>> items, std::vector<int> queries) {
-  int n = queries.size();
   std::sort(items.begin(), items.end()); // * nlog(n)
 
   // * Pre Update the max beauty for each pair
@@ -102,24 +101,26 @@ std::vector<int> maximumBeauty(std::vector<std::vector<int>> items, std::vector<
     items[i][1] = maxBeautySeen;
   }
 
-  std::vector<int> ans(n, 0);
-  for (int i = 0; i < n; ++i) { // * O(m)
+  // * For every query find the highest price from items.
+  int m = queries.size();
+  std::vector<int> ans(m, 0);
+  for (int i = 0; i < m; ++i) { // * O(m)
     int curQuery = queries[i];
-    int curMax = helper(items, curQuery);  // * O(log(n))
-    ans[i] = curMax;
+    ans[i] = helper(items, curQuery);  // * O(log(n));
   }
 
   return ans;
 }
 
 int main(void) {
+  // * testcase 1
+  // std::vector<std::vector<int>> items = {{1, 2}, {3, 2}, {2, 4}, {5, 6}, {3, 5}};
+  // std::vector<int> queries = {1, 2, 3, 4, 5, 6};
+  
+  // * testcase 2
   std::vector<std::vector<int>> items =
-      {{1, 2}, {3, 2}, {2, 4}, {5, 6}, {3, 5}};
-  std::vector<int> queries = {1, 2, 3, 4, 5, 6};
-
-  // std::vector<std::vector<int>> items =
-  //     {{193, 732}, {781, 962}, {864, 954}, {749, 627}, {136, 746}, {478, 548}, {640, 908}, {210, 799}, {567, 715}, {914, 388}, {487, 853}, {533, 554}, {247, 919}, {958, 150}, {193, 523}, {176, 656}, {395, 469}, {763, 821}, {542, 946}, {701, 676}};
-  // std::vector<int> queries = {985, 1445, 1580, 1309, 205, 1788, 1214, 1404, 572, 1170, 989, 265, 153, 151, 1479, 1180, 875, 276, 1584};
+      {{193, 732}, {781, 962}, {864, 954}, {749, 627}, {136, 746}, {478, 548}, {640, 908}, {210, 799}, {567, 715}, {914, 388}, {487, 853}, {533, 554}, {247, 919}, {958, 150}, {193, 523}, {176, 656}, {395, 469}, {763, 821}, {542, 946}, {701, 676}};
+  std::vector<int> queries = {985, 1445, 1580, 1309, 205, 1788, 1214, 1404, 572, 1170, 989, 265, 153, 151, 1479, 1180, 875, 276, 1584};
 
   std::cout << "Items " << std::endl;
   printMatrix(items);

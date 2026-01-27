@@ -1,17 +1,20 @@
 #include <math.h>
-#include <climits>
 #include <vector>
-#include <iostream>
 #include <numeric>
+#include <climits>
+#include <iostream>
 #include <algorithm>
 
 template <typename T>
-void printArr(std::vector<T> arr) {
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 // * ------------------------------------------------------------------
@@ -52,7 +55,9 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 07 - Successful Pairs of Spells and Potions
-// std::vector<int> successfulPairs(std::vector<int> &spells, std::vector<int> &potions, long long success) {
+// std::vector<int> successfulPairs(std::vector<int> &spells,
+//                                  std::vector<int> &potions,
+//                                  long long success) {
 // TODO
 // }
 
@@ -62,27 +67,29 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 09 - Koko eating bananas
-// int findMinimumBananasToEat(std::vector<int> piles, int h) {
+// int findMinimumBananasToEat(std::vector<int> &piles, int h) {
 // TODO
 // }
 
 // * 10 - Capacity To Ship Packages Within D Days
-// int findLeastPossileWeight(std::vector<int> weights, int days) {
+// int findLeastPossileWeight(std::vector<int> &weights, int days) {
 // TODO
 // }
 
 // * 11 - Maximum Candies Allocated to K Children
-// int maximumCandies(std::vector<int> candies, long long k) {
+// int maximumCandies(std::vector<int> &candies, long long k) {
 // TODO
 // }
 
 // * 12 - Rose Garden
-// int findMinimumDaysToMakeBouquets(std::vector<int> bloomDay, int flowersInAbouquet, int bouquetsRequired) {
+// int findMinimumDaysToMakeBouquets(std::vector<int> &bloomDay,
+//                                   int &flowersInAbouquet,
+//                                   int &bouquetsRequired) {
 // TODO
 // }
 
 // * 13 - Smallest Divisor
-// int findSmallestDivisor(std::vector<int> arr, int threshold) {
+// int findSmallestDivisor(std::vector<int> &arr, int threshold) {
 // TODO
 // } 
 
@@ -97,12 +104,12 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 16 - Minimized Maximum of Products Distributed to Any Store
-// int minimizedMaximum(std::vector<int> quantities, int stores) {
+// int minimizedMaximum(std::vector<int> &quantities, int stores) {
 // TODO
 // } 
 
 // * 17 - Minimize Maximum of Array
-// int minimizeArrayValue(std::vector<int> arr) {
+// int minimizeArrayValue(std::vector<int> &arr) {
 // TODO
 // } 
 
@@ -113,8 +120,8 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 19 - Minimum Limit of Balls in a Bag
-// int minimumSize(std::vector<int> nums, int maxOperations) {
-// TODO 
+// int minimumSize(std::vector<int> &nums, int maxOperations) {
+// TODO
 // }
 
 // * 20 - Minimum Time to Repair Cars
@@ -133,18 +140,31 @@ void printArr(std::vector<T> arr) {
 // }
 
 // * 23 - Most Beautiful Item for Each Query
-// std::vector<int> maximumBeauty(std::vector<std::vector<int>> items, std::vector<int> queries) {
+// std::vector<int> maximumBeauty(std::vector<std::vector<int>> &items, std::vector<int> queries) {
 // TODO
 // }
 
 // * 24 - Search Suggestions System
-// std::vector<std::vector<std::string>> suggestedProducts(std::vector<std::string> products,
-//                                                         std::string searchWord) {
+// std::vector<std::vector<std::string>> suggestedProducts(
+//     std::vector<std::string> &products,
+//     std::string &searchWord)
+// {
 // TODO
 // }
 
 // * 25 - Minimum Speed to Arrive on Time
 // int minSpeedOnTime(std::vector<int>& dist, double hour) {
+// TODO
+// }
+
+// * 26 - Time Based Key-Value Store
+// TODO (Do this on leetcode)
+
+// * 27 - Random Pick with Weight
+// TODO (Do this on leetcode)
+
+// * 28 - Search a 2D Matrix II
+// bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
 // TODO
 // }
 

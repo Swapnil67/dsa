@@ -51,15 +51,15 @@ const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 // * SPACE COMPLEXITY O(m x n)
 std::vector<std::vector<int>> updateMatrix(std::vector<std::vector<int>>& mat) {
   int m = mat.size(), n = mat[0].size();
-  std::vector<std::vector<int>> result(m, std::vector<int>(n, -1));
+  std::vector<std::vector<int>> dist(m, std::vector<int>(n, -1));
   std::queue<std::pair<int, int>> q;
 
   // * push all the co-ordinates which has element 0 to `q`
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (mat[r][c] == 0) {
-        result[r][c] = 0;
-        q.push({r, c});
+        dist[r][c] = 0;
+        q.push(std::make_pair(r, c));
       }
     }
   }
@@ -78,14 +78,14 @@ std::vector<std::vector<int>> updateMatrix(std::vector<std::vector<int>>& mat) {
     for (auto &dir: dirs) {
       int n_r = r + dir[0];
       int n_c = c + dir[1];
-      if (is_safe(n_r, n_c) && result[n_r][n_c] == -1) {
-          result[n_r][n_c] = result[r][c] + 1;
+      if (is_safe(n_r, n_c) && dist[n_r][n_c] == -1) {
+          dist[n_r][n_c] = dist[r][c] + 1;
           q.push({n_r, n_c});
       }
     }
   }
 
-  return result;
+  return dist;
 }
 
 int main(void) {

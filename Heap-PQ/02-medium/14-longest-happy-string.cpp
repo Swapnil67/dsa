@@ -23,6 +23,8 @@
  * https://leetcode.com/problems/longest-happy-string/description/
 */
 
+// ! Microsoft
+
 #include <queue>
 #include <vector>
 #include <iostream>

@@ -18,6 +18,7 @@
  * Output: []
  * 
  * https://neetcode.io/problems/missing-ranges/question?list=allNC
+ * https://www.geeksforgeeks.org/problems/missing-ranges-of-numbers1019/1
 */
 
 // ! Apple, Google, Meta, Tiktok

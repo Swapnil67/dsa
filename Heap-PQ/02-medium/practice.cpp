@@ -8,14 +8,20 @@
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 // * ------------------------------------------------------------------------------------
+
+typedef long long ll;
+typedef std::pair<int, int> pii;
 
 // * 01 - K Closest Points to Origin
 // std::vector<std::vector<int>> kClosest(std::vector<std::vector<int>> points, int k) {
@@ -72,13 +78,13 @@ void printArr(std::vector<T> &arr) {
 
 // * 12 - Find K Closest Elements
 // std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
-// TODO 
+// TODO
 // }
 
 // * 13 - Reorganize String
 // std::string reorganizeString(std::string &s) {  
 // TODO
-// }
+// } 
 
 // * 14 - Longest Happy String
 // std::string longestDiverseString(int a, int b, int c) {
@@ -103,8 +109,21 @@ void printArr(std::vector<T> &arr) {
 // TODO
 // }
 
+// * 19 - 
+// TODO
+
+// * 20 - Minimum Cost to Connect Sticks
+// int connectSticks(std::vector<int> &sticks) {
+// TODO
+// }
+
+// * 21 - Campus Bikes
+// int connectSticks(std::vector<int> &sticks) {
+// TODO
+// }
+
 int main(void) {
-  return 0;
+  return 0; 
 }
 
 // * Run the code

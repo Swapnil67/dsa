@@ -1,20 +1,20 @@
-/**
- * * Leetcode - 2487
- * * Remove Nodes From Linked List
+/*
+ * Leetcode - 2487
+ * Remove Nodes From Linked List
 
- * * You are given the head of a linked list.
- * * Remove every node which has a node with a greater value anywhere to the right side of it.
- * * Return the head of the modified linked list.
+ * You are given the head of a linked list.
+ * Remove every node which has a node with a greater value anywhere to the right side of it.
+ * Return the head of the modified linked list.
 
- * * Example 1
- * * Input  : head = [5, 2, 13, 3, 8]
- * * Output : [13, 8]
+ * Example 1
+ * Input  : head = [5, 2, 13, 3, 8]
+ * Output : [13, 8]
 
- * * Example 2
- * * Input  : head = [1, 1, 1, 1]
- * * Output : [1, 1, 1, 1]
+ * Example 2
+ * Input  : head = [1, 1, 1, 1]
+ * Output : [1, 1, 1, 1]
 
- * * https://leetcode.com/problems/remove-nodes-from-linked-list/description/
+ * https://leetcode.com/problems/remove-nodes-from-linked-list/description/
 */
 
 #include <stack>
@@ -123,14 +123,16 @@ ListNode* removeNodes(ListNode* head) {
   }
 
   // * Reverse the temp LL
-  tail = reverse_ll(tail);
-
-  return tail;
+  return reverse_ll(tail);
 }
 
 
 int main(void) {
-  std::vector<int> arr = {5, 2, 13, 3, 8};
+  // * testcase 1
+  // std::vector<int> arr = {5, 2, 13, 3, 8};
+
+  // * testcase 2
+  std::vector<int> arr = {1, 1, 1, 1};
 
   ListNode* head = arrayToLL(arr);
   std::cout << "Linked List" << std::endl;
@@ -138,6 +140,7 @@ int main(void) {
 
   // ListNode *ans = bruteForce(head);
   ListNode *ans = removeNodes(head);
+  std::cout << "After Removing Nodes" << std::endl;
   printLL(ans);
   
   return 0;

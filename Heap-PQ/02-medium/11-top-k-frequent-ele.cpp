@@ -107,14 +107,15 @@ std::vector<int> topKFrequent(std::vector<int> &nums, int k) {
 }
 
 int main() {
-  // int k = 2;
-  // std::vector<int> nums = {1, 1, 1, 2, 2, 3};
+  // * testcase 1
+  int k = 2;
+  std::vector<int> nums = {1, 1, 1, 2, 2, 3};
 
   // int k = 2;
   // std::vector<int> nums = {1, 2, 2, 3, 3};
 
-  int k = 2;
-  std::vector<int> nums = {1, 2, 1, 2, 1, 2, 3, 1, 3, 2};
+  // int k = 2;
+  // std::vector<int> nums = {1, 2, 1, 2, 1, 2, 3, 1, 3, 2};
 
   // int k = 1;
   // std::vector<int> nums = {1};

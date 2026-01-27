@@ -68,26 +68,21 @@ void dfs(int r, int c, int &area,
 }
 
 // * Using grid as matrix
-void dfs2(int r, int c, int &area,
-         std::vector<std::vector<int>> &visited,
-         std::vector<std::vector<int>> &grid)
-{
+void dfs2(int r, int c, int& area, std::vector<std::vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
-
-  // * Edge case
-  if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] == 0) {
-      return;
-  }
+  area++;
 
   grid[r][c] = 0; // * mark visited
 
-  if (grid[r][c] == 1) // * add to current area
-      area += 1;
+  const auto is_safe = [&](const int& row, const int& col) {
+      return row >= 0 && row < m && col >= 0 && col < n;
+  };
 
-  for (auto &dir : dirs) { // * go to neighbours
-    int n_r = r + dir[0];
-    int n_c = c + dir[1];
-    dfs2(n_r, n_c, area, visited, grid);
+  for (auto& dir : dirs) {
+      int dr = r + dir[0], dc = c + dir[1];
+      if (is_safe(dr, dc) && grid[dr][dc] == 1) {
+          dfs2(dr, dc, area, grid);
+      }
   }
 }
 
@@ -114,13 +109,14 @@ int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
   return max_area;
 }
 
-int bfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<std::vector<int>> &grid)
+int bfs(int x, int y, std::vector<std::vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
 
   std::queue<std::pair<int, int>> q;
   q.push({x, y});
-  int area = 0;
+  int area = 1;
+  grid[x][y] = 0;
 
   const auto is_safe = [&](const int &r, const int &c) {
     return r >= 0 && r < m && c >= 0 && c < n;
@@ -130,14 +126,13 @@ int bfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<std::v
     auto [r, c] = q.front();
     q.pop();
 
-    area++;
-    visited[r][c] = 1;
-
     // * Traverse in neighbours and mark them it it's a land
     for (auto &dir : dirs) {
-      int nx = r + dir[0], ny = c + dir[1];
-      if (is_safe(nx, ny) && grid[nx][ny] == 1 && !visited[nx][ny]) {
-        q.push({nx, ny});
+      int dr = r + dir[0], dc = c + dir[1];
+      if (is_safe(dr, dc) && grid[dr][dc] == 1) {
+        area++;
+        grid[dr][dc] = 0;
+        q.push({dr, dc});
       }
     }
   }
@@ -153,13 +148,13 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
   int n = grid[0].size(); 
   int max_area = 0;
 
-  std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
 
   // * Loop over grid and do BFS on islands
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
-      if (grid[r][c] == 1 && !visited[r][c]) {
-        int cur_area = bfs(r, c, visited, grid);
+      if (grid[r][c] == 1) {
+        int cur_area = bfs(r, c, grid);
+        std::cout << r << ", " << c << ": " << cur_area << std::endl;
         max_area = std::max(max_area, cur_area);
       }
     }
@@ -170,20 +165,23 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-                                        {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
-                                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
-                                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-                                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
+  // std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                                        // {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                                        // {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                                        // {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                                        // {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                                        // {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                                        // {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                                        // {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
 
   // * testcase 2
   // std::vector<std::vector<int>> grid = {{0, 0, 0, 0, 0, 0, 0, 0}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> grid = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
+  std::vector<std::vector<int>> grid = {{1, 1, 0, 0, 0},
+                                        {1, 1, 0, 0, 0},
+                                        {0, 0, 0, 1, 1},
+                                        {0, 0, 0, 1, 1}};
 
   std::cout << "grid: " << std::endl;
   for (auto &vec : grid)

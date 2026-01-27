@@ -36,12 +36,18 @@
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+// ! Meta
+
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -57,7 +63,7 @@ long long totalCost(std::vector<int> &costs, int k, int candidates) {
   std::priority_queue<ll, std::vector<ll>, std::greater<ll>> pq1, pq2;
   
   int total_cost = 0;
-  while (k > 0) {
+  while (k > 0) { // * no of sessions
 
     // * Put costs from start in pq1
     while (i <= j && pq1.size() < candidates) {

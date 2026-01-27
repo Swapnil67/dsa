@@ -1,24 +1,27 @@
 
-/**
- * * Leetcode - 1658
- * * Minimum Operations to Reduce X to Zero
- * * You are given an integer array nums and an integer x. In one operation, you can either remove the leftmost or
- * * the rightmost element from the array nums and subtract its value from x. 
- * * Note that this modifies the array for future operations.
+/*
+ * Leetcode - 1658
+ * Minimum Operations to Reduce X to Zero
  * 
- * * Return the minimum number of operations to reduce x to exactly 0 if it is possible, otherwise, return -1.
+ * You are given an integer array nums and an integer x. In one operation, you can either remove the leftmost or
+ * the rightmost element from the array nums and subtract its value from x. 
+ * Note that this modifies the array for future operations.
+ * 
+ * Return the minimum number of operations to reduce x to exactly 0 if it is possible, otherwise, return -1.
 
- * * Example 1
- * * Input  :  nums = [1,1,4,2,3], x = 5
- * * Output : 2
- * * Explanation: The optimal solution is to remove the last two elements to reduce x to zero.
+ * Example 1
+ * Input  :  nums = [1,1,4,2,3], x = 5
+ * Output : 2
+ * Explanation: The optimal solution is to remove the last two elements to reduce x to zero.
  * 
- * * Example 2
- * * Input  : nums = [5,6,7,8,9], x = 4
- * * Output : -1
+ * Example 2
+ * Input  : nums = [5,6,7,8,9], x = 4
+ * Output : -1
  * 
- * * https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero
+ * https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero
 */
+
+// ! Amazon
 
 #include <map>
 #include <numeric>
@@ -81,37 +84,37 @@ int minOperations2(std::vector<int> &arr, int x) {
 // * Problem converted to simple sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minOperations(std::vector<int> &arr, int x) {
-  int n = arr.size();
+int minOperations(std::vector<int> &nums, int x) {
+  int n = nums.size();
   int i = 0, j = 0, ans = INT_MIN;
-  long long total_sum = accumulate(arr.begin(), arr.end(), 0);
+  long long total_sum = accumulate(nums.begin(), nums.end(), 0);
   long long target_sum = total_sum - x;
   // printf("total_sum: %d, target_sum: %d\n", total_sum, target_sum);
+
   int cur_sum = 0;
   while(j < n) {
-    cur_sum += arr[j];
+    cur_sum += nums[j];
     
     // * Shrink the window
     while(i <= j && cur_sum > target_sum) {
-      cur_sum -= arr[i];
+      cur_sum -= nums[i];
       i++;
     }
 
-    if(cur_sum == target_sum) {
+    if (cur_sum == target_sum) {
       ans = std::max(ans, (j - i + 1));
     }
     j++; 
   }
 
-  if (ans < 0)
-    return -1;
-  return n - ans;
+  return ans < 0 ? -1 : n - ans;
 }
 
 int main() {
   // * testcase 1
   // int x = 3;
-  // std::vector<int> arr = {1, 1};
+  // std::vector<int> nums = {1, 1};
+
   // * testcase 2
   // int x = 5;
   // std::vector<int> arr = {1, 1, 4, 2, 3};

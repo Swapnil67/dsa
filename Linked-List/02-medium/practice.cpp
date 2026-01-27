@@ -21,11 +21,16 @@ class ListNode {
   }
 };
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  printf("\n");
+  std::cout << " ]" << std::endl;
 }
 
 ListNode* arrayToLL(std::vector<int> &arr) {
@@ -115,6 +120,48 @@ void swap(int &a, int &b) {
   a = b;
   b = temp;
 }
+
+// * 21 - Swap Nodes in Pairs
+// ListNode *swapPairs(ListNode *head) {
+// TODO
+// }
+
+// * 22 - Sort List
+// ListNode *sortList(ListNode *head) {
+// TODO 
+// }
+
+// * 23 - Partition List
+// ListNode *partition(ListNode *head, int x) {
+// TODO
+// }
+
+// * 24 - Rotate List
+// ListNode *rotateRight(ListNode *head, int k) {
+// TODO
+// }
+
+// * 25 - Design Circular Queue
+// TODO (Do this on leetcode)
+
+// * 26 - Insertion Sort List
+// ListNode* insertionSortList(ListNode* head) {
+// TODO
+// }
+
+// * 27 - Split Linked List in Parts
+// std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
+// TODO
+// }
+
+// * 28 - Add 1 to a Linked List Number
+// ListNode* addOne(ListNode* head) {
+// TODO
+// }
+
+// * 29 - Design Circular Deque
+// TODO (Do this on leetcode)
+
 // * --------------------------------------------------------------------------------
 
 // * 01 - Add Two Numbers
@@ -141,7 +188,7 @@ void swap(int &a, int &b) {
 // ListNode* deleteMiddle(ListNode* head) {
 // TODO
 // }
-
+  
 // * 06 - Delete all occurrences of a given key in a doubly linked list
 // DLListNode<int> *deleteOccurences(DLListNode<int> *head, int k) {
 // TODO
@@ -211,47 +258,6 @@ void swap(int &a, int &b) {
 // }
 
 // * 20 - LRU Cache
-// TODO (Do this on leetcode)
-
-// * 21 - Swap Nodes in Pairs
-// ListNode *swapPairs(ListNode *head) {
-// TODO
-// }
-
-// * 22 - Sort List
-// ListNode *sortList(ListNode *head) {
-// TODO 
-// }
-
-// * 23 - Partition List
-// ListNode *partition(ListNode *head, int x) {
-// TODO
-// }
-
-// * 24 - Rotate List
-// ListNode *rotateRight(ListNode *head, int k) {
-// TODO
-// }
-
-// * 25 - Design Circular Queue
-// TODO (Do this on leetcode)
-
-// * 26 - Insertion Sort List
-// ListNode* insertionSortList(ListNode* head) {
-// TODO
-// }
-
-// * 27 - Split Linked List in Parts
-// std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
-// TODO
-// }
-
-// * 28 - Add 1 to a Linked List Number
-// ListNode* addOne(ListNode* head) {
-// TODO
-// }
-
-// * 29 - Design Circular Deque
 // TODO (Do this on leetcode)
 
 int main(void) {

@@ -1,35 +1,35 @@
-/**
- * * Leetcode - 2316
- * * Number of Islands
+/*
+ * Leetcode - 2316
+ * Number of Islands
  *
- * * Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), 
- * * return the number of islands.
+ * Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), 
+ * return the number of islands.
  *
- * * Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), 
- * * return the number of islands.
+ * Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), 
+ * return the number of islands.
  *
- * * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
- * * You may assume all four edges of the grid are all surrounded by water.
+ * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
+ * You may assume all four edges of the grid are all surrounded by water.
  * 
- * * Example 1  :
- * * Input      : grid = [
- * *                      ["1","1","1","1","0"],
- * *                      ["1","1","0","1","0"],
- * *                      ["1","1","0","0","0"],
- * *                      ["0","0","0","0","0"]]
- * * Output     : 1
+ * Example 1  :
+ * Input      : grid = [
+ *                      ["1","1","1","1","0"],
+ *                      ["1","1","0","1","0"],
+ *                      ["1","1","0","0","0"],
+ *                      ["0","0","0","0","0"]]
+ * Output     : 1
 
- * * Example 2  :
- * * Input      : grid = [
- * *                      ["1","1","0","0","0"],
- * *                      ["1","1","0","0","0"],
- * *                      ["0","0","1","0","0"],
- * *                      ["0","0","0","1","1"]]
- * * Output     : 0
+ * Example 2  :
+ * Input      : grid = [
+ *                      ["1","1","0","0","0"],
+ *                      ["1","1","0","0","0"],
+ *                      ["0","0","1","0","0"],
+ *                      ["0","0","0","1","1"]]
+ * Output     : 0
  * 
- * * https://leetcode.com/problems/number-of-islands/description/
- * * https://www.naukri.com/code360/problems/find-number-of-islands_630512
- * * https://www.geeksforgeeks.org/problems/find-the-number-of-islands/1
+ * https://leetcode.com/problems/number-of-islands/description/
+ * https://www.naukri.com/code360/problems/find-number-of-islands_630512
+ * https://www.geeksforgeeks.org/problems/find-the-number-of-islands/1
 */
 
 // ! Meta, Microsoft, Google, Apple, Amazon, Uber
@@ -157,18 +157,18 @@ int numIslandsBFS(std::vector<vc>& grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<vc> grid = {
-  //     {'1', '1', '1', '1', '0'},
-  //     {'1', '1', '0', '1', '0'},
-  //     {'1', '1', '0', '0', '0'},
-  //     {'0', '0', '0', '0', '0'}};
+  std::vector<vc> grid = {
+      {'1', '1', '1', '1', '0'},
+      {'1', '1', '0', '1', '0'},
+      {'1', '1', '0', '0', '0'},
+      {'0', '0', '0', '0', '0'}};
 
   // * testcase 2
-  std::vector<vc> grid = {
-      {'1', '1', '0', '0', '0'},
-      {'1', '1', '0', '0', '0'},
-      {'0', '0', '1', '0', '0'},
-      {'0', '0', '0', '1', '1'}};
+  // std::vector<vc> grid = {
+  //     {'1', '1', '0', '0', '0'},
+  //     {'1', '1', '0', '0', '0'},
+  //     {'0', '0', '1', '0', '0'},
+  //     {'0', '0', '0', '1', '1'}};
 
   std::cout << "grid: " << std::endl;
   for (auto &vec : grid)

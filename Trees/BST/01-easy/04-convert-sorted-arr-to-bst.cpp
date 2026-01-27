@@ -20,6 +20,8 @@
 * https://www.geeksforgeeks.org/problems/array-to-bst4443/1
 */
 
+// ! Meta
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -47,31 +49,30 @@ void printArr(std::vector<T> arr) {
   std::cout << "]" << std::endl;
 }
 
-void levelOrder(TreeNode *root) {
-  std::vector<std::vector<int>> ans;
-  if (root == nullptr)
+void levelOrderTraversal(TreeNode *root) {
+  if (!root)
     return;
 
-  // * Create the queue of TreeNode and push the root node
-  std::queue<TreeNode*> q;
+  std::queue<TreeNode *> q;
   q.push(root);
 
-  while (!q.empty()) {
-    std::vector<int> level;
-    int size = q.size();
-    for (int i = 0; i < size; ++i) {
+  while(!q.empty()) {
+    int n = q.size();
+    // * traverse the whole level
+    while (n--) {
       TreeNode *node = q.front();
-      q.pop();                    // * pop the front node
+      q.pop();
+
+      std::cout << node->data << " ";
 
       if (node->left)
         q.push(node->left);
+
       if (node->right)
         q.push(node->right);
-
-      std::cout << node->data << " ";
     }
+    std::cout << std::endl;
   }
-
 }
 
 TreeNode *helper(std::vector<int> &nums, int l, int r) {
@@ -82,6 +83,7 @@ TreeNode *helper(std::vector<int> &nums, int l, int r) {
   int m = (l + r) / 2;
 
   TreeNode* root = new TreeNode(nums[m]);
+  std::cout << root->data << std::endl;
   root->left = helper(nums, l, m - 1);     // * elements on left of mid
   root->right = helper(nums, m + 1, r);     // * elements on right of mid
 
@@ -94,11 +96,12 @@ TreeNode *sortedArrayToBST(std::vector<int> &nums) {
 
 int main(void) {
   std::vector<int> arr = {-10, -3, 0, 5, 9};
-  std::cout << "Input Sorted array" << std::endl;
+  std::cout << "Input Sorted array: ";
   printArr(arr);
 
+  std::cout << "Height Balanced BST" << std::endl;
   TreeNode* root = sortedArrayToBST(arr);
-  levelOrder(root);
+  levelOrderTraversal(root);
 
   return 0;
 }

@@ -10,9 +10,10 @@
  * and the probability of picking index 1 is 3 / (1 + 3) = 0.75 (i.e., 75%).
  * 
  * 
- 
  * https://leetcode.com/problems/random-pick-with-weight/description/
 */
+
+// ! Google, Meta, Netflix, Amazon
 
 #include <vector>
 #include <iostream>
@@ -31,24 +32,27 @@ public:
     }
   }
 
+  // * ------------------------- APPROACH Optimal APPROACH -------------------------
+  // * TIME COMPLEXITY O(log(n))
+  // * SPACE COMPLEXITY O(n)
   int pickIndex() {
     int x = prefix_vec.back();
-    int index = rand() % x;
+    int random_val = rand() % x;
     int l = 0, r = prefix_vec.size() - 1;
     int ans = -1;
-    while (l <= r) {
-        int m = l + (r - l) / 2;
-        if (prefix_vec[m] > index) {
-            ans = m;
-            r = m - 1;
-        } else {
-            l = m + 1;
-        }
+    while (l <= r) { // * Upper Bound
+      int m = l + (r - l) / 2;
+      if (prefix_vec[m] > random_val) {
+        ans = m;
+        r = m - 1;
+      }
+      else {
+        l = m + 1;
+      }
     }
-
     return ans;
   }
 };
 
 // * Run the code
-// * g++ --std=c++17 27-random-pick-weight.cpp -o output && ./output
+// * g++ --std=c++20 27-random-pick-weight.cpp -o output && ./output

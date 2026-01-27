@@ -150,14 +150,14 @@ int pairSum(ListNode *head) {
   ListNode *temp = head;
   ListNode *mid = reverseLL(slow);
 
-  int curSum = 0, maxSum = 0;
+  int max_sum = 0;
   while (mid && temp != mid) {
     // std::cout << temp->data + mid->data << std::endl;
-    maxSum = std::max(maxSum, temp->data + mid->data);
+    max_sum = std::max(max_sum, temp->data + mid->data);
     temp = temp->next;
     mid = mid->next;
   }
-  return maxSum;
+  return max_sum;
 }
 
 int main(void) {

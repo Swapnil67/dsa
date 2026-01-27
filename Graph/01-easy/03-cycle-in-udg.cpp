@@ -9,14 +9,17 @@
  * * Input      : V = 3, edges[][] = [[0, 1], [1, 2]]
  * * Output     : false
  * 
- * * https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
- * * https://www.naukri.com/code360/problems/detect-cycle-in-a-directed-graph_1062626
+ * * https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+ * * https://www.naukri.com/code360/problems/cycle-detection-in-undirected-graph_1062670
  * 
  */
+
+ // ! Amazon, Flipkart
 
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -31,40 +34,40 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
   int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+  for (auto &[u, vec] : adj) {
+    std::cout << u << " -> ";
+    printArr(vec);
   }
 }
 
-std::vector<std::vector<int>> constructadj(int V, std::vector<std::vector<int>> &edges) {
-  std::cout << "V: " << V << std::endl;
-  std::vector<std::vector<int>> adj(V + 1);
+std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
+  std::unordered_map<int, std::vector<int>> adj;
   for (auto &it : edges) {
+    // * u = it[0], v = it[1]
     adj[it[0]].push_back(it[1]);
     adj[it[1]].push_back(it[0]);
   }
   return adj;
 }
 
-bool dfs(int u, int parent,
-         std::vector<std::vector<int>> &edges,
-         std::vector<bool> &visited)
+bool dfs(
+    int u, int parent,
+    std::vector<bool> &visited,
+    std::unordered_map<int, std::vector<int>> adj)
 {
   visited[u] = true;
   
-  for (auto &v: edges[u]) {
-    if (v == parent)
+  for (auto &v: adj[u]) {
+    if (v == parent) // * don't go parent again
       continue;
 
+    // * loop found
     if (visited[v])
       return true;
     
-    if (!visited[v]) {
-      if (dfs(v, u, edges, visited))
+    if (!visited[v] && dfs(v, u, visited, adj)) {
         return true;
     }
   }
@@ -75,17 +78,22 @@ bool dfs(int u, int parent,
 // * DFS
 // * Use a parent pointer
 bool cycleDetectionDFS(std::vector<std::vector<int>> &edges) {
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
+  // printAdjList(adj); // * For debugging
+
   int V = edges.size();
   std::vector<bool> visited(V + 1, false);
   for (int u = 0; u < V; ++u) {
-    if (!visited[u] && dfs(u, -1, edges, visited))
+    if (!visited[u] && dfs(u, -1, visited, adj))
       return true;
   }
   return false;
 }
 
-bool bfs(std::vector<std::vector<int>> &adj,
-         std::vector<bool> &visited, int u)
+bool bfs(
+    int u,
+    std::vector<bool> &visited,
+    std::unordered_map<int, std::vector<int>> adj)
 {
   std::queue<std::pair<int, int>> q;
   q.push({u, -1}); // * initial pair
@@ -119,15 +127,12 @@ bool cycleDetectionBFS(std::vector<std::vector<int>> &edges) {
   int V = edges.size();
   std::vector<bool> visited(V + 1, false);
 
-  std::vector<std::vector<int>> adj = constructadj(V + 1, edges);
-
-  // * For Debugging
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
   std::cout << "Adjacency List" << std::endl;
-  printAdjList(adj);
+  printAdjList(adj); // * For Debugging
 
   for (int i = 0; i < V; ++i) {
-    if (!visited[i] && bfs(adj, visited, i)) {
-      // std::cout << i << std::endl;
+    if (!visited[i] && bfs(i, visited, adj)) {
       return true;
     }
   }
@@ -138,13 +143,10 @@ bool cycleDetectionBFS(std::vector<std::vector<int>> &edges) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}};
+  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}}; // * true
 
   // * testcase 2
-  // std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}};
-
-  // * testcase 3
-  std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
+  std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}}; // * false
 
   for (auto &vec : edges)
     printArr(vec);

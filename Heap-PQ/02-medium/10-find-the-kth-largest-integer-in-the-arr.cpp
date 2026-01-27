@@ -18,6 +18,7 @@
  * https://leetcode.com/problems/process-tasks-using-servers/description/
 */
 
+#include <queue>
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -33,8 +34,36 @@ void printArr(std::vector<T> arr) {
 
 std::string kthLargestNumber(std::vector<std::string>& nums, int k) {
   int n = nums.size();
-  std::sort(begin(nums), end(nums), [](const auto &a, const auto &b)
-            { 
+  const auto compare = [&](const auto &a, const auto &b)
+  { 
+    if(a.length() == b.length()) {
+      return a > b;
+    }
+    return a.length() > b.length();
+  };
+
+  std::priority_queue<std::string, std::vector<std::string>, decltype(compare)>
+      min_heap(compare);
+  for (auto &num: nums) {
+    min_heap.push(num);
+    if (min_heap.size() > k)
+      min_heap.pop();
+  }
+
+  // * For debugging
+  // while (!min_heap.empty()) { 
+  //   std::string ele = min_heap.top();
+  //   std::cout<< ele <<std::endl;
+  //   min_heap.pop();
+  // }
+
+  return nums[n - k];
+}
+
+// * Without heap
+std::string kthLargestNumber2(std::vector<std::string>& nums, int k) {
+  int n = nums.size();
+  std::sort(begin(nums), end(nums), [](const auto &a, const auto &b) { 
     if(a.length() == b.length()) {
       return a < b;
     }
@@ -58,6 +87,7 @@ int main(void) {
   printArr(nums);
   
   std::string ans = kthLargestNumber(nums, k);
+  // std::string ans = kthLargestNumber2(nums, k);
   std::cout << "Ans: " << ans << std::endl;
 
   return 0;

@@ -15,8 +15,8 @@
  * * https://leetcode.com/problems/length-of-last-word/description/
 */
 
-#include<string>
-#include<iostream>
+#include <string>
+#include <iostream>
 
 bool isValidChar(char ch) {
   return (
@@ -29,22 +29,23 @@ bool isValidChar(char ch) {
 // * From start count every word length then return the last count
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::string str) { 
-  int n = str.size();
-  int curC = 0, maxC = 0;
+int bruteForce(std::string s) { 
+  int n = s.size();
+  int lastLength = 0;
+  std::string word = "";
   for (int i = 0; i < n; ++i) {
-    if(isValidChar(str[i])) {
-      curC++;
-    }
-    else {
-      maxC = std::max(maxC, curC);
-      curC = 1;
-      while(!isValidChar(str[i]))
-        i++;
-    }
+    while (isspace(s[i])) {
+      i++;
+      lastLength = std::max(lastLength, (int)word.size());
+      // std::cout << word << std::endl;
+      word = "";    // * reset the cur word to empty string
+    } 
+    word += s[i];
   }
-  maxC = std::max(maxC, curC);
-  return maxC;
+  std::cout << word << std::endl;
+  // lastLength = std::max(lastLength, (int)word.size());
+  
+  return lastLength;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
@@ -53,21 +54,21 @@ int bruteForce(std::string str) {
 // * TIME COMPLEXITY O(len of last word) [Best case]
 // * SPACE COMPLEXITY O(1)
 int lengthOfLastWord(std::string s) {
-  int n = s.size(), cnt = 0;
+  int n = s.size();
 
   // * Step 1: Get i to the first char of last word
-  int i = n-1;
-  while(!isValidChar(str[i]))
+  int i = n - 1;
+  while (isspace(s[i]))
     --i;
 
   // * Step 2: Count then length of last word
+  int lastWordLength = 0;
   for (; i >= 0; i--) {
-    if (isValidChar(s[i]))
-      cnt++;
-    else
+    if (isspace(s[i]))
       break;
+    lastWordLength++;
   }
-  return cnt;
+  return lastWordLength;
 }
 
 

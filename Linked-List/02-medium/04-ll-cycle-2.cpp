@@ -22,9 +22,9 @@
 
 // ! Microsoft
 
-#include <map>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 class ListNode {
   public: 
@@ -99,16 +99,16 @@ ListNode* bruteForce(ListNode* head) {
     return nullptr;
 
   ListNode* temp = head;
-  std::map<ListNode*, int> nodeMap;
-
+  std::unordered_map<ListNode*, ListNode*> nodeMap;
+  
   // * O(N)
   while(temp) {
     // * O(logN)
-    if (nodeMap.find(temp) != nodeMap.end())
+    if (nodeMap.count(temp))
       return temp;
 
     // * O(logN)
-    nodeMap[temp] = 1;
+    nodeMap[temp] = temp;
     temp = temp->next;
   }
   return nullptr;

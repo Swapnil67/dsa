@@ -1,30 +1,20 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
-
-
-// * -----------------------------------------------------------------------------
-
-// * 01 - Binary Search
-// int binarySearch(std::vector<int> arr, int target) {
-// TODO
-// }
-
-// * 02 - Lower Bound
-// int findLowerBound(std::vector<int> arr, int x) {
-// TODO
-// }
-
 // * 03 - Upper Bound
-// int findUpperBound(std::vector<int> arr, int x) {
+// int findUpperBound(std::vector<int> &arr, int x) {
 // TODO
 // }
 
@@ -34,12 +24,12 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 05 - Ceil The Floor
-// std::pair<int, int> getFloorAndCeil(std::vector<int>arr, int x) {
+// std::pair<int, int> getFloorAndCeil(std::vector<int> &arr, int x) {
 // TODO
 // }
 
 // * 06 - First and Last Position of an Element In Sorted Array
-// std::pair<int, int> firstAndLastOccurence(std::vector<int> arr, int k) {
+// std::pair<int, int> firstAndLastOccurence(std::vector<int> &arr, int k) {
 // TODO
 // }
 
@@ -49,7 +39,19 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 10 - Kth Missing Positive Number 
-// int findKthMissingNumber(std::vector<int> arr, int k) {
+// int findKthMissingNumber(std::vector<int> &arr, int k) {
+// TODO
+// }
+
+// * -----------------------------------------------------------------------------
+
+// * 01 - Binary Search
+// int binarySearch(std::vector<int> arr, int target) {
+// TODO
+// }
+
+// * 02 - Lower Bound
+// int findLowerBound(std::vector<int> &arr, int x) {
 // TODO
 // }
 

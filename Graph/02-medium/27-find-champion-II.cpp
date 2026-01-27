@@ -50,12 +50,12 @@ int findChampion(int n, std::vector<std::vector<int>>& edges) {
 
 int main(void) {
   // * testcase 1
-  // int n = 3;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}};
+  int n = 3;
+  std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}};
   
   // * testcase 2
-  int n = 4;
-  std::vector<std::vector<int>> edges = {{0, 2}, {1, 3}, {1, 2}};
+  // int n = 4;
+  // std::vector<std::vector<int>> edges = {{0, 2}, {1, 3}, {1, 2}};
 
   std::cout << "Edges" << std::endl;
   for (auto &vec : edges)

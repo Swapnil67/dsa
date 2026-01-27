@@ -137,6 +137,9 @@ ListNode* bruteForce(ListNode* head, int k) {
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
 ListNode* swapNodes(ListNode* head, int k) {
+  if (!head)
+    return head;
+    
   ListNode *node1 = nullptr;
   ListNode *node2 = nullptr;
 
@@ -178,8 +181,8 @@ int main(void) {
   std::cout << "Linked List Before Swap" << std::endl;
   printLL(head);
   
-  head = bruteForce(head, k);
-  // head = swapNodes(head, k);
+  // head = bruteForce(head, k);
+  head = swapNodes(head, k);
   std::cout << "Linked List After Swap" << std::endl;
   printLL(head);
 

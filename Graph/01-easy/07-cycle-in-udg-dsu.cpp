@@ -12,12 +12,12 @@
  * * Output     : false
  * 
  * * https://www.geeksforgeeks.org/problems/detect-cycle-using-dsu/1
- * 
  */
 
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -32,24 +32,24 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
   int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+  for (auto &[key, vec] : adj) {
+    std::cout << key << " -> ";
+    printArr(vec);
   }
 }
 
-std::vector<std::vector<int>> constructadj(int V, std::vector<std::vector<int>> &edges) {
-  std::cout << "V: " << V << std::endl;
-  std::vector<std::vector<int>> adj(V + 1);
-  for (auto &it : edges) {
-    adj[it[0]].push_back(it[1]);
-    adj[it[1]].push_back(it[0]);
+std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
+  std::unordered_map<int, std::vector<int>> adj;
+  for (auto &it: edges) {
+    int u = it[0], v = it[1];
+    adj[u].push_back(v);
+    adj[v].push_back(u);
   }
   return adj;
 }
+
 
 int find(int x, std::vector<int> &parent) {
   if (x == parent[x])
@@ -78,21 +78,20 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
 }
 
 // * DSU
+// * If we get the same parents for two nodes that means there is a cycles
 bool cycleDetectionDSU(std::vector<std::vector<int>> &edges) {
   int V = edges.size();
 
   // * Initialize rank and parent vectors
-  std::vector<int> rank(V);
+  std::vector<int> rank(V, 1);
   std::vector<int> parent(V);
   for (int i = 0; i < V; ++i) {
-    rank[i] = 1;
     parent[i] = i;
   }
 
-  std::vector<std::vector<int>> adj = constructadj(V + 1, edges);
-  // * For Debugging
+  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
   std::cout << "Adjacency List" << std::endl;
-  printAdjList(adj);
+  printAdjList(adj); // * For Debugging
 
   for (int u = 0; u < V; ++u) {
     for (auto &v: adj[u]) {
@@ -113,16 +112,16 @@ bool cycleDetectionDSU(std::vector<std::vector<int>> &edges) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}};
+  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {2, 3}}; // * true
 
   // * testcase 2
-  std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}};
+  // std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}}; // * false
 
   // * testcase 3
-  // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}};
+  // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}}; // * true
 
   // * testcase 4
-  // std::vector<std::vector<int>> edges = {{0, 2}, {0, 3}, {0, 4}, {1, 3}, {2, 4}};
+  std::vector<std::vector<int>> edges = {{0, 2}, {0, 3}, {0, 4}, {1, 3}, {2, 4}}; // * true
 
   for (auto &vec : edges)
     printArr(vec);
@@ -133,4 +132,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 08-cycle-in-udg-dsu.cpp -o output && ./output
+// * g++ --std=c++20 07-cycle-in-udg-dsu.cpp -o output && ./output

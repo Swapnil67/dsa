@@ -22,41 +22,43 @@
 #include <algorithm>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
-
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Using sorting
 // * TIME COMPLEXITY O(n + nlogn)
 // * SPACE COMPLEXITY O(n)
 int bruteForce(std::vector<int> &arr, int k) {
-
   // * 1. Find the freq of each number
-  std::unordered_map<int, int> freq_map;
+  std::unordered_map<int, int> freq_mp;
   for (auto &x : arr) {
-    freq_map[x]++;
+    freq_mp[x]++;
   }
 
   // * 2. Add the freq of each number to `temp` vector
   std::vector<int> temp;
-  for (auto &[key, freq] : freq_map) {
+  for (auto &[key, freq] : freq_mp) {
     temp.push_back(freq);
   } 
 
   // * 3. sort the temp vector in ASC
   std::sort(temp.begin(), temp.end());
 
-  // * Start removing first 'k' elements with least freq
+  // * 4. Start removing first 'k' elements with least frequency
   int n = temp.size();
   for (int i = 0; i < n; ++i) {
     k -= temp[i];
-    if (k <= 0) {
+    if (k < 0) {
       return n - i;
     }
   }
@@ -102,18 +104,20 @@ int findLeastNumOfUniqueInts(std::vector<int> &arr, int k) {
 }
 
 int main(void) {
-  // int k = 1;
-  // std::vector<int> arr = {5, 5, 4};
-
-  int k = 3;
-  std::vector<int> arr = {4, 3, 1, 1, 3, 3, 2};
+  // * testcase 1
+  int k = 1;
+  std::vector<int> arr = {5, 5, 4};
+  
+  // * testcase 2
+  // int k = 3;
+  // std::vector<int> arr = {4, 3, 1, 1, 3, 3, 2};
   
   std::cout << "k: " << k << std::endl;
   std::cout << "Input Array: ";
   printArr(arr);
 
-  // int ans = bruteForce(arr, k);
-  int ans = findLeastNumOfUniqueInts(arr, k);
+  int ans = bruteForce(arr, k);
+  // int ans = findLeastNumOfUniqueInts(arr, k);
   std::cout << "Unique Integers after K Removals " << ans << std::endl;
 
   return 0;

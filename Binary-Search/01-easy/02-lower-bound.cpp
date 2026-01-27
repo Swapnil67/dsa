@@ -16,21 +16,24 @@
  * https://www.naukri.com/code360/problems/lower-bound_8165382
 */
 
-// ! First element not less than 'x'
+// ! First element greater than or equal to 'x'
 
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(std::vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
-
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 int lowerBoundBrute(std::vector<int> arr, int x) {
   int n = arr.size();

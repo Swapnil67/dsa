@@ -103,14 +103,18 @@ void reorderList(ListNode* head) {
   slow->next = nullptr; // * make two ll here
   // printLL(head);
   
-  ListNode* temp = head;
+  ListNode* cur = head;
   while (rev) {
-    ListNode *temp_next = temp->next;
+    // * point cur to the rev
+    ListNode *cur_next = cur->next;
+    cur->next = rev;
+    
+    // * point rev to the cur->next
     ListNode *rev_next = rev->next;
-    temp->next = rev;
-    rev->next = temp_next;
-    temp = temp_next;
-    rev = rev_next;
+    rev->next = cur_next;
+
+    cur = cur_next; // * move cur
+    rev = rev_next; // * move rev
   }
 }
 
@@ -134,53 +138,16 @@ void reorderList2(ListNode* head) {
   curr = head;
   size_t k = st.size() / 2;
   while (k--) {
-    ListNode* topNode = st.top();
+    ListNode* top_node = st.top();
     st.pop();
 
-    ListNode* frontNode = curr->next;
-    curr->next = topNode;
-    topNode->next = frontNode;
-    curr = frontNode;
+    ListNode *front_node = curr->next;
+    curr->next = top_node;
+    top_node->next = front_node;
+    curr = front_node;
   }
   curr->next = nullptr;
 }
-
-// * ------------------ APPROACH 3: Optimal Approach ---------------------
-ListNode* curr = nullptr;
-
-void helper(ListNode* head) {
-  if (!head)
-    return;
-
-  // * Keep calling recursion till the last node
-  helper(head->next);
-
-  // * Edge cases
-  if (!curr->next)
-    return;
-  else if (curr == head) {
-    curr->next = nullptr;
-    return;
-  }
-
-  ListNode* frontNode = curr->next;
-  curr->next = head;
-  head->next = (frontNode != head) ? frontNode : nullptr;
-  curr = frontNode;
-}
-
-// * Using recursion
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1) - Auxillary Space
-// * SPACE COMPLEXITY O(N) - System stack Space
-void reorderList3(ListNode* head) {
-  if (!head || !head->next)
-    return;
-
-  curr = head;
-  helper(head);
-}
-
 
 int main(void) {
   // * testcase 1
@@ -195,7 +162,6 @@ int main(void) {
 
   reorderList(head);
   // reorderList2(head);
-  // reorderList3(head);
   
   printLL(head);
 

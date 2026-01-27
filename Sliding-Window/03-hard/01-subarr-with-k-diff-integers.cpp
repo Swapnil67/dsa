@@ -18,6 +18,8 @@
  * * Explanation: Subarrays formed with exactly 3 different integers: [1,2,1,3], [2,1,3], [1,3,4].
  * 
  * * https://leetcode.com/problems/subarrays-with-k-different-integers/description/
+ * * https://www.naukri.com/code360/problems/subarrays-with-at-most-k-distinct-values_1473804 
+ * * https://www.geeksforgeeks.org/problems/subarrays-with-at-most-k-distinct-integers/1
 */
 
 #include <vector>
@@ -100,22 +102,22 @@ int subarraysWithKDistinct2(std::vector<int> &arr, int k) {
     freq_map[arr[j]]++;
 
     // * Handle invalid subarray - (Shrink)
-    while(freq_map.size() > k) {
+    while (freq_map.size() > k) {
       freq_map[arr[i]]--;
-      if(freq_map[arr[i]] == 0) {
+      if (freq_map[arr[i]] == 0)
         freq_map.erase(arr[i]);
-      }
+      
       i++;
       i_bada = i;
     }
 
     // * Find smallest subarray ending at 'j'
-    while(freq_map[arr[j]] > 1) {
+    while (freq_map[arr[j]] > 1) {
       freq_map[arr[i]]--;
       i++;
     }
 
-    if(freq_map.size() == k) {
+    if (freq_map.size() == k) {
       ans += (i - i_bada) + 1;
     }
     j++;
@@ -126,24 +128,24 @@ int subarraysWithKDistinct2(std::vector<int> &arr, int k) {
 
 int main() {
   // * testcase 1
-  // int k = 2;
-  // std::vector<int> arr = {1, 2, 1, 2, 3};
+  int k = 2;
+  std::vector<int> arr = {1, 2, 1, 2, 3};
 
   // * testcase 2
-  int k = 3;
-  std::vector<int> arr = {1, 2, 1, 3, 4};
+  // int k = 3;
+  // std::vector<int> arr = {1, 2, 1, 3, 4};
 
   printf("k different: %d\n", k);
   printf("Input Array\n");
   printArr(arr);  
 
   // int ans = bruteForce(arr, k);
-  // int ans = subarraysWithKDistinct(arr, k);
-  int ans = subarraysWithKDistinct2(arr, k);
+  int ans = subarraysWithKDistinct(arr, k);
+  // int ans = subarraysWithKDistinct2(arr, k);
   printf("Subarrays with %d Different Integers is %d\n", k, ans);
 
   return 0;
 }
 
 // * Run the code
-// * $CXX --std=c++20 01-subarr-with-k-diff-integers.cpp -o output && ./output
+// * g++ --std=c++20 01-subarr-with-k-diff-integers.cpp -o output && ./output

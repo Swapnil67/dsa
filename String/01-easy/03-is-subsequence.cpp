@@ -21,19 +21,19 @@
 #include<string>
 #include<iostream>
 
-// * TIME COMPLEXITY O(n1 + n2)
+// * TIME COMPLEXITY O(n + m)
 // * SPACE COMPLEXITY O(1)
 bool isSubsequence(std::string s, std::string t) {
   int i = 0, j = 0;
-  int n1 = s.size(), n2 = t.size();
-  while(i < n1 && j < n2) {
-    if(s[i] == t[j]) {
+  int n = s.size(), m = t.size();
+  while (i < n && j < m) {
+    if (s[i] == t[j])
       i++;
-    }
+    
     j++; // * j is going to increment every time
   }
   // std::cout << "i " << i << " j " << j << std::endl;
-  return i == n1;
+  return i == n;
 }
 
 int main() {

@@ -41,7 +41,7 @@ int longestMountain(std::vector<int> &arr) {
 
   // * 1 to n - 2 (only possible peak elements)
   for (int i = 1; i <= n - 2;) {
-    // * Greater than both the neighbours
+    // * Found peak element (Greater than both the neighbours)
     if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
       int cnt = 1; // * for the peak element
 

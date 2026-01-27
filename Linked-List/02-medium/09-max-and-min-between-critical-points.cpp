@@ -80,10 +80,8 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
   int min_nodes = INT_MAX;
 
   while (cur->next) {
-    bool local_minima =
-        prev->data > cur->data && cur->next->data > cur->data;
-    bool local_maxima =
-        prev->data < cur->data && cur->next->data < cur->data;
+    bool local_minima = prev->data > cur->data && cur->next->data > cur->data;
+    bool local_maxima = prev->data < cur->data && cur->next->data < cur->data;
 
     if (local_minima || local_maxima) { // * check if local minima or local maxima
       if (first_critical_point == -1) {
@@ -109,9 +107,16 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
 }
 
 int main(void) {
+  // * testcase 1
   // std::vector<int> arr = {3, 1};
+  
+  // * testcase 2
   // std::vector<int> arr = {2, 3, 3, 2};
+
+  // * testcase 3
   std::vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
+
+  // * testcase 4
   // std::vector<int> arr = {1, 3, 2, 2, 3, 2, 2, 2, 7};
 
   ListNode *head = arrayToLL(arr);

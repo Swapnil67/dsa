@@ -28,10 +28,9 @@
 // * S = 83, p = 112
 // * 83 - 65 = 18 + 97 = 115
 
-
-#include<stack>
-#include<string>
-#include<iostream>
+#include <stack>
+#include <string>
+#include <iostream>
 
 // * ------------------------- Utility -------------------------`
 
@@ -82,35 +81,17 @@ bool bruteForce(std::string str) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-bool findIsValidPalindrome(std::string str) {
-  int l = 0, r = str.size() - 1;
-  while(l < r) {
-    while (!(isAlphanumeric(str[l])) && l < r) {
-      l++;
-      std::cout << "1" << std::endl;
-    }
+bool findIsValidPalindrome(std::string s) {
+  int i = 0, j = s.size() - 1;
+  while (i < j) {
+    while (i < j && !isalnum(s[i]))
+      i++;
 
-    while (!(isAlphanumeric(str[r])) && l < r){
-      r--;
-      std::cout << "2" << std::endl;
-    }
+    while (j > 0 && !isalnum(s[j]))
+      j--;
 
-    char l_ch = getLowerChar(str[l]);
-    char r_ch = getLowerChar(str[r]);
-
-
-    // * debug
-    // std::cout << "-------------------------------" << std::endl;
-    // std::cout << l << " & " << r << std::endl;
-    // std::cout << str[l] << " " << str[r] << std::endl;
-    // std::cout << l_ch << " " << r_ch << std::endl;
-    // std::cout << isAlphanumeric(str[l]) << " " << isAlphanumeric(str[r]) << std::endl;
-
-    if (l_ch != r_ch)
+    if (i < j && getLowerChar(s[i++]) != getLowerChar(s[j--]))
       return false;
-    
-    l++;
-    r--;
   }
   return true;
 }
@@ -118,14 +99,17 @@ bool findIsValidPalindrome(std::string str) {
 int main() {
   // * testcase 1
   // std::string str = "A man, a plan, a canal: Panama";
+
   // * testcase 2
   // std::string str = "race a car";
+
   // * testcase 3
   // std::string str = "s.";
+
   // * testcase 4
   std::string str = ".,";
 
-  std::cout << str << std::endl;
+  std::cout << "String: " << str << std::endl;
   // bool isValid = bruteForce(str);
   bool isValid = findIsValidPalindrome(str);
   std::cout << "Is Valid Palindrome " << isValid << std::endl;
@@ -133,4 +117,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 01-valid-palindrome-a.cpp -o output && ./output
+// * g++ --std=c++20 01-valid-palindrome-a.cpp -o output && ./output

@@ -21,7 +21,6 @@
  * https://leetcode.com/problems/linked-list-components/description/
 */
 
-#include <stack>
 #include <vector>
 #include <iostream>
 #include <unordered_set>
@@ -66,9 +65,8 @@ ListNode* arrayToLL(std::vector<int> &arr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int numComponents(ListNode *head, std::vector<int> &nums) {
-  std::unordered_set<int> st;
-  for (auto x : nums) // * O(N)
-    st.insert(x);
+  // * Push the nums to set
+  std::unordered_set<int> st(begin(nums), end(nums)); // * O(N)
 
   int components = 0;
   bool streak = false;

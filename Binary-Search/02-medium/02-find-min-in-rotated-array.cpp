@@ -15,6 +15,8 @@
 * https://www.naukri.com/code360/problems/rotated-array_1093219
 */
 
+// ! Amazon, Meta, Google, MIcrosoft, Apple, Uber, Flipkart, IBM
+
 #include <vector>
 #include <climits>
 #include <iostream>
@@ -39,41 +41,41 @@ void printArr(std::vector<int> arr) {
 // * SPACE COMPLEXITY O(1)
 int findMinimum(std::vector<int> arr) {
   int n = arr.size();
-  if(n == 1) return arr[0];
+  if (n == 1)
+    return arr[0];
 
   int l = 0, r = n - 1;
-  int minEle = INT_MAX;
+  int ans = INT_MAX;
   while (l <= r) {
     int m = l + (r - l) / 2;
 
     // * If the whole search space is sorted
-    // * then find the minEle & break
+    // * then find the ans & break
     if(arr[l] <= arr[r]) {
-      minEle = std::min(minEle, arr[l]);
+      ans = std::min(ans, arr[l]);
       break;
     }
 
     // * Left part is sorted
     if (arr[l] <= arr[m]) {
-      minEle = std::min(minEle, arr[l]);
+      ans = std::min(ans, arr[l]);
       l = m + 1;
-    }
-    else {
+    } else {
       // * Right part is sorted
-      minEle = std::min(minEle, arr[m]);
+      ans = std::min(ans, arr[m]);
       r = m - 1;
     }
   }
 
-  return minEle == INT_MAX ? -1 : minEle;
+  return ans == INT_MAX ? -1 : ans;
 }
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {2, 3, 4, 1};
+  std::vector<int> arr = {2, 3, 4, 1};
 
   // * testcase 2
-  std::vector<int> arr = {4, 5, 6, 7, 0, 1, 2};
+  // std::vector<int> arr = {4, 5, 6, 7, 0, 1, 2};
 
   // * testcase 3
   // std::vector<int> arr = {25, 30, 5, 10, 15, 20};

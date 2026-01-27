@@ -85,7 +85,6 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
   }
 }
 
-// * ------------------------------------------------------------------------------------------
 
 // * 01 - Path With Minimum Effort  
 // int minimumEffortPath(std::vector<std::vector<int>>& heights) {
@@ -148,6 +147,8 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
 // {
 // TODO
 // }
+
+// * ------------------------------------------------------------------------------------------
 
 int main(void) {
   return 0;

@@ -70,32 +70,6 @@ void printVectorString(std::vector<std::string> strs) {
   std::cout << "]" << std::endl;
 }
 
-
-// * 06 - Number of Subsequences That Satisfy the Given Sum Condition
-// int numSubseq(std::vector<int> arr, int target) {
-// TODO
-// }
-
-// * 07 - Boats to Save People
-// int numRescueBoats(std::vector<int> boats, int limit) {
-// TODO
-// }
-
-// * 08 - K-th Symbol in Grammar
-// int kthGrammar(int n, int k) {
-// TODO
-// }
-
-// * 09 - Bag of Tokens
-// int bagOfTokensScore(std::vector<int> tokens, int power) {
-// TODO
-// }
-
-// * 10 - Rearrange Array Elements by Sign
-// std::vector<int> rearrangeArray(std::vector<int> arr) {
-// TODO
-// }
-
 // * 11 - Divide Players Into Teams of Equal Skill
 // long long dividePlayers(std::vector<int> skill) {
 // TODO
@@ -180,6 +154,31 @@ void printVectorString(std::vector<std::string> strs) {
 
 // * 05 - Container With Most Water
 // int maxArea(std::vector<int> &height) {
+// TODO
+// }
+
+// * 06 - Number of Subsequences That Satisfy the Given Sum Condition
+// int numSubseq(std::vector<int> arr, int target) {
+// TODO
+// }
+
+// * 07 - Boats to Save People
+// int numRescueBoats(std::vector<int> &people, int limit) {
+// TODO
+// }
+
+// * 08 - K-th Symbol in Grammar
+// int kthGrammar(int n, int k) {
+// TODO
+// } 
+
+// * 09 - Bag of Tokens
+// int bagOfTokensScore(std::vector<int> tokens, int power) {
+// TODO
+// }
+
+// * 10 - Rearrange Array Elements by Sign
+// std::vector<int> rearrangeArray(std::vector<int> arr) {
 // TODO
 // }
 

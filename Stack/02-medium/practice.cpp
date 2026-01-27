@@ -173,55 +173,11 @@ void reverseArr(std::vector<int> &arr, int i, int j) {
 // }
 
 // * 27 - Minimum Remove to Make Valid Parentheses
-std::string minRemoveToMakeValid(std::string s) {
-  int n = s.size();
-  std::stack<int> st;
-  std::unordered_set<int> remove_set;
-  for (int i = 0; i < n; ++i) {
-    char c = s[i];
-    if (c == '(') {
-      st.push(i);
-    } else if (c == ')') {
-      if (st.empty()) {
-        remove_set.insert(i);
-      } else {
-        st.pop();
-      }
-    }
-  }
-
-  while (!st.empty()) {
-    remove_set.insert(st.top());
-    st.pop();
-  }
-
-  std::string ans = "";
-  for (int i = 0; i < n; ++i) {
-    if (remove_set.count(i))
-      continue;
-    ans += s[i];
-  }
-
-  return ans;
-}
+// std::string minRemoveToMakeValid(std::string s) {
+// TODO
+// }
 
 int main(void) {
-  // * testcase 1
-  // std::string s = "lee(t(c)o)de)";
-
-  // * testcase 2
-  // std::string s = "a)b(c)d";
-
-  // * testcase 3
-  // std::string s = "))((";
-
-  // * testcase 4
-  std::string s = ")())m(s)(";
-
-  std::cout << "Input string: " << s << std::endl;
-  std::string ans = minRemoveToMakeValid(s);
-  std::cout << "Ans: " << ans << std::endl;
-
   return 0;
 }
 

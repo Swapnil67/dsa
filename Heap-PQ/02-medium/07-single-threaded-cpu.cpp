@@ -27,6 +27,8 @@
  * https://leetcode.com/problems/single-threaded-cpu/description/
 */
 
+// ! Google
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -42,7 +44,9 @@ void printArr(std::vector<int> arr) {
 
 typedef std::pair<int, int> P;
 
+// * ------------------------- Optimal Approach -------------------------
 // * Sort the task in ASC order of start time
+// * Creating a new sorted tasks array.
 std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
   int n = tasks.size();
 
@@ -54,37 +58,79 @@ std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
     sorted_tasks.push_back({start_time, processing_time, i});
   }
   std::sort(begin(sorted_tasks), end(sorted_tasks));
-
   // * For debugging
   // std::cout << "Tasks: " << std::endl;
   // for (auto &vec : sorted_tasks)
   //   printArr(vec);
 
   std::vector<int> ans;
-
-  long long current_time = 0, i = 0;
-  std::priority_queue<P, std::vector<P>, std::greater<>> pq; // * {processing_time, index}
-  while (i < n || !pq.empty()) {
+  long time = 0, i = 0;
+  // * Heap = {processing_time, index}
+  std::priority_queue<P, std::vector<P>, std::greater<>> busy; 
+  while (i < n || !busy.empty()) {
     // * initial task time start
-    if (pq.empty() && current_time < sorted_tasks[i][0]) {
-      current_time = sorted_tasks[i][0];
+    if (busy.empty()) {
+      time = std::max(time, (long)tasks[i][0]);
     }
-    // std::cout << current_time << std::endl;
+    // std::cout << time << std::endl;
     
     // * Here we are push all the task which can be given to cpu
-    // * if they have arrived before the current_time  
-    while (i < n && sorted_tasks[i][0] <= current_time) {
+    // * if they have arrived before the time  
+    while (i < n && sorted_tasks[i][0] <= time) {
       // std::cout << "push: " << sorted_tasks[i][0] << std::endl;
-      pq.push({sorted_tasks[i][1], sorted_tasks[i][2]}); // * {processing_time, index}
+      busy.push({sorted_tasks[i][1], sorted_tasks[i][2]}); // * {processing_time, index}
       i++;
     }
 
     // * Get the task with least processing time
-    std::pair<int, int> cur_task = pq.top();
-    pq.pop();
+    auto [processing_tm, index] = busy.top();
+    busy.pop();
+    time += processing_tm; // * Add the processing time to `time`
+    ans.push_back(index);
+  }
 
-    current_time += cur_task.first; // * Add the processing time to `current_time`
-    ans.push_back(cur_task.second);
+  return ans;
+}
+
+// * ------------------------- Optimal Approach -------------------------`
+// * Sort the task in ASC order of start time
+// * Using Input Array itself.
+std::vector<int> cpuTasks2(std::vector<std::vector<int>> &tasks) {
+  int n = tasks.size();
+
+  // * Create the sorted task array with each task index
+  for (int i = 0; i < n; ++i) {
+    tasks[i].push_back(i);
+  }
+  std::sort(begin(tasks), end(tasks));
+  // * For debugging
+  // std::cout << "Tasks: " << std::endl;
+  // for (auto &vec : tasks)
+  //   printArr(vec);
+
+  std::vector<int> ans;
+  long time = 0, i = 0;
+  // * Heap = {processing_time, index}
+  std::priority_queue<P, std::vector<P>, std::greater<>> busy; 
+  while (i < n || !busy.empty()) {
+    // * initial task time start
+    if (busy.empty()) {
+      time = std::max(time, (long)tasks[i][0]);
+    }
+    // std::cout << time << std::endl;
+    
+    // * Here we are push all the task which can be given to cpu
+    // * if they have arrived before the time  
+    while (i < n && tasks[i][0] <= time) {
+      busy.push({tasks[i][1], tasks[i][2]}); // * {processing_time, index}
+      i++;
+    }
+
+    // * Get the task with least processing time
+    auto [processing_tm, index] = busy.top();
+    busy.pop();
+    time += processing_tm; // * Add the processing time to `time`
+    ans.push_back(index);
   }
 
   return ans;

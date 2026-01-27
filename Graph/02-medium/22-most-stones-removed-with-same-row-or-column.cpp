@@ -155,10 +155,10 @@ int removeStonesDSU(std::vector<std::vector<int>> &stones) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> stones = {{0, 0}, {0, 1}, {1, 0}, {1, 2}, {2, 1}, {2, 2}};
+  // std::vector<std::vector<int>> stones = {{0, 0}, {0, 1}, {1, 0}, {1, 2}, {2, 1}, {2, 2}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> stones = {{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}};
+  std::vector<std::vector<int>> stones = {{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}};
 
   std::cout << "Stones: " << std::endl;
   for (auto &vec : stones)

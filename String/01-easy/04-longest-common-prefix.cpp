@@ -15,15 +15,14 @@
  * * https://www.naukri.com/code360/problems/longest-common-prefix_2090383
 */
 
-#include<unordered_map>
-#include<string>
-#include<iostream>
+#include <string>
+#include <vector>
+#include <iostream>
 
 void printVectorString(std::vector<std::string> arr) {
   std::cout << "[ ";
   for (std::string s : arr) {
-    std::cout << s;
-    std::cout << ", ";
+    std::cout << s << ", ";
   }
   std::cout << "]\n";
 }
@@ -65,6 +64,7 @@ std::string longestCommonPrefix(std::vector<std::string> strs) {
 
 int main() {
   std::vector<std::string> strs = {"flower", "flow", "flight"};
+  // std::vector<std::string> strs = {"dog", "racecar", "car"};
   printVectorString(strs);
   std::string commonPrefix = longestCommonPrefix(strs);
   std::cout << "Longest Common Prefix is = " << commonPrefix << std::endl;
@@ -72,4 +72,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 04-longest-common-prefix.cpp -o 04-longest-common-prefix && ./04-longest-common-prefix
+// * g++ --std=c++17 04-longest-common-prefix.cpp -o output && ./output

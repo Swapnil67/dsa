@@ -18,7 +18,7 @@
 * https://www.geeksforgeeks.org/problems/range-sum-of-bst/1
 */
 
-// ! Apple, Ola
+// ! Amazon, Google, Meta, Microsoft, Apple
 
 #include <vector>
 #include <climits>

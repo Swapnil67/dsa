@@ -12,12 +12,12 @@
  * input  : candidates = [10,1,2,7,6,1,5], target = 8
  * output : [[1,1,6], [1,2,5], [1,7], [2,6]]
  * 
- * 
  * Example 2
  * input  : candidates = [2,5,2,1,2], target = 5
  * output : [[1,2,2], [5]]
  * 
  * https://leetcode.com/problems/combination-sum-ii/description/
+ * https://www.naukri.com/code360/problems/combination-sum-ii_1112622
 */
 
 #include <set>
@@ -120,7 +120,9 @@ std::vector<std::vector<int>> combinationSum(std::vector<int> &candidates, int t
 int main(void) {
   int target = 8;
   std::vector<int> candidates = {10, 1, 2, 7, 6, 1, 5};
+  
   std::cout << "target: " << target << std::endl;
+  std::cout << "Candidates: ";
   printArr(candidates);
 
   // std::vector<std::vector<int>> ans = bruteForce(candidates, target);

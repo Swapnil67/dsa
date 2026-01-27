@@ -70,6 +70,7 @@ int main() {
   
   // int insertIndex = bruteForce(arr, target);
   int insertIndex = findInsertIndex(arr, target);
+  
   std::cout<<"Insert Index: "<<insertIndex<<std::endl;
 
   return 0;

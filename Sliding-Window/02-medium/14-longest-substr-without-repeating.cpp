@@ -1,26 +1,30 @@
-/**
- * * Leetcode 3
- * * Longest Substring Without Repeating Characters
- * * Given a string s, find the length of the longest substring without repeating characters.
+/*
+ * Leetcode 3
+ * Longest Substring Without Repeating Characters
  * 
- * * Example 1
- * * Input  : s = "abcabcbb"
- * * Output : 3
- * * Explanation: The answer is "abc", with the length of 3
+ * Given a string s, find the length of the longest substring without repeating characters.
+ * 
+ * Example 1
+ * Input  : s = "abcabcbb"
+ * Output : 3
+ * Explanation: The answer is "abc", with the length of 3
 
- * * Example 2
- * * Input  : s = "bbbbb"
- * * Output : 1
- * * Explanation: The answer is "b", with the length of 1.
+ * Example 2
+ * Input  : s = "bbbbb"
+ * Output : 1
+ * Explanation: The answer is "b", with the length of 1.
 
- * * Example 3
- * * Input  : s = "tmmzuxt"
- * * Output : 5
- * * Explanation: The answer is "mzuxt", with the length of 5.
+ * Example 3
+ * Input  : s = "tmmzuxt"
+ * Output : 5
+ * Explanation: The answer is "mzuxt", with the length of 5.
 
- * * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
- * * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+ * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
+ * https://www.geeksforgeeks.org/problems/longest-distinct-characters-in-string5848/1
 */
+
+// ! Amazon, Google, Meta, Microsoft
 
 #include <vector>
 #include <iostream>
@@ -101,9 +105,6 @@ int lengthOfLongestSubstring2(std::string s) {
     // * Shrink the window
     while (charFreq[s[j]] > 1) {
       charFreq[s[i]]--;
-      if (charFreq[s[i]] == 0) {
-        charFreq.erase(s[i]);
-      }
       i++;
     }
 

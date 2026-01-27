@@ -31,7 +31,9 @@
  * Output :  -1
  * 
  * https://leetcode.com/problems/minimum-speed-to-arrive-on-time/description/
- */
+*/
+
+// ! Google
 
 #include <vector>
 #include <math.h>
@@ -56,14 +58,17 @@ bool isValidSpeed(std::vector<int> &dist, int &speed, double &maxHours) {
     double hr = std::ceil((double)km / (double)speed);
     // std::cout << dist[i] << " => " << hr << std::endl;
     currentHrs += hr;
+
+    if (currentHrs > maxHours) // * Took more time (no need to check further)
+      break;
   }
+
   double hr = ((double)(dist[n - 1]) / (double)speed);
   currentHrs += hr;
-  // std::cout << dist[n - 1] << " => " << hr << std::endl;
 
+  // std::cout << dist[n - 1] << " => " << hr << std::endl;
   // std::cout << speed << " -> " << currentHrs << std::endl;
   // std::cout << "------------------------------" << std::endl;
-
   return currentHrs <= maxHours;
 }
 
@@ -71,7 +76,7 @@ bool isValidSpeed(std::vector<int> &dist, int &speed, double &maxHours) {
 // * TIME COMPLEXITY O(log(1e9-7)) * O(n)
 // * SPACE COMPLEXITY O(1)
 int minSpeedOnTime(std::vector<int>& dist, double hour) {
-  int l = 0, r = 1e9 - 7;
+  int l = 0, r = 1e7;
   int ans = -1;
   while (l <= r) {
     int m = l + (r - l) / 2;
@@ -99,6 +104,7 @@ int main(void) {
 
   int speed = minSpeedOnTime(dist, hour);
   std::cout << "Minimum Speed to Arrive on Time: " << speed << std::endl;
+
   return 0;
 }
 

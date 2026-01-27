@@ -122,12 +122,15 @@ ListNode* bruteForce(ListNode* head, int n) {
   return reverseLL(new_head->next);
 }
 
+
+// * ------------------ APPROACH 2: Optimal Solution ---------------------
+// * TIME COMPLEXITY O(N/2) * 2 = O(N)
+// * SPACE COMPLEXITY O(1)
 ListNode* removeNthFromEnd(ListNode* head, int n) {
   if (!head)
       return head;
 
   int cnt = count_ll(head);
-
   if (cnt == n) { // * Since we are removing from end
       // * Remove Head
       ListNode* new_head = head->next;

@@ -87,12 +87,12 @@ std::pair<int, int> getFloorAndCeil(std::vector<int>arr, int x) {
 
 int main() {
   // * testcase 1
-  // int x = 5;
-  // std::vector<int> arr = {1, 2, 3, 4, 8, 10, 10, 12, 19};
+  int x = 5;
+  std::vector<int> arr = {1, 2, 3, 4, 8, 10, 10, 12, 19};
 
   // * testcase 2
-  int x = 2;
-  std::vector<int> arr = {3, 4, 4, 7, 8, 10};
+  // int x = 2;
+  // std::vector<int> arr = {3, 4, 4, 7, 8, 10};
 
   printArr(arr);
   std::pair<int, int> ans = getFloorAndCeil(arr, x);

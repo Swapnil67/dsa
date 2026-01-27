@@ -25,6 +25,7 @@
  * Output    : [[0,0]]
 
  * https://leetcode.com/problems/pacific-atlantic-water-flow/description/
+ * https://www.geeksforgeeks.org/problems/pacific-atlantic-water-flow/1
 */
 
 // ! Amazon
@@ -66,9 +67,9 @@ void dfs(
     return;
   }
 
-  if (heights[r][c] > prev_val) {
+  // * Water cannot flow here
+  if (heights[r][c] > prev_val)
     return;
-  }
 
   int tmp = heights[r][c];
   heights[r][c] = INT_MAX;  // * this is to mark visited
@@ -99,9 +100,9 @@ void dfs(
 
   // * Go to neighbours
   for (auto dir : dirs) {
-    int nr = r + dir[0], nc = c + dir[1];
-    if (is_safe(nr, nc) && !ocean[nr][nc] && heights[nr][nc] >= heights[r][c]) {
-      dfs(nr, nc, ocean, heights);
+    int dr = r + dir[0], dc = c + dir[1];
+    if (is_safe(dr, dc) && !ocean[dr][dc] && heights[dr][dc] >= heights[r][c]) {
+      dfs(dr, dc, ocean, heights);
     }
   }
 }
@@ -130,6 +131,8 @@ std::vector<std::vector<int>> bruteForce(std::vector<std::vector<int>> &heights)
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * DFS
+// * Here we need to go in reverse directions i.e., from All 4 borders to center of cube and
+// * mark cells in which water can flow.
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
 std::vector<std::vector<int>> pacificAtlantic(std::vector<std::vector<int>> &heights) {
@@ -161,7 +164,11 @@ std::vector<std::vector<int>> pacificAtlantic(std::vector<std::vector<int>> &hei
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> heights = {{1, 2, 2, 3, 5}, {3, 2, 3, 4, 4}, {2, 4, 5, 3, 1}, {6, 7, 1, 4, 5}, {5, 1, 1, 2, 4}};
+  std::vector<std::vector<int>> heights = {{1, 2, 2, 3, 5},
+                                           {3, 2, 3, 4, 4},
+                                           {2, 4, 5, 3, 1},
+                                           {6, 7, 1, 4, 5},
+                                           {5, 1, 1, 2, 4}};
 
   // * testcase 2
   // std::vector<std::vector<int>> heights = {{1}};
@@ -171,8 +178,8 @@ int main(void) {
   printArr(vec);
   
   std::cout << "-------- Pacific Atlantic Water Flow -------- " << std::endl;
-  // std::vector<std::vector<int>> ans = bruteForce(heights);
-  std::vector<std::vector<int>> ans = pacificAtlantic(heights);
+  std::vector<std::vector<int>> ans = bruteForce(heights);
+  // std::vector<std::vector<int>> ans = pacificAtlantic(heights);
   for (auto &vec : ans)
     printArr(vec);
 

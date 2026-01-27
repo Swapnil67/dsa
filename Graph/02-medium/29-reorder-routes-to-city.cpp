@@ -27,6 +27,8 @@
  * https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero
 */
 
+// ! Meta, Microsoft
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -66,16 +68,18 @@ std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<i
   return adj;
 }
 
-void dfs(int u, int parent, int &reorder, std::unordered_map<int, std::vector<pii>> &adj) {
-  for (auto &p: adj[u]) {
-    if (p.first == parent) // * don't go to parent again
+void dfs(int u, int parent, int &reorder,
+         std::unordered_map<int, std::vector<pii>> &adj)
+{
+  for (auto &[v, path]: adj[u]) {
+    if (v == parent) // * don't go to parent again
       continue;
 
-    if (p.second == 1) { // * Moved away from 'u' using real path so we need to flip
+    if (path == 1) { // * Moved away from 'u' using real path so we need to flip
       reorder += 1;
     } 
 
-    dfs(p.first, u, reorder, adj);
+    dfs(v, u, reorder, adj);
   }
 }
 
@@ -85,6 +89,7 @@ void dfs(int u, int parent, int &reorder, std::unordered_map<int, std::vector<pi
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
 int minReorder(int n, std::vector<std::vector<int>>& connections) {
+  // * 1. Create an Adj with Real & fake paths
   std::unordered_map<int, std::vector<pii>> adj = constructadj(connections);
   // std::cout << "Adjacency List" << std::endl;
   // printAdjList(adj); // * For Debugging

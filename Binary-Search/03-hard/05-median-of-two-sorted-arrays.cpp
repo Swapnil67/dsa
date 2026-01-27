@@ -1,4 +1,5 @@
 /*
+* Leetcode - 4
 * Median of Two Sorted Arrays
 * Given two sorted arrays nums1 and nums2 of size m and n respectively,
 * return the median of the two sorted arrays.
@@ -117,14 +118,14 @@ double bruteForce(std::vector<int> arr1, std::vector<int> arr2) {
 // * SPACE COMPLEXITY O(1)
 double betterApproach(std::vector<int> arr1, std::vector<int> arr2) {
   int n1 = arr1.size(), n2 = arr2.size();
-  int n = n1+n2;
+  int n = n1 + n2;
 
   std::vector<int> values = returnMedianPositions(arr1, arr2);
   int ele1 = values[0], ele2 = values[1];
 
   if (n % 2 == 1)
     return ele1;
-  
+
   return (double)((double)(ele1 + ele2) / 2.0);
 }
 
@@ -132,26 +133,22 @@ double betterApproach(std::vector<int> arr1, std::vector<int> arr2) {
 // * Find Valid Symmetry
 double findMedian(std::vector<int> arr1, std::vector<int> arr2) {
   int n1 = arr1.size(), n2 = arr2.size();
-  if(n1 > n2) findMedian(arr2, arr1);
+  if (n1 > n2)
+    findMedian(arr2, arr1);
   int left = (n1 + n2 + 1) / 2;
   int n = n1 + n2;
-  // std::cout << "left " << left << std::endl;
   
   int l = 0, r = n1;
-  while(l <= r) {
+  while (l <= r) {
     // std::cout << "l " << l << " r " << r << std::endl;
     int m1 = l + (r - l) / 2;
     int m2 = left - m1;
     // std::cout << " m1 " << m1 << " m2 " << m2 << std::endl;
 
-    int l1 = INT_MIN, l2 = INT_MIN;
-    int r1 = INT_MAX, r2 = INT_MAX;
-    if (m1 - 1 >= 0)
-      l1 = arr1[m1 - 1];
-    if (m2 - 1 >= 0)
-      l2 = arr2[m2 - 1];
-    if (m1 < n1) r1 = arr1[m1];
-    if (m2 < n2) r2 = arr2[m2];
+    int l1 = (m1 - 1 >= 0) ? arr1[m1 - 1] : INT_MIN;
+    int l2 = (m2 - 1 >= 0) ? arr2[m2 - 1] : INT_MIN;
+    int r1 = (m1 < n1) ? arr1[m1] : INT_MAX;
+    int r2 = (m2 < n2) ? arr2[m2] : INT_MAX;
 
     // std::cout << " l1 " << l1 << " l2 " << l2 << std::endl;
     // std::cout << " r1 " << r1 << " r2 " << r2 << std::endl;
@@ -177,9 +174,9 @@ double findMedian(std::vector<int> arr1, std::vector<int> arr2) {
 }
 
 int main() {
-  // std::vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
+  std::vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
   // std::vector<int> nums1 = {7, 12, 14, 15}, nums2 = {1, 2, 3, 4, 9, 11};
-  std::vector<int> nums1 = {1, 2}, nums2 = {3, 4};
+  // std::vector<int> nums1 = {1, 2}, nums2 = {3, 4};
 
   std::cout << "First Array" << std::endl;
   printArr(nums1);
@@ -191,6 +188,7 @@ int main() {
   // double median = betterApproach(nums1, nums2);
   double median = findMedian(nums1, nums2);
   std::cout << "Median of two sorted array is " << median << std::endl;
+
   return 0;
 }
 

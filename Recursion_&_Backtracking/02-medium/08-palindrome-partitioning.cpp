@@ -49,7 +49,7 @@ void solve(std::string &s,
   }
 
   for (int i = idx; i < s.size(); ++i) {
-    std::cout << s.substr(idx, i - idx + 1) << std::endl;
+    // std::cout << s.substr(idx, i - idx + 1) << std::endl;
     if (check_palindrome(s, idx, i)) {
       cur.push_back(s.substr(idx, i - idx + 1));
       solve(s, i + 1, cur, ans);
@@ -78,7 +78,7 @@ int main(void) {
   for (auto &vec : ans)
     printArr(vec);
 
- return 0;
+  return 0;
 }
 
 // * Run the code

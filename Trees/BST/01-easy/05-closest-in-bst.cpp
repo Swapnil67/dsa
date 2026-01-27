@@ -2,10 +2,11 @@
 * Closest Binary Search Tree Value
 *
 * https://www.naukri.com/code360/problems/closest-element-in-bst_920449
+* https://leetcode.com/problems/closest-binary-search-tree-value/description/
 * https://www.geeksforgeeks.org/problems/find-the-closest-element-in-bst/1
 */
 
-// ! Adobe
+// ! Adobe, Amazon, Google, Meta, Microsoft, Oracle
 
 #include <vector>
 #include <climits>
@@ -37,31 +38,60 @@ struct TreeNode {
     }
 };
 
-// * TIME COMPLEXITY  O(logn)
+void inorder(TreeNode* root, double target, double closest, int &ans) {
+  if (!root)
+    return;
+
+  inorder(root->left, target, closest, ans);
+
+  double distance = std::abs(root->data - target);
+  if (distance == 0) {
+    ans = root->data;
+    return;
+  }
+
+  if (closest > distance || (closest == distance && root->data < ans)) {
+    closest = distance;
+    ans = root->data;
+  }
+
+  inorder(root->right, target, closest, ans);
+}
+
+// * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
+// * n - nodes in binary tree
+// * TIME COMPLEXITY  O(n)
+// * SPACE COMPLEXITY O(n)
+int bruteForce(TreeNode* root, double target) {
+  double closest = INT_MAX;
+  int ans = 0;
+  inorder(root, target, closest, ans);
+  return ans;
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * H = height of BST
+// * TIME COMPLEXITY  O(logn) or O(H)
 // * SPACE COMPLEXITY O(1)
-int findClosestElement(TreeNode *root, int k) {
+int closestValue(TreeNode* root, double target) {
   if (!root)
     return 0;
 
-  int ans ;
-  int closest_dist = INT_MAX;
-
+  int ans;
+  double closest = INT_MAX;
   while (root) {
-    int dist = std::abs(root->data - k);
-    if (closest_dist >= dist && root->data < ans) {
-      closest_dist = dist;
-      ans = root->data;
-    }
-
+    double dist = abs(root->data - target);
     if (dist == 0)
       return root->data;
 
-    // * Binary search
-    if (root->data < k) {
-      root = root->right;
-    } else {
-      root = root->left;
+    // * Case 1: Current distance is more closer than previous
+    // * Case 2: Both distance are equal then we choose the lower answer
+    if (closest > dist || (dist == closest && root->data < ans)) {
+      closest = dist;
+      ans = root->data;
     }
+
+    root = target < root->data ? root->left : root->right;
   }
 
   return ans;
@@ -82,7 +112,7 @@ int main(void) {
   int k = 32;
 
   std::cout << "k: " << k << std::endl;
-  int ans = findClosestElement(root, k);
+  int ans = closestValue(root, k);
   std::cout << "Closest node: " << ans << std::endl;
 
   return 0;

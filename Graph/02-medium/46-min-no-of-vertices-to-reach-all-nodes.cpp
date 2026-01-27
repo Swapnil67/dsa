@@ -116,7 +116,6 @@ std::vector<int> findSmallestSetOfVertices(int n, std::vector<std::vector<int>> 
     if (indegree[i] == 0)
       ans.push_back(i);
   }
-
   return ans;
 } 
 

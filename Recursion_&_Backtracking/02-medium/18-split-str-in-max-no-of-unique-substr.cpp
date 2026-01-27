@@ -45,8 +45,7 @@ void printArr(std::vector<T> &arr) {
 // * TIME COMPLEXITY O(2^n * n)
 // * SPACE COMPLEXITY O(n)
 void dfs(std::string &s, int &ans, std::unordered_set<std::string> &st, int i) {
-  // * pruning
-  if ((st.size() - 1) + (s.length() - 1) <= ans)
+  if ((st.size() - 1) + (s.size() - i + 1) <= ans) // * pruning
     return;
 
   if (i >= s.size()) {
@@ -75,13 +74,13 @@ int maxUniqueSplit(std::string &s) {
 
 int main(void) {
   // * testcase 1
-  std::string s = "ababccc";
+  // std::string s = "ababccc";
 
   // * testcase 2
   // std::string s = "aba";
 
   // * testcase 2
-  // std::string s = "aa";
+  std::string s = "aa";
 
   std::cout << "Input string: " << s << std::endl;
 

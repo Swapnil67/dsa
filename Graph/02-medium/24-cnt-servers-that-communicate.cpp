@@ -1,6 +1,33 @@
-#include<vector>
-#include<iostream>
-#include<unordered_map>
+/*
+ * Leetcode - 1267
+ * Count Servers that Communicate
+ *
+ * You are given a map of a server center, represented as a m * n integer matrix grid, where 1 means that on that cell
+ * there is a server and 0 means that it is no server. Two servers are said to communicate if they are on 
+ * the same row or on the same column.
+
+ * Return the number of servers that communicate with any other server.
+
+ * Example 1  :
+ * Input      : grid = [[1,0],[0,1]]
+ * Output     : 0
+
+ * Example 2  :
+ * Input      : grid = [[1,0],[1,1]]
+ * Output     : 3
+
+ * Example 3  :
+ * Input      : grid = [[1,1,0,0],[0,0,1,0],[0,0,1,0],[0,0,0,1]]
+ * Output     : 4
+ * 
+ * https://leetcode.com/problems/count-servers-that-communicate
+*/
+
+#include <vector>
+#include <numeric>
+#include <iostream>
+
+// ! Google, Microsoft, Amazon, Meta, Oracle
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -55,7 +82,7 @@ int countServersBrute(std::vector<std::vector<int>>& grid) {
 
       bool found = false;
 
-      // * check in same col
+      // * check in same row
       for (int col = 0; col < n; ++col) {
         if (col != c && grid[r][col] == 1) {
           found = true;
@@ -63,7 +90,7 @@ int countServersBrute(std::vector<std::vector<int>>& grid) {
         }
       }
 
-      // * check in same row
+      // * check in same col
       if (!found) {
         for (int row = 0; row < m; ++row) {
           if (row != c && grid[row][c] == 1) {
@@ -89,15 +116,14 @@ int countServersBrute(std::vector<std::vector<int>>& grid) {
 int countServers(std::vector<std::vector<int>>& grid) {
   int ROWS = grid.size(), COLS = grid[0].size();
 
+  // * DSU boilerplate
+  int n = ROWS * COLS;
+  std::vector<int> rank(n, 1);
+  std::vector<int> parent(n);
+  std::iota(begin(parent), end(parent), 0);
+  
   std::vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
   std::vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
-
-  std::vector<int> rank(ROWS * COLS, 1);
-  std::vector<int> parent(ROWS * COLS);
-  for (int i = 0; i < (ROWS * COLS); ++i) {
-    parent[i] = i;
-  }
-
   for (int r = 0; r < ROWS; ++r) {
     for (int c = 0; c < COLS; ++c) {
       if (grid[r][c] == 1) {
@@ -114,9 +140,9 @@ int countServers(std::vector<std::vector<int>>& grid) {
   }
 
   // * For debugging
-  // std::cout << "Servers count in each row & col" << std::endl;
-  // printArr(row_servers_cnt);
-  // printArr(col_servers_cnt);
+  std::cout << "Servers count in each row & col" << std::endl;
+  printArr(row_servers_cnt);
+  printArr(col_servers_cnt);
 
   int res = 0;
   for (int r = 0; r < ROWS; ++r) {

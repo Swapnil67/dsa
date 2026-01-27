@@ -1,30 +1,31 @@
 
-/**
- * * Leetcode - 930
- * * Binary Subarrays With Sum
- * * Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal.
- * * A subarray is a contiguous part of the array.
+/*
+ * Leetcode - 930
+ * Binary Subarrays With Sum
+ * 
+ * Given a binary array nums and an integer goal, return the number of non-empty subarrays with a sum goal.
+ * A subarray is a contiguous part of the array.
 
- * * Example 1
- * * Input  : nums = [1,0,1,0,1], goal = 2
- * * Output : 4
- * * Explanation: The 4 subarray whose sum is equal to 2
- * * [1,0,1,0,1]
- * * ______
- * * [1,0,1,0,1]
- * * ________
- * * [1,0,1,0,1]
- * *    _______
- * * [1,0,1,0,1]
- * *      ______
+ * Example 1
+ * Input  : nums = [1,0,1,0,1], goal = 2
+ * Output : 4
+ * Explanation: The 4 subarray whose sum is equal to 2
+ * [1,0,1,0,1]
+ * ______
+ * [1,0,1,0,1]
+ * ________
+ * [1,0,1,0,1]
+ *    _______
+ * [1,0,1,0,1]
+ *      ______
  
 
- * * Example 2
- * * Input  : nums = [0,0,0,0,0], goal = 0
- * * Output : 15
- * * Explanation: The 15 subarray whose sum is equal to 0
+ * Example 2
+ * Input  : nums = [0,0,0,0,0], goal = 0
+ * Output : 15
+ * Explanation: The 15 subarray whose sum is equal to 0
  * 
- * * https://leetcode.com/problems/binary-subarrays-with-sum/description/
+ * https://leetcode.com/problems/binary-subarrays-with-sum/description/
 */
 
 
@@ -70,16 +71,16 @@ int bruteForce(std::vector<int> arr, int goal) {
 // * SPACE COMPLEXITY O(N)
 int betterApproach(std::vector<int> arr, int goal) {
   int n = arr.size();
-  int ans = 0, cur_sum = 0;
+  int ans = 0, sum = 0;
   std::unordered_map<int, int> sum_count;
   sum_count[0] = 1; // * If first rem comes zero
   for(int &num : arr) {
-    cur_sum += num;
-    int rem = cur_sum - goal;
-    if(sum_count.find(rem) != sum_count.end()) {
+    sum += num;
+    int rem = sum - goal;
+    if (sum_count.find(rem) != sum_count.end()) {
       ans += sum_count[rem];
     }
-    sum_count[cur_sum]++;
+    sum_count[sum]++;
   }
   return ans;
 }
@@ -146,12 +147,12 @@ int numSubarraysWithSum2(std::vector<int> arr, int goal) {
 
 int main() {
   // * testcase 1
-  // int goal = 2;
-  // std::vector<int> arr = {1, 0, 1, 0, 1};
+  int goal = 2;
+  std::vector<int> arr = {1, 0, 1, 0, 1};
 
   // * testcase 2
-  int goal = 2;
-  std::vector<int> arr = {0, 1, 0, 0, 1};
+  // int goal = 2;
+  // std::vector<int> arr = {0, 1, 0, 0, 1};
 
   // * testcase 3
   // int goal = 0;

@@ -117,8 +117,13 @@ ListNode* mergeNodes(ListNode* head) {
 }
 
 int main(void) {
+  // * testcase 1
   std::vector<int> arr = {0, 3, 1, 0, 4, 5, 2, 0};
+  
+  // * testcase 2
   // std::vector<int> arr = {0, 1, 0, 3, 0, 2, 2, 0};
+
+  // * testcase 3
   // std::vector<int> arr = {0, 24, 14, 0};
 
   ListNode* head = arrayToLL(arr);

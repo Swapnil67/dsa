@@ -31,6 +31,7 @@
 // ! Microsoft, Meta, Amazon
 
 #include <vector>
+#include <numeric>
 #include <iostream>
 
 template <typename T>
@@ -95,9 +96,7 @@ int makeConnected(int n, std::vector<std::vector<int>> &connections) {
   // * 1. Initialize rank and parent vectors
   std::vector<int> rank(n, 0);
   std::vector<int> parent(n);
-  for (int i = 0; i < n; ++i) {
-    parent[i] = i;
-  }
+  std::iota(begin(parent), end(parent), 0);
 
   // * 2. Classic DSU
   for (auto &vec : connections) {
@@ -121,12 +120,12 @@ int main(void) {
   // std::vector<std::vector<int>> connections = {{0, 1}, {0, 2}, {1, 2}};
   
   // * testcase 2
-  // int n = 6;
-  // std::vector<std::vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
+  int n = 6;
+  std::vector<std::vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
   
   // * testcase 3
-  int n = 6;
-  std::vector<std::vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}};
+  // int n = 6;
+  // std::vector<std::vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}};
   
   std::cout << "Components: " << n << std::endl;
   std::cout << "Connections: " << std::endl;

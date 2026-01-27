@@ -134,7 +134,7 @@ std::vector<std::string> findAllRecipes(
   std::unordered_map<std::string, std::vector<int>> adj;
   for (int i = 0; i < recipes_cnt; ++i) { // * O(n)
     for (auto &ing : ingredients[i]) { // * O(m)
-      // * If ingredient is not found ing supplies that means this recipe depends on `ing`
+      // * If ingredient is not found in supplies that means this recipe depends on `ing`
       if (!supplies_set.count(ing)) {
         // * ing -> recipe[i]
         indegree[i]++;
@@ -143,6 +143,8 @@ std::vector<std::string> findAllRecipes(
     }
   }
   // printAdjList(adj);
+  // std::cout << "Indegree" << std::endl;
+  // printArr(indegree);
 
   // * Kahn's Algo 
   std::queue<int> q;
@@ -150,7 +152,6 @@ std::vector<std::string> findAllRecipes(
     if (indegree[i] == 0)
       q.push(i);
   }
-  // printArr(indegree);
 
   std::vector<std::string> ans;
   while (!q.empty()) { // * O(n) ~ Worst case all recipes
@@ -183,12 +184,12 @@ int main(void) {
   // std::vector<std::vector<std::string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}};
 
   // * testcase 3
-  // std::vector<std::string> recipes = {"bread", "sandwich", "burger"}, supplies = {"yeast", "flour", "meat"};
-  // std::vector<std::vector<std::string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}, {"sandwich", "meat", "bread"}};
+  std::vector<std::string> recipes = {"bread", "sandwich", "burger"}, supplies = {"yeast", "flour", "meat"};
+  std::vector<std::vector<std::string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}, {"sandwich", "meat", "bread"}};
 
   // * testcase 4
-  std::vector<std::string> recipes = {"sandwich,", "bread", "burger"}, supplies = {"yeast", "flour", "meat"};
-  std::vector<std::vector<std::string>> ingredients = {{"bread", "meat"}, {"yeast", "flour"}, {"meat", "bread"}};
+  // std::vector<std::string> recipes = {"sandwich,", "bread", "burger"}, supplies = {"yeast", "flour", "meat"};
+  // std::vector<std::vector<std::string>> ingredients = {{"bread", "meat"}, {"yeast", "flour"}, {"meat", "bread"}};
 
   std::cout << "Recipes: ";
   printArr(recipes);

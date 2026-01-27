@@ -24,6 +24,8 @@
 * https://www.geeksforgeeks.org/problems/implementing-ceil-in-bst/1
 */
 
+// ! Patym, Flipkart, Samsung
+
 #include <vector>
 #include <iostream>
 
@@ -39,16 +41,14 @@ struct TreeNode {
     data = val;
     left = right = nullptr;
   }
-};
 
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+  ~TreeNode() {
+    if (left)
+      delete left;
+    if (right)
+      delete right;
   }
-  std::cout << "]" << std::endl;
-}
+};
 
 // * TIME COMPLEXITY  O(logn)
 // * SPACE COMPLEXITY O(1)
@@ -59,11 +59,12 @@ int findCeil(TreeNode* root, int val) {
       return val;
 
     // * if cur node is > val then this is possible ceil
-    if (root && root->data > val)
+    if (root->data > val) {
       ans = root->data;
-
-    root = (val > root->data) ? root->right : root->left;
-
+      root = root->left;
+    } else {
+      root = root->right;
+    }
   }
   return ans;
 }

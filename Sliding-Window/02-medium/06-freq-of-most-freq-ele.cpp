@@ -1,28 +1,31 @@
-/**
- * * Leetcode - 1838
- * * Frequency of the Most Frequent Element
- * * The frequency of an element is the number of times it occurs in an array.
- * * You are given an integer array nums and an integer k. In one operation, 
- * * you can choose an index of nums and increment the element at that index by 1.
- * * Return the maximum possible frequency of an element after performing at most k operations.
-
- * * Example 1
- * * Input  : nums = [1, 2, 4], k = 5
- * * Output : 3
- * * Explanation: Increment the first element three times and the second element two times to make nums = [4,4,4].
- * *              4 has a frequency of 3.
-
- * * Example 2
- * * Input  : nums = [1,4,8,13], k = 5
- * * Output : 2
- * * Explanation : Increment the first element three times to make nums = [4,4,8,13]. 4 has a frequency of 2.
+/*
+ * Leetcode - 1838
+ * Frequency of the Most Frequent Element
  * 
- * * Example 2
- * * Input  : nums = [3,9,6], k = 2
- * * Output : 1
+ * The frequency of an element is the number of times it occurs in an array.
+ * You are given an integer array nums and an integer k. In one operation, 
+ * you can choose an index of nums and increment the element at that index by 1.
+ * Return the maximum possible frequency of an element after performing at most k operations.
 
- * * https://leetcode.com/problems/frequency-of-the-most-frequent-element/description/
+ * Example 1
+ * Input  : nums = [1, 2, 4], k = 5
+ * Output : 3
+ * Explanation: Increment the first element three times and the second element two times to make nums = [4,4,4].
+ *              4 has a frequency of 3.
+
+ * Example 2
+ * Input  : nums = [1, 4, 8, 13], k = 5
+ * Output : 2
+ * Explanation : Increment the first element three times to make nums = [4,4,8,13]. 4 has a frequency of 2.
+ * 
+ * Example 2
+ * Input  : nums = [3, 9, 6], k = 2
+ * Output : 1
+
+ * https://leetcode.com/problems/frequency-of-the-most-frequent-element/description/
 */
+
+// ! Amazon, Google, Meta, Uber, Apple, Microsoft
 
 // ! [HINT] => Mostly frequent element will be one of the array elements
 
@@ -73,12 +76,16 @@ int myBruteForce(std::vector<int> arr, int k) {
 
 
 // * -------------------------- Binary Search Approach
-int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefix_arr) {
+int bSearch(
+    int target_idx, int k,
+    std::vector<int> arr,
+    std::vector<long long> &prefix_arr)
+{
   int l = 0, r = target_idx;
   int best_idx = target_idx;
 
   while(l <= r) {
-    int m = (l + r) / 2;
+    int m = l + (r - l) / 2;
 
     // * Count number of elements b/w target_idx & mid index
     long long count = (target_idx - m + 1);
@@ -104,16 +111,15 @@ int bSearch(int target_idx, int k,  std::vector<int> arr, std::vector<int> prefi
   return target_idx - best_idx + 1;
 }
 
-
 // ! Sort the array & calculate prefix_sum for array
 // * TIME COMPLEXITY O(N * nlogn)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(std::vector<int> arr, int k) {
   int n = arr.size();
-  std::sort(arr.begin(), arr.end());
+  std::sort(arr.begin(), arr.end()); // * O(nlogn)
 
   // * Create prefix sum array
-  std::vector<int> prefix_arr(n);
+  std::vector<long long> prefix_arr(n);
   prefix_arr[0] = arr[0];
   for (int i = 1; i < n; i++) {
     prefix_arr[i] += prefix_arr[i - 1] + arr[i];
@@ -136,10 +142,10 @@ int betterApproach(std::vector<int> arr, int k) {
   int n = arr.size();
   std::sort(arr.begin(), arr.end());
 
-  int i = 0, j = 0;
-  long long cur_sum = 0;
   int ans = 0;
-
+  long long cur_sum = 0;
+  
+  long long i = 0, j = 0;
   while(j < n) {
     cur_sum += arr[j];
 
@@ -151,14 +157,13 @@ int betterApproach(std::vector<int> arr, int k) {
     // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
 
     // * Calculate how many operations we need
-    int ops = window_sum - cur_sum;
-    while (ops > k) {
+    while (window_sum - cur_sum > k) {
       cur_sum -= arr[i];
       i++;
-      long long new_window_sum = (long long)(j - i + 1) * (long long)arr[j];
-      ops = new_window_sum - cur_sum;
+      window_sum = ((j - i + 1) * arr[j]) * 1ll;
     }
-    ans = std::max(ans, (j - i + 1));
+
+    ans = std::max(ans, (int)(j - i + 1));
     j++;
   }
   return ans;
@@ -181,7 +186,7 @@ int maxFrequency(std::vector<int> arr, int k) {
     cur_sum += arr[j];
 
     // * Make all numbers equal to arr[j] value and calculate sum
-    long long window_sum = (long)(j - i + 1) * arr[j];
+    long long window_sum = ((j - i + 1) * arr[j]) * 1ll;
     // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
 
     if (window_sum - cur_sum > k) {
@@ -202,13 +207,15 @@ int main() {
   // std::vector<int> arr = {1, 2, 4};
 
   // * testcase 2
-  // int k = 5;
-  // std::vector<int> arr = {1,4,8,13};
+  int k = 5;
+  std::vector<int> arr = {1, 4, 8, 13};
 
   // * testcase 3
-  int k = 2;
-  std::vector<int> arr = {3, 9, 6};
-  
+  // int k = 2;
+  // std::vector<int> arr = {3, 9, 6};
+
+  std::cout << "K: " << k << std::endl;
+  std::cout << "Inupt Array: ";
   printArr(arr);
   
   // int ans = myBruteForce(arr, k);

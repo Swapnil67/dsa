@@ -1,13 +1,14 @@
-/**
- * * leetcode - 2461
- * * Maximum Sum of Distinct Subarrays With Length K
- * * You are given an integer array nums and an integer k. Find the maximum subarray sum of all the 
- * * subarrays of nums that meet the following conditions:
- *  * The length of the subarray is k, and
- *  * All the elements of the subarray are distinct.
+/*
+ * leetcode - 2461
+ * Maximum Sum of Distinct Subarrays With Length K
  * 
- * * Return the maximum subarray sum of all the subarrays that meet the conditions. 
- * * If no subarray meets the conditions, return 0.
+ * You are given an integer array nums and an integer k. Find the maximum subarray sum of all the 
+ * subarrays of nums that meet the following conditions:
+ *  - The length of the subarray is k, and
+ *  - All the elements of the subarray are distinct.
+ * 
+ * Return the maximum subarray sum of all the subarrays that meet the conditions. 
+ * If no subarray meets the conditions, return 0.
  * 
  * * Example 1
  * * Input  : nums = [1,5,4,2,9,9,9], k = 3
@@ -28,7 +29,10 @@
  * * We return 0 because no subarrays meet the conditions.
 
  * * https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/
+ * https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
 */
+
+// ! IBM, Nvidia, Meta, Google, Microsoft
 
 #include<vector>
 #include<iostream>
@@ -76,23 +80,23 @@ int bruteForce(std::vector<int> arr, int k) {
 // * Classic Sliding Window with set
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int subarraySum(std::vector<int> arr, int window_size) {
-  int n = arr.size();
+int subarraySum(std::vector<int> nums, int window_size) {
+  int n = nums.size();
   int i = 0, j = 0;
   long long max_sum = 0, cur_sum = 0;
   std::unordered_set<int> st;
   while (j < n) {
     // * Shrink window 
     // * on duplicate element or on set size >= window_size
-    while (i < j && (st.count(arr[j]) || st.size() >= window_size)) {
-      cur_sum -= arr[i];
-      st.erase(arr[i]);
+    while (i < j && (st.count(nums[j]) || st.size() >= window_size)) {
+      cur_sum -= nums[i];
+      st.erase(nums[i]);
       i++;
     }
 
     // * Update cur_sum & set
-    cur_sum += arr[j];
-    st.insert(arr[j]);
+    cur_sum += nums[j];
+    st.insert(nums[j]);
 
     if (st.size() == window_size)
       max_sum = std::max(max_sum, cur_sum);
@@ -120,7 +124,7 @@ int main(void) {
 
   // int ans= bruteForce(arr, window_size);
   int ans= subarraySum(arr, window_size);
-  std::cout << "Subarray Sum Equals K: " << ans << std::endl;
+  std::cout << "Maximum Sum of Distinct Subarrays With Length K: " << ans << std::endl;
 
   return 0;
 }

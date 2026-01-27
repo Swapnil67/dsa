@@ -74,6 +74,7 @@ int betterApproach(std::vector<int>& nums, int n, int left, int right) {
   int M = 1e9 + 7;
   std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
   
+  // * Calculate all possible subarray sum
   for (int i = 0; i < n; ++i) {
     int cur_sum = 0;
     for (int j = i; j < n; ++j) {

@@ -57,7 +57,12 @@ std::vector<std::vector<int>> subsets(std::vector<int> &nums) {
 }
 
 int main(void) {
+  // * testcase 1
   std::vector<int> nums = {1, 2, 3};
+
+  // * testcase 2
+  // std::vector<int> nums = {1, 2, 3, 4};
+
   std::cout<<"Input nums: ";
   printArr(nums);
   

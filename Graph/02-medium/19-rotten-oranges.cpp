@@ -100,12 +100,11 @@ int orangesRotting(std::vector<std::vector<int>> &grid)
       q.pop();
 
       for (auto &dir : dirs) {
-        int nr = r + dir[0];
-        int nc = c + dir[1];
-        // * Make all the fresh_oranges oranges in neighbour rotten
-        if (is_safe(nr, nc) && grid[nr][nc] == 1) {
-          grid[nr][nc] = 2;
-          q.push({nr, nc});
+        int dr = r + dir[0], dc = c + dir[1];
+        // * Make all the fresh_oranges in neighbour rotten
+        if (is_safe(dr, dc) && grid[dr][dc] == 1) {
+          grid[dr][dc] = 2; // * Mark rotten (i.e., visited)
+          q.push({dr, dc});
           fresh_oranges--;
         }
       }

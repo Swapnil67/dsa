@@ -73,16 +73,20 @@ int tribonacci(int n) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int tribonacci2(int n) {
-  int c = 0;
-  int b = 1;
-  int a = 1;
-  int ans = 0;
+  if (n == 0)
+    return 0;
+    
+  if (n == 1 || n == 2)
+    return 1;
+
+  int c = 0, b = 1, a = 1, ans = 0;
   for (int i = 3; i <= n; ++i) {
     ans = c + b + a;
-     c = b;
-     b = a;
-     a = ans;
+    c = b;
+    b = a;
+    a = ans;
   }
+
   return ans;
 }
 

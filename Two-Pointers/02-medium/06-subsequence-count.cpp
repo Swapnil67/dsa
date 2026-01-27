@@ -17,7 +17,7 @@
  *
  * * Example 2
  * * Input  : nums = [2, 3, 3, 4, 6, 7], target = 12
- * * Output : 12
+ * * Output : 61
 
  * * https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/
  * * https://www.naukri.com/code360/problems/count-the-number-of-subsequences-having-product-not-more-than-p_1214647
@@ -56,16 +56,15 @@ int numSubseq(std::vector<int> arr, int target)
     power[i] = (2 * power[i - 1]) % M;
   }
 
-  // * Create pointers
   int ans = 0;
   int l = 0, r = n - 1;
 
-  while (l <= r)
-  {
+  while (l <= r) {
     long long sum = arr[l] + arr[r];
     if (sum <= target) {
       // * if this is valid then all combination of elements b/w i - j will be valid
       int diff = r - l;
+      // std::cout << power[diff] << std::endl;
       // std::cout << diff << std::endl;
       ans = ((ans % M) + (power[diff])) % M ;
       l++;

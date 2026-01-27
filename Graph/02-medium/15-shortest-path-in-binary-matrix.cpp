@@ -27,11 +27,13 @@
 
  * https://leetcode.com/problems/shortest-path-in-binary-matrix/description/
  * https://www.naukri.com/code360/problems/shortest-path-in-a-binary-matrix_699835
+ * https://www.naukri.com/code360/problems/shortest-path-in-a-binary-maze_893065
+ * https://www.geeksforgeeks.org/problems/shortest-path-in-a-binary-maze-1655453161/1
 */
 
 // ! BFS
 
-// ! Amazon
+// ! Amazon, Google, Oracle
 
 #include <queue>
 #include <vector>

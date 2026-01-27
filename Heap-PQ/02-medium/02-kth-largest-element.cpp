@@ -48,8 +48,6 @@ int bruteForce(std::vector<int> nums, int k) {
 
   // * sort the coordinates in ASC order 
   std::sort(nums.begin(), nums.end());
-  // printArr(nums);
-
   return nums[n - k];
 }
 

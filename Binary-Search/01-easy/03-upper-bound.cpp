@@ -68,12 +68,12 @@ int findUpperBound(std::vector<int> arr, int x) {
 
 int main() {
   // * testcase 1
-  // int x = 7;
-  // std::vector<int> arr = {1, 4, 7, 8, 10};
+  int x = 7;
+  std::vector<int> arr = {1, 4, 7, 8, 10};
 
   // * testcase 2
-  int x = 5;
-  std::vector<int> arr = {2, 4, 6, 7};
+  // int x = 5;
+  // std::vector<int> arr = {2, 4, 6, 7};
 
   std::cout << "Input Array" << std::endl;
   printArr(arr);

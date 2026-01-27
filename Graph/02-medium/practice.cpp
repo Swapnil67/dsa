@@ -1,9 +1,12 @@
 #include <queue>
 #include <vector>
+#include <numeric>
 #include <climits>
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
+
+using namespace std;
 
 template <typename T>
 void printArr(std::vector<T> &arr) {
@@ -38,19 +41,15 @@ const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 typedef std::pair<int, int> pii;
 
-// std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-//   std::unordered_map<int, std::vector<int>> adj;
-//   for (auto &it: edges) {
-//     int u = it[0], v = it[1];
-//     adj[u].push_back(v);
-//     adj[v].push_back(u);
-//   }
-//   return adj;
-// }
+// * check out of bound
+template <typename T>
+bool check_not_oob(const int &row, const int &col, std::vector<std::vector<T>> &grid) {
+  int m = grid.size(), n = grid[0].size();
+  return row >= 0 && row < m && col >= 0 && col < n;
+}
 
 std::unordered_map<int, std::vector<pii>> constructadj(
-    std::vector<std::vector<int>> &edges)
-{
+    std::vector<std::vector<int>> &edges) {
   std::unordered_map<int, std::vector<pii>> adj;
   for (auto &data: edges) {
     int u = data[0], v = data[1], w = data[2];
@@ -85,6 +84,66 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
   }
 }
 
+// * 36 - Graph Valid Tree
+// bool validTree(
+//     int n,
+//     std::vector<std::vector<int>> &edges){
+// TODO
+// }
+
+// * 37 - Check if Move is Legal
+// bool validTree(
+//     int n,
+//     std::vector<std::vector<int>> &edges){
+// TODO
+// }
+
+// * 38 - Shortest Bridge
+// int shortestBridge(std::vector<std::vector<int>>& grid) {
+// TODO
+// }
+
+// * 39 - Find Closest Node to Given Two Nodes
+// int closestMeetingNode(std::vector<int> &edges, int node1, int node2) {
+// TODO
+// }
+
+// * 40 - Number of Connected Components in an Undirected Graph
+// int countComponents(int n, std::vector<int> &edges) {
+// TODO
+// }
+
+// * 41 - Shortest Path with Alternating Colors
+// std::vector<int> shortestAlternatingPaths(
+//     int n,
+//     std::vector<std::vector<int>> &redEdges,
+//     std::vector<std::vector<int>> &blueEdges) 
+// {
+// TODO
+// }
+
+// * 42 - Minimum Fuel Cost to Report to the Capital
+// long long minimumFuelCost(
+//     int seats,
+//     std::vector<std::vector<int>> &roads)
+// {
+// TODO
+// }
+
+// * 43 - Minimum Score of a Path Between Two Cities
+// int minScoreDFS(int n, std::vector<std::vector<int>> &roads) {
+// TODO
+// }
+
+// * 44 - Number of Enclaves
+// int numEnclaves(std::vector<std::vector<int>>& grid) {
+// TODO
+// }
+
+// * 45 - Regions Cut By Slashes
+// int regionsBySlashes(std::vector<std::string> &grid) {
+// TODO
+// }
 
 // * ------------------------------------------------------------------------------------------
 
@@ -153,8 +212,8 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
 // TODO
 // }
 
-// * 14 - Network Delay Time
-// int networkDelayTime(std::vector<std::vector<int>>& times, int n, int k) {
+// * 14 - All Paths From Source to Target
+// std::vector<std::vector<int>> allPathsSourceTarget(std::vector<std::vector<int>> &graph) {
 // TODO
 // }
 
@@ -163,8 +222,8 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
 // TODO
 // }
 
-// * 16 - Path With Minimum Effort
-// int minimumEffortPath(std::vector<std::vector<int>>& heights) {
+// * 16 - Battleships in a Board
+// int countBattleships(std::vector<std::vector<char>>& board) {
 // TODO
 // }
 
@@ -190,12 +249,12 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
 
 // * 21 - Accounts Merge
 // std::vector<std::vector<std::string>> accountsMerge(std::vector<std::vector<std::string>> &accounts) {
-// TODO 
+// TODO
 // }
 
 // * 22 - Most Stones Removed with Same Row or Column
 // int removeStones(std::vector<std::vector<int>> &stones) {
-// TODO 
+// TODO
 // }
 
 // * 23 - Maximum Number of Fish in a Grid
@@ -270,74 +329,67 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
 // TODO
 // }
 
-// * 36 - Graph Valid Tree
-// bool validTree(
-//     int n,
-//     std::vector<std::vector<int>> &edges){
-// TODO
-// }
-
-// * 37 - Check if Move is Legal
-// bool validTree(
-//     int n,
-//     std::vector<std::vector<int>> &edges){
-// TODO
-// }
-
-// * 38 - Shortest Bridge
-// int shortestBridge(std::vector<std::vector<int>>& grid) {
-// TODO
-// }
-
-// * 39 - Find Closest Node to Given Two Nodes
-// int closestMeetingNode(std::vector<int> &edges, int node1, int node2) {
-// TODO
-// }
-
-// * 40 - Number of Connected Components in an Undirected Graph
-// int countComponents(int n, std::vector<int> &edges) {
-// TODO
-// }
-
-// * 41 - Shortest Path with Alternating Colors
-// std::vector<int> shortestAlternatingPaths(
-//     int n,
-//     std::vector<std::vector<int>> &redEdges,
-//     std::vector<std::vector<int>> &blueEdges) 
-// {
-// TODO
-// }
-
-// * 42 - Minimum Fuel Cost to Report to the Capital
-// long long minimumFuelCost(
-//     int seats,
-//     std::vector<std::vector<int>> &roads)
-// {
-// TODO
-// }
-
-// * 43 - Minimum Score of a Path Between Two Cities
-// int minScoreDFS(int n, std::vector<std::vector<int>> &roads) {
-// TODO
-// }
-
-// * 44 - Number of Enclaves
-// int numEnclaves(std::vector<std::vector<int>>& grid) {
-// TODO
-// }
-
-// * 45 - Regions Cut By Slashes
-// int regionsBySlashes(std::vector<std::string> &grid) {
-// TODO
-// }
-
 // * 46 - Minimum Number of Vertices to Reach All Nodes
 // std::vector<int> findSmallestSetOfVertices(int n, std::vector<std::vector<int>> edges) {
 // TODO
 // }
 
-// * 46 - Count the Number of Complete Components
+// * 47 - Count the Number of Complete Components
 // int countCompleteComponents(int n, std::vector<std::vector<int>>& edges) {
+// TODO
+// }
+
+// * 48 - Detonate the Maximum Bombs
+// int maximumDetonationBFS(std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 49 - Find All Possible Recipes from Given Supplies
+// std::vector<std::string> findAllRecipes(
+//     std::vector<std::string> &recipes,
+//     std::vector<std::string> &supplies,
+//     std::vector<std::vector<std::string>> &ingredients)
+// {
+// TODO
+// }
+
+// * 50 - Shortest Distance After Road Addition Queries I
+// std::vector<int> shortestDistanceAfterQueries(int n, std::vector<std::vector<int>> &queries) {
+// TODO
+// }
+
+// * 51 - Minimum Height Trees
+// vector<int> findMinHeightTrees(int n, vector<vector<int>> &edges) {
+// TODO
+// }
+
+// * 52 - Path with Maximum Gold
+// int getMaximumGold(std::vector<std::vector<int>> &grid) {
+// TODO
+// }
+
+// * 53 - Most Profitable Path in a Tree
+// int mostProfitablePath(int bob, std::vector<int> amount, std::vector<std::vector<int>> &edges) {
+// TODO
+// }
+
+// * 54 - Minimum Operations to Convert Number
+// int minimumOperations(std::vector<int> &nums, int start, int goal) {
+// TODO
+// }
+
+// * 55 - Path With Maximum And Minimum Value
+// int pathWithMaxMinValue(std::vector<std::vector<int>> &grid) {
+// TODO
+// }
+
+// * 56 - Shortest Path to Get Food
+// int getFood(std::vector<std::vector<char>> &grid) {
+// TODO
+// }
+
+// * 57 - Open the Lock 
+// int openLock(std::vector<std::string> &deadends, std::string target) {
 // TODO
 // }
 
