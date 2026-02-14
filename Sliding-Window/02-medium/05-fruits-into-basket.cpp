@@ -34,23 +34,25 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
   
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Keep two fruits variable f1 & f2
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> fruits) {
+int bruteForce(vector<int> fruits) {
   int n = fruits.size();
 
   int max_fruits = 0;
@@ -68,7 +70,7 @@ int bruteForce(std::vector<int> fruits) {
         break;
       }
     }
-    max_fruits = std::max(max_fruits, j - i);
+    max_fruits = max(max_fruits, j - i);
   }
 
   return max_fruits;
@@ -79,11 +81,11 @@ int bruteForce(std::vector<int> fruits) {
 // * keep fruits map and keep the map size to 2
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int betterApproach(std::vector<int> fruits) {
+int betterApproach(vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;
   int fruits_collected = 0;
-  std::unordered_map<int, int> fruits_freq;
+  unordered_map<int, int> fruits_freq;
 
   while(j < n) {
     fruits_freq[fruits[j]]++;
@@ -99,7 +101,7 @@ int betterApproach(std::vector<int> fruits) {
 
     // * When we have two unique fruits
     if (fruits_freq.size() <= 2) {
-      fruits_collected = std::max(fruits_collected, j - i + 1);
+      fruits_collected = max(fruits_collected, j - i + 1);
     }
 
     j++;
@@ -114,11 +116,11 @@ int betterApproach(std::vector<int> fruits) {
 // * Only collect fruits if the frequency < 'k'
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int totalFruit(std::vector<int> fruits) {
+int totalFruit(vector<int> fruits) {
   int n = fruits.size();
   int i = 0, j = 0;
   int fruits_collected = 0;
-  std::unordered_map<int, int> fruits_freq;
+  unordered_map<int, int> fruits_freq;
   while (j < n) {
     fruits_freq[fruits[j]]++;
 
@@ -130,9 +132,8 @@ int totalFruit(std::vector<int> fruits) {
         fruits_freq.erase(fruits[i]);
       }
       i++;
-    }
-    else {
-      fruits_collected = std::max(fruits_collected, j - i + 1);
+    } else {
+      fruits_collected = max(fruits_collected, j - i + 1);
     }
     j++;
   }
@@ -142,20 +143,20 @@ int totalFruit(std::vector<int> fruits) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> fruits = {1, 2, 3, 2, 2};
+  // vector<int> fruits = {1, 2, 3, 2, 2};
 
   // * testcase 2
-  // std::vector<int> fruits = {0, 1, 2, 2};
+  // vector<int> fruits = {0, 1, 2, 2};
 
   // * testcase 2
-  std::vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
+  vector<int> fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};
 
   printArr(fruits);
   
   // int ans = bruteForce(fruits);
   // int ans = betterApproach(fruits);
   int ans = totalFruit(fruits);
-  std::cout << "Fruits into baskets: " << ans << std::endl;
+  cout << "Fruits into baskets: " << ans << endl;
 
   return 0;
 }

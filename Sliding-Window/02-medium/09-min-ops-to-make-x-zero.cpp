@@ -8,7 +8,7 @@
  * Note that this modifies the array for future operations.
  * 
  * Return the minimum number of operations to reduce x to exactly 0 if it is possible, otherwise, return -1.
-
+ * 
  * Example 1
  * Input  :  nums = [1,1,4,2,3], x = 5
  * Output : 2
@@ -29,23 +29,29 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
-  }
-  printf("\n");
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * Using prefix sum map
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(X)
-int minOperations2(std::vector<int> &arr, int x) {
+int minOperations2(vector<int> &arr, int x) {
   int n = arr.size();
 
   // * Make prefix sum map
-  std::map<int, int> prefix_sum;
+  map<int, int> prefix_sum;
   prefix_sum[0] = -1;
   long long sum = 0;
   for (int i = 0; i < n; ++i) {
@@ -58,7 +64,7 @@ int minOperations2(std::vector<int> &arr, int x) {
     return -1;
 
   long long target_sum = sum - x;
-  // std::cout << "Total Sum: " << sum << " & Target Sum: " << target_sum << std::endl;
+  // cout << "Total Sum: " << sum << " & Target Sum: " << target_sum << endl;
 
   long long cur_sum = 0;
   int j = 0, ans = -1;
@@ -67,7 +73,7 @@ int minOperations2(std::vector<int> &arr, int x) {
     long long check_sum = cur_sum - target_sum;
     // * check if we found 'check_sum' previously
     if (prefix_sum.find(check_sum) != prefix_sum.end()) {
-      ans = std::max(ans, j - prefix_sum[check_sum]);
+      ans = max(ans, j - prefix_sum[check_sum]);
     }
     j++;
   }
@@ -84,7 +90,7 @@ int minOperations2(std::vector<int> &arr, int x) {
 // * Problem converted to simple sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minOperations(std::vector<int> &nums, int x) {
+int minOperations(vector<int> &nums, int x) {
   int n = nums.size();
   int i = 0, j = 0, ans = INT_MIN;
   long long total_sum = accumulate(nums.begin(), nums.end(), 0);
@@ -102,7 +108,7 @@ int minOperations(std::vector<int> &nums, int x) {
     }
 
     if (cur_sum == target_sum) {
-      ans = std::max(ans, (j - i + 1));
+      ans = max(ans, (j - i + 1));
     }
     j++; 
   }
@@ -113,19 +119,19 @@ int minOperations(std::vector<int> &nums, int x) {
 int main() {
   // * testcase 1
   // int x = 3;
-  // std::vector<int> nums = {1, 1};
+  // vector<int> nums = {1, 1};
 
   // * testcase 2
   // int x = 5;
-  // std::vector<int> arr = {1, 1, 4, 2, 3};
+  // vector<int> arr = {1, 1, 4, 2, 3};
 
   // * testcase 3
   // int x = 4;
-  // std::vector<int> arr = {5, 6, 7, 8, 9};
+  // vector<int> arr = {5, 6, 7, 8, 9};
 
   // * testcase 4
   int x = 10;
-  std::vector<int> arr = {3, 2, 20, 1, 1, 3};
+  vector<int> arr = {3, 2, 20, 1, 1, 3};
 
   printf("Input Array\n");
   printArr(arr);

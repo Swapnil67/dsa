@@ -1,19 +1,20 @@
-/**
- * * Leetcode - 1343
- * * Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
- * * Given an array of integers arr and two integers 'k' and 'threshold', return the number of 
- * * sub-arrays of size 'k' and average greater than or equal to 'threshold'.
+/*
+ * Leetcode - 1343
+ * Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
  * 
- * * Example 1
- * * Input  : nums = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
- * * Output : 3
- * * Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively.
-
- * * Example 2
- * * Input  : nums = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5
- * * Output : 6
-
- * * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
+ * Given an array of integers arr and two integers 'k' and 'threshold', return the number of 
+ * sub-arrays of size 'k' and average greater than or equal to 'threshold'.
+ * 
+ * Example 1
+ * Input  : nums = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
+ * Output : 3
+ * Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively.
+ *
+ * Example 2
+ * Input  : nums = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5
+ * Output : 6
+ * 
+ * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
 */
 
 // ! Amazon, LinkedIn, Turo
@@ -21,19 +22,25 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
+int bruteForce(vector<int> &arr, int &k, int &threshold) {
   int n = arr.size();
   int ans = 0;
   for(int i = 0; i <= n - k; ++i) {
@@ -53,7 +60,7 @@ int bruteForce(std::vector<int> &arr, int &k, int &threshold) {
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
+int numOfSubarrays1(vector<int> &arr, int k, int threshold) {
   int n = arr.size();
   int ans = 0, i = 0, j = 0;
   long long sum = 0;
@@ -84,7 +91,7 @@ int numOfSubarrays1(std::vector<int> &arr, int k, int threshold) {
 // * then sum_of_k >= (k * threshold)
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int numOfSubarrays(std::vector<int> &arr, int &k, int &threshold) {
+int numOfSubarrays(vector<int> &arr, int &k, int &threshold) {
   int n = arr.size(); 
   int sum = 0, ans = 0;
   int target = k * threshold;
@@ -111,19 +118,19 @@ int numOfSubarrays(std::vector<int> &arr, int &k, int &threshold) {
 int main() {
   // * testcase 1
   int k = 3, threshold = 4;
-  std::vector<int> arr = {2, 2, 2, 2, 5, 5, 5, 8};
+  vector<int> arr = {2, 2, 2, 2, 5, 5, 5, 8};
 
   // * testcase 2
   // int k = 3, threshold = 5;
-  // std::vector<int> arr = {11, 13, 17, 23, 29, 31, 7, 5, 2, 3};
+  // vector<int> arr = {11, 13, 17, 23, 29, 31, 7, 5, 2, 3};
 
-  std::cout << "k = " << k << " & threshold = " << threshold << std::endl;
-  std::cout << "Input Array " << std::endl;
+  cout << "k = " << k << " & threshold = " << threshold << endl;
+  cout << "Input Array " << endl;
   printArr(arr);
   
   // int ans = bruteForce(arr, k, threshold);
   int ans = numOfSubarrays(arr, k, threshold);
-  std::cout << "Number of Sub-arrays of Size '" << k << "' and Average Greater than or Equal to '" << threshold << "' are " << ans << std::endl;
+  cout << "Number of Sub-arrays of Size '" << k << "' and Average Greater than or Equal to '" << threshold << "' are " << ans << endl;
 
   return 0;
 }

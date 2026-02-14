@@ -37,49 +37,27 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
-// * Using Nested Loop
-// * TIME COMPLEXITY O(N^2)
-// * SPACE COMPLEXITY O(1)
-int myBruteForce(std::vector<int> arr, int k) {
-  int n = arr.size();
-  int ans = 0;
-  for(int i = 0; i < n; ++i) {
-    int ele = arr[i], cur_ops = k;
-    int j = 0;
-    for (; j < n; ++j) {
-      if(arr[j] < ele) {
-        int required_ops = ele - arr[j];
-        if (cur_ops > 0 && required_ops <= cur_ops) {
-          cur_ops -= required_ops;
-        }
-        else {
-          break;
-        }
-      }
-      else {
-        break;
-      }
-    }
-    ans = std::max(ans, j + 1);
-  }
-  return ans;
-}
-
+typedef long long ll;
 
 // * -------------------------- Binary Search Approach
 int bSearch(
     int target_idx, int k,
-    std::vector<int> arr,
-    std::vector<long long> &prefix_arr)
+    vector<int> arr,
+    vector<long long> &prefix_arr)
 {
   int l = 0, r = target_idx;
   int best_idx = target_idx;
@@ -108,18 +86,23 @@ int bSearch(
       r = m - 1;
     }
   }
-  return target_idx - best_idx + 1;
+
+  int ans = target_idx - best_idx + 1;
+  cout << arr[target_idx] << " " << ans << endl;
+
+  return ans;
 }
 
+// * ------------------------- APPROACH 1: Brute Force -------------------------`
 // ! Sort the array & calculate prefix_sum for array
 // * TIME COMPLEXITY O(N * nlogn)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr, int k) {
+int bruteForce(vector<int> arr, int k) {
   int n = arr.size();
-  std::sort(arr.begin(), arr.end()); // * O(nlogn)
+  sort(arr.begin(), arr.end()); // * O(nlogn)
 
   // * Create prefix sum array
-  std::vector<long long> prefix_arr(n);
+  vector<long long> prefix_arr(n);
   prefix_arr[0] = arr[0];
   for (int i = 1; i < n; i++) {
     prefix_arr[i] += prefix_arr[i - 1] + arr[i];
@@ -128,7 +111,7 @@ int bruteForce(std::vector<int> arr, int k) {
   int ans = INT_MIN;
   for (int target_idx = 0; target_idx < n; ++target_idx) {
     int freq = bSearch(target_idx, k, arr, prefix_arr);
-    ans = std::max(ans, freq);
+    ans = max(ans, freq);
   }
   return ans;
 }
@@ -138,9 +121,9 @@ int bruteForce(std::vector<int> arr, int k) {
 // * Keep cur_sum & window_sum
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int betterApproach(std::vector<int> arr, int k) {
+int betterApproach(vector<int> arr, int k) {
   int n = arr.size();
-  std::sort(arr.begin(), arr.end());
+  sort(arr.begin(), arr.end());
 
   int ans = 0;
   long long cur_sum = 0;
@@ -154,7 +137,7 @@ int betterApproach(std::vector<int> arr, int k) {
 
     // * Make all numbers equal to arr[j] value and calculate sum
     long long window_sum = (long long)count * (long long)arr[j];
-    // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
+    // cout << count << " " << window_sum << " " << cur_sum << " " << ans << endl;
 
     // * Calculate how many operations we need
     while (window_sum - cur_sum > k) {
@@ -163,7 +146,7 @@ int betterApproach(std::vector<int> arr, int k) {
       window_sum = ((j - i + 1) * arr[j]) * 1ll;
     }
 
-    ans = std::max(ans, (int)(j - i + 1));
+    ans = max(ans, (int)(j - i + 1));
     j++;
   }
   return ans;
@@ -174,26 +157,25 @@ int betterApproach(std::vector<int> arr, int k) {
 // * Keep cur_sum & window_sum
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int maxFrequency(std::vector<int> arr, int k) {
+int maxFrequency(vector<int> arr, int k) {
   int n = arr.size();
-  std::sort(arr.begin(), arr.end());
+  sort(arr.begin(), arr.end());
 
   int i = 0, j = 0;
-  long cur_sum = 0;
+  ll cur_sum = 0;
   int ans = 0;
-
   while (j < n) {
     cur_sum += arr[j];
 
     // * Make all numbers equal to arr[j] value and calculate sum
-    long long window_sum = ((j - i + 1) * arr[j]) * 1ll;
-    // std::cout << count << " " << window_sum << " " << cur_sum << " " << ans << std::endl;
+    ll window_sum = ((ll)(j - i + 1) * arr[j]) * 1ll;
+    // cout << count << " " << window_sum << " " << cur_sum << " " << ans << endl;
 
     if (window_sum - cur_sum > k) {
       cur_sum -= arr[i];
       i++;
     } else {
-      ans = std::max(ans, (j - i + 1));
+      ans = max(ans, (j - i + 1));
     }
     
     j++;
@@ -204,25 +186,24 @@ int maxFrequency(std::vector<int> arr, int k) {
 int main() {
   // * testcase 1
   // int k = 5;
-  // std::vector<int> arr = {1, 2, 4};
+  // vector<int> arr = {1, 2, 4};
 
   // * testcase 2
   int k = 5;
-  std::vector<int> arr = {1, 4, 8, 13};
+  vector<int> arr = {1, 4, 8, 13};
 
   // * testcase 3
   // int k = 2;
-  // std::vector<int> arr = {3, 9, 6};
+  // vector<int> arr = {3, 9, 6};
 
-  std::cout << "K: " << k << std::endl;
-  std::cout << "Inupt Array: ";
+  cout << "K: " << k << endl;
+  cout << "Inupt Array: ";
   printArr(arr);
   
-  // int ans = myBruteForce(arr, k);
   // int ans = bruteForce(arr, k);
   // int ans = betterApproach(arr, k);
   int ans = maxFrequency(arr, k);
-  std::cout << "Frequency of the Most Frequent Element: " << ans << std::endl;
+  cout << "Frequency of the Most Frequent Element: " << ans << endl;
 
   return 0;
 }

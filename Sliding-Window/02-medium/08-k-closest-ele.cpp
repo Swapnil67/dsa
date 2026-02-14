@@ -8,7 +8,7 @@
  * An integer a is closer to x than an integer b if:
  * |a - x| < |b - x|, or
  * |a - x| == |b - x| and a < b
-
+ * 
  * Example 1
  * Input: arr = [1, 2, 3, 4, 5], k = 4, x = 3
  * Output : [1, 2, 3, 4]
@@ -30,61 +30,67 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-typedef std::pair<int, int> pii;
+typedef pair<int, int> pii;
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Push the difference of first k elements to deque
 // * TIME COMPLEXITY O(N * k)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> bruteForce(std::vector<int> &arr, int k, int x) {
-  std::deque<pii> dq;
-  int n = arr.size();
+vector<int> bruteForce(vector<int> &nums, int k, int x) {
+  deque<pii> dq;
+  int n = nums.size();
   for (int i = 0; i < n; ++i) {
     if (dq.size() < k) {
-      dq.push_back({arr[i] - x, arr[i]});
+      dq.push_back({nums[i] - x, nums[i]});
     }
   }
   
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = 0; i < dq.size(); i++) {
-    printf("arr[i] - x: %d \t arr[i]: %d\n", dq[i].first, dq[i].second);
-    // ans.push_back(dq[i].second);
+    printf("nums[i] - x: %d \t nums[i]: %d\n", dq[i].first, dq[i].second);
+    ans.push_back(dq[i].second);
   }
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Using max_heap
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> betterApproach(std::vector<int> &arr, int k, int x) {
+vector<int> betterApproach(vector<int> &arr, int k, int x) {
   int n = arr.size();
-  std::priority_queue<pii> max_heap;
+  priority_queue<pii> max_heap;
 
   // * Push the abs diff with 'x' to max_heap
   for (auto &num : arr) {
-    max_heap.push({std::abs(num - x), num});
+    max_heap.push({abs(num - x), num});
     if (max_heap.size() > k)
       max_heap.pop();
   }
 
   // * Save the ans to array
-  std::vector<int> ans;
+  vector<int> ans;
   while (max_heap.size()) {
-    auto p = max_heap.top();
-    ans.push_back(p.second);
+    ans.push_back(max_heap.top().second);
     max_heap.pop();
   }
 
   // * sort the ans
-  std::sort(ans.begin(), ans.end());
+  sort(ans.begin(), ans.end());
 
   return ans;
 }
@@ -98,7 +104,7 @@ std::vector<int> betterApproach(std::vector<int> &arr, int k, int x) {
 // * (x - arr[m]) > (arr[m + k] - x)
 // * TIME COMPLEXITY O(logn)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
+vector<int> findClosestElements(vector<int> &arr, int k, int x) {
   int n = arr.size();
 
   // * 'r' is little restricted becoz m + k should not become greater than n
@@ -116,29 +122,29 @@ std::vector<int> findClosestElements(std::vector<int> &arr, int k, int x) {
       r = m;
     }
   }
-  return std::vector(arr.begin() + l, arr.begin() + l + k);
+  return vector(arr.begin() + l, arr.begin() + l + k);
 }
 
 int main() {
   // * testcase 1
   // int k = 4, x = 3;
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int k = 4, x = -1;
-  // std::vector<int> arr = {1, 1, 2, 3, 4, 5};
+  // vector<int> arr = {1, 1, 2, 3, 4, 5};
 
   // * testcase 2
   int k = 1, x = 9;
-  std::vector<int> arr = {1, 1, 1, 10, 10, 10};
+  vector<int> arr = {1, 1, 1, 10, 10, 10};
 
-  std::cout << "K: " << k << ", X: " << x << std::endl;
+  cout << "K: " << k << ", X: " << x << endl;
   printf("Input Array: ");
   printArr(arr);
 
-  // std::vector<int> ans = bruteForce(arr, k, x);
-  std::vector<int> ans = betterApproach(arr, k, x);
-  // std::vector<int> ans = findClosestElements(arr, k, x);
+  // vector<int> ans = bruteForce(arr, k, x);
+  vector<int> ans = betterApproach(arr, k, x);
+  // vector<int> ans = findClosestElements(arr, k, x);
   printArr(ans);
 
   return 0;

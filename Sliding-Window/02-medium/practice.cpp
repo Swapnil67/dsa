@@ -1,5 +1,3 @@
-#include <map>
-#include <set>
 #include <deque>
 #include <queue>
 #include <vector>
@@ -10,174 +8,180 @@
 #include <unordered_set>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * 18 - Permutation in String
-// bool checkInclusion(std::string &s1, std::string &s2) {
+// bool checkInclusion(string &s1, string &s2) {
 // TODO
 // }
 
 // * 19 - Maximum Number of Vowels in a Substring of Given Length
-// int maxVowels(std::string &s, int k) {
+// int maxVowels(string &s, int k) {
 // TODO
 // }
 
 // * 20 - Minimum Number of Flips to Make the Binary String Alternating
-// int minFlips(std::string s) {
+// int minFlips(string s) {
 // TODO
 // }
 
 // * 21 - get Equal Substrings Within Budget
-// int equalSubstring(std::string s, std::string t, int max_cost) {
+// int equalSubstring(string s, string t, int max_cost) {
 // TODO
 // }
 
 // * 22 - Grumpy Bookstore Owner
-// int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
+// int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
 // TODO
 // }
 
 // * 23 - Alternating Groups II
-// int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
+// int numberOfAlternatingGroups(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 24 - Count Number of Nice Subarrays
-// int numberOfSubarrays(std::vector<int> &arr, int k) {
+// int numberOfSubarrays(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 25 - Count of Substrings Containing Every Vowel and K Consonants II
-// long long countOfSubstrings(std::string s, int k) {
+// long long countOfSubstrings(string s, int k) {
 // TODO
 // }
 
 // * 26 - Find the Power of K-Size Subarrays I
-// std::vector<int> resultsArray(std::vector<int> &arr, int k) {
+// vector<int> resultsArray(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 27 - Maximum Beauty of an Array After Applying Operation
-// int maximumBeauty(std::vector<int> &arr, int k) {
+// int maximumBeauty(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 28 - Take K of Each Character From Left and Right
-// int takeCharacters(std::string s, int k) {
+// int takeCharacters(string s, int k) {
 // TODO
 // } 
 
 // * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
-// int longestSubarray(std::vector<int> &nums, int limit) {
+// int longestSubarray(vector<int> &nums, int limit) {
 // TODO
 // }
 
 // * 30 - Sliding Subarray Beauty
-// std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
+// vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
 // TODO
 // }
 
 // * 32 - Max Consecutive Ones II
-// int findMaxConsecutiveOnes(std::vector<int> &nums) {
+// int findMaxConsecutiveOnes(vector<int> &nums) {
 // TODO
 // }
 
 // * ------------------------------------------------------------------------------------------
 
 // * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
-// int numOfSubarrays(std::vector<int> &arr, int &k, int &threshold) {
+// int numOfSubarrays(vector<int> &nums, int &k, int &threshold) {
 // TODO
 // }
 
 // * 02 - Maximum Sum of Distinct Subarrays With Length K
-// int subarraySum(std::vector<int> &arr, int k) {
+// int subarraySum(vector<int> &nums, int k) {
 // TODO
 // }
 
 // * 03 - First Negative In Every Window
-// std::vector<int> firstNegative(std::vector<int> arr, int k) {
+// vector<int> firstNegative(vector<int> &nums, int &k) {
 // TODO
 // }
 
 // * 04 - Max Consecutive Ones III
-// int longestOnes(std::vector<int> &arr, int k) {
+// int longestOnes(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 05 - Fruit Into Baskets
-// int totalFruit(std::vector<int> &fruits) {
+// int totalFruit(vector<int> &fruits) {
 // TODO
 // }
 
 // * 06 - Frequency of the Most Frequent Element
-// int maxFrequency(std::vector<int> &nums, int k) {
+// int maxFrequency(vector<int> &nums, int k) {
 // TODO
 // }
 
 // * 07 - Minimum Size Subarray Sum
-// int minSubArrayLen(std::vector<int> &arr, int &target) {
+// int minSubArrayLen(vector<int> &arr, int &target) {
 // TODO
 // }
 
 // * 08 - Find K Closest Elements
-// std::vector<int> findClosestElements(std::vector<int> arr, int k, int x) {
+// vector<int> findClosestElements(vector<int> arr, int k, int x) {
 // TODO
 // }
 
 // * 09 - Minimum Operations to Reduce X to Zero
-// int minOperations(std::vector<int> &nums, int x) {  
+// int minOperations(vector<int> &nums, int x) {  
 // TODO
 // }
 
 // * 10 - Binary Subarrays With Sum
-// int numSubarraysWithSum(std::vector<int> &nums, int goal) {
+// int numSubarraysWithSum(vector<int> &nums, int goal) {
 // TODO
 // }
 
+/**
+
 // * 11 - Subarray Product Less Than K
-// int numSubarrayProductLessThanK(std::vector<int> &arr, int k) {
+// int numSubarrayProductLessThanK(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 12 - Length of Longest Subarray With at Most K Frequency
-// int maxSubarrayLength(std::vector<int> &arr, int k) {
+// int maxSubarrayLength(vector<int> &arr, int k) {
 // TODO 
 // }
 
 // * 13 - Count Subarrays Where Max Element Appears at Least K Times
-// int countSubarrays(std::vector<int> &arr, int k) {
+// int countSubarrays(vector<int> &arr, int k) {
 // TODO
 // }
 
 // * 14 - Longest Substring Without Repeating Characters
-// int lengthOfLongestSubstring(std::string s) {
+// int lengthOfLongestSubstring(string s) {
 // TODO
 // }
 
 // * 15 - Longest Substring with At Most K Distinct Characters
-// int kDistinctChars(std::string s, int k) {
+// int kDistinctChars(string s, int k) {
 // TODO
 // }
 
 // * 16 - Number of Substrings Containing All Three Characters
-// int numberOfSubstrings(std::string &s) {
+// int numberOfSubstrings(string &s) {
 // TODO
 // } 
 
 // * 17 - Longest Repeating Character Replacement
-// int characterReplacement(std::string s, int k) {
+// int characterReplacement(string s, int k) {
 // TODO
 // }
+
+*/
 
 int main(void) {
   return 0;

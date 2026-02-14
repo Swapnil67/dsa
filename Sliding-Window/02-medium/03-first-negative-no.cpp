@@ -23,21 +23,27 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all k size windows
 // * TIME COMPLEXITY O(N * 3)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> arr, int k) {
+vector<int> bruteForce(vector<int> arr, int k) {
   int n = arr.size();
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = 0; i <= n - k; ++i) {
     int neg_num = 0;
     for(int j = i; j < i + k; ++j)  {
@@ -55,10 +61,10 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
 // * Save the -ve numbers to deque
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> firstNegative(std::vector<int> arr, int k) {
+vector<int> firstNegative(vector<int> arr, int k) {
   int n = arr.size();
-  std::deque<int> dq;
-  std::vector<int> ans;
+  deque<int> dq;
+  vector<int> ans;
   int i = 0, j = 0;
 
   while (j < n) {
@@ -89,18 +95,18 @@ std::vector<int> firstNegative(std::vector<int> arr, int k) {
 
 int main() {
   // * testcase 1
-  int window_size = 2;
-  std::vector<int> arr = {5, -3, 2, 3, -4};
+  // int k = 2;
+  // vector<int> arr = {5, -3, 2, 3, -4};
 
   // * testcase 2
-  // int window_size = 3;
-  // std::vector<int> arr = {8, 1, -2, 2, -3, 6, 8, -1};
+  int k = 3;
+  vector<int> arr = {8, 1, -2, 2, -3, 6, 8, -1};
   
   printArr(arr);
   
-  // std::vector<int> ans = bruteForce(arr, window_size);
-  std::vector<int> ans = firstNegative(arr, window_size);
-  std::cout << "First Negative In Every Window" << std::endl;
+  // vector<int> ans = bruteForce(arr, k);
+  vector<int> ans = firstNegative(arr, k);
+  cout << "First Negative In Every Window" << endl;
   printArr(ans);
 
   return 0;

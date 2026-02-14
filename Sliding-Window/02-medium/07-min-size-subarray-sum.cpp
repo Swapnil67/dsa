@@ -26,19 +26,25 @@
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all k size windows with k zeros
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr, int target) {
+int bruteForce(vector<int> arr, int target) {
   int ans = INT_MAX;
   int n = arr.size();
   for(int i = 0; i < n; ++i) {
@@ -50,9 +56,9 @@ int bruteForce(std::vector<int> arr, int target) {
       if (curSum >= target)
         break;
     }
-    // std::cout << curSum << std::endl;
+    // cout << curSum << endl;
     if (curSum >= target)
-      ans = std::min(ans, j - i + 1);
+      ans = min(ans, j - i + 1);
   }
   return ans == INT_MAX ? 0 : ans;
 }
@@ -63,7 +69,7 @@ int bruteForce(std::vector<int> arr, int target) {
 // * Then find the window while(curSum >= target)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minSubArrayLen(std::vector<int> arr, int target) {
+int minSubArrayLen(vector<int> arr, int target) {
   int n = arr.size();
   int ans = INT_MAX, sum = 0;
   int i = 0, j = 0;
@@ -73,7 +79,7 @@ int minSubArrayLen(std::vector<int> arr, int target) {
     // * While sum >= target shrink window and store new subarray size
     while (i < j && sum >= target) {
       // * Shrink the window
-      ans = std::min(ans, j - i + 1);
+      ans = min(ans, j - i + 1);
       sum -= arr[i];
       i++;
     }
@@ -87,23 +93,23 @@ int minSubArrayLen(std::vector<int> arr, int target) {
 int main() {
   // * testcase 1
   // int target = 7;
-  // std::vector<int> arr = {2, 3, 1, 2, 4, 3};
+  // vector<int> arr = {2, 3, 1, 2, 4, 3};
 
   // * testcase 2
   int target = 11;
-  std::vector<int> arr = {1, 1, 1, 1, 1, 1, 1, 1};
+  vector<int> arr = {1, 1, 1, 1, 1, 1, 1, 1};
 
   // * testcase 3
   // int target = 4;
-  // std::vector<int> arr = {1, 4, 4};
+  // vector<int> arr = {1, 4, 4};
 
-  std::cout<<"Input Array: ";
+  cout<<"Input Array: ";
   printArr(arr);
-  std::cout << "Target Sum: " << target << std::endl;
+  cout << "Target Sum: " << target << endl;
 
   // int ans = bruteForce(arr, target);
   int ans = minSubArrayLen(arr, target);
-  std::cout << "Minimum Size Subarray Sum: " << ans << std::endl;
+  cout << "Minimum Size Subarray Sum: " << ans << endl;
 
   return 0;
 }
