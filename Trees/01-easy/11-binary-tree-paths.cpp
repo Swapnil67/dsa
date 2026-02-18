@@ -20,6 +20,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -37,18 +39,21 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * Note here the 'temp' passed by value so it won't have its previous value when it gets returned from
 // * function in recursion
-void dfs(TreeNode *root,  std::vector<std::string> &ans, std::string temp) {
-  temp += std::to_string(root->data);
+void dfs(TreeNode *root,  vector<string> &ans, string temp) {
+  temp += to_string(root->data);
   
   // * Go to the left
   if (root->left)
@@ -63,9 +68,9 @@ void dfs(TreeNode *root,  std::vector<std::string> &ans, std::string temp) {
     ans.push_back(temp);
 }
 
-std::vector<std::string> rootToNode(TreeNode *root) {
-  std::vector<std::string> ans;
-  std::string cur = "";
+vector<string> rootToNode(TreeNode *root) {
+  vector<string> ans;
+  string cur = "";
   dfs(root, ans, "");
   return ans;
 }
@@ -79,7 +84,7 @@ int main(void) {
 
   root->left->right = new TreeNode(5);
 
-  std::vector<std::string> ans = rootToNode(root);
+  vector<string> ans = rootToNode(root);
   printArr(ans);
 
   return 0;

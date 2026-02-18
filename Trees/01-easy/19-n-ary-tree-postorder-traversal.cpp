@@ -9,11 +9,13 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // * Definition for a Node.
 class Node {
 public:
     int val;
-    std::vector<Node *> children;
+    vector<Node *> children;
 
     Node() {}
 
@@ -21,7 +23,7 @@ public:
         val = _val;
     }
 
-    Node(int _val, std::vector<Node *> _children)
+    Node(int _val, vector<Node *> _children)
     {
       val = _val;
       children = _children;
@@ -30,7 +32,7 @@ public:
 
 class Solution {
 public:
-  void dfs(Node *root, std::vector<int> &res) {
+  void dfs(Node *root, vector<int> &res) {
     if (!root)
       return;
 
@@ -40,8 +42,8 @@ public:
     res.push_back(root->val);
   }
 
-  std::vector<int> postorder(Node *root) {
-    std::vector<int> res;
+  vector<int> postorder(Node *root) {
+    vector<int> res;
     dfs(root, res);
     return res;
   }

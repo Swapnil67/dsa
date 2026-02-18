@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -23,12 +25,15 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 void levelOrder(TreeNode *root) {
@@ -36,11 +41,11 @@ void levelOrder(TreeNode *root) {
     return;
 
   // * Create the queue of TreeNode and push the root node
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
-    std::vector<int> level;
+    vector<int> level;
     int n = q.size();
     while (n--) {
       TreeNode *node = q.front();
@@ -52,11 +57,55 @@ void levelOrder(TreeNode *root) {
         q.push(node->right);
 
       level.push_back(node->data);
-      std::cout << node->data << " ";
+      cout << node->data << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
+
+// * 01A - In Order DFS
+// void inOrderDFS(TreeNode *root, vector<int> &ans) {
+// TODO
+// }
+
+// * 01B - In Order Iterative
+// void inOrderIterative(TreeNode *root, vector<int> &ans) {
+// TODO
+// }
+
+// * 02A - Pre Order Recursive DFS
+// void preOrderDFS(TreeNode *root, vector<int> &ans) {
+// TODO
+// }
+
+// * 02B - Pre Order Iterative
+// void preOrderIterative(TreeNode *root, vector<int> &ans) {
+// TODO
+// }
+
+// * 03A - Post Order Recursive DFS
+// void postOrderDFS(TreeNode *root, vector<int> &ans) {
+// TODO
+// }
+
+// * 03B - Post Order Iterative
+// void postOrderIterative(TreeNode *root, vector<int> &ans) {
+// TODO
+// }
+
+// * 04 - All 3 traversals
+// void threeTraversal(TreeNode *root,
+//                     vector<int> &preOrder,
+//                     vector<int> &inOrder,
+//                     vector<int> &postOrder)
+// {
+// TODO
+// }
+
+// * 05A - Maximum Depth of Binary Tree (DFS)
+// int maxDepthDFS(TreeNode *root) {
+// TODO
+// }
 
 // * 05B - Maximum Depth of Binary Tree (BFS)
 // int maxDepthBFS(TreeNode *root) {
@@ -82,7 +131,7 @@ void levelOrder(TreeNode *root) {
 // int diameterOfBinaryTree(TreeNode *root, int &diameter) {
 // TODO  
 // }
-  
+ 
 // * 09 - Same Tree
 // bool isSameTree(TreeNode* p, TreeNode* q) {
 // TODO
@@ -91,10 +140,10 @@ void levelOrder(TreeNode *root) {
 // * 10 - Symmetric Tree
 // bool isSymmetric(TreeNode* root) {
 // TODO
-// }
+// } 
 
 // * 11 - Binary Tree Paths
-// std::vector<std::string> rootToNode(TreeNode* root) {
+// vector<string> rootToNode(TreeNode* root) {
 // TODO
 // }
 
@@ -128,55 +177,36 @@ void levelOrder(TreeNode *root) {
 // TODO
 // }
 
+// * 18 - Path In Tree
+// vector<int> pathInATree(TreeNode *root, int x) {
+// TODO
+// }
+
+// * 21 - N-ary Tree Postorder Traversal
+// vector<int> postorder(Node *root) {
+// TODO
+// }
+
+// * 20 - N-ary Tree Preorder Traversal
+// vector<int> preorder(Node *root) {
+// TODO
+// }
+
+// * 21 - Leaf Similar trees
+// bool leafSimilar(TreeNode *root1, TreeNode *root2) {
+// TODO
+// }
+
+// * 22 - Evaluate Boolean Binary Tree
+// bool evaluateTree(TreeNode* root) {
+// TODO
+// }
+
 // * ---------------------------------------------------------------------------------------
-
-// * 01A - In Order DFS
-// void inOrderDFS(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 01B - In Order Iterative
-// void inOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 02A - Pre Order Recursive DFS
-// void preOrderDFS(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 02B - Pre Order Iterative
-// void preOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 03A - Post Order Recursive DFS
-// void postOrderDFS(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 03B - Post Order Iterative
-// void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
-// TODO
-// }
-
-// * 04 - All 3 traversals
-// void threeTraversal(TreeNode *root,
-//                     std::vector<int> &preOrder,
-//                     std::vector<int> &inOrder,
-//                     std::vector<int> &postOrder)
-// {
-// TODO
-// }
-
-// * 05A - Maximum Depth of Binary Tree (DFS)
-// int maxDepthDFS(TreeNode *root) {
-// TODO
-// }
 
 int main(void) {
   return 0;
 }
 
 // * run the code
-// * g++ --std=c++17 practice.cpp -o output && ./output
+// * g++ --std=c++20 practice.cpp -o output && ./output

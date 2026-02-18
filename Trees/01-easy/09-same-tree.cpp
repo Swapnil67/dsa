@@ -11,6 +11,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -48,7 +50,7 @@ bool isSameTreeBFS(TreeNode *p, TreeNode *q) {
   if (!p || !q) // * One empty root
     return false;
 
-  std::queue<TreeNode *> q1, q2;
+  queue<TreeNode *> q1, q2;
   q1.push(p);
   q2.push(q);
 
@@ -66,8 +68,7 @@ bool isSameTreeBFS(TreeNode *p, TreeNode *q) {
     if (node1->left && node2->left) {
       q1.push(node1->left);
       q2.push(node2->left);
-    } 
-    else if (node1->left || node2->left) { // * One of tree does not have left node
+    } else if (node1->left || node2->left) { // * One of tree does not have left node
       return false;
     }
 
@@ -108,7 +109,7 @@ int main(void) {
   
   // bool ans = isSameTree(root, root2);
   bool ans = isSameTreeBFS(root, root2);
-  std::cout << "Is same trees: " << ans << std::endl;
+  cout << "Is same trees: " << ans << endl;
 
   return 0;
 }

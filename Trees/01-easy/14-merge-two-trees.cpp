@@ -1,7 +1,7 @@
 /*
 * Leetcode - 617
 * Merge Two Binary Trees
-
+*
 * Example:
 * Input: 
 * rootA = [1,3,2,5]
@@ -35,6 +35,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -50,25 +52,27 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
-
+  cout << " ]" << endl;
+}
 
 void levelOrder(TreeNode *root) {
   if (root == nullptr)
     return;
 
   // * Create the queue of TreeNode and push the root node
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
-    std::vector<int> level;
+    vector<int> level;
     int n = q.size();
     while (n--) {
       TreeNode *node = q.front();
@@ -80,13 +84,13 @@ void levelOrder(TreeNode *root) {
         q.push(node->right);
 
       level.push_back(node->data);
-      std::cout << node->data << " ";
+      cout << node->data << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
-
+// * Depth First Search (Creating New Tree)
 TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
   if (!root1 && !root2)
     return nullptr;
@@ -107,6 +111,20 @@ TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
   return ans;
 }
 
+// * Depth First Search (In Place)
+TreeNode *mergeTrees2(TreeNode *p, TreeNode *q) {
+  if (!p)
+    return q;
+    
+  if (!q)
+    return p;
+
+  p->data += q->data;
+  p->left = mergeTrees2(p->left, q->left);
+  p->right = mergeTrees2(p->right, q->right);
+  return p;
+}
+
 int main(void) {
   TreeNode *rootA = new TreeNode(1);
   rootA->left = new TreeNode(3);
@@ -119,12 +137,12 @@ int main(void) {
   rootB->left->right = new TreeNode(4);
   rootB->right->right = new TreeNode(7);
 
-  std::cout << "Root A: " << std::endl;
+  cout << "Root A: " << endl;
   levelOrder(rootA);
-  std::cout << "Root B: " << std::endl;
+  cout << "Root B: " << endl;
   levelOrder(rootB);
   
-  std::cout << "Merged Root: " << std::endl;
+  cout << "Merged Root: " << endl;
   TreeNode *ans = mergeTrees(rootA, rootB);
   levelOrder(ans);
   

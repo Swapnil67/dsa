@@ -1,16 +1,16 @@
 /*
 * Leetcode - 226
 * Invert Binary Tree
-
+*
 * Given the root of a binary tree, invert the tree, and return its root.
-
+*
 *
 *                  4
 *               /     \  
 *             2        7
 *           /  \     /   \  
 *          1    3   6     9
-
+*
 * Example 1:
 * Input: root = [4, 2, 7, 1, 3, 6, 9]
 *
@@ -19,19 +19,21 @@
 *             7        2
 *           /  \     /   \  
 *          9    6   3     1
-
+*
 * Output: [4, 7, 2, 9, 6, 3, 1]
-
+*
 * https://leetcode.com/problems/invert-binary-tree/description/
 * https://www.naukri.com/code360/problems/invert-a-binary-tree_1281382
 * https://www.geeksforgeeks.org/problems/mirror-tree/1
 */
 
-// ! Apple
+// ! Amazon, Google, Meta, Microsoft
 
 #include <queue>
 #include <vector>
 #include <iostream>
+
+using namespace std;
 
 typedef struct TreeNode TreeNode;
 
@@ -48,18 +50,17 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-// 
 void levelOrder(TreeNode *root) {
   if (root == nullptr)
     return;
@@ -89,6 +90,7 @@ void levelOrder(TreeNode *root) {
 
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * Breadth First Search
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) [queue]
 TreeNode *invertTreeBFS(TreeNode *root) {
@@ -115,7 +117,8 @@ TreeNode *invertTreeBFS(TreeNode *root) {
 }
 
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
+// * Depth First Search
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) [recursion stack]
 TreeNode *invertTreeDFS(TreeNode *root) {

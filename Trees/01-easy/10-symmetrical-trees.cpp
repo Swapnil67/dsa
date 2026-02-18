@@ -29,8 +29,11 @@
 * https://www.geeksforgeeks.org/problems/symmetric-tree/1
 */
 
+#include <queue>
 #include <vector>
 #include <iostream>
+
+using namespace std;
 
 typedef struct TreeNode TreeNode;
 
@@ -49,12 +52,12 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * rootA -> root | left | right
@@ -100,7 +103,7 @@ int main(void) {
   // root->right->right = new TreeNode(3);
 
   bool ans = isSymmetric(root);
-  std::cout << "Is Symmetric Tree " << ans << std::endl;
+  cout << "Is Symmetric Tree " << ans << endl;
 
   return 0;
 }

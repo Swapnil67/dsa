@@ -21,6 +21,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -36,12 +38,12 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // ! Left | Root | Right
@@ -50,7 +52,7 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void inOrderDFS(TreeNode* node, std::vector<int> &ans) {
+void inOrderDFS(TreeNode* node, vector<int> &ans) {
   if (node == nullptr)
     return;
 
@@ -62,11 +64,11 @@ void inOrderDFS(TreeNode* node, std::vector<int> &ans) {
 // * DFS Iterative - (Stack)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
-void inOrderIterative(TreeNode* root, std::vector<int> &ans) {
+void inOrderIterative(TreeNode* root, vector<int> &ans) {
   if (root == nullptr)
     return;
 
-  std::stack<TreeNode *> st;
+  stack<TreeNode *> st;
   TreeNode *node = root;
   while (root || st.size()) {
     // * Go to extreme left
@@ -86,23 +88,23 @@ void inOrderIterative(TreeNode* root, std::vector<int> &ans) {
 
 int main(void) {
   // * testcase 1
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(3);
+  TreeNode *root = new TreeNode(1);
+  root->left = new TreeNode(2);
+  root->right = new TreeNode(3);
   
-  // root->left->left = new TreeNode(4);
-  // root->left->right = new TreeNode(5);
+  root->left->left = new TreeNode(4);
+  root->left->right = new TreeNode(5);
   
-  // root->right->left = new TreeNode(6);
-  // root->right->right = new TreeNode(7);
+  root->right->left = new TreeNode(6);
+  root->right->right = new TreeNode(7);
 
 
   // * testcase 2
-  TreeNode *root = new TreeNode(1);
-  root->right = new TreeNode(2);
-  root->right->left = new TreeNode(3);
+  // TreeNode *root = new TreeNode(1);
+  // root->right = new TreeNode(2);
+  // root->right->left = new TreeNode(3);
 
-  std::vector<int> ans;
+  vector<int> ans;
   inOrderDFS(root, ans);
   // inOrderIterative(root, ans);
 

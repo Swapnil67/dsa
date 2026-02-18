@@ -21,6 +21,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -36,12 +38,12 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 };
 
 // ! Root | Left | Right
@@ -50,11 +52,11 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void preOrderDFS(TreeNode* node, std::vector<int> &ans) {
+void preOrderDFS(TreeNode* node, vector<int> &ans) {
   if (!node)
     return;
 
-  // std::cout << node->data << std::endl;
+  // cout << node->data << endl;
   ans.push_back(node->data);
   preOrderDFS(node->left, ans);
   preOrderDFS(node->right, ans);
@@ -63,18 +65,18 @@ void preOrderDFS(TreeNode* node, std::vector<int> &ans) {
 // * DFS Iterative - (Stack)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
-void preOrderIterative(TreeNode* root, std::vector<int> &ans) {
+void preOrderIterative(TreeNode* root, vector<int> &ans) {
   if (!root)
     return;
 
-  std::stack<TreeNode *> st;
+  stack<TreeNode *> st;
   st.push(root);
 
   while (!st.empty()) {
     TreeNode* node = st.top();
     st.pop();
     ans.push_back(node->data);
-    // std::cout << node->data << std::endl;
+    // cout << node->data << endl;
 
     // * since its a stack we'll store right node first and then left node
     
@@ -97,7 +99,7 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  std::vector<int> ans;
+  vector<int> ans;
   preOrderDFS(root, ans);
   // preOrderIterative(root, ans);
 

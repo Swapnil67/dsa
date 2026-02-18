@@ -86,7 +86,7 @@ int main(void) {
 
   int x = 7;
 
-  vector<int> ans =pathInATree(root, 7);
+  vector<int> ans = pathInATree(root, 7);
   std::cout << "Path: ";
   printArr(ans);
 

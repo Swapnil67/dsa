@@ -32,6 +32,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -47,12 +49,12 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 };
 
 void inOrderDFS(TreeNode *root, int &count) {
@@ -64,10 +66,10 @@ void inOrderDFS(TreeNode *root, int &count) {
 }
 
 int countLeftHeight(TreeNode *root) {
-  int height = 0;
   if (!root)
-    return height;
+    return 0;
 
+  int height = 0;
   while (root) {
     height++;
     root = root->left;
@@ -77,10 +79,10 @@ int countLeftHeight(TreeNode *root) {
 }
 
 int countRightHeight(TreeNode *root) {
-  int height = 0;
   if (!root)
-    return height;
+    return 0;
 
+  int height = 0;
   while (root) {
     height++;
     root = root->right;
@@ -112,7 +114,7 @@ int countNodes(TreeNode* root) {
 
   // * Count the right height of tree
   int rh = countRightHeight(root);
-  // std::cout << lh << " " << rh << std::endl;
+  // cout << lh << " " << rh << endl;
 
   // * If both height are same then it is a complete tree
   if (lh == rh)
@@ -140,7 +142,7 @@ int main(void) {
 
   // int count = bruteForce(root);
   int count = countNodes(root);
-  std::cout << "Count: " << count << std::endl;
+  cout << "Count: " << count << endl;
   
   return 0;
 }

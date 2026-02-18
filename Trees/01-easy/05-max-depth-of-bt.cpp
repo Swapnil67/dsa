@@ -25,6 +25,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -40,13 +42,16 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
+  cout << " ]" << endl;
+}
 
 // * Using BFS
 int maxDepthBFS(TreeNode *root) {
@@ -54,14 +59,14 @@ int maxDepthBFS(TreeNode *root) {
   if (!root)
     return level;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
 
     // * Process the complete level
     int n = q.size();
-    // std::cout << n << std::endl;
+    // cout << n << endl;
     while (n--) {
       TreeNode *node = q.front();
       q.pop();
@@ -88,7 +93,7 @@ int maxDepthDFS(TreeNode *root) {
   int lh = maxDepthDFS(root->left); // * calculate left height
   int rh = maxDepthDFS(root->right); // * calculate right height
 
-  return 1 + std::max(lh, rh);
+  return 1 + max(lh, rh);
 }
 
 int main(void) {
@@ -104,7 +109,7 @@ int main(void) {
 
   // int depth = maxDepthBFS(root);
   int depth = maxDepthDFS(root);
-  std::cout << "Maximum Depth: " << depth << std::endl;
+  cout << "Maximum Depth: " << depth << endl;
 
   return 0;
 }

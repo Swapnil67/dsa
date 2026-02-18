@@ -23,10 +23,14 @@
 * https://www.geeksforgeeks.org/problems/minimum-depth-of-a-binary-tree/1
 */
 
+// ! Amazon, Meta
+
 #include <queue>
 #include <vector>
 #include <climits>
 #include <iostream>
+
+using namespace std;
 
 typedef struct TreeNode TreeNode;
 
@@ -43,12 +47,12 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 };
 
 // * Using BFS 
@@ -58,13 +62,13 @@ int minDepthBFS(TreeNode *root) {
     return 0;
   
   int level = 1;  // * Default 1 level
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
 
     int n = q.size();
-    // std::cout << n << std::endl;
+    // cout << n << endl;
     
     // * Process the complete level
     while (n--) {
@@ -102,7 +106,7 @@ int minDepthDFS(TreeNode *root) {
   int lh = root->left ? minDepthDFS(root->left) : INT_MAX;
   int rh = root->right ? minDepthDFS(root->right) : INT_MAX;
 
-  return 1 + std::min(lh, rh);
+  return 1 + min(lh, rh);
 }
 
 int main(void) {
@@ -118,7 +122,7 @@ int main(void) {
 
   int depth = minDepthDFS(root);
   // int depth = minDepthBFS(root);
-  std::cout << "Minimum Depth: " << depth << std::endl;
+  cout << "Minimum Depth: " << depth << endl;
 
   return 0;
 }

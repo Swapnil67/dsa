@@ -22,13 +22,16 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
-struct TreeNode {
-  public:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
+struct TreeNode
+{
+public:
+  int data;
+  TreeNode *left;
+  TreeNode *right;
   
   TreeNode(int val) {
     data = val;
@@ -37,13 +40,16 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
+  cout << " ]" << endl;
+}
 
 // ! Left | Right | Root
 
@@ -52,11 +58,11 @@ void printArr(std::vector<T> arr) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY Worst Case = O(n)
 // * SPACE COMPLEXITY Best Case  = O(logn) ~ O(height of tree) * Size of Activation Record
-void postOrderDFS(TreeNode* node, std::vector<int> &ans) {
+void postOrderDFS(TreeNode* node, vector<int> &ans) {
   if (node == nullptr)
     return;
 
-  // std::cout << node->data << std::endl;
+  // cout << node->data << endl;
   postOrderDFS(node->left, ans);
   postOrderDFS(node->right, ans);
   ans.push_back(node->data);
@@ -67,13 +73,11 @@ void postOrderDFS(TreeNode* node, std::vector<int> &ans) {
 // * SPACE COMPLEXITY 
 // *    O(n) - stack
 // *    O(n) - output array
-void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
+void postOrderIterative(TreeNode *root, vector<int> &ans) {
  if (!root)
     return;
 
-  std::stack<TreeNode *> st;
-
-  TreeNode* cur = root;
+  stack<TreeNode *> st;
   st.push(root);
   while (st.size()) {
     TreeNode* topNode = st.top();
@@ -87,7 +91,7 @@ void postOrderIterative(TreeNode *root, std::vector<int> &ans) {
       st.push(topNode->right);
   }
 
-  std::reverse(ans.begin(), ans.end());
+  reverse(ans.begin(), ans.end());
 }
 
 
@@ -102,7 +106,7 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  std::vector<int> ans;
+  vector<int> ans;
   // postOrderDFS(root, ans);
   postOrderIterative(root, ans);
 

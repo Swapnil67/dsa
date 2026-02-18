@@ -16,6 +16,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -31,21 +33,24 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
+  cout << " ]" << endl;
+}
 
-bool isSameTree(TreeNode *rootA, TreeNode *rootB) {
+bool isSame(TreeNode *rootA, TreeNode *rootB) {
   if (!rootA || !rootB)
     return rootA == rootB;
 
   return (rootA->data == rootB->data &&
-          isSameTree(rootA->left, rootB->left) &&
-          isSameTree(rootA->right, rootB->right));
+          isSame(rootA->left, rootB->left) &&
+          isSame(rootA->right, rootB->right));
 }
 
 bool isSubtree(TreeNode* root, TreeNode* subRoot) {
@@ -57,7 +62,7 @@ bool isSubtree(TreeNode* root, TreeNode* subRoot) {
     return false;
 
   // * Check from the root itself first
-  if (isSameTree(root, subRoot))
+  if (isSame(root, subRoot))
     return true;
 
   // * Now Check from root->left & root->right subtrees
@@ -79,7 +84,7 @@ int main(void) {
   rootB->right = new TreeNode(2);
 
   bool ans = isSubtree(rootA, rootB);
-  std::cout << "Subtree of Another Tree: " << ans << std::endl;
+  cout << "Subtree of Another Tree: " << ans << endl;
 
   return 0;
 }

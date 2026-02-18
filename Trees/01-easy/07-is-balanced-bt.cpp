@@ -10,6 +10,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -25,14 +27,16 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
-
+  cout << " ]" << endl;
+}
 
 // * Use Max Depth of a tree
 // * Using DFS 
@@ -50,10 +54,10 @@ int isBalanced(TreeNode *root) {
   if (rh == -1)
     return -1;
 
-  if (std::abs(rh - lh) > 1)
+  if (abs(rh - lh) > 1)
     return -1;
 
-  return 1 + std::max(lh, rh);
+  return 1 + max(lh, rh);
 }
 
 int main(void) {
@@ -68,7 +72,7 @@ int main(void) {
 
   int balanced = isBalanced(root);
   bool ans = balanced >= 0;
-  std::cout << "is Balanced Binary Tree: " << ans << std::endl;
+  cout << "is Balanced Binary Tree: " << ans << endl;
 
   return 0;
 }

@@ -91,8 +91,23 @@ bool solve(TreeNode *node, int target_sum, int total) {
   return solve(node->left, target_sum, total) || solve(node->right, target_sum, total);
 }
 
+// * Depth First Search
 bool hasPathSum(TreeNode* root, int targetSum) {
   return solve(root, targetSum, 0);
+}
+
+// * Depth First Search
+bool hasPathSum2(TreeNode *root, int targetSum) {
+  if (!root)
+    return false;
+
+  targetSum -= root->data;
+
+  if (targetSum == 0 && !root->left && !root->right)
+    return true;
+
+  return hasPathSum(root->left, targetSum) ||
+         hasPathSum(root->right, targetSum);
 }
 
 int main(void) {

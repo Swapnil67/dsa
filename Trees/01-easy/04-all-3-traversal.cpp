@@ -2,6 +2,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -17,24 +19,24 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 };
 
 void threeTraversal(TreeNode *root,
-                    std::vector<int> &preOrder,
-                    std::vector<int> &inOrder,
-                    std::vector<int> &postOrder)
+                    vector<int> &preOrder,
+                    vector<int> &inOrder,
+                    vector<int> &postOrder)
 {
 
   if (root == nullptr)
     return;
 
-  std::stack<std::pair<TreeNode *, int>> st;
+  stack<pair<TreeNode *, int>> st;
   st.push({root, 1});
 
   while (!st.empty()) {
@@ -76,14 +78,14 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  std::vector<int> preOrder, inOrder, postOrder;
+  vector<int> preOrder, inOrder, postOrder;
   threeTraversal(root, preOrder, inOrder, postOrder);
 
-  std::cout << "Pre Order Traversal" << std::endl;
+  cout << "Pre Order Traversal" << endl;
   printArr(preOrder);
-  std::cout << "In Order Traversal" << std::endl;
+  cout << "In Order Traversal" << endl;
   printArr(inOrder);
-  std::cout << "Post Order Traversal" << std::endl;
+  cout << "Post Order Traversal" << endl;
   printArr(postOrder);
 
   return 0;

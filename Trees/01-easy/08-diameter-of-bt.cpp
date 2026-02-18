@@ -28,6 +28,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -43,13 +45,16 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
+  cout << " ]" << endl;
+}
 
 // * Same as max depth of BT
 int dfs(TreeNode* root, int &diameter) {
@@ -63,10 +68,10 @@ int dfs(TreeNode* root, int &diameter) {
   int rh = dfs(root->right, diameter);
 
   // * calculate max diamter
-  diameter = std::max(diameter, lh + rh);
+  diameter = max(diameter, lh + rh);
 
   // * Add cur node to height
-  return 1 + std::max(lh, rh);
+  return 1 + max(lh, rh);
 }
 
 int diameterOfBinaryTree(TreeNode* root) {
@@ -84,7 +89,7 @@ int main(void) {
   root->left->right = new TreeNode(5);
   
   int diameter = diameterOfBinaryTree(root);
-  std::cout << "Diameter of Binary Tree: " << diameter << std::endl;
+  cout << "Diameter of Binary Tree: " << diameter << endl;
   
   return 0;
 }
