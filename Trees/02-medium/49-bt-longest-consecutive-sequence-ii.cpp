@@ -37,72 +37,18 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
+using namespace std;
 
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-
-  ~TreeNode() {
-    if (left)
-      delete left;
-    if (right)
-      delete right;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
-std::vector<int> solve(int &max_val, TreeNode *root) {
+vector<int> solve(int &max_val, TreeNode *root) {
   if (!root)
     return {0, 0};
 
   int inr = 1, dcr = 1;
 
   if (root->left) {
-    std::vector<int> left = solve(max_val, root->left);
+    vector<int> left = solve(max_val, root->left);
     if (root->data == root->left->data + 1) {
       dcr = left[1] + 1; // * decreasing
     } else if (root->data == root->left->data - 1) {
@@ -111,7 +57,7 @@ std::vector<int> solve(int &max_val, TreeNode *root) {
   }
   
   if (root->right) {
-    std::vector<int> right = solve(max_val, root->right);
+    vector<int> right = solve(max_val, root->right);
     if (root->data == root->right->data + 1) {
       dcr = right[1] + 1; // * decreasing
     } else if (root->data == root->right->data - 1) {
@@ -119,9 +65,20 @@ std::vector<int> solve(int &max_val, TreeNode *root) {
     }
   }
 
-  max_val = std::max(max_val, (inr + dcr - 1));
+  // * When combining increasing and decreasing paths through a node, that node is counted in both. 
+  // * The formula is inr + dcr - 1, not inr + dcr.
+  max_val = max(max_val, (inr + dcr - 1));
   return {inr, dcr};
 }
+
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
+// !Time Limit Exceeded
+// * The brute force approach considers every possible path in the tree and checks if it forms a consecutive sequence. 
+// * For each node, we explore all paths passing through it by examining every possible starting and ending point in its subtrees.
+// * TIME COMPLEXITY O(n^3)
+// * SPACE COMPLEXITY O(n^3) 
+
 
 // * ------------------------- APPROACH: OPTIMAL APPROACH -------------------------
 // * DFS
@@ -144,11 +101,11 @@ int main(void) {
   // root->left = new TreeNode(1);
   // root->right = new TreeNode(3);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
   int ans = longestConsecutive(root);
-  std::cout << "Longest Consecutive Sequence: " << ans << std::endl;
+  cout << "Longest Consecutive Sequence: " << ans << endl;
 
   return 0;
 }

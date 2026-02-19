@@ -30,6 +30,8 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -45,19 +47,19 @@ public:
   }
 };
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 void levelOrderTraversal(TreeNode *root) {
   if (!root)
     return;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while(!q.empty()) {
@@ -67,7 +69,7 @@ void levelOrderTraversal(TreeNode *root) {
       TreeNode *node = q.front();
       q.pop();
 
-      std::cout << node->data << " ";
+      cout << node->data << " ";
 
       if (node->left)
         q.push(node->left);
@@ -75,18 +77,18 @@ void levelOrderTraversal(TreeNode *root) {
       if (node->right)
         q.push(node->right);
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-TreeNode *createBinaryTree(std::vector<std::vector<int>> &descriptions) {
-  std::map<int, TreeNode *> hash;
-  std::unordered_set<int> children; // * They can never be root of the tree
+TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
+  map<int, TreeNode *> hash;
+  unordered_set<int> children; // * They can never be root of the tree
 
-  for(std::vector<int> &vec: descriptions) {
+  for(vector<int> &vec: descriptions) {
     int parent_val = vec[0];
     int child_val = vec[1];
     bool is_left = vec[2];
@@ -111,7 +113,7 @@ TreeNode *createBinaryTree(std::vector<std::vector<int>> &descriptions) {
   }
 
   // * Find the root
-  for(std::vector<int> &vec: descriptions) {
+  for(vector<int> &vec: descriptions) {
     const int parent = vec[0];
     if (!children.count(parent)) {
       return hash[parent];
@@ -123,16 +125,16 @@ TreeNode *createBinaryTree(std::vector<std::vector<int>> &descriptions) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> descriptions = {{20, 15, 1}, {20, 17, 0}, {50, 20, 1}, {50, 80, 0}, {80, 19, 1}};
+  vector<vector<int>> descriptions = {{20, 15, 1}, {20, 17, 0}, {50, 20, 1}, {50, 80, 0}, {80, 19, 1}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> descriptions = {{85, 82, 1}, {74, 85, 1}, {39, 70, 0}, {82, 38, 1}, {74, 39, 0}, {39, 13, 1}};
+  // vector<vector<int>> descriptions = {{85, 82, 1}, {74, 85, 1}, {39, 70, 0}, {82, 38, 1}, {74, 39, 0}, {39, 13, 1}};
 
-  std::cout << "----- Tree Description ------" << std::endl;
+  cout << "----- Tree Description ------" << endl;
   for (auto &arr : descriptions)
     printArr(arr);
 
-  std::cout << "\n----- Binary Tree ------" << std::endl;
+  cout << "\n----- Binary Tree ------" << endl;
   TreeNode* root = createBinaryTree(descriptions);
   levelOrderTraversal(root);
 

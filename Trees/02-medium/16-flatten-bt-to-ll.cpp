@@ -22,6 +22,8 @@
 #include <stack>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -41,7 +43,7 @@ void inOrderTraversal(TreeNode *root) {
   if (root == nullptr)
     return;
   inOrderTraversal(root->left);
-  std::cout << root->data << std::endl;
+  cout << root->data << endl;
   inOrderTraversal(root->right);
 }
 
@@ -59,7 +61,7 @@ TreeNode* solve(TreeNode* root, TreeNode* &prev) {
   return root;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * DFS Approach
 // * Traverse => Right -> Left -> Root
 // * TIME COMPLEXITY O(n)
@@ -79,7 +81,7 @@ void flatten2(TreeNode* root) {
   if (!root)
     return;
 
-  std::stack<TreeNode *> st;
+  stack<TreeNode *> st;
   st.push(root);
 
   while (!st.empty()) {

@@ -26,6 +26,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -42,19 +44,19 @@ public:
   }
 };
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 bool isLeaf(TreeNode *node) {
   return !node->left && !node->right;
 }
 
-void addLeaves(TreeNode* root, std::vector<int> &ans) {
+void addLeaves(TreeNode* root, vector<int> &ans) {
   if (isLeaf(root)) {
     ans.push_back(root->data);
     return;
@@ -67,7 +69,7 @@ void addLeaves(TreeNode* root, std::vector<int> &ans) {
     addLeaves(root->right, ans);
 }
 
-void addLeftBoundary(TreeNode *root, std::vector<int> &res) {
+void addLeftBoundary(TreeNode *root, vector<int> &res) {
   TreeNode *cur = root->left;
   while (cur) {
     if (!isLeaf(cur))
@@ -79,9 +81,9 @@ void addLeftBoundary(TreeNode *root, std::vector<int> &res) {
   }
 }
 
-void addRightBoundary(TreeNode *root, std::vector<int> &res) {
+void addRightBoundary(TreeNode *root, vector<int> &res) {
   TreeNode *cur = root->right;
-  std::stack<int> st;
+  stack<int> st;
   
   while (cur) {
     if (!isLeaf(cur))
@@ -102,8 +104,8 @@ void addRightBoundary(TreeNode *root, std::vector<int> &res) {
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> boundaryTraversal(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> boundaryTraversal(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
 
@@ -147,7 +149,7 @@ int main() {
   root->right->left = new TreeNode(18);
   root->right->right = new TreeNode(25);
 
-  std::vector<int> ans = boundaryTraversal(root);
+  vector<int> ans = boundaryTraversal(root);
   printArr(ans);
 
   return 0;

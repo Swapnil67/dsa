@@ -20,6 +20,8 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -37,19 +39,19 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 void levelOrderTraversal(TreeNode *root) {
   if (!root)
     return;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while(!q.empty()) {
@@ -59,7 +61,7 @@ void levelOrderTraversal(TreeNode *root) {
       TreeNode *node = q.front();
       q.pop();
 
-      std::cout << node->data << " ";
+      cout << node->data << " ";
 
       if (node->left)
         q.push(node->left);
@@ -67,13 +69,13 @@ void levelOrderTraversal(TreeNode *root) {
       if (node->right)
         q.push(node->right);
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
 
-std::vector<std::vector<int>> zigzagLevelOrder(TreeNode *root) {
-  std::vector<std::vector<int>> ans;
+vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
+  vector<vector<int>> ans;
   if (root == nullptr)
       return ans;
 
@@ -81,11 +83,11 @@ std::vector<std::vector<int>> zigzagLevelOrder(TreeNode *root) {
   // * 1 = R -> L
   int flag = 0;
 
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
-    std::vector<int> cur;
+    vector<int> cur;
     int n = q.size();
     while (n--) {
       TreeNode *node = q.front();
@@ -99,7 +101,7 @@ std::vector<std::vector<int>> zigzagLevelOrder(TreeNode *root) {
     
     // * Reverse the cur level
     if(flag == 1) {
-      std::reverse(cur.begin(), cur.end());
+      reverse(cur.begin(), cur.end());
     }
     ans.push_back(cur);
     flag = !flag;
@@ -112,18 +114,18 @@ std::vector<std::vector<int>> zigzagLevelOrder(TreeNode *root) {
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<std::vector<int>> zigzagLevelOrder2(TreeNode *root) {
-  std::vector<std::vector<int>> ans;
+vector<vector<int>> zigzagLevelOrder2(TreeNode *root) {
+  vector<vector<int>> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   int reverse = 1;
   while (!q.empty()) {
     int n = q.size();
-    std::vector<int> cur(n);
+    vector<int> cur(n);
 
     for (int i = 0; i < n; ++i) {
       TreeNode *node = q.front();
@@ -166,12 +168,12 @@ int main() {
   root->right->left = new TreeNode(15);
   root->right->right = new TreeNode(7);
 
-  std::cout << "Input Tree:" << std::endl;
+  cout << "Input Tree:" << endl;
   levelOrderTraversal(root);
 
-  // std::vector<std::vector<int>> ans = zigzagLevelOrder(root);
-  std::vector<std::vector<int>> ans = zigzagLevelOrder2(root);
-  std::cout << "Zigzag Level Order Traversal: " << std::endl;
+  // vector<vector<int>> ans = zigzagLevelOrder(root);
+  vector<vector<int>> ans = zigzagLevelOrder2(root);
+  cout << "Zigzag Level Order Traversal: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

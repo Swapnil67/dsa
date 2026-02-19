@@ -33,6 +33,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -50,30 +52,30 @@ public:
 
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
-  std::vector<std::vector<int>> ans;
+vector<vector<int>> bfsTraversal(TreeNode* root) {
+  vector<vector<int>> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while(!q.empty()) {
     int n = q.size();
 
     int is_odd_level = 0;
-    std::vector<int> temp;
+    vector<int> temp;
     while(n--) {
       TreeNode* front = q.front();
       q.pop();
@@ -91,14 +93,14 @@ std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
   return ans;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 TreeNode* reverseOddLevelsBFS(TreeNode* root) {
   if (!root)
     return root;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   int is_odd_level = 0;
@@ -106,7 +108,7 @@ TreeNode* reverseOddLevelsBFS(TreeNode* root) {
     int n = q.size();
 
     // * Nodes of current level
-    std::vector<TreeNode *> level;
+    vector<TreeNode *> level;
 
     while (n--) {
       TreeNode* node = q.front();
@@ -144,7 +146,7 @@ void helper(TreeNode *p, TreeNode *q, int level) {
 
   // * Odd level
   if (level % 2 == 1) {
-    // std::cout << p->data << " " << q->data << std::endl;
+    // cout << p->data << " " << q->data << endl;
     int temp = p->data;
     p->data = q->data;
     q->data = temp;
@@ -173,15 +175,15 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  std::cout << "Tree Before Reverse" << std::endl;
-  std::vector<std::vector<int>> tree = bfsTraversal(root);
+  cout << "Tree Before Reverse" << endl;
+  vector<vector<int>> tree = bfsTraversal(root);
   for (auto &level : tree)
     printArr(level);
   
   // root = reverseOddLevelsBFS(root);
   root = reverseOddLevelsDFS(root);
   
-  std::cout << "Tree After Reverse" << std::endl;
+  cout << "Tree After Reverse" << endl;
   tree = bfsTraversal(root);
   for (auto &level : tree)
     printArr(level);

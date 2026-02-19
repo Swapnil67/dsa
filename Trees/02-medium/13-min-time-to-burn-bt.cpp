@@ -32,6 +32,8 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -49,19 +51,19 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 void markParents(TreeNode *root,
-                 std::unordered_map<TreeNode *, TreeNode *> &parent_map,
+                 unordered_map<TreeNode *, TreeNode *> &parent_map,
                  TreeNode *&startNode, int start)
 {
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -97,21 +99,21 @@ int amountOfTime(TreeNode* root, int start) {
 
   // * 1. Map the parent node of each node in hashmap
   TreeNode *startNode = nullptr;
-  std::unordered_map<TreeNode *, TreeNode *> parent_map;
+  unordered_map<TreeNode *, TreeNode *> parent_map;
   markParents(root, parent_map, startNode, start);
   if (!startNode)
     return time;
 
   // * For debugging
   // for(auto &it: parent_map) {
-  //   std::cout << it.first->data << " -> " << it.second->data << std::endl;
+  //   cout << it.first->data << " -> " << it.second->data << endl;
   // }
 
   // * Queue for BFS
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(startNode); // * Push the initial starting node to queue
 
-  std::unordered_map<TreeNode *, bool> visited_map;
+  unordered_map<TreeNode *, bool> visited_map;
   visited_map[startNode] = true; // * Put the starting node in visited_map
 
 
@@ -166,7 +168,7 @@ int main(void) {
   int start =  3;
 
   int time = amountOfTime(root, start);
-  std::cout << "Amount of Time for Binary Tree to Be Infected " << time << std::endl;
+  cout << "Amount of Time for Binary Tree to Be Infected " << time << endl;
 
   return 0;
 }

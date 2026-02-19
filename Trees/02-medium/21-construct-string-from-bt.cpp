@@ -52,6 +52,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -67,23 +69,23 @@ public:
   }
 };
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-std::string tree2str(TreeNode* root) {
-  std::string ans = "";
+string tree2str(TreeNode* root) {
+  string ans = "";
   if (!root)
     return ans;
   
-  ans += std::to_string(root->data);
+  ans += to_string(root->data);
 
-  std::string left_str = tree2str(root->left);
-  std::string right_str = tree2str(root->right);
+  string left_str = tree2str(root->left);
+  string right_str = tree2str(root->right);
   
   if (!root->left && !root->right) { // * no children
     return ans;   // * single node in tree    
@@ -118,8 +120,8 @@ int main(void) {
   // TreeNode* root = new TreeNode(1);
   // root->right = new TreeNode(2);
 
-  std::string ans = tree2str(root);
-  std::cout << ans << std::endl;
+  string ans = tree2str(root);
+  cout << ans << endl;
 
   return 0;
 }

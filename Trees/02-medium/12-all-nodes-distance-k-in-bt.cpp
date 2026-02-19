@@ -26,7 +26,8 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
-#include <math.h>
+
+using namespace std;
 
 typedef struct TreeNode TreeNode;
 
@@ -45,19 +46,19 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Map the parent node of each node in hashmap
 void markParents(TreeNode *root,
-                 std::unordered_map<TreeNode *, TreeNode *> &parent_map)
+                 unordered_map<TreeNode *, TreeNode *> &parent_map)
 {
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   // * Level Order Traversal
@@ -83,22 +84,22 @@ void markParents(TreeNode *root,
 }
 
 // * BFS
-std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   // * 1. Map the parent node of each node in hashmap
-  std::unordered_map<TreeNode *, TreeNode *> parent_map;
+  unordered_map<TreeNode *, TreeNode *> parent_map;
   markParents(root, parent_map);
 
   // * For debugging
   // for(auto &it: parent_map) {
-  //   std::cout << it.first->data << " -> " << it.second->data << std::endl;
+  //   cout << it.first->data << " -> " << it.second->data << endl;
   // }
   
   // * 2. Do any type of traversal on tree 
   // * Visited Map for keeping track of which is we already visited during traversal
-  std::unordered_map<TreeNode*, bool> visitedMap;
+  unordered_map<TreeNode*, bool> visitedMap;
   visitedMap[target] = true;
   
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(target);
   
   int distance = 0;
@@ -133,7 +134,7 @@ std::vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   }
 
   // * 3. The queue will contain our answer
-  std::vector<int> ans;
+  vector<int> ans;
   while (!q.empty()) {
     ans.push_back(q.front()->data);
     q.pop();
@@ -158,8 +159,8 @@ int main(void) {
   root->left->right->right = new TreeNode(4);
 
   int k = 2;
-  std::cout << "All nodes at distance " << k << ": ";
-  std::vector<int> ans = distanceK(root, root->left, k);
+  cout << "All nodes at distance " << k << ": ";
+  vector<int> ans = distanceK(root, root->left, k);
   printArr(ans);
 
   return 0;

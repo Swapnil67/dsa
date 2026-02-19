@@ -39,6 +39,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -56,19 +58,19 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
+void printArr(vector<T> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+    cout << arr[i] << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Might go out of 'long long' range if input is too big.
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int bruteForce(TreeNode *root) {
-  std::queue<std::pair<TreeNode *, int>> q;
+  queue<pair<TreeNode *, int>> q;
   q.push({root, 0});
 
   int ans = 0;
@@ -91,7 +93,7 @@ int bruteForce(TreeNode *root) {
         q.push({node->right, ((2 * idx) + 2)});
       }
     }
-    ans = std::max(ans, (last - first + 1));
+    ans = max(ans, (last - first + 1));
   }
   return ans;
 }
@@ -105,13 +107,13 @@ int widthOfBinaryTree(TreeNode *root) {
   if (!root)
     return max_width;
 
-  std::queue<std::pair<TreeNode *, long long>> q;
+  queue<pair<TreeNode *, long long>> q;
   q.push({root, 0});
 
   while (!q.empty()) {
     // * find the max_width in cur_level
     int L = (int)q.front().second, R = (int)q.back().second;
-    max_width = std::max(max_width, R - L + 1);
+    max_width = max(max_width, R - L + 1);
 
     long long level_min = q.front().second; // * base value
     
@@ -149,7 +151,7 @@ int main(void) {
 
   // int width = bruteForce(root);
   int width = widthOfBinaryTree(root);
-  std::cout << "Maximum Width of Binary Tree " << width << std::endl;
+  cout << "Maximum Width of Binary Tree " << width << endl;
   return 0;
 }
 

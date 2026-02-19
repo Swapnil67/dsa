@@ -21,6 +21,7 @@
 */
 
 #include <iostream>
+using namespace std;
 
 typedef struct TreeNode TreeNode;
 
@@ -37,20 +38,20 @@ public:
   }
 };
 
-void dfs(TreeNode* root, int &ans, int curMaxVal) {
+void dfs(TreeNode* root, int &ans, int cur_max) {
   if (!root) // * Base case
     return;
 
-  if (root->data >= curMaxVal)
+  if (root->data >= cur_max)
     ans++;
 
   // * Update the max_val in current path
-  curMaxVal = std::max(curMaxVal, root->data);
-  dfs(root->left, ans, curMaxVal);
-  dfs(root->right, ans, curMaxVal);
+  cur_max = max(cur_max, root->data);
+  dfs(root->left, ans, cur_max);
+  dfs(root->right, ans, cur_max);
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * DFS Approach
 // * Pre order traversal
 // * TIME COMPLEXITY O(n)
@@ -73,7 +74,7 @@ int main(void) {
   root->right->right = new TreeNode(5);
 
   int ans = goodNodes(root);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
   return 0;
 }
 

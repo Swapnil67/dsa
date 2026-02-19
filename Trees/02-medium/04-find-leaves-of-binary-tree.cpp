@@ -26,6 +26,8 @@
 #include <unordered_map>
 
 using namespace std;
+
+using namespace std;
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -42,24 +44,24 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int binaryTreeHeight(TreeNode* root, std::unordered_map<int, std::vector<int>> &mp) {
+int binaryTreeHeight(TreeNode* root, unordered_map<int, vector<int>> &mp) {
   if (!root)
     return 0;
 
   int lh = binaryTreeHeight(root->left, mp);
   int rh = binaryTreeHeight(root->right, mp);
-  int height = 1 + std::max(lh, rh);
+  int height = 1 + max(lh, rh);
   mp[height].push_back(root->val);
   return height;
 }
@@ -71,7 +73,7 @@ int height(TreeNode *root, vector<vector<int>> &ans) {
   int lh = height(root->left, ans);
   int rh = height(root->right, ans);
 
-  int cur_height = max(lh, rh) + 1;
+  int cur_height = 1 + max(lh, rh);
   if (ans.size() == cur_height) { // * To prevent out of bound errors
     ans.push_back({});
   }
@@ -88,7 +90,7 @@ vector<vector<int>> findLeaves1(TreeNode *root) {
   if (!root)
     return ans;
 
-  std::unordered_map<int, std::vector<int>> mp;
+  unordered_map<int, vector<int>> mp;
   binaryTreeHeight(root, mp);
 
   for (auto &it: mp) {
@@ -120,9 +122,9 @@ int main() {
   root->left->left = new TreeNode(4);
   root->left->right = new TreeNode(5);
 
-  std::cout << "Vertical Traversal of tree: " << std::endl;
-  // std::vector<std::vector<int>> ans = findLeaves1(root);
-  std::vector<std::vector<int>> ans = findLeaves2(root);
+  cout << "Vertical Traversal of tree: " << endl;
+  // vector<vector<int>> ans = findLeaves1(root);
+  vector<vector<int>> ans = findLeaves2(root);
   for (auto &p : ans)
     printArr(p);
 

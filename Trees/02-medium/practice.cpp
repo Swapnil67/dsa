@@ -8,180 +8,9 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include "common.hpp"
 
 using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-
-  ~TreeNode() {
-    if (left)
-      delete left;
-    if (right)
-      delete right;
-  }
-};
-
-template <typename T>
-void printArr(vector<T> &arr) {
-  int n = arr.size();
-  cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    cout << arr[i];
-    if (i != n - 1)
-      cout << ", ";
-  }
-  cout << " ]" << endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    cout << endl;
-  }
-}
-
-// * ------------------------------------------------------------------------
-
-// * 01 - Binary Tree Level Order Traversal
-// vector<vector<int>> levelOrder(TreeNode *root) {
-// TODO
-// }
-
-// * 02 - Binary Tree Zigzag Level Order Traversal
-// vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-// TODO
-// }
-
-// * 03 - Boundary Traversal of tree
-// vector<int> boundaryTraversal(TreeNode* root) {
-// TODO
-// }
-
-// * 04 - Find Leaves of Binary Tree
-// vector<vector<int>> findLeaves2(TreeNode *root) {
-// TODO
-// }
-
-// * 05 - Top View of Binary tree
-// vector<int> topView(TreeNode *root) {
-// TODO
-// }
-
-// * 06 - Bottom View of Binary tree
-// vector<int> bottomView(TreeNode *root) {
-// TODO
-// }
-
-// * 07 - Right View of Binary tree
-// vector<int> rightView(TreeNode *root) {
-// TODO
-// }
-
-// * 08 - left View of Binary tree
-// vector<int> leftView(TreeNode *root) {
-// TODO
-// }
-
-// * 09 - Root to Node
-// vector<int> rootToNode(TreeNode *root, int x) {
-// TODO
-// }
-
-// * 10 - Lowest Common Ancestor of a Binary Tree
-// TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
-// TODO
-// }
-
-// * 11 - Maximum Width of Binary Tree
-// int widthOfBinaryTree(TreeNode *root) {
-// TODO
-// }
-
-// * 12 - All Nodes Distance K in Binary Tree
-// vector<int> distanceK(TreeNode *root, TreeNode *target, int k) {
-// TODO
-// }
-
-// * 13 - Amount of Time for Binary Tree to Be Infected
-// int amountOfTime(TreeNode* root, int start) {
-// TODO
-// }
-
-// * 14 - Construct Binary Tree from Preorder and Inorder Traversal
-// TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
-// TODO
-// }
-
-// * 15 - Construct Binary Tree from Inorder and Postorder Traversal
-// TreeNode *buildTree(vector<int> &postorder, vector<int> &inorder) {
-// TODO
-// }
-
-// * 16 - Flatten Binary Tree to Linked List
-// void flatten(TreeNode* root) {
-// TODO
-// }
-
-// * 17 - Count Good Nodes in Binary Tree
-// int goodNodes(TreeNode* root) {
-// TODO
-// }
-
-// * 18 - Delete Leaves With a Given Value
-// TreeNode* removeLeafNodes(TreeNode* root, int target) {
-// TODO
-// }
-
-// * 19 - Reverse Odd Levels of Binary Tree
-// TreeNode* reverseOddLevelsBFS(TreeNode* root) {
-// TODO Tomorrow
-// }
-
-// * 20 - Create Binary Tree From Descriptions
-// TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
-// TODO
-// }
-
-// * 21 - Construct String from Binary Tree
-// string tree2str(TreeNode *root) {
-// TODO
-// }
-
-// * 22 - Kth Largest Sum in a Binary Tree
-// long long kthLargestLevelSum(TreeNode *root, int k) {
-// TODO
-// }
 
 // * 23 - Cousins in Binary Tree II
 // TreeNode* replaceValueInTree(TreeNode* root) {
@@ -351,7 +180,120 @@ void levelOrderTraversal(TreeNode *root) {
 // TODO
 // }
 
+// * ------------------------------------------------------------------------
+
+// * 01 - Binary Tree Level Order Traversal
+// vector<vector<int>> levelOrder(TreeNode *root) {
+// TODO
+// }
+
+// * 02 - Binary Tree Zigzag Level Order Traversal
+// vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+// TODO
+// }
+
+// * 03 - Boundary Traversal of tree
+// vector<int> boundaryTraversal(TreeNode* root) {
+// TODO
+// }
+
+// * 04 - Find Leaves of Binary Tree
+// vector<vector<int>> findLeaves(TreeNode *root) {
+// TODO
+// }
+
+// * 05 - Top View of Binary tree
+// vector<int> topView(TreeNode *root) {
+// TODO Tomorrow
+// }
+
+// * 06 - Bottom View of Binary tree
+// vector<int> bottomView(TreeNode *root) {
+// TODO Tomorrow
+// }
+
+// * 07 - Right View of Binary tree
+// vector<int> rightView(TreeNode *root) {
+// TODO Tomorrow
+// }
+
+// * 08 - left View of Binary tree
+// vector<int> leftView(TreeNode *root) {
+// TODO Tomorrow
+// }
+
+// * 09 - Root to Node
+// vector<int> rootToNode(TreeNode *root, int x) {
+// TODO
+// }
+
+// * 10 - Lowest Common Ancestor of a Binary Tree
+// TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
+// TODO
+// }
+
+// * 11 - Maximum Width of Binary Tree
+// int widthOfBinaryTree(TreeNode *root) {
+// TODO
+// }
+
+// * 12 - All Nodes Distance K in Binary Tree
+// vector<int> distanceK(TreeNode *root, TreeNode *target, int k) {
+// TODO
+// }
+
+// * 13 - Amount of Time for Binary Tree to Be Infected
+// int amountOfTime(TreeNode* root, int start) {
+// TODO
+// }
+
+// * 14 - Construct Binary Tree from Preorder and Inorder Traversal
+// TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
+// TODO Tomorrow
+// }
+
+// * 15 - Construct Binary Tree from Inorder and Postorder Traversal
+// TreeNode *buildTree(vector<int> &postorder, vector<int> &inorder) {
+// TODO Tomorrow
+// }
+
+// * 16 - Flatten Binary Tree to Linked List
+// void flatten(TreeNode* root) {
+// TODO
+// }
+
+// * 17 - Count Good Nodes in Binary Tree
+// int goodNodes(TreeNode* root) {
+// TODO
+// }
+
+// * 18 - Delete Leaves With a Given Value
+// TreeNode* removeLeafNodes(TreeNode* root, int target) {
+// TODO
+// }
+
+// * 19 - Reverse Odd Levels of Binary Tree
+// TreeNode* reverseOddLevelsBFS(TreeNode* root) {
+// TODO
+// }
+
+// * 20 - Create Binary Tree From Descriptions
+// TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
+// TODO
+// }
+
+// * 21 - Construct String from Binary Tree
+// string tree2str(TreeNode *root) {
+// TODO
+// }
+
+// * 22 - Kth Largest Sum in a Binary Tree
+// long long kthLargestLevelSum(TreeNode *root, int k) {
+// TODO
+// }
+
 int main(void) {
+
   return 0;
 }
 
