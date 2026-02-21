@@ -22,60 +22,14 @@
 #include <vector>
 #include <climits>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
+using namespace std;
 
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
+// * Use Max Heap
 
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
-std::vector<std::vector<int>> bfsTraversal(TreeNode* root) {
-  std::vector<std::vector<int>> ans;
-  if (!root)
-    return ans;
-
-  std::queue<TreeNode*> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-
-    int is_odd_level = 0;
-    std::vector<int> temp;
-    while(n--) {
-      TreeNode* front = q.front();
-      q.pop();
-
-      temp.push_back(front->data);
-      if (front->left)
-        q.push(front->left);
-      if (front->right)
-        q.push(front->right);
-    }
-
-    ans.push_back(temp);
-  }
-
-  return ans;
-}
-
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Calculate level sum on the go
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
@@ -100,13 +54,11 @@ int maxLevelSum(TreeNode* root) {
       
       level_sum += node->data;
 
-      if (node->left) {
+      if (node->left) 
         q.push(node->left);
-      }
       
-      if (node->right) {
+      if (node->right) 
         q.push(node->right);
-      }
     }
     std::cout << "level_sum " << level_sum << std::endl;
     if (level_sum > max_sum) {
@@ -140,9 +92,7 @@ int main(void) {
   root->right->right = new TreeNode(9);
 
   std::cout << "Input Tree" << std::endl;
-  std::vector<std::vector<int>> tree = bfsTraversal(root);
-  for (auto &level : tree)
-    printArr(level);
+  levelOrderTraversal(root);
   
   int level = maxLevelSum(root); 
   std::cout << "Max sum level: " << level << std::endl;

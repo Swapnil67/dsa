@@ -36,6 +36,15 @@ void printArr(std::vector<T> &arr)
   std::cout << " ]" << std::endl;
 }
 
+void inOrderTraversal(TreeNode* root) {
+  if (!root)
+    return;
+
+  inOrderTraversal(root->left);
+  std::cout << root->data << " ";
+  inOrderTraversal(root->right);
+}
+
 void levelOrderTraversal(TreeNode *root)
 {
   if (!root)

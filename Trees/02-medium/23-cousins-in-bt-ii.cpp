@@ -1,15 +1,15 @@
 /*
 * Leetcode - 2641
 * Cousins in Binary Tree II
-
+*
 * Given the root of a binary tree, replace the value of each node in the tree with the sum of all its cousins' values.
-
+*
 * Two nodes of a binary tree are cousins if they have the same depth with different parents.
 * Return the root of the modified tree.
-
+*
 * Note that the depth of a node is the number of edges in the path from the root node to it.
-
-
+*
+*
 * Example 1:
 * Input: 
 *                   5             
@@ -17,60 +17,31 @@
 *             4         9        
 *           /   \     /  \  
 *          1    10   x    7 
-
+*
 * Output: 
 *                   0        
 *               /      \     
 *             0         0      
 *           /  \      /   \  
 *          7    7    x    11
-
-
+*
 * https://leetcode.com/problems/cousins-in-binary-tree-ii/description/
 */
 
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
-void inOrderTraversal(TreeNode* root) {
-  if (!root)
-    return;
-
-  inOrderTraversal(root->left);
-  std::cout << root->data << " ";
-  inOrderTraversal(root->right);
-}
+using namespace std;
 
 // * Finds the level sum at each level in given BT
-std::vector<int> getTreeLevelSum(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> getTreeLevelSum(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -102,11 +73,11 @@ TreeNode *bruteForce(TreeNode *root) {
     return root;
 
   // * 1. Find the sum of each level
-  std::vector<int> level_sum_arr = getTreeLevelSum(root);
+  vector<int> level_sum_arr = getTreeLevelSum(root);
   // printArr(level_sum_arr);
 
   // * 2. Level order traversal
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
   root->data = 0; // * Since root does not have any cousins
 
@@ -150,7 +121,7 @@ TreeNode* replaceValueInTree(TreeNode* root) {
   if (!root)
     return root;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   int level_sum = root->data;
@@ -201,16 +172,17 @@ int main(void) {
   
   root->right->right = new TreeNode(7);
 
-  std::cout << "Input Tree" << std::endl;
+  cout << "Input Tree" << endl;
   inOrderTraversal(root);
-  std::cout << std::endl;
+  cout << endl;
   
   // TreeNode *ans = bruteForce(root); 
   TreeNode *ans = replaceValueInTree(root); 
 
-  std::cout << "Output Tree" << std::endl;
+  cout << "Output Tree" << endl;
   inOrderTraversal(ans);
-  std::cout << std::endl;
+  cout << endl;
+
   return 0;
 }
 

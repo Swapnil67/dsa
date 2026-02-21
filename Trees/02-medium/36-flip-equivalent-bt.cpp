@@ -39,64 +39,17 @@
 * https://www.naukri.com/code360/problems/flip-equivalent-binary-tree_1234687
 */
 
-// ! Google, Uber, Apple
+// ! Microsoft, Google, Uber, Apple
 
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 // * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
-// * TIME COMPLEXITY O(N)
+// * TIME COMPLEXITY O(4*N)
 // * SPACE COMPLEXITY O(1)
 bool flipEquiv(TreeNode* root1, TreeNode* root2) {
   if (!root1 || !root2)

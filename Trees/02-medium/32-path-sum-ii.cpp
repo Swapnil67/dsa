@@ -29,81 +29,31 @@
 #include <queue>
 #include <vector>
 #include <iostream>
-#include <unordered_set>
-#include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 void dfs(
     TreeNode *root,
-    int &cur_sum,
-    int &target_sum,
-    std::vector<int> &path,
-    std::vector<std::vector<int>> &ans)
+    int target_sum,
+    vector<int> &path,
+    vector<vector<int>> &ans)
 {
   if (!root)
     return;
 
-  cur_sum += root->data;
+  target_sum -= root->data;
   path.push_back(root->data);
   
   // * Found Root to Leaf which matches target sum
-  if (cur_sum == target_sum && !root->left && !root->right) {
+  if (target_sum == 0 && !root->left && !root->right) {
     ans.push_back(path);
   }
+
+  dfs(root->left, target_sum, path, ans);
+  dfs(root->right, target_sum, path, ans);
   
-  dfs(root->left, cur_sum, target_sum, path, ans);
-  dfs(root->right, cur_sum, target_sum, path, ans);
-  
-  cur_sum -= root->data;
+  target_sum += root->data;
   path.pop_back();
 }
 
@@ -112,14 +62,14 @@ void dfs(
 // * DFS
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<std::vector<int>> pathSum(TreeNode *root, int target_sum) {
-  std::vector<std::vector<int>> ans;
+vector<vector<int>> pathSum(TreeNode *root, int target_sum) {
+  vector<vector<int>> ans;
   if (!root)
     return ans;
 
-  std::vector<int> path;
+  vector<int> path;
   int cur_sum = 0;
-  dfs(root, cur_sum, target_sum, path, ans);
+  dfs(root, target_sum, path, ans);
   return ans;
 }
 
@@ -137,11 +87,11 @@ int main(void) {
   root->right->right->left = new TreeNode(5);
   root->right->right->right = new TreeNode(1);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  std::vector<std::vector<int>> ans = pathSum(root, target_sum);
-  std::cout << "Path Sum: " << std::endl;
+  vector<vector<int>> ans = pathSum(root, target_sum);
+  cout << "Path Sum: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

@@ -37,54 +37,9 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 int countNodes(TreeNode* root) {
   if (!root)
@@ -105,7 +60,7 @@ bool dfs(TreeNode* root, int i, int &total_nodes) {
 
 // * BFS
 bool isCompleteTreeBFS(TreeNode* root) {
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   bool past = false;
@@ -132,7 +87,7 @@ bool isCompleteTreeBFS(TreeNode* root) {
 // * DFS
 bool isCompleteTreeDFS(TreeNode* root) {
   int total_nodes = countNodes(root);
-  std::cout << "Total Nodes " << total_nodes << std::endl;
+  cout << "Total Nodes " << total_nodes << endl;
 
   int i = 1;
   return dfs(root, i, total_nodes);
@@ -155,12 +110,12 @@ int main(void) {
   root->left->right = new TreeNode(5);
   root->right->right = new TreeNode(7);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
   // bool ans = isCompleteTreeBFS(root);
   bool ans = isCompleteTreeDFS(root);
-  std::cout << "Is BT complete: " << ans << std::endl;
+  cout << "Is BT complete: " << ans << endl;
 
   return 0;
 }

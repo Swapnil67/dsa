@@ -38,49 +38,11 @@
 #include <iostream>
 #include <unordered_set>
 #include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
+using namespace std;
 
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
-void preorder(TreeNode *root, std::vector<TreeNode *> &subTree) {
+void preorder(TreeNode *root, vector<TreeNode *> &subTree) {
   if (!root)
     return;
 
@@ -101,15 +63,15 @@ bool same(TreeNode *p, TreeNode *q) {
          same(p->right, q->right);
 }
 
-std::string dfs(
+string dfs(
     TreeNode *node,
-    std::vector<TreeNode *> &res,
-    std::unordered_map<std::string, int>&mp)
+    vector<TreeNode *> &res,
+    unordered_map<string, int>&mp)
 {
   if (!node)
     return "n";
 
-  std::string s = std::to_string(node->data) + "," +
+  string s = to_string(node->data) + "," +
                   dfs(node->left, res, mp) + "," +
                   dfs(node->right, res, mp);
 
@@ -127,16 +89,16 @@ std::string dfs(
 // * Nested Loop
 // * TIME COMPLEXITY O(n^3)
 // * SPACE COMPLEXITY O(n)
-std::vector<TreeNode *> bruteForce(TreeNode *root) {
-  std::vector<TreeNode *> ans;
+vector<TreeNode *> bruteForce(TreeNode *root) {
+  vector<TreeNode *> ans;
 
   // * 1. Save all nodes into a vector
-  std::vector<TreeNode *> subTree;
+  vector<TreeNode *> subTree;
   preorder(root, subTree);
 
   // * 2. Compare each subtree with another
   int n = subTree.size();
-  std::unordered_set<TreeNode *> seen;
+  unordered_set<TreeNode *> seen;
   for (int i = 0; i < n; ++i) {
     if (seen.count(subTree[i]))
       continue;
@@ -158,18 +120,18 @@ std::vector<TreeNode *> bruteForce(TreeNode *root) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * DFS
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
-  std::vector<TreeNode *> res;
-  std::unordered_map<std::string, int> mp;
+vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
+  vector<TreeNode *> res;
+  unordered_map<string, int> mp;
   dfs(root, res, mp);
 
   // * For debugging (All Unique subtrees)
   // for(auto &[key, val]: mp) {
-  //   std::cout << "'" << key  << "': " << val << std::endl;
+  //   cout << "'" << key  << "': " << val << endl;
   // }
 
   return res;
@@ -192,14 +154,14 @@ int main(void) {
   // root->left->left = new TreeNode(11);
   // root->right->left = new TreeNode(1);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  // std::vector<TreeNode *> ans = bruteForce(root);
-  std::vector<TreeNode *> ans = findDuplicateSubtrees(root);
-  std::cout << "Duplicate Subtrees: " << std::endl;
+  // vector<TreeNode *> ans = bruteForce(root);
+  vector<TreeNode *> ans = findDuplicateSubtrees(root);
+  cout << "Duplicate Subtrees: " << endl;
   for (auto &tree : ans) {
-    std::cout << "subtree: " << std::endl;
+    cout << "subtree: " << endl;
     levelOrderTraversal(tree);
   }
 

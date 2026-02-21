@@ -34,55 +34,9 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 void swap(int &a, int &b) {
   int temp = a;
@@ -90,10 +44,10 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
-int findOps(std::vector<int> &arr, std::unordered_map<int, int> &level_idx_mp) {
+int findOps(vector<int> &arr, unordered_map<int, int> &level_idx_mp) {
   // * create an actual sorted array
-  std::vector<int> sorted_vec(arr.begin(), arr.end());
-  std::sort(sorted_vec.begin(), sorted_vec.end());
+  vector<int> sorted_vec(arr.begin(), arr.end());
+  sort(sorted_vec.begin(), sorted_vec.end());
 
   // printArr(sorted_vec);
 
@@ -124,13 +78,13 @@ int minimumOperations(TreeNode *root) {
     return ans;
 
   // * BFS  
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while(!q.empty()) {
 
-    std::vector<int> arr;
-    std::unordered_map<int, int> idxMap;
+    vector<int> arr;
+    unordered_map<int, int> idxMap;
 
     int n = q.size();
     // * traverse the whole level
@@ -185,11 +139,11 @@ int main(void) {
   // root->left->left->left = new TreeNode(27);
   // root->right->left->left = new TreeNode(25);
 
-  std::cout << "Input Tree" << std::endl;
+  cout << "Input Tree" << endl;
   levelOrderTraversal(root);
 
   int ans = minimumOperations(root);
-  std::cout << "Minimum Number of Operations to Sort a Binary Tree by Level " << ans << std::endl;
+  cout << "Minimum Number of Operations to Sort a Binary Tree by Level " << ans << endl;
   
   return 0;
 }

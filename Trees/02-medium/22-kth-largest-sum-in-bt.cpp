@@ -28,39 +28,19 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
+using namespace std;
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------`
 // * BFS + Vector sorting
 // * TIME COMPLEXITY O(level + wlogw) ('w' is sum of all nodes on each level)
 // * SPACE COMPLEXITY O(W)
 int bruteForce(TreeNode *root, int k) {
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
   
-  std::vector<int> level_sum_arr;
+  vector<int> level_sum_arr;
   while (!q.empty()) {
     int n = q.size();
     int level_sum = 0;
@@ -82,7 +62,7 @@ int bruteForce(TreeNode *root, int k) {
   }
 
   // * Sort the level sum array
-  std::sort(level_sum_arr.begin(), level_sum_arr.end());
+  sort(level_sum_arr.begin(), level_sum_arr.end());
   printArr(level_sum_arr);
 
   return level_sum_arr[level_sum_arr.size() - k];
@@ -97,10 +77,10 @@ long long kthLargestLevelSum(TreeNode *root, int k) {
     return -1;
 
   // * BFS
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
-  std::priority_queue<long long, std::vector<long long>, std::greater<>> min_heap;
+  priority_queue<long long, vector<long long>, greater<>> min_heap;
   while (!q.empty()) { // * O(n)
     int n = q.size();
     int level_sum = 0;
@@ -117,7 +97,7 @@ long long kthLargestLevelSum(TreeNode *root, int k) {
       if (node->right)
         q.push(node->right);
     }
-    // std::cout << level_sum << std::endl;
+    // cout << level_sum << endl;
     min_heap.push(level_sum);  // * O(h * logk)
     if (min_heap.size() > k)
       min_heap.pop();
@@ -145,7 +125,7 @@ int main(void) {
 
   // int ans = bruteForce(root, k);
   int ans = kthLargestLevelSum(root, k);
-  std::cout << k << "th largest element in BT: " << ans << std::endl;
+  cout << k << "th largest element in BT: " << ans << endl;
 
   return 0;
 }

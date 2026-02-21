@@ -31,8 +31,8 @@
 * Output      : 2
 * Explanation : The good pairs are [4,5] and [6,7] with shortest path = 2. The pair [4,6] is not
 *               good because the length of ther shortest path between them is 4.
-
-
+*
+*
 * https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/
 */
 
@@ -45,61 +45,9 @@
 #include <iostream>
 #include <unordered_set>
 #include <unordered_map>
+#include "common.hpp"
 
 using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(vector<T> &arr) {
-  int n = arr.size();
-  cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    cout << arr[i];
-    if (i != n - 1)
-      cout << ", ";
-  }
-  cout << " ]" << endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    cout << endl;
-  }
-}
 
 // * Builds a Adj list from graph & Save the leave nodes to set
 void makeGraph(TreeNode *root, TreeNode *prev,

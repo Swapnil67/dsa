@@ -29,8 +29,9 @@
 
 #include <vector>
 #include <iostream>
-
-typedef struct TreeNode TreeNode;
+#include "common.hpp"
+ 
+using namespace std;
 
 struct ListNode {
 public:
@@ -43,36 +44,16 @@ public:
   }
 };
 
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
 void printLL(ListNode* head) {
   ListNode* temp = head;
   while (temp) {
-    std::cout << temp->data << " -> ";
+    cout << temp->data << " -> ";
     temp = temp->next;
   }
-  std::cout << "NULL" << std::endl;
+  cout << "NULL" << endl;
 }
 
-ListNode* arrayToLL(std::vector<int> &arr) {
+ListNode* arrayToLL(vector<int> &arr) {
   int n = arr.size();
   if (n == 0)
     return nullptr;
@@ -129,13 +110,13 @@ int main(void) {
   root->right->left->right->left = new TreeNode(1);
   root->right->left->right->right = new TreeNode(3);
 
-  std::cout << "Input Linked List" << std::endl;
-  std::vector<int> arr = {4, 2, 8};
+  cout << "Input Linked List" << endl;
+  vector<int> arr = {4, 2, 8};
   ListNode *head = arrayToLL(arr);
   printLL(head);
 
   bool ans = isSubPath(head, root);
-  std::cout << "Linked List in Binary Tree: " << ans << std::endl;
+  cout << "Linked List in Binary Tree: " << ans << endl;
 
   return 0;
 }

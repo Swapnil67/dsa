@@ -12,93 +12,36 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void inOrderTraversal(TreeNode* root) {
-  if (!root)
-    return;
-
-  inOrderTraversal(root->left);
-  std::cout << root->data << " ";
-  inOrderTraversal(root->right);
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
+using namespace std;
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
 // * Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-TreeNode* str2tree(std::string &str) {
-  std::stack<TreeNode *> st;
+TreeNode* str2tree(string &str) {
+  stack<TreeNode *> st;
   int n = str.size();
   for (int i = 0; i < n; ++i) {
-    if (str[i] == '-') { // * Handle -ve value
+    // * Handle -ve digit
+    if (str[i] == '-') { 
       i += 1;
       int val = 0;
       while (i < n && isdigit(str[i])) {
         val = val * 10 + (str[i] - '0');
         i++;
       }
-      // std::cout << val << std::endl;
+      // cout << val << endl;
       st.push(new TreeNode(val * -1));
     }
-    else if (isdigit(str[i])) { // * Handle digit
+    else if (isdigit(str[i])) { // * Handle +ve digit
       int val = 0;
       while (i < n && isdigit(str[i])) {
         val = val * 10 + (str[i] - '0');
         i++;
       }
-      // std::cout << val << std::endl;
+      // cout << val << endl;
       st.push(new TreeNode(val));
     }
 
@@ -109,10 +52,10 @@ TreeNode* str2tree(std::string &str) {
       
         TreeNode* parent = st.top();
         if (!parent->left) {
-          // std::cout << "L" << std::endl;
+          // cout << "L" << endl;
           parent->left = child;
         } else {
-          // std::cout << "R" << std::endl;
+          // cout << "R" << endl;
           parent->right = child;
         }
       }
@@ -122,20 +65,70 @@ TreeNode* str2tree(std::string &str) {
   return st.top();
 }
 
+// * Variant (With no -ve digits)
+TreeNode *treeFromBracket(string &s) {
+  stack<TreeNode *> st;
+  int n = s.size();
+
+  // * for root having multiple digits
+  TreeNode *root = new TreeNode(s[0] - '0');
+  int i = 1;
+  while (i < n && s[i] != '(' && s[i] != ')') {
+    root->data = root->data * 10 + (s[i] - '0');
+    i++;
+  }
+
+  TreeNode *cur = root;
+
+  for (; i < n; ++i) {
+    // * if '(' signifies the beginning of new subtree, 
+    if (s[i] == '(') {
+      if (cur) {
+        st.push(cur);
+      }
+      cur = NULL;
+    }
+    else if (s[i] == ')') {
+      // * if ')' signifies the end of this subtree
+      TreeNode* parent = st.top();
+      st.pop();
+
+      if (!parent->left)
+        parent->left = cur;
+      else
+        parent->right = cur;
+
+      cur = parent;
+    } else {
+      // * if digit then keep concat to current data
+      if (!cur)
+        cur = new TreeNode(s[i] - '0');
+      else
+        cur->data = cur->data * 10 + (s[i] - '0');
+    }
+  }
+
+  return root;
+}
+
 int main(void) {
   // * testcase 1
-  // std::string str = "10(-20(30))";
+  // string str = "10(-20(30))";
   
   // * testcase 2
-  std::string str = "1()(3)";
+  // string str = "1()(3)";
 
   // * testcase 3
-  // std::string str = "4(2(3)(1))(6(5))";
+  // string str = "4(2(3)(1))(6(5))";
 
-  std::cout << "Input String: " << str << std::endl;
+  // * testcase 4 (Variant)
+  string str = "4(4(2))(3()(2()(1)))";
 
-  TreeNode *root = str2tree(str);
-  std::cout << "Binary Tree" << std::endl;
+  cout << "Input String: " << str << endl;
+
+  // TreeNode *root = str2tree(str);
+  TreeNode *root = treeFromBracket(str);
+  cout << "Binary Tree" << endl;
   levelOrderTraversal(root);
 
   return 0;

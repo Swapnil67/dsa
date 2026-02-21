@@ -9,6 +9,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct Node Node;
 
 struct Node {
@@ -32,7 +34,7 @@ Node *connect_bfs_brute(Node *root) {
   if (!root)
     return root;
 
-  std::queue<Node *> q;
+  queue<Node *> q;
   q.push(root);
 
   while (!q.empty()) {

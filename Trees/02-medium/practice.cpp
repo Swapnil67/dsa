@@ -12,84 +12,6 @@
 
 using namespace std;
 
-// * 23 - Cousins in Binary Tree II
-// TreeNode* replaceValueInTree(TreeNode* root) {
-// TODO
-// }
-
-// * 24 - Min Number of Operations to Sort a Binary Tree by Level
-// int minimumOperations(TreeNode *root) {
-// TODO
-// }
-
-// * 25 - Linked List in Binary Tree
-// bool isSubPath(ListNode* head, TreeNode* root) {
-// TODO
-// }
-
-// * 26 - Check Completeness of a Binary Tree
-// bool isCompleteTreeBFS(TreeNode* root) {
-// TODO
-// }
-
-// * 27 - Populating Next Right Pointers in Each Node I
-// Node *connect(Node *root) {
-// TODO (Solve this on leetcode)
-// }
-
-// * 28 - Find Duplicate Subtrees
-// vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
-// TODO
-// }
-
-// * 29 - Maximum Level Sum of a Binary Tree
-// int maxLevelSum(TreeNode *root) {
-// TODO
-// }
-
-// * 30 - Construct Binary Tree From String
-// TreeNode *str2tree(string &str) {
-// TODO
-// }
-
-// * 31 - Populating Next Right Pointers in Each Node II
-// TreeNode *connect(TreeNode *root) {
-// TODO 
-// }
-
-// * 32 - Path Sum II
-// vector<vector<int>> pathSum(TreeNode *root, int target_sum) {
-// TODO
-// }
-
-// * 33 - Sum Root to Leaf Numbers
-// int sumNumbers(TreeNode* root) {
-// TODO
-// }
-
-// * 34 - Number of Good Leaf Nodes Pairs
-// int countPairs(TreeNode* root, int distance) {
-// TODO
-// }
-
-// * 35 - Step-By-Step Directions From a Binary Tree Node to Another
-// string getDirections(TreeNode* root, int src, int dest) {
-// TODO
-// }
-
-// * 36 - Flip Equivalent Binary Trees
-// bool flipEquiv(TreeNode* root1, TreeNode* root2) {
-// TODO
-// }
-
-// * 37 - House Robber III
-// int rob(TreeNode* root) {
-// TODO
-// }
-
-// * 38 - Operations on Tree
-// TODO TOMORROW (Solve this on leetcode)
-
 // * 39 - Find Bottom Left Tree Value
 // int findBottomLeftValue(TreeNode* root) {
 // TODO
@@ -291,6 +213,84 @@ using namespace std;
 // long long kthLargestLevelSum(TreeNode *root, int k) {
 // TODO
 // }
+
+// * 23 - Cousins in Binary Tree II
+// TreeNode* replaceValueInTree(TreeNode* root) {
+// TODO
+// }
+
+// * 24 - Min Number of Operations to Sort a Binary Tree by Level
+// int minimumOperations(TreeNode *root) {
+// TODO
+// }
+
+// * 25 - Linked List in Binary Tree
+// bool isSubPath(ListNode* head, TreeNode* root) {
+// TODO
+// }
+
+// * 26 - Check Completeness of a Binary Tree
+// bool isCompleteTreeBFS(TreeNode* root) {
+// TODO
+// }
+
+// * 27 - Populating Next Right Pointers in Each Node I
+// Node *connect(Node *root) {
+// TODO (Solve this on leetcode)
+// }
+
+// * 28 - Find Duplicate Subtrees
+// vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
+// TODO
+// }
+
+// * 29 - Maximum Level Sum of a Binary Tree
+// int maxLevelSum(TreeNode *root) {
+// TODO
+// }
+
+// * 30 - Construct Binary Tree From String
+// TreeNode *str2tree(string &str) {
+// TODO
+// }
+
+// * 31 - Populating Next Right Pointers in Each Node II
+// TreeNode *connect(TreeNode *root) {
+// TODO 
+// }
+
+// * 32 - Path Sum II
+// vector<vector<int>> pathSum(TreeNode *root, int target_sum) {
+// TODO
+// }
+
+// * 33 - Sum Root to Leaf Numbers
+// int sumNumbers(TreeNode* root) {
+// TODO
+// }
+
+// * 34 - Number of Good Leaf Nodes Pairs
+// int countPairs(TreeNode* root, int distance) {
+// TODO
+// }
+
+// * 35 - Step-By-Step Directions From a Binary Tree Node to Another
+// string getDirections(TreeNode* root, int src, int dest) {
+// TODO
+// }
+
+// * 36 - Flip Equivalent Binary Trees
+// bool flipEquiv(TreeNode* root1, TreeNode* root2) {
+// TODO
+// }
+
+// * 37 - House Robber III
+// int rob(TreeNode* root) {
+// TODO
+// }
+
+// * 38 - Operations on Tree
+// TODO TOMORROW (Solve this on leetcode)
 
 int main(void) {
 

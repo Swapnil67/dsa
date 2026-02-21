@@ -40,57 +40,9 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
+using namespace std;
 
 TreeNode* find_lca(TreeNode* root, int start, int dest) {
   if (!root || root->data == start || root->data == dest)
@@ -106,10 +58,10 @@ TreeNode* find_lca(TreeNode* root, int start, int dest) {
 }
 
 // * Root to Node
-bool root_to_node(TreeNode *root, std::string &path, int target) {
+bool root_to_node(TreeNode *root, string &path, int target) {
   if (!root)
     return false;
-  // std::cout << path << std::endl;
+  // cout << path << endl;
 
   // * Found the target node
   if (root->data == target) {
@@ -139,22 +91,22 @@ bool root_to_node(TreeNode *root, std::string &path, int target) {
 // * 3. Find Path from LCA to dest
 // * TIME COMPLEXITY O(3N) ~ O(N)
 // * SPACE COMPLEXITY O(N)
-std::string bruteForce(TreeNode* root, int src, int dest) {
+string bruteForce(TreeNode* root, int src, int dest) {
   // * 1. Find LCA for Src & Dest
   TreeNode *lca = find_lca(root, src, dest);
-  // std::cout << "LCA : " << lca->data << std::endl;
+  // cout << "LCA : " << lca->data << endl;
   
   // * 2. Find Path from LCA to src
-  std::string lca_to_src = "";
+  string lca_to_src = "";
   root_to_node(lca, lca_to_src, src);
-  // std::cout << "lca_to_src : " << lca_to_src << std::endl;
+  // cout << "lca_to_src : " << lca_to_src << endl;
   
   // * 3. Find Path from LCA to Dest
-  std::string lca_to_dest = "";
+  string lca_to_dest = "";
   root_to_node(lca, lca_to_dest, dest);
-  // std::cout << "lca_to_dest : " << lca_to_dest << std::endl;
+  // cout << "lca_to_dest : " << lca_to_dest << endl;
 
-  std::string ans(lca_to_src.size(), 'U');
+  string ans(lca_to_src.size(), 'U');
   ans += lca_to_dest;
 
   return ans;
@@ -165,24 +117,24 @@ std::string bruteForce(TreeNode* root, int src, int dest) {
 // * 2. Find Path from root to dest
 // * TIME COMPLEXITY O(2N) ~ O(N)
 // * SPACE COMPLEXITY O(N)
-std::string getDirections(TreeNode* root, int src, int dest) {
+string getDirections(TreeNode* root, int src, int dest) {
   // * 1. Find Path from root to src
-  std::string lca_to_src = "";
-  root_to_node(root, lca_to_src, src);
-  // std::cout << "lca_to_src : " << lca_to_src << std::endl;
+  string root_to_src = "";
+  root_to_node(root, root_to_src, src);
+  // cout << "root_to_src : " << root_to_src << endl;
   
   // * 2. Find Path from root to Dest
-  std::string lca_to_dest = "";
-  root_to_node(root, lca_to_dest, dest);
-  // std::cout << "lca_to_dest : " << lca_to_dest << std::endl;
+  string root_to_dest = "";
+  root_to_node(root, root_to_dest, dest);
+  // cout << "root_to_dest : " << root_to_dest << endl;
 
   // * The LCA Will be point at which both directions changed
   int i = 0;
-  while (lca_to_src[i] == lca_to_dest[i])
+  while (root_to_src[i] == root_to_dest[i])
     i++;
 
-  std::string ans(lca_to_src.size() - i, 'U');
-  ans += lca_to_dest.substr(i, lca_to_dest.size());
+  string ans(root_to_src.size() - i, 'U');
+  ans += root_to_dest.substr(i, root_to_dest.size());
 
   return ans;
 }
@@ -213,13 +165,13 @@ int main(void) {
   // TreeNode *root = new TreeNode(2);
   // root->left = new TreeNode(1);
 
-  std::cout << "start: " << startValue << ", dest: " << destValue << std::endl;
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "start: " << startValue << ", dest: " << destValue << endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  // std::string ans = bruteForce(root, startValue, destValue);
-  std::string ans = getDirections(root, startValue, destValue);
-  std::cout << "Ans: " << ans << std::endl;
+  // string ans = bruteForce(root, startValue, destValue);
+  string ans = getDirections(root, startValue, destValue);
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

@@ -43,58 +43,13 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
+using namespace std;
 
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
+using namespace std;
 
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
-int dfs_dp(TreeNode *root, std::unordered_map<TreeNode*, int> &cache) {
+int dfs_dp(TreeNode *root, unordered_map<TreeNode*, int> &cache) {
   if (cache.find(root) != cache.end())
     return cache[root];
     
@@ -107,12 +62,12 @@ int dfs_dp(TreeNode *root, std::unordered_map<TreeNode*, int> &cache) {
   }
   
   int without_root = dfs_dp(root->left, cache) + dfs_dp(root->right, cache);
-  int ans = std::max(with_root, without_root);
+  int ans = max(with_root, without_root);
   cache[root] = ans;
   return ans;
 }
 
-std::pair<int, int> dfs(TreeNode *root) {
+pair<int, int> dfs(TreeNode *root) {
   if (!root)
     return {0, 0};
 
@@ -121,8 +76,8 @@ std::pair<int, int> dfs(TreeNode *root) {
 
   int with_root = root->data + left_p.second + right_p.second;
   // * take max from left or right path
-  int without_root = std::max(left_p.first, left_p.second) +
-                     std::max(right_p.first, right_p.second);
+  int without_root = max(left_p.first, left_p.second) +
+                     max(right_p.first, right_p.second);
 
   return {with_root, without_root};
 }
@@ -144,7 +99,7 @@ int bruteForce(TreeNode *root) {
   }
 
   int without_root = bruteForce(root->left) + bruteForce(root->right);
-  return std::max(with_root, without_root);
+  return max(with_root, without_root);
 }
 
 // * ------------------------- APPROACH 2: BETTER APPROACH -------------------------
@@ -152,7 +107,7 @@ int bruteForce(TreeNode *root) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int betterApproach(TreeNode *root) {
-  std::unordered_map<TreeNode*, int> cache;
+  unordered_map<TreeNode*, int> cache;
   cache[nullptr] = 0;
   return dfs_dp(root, cache);
 }
@@ -163,7 +118,7 @@ int betterApproach(TreeNode *root) {
 // * SPACE COMPLEXITY O(N) [recursion stack]
 int rob(TreeNode* root) {
   auto p = dfs(root);
-  return std::max(p.first, p.second);
+  return max(p.first, p.second);
 }
 
 int main(void) {
@@ -182,13 +137,13 @@ int main(void) {
   root->left->right = new TreeNode(3);
   root->right->right = new TreeNode(1);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
   // int ans = bruteForce(root);
   // int ans = betterApproach(root);
   int ans = rob(root);
-  std::cout << "Rob amount: " << ans << std::endl;
+  cout << "Rob amount: " << ans << endl;
 
   return 0;
 }
