@@ -1,68 +1,45 @@
 /*
  * Leetcode - 429 
- * N-ary Tree Level Order Traversal
- * 
- * Given an n-ary tree, return the level order traversal of its nodes' values.
- * 
- * Nary-Tree input serialization is represented in their level order traversal, each group of children 
- * is separated by the null value (See examples).
- * 
  * https://leetcode.com/problems/n-ary-tree-level-order-traversal/
 */
 
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "common.hpp"
 
 using namespace std;
 
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
+TreeNode *insertIntoMaxTree(TreeNode *root, int val)
+{
+  if (!root || val > root->data) {
+    TreeNode *new_node = new TreeNode(val);
+    new_node->left = root;
+    return new_node;
   }
-  std::cout << " ]" << std::endl;
+  root->right = insertIntoMaxTree(root->right, val);
+  return root;
 }
 
-class Node {
-public:
-  int val;
-  vector<Node*> children;
-
-  Node(int v) {
-    val = v;
+TreeNode *insertIntoMaxTree(TreeNode *root, int val)
+{
+  
+  TreeNode *new_node = new TreeNode(val);
+  TreeNode *cur = root;
+  if (!root || val > root->data) {
+    new_node->left = root;
+    return new_node;
   }
-};
 
-vector<vector<int>> levelOrder(Node *root) {
-  vector<vector<int>> ans;
-  if (!root)
-    return ans;
-
-  queue<Node *> q;
-  q.push(root);
-
-  while (!q.empty()) {
-    int n = q.size();
-    vector<int> level;
-    while (n--) {
-      Node *node = q.front();
-      q.pop();
-
-      level.push_back(node->val);
-      for (int i = 0; i < node->children.size(); ++i) {
-        q.push(node->children[i]);
-      }
-    }
-
-    ans.push_back(level);
+  // * Go to right till we have <= val
+  while (cur->right && cur->right->data > val) {
+    cur = cur->right;
   }
-  return ans;
+  new_node->right = cur->right;
+  cur->right = new_node;
+  return root;
 }
+
 
 int main(void) {
   // * Do this on leetcode
