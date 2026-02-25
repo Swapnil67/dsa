@@ -15,6 +15,9 @@
  *             2  --->  3
  * Input: root = [1,2,3], fromNode = 2, toNode = 3
  * Output: [1,null,3]
+ *                 1
+ *               /   \  
+ *             X      3
  * 
  * 
  * Example 2:
@@ -25,75 +28,18 @@
  *          4     
  * Input: root = [1,2,3], fromNode = 2, toNode = 3
  * Output: [1,null,3]
+ *                 1
+ *               /   \  
+ *             X      3
 */
 
 #include <queue>
 #include <vector>
 #include <iostream>
 #include <unordered_set>
+#include "common.hpp"
 
 using namespace std;
-
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
-}
-
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-
-  ~TreeNode() {
-    if (left)
-      delete left;
-    if (right)
-      delete right;
-  }
-};
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
 
 TreeNode *dfs(TreeNode *root, unordered_set<int>&seen) {
   if (!root)

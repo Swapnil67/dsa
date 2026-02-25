@@ -86,7 +86,7 @@ void tree_to_array(Node* root, std::vector<Node*> &nodes) {
   tree_to_array(root->right, nodes);
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(h)
 // * SPACE COMPLEXITY O(1)
 Node* lowestCommonAncestor(Node* p_start, Node * q_start) {
@@ -110,7 +110,7 @@ Node* lowestCommonAncestor(Node* p_start, Node * q_start) {
 }
 
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Variant 1
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)

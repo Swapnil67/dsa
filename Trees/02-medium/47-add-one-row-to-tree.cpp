@@ -40,58 +40,9 @@
 #include <queue>
 #include <vector>
 #include <iostream>
-#include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
+using namespace std;
 
 // * ------------------------- APPROACH: OPTIMAL APPROACH -------------------------
 // * BFS
@@ -106,7 +57,7 @@ TreeNode* addOneRow(TreeNode* root, int val, int depth) {
     new_root->left = root;
   }
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
   int level = 0;
   while (!q.empty()) {
@@ -157,10 +108,10 @@ int main(void) {
   // root->left->right = new TreeNode(1);
   // root->right->left = new TreeNode(5);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  std::cout << "Answer: " << std::endl;
+  cout << "Answer: " << endl;
   TreeNode *ans = addOneRow(root, val, depth);
   levelOrderTraversal(ans);
 

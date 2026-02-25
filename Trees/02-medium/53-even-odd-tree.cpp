@@ -20,11 +20,11 @@
 *
 *                      1
 *                /           \  
-*              10              4
-*            /               /   \
-*           3               7     9
-*         /  \             /       \
-*        12   8           6         2
+*              10             4
+*             /              /  \
+*           3               7    9
+*         /  \             /      \
+*        12   8           6        2
 *
 
 * Output      : true
@@ -50,57 +50,9 @@
 #include <vector>
 #include <climits>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * BFS

@@ -30,60 +30,13 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
+using namespace std;
 
-struct TreeNode {
-public:
-  int val;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int v) {
-    val = v;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->val << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
-void mark_parents(TreeNode* root, std::unordered_map<TreeNode*, TreeNode*> &parent_mp) {
+void mark_parents(TreeNode* root, unordered_map<TreeNode*, TreeNode*> &parent_mp) {
   if (!root) return;
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -109,8 +62,8 @@ void dfs(TreeNode *cur, TreeNode *p, TreeNode *gp, int &sum) {
   if (!cur)
     return;
 
-  if (gp && (gp->val % 2 == 0))
-    sum += cur->val;
+  if (gp && (gp->data % 2 == 0))
+    sum += cur->data;
 
   dfs(cur->left, cur, p, sum);
   dfs(cur->right, cur, p, sum);
@@ -122,12 +75,12 @@ void dfs(TreeNode *cur, TreeNode *p, TreeNode *gp, int &sum) {
 // * SPACE COMPLEXITY O(N) 
 int bruteForce(TreeNode* root) {
   // * 1. mark parents
-  std::unordered_map<TreeNode*, TreeNode*> parent_mp;
+  unordered_map<TreeNode*, TreeNode*> parent_mp;
   mark_parents(root, parent_mp);
 
   // * 2. BFS
   int ans = 0;
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -140,8 +93,8 @@ int bruteForce(TreeNode* root) {
       auto parent = parent_mp[node];
       if (parent_mp[parent]) { // * check if grand parent exists
         auto grand_parent = parent_mp[parent];
-        if (!(grand_parent->val % 2)) {
-          ans += node->val;
+        if (!(grand_parent->data % 2)) {
+          ans += node->data;
         }
       }
     }
@@ -164,11 +117,11 @@ int bruteForce(TreeNode* root) {
 // * SPACE COMPLEXITY O(N) 
 int sumEvenGrandparent(TreeNode* root) {
   // * 1. mark parents
-  std::unordered_map<TreeNode*, TreeNode*> parent_mp;
+  unordered_map<TreeNode*, TreeNode*> parent_mp;
 
   // * 2. BFS
   int ans = 0;
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -179,8 +132,8 @@ int sumEvenGrandparent(TreeNode* root) {
       auto parent = parent_mp[node];
       if (parent_mp[parent]) { // * check if grand parent exists
         auto grand_parent = parent_mp[parent];
-        if (!(grand_parent->val % 2)) {
-          ans += node->val;
+        if (!(grand_parent->data % 2)) {
+          ans += node->data;
         }
       }
     }
@@ -224,14 +177,14 @@ int main(void) {
   root->right->right = new TreeNode(3);
   root->right->right->right = new TreeNode(5);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  std::cout << "Answer: " << std::endl;
+  cout << "Answer: " << endl;
   // int ans = bruteForce(root);
   int ans = sumEvenGrandparent(root);
   // int ans = sumEvenGrandparentDfs(root);
-  std::cout << "Sum of Nodes with Even-Valued Grandparent: " << ans << std::endl;
+  cout << "Sum of Nodes with Even-Valued Grandparent: " << ans << endl;
 
   return 0;
 }

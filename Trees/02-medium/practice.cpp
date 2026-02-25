@@ -12,93 +12,10 @@
 
 using namespace std;
 
-// * 39 - Find Bottom Left Tree Value
-// int findBottomLeftValue(TreeNode* root) {
-// TODO
-// }
 
-// * 40 - Insufficient Nodes in Root to Leaf Paths
-// TreeNode* sufficientSubset(TreeNode* root, int &limit) {
-// TODO
-// }
 
-// * 41 - Lowest Common Ancestor of Deepest Leaves
-// TreeNode* lcaDeepestLeaves(TreeNode* root) {
-// TODO  
-// }
-
-// * 42 - Smallest Subtree with all the Deepest Nodes
-// TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-// TODO  
-// }
-
-// * 43 - Sum of Nodes with Even-Valued Grandparent
-// int sumEvenGrandparent(TreeNode* root) {
-// TODO  
-// }
-
-// * 44 - Find Largest Value in Each Tree Row
-// vector<int> largestValues(TreeNode *root) {
-// TODO  
-// }
-
-// * 45 - All Possible Full Binary Trees
-// vector<TreeNode *> allPossibleFBT(int n) {
-// TODO  
-// }
-
-// * 46 - Lowest Common Ancestor of a Binary Tree III
-// Node *lowestCommonAncestor2(vector<Node *> &nodes, Node *p_start, Node *q_start) {
-// TODO
-// }
-
-// * 47 - Add One Row to Tree
-// TreeNode* addOneRow(TreeNode* root, int val, int depth) {
-// TODO
-// }
-
-// * 48 - Longest Consecutive Sequence In A Binary Tree
-// int longestConsecutive(TreeNode* root) {
-// TODO
-// }
-
-// * 49 - Binary Tree Longest Consecutive Sequence II
-// int longestConsecutive(TreeNode* root) {
-// TODO
-// }
-
-// * 50 - Count Nodes Equal to Average of Subtree
-// int averageOfSubtree(TreeNode* root) {
-// TODO
-// }
-
-// * 51 - Validate Binary Tree Nodes
-// bool validateBinaryTreeNodes(int n, vector<int> &left_child, vector<int> &right_child) {
-// TODO
-// }
-
-// * 52 - Delete Nodes And Return Forest
-// vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
-// TODO
-// }
-
-// * 53 - Even Odd Tree
-// bool isEvenOddTree(TreeNode *root) {
-// TODO
-// }
-
-// * 54 - Smallest String Starting From Leaf
-// string smallestFromLeaf(TreeNode *root) {
-// TODO
-// }
-
-// * 55 - Distribute Coins in Binary Tree
-// int distributeCoins(TreeNode *root) {
-// TODO
-// }
-
-// * 56 - Binary Tree Level Order Traversal II
-// vector<vector<int>> levelOrderBottom(TreeNode *root) {
+// * 62 - Maximum Average Subtree
+// double maximumAverageSubtree(TreeNode* root) {
 // TODO
 // }
 
@@ -291,6 +208,116 @@ using namespace std;
 
 // * 38 - Operations on Tree
 // TODO TOMORROW (Solve this on leetcode)
+
+// * 39 - Find Bottom Left Tree Value
+// int findBottomLeftValue(TreeNode* root) {
+// TODO
+// }
+
+// * 40 - Insufficient Nodes in Root to Leaf Paths
+// TreeNode* sufficientSubset(TreeNode* root, int &limit) {
+// TODO
+// }
+
+// * 41 - Lowest Common Ancestor of Deepest Leaves
+// TreeNode* lcaDeepestLeaves(TreeNode* root) {
+// TODO  
+// }
+
+// * 42 - Smallest Subtree with all the Deepest Nodes
+// TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+// TODO  
+// }
+
+// * 43 - Sum of Nodes with Even-Valued Grandparent
+// int sumEvenGrandparent(TreeNode* root) {
+// TODO  
+// }
+
+// * 44 - Find Largest Value in Each Tree Row
+// vector<int> largestValues(TreeNode *root) {
+// TODO  
+// }
+
+// * 45 - All Possible Full Binary Trees
+// vector<TreeNode *> allPossibleFBT(int n) {
+// TODO  
+// }
+
+// * 46 - Lowest Common Ancestor of a Binary Tree III
+// Node *lowestCommonAncestor2(vector<Node *> &nodes, Node *p_start, Node *q_start) {
+// TODO
+// }
+
+// * 47 - Add One Row to Tree
+// TreeNode* addOneRow(TreeNode* root, int val, int depth) {
+// TODO
+// }
+
+// * 48 - Longest Consecutive Sequence In A Binary Tree
+// int longestConsecutive(TreeNode* root) {
+// TODO
+// }
+
+// * 49 - Binary Tree Longest Consecutive Sequence II
+// int longestConsecutive(TreeNode* root) {
+// TODO
+// }
+
+// * 50 - Count Nodes Equal to Average of Subtree
+// int averageOfSubtree(TreeNode* root) {
+// TODO
+// }
+
+// * 51 - Validate Binary Tree Nodes
+// bool validateBinaryTreeNodes(int n, vector<int> &left_child, vector<int> &right_child) {
+// TODO
+// }
+
+// * 52 - Delete Nodes And Return Forest
+// vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
+// TODO
+// }
+
+// * 53 - Even Odd Tree
+// bool isEvenOddTree(TreeNode *root) {
+// TODO
+// }
+
+// * 54 - Smallest String Starting From Leaf
+// string smallestFromLeaf(TreeNode *root) {
+// TODO
+// }
+
+// * 55 - Distribute Coins in Binary Tree
+// int distributeCoins(TreeNode *root) {
+// TODO
+// }
+
+// * 56 - Binary Tree Level Order Traversal II
+// vector<vector<int>> levelOrderBottom(TreeNode *root) {
+// TODO
+// }
+
+// * 57 - Correct a Binary Tree 
+// TreeNode *correctBinaryTree(TreeNode *root) {
+// TODO
+// }
+
+// * 58 - Maximum Binary Tree 
+// TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+// TODO
+// }
+
+// * 59 - Maximum Binary Tree II 
+// TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+// TODO
+// }
+
+// * 61 - Count Univalue Subtrees
+// int countUnivalSubtrees(TreeNode* root) {
+// TODO
+// }
 
 int main(void) {
 

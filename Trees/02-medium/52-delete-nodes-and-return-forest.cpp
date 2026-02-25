@@ -40,78 +40,30 @@
 #include <vector>
 #include <iostream>
 #include <unordered_set>
+#include "common.hpp"
 
 using namespace std;
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(vector<T> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    cout << endl;
-  }
-}
-
-TreeNode *dfs(TreeNode *root, unordered_set<int> &del_st, vector<TreeNode *> &ans) {
+TreeNode *dfs(TreeNode *root, vector<TreeNode *> &ans, unordered_set<int> &del_st ) {
   if (!root)
     return root;
 
-  root->left = dfs(root->left, del_st, ans);
-  root->right = dfs(root->right, del_st, ans);
+  root->left = dfs(root->left, ans, del_st);
+  root->right = dfs(root->right, ans, del_st);
 
   if (del_st.count(root->data)) {
     if (root->left)
       ans.push_back(root->left);
     if (root->right)
       ans.push_back(root->right);
-    return nullptr;
+    return nullptr; // * Since this node is in del_st set.
   }
 
   return root;
 }
 
 // * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
+// * Bottom Up [Post Order Traversal]
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
@@ -120,7 +72,7 @@ vector<TreeNode *> delNodes(TreeNode *root, vector<int> &to_delete) {
     return ans;
 
   unordered_set<int> del_st(begin(to_delete), end(to_delete));
-  dfs(root, del_st, ans);
+  dfs(root, ans, del_st);
 
   // * Insert root if its not present in delete set
   if (!del_st.count(root->data)) {

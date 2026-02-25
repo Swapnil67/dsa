@@ -44,74 +44,27 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 // * Maps the depth of each node {node: depth}
 void build_depth_map(
     TreeNode *root, int d, int &max_depth,
-    std::unordered_map<TreeNode *, int> &depth_map)
+    unordered_map<TreeNode *, int> &depth_map)
 {
   if (!root)
     return;
 
   depth_map[root] = d;
-  max_depth = std::max(max_depth, d); // * check max_depth
+  max_depth = max(max_depth, d); // * check max_depth
 
   build_depth_map(root->left, d + 1, max_depth, depth_map);
   build_depth_map(root->right, d + 1, max_depth, depth_map);
 }
 
 TreeNode *dfs(TreeNode *root, int &max_depth,
-              std::unordered_map<TreeNode *, int> &depth_map)
+              unordered_map<TreeNode *, int> &depth_map)
 {
   // * Found null or node with max depth
   if (!root || max_depth == depth_map[root])
@@ -127,7 +80,7 @@ TreeNode *dfs(TreeNode *root, int &max_depth,
   return left != nullptr ? left : right;
 }
 
-std::pair<int, TreeNode*> dfs2(TreeNode *root)
+pair<int, TreeNode*> dfs2(TreeNode *root)
 {
   // * Found null or node with max depth
   if (!root)
@@ -140,7 +93,7 @@ std::pair<int, TreeNode*> dfs2(TreeNode *root)
   if (left_depth == right_depth) {
     return {1 + left_depth, root};
   }
-  else if(left_depth > right_depth) { // * left depth is more
+  else if(left_depth > right_depth) { // * left depth is mor  e
     return {1 + left_depth, left};
   }
   return {1 + right_depth, right};    // * right depth is more
@@ -152,17 +105,17 @@ std::pair<int, TreeNode*> dfs2(TreeNode *root)
 TreeNode* bruteForce(TreeNode* root) {
   // * 1. Build the depth map
   int max_depth = 0;
-  std::unordered_map<TreeNode *, int> depth_map;
-  build_depth_map(root, 0, max_depth, depth_map); // * O(N)
+  unordered_map<TreeNode *, int> depth_mp;
+  build_depth_map(root, 0, max_depth, depth_mp); // * O(N)
 
   // * For Debugging
-  // std::cout << "Max Depth: " << max_depth << std::endl;
-  // for (auto &[node, depth]: depth_map) {
-  //   std::cout << node->data << " " << depth << std::endl;
+  // cout << "Max Depth: " << max_depth << endl;
+  // for (auto &[node, depth]: depth_mp) {
+  //   cout << node->data << " " << depth << endl;
   // }
 
   // * 2. Return the LCA of max_depth nodes
-  return dfs(root, max_depth, depth_map); // * O(N)
+  return dfs(root, max_depth, depth_mp); // * O(N)
 }
 
 // * ------------------------- APPROACH: OPTIMAL APPROACH -------------------------
@@ -197,10 +150,10 @@ int main(void) {
   root->right->right = new TreeNode(8);
   root->right->left->left = new TreeNode(10);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  std::cout << "Answer: " << std::endl;
+  cout << "Answer: " << endl;
   // TreeNode* ans = bruteForce(root);
   TreeNode* ans = subtreeWithAllDeepest(root);
   levelOrderTraversal(ans);

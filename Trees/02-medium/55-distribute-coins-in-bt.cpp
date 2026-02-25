@@ -1,19 +1,19 @@
 /*
 * Leetcode - 979
 * Distribute Coins in Binary Tree
-
+*
 * You are given the root of a binary tree with n nodes where each node in the tree has node.val coins. 
 * There are n coins in total throughout the whole tree.
-
+*
 * In one move, we may choose two adjacent nodes and move one coin from one node to another.
 * A move may be from parent to child, or from child to parent.
-
+*
 * Return the minimum number of moves required to make every node have exactly one coin.
-
+*
 * Example 1:
 * Input       : root = [3,0,0]
 * Output      : 2
-
+*
 * Example 2:
 * Input       : root = [0,3,0]
 * Output      : 3
@@ -27,56 +27,9 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include "../common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 int dfs(TreeNode *root, int &moves) {
   if (!root)
@@ -94,7 +47,7 @@ int dfs(TreeNode *root, int &moves) {
 }
 
 // * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
-// * DFS
+// * DFS - Bottom Up
 // * h - height of tree
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(h) 

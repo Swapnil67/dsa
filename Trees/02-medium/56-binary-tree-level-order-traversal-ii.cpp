@@ -24,68 +24,9 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "common.hpp"
 
 using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int val;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int v) {
-    val = v;
-    left = nullptr;
-    right = nullptr;
-  }
-
-  ~TreeNode() {
-    if (left)
-      delete left;
-    if (right)
-      delete right;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->val << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n)
@@ -97,8 +38,7 @@ vector<vector<int>> levelOrderBottom(TreeNode *root) {
 
   queue<TreeNode *> q;
   q.push(root);
-  while (!q.empty())
-  {
+  while (!q.empty()) {
     vector<int> level;
     int n = q.size();
     while (n--)
@@ -106,7 +46,7 @@ vector<vector<int>> levelOrderBottom(TreeNode *root) {
       TreeNode *node = q.front();
       q.pop();
 
-      level.push_back(node->val);
+      level.push_back(node->data);
 
       if (node->left)
         q.push(node->left);

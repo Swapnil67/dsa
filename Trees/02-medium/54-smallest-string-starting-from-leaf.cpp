@@ -50,57 +50,9 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+using namespace std;
 
 void dfs_brute(std::string cur, TreeNode *root, std::vector<std::string> &strs) {
   if (!root) {
@@ -134,7 +86,7 @@ void dfs(std::string &res, std::string cur, TreeNode *root) {
 }
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
-// * DFS
+// * DFS - Bottom Up + Sorting
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 std::string bruteForce(TreeNode *root) {
@@ -152,7 +104,7 @@ std::string bruteForce(TreeNode *root) {
 }
 
 // * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------
-// * DFS
+// * DFS - Bottom Up
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 std::string smallestFromLeaf(TreeNode *root) {

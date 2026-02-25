@@ -21,69 +21,21 @@
 #include <vector>
 #include <climits>
 #include <iostream>
+#include "common.hpp"
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
-
+using namespace std;
 
 // * ------------------------- APPROACH: OPTIMAL APPROACH -------------------------
 // * BFS
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> largestValues(TreeNode *root) {
+vector<int> largestValues(TreeNode *root) {
   if (!root)
     return {};
     
-  std::vector<int> ans;
+  vector<int> ans;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -93,7 +45,7 @@ std::vector<int> largestValues(TreeNode *root) {
       auto node = q.front();
       q.pop();
 
-      cur_max = std::max(cur_max, node->data);
+      cur_max = max(cur_max, node->data);
 
       if (node->left) {
         q.push(node->left);
@@ -123,10 +75,10 @@ int main(void) {
   root->left = new TreeNode(2);
   root->right = new TreeNode(3);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  std::vector<int> ans = largestValues(root);
+  vector<int> ans = largestValues(root);
   printArr(ans);
 
   return 0;

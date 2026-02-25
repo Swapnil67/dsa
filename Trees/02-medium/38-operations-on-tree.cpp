@@ -12,18 +12,20 @@
 
 #include <vector>
 #include <iostream>
+using namespace std;
 
 class LockingTree
 {
-  std::vector<int> locked;
-  std::vector<int> parent;
-  std::vector<std::vector<int>> child;
+  vector<int> locked;
+  vector<int> parent;
+  vector<vector<int>> child;
 
+  // * Go the descendants (children) and unlock all the nodes
   int dfs(int node) {
     int locked_count = 0;
     if (locked[node]) {
       locked_count++;
-      locked[node] = 0;
+      locked[node] = 0; // * unlocks all of its descendants
     }
     for (int &nei : child[node]) {
       locked_count += dfs(nei);
@@ -32,7 +34,7 @@ class LockingTree
   }
 
 public:
-  LockingTree(std::vector<int> &parent) : parent(parent), locked(parent.size()) {
+  LockingTree(vector<int> &parent) : parent(parent), locked(parent.size()) {
     int n = parent.size();
     child.resize(n);
     // * {0: {1, 2}, 1: {3, 4}, 2: {5, 6}}
@@ -76,23 +78,23 @@ public:
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> parent = {-1, 0, 0, 1, 1, 2, 2};
+  // vector<int> parent = {-1, 0, 0, 1, 1, 2, 2};
   // LockingTree *obj = new LockingTree(parent);
-  // std::cout << obj->lock(2, 2) << std::endl;
-  // std::cout << obj->unlock(2, 3) << std::endl; 
-  // std::cout << obj->unlock(2, 2) << std::endl; 
-  // std::cout << obj->lock(4, 5) << std::endl;
-  // std::cout << obj->upgrade(0, 1) << std::endl;
-  // std::cout << obj->lock(0, 1) << std::endl;
+  // cout << obj->lock(2, 2) << endl;
+  // cout << obj->unlock(2, 3) << endl; 
+  // cout << obj->unlock(2, 2) << endl; 
+  // cout << obj->lock(4, 5) << endl;
+  // cout << obj->upgrade(0, 1) << endl;
+  // cout << obj->lock(0, 1) << endl;
 
   // * testcase 2
-  std::vector<int> parent = {-1,0,1,1,0};
+  vector<int> parent = {-1,0,1,1,0};
   LockingTree *obj = new LockingTree(parent);
-  std::cout << obj->unlock(2, 1) << std::endl;
-  std::cout << obj->unlock(3, 10) << std::endl;
-  std::cout << obj->upgrade(2, 9) << std::endl;
-  std::cout << obj->upgrade(4, 1) << std::endl;
-  std::cout << obj->upgrade(1, 5) << std::endl;
+  cout << obj->unlock(2, 1) << endl;
+  cout << obj->unlock(3, 10) << endl;
+  cout << obj->upgrade(2, 9) << endl;
+  cout << obj->upgrade(4, 1) << endl;
+  cout << obj->upgrade(1, 5) << endl;
   return 0;
 }
 

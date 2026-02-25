@@ -36,7 +36,6 @@
 #include <queue>
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 #include "common.hpp"
 
 using namespace std;
@@ -82,6 +81,7 @@ vector<int> solve(int &max_val, TreeNode *root) {
 
 // * ------------------------- APPROACH: OPTIMAL APPROACH -------------------------
 // * DFS
+// * h - height of tree
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(h) 
 int longestConsecutive(TreeNode* root) {
