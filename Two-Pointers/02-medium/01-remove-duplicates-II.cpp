@@ -1,7 +1,9 @@
 /*
  * Leetcode - 80
  * Remove Duplicates from Sorted Array II
- * Here each unique element must appear atmost twice. The relative order of the elements should be kept the same.
+ * 
+ * Here each unique element must appear atmost twice. 
+ * The relative order of the elements should be kept the same.
  * 
  * Example 1
  * Input  : nums = [1,1,1,2,2,3]
@@ -18,51 +20,54 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Map Data Structure
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int bruteForce(std::vector<int> &arr) {
-  int n = arr.size(), c = 0;
-  std::unordered_map<int, int> countMap;
+int bruteForce(vector<int> &arr) {
+  int n = arr.size(), i = 0;
+  unordered_map<int, int> countMap;
   
-  for (int i = 0; i < n; ++i) {
-    int val = arr[i];
+  for (int j = 0; j < n; ++j) {
+    int val = arr[j];
     if (countMap.count(val) && countMap[val] >= 2) {
       // * ignore element
       continue;
     }
     else {
-      arr[c] = val;
-      c++;
+      arr[i] = val;
+      i++;
       countMap[val]++;
     }
   }
 
-  // * For debugging
-  // for(auto it: cmap) {
-  //   std::cout << it.first << " " << it.second << std::endl;
-  // }
-  return c;
+  return i;
 }
 
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * count the duplicates & loop over duplicates
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int removeDuplicates(std::vector<int> &arr) {
+int removeDuplicates(vector<int> &arr) {
   int n = arr.size();
   int i = 0, j = 0;
 
-  while(j < n) {
+  while (j < n) {
     int c = 1;
     // * count the duplicates
     while ((j + 1) < n && arr[j] == arr[j + 1]) {
@@ -71,7 +76,7 @@ int removeDuplicates(std::vector<int> &arr) {
     }
 
     // * loop over duplicates
-    for (int k = 0; k < std::min(2, c); ++k) {
+    for (int k = 0; k < min(2, c); ++k) {
         arr[i] = arr[j];
         i++;
     }
@@ -81,18 +86,28 @@ int removeDuplicates(std::vector<int> &arr) {
 }
 
 int main(void) {
-  // std::vector<int> nums = {1, 1, 1, 2, 2, 3};
-  std::vector<int> nums = {0, 0, 1, 1, 1, 1, 2, 3, 3};
-  // std::vector<int> nums = {1, 1};
-  // std::vector<int> nums = {1, 2, 2};
+  // * testcase 1
+  // vector<int> nums = {1, 1, 1, 2, 2, 3};
+
+  // * testcase 2
+  vector<int> nums = {0, 0, 1, 1, 1, 1, 2, 3, 3};
+
+  // * testcase 3
+  // vector<int> nums = {1, 1};
   
+  // * testcase 4
+  // vector<int> nums = {1, 2, 2};
+  
+  cout << "Input nums: ";
   printArr(nums);
+
   // int ans = bruteForce(nums);
   int ans = removeDuplicates(nums);
-  std::cout << ans << std::endl;
+
+  cout << ans << endl;
   printArr(nums);
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 01-remove-duplicates-II.cpp -o output && ./output
+// * g++ --std=c++20 01-remove-duplicates-II.cpp -o output && ./output

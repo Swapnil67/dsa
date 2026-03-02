@@ -26,14 +26,28 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
+
 // ! Note: This question is the same as 445: Assign Cookies.
 
-// * ------------------------- Optimal APPROACH -------------------------`
+// * ------------------------- Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(nlogn + mlogm)
 // * SPACE COMPLEXITY O(1)
-int matchPlayersAndTrainers(std::vector<int> &players, std::vector<int> &trainers) {
-	std::sort(players.begin(), players.end());
-	std::sort(trainers.begin(), trainers.end());
+int matchPlayersAndTrainers(vector<int> &players, vector<int> &trainers) {
+	sort(players.begin(), players.end());
+	sort(trainers.begin(), trainers.end());
 
 	int i = 0, j = 0;
 	while (i < players.size() && j < trainers.size()) {
@@ -48,15 +62,15 @@ int matchPlayersAndTrainers(std::vector<int> &players, std::vector<int> &trainer
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> players = {4, 7, 9};
-  // std::vector<int> trainers = {8, 2, 5, 8};
+  // vector<int> players = {4, 7, 9};
+  // vector<int> trainers = {8, 2, 5, 8};
   
   // * testcase 2
-  std::vector<int> players = {1, 1, 1};
-  std::vector<int> trainers = {10};
+  vector<int> players = {1, 1, 1};
+  vector<int> trainers = {10};
 
   int ans = matchPlayersAndTrainers(players, trainers);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }

@@ -24,11 +24,13 @@
 
 #include <iostream>
 
-int minimumLength(std::string s) {
+using namespace std;
+
+int minimumLength(string s) {
   int n = s.size();
   int i = 0, j = n - 1;
   while(i < j) {
-    // std::cout << i << " " << j << std::endl;
+    // cout << i << " " << j << endl;
     if(s[i] != s[j]) {
       break;
     }
@@ -52,17 +54,17 @@ int minimumLength(std::string s) {
 
 int main() {
   // * testcase 1
-  std::string s = "cabaabac";
+  string s = "cabaabac";
 
   // * testcase 2
-  // std::string s = "aabccabba";
+  // string s = "aabccabba";
   
   // * testcase 3
-  // std::string s = "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb";
+  // string s = "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb";
 
-  std::cout << s << std::endl;
+  cout << s << endl;
   int length = minimumLength(s);
-  std::cout << length << std::endl;
+  cout << length << endl;
 }
 
 // * Run the code

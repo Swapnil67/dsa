@@ -20,10 +20,24 @@
 #include <vector>
 #include <iostream>
 
-std::string addSpaces(std::string s, std::vector<int> spaces) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
+
+string addSpaces(string s, vector<int> spaces) {
   int j = 0;
 
-  std::string ans = "";
+  string ans = "";
   for (int i = 0; i < s.length(); ++i) {
     // * check if the current char is space
     if (j < spaces.size() && i == spaces[j]) {
@@ -37,19 +51,23 @@ std::string addSpaces(std::string s, std::vector<int> spaces) {
 
 int main(void) {
   // * testcase 1
-  std::string s = "LeetcodeHelpsMeLearn";
-  std::vector<int> spaces = {8, 13, 15};
+  string s = "LeetcodeHelpsMeLearn";
+  vector<int> spaces = {8, 13, 15};
   
   // * testcase 2
-  // std::string s = "icodeinpython";
-  // std::vector<int> spaces = {1, 5, 7, 9};
+  // string s = "icodeinpython";
+  // vector<int> spaces = {1, 5, 7, 9};
   
   // * testcase 3
-  // std::string s = "spacing";
-  // std::vector<int> spaces = {0, 1, 2, 3, 4, 5, 6};
+  // string s = "spacing";
+  // vector<int> spaces = {0, 1, 2, 3, 4, 5, 6};
 
-  std::string ans = addSpaces(s, spaces);
-  std::cout << ans << std::endl;
+  cout << "Input string: " << s << endl;
+  cout << "Space vector: ";
+  printArr(spaces);
+
+  string ans = addSpaces(s, spaces);
+  cout << "Answer: " << ans << endl;
 }
 
 // * Run the code

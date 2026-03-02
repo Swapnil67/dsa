@@ -26,22 +26,30 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 // * Shuffling the array using two pointers
-std::vector<int> rearrangeArray(std::vector<int> &nums) {
+vector<int> rearrangeArray(vector<int> &nums) {
   // * sort the nums
-  std::sort(nums.begin(), nums.end());
-  std::vector<int> ans;
+  sort(nums.begin(), nums.end());
 
+  // * Shuffle the numbers
+  vector<int> ans;
   int n = nums.size();
   int l = 0, r = n - 1;
   while (ans.size() != n) {
@@ -60,14 +68,14 @@ std::vector<int> rearrangeArray(std::vector<int> &nums) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 // * Shuffling the array using deque
-std::vector<int> rearrangeArray2(std::vector<int> &nums) {
+vector<int> rearrangeArray2(vector<int> &nums) {
   // * sort the nums
-  std::sort(nums.begin(), nums.end());
+  sort(nums.begin(), nums.end());
 
   // * create a deque with nums
-  std::deque q(nums.begin(), nums.end());
+  deque q(nums.begin(), nums.end());
 
-  std::vector<int> ans;
+  vector<int> ans;
   while (q.size() > 0) {
     // * push from back first
     ans.push_back(q.back());
@@ -84,11 +92,11 @@ std::vector<int> rearrangeArray2(std::vector<int> &nums) {
 }
 
 int main(void) {
-  std::vector<int> nums = {1, 2, 3, 4, 5};
+  vector<int> nums = {1, 2, 3, 4, 5};
   printArr(nums);
 
-  // std::vector<int> ans = rearrangeArray(nums);
-  std::vector<int> ans = rearrangeArray2(nums);
+  // vector<int> ans = rearrangeArray(nums);
+  vector<int> ans = rearrangeArray2(nums);
   printArr(ans);
 
   return 0;

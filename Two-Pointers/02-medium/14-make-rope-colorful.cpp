@@ -1,6 +1,7 @@
 /*
  * Leetcode - 1578
  * Minimum Time to Make Rope Colorful
+ * 
  * Alice has n balloons arranged on a rope. You are given a 0-indexed string colors where colors[i] is the color of the ith balloon.
  * Alice wants the rope to be colorful. She does not want two consecutive balloons to be of the same color,
  * so she asks Bob for help. Bob can remove some balloons from the rope to make it colorful. 
@@ -26,17 +27,24 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
+int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime) {
   int n = neededTime.size();
   int l = 0, time = 0;
   for (int r = 1; r < n; ++r) {
@@ -57,26 +65,26 @@ int minTimeToMakeRopeColorful(std::string colors, std::vector<int> neededTime) {
 
 int main() {
   // * testcase 1
-  // std::string colors = "abaac";
-  // std::vector<int> neededTime = {1, 2, 3, 4, 5};
+  // string colors = "abaac";
+  // vector<int> neededTime = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  // std::string colors = "abc";
-  // std::vector<int> neededTime = {1, 2, 3};
+  // string colors = "abc";
+  // vector<int> neededTime = {1, 2, 3};
 
   // * testcase 3
-  std::string colors = "aabaa";
-  std::vector<int> neededTime = {1, 2, 3, 4, 1};
+  string colors = "aabaa";
+  vector<int> neededTime = {1, 2, 3, 4, 1};
   
   // * testcase 4
-  // std::string colors = "aaabbbabbbb";
-  // std::vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
+  // string colors = "aaabbbabbbb";
+  // vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
 
-  std::cout << "Rope: " << colors << std::endl;
+  cout << "Rope: " << colors << endl;
   printArr(neededTime);
 
   int time = minTimeToMakeRopeColorful(colors, neededTime);
-  std::cout << time << std::endl;
+  cout << time << endl;
 
   return 0;
 }

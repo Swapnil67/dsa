@@ -9,19 +9,19 @@
  * 
  * Return the sum of the chemistry of all the teams, or return -1 if there is no way to divide the players into
  * teams such that the total skill of each team is equal.
-
+ *
  * Example 1:
  * Input: skill = [3,2,5,1,3,4]
  * Output: 22
  * Explanation: Divide the players into the following teams: (1, 5), (2, 4), (3, 3), where each team has a total skill of 6.
  * The sum of the chemistry of all the teams is: 1 * 5 + 2 * 4 + 3 * 3 = 5 + 8 + 9 = 22.
-
+ *
  * Example 2:
  * Input: skill = [3,4]
  * Output: 12
  * Explanation: The two players form a team with a total skill of 7.
  * The chemistry of the team is 3 * 4 = 12.
-
+ *
  * Example 2:
  * Input: skill = [1,1,2,3]
  * Output: -1
@@ -34,18 +34,25 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * Classic Two Pointers Approach
 // * Make pairs of smallest & largest numbers
-long long dividePlayers(std::vector<int>& skill) {
+long long dividePlayers(vector<int>& skill) {
   // * sort the array
-  std::sort(skill.begin(), skill.end());
+  sort(skill.begin(), skill.end());
   
   int n = skill.size();
   int i = 0, j = n - 1;
@@ -66,14 +73,14 @@ long long dividePlayers(std::vector<int>& skill) {
   return ans;
 }
 
-long long dividePlayers2(std::vector<int>& skill) {
+long long dividePlayers2(vector<int>& skill) {
   int n = skill.size();
-  std::sort(skill.begin(), skill.end());
+  sort(skill.begin(), skill.end());
 
   long long total_sum = 0;
 
   // * count the frequency of array elements
-  std::vector<int> freq_vec(1000, 0);
+  vector<int> freq_vec(1000, 0);
   for (int x : skill) {
     freq_vec[x]++;
     total_sum += x;
@@ -98,19 +105,20 @@ long long dividePlayers2(std::vector<int>& skill) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> skill = {3, 4};
+  // vector<int> skill = {3, 4};
 
   // * testcase 2
-  // std::vector<int> skill = {1, 1, 2, 3};
+  // vector<int> skill = {1, 1, 2, 3};
 
   // * testcase 3
-  std::vector<int> skill = {3, 2, 5, 1, 3, 4};
+  vector<int> skill = {3, 2, 5, 1, 3, 4};
 
+  cout << "Input skill: ";
   printArr(skill);
 
   // long long ans = dividePlayers(skill);
   long long ans = dividePlayers2(skill);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }

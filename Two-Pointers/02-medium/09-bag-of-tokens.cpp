@@ -34,31 +34,35 @@
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- UTILITY FUNCTIONS -------------------------`
+using namespace std;
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-int bagOfTokensScore(std::vector<int> tokens, int power) {
+int bagOfTokensScore(vector<int> tokens, int power) {
   // * sort the tokens
-  std::sort(tokens.begin(), tokens.end()); 
+  sort(tokens.begin(), tokens.end()); 
   int n = tokens.size();
   int i = 0, j = n - 1;
 
   int score = 0, max_score = 0;
   while(i <= j) {
-    // std::cout << power << std::endl;
+    // cout << power << endl;
     // * Increase the score by reducing power
     if(power >= tokens[i]) {
       power -= tokens[i];
       score += 1;
       i++;
-      max_score = std::max(max_score, score);
+      max_score = max(max_score, score);
     }
     else {
       if (score >= 1) {
@@ -77,17 +81,17 @@ int bagOfTokensScore(std::vector<int> tokens, int power) {
 
 int main() {
   int power = 200;
-  std::vector<int> tokens = {100, 200, 300, 400};
+  vector<int> tokens = {100, 200, 300, 400};
 
   // int power = 150;
-  // std::vector<int> tokens = {200, 100};
+  // vector<int> tokens = {200, 100};
 
-  std::cout << "Power: " << power << std::endl;
-  std::cout << "Tokens: ";
+  cout << "Power: " << power << endl;
+  cout << "Tokens: ";
   printArr(tokens);
 
   int ans = bagOfTokensScore(tokens, power);
-  std::cout << "Max Score " << ans << std::endl;
+  cout << "Max Score " << ans << endl;
   return 0;
 }
 

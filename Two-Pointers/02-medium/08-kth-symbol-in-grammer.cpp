@@ -33,25 +33,32 @@
 #include <math.h>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH: Optimal APPROACH -------------------------
 // * Binary Search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int kthGrammar(int n, int k) {
-  int l = 1, r = std::pow(2, n - 1);
+  // int l = 1, r = pow(2, n - 1);
+  int l = 1, r = 1 << (n - 1);
   int cur = 0;
-  while(l < r) {
+  while (l <= r) {
     int mid = (l + r) / 2;
     if (k <= mid) {
-      r = mid;
+      r = mid - 1;
     } else {
       l = mid + 1;
       // * Since the right part changes therefore we take compliment
@@ -63,9 +70,9 @@ int kthGrammar(int n, int k) {
 
 int main() {
   int n = 4, k = 2;
-  std::cout << "n: " << n << " k: " << k << std::endl;
+  cout << "n: " << n << " k: " << k << endl;
   int ans = kthGrammar(n, k);
-  std::cout << "Answer " << ans << std::endl;
+  cout << "Answer " << ans << endl;
 
   return 0;
 }

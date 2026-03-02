@@ -1,6 +1,7 @@
 /*
  * Leetcode - 962
  * Maximum Width Ramp
+ * 
  * A ramp in an integer array nums is a pair (i, j) for which i < j and nums[i] <= nums[j]. 
  * The width of such a ramp is j - i.
  * 
@@ -8,57 +9,63 @@
  * If there is no ramp in nums, return 0.
 
  * Example 1
- * * Input       : nums = [6,0,8,2,1,5]
+ * * Input       : nums = [6, 0, 8, 2, 1, 5]
  * * Output      : 4
  * * Explanation : The maximum width ramp is achieved at (i, j) = (1, 5): nums[1] = 0 and nums[5] = 5.
  * 
  * Example 2
- * * Input       : nums = [9,8,1,0,1,9,4,0,4,1]
+ * * Input       : nums = [9, 8, 1, 0, 1, 9, 4, 0, 4, 1]
  * * Output      : 7
  * * Explanation : The maximum width ramp is achieved at (i, j) = (2, 9): nums[2] = 1 and nums[9] = 1.
  * 
  * Example 3
- * * Input       : nums = [2,2,1]
+ * * Input       : nums = [2, 2, 1]
  * * Output      : 1
  * * Explanation : The maximum width ramp is achieved at (i, j) = (0, 1): nums[0] = 2 and nums[1] = 2.
  * 
  * https://leetcode.com/problems/maximum-width-ramp/description/
 */
 
-#include <stack>
 #include <vector>
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Approach -------------------------`
+// * ------------------------- APPROACH 1: Brute Approach -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> &nums) {
+int bruteForce(vector<int> &nums) {
   int n = nums.size();
   int ans = INT_MIN;
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
       if (nums[i] <= nums[j]) {
-        ans = std::max(ans, j - i);
+        ans = max(ans, j - i);
       }
     }
   }
   return ans < 0 ? 0 : ans;
 }
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int betterApproach(std::vector<int> &nums) {
+int betterApproach(vector<int> &nums) {
   int n = nums.size();
   int ans = INT_MIN;
   
@@ -68,7 +75,7 @@ int betterApproach(std::vector<int> &nums) {
     while (nums[i] > nums[j]) {
       j--;
     }
-    ans = std::max(ans, j - i);
+    ans = max(ans, j - i);
   }
 
   return ans < 0 ? 0 : ans;
@@ -80,23 +87,23 @@ int betterApproach(std::vector<int> &nums) {
 // * Pre calculate next greater element to the right of each element
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int maxWidthRampA(std::vector<int> &nums) {
+int maxWidthRampA(vector<int> &nums) {
   int n = nums.size();
   
   // * Create a vector where for each element next greater element
-  std::vector<int> maxToRight(n);
+  vector<int> maxToRight(n);
   int curMax = INT_MIN;
   for (int i = n - 1; i >= 0; --i) {
-    curMax = std::max(curMax, nums[i]);
+    curMax = max(curMax, nums[i]);
     maxToRight[i] = curMax;
   }
-  printArr(maxToRight);
+  // printArr(maxToRight);
   
   int ans = INT_MIN;
   int i = 0, j = 0;
   while (j < n) {
     if(nums[i] <= maxToRight[j]) {
-      ans = std::max(ans, j - i);
+      ans = max(ans, j - i);
     }
     else {
       i++;
@@ -109,13 +116,13 @@ int maxWidthRampA(std::vector<int> &nums) {
 
 int main() {
   // * testcase 1
-  std::vector<int> nums = {6, 0, 8, 2, 1, 5};
+  vector<int> nums = {6, 0, 8, 2, 1, 5};
 
   // * testcase 2
-  // std::vector<int> nums = {9, 8, 1, 0, 1, 9, 4, 0, 4, 1};
+  // vector<int> nums = {9, 8, 1, 0, 1, 9, 4, 0, 4, 1};
   
   // * testcase 3
-  // std::vector<int> nums = {2, 2, 1};
+  // vector<int> nums = {2, 2, 1};
 
   printArr(nums);
 
@@ -123,7 +130,7 @@ int main() {
   // int ans = betterApproach(nums);
 
   int ans = maxWidthRampA(nums);
-  std::cout << "Maximum Width Ramp: " << ans << std::endl;
+  cout << "Maximum Width Ramp: " << ans << endl;
 
   return 0;
 }

@@ -1,11 +1,12 @@
 /*
  * Leetcode - 11
  * Container With Most Water
+ * 
  * You are given an integer array height of length n. There are n vertical lines drawn such that the
  * two endpoints of the ith line are (i, 0) and (i, height[i]).
  * Find two lines that together with the x-axis form a container, such that the container contains the most water.
  * Return the maximum amount of water a container can store.
-
+ * 
  * Example 1
  * Input  : height = [1,8,6,2,5,4,8,3,7]
  * Output : 49
@@ -18,44 +19,50 @@
 #include <climits>
 #include <iostream>
 
-// * ------------------------- UTILITY FUNCTIONS -------------------------`
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> height) {
+int bruteForce(vector<int> height) {
   int n = height.size();
   int maxArea = INT_MIN;
   for (int i = 0; i < n; ++i)  {
     for (int j = i + 1; j < n; ++j) {
-      int curArea = ((j - i) * std::min(height[i], height[j]));
-      // std::cout << curArea << " ";
-      maxArea = std::max(curArea, maxArea);
+      int curArea = ((j - i) * min(height[i], height[j]));
+      // cout << curArea << " ";
+      maxArea = max(curArea, maxArea);
     }
-    // std::cout << std::endl;
+    // cout << endl;
   }
   return maxArea;
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Two pointer at start & end
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int maxArea(std::vector<int> height) {
+int maxArea(vector<int> height) {
   int n = height.size();
   int i = 0, j = n - 1;
   int max_area = INT_MIN;
   while (j > i) {
-    int cur_area = (j - i) * std::min(height[i], height[j]);
-    max_area = std::max(max_area, cur_area);
+    int cur_area = (j - i) * min(height[i], height[j]);
+    max_area = max(max_area, cur_area);
 
     // * keep the more height for finding 'greater area'
     if (height[i] > height[j])
@@ -67,14 +74,14 @@ int maxArea(std::vector<int> height) {
 }
 
 int main() {
-  std::vector<int> nums = {3, 1, 2, 3};
-  // std::vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-  // std::vector<int> nums = {1, 1};
+  vector<int> nums = {3, 1, 2, 3};
+  // vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+  // vector<int> nums = {1, 1};
   printArr(nums);
 
   // int ans = bruteForce(nums);
   int ans = maxArea(nums);
-  std::cout << "maximum amount of water a container can store : " << ans << std::endl;
+  cout << "maximum amount of water a container can store : " << ans << endl;
 
   return 0;
 }

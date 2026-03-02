@@ -22,26 +22,65 @@
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+using namespace std;
+
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Using stringstream
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::string bruteForce(std::string &s) {
+string bruteForce(string &s) {
   int n = s.size();
-  std::stringstream ss(s);
+  stringstream ss(s);
   
-  std::string token = "", result = "";
-  while(ss >> token) {
+  string token = "", result = "";
+  while (ss >> token) {
     result = token + " " + result;
   }
   return result;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
+// * Using stringstream
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+string betterApproach(string s) {
+  int n = s.length();
+  if (n == 0)
+    return "";
+
+  int i = 0;
+  while (i < n && isspace(s[i]))
+    i++;
+
+  string ans = "";
+  int j = i;
+  while (j < n) {
+    // * Take the word
+    i = j;
+    while (j < n && !isspace(s[j])) {
+      j++;
+    }
+    string temp = s.substr(i, j - i);
+
+    // * Skip the empty spaces
+    while (j < n && isspace(s[j]))
+      j++;
+
+    ans = temp + ' ' + ans;
+  }
+
+  // * Remove the end space
+  if (ans.length())
+    ans.pop_back();
+
+  return ans;
+}
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Using Two Pointers
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::string reverseWords(std::string &s) {
+string reverseWords(string &s) {
   int n = s.size();
 
   // * Reverse complete string
@@ -60,8 +99,8 @@ std::string reverseWords(std::string &s) {
 
     // * Reverse l to r
     if (l < r) {
-      // std::cout << l << " " << r << std::endl;
-      std::reverse(s.begin() + l, s.begin() + r);
+      // cout << l << " " << r << endl;
+      reverse(s.begin() + l, s.begin() + r);
       s[r] = ' '; // * Add a space
       r++;        // * Incr the r ptr
       l = r;      // * Bring l to r
@@ -73,15 +112,17 @@ std::string reverseWords(std::string &s) {
 }
 
 int main() {
-  // std::string s = "I am zoro";
-  // std::string s = "   Roronoa      Zoro     ";
-  // std::string s = "  hello world  ";
-  std::string s = "blue is sky the";
-  std::cout << s << std::endl;
-  
-  // std::string ans = bruteForce(s);
-  std::string ans = reverseWords(s);
-  std::cout << ans << std::endl;
+  // string s = "I am zoro";
+  // string s = "   Roronoa      Zoro     ";
+  // string s = "  hello world  ";
+  string s = "blue is sky the";
+  cout << "Input string: " << s << endl;
+
+  // string ans = bruteForce(s);
+  string ans = reverseWords(s);
+  std::cout << "Answer: " << ans << std::endl;
+
+  return 0;
 }
 
 // * Run the code

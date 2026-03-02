@@ -30,18 +30,20 @@
 #include <vector>
 #include <iostream>
 
-void printVectorString(std::vector<std::string> strs) {
+using namespace std;
+
+void printVectorString(vector<string> strs) {
   int n = strs.size();
-  std::cout << "[ "; 
-  for (std::string s : strs) {
-    std::cout << s << ", ";
+  cout << "[ "; 
+  for (string s : strs) {
+    cout << s << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-std::vector<std::string> getStringVector(std::string sentence) {
-  std::string word = "";
-  std::vector<std::string> vec;
+vector<string> getStringVector(string sentence) {
+  string word = "";
+  vector<string> vec;
   for(char &ch : sentence) {
     if (isspace(ch)) {
       vec.push_back(word);
@@ -54,20 +56,20 @@ std::vector<std::string> getStringVector(std::string sentence) {
   return vec;
 }
 
-// * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------`
+// * ------------------------- APPROACH 1: OPTIMAL APPROACH -------------------------
 // * TIME COMPLEXITY O(s1) + O(s2)
 // * SPACE COMPLEXITY O(s1 + s2)
-bool areSentencesSimilar(std::string s1, std::string s2) {
+bool areSentencesSimilar(string s1, string s2) {
   int n1 = s1.size(), n2 = s2.size();
   if(n1 < n2) {
     return areSentencesSimilar(s2, s1);
   }
 
   // * create vector string of words of s1
-  std::vector<std::string> vec1 = getStringVector(s1);
+  vector<string> vec1 = getStringVector(s1);
 
   // * create vector string of words of s2
-  std::vector<std::string> vec2 = getStringVector(s2);
+  vector<string> vec2 = getStringVector(s2);
 
   // * for debug
   // printVectorString(vec1);
@@ -77,36 +79,36 @@ bool areSentencesSimilar(std::string s1, std::string s2) {
   int l = 0, r = vec2.size() - 1; // * for s2
 
   while (l < vec2.size() && i < vec1.size() && vec1[i] == vec2[l]) {
-    // std::cout << vec1[i] << " " << vec2[k] << std::endl;
+    // cout << vec1[i] << " " << vec2[k] << endl;
     i++;
     l++;
   }
 
   while (j >= 0 && r >= 0 && (vec1[j] == vec2[r])) {
-    // std::cout << vec1[j] << " " << vec2[l] << std::endl;
+    // cout << vec1[j] << " " << vec2[l] << endl;
     j--;
     r--;
   }
 
-  // std::cout << k << " " << l << std::endl;
+  // cout << k << " " << l << endl;
   return l > r;
 }
 
 int main() {
   // * testcase 1
-  // std::string s1 = "My name is Haley", s2 = "My Haley";
+  // string s1 = "My name is Haley", s2 = "My Haley";
 
   // * testcase 2
-  // std::string s1 = "of", s2 = "of course";
+  // string s1 = "of", s2 = "of course";
 
   // * testcase 3
-  std::string s1 = "of", s2 = "A lot of words";
+  string s1 = "of", s2 = "A lot of words";
 
-  std::cout << s1 << std::endl;
-  std::cout << s2 << std::endl;
+  cout << s1 << endl;
+  cout << s2 << endl;
 
   bool ans = areSentencesSimilar(s1, s2);
-  std::cout << "Is similar sentences: " << ans << std::endl;
+  cout << "Is similar sentences: " << ans << endl;
 
   return 0;
 }

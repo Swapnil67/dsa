@@ -26,14 +26,18 @@
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- UTILITY FUNCTIONS -------------------------`
+using namespace std;
 
-void printArr(std::vector<int> arr) {
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------`
@@ -41,8 +45,8 @@ void printArr(std::vector<int> arr) {
 // * If take the most heavy person and move forward
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int numRescueBoats(std::vector<int>& people, int limit) {
-  std::sort(people.begin(), people.end());
+int numRescueBoats(vector<int>& people, int limit) {
+  sort(people.begin(), people.end());
 
   int n = people.size();
   int boats_required = 0;
@@ -63,18 +67,18 @@ int numRescueBoats(std::vector<int>& people, int limit) {
 int main() {
   // * testcase 1
   int limit = 6;
-  std::vector<int> people = {5, 1, 4, 2};
+  vector<int> people = {5, 1, 4, 2};
   
   // * testcase 2
   // int limit = 9;
-  // std::vector<int> people = {3, 8, 7, 1, 4};
+  // vector<int> people = {3, 8, 7, 1, 4};
 
-  std::cout << "limit: " << limit << std::endl;
-  std::cout << "People: ";
+  cout << "limit: " << limit << endl;
+  cout << "People: ";
   printArr(people);
 
   int ans = numRescueBoats(people , limit);
-  std::cout << "minimum number of boats to carry every given person " << ans << std::endl;
+  cout << "minimum number of boats to carry every given person " << ans << endl;
 
   return 0;
 }

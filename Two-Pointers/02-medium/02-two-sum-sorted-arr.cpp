@@ -24,41 +24,45 @@
  * https://www.geeksforgeeks.org/problems/two-sum-in-sorted-array/1
 */
 
-#include <iostream>
 #include <vector>
+#include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
-
-// * ------------------------- Optimal APPROACH -------------------------`
+// * ------------------------- Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> findTwoSumSorted(std::vector<int> &arr, int target) {    
+vector<int> findTwoSumSorted(vector<int> &arr, int target) {    
   int n = arr.size();
   int i = 0, j = n - 1;
   while(i < j) {
     int cur_sum = arr[i] + arr[j];
-    if(cur_sum == target) {
+    if (cur_sum == target) {
       return {i + 1, j + 1};
-    }
-    else if(cur_sum > target) {
+    } else if(cur_sum > target) {
       j--;
-    }
-    else {
+    } else {
       i++;
     }
   }
   return {-1, -1};
 }
 
-// * ------------------------- Optimal APPROACH -------------------------`
+// * ------------------------- Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-bool findTwoSum(std::vector<int> arr, int target) {
+bool findTwoSum(vector<int> arr, int target) {
   int n = arr.size();
   int l = 0, r = n - 1;
   while (l < r) {
@@ -75,17 +79,22 @@ bool findTwoSum(std::vector<int> arr, int target) {
 }
 
 int main() {
+  // * testcase 1
   int target = 9;
-  std::vector<int> arr = {2, 7, 11, 15};
+  vector<int> arr = {2, 7, 11, 15};
+
+  std::cout << "Input nums: ";
   printArr(arr);
+  std::cout << "target: " << target << std::endl;
 
   // * Note that this does not returns the index
-  bool ans = findTwoSum(arr, target);
-  std::cout << "Sum found " << ans << std::endl;
+  // bool ans = findTwoSum(arr, target);
+  // cout << "Sum found " << ans << endl;
   
   // * Note that this returns the index
-  // std::vector<int> ans = findTwoSumSorted(arr, target);
-  // printArr(ans);
+  vector<int> ans = findTwoSumSorted(arr, target);
+  printArr(ans);
+  
   return 0;
 }
 
