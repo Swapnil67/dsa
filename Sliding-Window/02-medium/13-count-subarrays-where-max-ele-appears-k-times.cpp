@@ -25,14 +25,21 @@
 #include <algorithm>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-int bruteForce(std::vector<int> &arr, int k) {
+int bruteForce(vector<int> &arr, int k) {
   int n = arr.size();
   int ans = 0;
 
@@ -40,7 +47,7 @@ int bruteForce(std::vector<int> &arr, int k) {
   int max_ele = *max_element(arr.begin(), arr.end());
 
   for(int i = 0; i < n; ++i) {
-    std::unordered_map<int, int> freq_map;
+    unordered_map<int, int> freq_map;
     for(int j = i; j < n; ++j) {
       int cur = arr[j];
       freq_map[cur]++;
@@ -58,7 +65,7 @@ int bruteForce(std::vector<int> &arr, int k) {
 // * Note: subarrays ending at 'j' => (n - j)
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-int countSubarrays(std::vector<int> &arr, int k) {
+int countSubarrays(vector<int> &arr, int k) {
   int n = arr.size();
 
   // * get the max_element from array
@@ -69,9 +76,8 @@ int countSubarrays(std::vector<int> &arr, int k) {
 
   // * sliding window
   while (j < n) {
-    if(arr[j] == max_ele) {
+    if (arr[j] == max_ele)
       max_ele_cnt++;
-    }
 
     while (max_ele_cnt >= k) {
       // * count subarrays ending from j till n
@@ -92,19 +98,19 @@ int countSubarrays(std::vector<int> &arr, int k) {
 int main() {
   // * testcase 1
   // int k = 2;
-  // std::vector<int> arr = {1, 3, 2, 3, 3};
+  // vector<int> arr = {1, 3, 2, 3, 3};
 
   // * testcase 1
   int k = 2;
-  std::vector<int> arr = {1, 3, 2, 5, 1, 5};
+  vector<int> arr = {1, 3, 2, 5, 1, 5};
 
   // * testcase 2
   // int k = 3;
-  // std::vector<int> arr = {1, 4, 2, 1};
+  // vector<int> arr = {1, 4, 2, 1};
 
   // * testcase 3
   // int k = 4;
-  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
+  // vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
 
   printf("Appear at least: %d\n", k);
   printf("Input Array\n");

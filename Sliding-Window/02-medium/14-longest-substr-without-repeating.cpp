@@ -24,30 +24,24 @@
  * https://www.geeksforgeeks.org/problems/longest-distinct-characters-in-string5848/1
 */
 
-// ! Amazon, Google, Meta, Microsoft
+// ! Amazon, Google, Meta, Microsoft, Oracle
 
 #include <vector>
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
+using namespace std;
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(256)
-int bruteForce(std::string s) {
+int bruteForce(string s) {
   int n = s.size();
   int max_len = 0;
   for (int i = 0; i < n; ++i) {
     // * All ASCII characters [0-255]
-    std::vector<int> frequency(256);
+    vector<int> frequency(256);
     int j = i;
     for (; j < n; ++j) {
       if (frequency[s[j]] == 1) {
@@ -55,7 +49,7 @@ int bruteForce(std::string s) {
       }
       frequency[s[j]] = 1;
     }
-    max_len = std::max(max_len, j - i);
+    max_len = max(max_len, j - i);
   }
   return max_len;
 }
@@ -64,9 +58,9 @@ int bruteForce(std::string s) {
 // * Keep the map of character positions & using sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(256)
-int lengthOfLongestSubstring(std::string s) {
+int lengthOfLongestSubstring(string s) {
   int n = s.size();
-  std::unordered_map<char, int> hash;
+  unordered_map<char, int> hash;
   int i = 0, j = 0, max_len = 0;
   while (j < n) {
     // * check if cur char is already seen
@@ -78,7 +72,7 @@ int lengthOfLongestSubstring(std::string s) {
     }
 
     // * update the length of substring
-    max_len = std::max(max_len, (j - i + 1));
+    max_len = max(max_len, (j - i + 1));
 
     // * update the index of char in map
     hash[s[j]] = j;
@@ -93,9 +87,9 @@ int lengthOfLongestSubstring(std::string s) {
 // * Keep the map of character positions & using sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(256)
-int lengthOfLongestSubstring2(std::string s) {
+int lengthOfLongestSubstring2(string s) {
   int n = s.size();
-  std::unordered_map<char, int> charFreq;
+  unordered_map<char, int> charFreq;
 
   int ans = 0;
   int i = 0, j = 0;
@@ -108,7 +102,7 @@ int lengthOfLongestSubstring2(std::string s) {
       i++;
     }
 
-    ans = std::max(ans, j - i + 1);
+    ans = max(ans, j - i + 1);
     j++;
   }
 
@@ -116,15 +110,15 @@ int lengthOfLongestSubstring2(std::string s) {
 }
 
 int main(void) {
-  // std::string s = "abcabcbb";
-  // std::string s = "abba";
-  std::string s = "tmmzuxt";
+  // string s = "abcabcbb";
+  // string s = "abba";
+  string s = "tmmzuxt";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
 
   int ans = bruteForce(s);
   // int ans = lengthOfLongestSubstring(s);
-  std::cout << "Longest Substring Without Repeating Characters: " << ans << std::endl;
+  cout << "Longest Substring Without Repeating Characters: " << ans << endl;
 
   return 0;
 }

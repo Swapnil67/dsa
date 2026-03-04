@@ -2,6 +2,7 @@
 /*
  * Leetcode - 713
  * Subarray Product Less Than K
+ * 
  * Given an array of integers nums and an integer k, return the number of contiguous subarrays 
  * where the product of all the elements in the subarray is strictly less than k.
 
@@ -20,25 +21,33 @@
  * https://leetcode.com/problems/subarray-product-less-than-k/description/
  * https://www.naukri.com/code360/problems/count-subarrays-having-product-less-than-k_1214643
  * https://www.geeksforgeeks.org/problems/count-the-subarrays-having-product-less-than-k1708/1
+ * https://neetcode.io/problems/subarray-product-less-than-k/
 */
 
-// ! Goldman Sachs
+// ! Goldman Sachs, Amazon, Google, Meta, Microsoft, Adobe, Oracle
 
 #include <vector>
 #include <iostream>
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr, int k) {
+int bruteForce(vector<int> arr, int k) {
   int n = arr.size();
   int ans = 0;
   for (int i = 0; i < n; ++i) {
@@ -56,12 +65,12 @@ int bruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * (j - i + 1) = no. of subarrays ending at 'j'
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int numSubarrayProductLessThanK(std::vector<int>& nums, int k) {
+int numSubarrayProductLessThanK(vector<int>& nums, int k) {
   int n = nums.size();
   int ans = 0;
   int i = 0, j = 0, cur_product = 1;
@@ -91,11 +100,11 @@ int numSubarrayProductLessThanK(std::vector<int>& nums, int k) {
 int main(void) {
   // * testcase 1
   int k = 100;
-  std::vector<int> arr = {10, 5, 2, 6};
+  vector<int> arr = {10, 5, 2, 6};
 
   // * testcase 2
   // int k = 0;
-  // std::vector<int> arr = {1, 2, 3};
+  // vector<int> arr = {1, 2, 3};
 
   printf("Product: %d\n", k);
   printf("Input Array\n");

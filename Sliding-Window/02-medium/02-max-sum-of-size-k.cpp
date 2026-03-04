@@ -137,4 +137,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++17 02-max-sum-of-size-k.cpp -o output && ./output
+// * g++ --std=c++20 02-max-sum-of-size-k.cpp -o output && ./output

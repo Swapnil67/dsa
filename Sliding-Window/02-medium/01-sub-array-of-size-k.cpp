@@ -17,7 +17,7 @@
  * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
 */
 
-// ! Amazon, LinkedIn, Turo
+// ! Amazon, Goldman Sachs, LinkedIn, Turo
 
 #include <vector>
 #include <iostream>

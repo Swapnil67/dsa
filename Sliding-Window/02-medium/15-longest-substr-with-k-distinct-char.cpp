@@ -27,29 +27,23 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
+using namespace std;
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(256)
-int bruteForce(std::string s, int k) {
+int bruteForce(string s, int k) {
   int n = s.size();
   int max_len = 0;
   for (int i = 0; i < n; ++i) {
-    std::unordered_map<int, int> freq_map;
+    unordered_map<int, int> freq_map;
     for (int j = i; j < n; ++j) {
       freq_map[s[j]]++;
       if (freq_map.size() > k) {
         break;
       }
-      max_len = std::max(max_len, j - i + 1);
+      max_len = max(max_len, j - i + 1);
     }
   }
   return max_len;
@@ -63,10 +57,10 @@ int bruteForce(std::string s, int k) {
 // * Use while loop to decrease size of frequency map
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(256)
-int betterApproach(std::string s, int k) {
+int betterApproach(string s, int k) {
   int n = s.size();
   int i = 0, j = 0, max_len = 0;
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   while(j < n) {
     freq_map[s[j]]++;
 
@@ -80,7 +74,7 @@ int betterApproach(std::string s, int k) {
     }
 
     if(freq_map.size() <= k) {
-      max_len = std::max(max_len, j - i + 1);
+      max_len = max(max_len, j - i + 1);
     }
 
     j++;
@@ -95,10 +89,10 @@ int betterApproach(std::string s, int k) {
 // * Only calculate max_len if map size is within k or else decrease the frequency map
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(256)
-int kDistinctChars(std::string s, int k) {
+int kDistinctChars(string s, int k) {
   int n = s.size();
   int i = 0, j = 0, max_len = 0;
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   while (j < n) {
     freq_map[s[j]]++;
 
@@ -112,7 +106,7 @@ int kDistinctChars(std::string s, int k) {
     }
     else {
       // * Only calculate if we have k distinct characters
-      max_len = std::max(max_len, (j - i + 1));
+      max_len = max(max_len, (j - i + 1));
     }
 
     j++;
@@ -124,19 +118,19 @@ int kDistinctChars(std::string s, int k) {
 int main() {
   // * testcase 1
   // int k = 2;
-  // std::string s = "abbbbbbc";
+  // string s = "abbbbbbc";
   
   // * testcase 2
   int k = 8;
-  std::string s = "fitmgntcesze";
+  string s = "fitmgntcesze";
 
-  std::cout << "Distinct Characters: " << k << std::endl;
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Distinct Characters: " << k << endl;
+  cout << "Input String: " << s << endl;
 
   // int ans = bruteForce(s, k);
   // int ans = betterApproach(s, k);
   int ans = kDistinctChars(s, k);
-  std::cout << "Longest Substring with At Most K Distinct Characters: " << ans << std::endl;
+  cout << "Longest Substring with At Most K Distinct Characters: " << ans << endl;
 
   return 0;
 }

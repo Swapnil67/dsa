@@ -98,11 +98,11 @@ int minOperations(vector<int> &nums, int x) {
   // printf("total_sum: %d, target_sum: %d\n", total_sum, target_sum);
 
   int cur_sum = 0;
-  while(j < n) {
+  while (j < n) {
     cur_sum += nums[j];
     
     // * Shrink the window
-    while(i <= j && cur_sum > target_sum) {
+    while (i <= j && cur_sum > target_sum) {
       cur_sum -= nums[i];
       i++;
     }
@@ -110,7 +110,7 @@ int minOperations(vector<int> &nums, int x) {
     if (cur_sum == target_sum) {
       ans = max(ans, (j - i + 1));
     }
-    j++; 
+    j++;
   }
 
   return ans < 0 ? -1 : n - ans;

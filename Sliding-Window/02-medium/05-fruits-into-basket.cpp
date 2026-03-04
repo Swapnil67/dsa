@@ -48,7 +48,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
   
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Keep two fruits variable f1 & f2
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -76,7 +76,7 @@ int bruteForce(vector<int> fruits) {
   return max_fruits;
 }
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // * Classic Sliding Window
 // * keep fruits map and keep the map size to 2
 // * TIME COMPLEXITY O(2N)
@@ -110,7 +110,7 @@ int betterApproach(vector<int> fruits) {
 }
 
 
-// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * keep frequency map for fruits
 // * Only collect fruits if the frequency < 'k'

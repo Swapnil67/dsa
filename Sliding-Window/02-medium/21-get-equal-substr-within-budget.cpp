@@ -21,49 +21,50 @@
 */
 
 #include <iostream>
+using namespace std;
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(26)
-int bruteForce(std::string s, std::string t, int max_cost) {  
+int bruteForce(string s, string t, int max_cost) {  
   int n = s.size();
   int ans = 0;
   for(int i = 0; i <n; ++i) {
     int cur_cost = 0, j = i;
     for (; j < n; ++j) {
-      int diff = std::abs(s[j] - t[j]);
+      int diff = abs(s[j] - t[j]);
       if (cur_cost + diff <= max_cost) {
         cur_cost += diff;
       } else {
         break;
       }
     }
-    ans = std::max(ans, j - i);
+    ans = max(ans, j - i);
   }
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int equalSubstring(std::string s, std::string t, int max_cost) {  
+int equalSubstring(string s, string t, int max_cost) {  
   int n = s.length();
   
   int i = 0, j = 0;
   int ans = 0, cur_cost = 0;
   while(j < n) {
     // * Add the abs difference to current cost
-    cur_cost += std::abs(t[j] - s[j]);
+    cur_cost += abs(t[j] - s[j]);
 
     // * Shrink the window from left
     if (cur_cost > max_cost) {
-      cur_cost -= std::abs(t[i] - s[i]);
+      cur_cost -= abs(t[i] - s[i]);
       i++;
     } else {
       // * calculate new max substring
-      ans = std::max(ans, j - i + 1);
+      ans = max(ans, j - i + 1);
     }
     j++;
   }
@@ -75,22 +76,22 @@ int main() {
 
   // * testcase 1
   // int max_cost = 3;
-  // std::string s = "abcd", t = "bcdf";
+  // string s = "abcd", t = "bcdf";
 
   // * testcase 2
   // int max_cost = 3;
-  // std::string s = "abcd", t = "cdef";
+  // string s = "abcd", t = "cdef";
 
   // * testcase 3
   int max_cost = 0;
-  std::string s = "abcd", t = "acde";
+  string s = "abcd", t = "acde";
 
-  std::cout << "s: " << s << std::endl;
-  std::cout << "t: " << t << std::endl;
+  cout << "s: " << s << endl;
+  cout << "t: " << t << endl;
 
   // int ans = bruteForce(s, t, max_cost);
   int ans = equalSubstring(s, t, max_cost);
-  std::cout << "Equal Substrings Within Budget: " << ans << std::endl;
+  cout << "Equal Substrings Within Budget: " << ans << endl;
 
   return 0;
 }

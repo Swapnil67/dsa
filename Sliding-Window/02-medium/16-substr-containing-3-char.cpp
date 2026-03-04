@@ -23,15 +23,17 @@
 #include <vector>
 #include <iostream>
 
-int bruteForce(std::string s) {
+using namespace std;
+
+int bruteForce(string s) {
   int n = s.size();
   int ans = 0;
   for (int i = 0; i < n; ++i) {
-    std::vector<int> hash(3, 0);
+    vector<int> hash(3, 0);
     for (int j = i; j < n; ++j) {
       hash[s[j] - 'a'] = 1;
       if(hash[0] + hash[1] + hash[2] == 3) {
-        // std::cout << n - j << std::endl;
+        // cout << n - j << endl;
         ans = ans + (n - j);
         break;
       }
@@ -44,10 +46,10 @@ int bruteForce(std::string s) {
 // * Classic sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int numberOfSubstrings(std::string s) {
+int numberOfSubstrings(string s) {
   int n = s.size();
   int i = 0, j = 0, ans = 0;
-  std::vector<int> hash(3, 0);
+  vector<int> hash(3, 0);
   while (j < n) {
     hash[s[j] - 'a']++;
 
@@ -65,15 +67,15 @@ int numberOfSubstrings(std::string s) {
 
 int main() {
   // * testcase 1
-  std::string s = "abcabc";
+  string s = "abcabc";
 
   // * testcase 2
-  // std::string s = "aaacb";
+  // string s = "aaacb";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
   // int ans = bruteForce(s);
   int ans = numberOfSubstrings(s);
-  std::cout << "Number of Substrings Containing All Three Characters: " << ans << std::endl;
+  cout << "Number of Substrings Containing All Three Characters: " << ans << endl;
   
   return 0;
 }

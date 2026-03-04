@@ -18,8 +18,7 @@
  *    _______
  * [1,0,1,0,1]
  *      ______
- 
-
+ * 
  * Example 2
  * Input  : nums = [0,0,0,0,0], goal = 0
  * Output : 15
@@ -28,6 +27,7 @@
  * https://leetcode.com/problems/binary-subarrays-with-sum/description/
 */
 
+// ! Amazon, Google, Meta, Microsoft, Bloomberg, Adobe
 
 // ! Similar sum
 // ! Count the Number of Fair Pairs
@@ -89,11 +89,12 @@ int betterApproach(std::vector<int> arr, int goal) {
 // * Clever apprach
 // * Sliding Window for ans <= goal
 int helper(std::vector<int> arr, int goal) {
-  int n = arr.size();
-  int i = 0, j = 0, ans = 0;
-  int cur_sum = 0;
   if (goal < 0)
     return 0;
+  
+  int n = arr.size();
+  int i = 0, j = 0;
+  int cur_sum = 0, ans = 0;
   while (j < n) {
     cur_sum += arr[j];
 
@@ -101,8 +102,8 @@ int helper(std::vector<int> arr, int goal) {
       cur_sum -= arr[i];
       i++;
     }
-    
-    // * add all subarrays from 'i' to 'j'
+
+    // * representing all valid subarrays ending at 'j'.
     ans += (j - i + 1);
     j++;
   }
@@ -115,34 +116,6 @@ int helper(std::vector<int> arr, int goal) {
 // * then ans1 - ans2 for goal == 2
 int numSubarraysWithSum(std::vector<int> arr, int goal) {
   return helper(arr, goal) - helper(arr, goal - 1);
-}
-
-// * ------------------------- APPROACH 3B: Optimal APPROACH -------------------------`
-// * Sliding Window + Prefix Zeros count
-int numSubarraysWithSum2(std::vector<int> arr, int goal) {
-  int n = arr.size();
-  int i = 0, j = 0, ans = 0;
-  int cur_sum = 0, zero_cnt = 0;
-  while(j < n) {
-    cur_sum += arr[j];
-
-    while (i < j && (arr[i] == 0 || cur_sum > goal)) {
-      if (arr[i] == 0) {
-        zero_cnt++;
-      } else {
-        zero_cnt = 0;
-      }
-      cur_sum -= arr[i];
-      i++;
-    }
-
-    if (cur_sum == goal) {
-      ans += (1 + zero_cnt);
-    }
-
-    j++;
-  }
-  return ans;
 }
 
 int main() {

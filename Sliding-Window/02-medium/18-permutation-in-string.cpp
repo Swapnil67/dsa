@@ -23,11 +23,11 @@
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * TIME COMPLEXITY O(n! * n)
 // TODO
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // * Sort the string s1
 // * Check all substring of length string s1 in string s2 
 // * TIME COMPLEXITY O(m - n) * O(nlogn)
@@ -53,7 +53,7 @@ bool betterApproach(std::string s1, std::string s2) {
   return false;
 }
 
-// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3: Optimal Approach -------------------------
 // * Calculate character frequency vector of s1 string
 // * Compare frequecy vectors of s1 & s2 using sliding window approach
 // * TIME COMPLEXITY O(m + n)

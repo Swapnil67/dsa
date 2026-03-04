@@ -22,25 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 18 - Permutation in String
-// bool checkInclusion(string &s1, string &s2) {
-// TODO
-// }
-
-// * 19 - Maximum Number of Vowels in a Substring of Given Length
-// int maxVowels(string &s, int k) {
-// TODO
-// }
-
-// * 20 - Minimum Number of Flips to Make the Binary String Alternating
-// int minFlips(string s) {
-// TODO
-// }
-
-// * 21 - get Equal Substrings Within Budget
-// int equalSubstring(string s, string t, int max_cost) {
-// TODO
-// }
 
 // * 22 - Grumpy Bookstore Owner
 // int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
@@ -144,8 +125,6 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
-/**
-
 // * 11 - Subarray Product Less Than K
 // int numSubarrayProductLessThanK(vector<int> &arr, int k) {
 // TODO
@@ -181,7 +160,25 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
-*/
+// * 18 - Permutation in String
+// bool checkInclusion(string &s1, string &s2) {
+// TODO
+// }
+
+// * 19 - Maximum Number of Vowels in a Substring of Given Length
+// int maxVowels(string &s, int k) {
+// TODO
+// }
+
+// * 20 - Minimum Number of Flips to Make the Binary String Alternating
+// int minFlips(string s) {
+// TODO
+// }
+
+// * 21 - get Equal Substrings Within Budget
+// int equalSubstring(string s, string t, int max_cost) {
+// TODO
+// }
 
 int main(void) {
   return 0;

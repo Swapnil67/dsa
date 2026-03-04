@@ -83,7 +83,7 @@ int longestOnes(vector<int> arr, int k) {
         k++;
       i++;
     }
-
+    
     ans = max(ans, (j - i + 1));
     j++;
   }
@@ -110,4 +110,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 04-max-consecutive-ones-iii.cpp -o output && ./output
+// * g++ --std=c++20 04-max-consecutive-ones-iii.cpp -o output && ./output

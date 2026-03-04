@@ -23,28 +23,30 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings
 // * use => replacements = len_of_substr - max_frequency
 // *                        (j - i + 1) - max_frequency
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(26)
-int bruteForce(std::string s, int k) {
+int bruteForce(string s, int k) {
   int n = s.size(), max_len = 0;
   for (int i = 0; i < n; ++i) {
     int max_freq = 0;
-    std::vector<int> char_hash(26, 0);
+    vector<int> char_hash(26, 0);
     int j = i;
     for (; j < n; ++j) {
       // * Incr the current character frequency
       char_hash[s[j] - 'A']++;
       // * check if max frequency of character changed
-      max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
+      max_freq = max(max_freq, char_hash[s[j] - 'A']);
       int replacements = (j - i) - max_freq;
       if (replacements >= k)
         break;
     }
-    max_len = std::max(max_len, (j - i));
+    max_len = max(max_len, (j - i));
   }
 
   return max_len;
@@ -58,31 +60,31 @@ int bruteForce(std::string s, int k) {
 // * Re-calcuate max_freq here
 // * TIME COMPLEXITY O(2N) * O(26)
 // * SPACE COMPLEXITY O(26)
-int betterApproach(std::string s, int k) {
+int betterApproach(string s, int k) {
   int n = s.size();
   int i = 0, j = 0;
   int max_len = 0, max_freq = 0;
-  std::vector<int> char_hash(26, 0);
+  vector<int> char_hash(26, 0);
   while(j < n) {
     // * Incr the current character frequency
     char_hash[s[j] - 'A']++;
 
     // * check if max frequency of character changed
-    max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
+    max_freq = max(max_freq, char_hash[s[j] - 'A']);
 
     // * While number of replacement required are greater than the max replacements
     // * Shrink window from left
     while ((j - i + 1) - max_freq > k) {
       char_hash[s[i] - 'A']--;
-      max_freq = 0;
       // * find new max_freq
+      max_freq = 0;
       for (int p = 0; p < 26; ++p) {
-        max_freq = std::max(max_freq, char_hash[p]);
+        max_freq = max(max_freq, char_hash[p]);
       }
       i++; // * Incr the left pointer
     }
 
-    max_len = std::max(max_len, j - i + 1);
+    max_len = max(max_len, j - i + 1);
 
     j++; // * Incr the right pointer
   }
@@ -97,14 +99,14 @@ int betterApproach(std::string s, int k) {
 // * Do not re-calcuate max_freq here
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(26)
-int characterReplacement(std::string s, int k) {
+int characterReplacement(string s, int k) {
   int n = s.size();
   int i = 0, j = 0;
   int max_len = 0, max_freq = 0;
-  std::vector<int> char_hash(26, 0);
+  vector<int> char_hash(26, 0);
   while(j < n) {
     char_hash[s[j] - 'A']++;
-    max_freq = std::max(max_freq, char_hash[s[j] - 'A']);
+    max_freq = max(max_freq, char_hash[s[j] - 'A']);
 
     // * if number of replacement required are greater than the max replacements
     if ((j - i + 1) - max_freq > k) {
@@ -114,7 +116,7 @@ int characterReplacement(std::string s, int k) {
       i++;
     }
     else {
-      max_len = std::max(max_len, (j - i + 1));
+      max_len = max(max_len, (j - i + 1));
     }
 
     j++;
@@ -126,17 +128,19 @@ int characterReplacement(std::string s, int k) {
 int main() {
   // * testcase 1
   int k = 1;
-  std::string s = "AABABBA";
+  string s = "AABABBA";
   
   // * testcase 2
   // int k = 2;
-  // std::string s = "ABAB";
+  // string s = "ABAB";
   
-  std::cout << "Input String: " << s << std::endl;
-  int ans = bruteForce(s, k);
+  cout << "Input String: " << s << endl;
+
+  // int ans = bruteForce(s, k);
   // int ans = betterApproach(s, k);
-  // int ans = characterReplacement(s, k);
-  std::cout << "Longest Repeating Character Replacement: " << ans << std::endl;
+  int ans = characterReplacement(s, k);
+
+  cout << "Longest Repeating Character Replacement: " << ans << endl;
 
   return 0;
 }
@@ -144,3 +148,4 @@ int main() {
 
 // * Run the code
 // * g++ --std=c++20 17-longest-repeating-char-replacement.cpp -o output && ./output
+

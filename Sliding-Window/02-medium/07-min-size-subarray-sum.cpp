@@ -40,7 +40,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all k size windows with k zeros
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -63,7 +63,7 @@ int bruteForce(vector<int> arr, int target) {
   return ans == INT_MAX ? 0 : ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * Find the curSum
 // * Then find the window while(curSum >= target)

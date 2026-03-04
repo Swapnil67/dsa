@@ -30,22 +30,29 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int>& arr, int k) {
+int bruteForce(vector<int>& arr, int k) {
   int n = arr.size();
   int ans = 0;
   for(int i = 0; i < n; ++i) {
-    std::unordered_map<int, int> freq_map;
+    unordered_map<int, int> freq_map;
     int j = i; // * This is done here to save the max sub arr calculation
     for(; j < n; ++j) {
       if(freq_map[arr[j]] >= k) {
@@ -53,7 +60,7 @@ int bruteForce(std::vector<int>& arr, int k) {
       }   
       freq_map[arr[j]]++;
     }
-    ans = std::max(ans, j - i);
+    ans = max(ans, j - i);
   }
   return ans;
 }
@@ -62,10 +69,10 @@ int bruteForce(std::vector<int>& arr, int k) {
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-int maxSubarrayLength(std::vector<int>& arr, int k) {
+int maxSubarrayLength(vector<int>& arr, int k) {
   int n = arr.size();
   int i = 0, j = 0, ans = 0;
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   while (j < n) {
     freq_map[arr[j]]++;
 
@@ -75,7 +82,7 @@ int maxSubarrayLength(std::vector<int>& arr, int k) {
       i++;
     }
 
-    ans = std::max(ans, j - i + 1);
+    ans = max(ans, j - i + 1);
     j++;
   }
   return ans;
@@ -84,15 +91,15 @@ int maxSubarrayLength(std::vector<int>& arr, int k) {
 int main() {
   // * testcase 1
   // int k = 2;
-  // std::vector<int> arr = {1, 2, 3, 1, 2, 3, 1, 2};
+  // vector<int> arr = {1, 2, 3, 1, 2, 3, 1, 2};
 
   // * testcase 2
   int k = 1;
-  std::vector<int> arr = {1, 2, 1, 2, 1, 2, 1, 2};
+  vector<int> arr = {1, 2, 1, 2, 1, 2, 1, 2};
 
   // * testcase 3
   // int k = 4;
-  // std::vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
+  // vector<int> arr = {5, 5, 5, 5, 5, 5, 5};
 
   printf("At most frequency: %d\n", k);
   printf("Input Array\n");

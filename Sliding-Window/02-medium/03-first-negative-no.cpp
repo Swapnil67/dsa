@@ -113,4 +113,4 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 03-first-negative-no.cpp -o output && ./output
+// * g++ --std=c++20 03-first-negative-no.cpp -o output && ./output

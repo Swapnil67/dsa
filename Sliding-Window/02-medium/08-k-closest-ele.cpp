@@ -145,6 +145,8 @@ int main() {
   // vector<int> ans = bruteForce(arr, k, x);
   vector<int> ans = betterApproach(arr, k, x);
   // vector<int> ans = findClosestElements(arr, k, x);
+
+  std::cout << "Answer: ";
   printArr(ans);
 
   return 0;
