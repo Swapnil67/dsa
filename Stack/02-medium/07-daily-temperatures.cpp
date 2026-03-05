@@ -21,20 +21,28 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
+
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> temperatures) {
+vector<int> bruteForce(vector<int> temperatures) {
   int n = temperatures.size();
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = 0; i < n; ++i) {
     int warmer_temperature = temperatures[i];
     int days = 0;
@@ -57,10 +65,10 @@ std::vector<int> bruteForce(std::vector<int> temperatures) {
 // * Monotonic Stack
 // * TIME COMPLEXITY O(2N) ~ O(N) 
 // * SPACE COMPLEXITY O(N)
-std::vector<int> dailyTemperatures(std::vector<int> &temperatures) {
+vector<int> dailyTemperatures(vector<int> &temperatures) {
   int n = temperatures.size();
-  std::vector<int> ans(n);
-  std::stack<int> st;    // * Monotonic stack
+  vector<int> ans(n);
+  stack<int> st;    // * Monotonic stack
   
   for (int i = 0; i < temperatures.size(); ++i) {
      // * st.top() should only contain element greater than temperatures[i] 
@@ -78,19 +86,19 @@ std::vector<int> dailyTemperatures(std::vector<int> &temperatures) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
+  // vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
 
   // * testcase 2
-  // std::vector<int> temperatures = {30, 40, 50, 60};
+  // vector<int> temperatures = {30, 40, 50, 60};
 
   // * testcase 3
-  std::vector<int> temperatures = {30, 60, 90};
+  vector<int> temperatures = {30, 60, 90};
 
-  std::cout << "Daily Temperatures" << std::endl;
+  cout << "Daily Temperatures" << endl;
   printArr(temperatures);
 
-  // std::vector<int> ans = bruteForce(temperatures);
-  std::vector<int> ans = dailyTemperatures(temperatures);
+  // vector<int> ans = bruteForce(temperatures);
+  vector<int> ans = dailyTemperatures(temperatures);
   printArr(ans);
 
   return 0;

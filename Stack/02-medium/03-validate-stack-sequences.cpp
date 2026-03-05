@@ -22,16 +22,18 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
+using namespace std;
+
+void printArr(vector<int> &arr) {
   for (int i = 0; i < arr.size(); i++) {
     printf("%d ", arr[i]);
   }
   printf("\n");
 }
 
-bool validateStackSequences(std::vector<int> &pushed, std::vector<int> &popped) {
+bool validateStackSequences(vector<int> &pushed, vector<int> &popped) {
   int n = pushed.size();
-  std::stack<int> st;
+  stack<int> st;
   int j = 0;
   for (int i = 0; i < n; ++i) {
     st.push(pushed[i]);
@@ -48,21 +50,21 @@ bool validateStackSequences(std::vector<int> &pushed, std::vector<int> &popped) 
 
 int main() {
   // * testcase 1
-  // std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 5, 3, 2, 1};
+  // vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 5, 3, 2, 1};
   
   // * testcase 2
-  std::vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 3, 5, 1, 2};
+  vector<int> pushed = {1, 2, 3, 4, 5}, popped = {4, 3, 5, 1, 2};
 
   // * testcase 3
-  // std::vector<int> pushed = {2, 1, 0}, popped = {1, 2, 0};
+  // vector<int> pushed = {2, 1, 0}, popped = {1, 2, 0};
 
-  std::cout << "Pushed Array: " << std::endl;
+  cout << "Pushed Array: " << endl;
   printArr(pushed);
-  std::cout << "Popped Array: " << std::endl;
+  cout << "Popped Array: " << endl;
   printArr(popped);
 
   bool ans = validateStackSequences(pushed, popped);
-  std::cout << "Validate Stack Sequences: " << ans << std::endl;
+  cout << "Validate Stack Sequences: " << ans << endl;
 
   return 0;
 }

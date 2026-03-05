@@ -20,23 +20,28 @@
  * https://leetcode.com/problems/maximum-width-ramp/description/
 */
 
-// * 6 0 8 2 1 5
-// * 8 8 8 5 5 5
-
 #include <stack>
 #include <vector>
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-void printStack(std::stack<int> st) {
-  std::cout << "-------- stack --------\n";
+
+void printStack(stack<int> st) {
+  cout << "-------- stack --------\n";
   while (!st.empty()) {
     printf("%d ", st.top());
     st.pop();
@@ -48,13 +53,13 @@ void printStack(std::stack<int> st) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> &nums) {
+int bruteForce(vector<int> &nums) {
   int n = nums.size();
   int ans = INT_MIN;
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
       if (nums[i] <= nums[j]) {
-        ans = std::max(ans, j - i);
+        ans = max(ans, j - i);
       }
     }
   }
@@ -65,7 +70,7 @@ int bruteForce(std::vector<int> &nums) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int betterApproach(std::vector<int> &nums) {
+int betterApproach(vector<int> &nums) {
   int n = nums.size();
   int ans = INT_MIN;
   
@@ -75,7 +80,7 @@ int betterApproach(std::vector<int> &nums) {
     while (nums[i] > nums[j]) {
       j--;
     }
-    ans = std::max(ans, j - i);
+    ans = max(ans, j - i);
   }
 
   return ans < 0 ? 0 : ans;
@@ -86,15 +91,15 @@ int betterApproach(std::vector<int> &nums) {
 // * Find Max to right for input nums + Two Pointers
 // * TIME COMPLEXITY O(2N) ~ O(N)
 // * SPACE COMPLEXITY O(N)
-int maxWidthRampA(std::vector<int> &nums) {
+int maxWidthRampA(vector<int> &nums) {
   int n = nums.size();
   int ans = INT_MIN;
 
   // * Create a vector where for each element next greater element
-  std::vector<int> max_to_right(n);
+  vector<int> max_to_right(n);
   int curMax = INT_MIN;
   for (int i = n - 1; i >= 0; --i) {
-    curMax = std::max(curMax, nums[i]);
+    curMax = max(curMax, nums[i]);
     max_to_right[i] = curMax;
   }
   printArr(max_to_right);
@@ -102,7 +107,7 @@ int maxWidthRampA(std::vector<int> &nums) {
   int i = 0, j = 0;
   while (j < n) {
     if (nums[i] <= max_to_right[j]) {
-      ans = std::max(ans, j - i);
+      ans = max(ans, j - i);
     } else {
       i++;
     }
@@ -116,11 +121,11 @@ int maxWidthRampA(std::vector<int> &nums) {
 // * Monotonic Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int maxWidthRampB(std::vector<int> &nums) {
+int maxWidthRampB(vector<int> &nums) {
   int n = nums.size();
 
   // * Decreasing stack
-  std::stack<int> st;
+  stack<int> st;
   st.push(0);
   for (int i = 1; i < n; ++i) {
     if (nums[st.top()] > nums[i]) { // * Prev ele should be greater for decreasing order
@@ -136,7 +141,7 @@ int maxWidthRampB(std::vector<int> &nums) {
   int j = n - 1;
   while(!st.empty()) {
     while(!st.empty() && nums[st.top()] <= nums[j]) {
-      ans = std::max(ans, j - st.top());
+      ans = max(ans, j - st.top());
       st.pop();
     }
     j--;
@@ -149,15 +154,15 @@ int maxWidthRampB(std::vector<int> &nums) {
 
 int main() {
   // * testcase 1
-  std::vector<int> nums = {6, 0, 8, 2, 1, 5};
+  vector<int> nums = {6, 0, 8, 2, 1, 5};
 
   // * testcase 2
-  // std::vector<int> nums = {9, 8, 1, 0, 1, 9, 4, 0, 4, 1};
+  // vector<int> nums = {9, 8, 1, 0, 1, 9, 4, 0, 4, 1};
   
   // * testcase 3
-  // std::vector<int> nums = {2, 2, 1};
+  // vector<int> nums = {2, 2, 1};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums);
@@ -165,7 +170,7 @@ int main() {
   // int ans = maxWidthRampA(nums);
   int ans = maxWidthRampB(nums);
   
-  std::cout << "Maximum Width Ramp: " << ans << std::endl;
+  cout << "Maximum Width Ramp: " << ans << endl;
   return 0;
 }
 

@@ -3,43 +3,51 @@
  *
  * Given an array of integers arr, find the sum of min(b), where b ranges over every (contiguous) subarray of arr. 
  * Since the answer may be large, return the answer modulo 109 + 7.
-
- * * Example 1
- * * Input  : arr = [3, 1, 2, 4]
- * * Output : 30
-
- * * Example 2
- * * Input  : arr = [1, 1]
- * * Output : 3
  * 
+ * Example 1
+ * Input  : arr = [3, 1, 2, 4]
+ * Output : 30
+ * 
+ * Example 2
+ * Input  : arr = [1, 1]
+ * Output : 3
+ * 
+ * https://www.geeksforgeeks.org/problems/sum-of-max-of-subarrays/1
 */
 
 #include <stack>
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Approach -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> nums) {
+int bruteForce(vector<int> nums) {
   int n = nums.size();
   long long sum = 0;
   for(int i = 0; i < n; ++i) {
     long long curMax = nums[i];
     long long cur_sum = 0;
     for(int j = i; j < n; ++j) {
-      curMax = std::max(curMax, (long long)nums[j]);
+      curMax = max(curMax, (long long)nums[j]);
       cur_sum += curMax;
     }
-    // std::cout << cur_sum << std::endl;
+    // cout << cur_sum << endl;
     sum += cur_sum;
   }
   return sum;
@@ -48,11 +56,11 @@ int bruteForce(std::vector<int> nums) {
 // * Next Greater Element
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> nextGreater(std::vector<int> &nums) {
+vector<int> nextGreater(vector<int> &nums) {
   int n = nums.size();
 
-  std::vector<int> nge(n, n);
-  std::stack<int> st;
+  vector<int> nge(n, n);
+  stack<int> st;
 
   for (int i = 0; i < n; ++i) {
     while (!st.empty() && nums[st.top()] <= nums[i]) {
@@ -69,11 +77,11 @@ std::vector<int> nextGreater(std::vector<int> &nums) {
 // * Previous Greater Element
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> prevGreater(std::vector<int> &nums) {
+vector<int> prevGreater(vector<int> &nums) {
   int n = nums.size();
 
-  std::vector<int> pge(n, -1);
-  std::stack<int> st;
+  vector<int> pge(n, -1);
+  stack<int> st;
 
   for (int i = 0; i < n; ++i) {
     while (!st.empty() && nums[st.top()] <= nums[i]) {
@@ -93,12 +101,12 @@ std::vector<int> prevGreater(std::vector<int> &nums) {
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * TC = O(N)
 // * SC = O(N)
-int sumSubarrayMaxs(std::vector<int> nums) {
+int sumSubarrayMaxs(vector<int> nums) {
   int n = nums.size();
 
-  std::vector<int> nge = nextGreater(nums);
+  vector<int> nge = nextGreater(nums);
   printArr(nge);
-  std::vector<int> pge = prevGreater(nums);
+  vector<int> pge = prevGreater(nums);
   printArr(pge);
 
   int M = 1e9 - 7;
@@ -116,21 +124,21 @@ int sumSubarrayMaxs(std::vector<int> nums) {
 
 
 int main() {
-  std::cout << "Input Array" << std::endl;
+  cout << "Input Array" << endl;
   // * testcase 1
-  std::vector<int> nums = {1, 1};      // * Edge case
+  vector<int> nums = {1, 1};      // * Edge case
 
   // * testcase 2
-  // std::vector<int> nums = {3, 1, 2, 4};
+  // vector<int> nums = {3, 1, 2, 4};
 
   // * testcase 3
-  // std::vector<int> nums = {11, 81, 94, 43, 3};
+  // vector<int> nums = {11, 81, 94, 43, 3};
 
   printArr(nums);
   
   // long long ans = bruteForce(nums);
   long long ans = sumSubarrayMaxs(nums);
-  std::cout << "Sum of Subarray Minimums: " << ans << std::endl;
+  cout << "Sum of Subarray Minimums: " << ans << endl;
   return 0;
 }
 

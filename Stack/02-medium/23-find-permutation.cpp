@@ -26,25 +26,33 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- Approach 1: Optimal Approach -------------------------`
+// * ------------------------- Approach 1: Optimal Approach -------------------------
+// * we want to place smaller numbers as early as possible
+// *  When we encounter a sequence of 'D's, we need to reverse the order of those numbers.
 // * Using Stack
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> findPermutation(std::string s) {
-  std::stack<int> st;
-  std::vector<int> res(s.length() + 1);
+vector<int> findPermutation(string s) {
+  int n = s.length();
+  stack<int> st;
+  vector<int> res(n + 1);
 
   int j = 0;
-  for (int i = 1; i <= s.length(); ++i) {
+  for (int i = 1; i <= n; ++i) {
     st.push(i);
     if (s[i - 1] == 'I') {
       while (!st.empty()) {
@@ -64,17 +72,17 @@ std::vector<int> findPermutation(std::string s) {
 
 int main(void) {
   // * testcase 1
-  // std::string s = "I";
+  // string s = "I";
 
   // * testcase 2
-  // std::string s = "DI";
+  // string s = "DI";
   
   // * testcase 3
-  std::string s = "IDID";
+  string s = "IDID";
   
-  std::cout << "s: " << s << std::endl;
-  std::vector<int> ans = findPermutation(s);
-  std::cout << "Ans: ";
+  cout << "s: " << s << endl;
+  vector<int> ans = findPermutation(s);
+  cout << "Ans: ";
   printArr(ans);
 
   return 0;

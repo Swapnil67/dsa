@@ -33,16 +33,21 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool matchesPattern(std::string num, std::string &pattern) {
+bool matchesPattern(string num, string &pattern) {
   for (int i = 0; i < pattern.size(); ++i) {
     if ((pattern[i] == 'I' && num[i] > num[i + 1]) ||
         (pattern[i] == 'D' && num[i] < num[i + 1]))
@@ -53,38 +58,40 @@ bool matchesPattern(std::string num, std::string &pattern) {
   return true;
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach ---------------------
 // * Find all permutation
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-// std::string bruteForce(std::string pattern) {
+// string bruteForce(string pattern) {
 // * Go to Recursion folder
 // }
 
-// * ------------------------- Approach 2: Better Approach -------------------------`
+// * ------------------------- Approach 2: Better Approach -------------------------
 // * CPP STL
 // * TIME COMPLEXITY O(n * O(n+1)!)
 // * SPACE COMPLEXITY O(n)
-std::string betterApproach(std::string pattern) {
+string betterApproach(string pattern) {
   int n = pattern.size();
-  std::string num = "";
+  string num = "";
   for (int i = 1; i <= n + 1; ++i) {
     num.push_back(i + '0');
   }
 
   while (!matchesPattern(num, pattern)) { // * O(n)
-    std::next_permutation(begin(num), end(num)); // * O(n+1)! [Permutation TC]
+    next_permutation(begin(num), end(num)); // * O(n+1)! [Permutation TC]
   }
   return num;
 }
 
-// * ------------------------- Approach 3: Optimal Approach -------------------------`
+// * ------------------------- Approach 3: Optimal Approach -------------------------
+// * we want to place smaller numbers as early as possible
+// *  When we encounter a sequence of 'D's, we need to reverse the order of those numbers.
 // * Same as find permutation
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::string smallestNumber(std::string pattern) {
-  std::stack<int> st;
-  std::string ans = "";
+string smallestNumber(string pattern) {
+  stack<int> st;
+  string ans = "";
   int n = pattern.size();
   for (int i = 1; i <= n; ++i) {
     st.push(i);
@@ -96,7 +103,7 @@ std::string smallestNumber(std::string pattern) {
     }
   }
 
-  st.push(pattern.size() + 1);
+  st.push(n + 1);
   while (!st.empty()) {
     ans.push_back(st.top() + '0');
     st.pop();
@@ -107,19 +114,19 @@ std::string smallestNumber(std::string pattern) {
 
 int main(void) {
   // * testcase 1
-  // std::string pattern = "III";
+  // string pattern = "III";
 
   // * testcase 2
-  // std::string pattern = "DDD";
+  // string pattern = "DDD";
   
   // * testcase 3
-  std::string pattern = "IIIDIDDD";
+  string pattern = "IIIDIDDD";
   
-  std::cout << "pattern string: " << pattern << std::endl;
+  cout << "pattern string: " << pattern << endl;
 
-  std::string ans = betterApproach(pattern);
-  // std::string ans = smallestNumber(pattern);
-  std::cout << "Smallest Number From DI String: " << ans << std::endl;
+  string ans = betterApproach(pattern);
+  // string ans = smallestNumber(pattern);
+  cout << "Smallest Number From DI String: " << ans << endl;
 
   return 0;
 }

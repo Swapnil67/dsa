@@ -24,17 +24,19 @@
 #include <stack>
 #include <iostream>
 
+using namespace std;
+
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Using stack
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-std::string reverseParentheses(std::string s) {
+string reverseParentheses(string s) {
   int n = s.size();
-  std::stack<char> st;
+  stack<char> st;
 
   for (char &ch : s) {
     if (ch == ')') {
-      std::string temp = "";
+      string temp = "";
       // * get the string b/w '()' brackets
       while(!st.empty() && st.top() != '(') {
         temp += st.top();
@@ -48,7 +50,7 @@ std::string reverseParentheses(std::string s) {
       for (char &c : temp) {
         st.push(c);
       }
-      // std::cout << temp << std::endl;
+      // cout << temp << endl;
     }
     else {
       st.push(ch);
@@ -56,7 +58,7 @@ std::string reverseParentheses(std::string s) {
   }
 
   // * build the answer string
-  std::string ans = "";
+  string ans = "";
   while (!st.empty()) {
     ans = st.top() + ans;
     st.pop();
@@ -68,11 +70,11 @@ std::string reverseParentheses(std::string s) {
 // * Using string as stack
 // * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(1)
-std::string reverseParentheses2(std::string s) {
-  std::string ans = "";
+string reverseParentheses2(string s) {
+  string ans = "";
   for (char &ch : s) {
     if (ch == ')') {
-      std::string temp = "";
+      string temp = "";
       while (!ans.empty() && ans.back() != '(') {
         temp += ans.back();
         ans.pop_back();
@@ -92,16 +94,16 @@ std::string reverseParentheses2(std::string s) {
 
 int main() {
   // * testcase 1
-  // std::string s = "(u(love)i)";
+  // string s = "(u(love)i)";
 
   // * testcase 2
-  std::string s = "(ed(et(oc))el)";
+  string s = "(ed(et(oc))el)";
   
-  std::cout << s << std::endl;
+  cout << s << endl;
 
-  // std::string ans = reverseParentheses(s);
-  std::string ans = reverseParentheses2(s);
-  std::cout << ans << std::endl;
+  // string ans = reverseParentheses(s);
+  string ans = reverseParentheses2(s);
+  cout << ans << endl;
   
   return 0;
 }

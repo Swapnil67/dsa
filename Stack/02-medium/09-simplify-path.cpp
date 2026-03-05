@@ -21,20 +21,21 @@
  * https://leetcode.com/problems/simplify-path/description/
 */
 
-#include <iostream>
-#include <vector>
 #include <stack>
+#include <vector>
 #include <sstream>
+#include <iostream>
 
+using namespace std;
 
 // * Using stringstream for tokenizing string into tokens
-std::string simplifyPath(std::string s) {
+string simplifyPath(string s) {
   int n = s.size();
 
-  std::string token = "";
-  std::stringstream ss(s);
+  string token = "";
+  stringstream ss(s);
 
-  std::stack<std::string> st;
+  stack<string> st;
 
   while(getline(ss, token, '/')) {
     if (token == "." || token == "")
@@ -51,7 +52,7 @@ std::string simplifyPath(std::string s) {
   if (st.empty())
     return "/";
 
-  std::string ans= "";
+  string ans= "";
   while(!st.empty()) {
     ans = "/" + st.top() + ans;
     st.pop();
@@ -60,11 +61,11 @@ std::string simplifyPath(std::string s) {
 }
 
 int main() {
-  std::cout << "Simplified Path: " << simplifyPath("/home/user/Documents/../Pictures") << std::endl;
-  std::cout << "Simplified Path: " << simplifyPath("/../") << std::endl;
-  std::cout << "Simplified Path: " << simplifyPath("/..hidden/") << std::endl;
-  std::cout << "Simplified Path: " << simplifyPath("/home//foo/") << std::endl;
-  std::cout << "Simplified Path: " << simplifyPath("/.../a/../b/c/../d/./") << std::endl;
+  cout << "Simplified Path: " << simplifyPath("/home/user/Documents/../Pictures") << endl;
+  cout << "Simplified Path: " << simplifyPath("/../") << endl;
+  cout << "Simplified Path: " << simplifyPath("/..hidden/") << endl;
+  cout << "Simplified Path: " << simplifyPath("/home//foo/") << endl;
+  cout << "Simplified Path: " << simplifyPath("/.../a/../b/c/../d/./") << endl;
   return 0;
 }
 

@@ -30,17 +30,19 @@
 #include <stack>
 #include <iostream>
 
+using namespace std;
+
 // ! Intuition
 // * Keep the count of closing brackets
-// * Note each swap cancel's out 2 closing bracket
+// * Note each swap cancel's out 2 bracket
 // * i.e. if there are 3 closing bracket and 1 swap is made then the remaining will be 1 bracket
 // * therefore we divide maxClosing brackets by 2
 
 // * Only contain a stack with '[' brackets
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int minSwaps(std::string s) {
-  std::stack<char> st;
+int bruteForce(string s) {
+  stack<char> st;
   for (auto &c : s) {
     if (c == ']') {
       if (!st.empty())
@@ -56,7 +58,7 @@ int minSwaps(std::string s) {
 
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minSwaps(std::string s) {
+int minSwaps(string s) {
   int closing = 0, max_closing = 0;
   int n = s.size();
   for (int i = 0; i < n; ++i) {
@@ -66,27 +68,27 @@ int minSwaps(std::string s) {
     else {
       closing -= 1;
     }
-    max_closing = std::max(max_closing, closing);
+    max_closing = max(max_closing, closing);
   }
-  // std::cout << max_closing << std::endl;
+  // cout << max_closing << endl;
   return (max_closing + 1) / 2;
 }
 
 int main() {
   // * testcase 1
-  // std::string s = "][][";
+  // string s = "][][";
 
   // * testcase 2
-  // std::string s = "]]][[[";
+  string s = "]]][[[";
 
   // * testcase 3
-  std::string s = "]][]][[[][";
+  // string s = "]][]][[[][";
 
-  std::cout << "Input string: " << s << std::endl;
+  cout << "Input string: " << s << endl;
   int ans = minSwaps(s);
-  std::cout << "Minimum swaps required to make balanced string is " << ans << std::endl;
+  cout << "Minimum swaps required to make balanced string is " << ans << endl;
   return 0;
 }
 
 // * run the code
-// * g++ --std=c++17 24-min-swaps-to-make-balance-string.cpp -o output && ./output
+// * g++ --std=c++17 25-min-swaps-to-make-balance-string.cpp -o output && ./output

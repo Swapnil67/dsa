@@ -17,10 +17,12 @@
 #include <climits>
 #include <iostream>
 
+using namespace std;
+
 // * Using stack with pair of {num, min_element}
 class MinStackBrute {
   public: 
-    std::stack<std::pair<int, int>> st;
+    stack<pair<int, int>> st;
     MinStackBrute() {
     }
 
@@ -29,7 +31,7 @@ class MinStackBrute {
         st.push({val, val});
       } else {
         int last_min = st.top().second;
-        st.push({val, std::min(val, last_min)});
+        st.push({val, min(val, last_min)});
       }
     }
     
@@ -57,7 +59,7 @@ class MinStack {
   public: 
     int s_top;
     int last_min;
-    std::vector<int> stack;
+    vector<int> stack;
     MinStack() {
       s_top = -1;
       last_min = INT_MAX;
@@ -80,7 +82,7 @@ class MinStack {
         // * find new last_min
         last_min = INT_MAX;
         for(int i = 0; i <= s_top - 1; ++i) {
-          last_min = std::min(last_min, stack[i]);
+          last_min = min(last_min, stack[i]);
         }
       }
       s_top -= 1;
@@ -107,20 +109,20 @@ int main() {
   stack->push(2147483646);
   stack->push(2147483646);
   stack->push(2147483647);
-  std::cout << "top " << stack->top() << std::endl;
+  cout << "top " << stack->top() << endl;
   stack->pop();
-  std::cout << "min_stack " << stack->getMin() << std::endl;
+  cout << "min_stack " << stack->getMin() << endl;
   stack->pop();
-  std::cout << "min_stack " << stack->getMin() << std::endl;
+  cout << "min_stack " << stack->getMin() << endl;
   stack->pop();
   stack->push(2147483647);
-  std::cout << "top " << stack->top() << std::endl;
-  std::cout << "min_stack " << stack->getMin() << std::endl;
+  cout << "top " << stack->top() << endl;
+  cout << "min_stack " << stack->getMin() << endl;
   stack->push(-2147483648);
-  std::cout << "top " << stack->top() << std::endl;
-  std::cout << "min_stack " << stack->getMin() << std::endl;
+  cout << "top " << stack->top() << endl;
+  cout << "min_stack " << stack->getMin() << endl;
   stack->pop();
-  std::cout << "min_stack " << stack->getMin() << std::endl;
+  cout << "min_stack " << stack->getMin() << endl;
   return 0;
 }
 

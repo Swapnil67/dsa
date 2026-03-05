@@ -5,12 +5,12 @@
  * Return the minimum number of moves required to make s valid.
  * 
  * Example 1
- * * Input       : s = "())"
- * * Output      : 1
+ * Input       : s = "())"
+ * Output      : 1
  * 
  * Example 2
- * * Input       : s = "((("
- * * Output      : 3
+ * Input       : s = "((("
+ * Output      : 3
  * 
  * https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/
 */
@@ -18,7 +18,9 @@
 #include <stack>
 #include <iostream>
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+using namespace std;
+
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Using Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
@@ -39,26 +41,22 @@ int minAddToMakeValid(std::string s) {
   return st.size();
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int minAddToMakeValid2(std::string s) {
-  int stack_size = 0;
-  int open = 0;
-  for (char &ch : s) {
-    if (ch == '(') {
-      stack_size++;
-    }
-    else {
-      // * closing bracket
-      if (stack_size > 0)
-        stack_size--;
+  int open_cnt = 0, close_cnt = 0;
+  for (auto &c : s) {
+    if (c == ')') {
+      if (open_cnt > 0)
+        open_cnt--;
       else
-        open++;
+        close_cnt++;
+    } else {
+      open_cnt++;
     }
   }
-
-  return stack_size + open;
+  return open_cnt + close_cnt;
 }
 
 int main() {
@@ -78,4 +76,4 @@ int main() {
 }
 
 // * run the code
-// * g++ --std=c++17 20-min-add-to-make-valid-parentheses.cpp -o output && ./output
+// * g++ --std=c++20 20-min-add-to-make-valid-parentheses.cpp -o output && ./output

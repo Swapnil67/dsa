@@ -28,26 +28,34 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
+
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n * logn)
 // * SPACE COMPLEXITY O(n)
-int carFleetOld(int target, std::vector<int> &position, std::vector<int> &speed) {
+int carFleetOld(int target, vector<int> &position, vector<int> &speed) {
   int n = position.size();
   
   // * Pairs of <position, speed>
-  std::vector<std::pair<float, float>> cars(n);
+  vector<pair<float, float>> cars(n);
   for (int i = 0; i < n; ++i) {
     cars[i] = {(float)position[i], (float)speed[i]};
   }
   // * sort in descending order
-  std::sort(cars.begin(), cars.end(), std::greater<std::pair<float, float>>());
+  sort(cars.begin(), cars.end(), greater<pair<float, float>>());
 
   // * For debug information
   // for (auto &it: cars) {
@@ -57,7 +65,7 @@ int carFleetOld(int target, std::vector<int> &position, std::vector<int> &speed)
 
   int fleet = 1;
   float f_target = (float)target;
-  std::pair<float, float> back = cars[0], front;
+  pair<float, float> back = cars[0], front;
   for(int i = 1; i < n; ++i) {
     front = cars[i];
 
@@ -83,10 +91,10 @@ int carFleetOld(int target, std::vector<int> &position, std::vector<int> &speed)
 // * Monotonic Stack
 // * TIME COMPLEXITY O(NlogN)
 // * SPACE COMPLEXITY O(N)
-int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
+int carFleet(int target, vector<int> &position, vector<int> &speed) {
   int n = position.size();
 
-  std::vector<std::pair<int, double>> cars;
+  vector<pair<int, double>> cars;
   for (int i = 0; i < n; i++) {
     double time = (double)(target - position[i]) / speed[i];
     cars.push_back({position[i], time});
@@ -95,7 +103,7 @@ int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
   // sort cars by positions descending(target ke pass wali pahle)
   sort(cars.rbegin(), cars.rend());
 
-  std::stack<double> st;
+  stack<double> st;
   for (auto &car : cars) {
     double time = car.second;
 
@@ -111,11 +119,11 @@ int carFleet(int target, std::vector<int> &position, std::vector<int> &speed) {
 int main() {
   // * testcase 1
   // int target = 12;
-  // std::vector<int> position = {10, 8, 0, 5, 3}, speed = {2, 4, 1, 1, 3};
+  // vector<int> position = {10, 8, 0, 5, 3}, speed = {2, 4, 1, 1, 3};
 
   // * testcase 2
   int target = 10;
-  std::vector<int> position = {1, 3, 6}, speed = {2, 3, 1};
+  vector<int> position = {1, 3, 6}, speed = {2, 3, 1};
 
   printf("Car positions: \n");
   printArr(position);
@@ -123,7 +131,7 @@ int main() {
   printArr(speed);
 
   int fleets = carFleet(target, position, speed);
-  std::cout << "Car Fleets: " << fleets << std::endl;
+  cout << "Car Fleets: " << fleets << endl;
 
   return 0;
 }

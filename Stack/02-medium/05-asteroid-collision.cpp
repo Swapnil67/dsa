@@ -33,17 +33,24 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1A: Optimal Approach -------------------------
 // * Using Stack
-std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
-  std::stack<int> st;
+vector<int> asteroidCollision(vector<int> &asteroids) {
+  stack<int> st;
   int n = asteroids.size();
   for(int &cur_asteroid: asteroids) {
     // * Asteroid Collision 
@@ -69,7 +76,7 @@ std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
   }
 
   n = st.size();
-  std::vector<int> ans(n);
+  vector<int> ans(n);
   for (int i = n - 1; i >= 0; --i) {
     ans[i] = st.top();
     st.pop();
@@ -79,8 +86,8 @@ std::vector<int> asteroidCollision(std::vector<int> &asteroids) {
 
 // * ------------------------- APPROACH 1B: Optimal Approach -------------------------`
 // * Using only vector
-std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
-  std::vector<int> ans;
+vector<int> asteroidCollision2(vector<int> &asteroids) {
+  vector<int> ans;
   int n = asteroids.size();
   for(int &cur_asteroid: asteroids) {
     // * Asteroid Collision
@@ -112,9 +119,9 @@ std::vector<int> asteroidCollision2(std::vector<int> &asteroids) {
 
 // * ------------------------- APPROACH 1C: Optimal Approach -------------------------`
 // * With Zero as a weightless object moving in right (code360)
-std::vector<int> asteroidCollision3(std::vector<int> &ast) {
+vector<int> asteroidCollision3(vector<int> &ast) {
   int n = ast.size();
-  std::stack<int> s;
+  stack<int> s;
   for (int i = 0; i < n; i++) {
     if (ast[i] > 0 || s.empty()) {
       s.push(ast[i]);
@@ -133,7 +140,7 @@ std::vector<int> asteroidCollision3(std::vector<int> &ast) {
     }
   }
 
-  std::vector<int> ans(s.size());
+  vector<int> ans(s.size());
   for (int i = (int)s.size() - 1; i >= 0; --i) {
     ans[i] = s.top();
     s.pop();
@@ -144,29 +151,29 @@ std::vector<int> asteroidCollision3(std::vector<int> &ast) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> asteroids = {5, 10, -5};
+  // vector<int> asteroids = {5, 10, -5};
 
   // * testcase 2
-  // std::vector<int> asteroids = {8, -8};
+  // vector<int> asteroids = {8, -8};
 
   // * testcase 3
-  // std::vector<int> asteroids = {10, 2, -5};
+  // vector<int> asteroids = {10, 2, -5};
 
   // * testcase 4
-  std::vector<int> asteroids = {-2, -1, 1, 2};
+  vector<int> asteroids = {-2, -1, 1, 2};
 
   // * testcase 5
-  // std::vector<int> asteroids = {-2, -2, 1, -1};
+  // vector<int> asteroids = {-2, -2, 1, -1};
 
   // * testcase 6
-  // std::vector<int> asteroids = {1, -2, -2, -2};
+  // vector<int> asteroids = {1, -2, -2, -2};
 
   printf("Asteroids Before Collision: ");
   printArr(asteroids);
 
   printf("Asteroids After Collision: ");
-  // std::vector<int> ans = asteroidCollision(asteroids);
-  std::vector<int> ans = asteroidCollision2(asteroids);
+  // vector<int> ans = asteroidCollision(asteroids);
+  vector<int> ans = asteroidCollision2(asteroids);
   printArr(ans);
 
   return 0;

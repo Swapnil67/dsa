@@ -10,6 +10,7 @@
 // ! Google, Meta, Netflix
 
 // ! Solve this on leetcode platform
+
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------
 
 // * Using Stack
@@ -61,7 +62,7 @@
 //         for (int i = n - 1; i >= 0; --i) {
 //             bool res = list[i].isInteger();
 //             if (res) {
-//                 st.push(list[i].getInteger());
+//                 st.push(list[i]);
 //             } else {
 //                 flatten(list[i].getList());
 //             }

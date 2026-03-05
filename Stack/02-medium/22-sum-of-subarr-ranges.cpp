@@ -31,18 +31,25 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 // * Previous Smaller or Equal Element
-std::vector<int> get_pse(std::vector<int> &nums) {
+vector<int> get_pse(vector<int> &nums) {
   int n = nums.size();
-  std::stack<int> st;
-  std::vector<int> pse(n, -1);
+  stack<int> st;
+  vector<int> pse(n, -1);
   for (int i = 0; i < n; ++i) {
     while (!st.empty() && nums[st.top()] > nums[i]) {
       st.pop();
@@ -58,10 +65,10 @@ std::vector<int> get_pse(std::vector<int> &nums) {
 }
 
 // * Next Smaller element
-std::vector<int> get_nse(std::vector<int> &nums) {
+vector<int> get_nse(vector<int> &nums) {
   int n = nums.size();
-  std::vector<int> nse(n, n);
-  std::stack<int> st;
+  vector<int> nse(n, n);
+  stack<int> st;
   for (int i = 0; i < n; ++i) {
     while (!st.empty() && nums[st.top()] > nums[i]) {
       nse[st.top()] = i;
@@ -73,10 +80,10 @@ std::vector<int> get_nse(std::vector<int> &nums) {
 }
 
 // * Previous Greater Element
-std::vector<int> get_pge(std::vector<int> &nums) {
+vector<int> get_pge(vector<int> &nums) {
   int n = nums.size();
-  std::stack<int> st;
-  std::vector<int> pge(n, -1);
+  stack<int> st;
+  vector<int> pge(n, -1);
   for (int i = 0; i < n; ++i) {
     while (!st.empty() && nums[st.top()] <= nums[i]) {
       st.pop();
@@ -90,10 +97,10 @@ std::vector<int> get_pge(std::vector<int> &nums) {
 }
 
 // * Next Greater Element
-std::vector<int> get_nge(std::vector<int> &nums) {
+vector<int> get_nge(vector<int> &nums) {
   int n = nums.size();
-  std::vector<int> nge(n, n);
-  std::stack<int> st;
+  vector<int> nge(n, n);
+  stack<int> st;
   for (int i = 0; i < n; ++i) {
     
     while (!st.empty() && nums[st.top()] <= nums[i]) {
@@ -110,39 +117,41 @@ std::vector<int> get_nge(std::vector<int> &nums) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-long long bruteForce(std::vector<int>& arr) {
+long long bruteForce(vector<int>& arr) {
   int n = arr.size();
   long long sum = 0;
-  for(int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; ++i) {
     int largest = arr[i], smallest = arr[i];
     for (int j = i + 1; j < n; ++j) {
-      largest = std::max(largest, arr[j]);
-      smallest = std::min(smallest, arr[j]);
+      largest = max(largest, arr[j]);
+      smallest = min(smallest, arr[j]);
       sum += (largest - smallest);
     }
   }
   return sum;
 }
 
-
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Sum of Subarray Maximum + Sum of Subarray Minimum
-long long subArrayRanges(std::vector<int>& nums) {
+long long subArrayRanges(vector<int>& nums) {
   int n = nums.size();
 
   // * next/prev smaller elements
-  std::vector<int> pse = get_pse(nums);
-  // std::cout << "Previous Smaller Elements" << std::endl;
+  vector<int> pse = get_pse(nums);
+  vector<int> nse = get_nse(nums);
+  // cout << "Previous Smaller Elements" << endl;
   // printArr(pse);
-
-  std::vector<int> nse = get_nse(nums);
-  // std::cout << "Next Smaller Elements" << std::endl;
+  // cout << "Next Smaller Elements" << endl;
   // printArr(nse);
   
   // * next/prev greater elements
-  std::vector<int> nge = get_nge(nums);
-  std::vector<int> pge = get_pge(nums);
-
+  vector<int> nge = get_nge(nums);
+  vector<int> pge = get_pge(nums);
+  // cout << "Next Greater Elements" << endl;
+  // printArr(nge);
+  // cout << "Prev Greater Elements" << endl;
+  // printArr(pge);
+  
   long long largest_elements_sum = 0, smallest_elements_sum = 0;
   for (int i = 0; i < n; ++i) {
     // * subarray of maximums
@@ -158,27 +167,29 @@ long long subArrayRanges(std::vector<int>& nums) {
     smallest_elements_sum += ((right * left) * 1LL * nums[i]);
   }
 
-  // std::cout << "Largest Sum: " << largest_elements_sum << std::endl;
-  // std::cout << "Smallest Sum: " << smallest_elements_sum << std::endl;
+  cout << "Largest Sum: " << largest_elements_sum << endl;
+  cout << "Smallest Sum: " << smallest_elements_sum << endl;
 
   return largest_elements_sum - smallest_elements_sum;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach ------------------------
-long long subArrayRanges2(std::vector<int>& nums) {
+long long subArrayRanges2(vector<int>& nums) {
   int n = nums.size();
   long long ans = 0;
-  std::stack<int> st;
+  stack<int> st;
 
-  // * Find the sum of all the minimum.
-  for(int right = 0; right <= n; ++right) {
+  // * Find the sum of all the minimum. [Increasing Stack]
+  for (int right = 0; right <= n; ++right) {
     while (!st.empty() &&
            (right == n || nums[st.top()] >= nums[right]))
     {
-      int mid = st.top();                          // * next smaller index in left
+      int mid = st.top();                          // * next smaller index to right
       st.pop();
-      int left = st.empty() ? -1 : st.top();       // * next smaller index in left
-      ans -= (long long)nums[mid] * (right - mid) * (mid - left);
+      int left = st.empty() ? -1 : st.top();       // * prev smaller index to left
+      long long cur = (long long)nums[mid] * (right - mid) * (mid - left);
+      // cout << nums[mid] <<" -> " << cur << endl;
+      ans -= cur;
     }
     st.push(right);
   }
@@ -203,24 +214,24 @@ long long subArrayRanges2(std::vector<int>& nums) {
 
 int main() {  
   // * testcase 1 (Ans 4)
-  // std::vector<int> nums = {1, 2, 3};
+  // vector<int> nums = {1, 2, 3};
   
   // * testcase 2 (Ans 4)
-  // std::vector<int> nums = {1, 3, 3};
+  // vector<int> nums = {1, 3, 3};
   
   // * testcase 3 (Ans 59)
-  // std::vector<int> nums = {4, -2, -3, 4, 1};
+  vector<int> nums = {4, -2, -3, 4, 1};
   
   // * testcase 4 (Ans 1537100894)
-  std::vector<int> nums = {-37988, -14446, -34454, -85916, 44628, -63469, 2405, 76071, 43291, 499, -43933, -10950, 22587, 45756, 36078, 49794, 81866, -70327, 80649, 19025, 82130, -53646, 99394, 63520, 20667, 41291, 80388, -82451, -17666, 52744, -84498, 30104, 41847, 67932, -89959, -42134, -79079, 80796, -27089, 9691, -26248, -31934, -20681, 33506, 16422, -98706, -16321, 847, 55516, -85834, -3479, -58562, 77791, 62111, -15830, 33478, 79046, -47470, -54997, -56231, 11301, 3998, 73631, 47168, 66983, 98655, -31405, -11411, 50967, -15908, 37346, 73429, -95644, 83331, 74868, -23201, 70451, 73304, 38820, -32124, 80413, -23607, 65237, 88536, 29905, -35443, -36683, 64419, -25056, 73050, 17960, 16070, 54748, 76597, 74972, -73098, 74704, 55261, -38420, -42739, 15098, -8078, 82487, -34954, -38895, 39994, 35077, -36851, 87932, 7216, -87758, -27817, 66742, 77803, -16270, 41596, -14558, 28610, 4151, -2590, -73414, 56156, 93465, 31128, -19581, -44840, -87553, -79674, -2016, 3190, 62008};
+  // vector<int> nums = {-37988, -14446, -34454, -85916, 44628, -63469, 2405, 76071, 43291, 499, -43933, -10950, 22587, 45756, 36078, 49794, 81866, -70327, 80649, 19025, 82130, -53646, 99394, 63520, 20667, 41291, 80388, -82451, -17666, 52744, -84498, 30104, 41847, 67932, -89959, -42134, -79079, 80796, -27089, 9691, -26248, -31934, -20681, 33506, 16422, -98706, -16321, 847, 55516, -85834, -3479, -58562, 77791, 62111, -15830, 33478, 79046, -47470, -54997, -56231, 11301, 3998, 73631, 47168, 66983, 98655, -31405, -11411, 50967, -15908, 37346, 73429, -95644, 83331, 74868, -23201, 70451, 73304, 38820, -32124, 80413, -23607, 65237, 88536, 29905, -35443, -36683, 64419, -25056, 73050, 17960, 16070, 54748, 76597, 74972, -73098, 74704, 55261, -38420, -42739, 15098, -8078, 82487, -34954, -38895, 39994, 35077, -36851, 87932, 7216, -87758, -27817, 66742, 77803, -16270, 41596, -14558, 28610, 4151, -2590, -73414, 56156, 93465, 31128, -19581, -44840, -87553, -79674, -2016, 3190, 62008};
 
-  std::cout << "Input Array" << std::endl;
+  cout << "Input Array" << endl;
   printArr(nums);
 
   // long long ans = bruteForce(nums);
-  long long ans = subArrayRanges(nums);
-  // long long ans = subArrayRanges2(nums);
-  std::cout << "Sum of Subarray Ranges " << ans << std::endl;
+  // long long ans = subArrayRanges(nums);
+  long long ans = subArrayRanges2(nums);
+  cout << "Sum of Subarray Ranges " << ans << endl;
 }
 
 // * run the code

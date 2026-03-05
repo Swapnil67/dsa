@@ -26,31 +26,33 @@
 #include <climits>
 #include <iostream>
 
+using namespace std;
+
 // ! Monotonic Stack
 
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(2N) ~ O(N)
 // * SPACE COMPLEXITY O(N)
-std::string bruteForce(std::string &str, int k) {
+string bruteForce(string &str, int k) {
   int n = str.size();
   int min_num = INT_MAX;
 
   if (n == k) // * Edge case
     return "0";
 
-  std::string ans = "";
+  string ans = "";
   for (int i = 0; i < n; ++i) {
-    std::string temp = "";
+    string temp = "";
     for (int j = 0; j < n; ++j) {
       if (j == i && j + k < n)
         j += k;
       temp += str[j];
     }
 
-    std::cout << temp << std::endl;
-    if (std::stoi(temp) < min_num) {
-      min_num = std::stoi(temp);
-      ans = std::to_string(min_num);
+    cout << temp << endl;
+    if (stoi(temp) < min_num) {
+      min_num = stoi(temp);
+      ans = to_string(min_num);
     }
   }
   return ans;
@@ -64,8 +66,8 @@ std::string bruteForce(std::string &str, int k) {
 
 // * Use the following logic
 // * one's ten's hundred's thousand's place
-std::string removeKdigits(std::string num, int k) {
-  std::stack<char> st;
+string removeKdigits(string num, int k) {
+  stack<char> st;
   for(int i = 0; i < num.size(); ++i) {
     // * If top of stack is greater than current value
     while(k > 0 && st.size() && st.top() - '0' > num[i] - '0') {
@@ -84,7 +86,7 @@ std::string removeKdigits(std::string num, int k) {
   }
 
   // * Create the ans from stack
-  std::string ans = "";
+  string ans = "";
   while (!st.empty()) {
     ans = st.top() + ans;
     st.pop();
@@ -100,13 +102,13 @@ std::string removeKdigits(std::string num, int k) {
 
 // * Use the following logic
 // * one's ten's hundred's thousand's place
-std::string removeKdigits2(std::string str, int k)
+string removeKdigits2(string str, int k)
 {
   int n = str.size();
-  std::string ans = "";
-
   if (n == k)
     return "0";
+
+  string ans = "";
 
   // * Monotonic Stack
   for (int i = 0; i < n; ++i) {
@@ -121,7 +123,7 @@ std::string removeKdigits2(std::string str, int k)
     if (ans.length() || str[i] != '0')
       ans.push_back(str[i]);
   }
-  // std::cout << ans << " " << k << std::endl;
+  // cout << ans << " " << k << endl;
 
   // * Edge Case (num = "1234")
   // * When the num string is already sorted
@@ -136,26 +138,26 @@ std::string removeKdigits2(std::string str, int k)
 int main() {
   // * testcase 1
   int k = 3;
-  std::string num = "1432219";
+  string num = "1432219";
   
   // * testcase 2
   // int k = 1;
-  // std::string num = "112";
+  // string num = "112";
   
   // * testcase 3
   // int k = 1;
-  // std::string num = "10200";
+  // string num = "10200";
   
   // * testcase 4
   // int k = 9;
-  // std::string num = "1234567890";
+  // string num = "1234567890";
 
-  std::cout << "k: " << k << std::endl;
-  std::cout << "num: " << num << std::endl;
+  cout << "k: " << k << endl;
+  cout << "num: " << num << endl;
 
-  std::string ans = bruteForce(num, k);
-  // std::string ans = removeKdigits(num, k);
-  std::cout << "Smallest Num: " << ans << std::endl;
+  string ans = bruteForce(num, k);
+  // string ans = removeKdigits(num, k);
+  cout << "Smallest Num: " << ans << endl;
 
   return 0;
 }

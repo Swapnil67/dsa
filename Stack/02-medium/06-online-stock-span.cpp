@@ -54,12 +54,6 @@ class StockSpanner {
     int next(int price) {
       int stock_span = 1;
 
-      // * Stack is empty
-      if(st.empty()) {
-        st.push({price, stock_span});
-        return stock_span;
-      }
-
       // * Check the previous day stock price
       // * If <= to today price pop the previous day stock span
       // * This keeps the st in decreasing order

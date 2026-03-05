@@ -25,11 +25,18 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<std::string> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 #define BINARY_OP(st, op)    \
@@ -44,32 +51,32 @@ void printArr(std::vector<std::string> &arr) {
     }                        \
   }
 
-int evalRPN(std::vector<std::string> &tokens) {
+int evalRPN(vector<string> &tokens) {
   int n = tokens.size();
-  std::stack<int> st;
-  for(std::string &s: tokens) {
+  stack<int> st;
+  for(string &s: tokens) {
     if(s == "+") { BINARY_OP(st, +) }
     else if(s == "-") { BINARY_OP(st, -) }
     else if(s == "*") { BINARY_OP(st, *) }
     else if(s == "/") { BINARY_OP(st, /) }
-    else { st.push(std::stoi(s)); }
+    else { st.push(stoi(s)); }
   }
   return st.empty() ? 0 : st.top();
 }
 
 int main() {
   // * testcase 1
-  // std::vector<std::string> tokens = {"2", "1", "+", "3", "*"};
+  // vector<string> tokens = {"2", "1", "+", "3", "*"};
 
   // * testcase 2
-  // std::vector<std::string> tokens = {"4", "13", "5", "/", "+"};
+  // vector<string> tokens = {"4", "13", "5", "/", "+"};
 
   // * testcase 3
-  std::vector<std::string> tokens = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+  vector<string> tokens = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
 
   printArr(tokens);
   int ans = evalRPN(tokens);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }
