@@ -36,42 +36,44 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 typedef long long ll;
 
-bool isPossibleToRepairWithinTime(std::vector<int> &ranks, int &cars, ll &time) {
+bool isPossibleToRepairWithinTime(vector<int> &ranks, int &cars, ll &time) {
   ll cars_repaired = 0;
   for (int &r : ranks) {
     // * how many car each mechanic with rank 'r' in given 'time'
     // * time = r * carsSqr  ------- (already given)
     // * carsSqr = time / r
     // * cars = sqrt(time / r)
-    cars_repaired += std::sqrt(time / r);
+    cars_repaired += sqrt(time / r);
   }
-  // std::cout << time << " cars repaired " << cars_repaired << std::endl;
+  // cout << time << " cars repaired " << cars_repaired << endl;
   return cars_repaired >= cars;
 }
 
-long long repairCars(std::vector<int> &ranks, int cars) {
-  int worstMechanic = *std::max_element(begin(ranks), end(ranks));
-
+long long repairCars(vector<int> &ranks, int cars) {
+  int worstMechanic = *max_element(begin(ranks), end(ranks));
+  ll cars_sqr = (ll)cars * (ll)cars;
+  
   // * Time range for binary search
-  ll l = 1, r = 1ll * worstMechanic * (cars * cars); // * Time window
+  ll l = 1, r = 1ll * worstMechanic * (cars_sqr); // * Time window
   ll ans = -1;
   while (l <= r) {
-    long long time = l + (r - l) / 2;
+    ll time = l + (r - l) / 2;
     if (isPossibleToRepairWithinTime(ranks, cars, time)) {
       ans = time;
       r = time - 1;
@@ -84,17 +86,17 @@ long long repairCars(std::vector<int> &ranks, int cars) {
 
 int main(void) {
   int cars = 10;
-  std::vector<int> ranks = {4, 2, 3, 1};
+  vector<int> ranks = {4, 2, 3, 1};
   
   // int cars = 736185;
-  // std::vector<int> ranks = {31, 31, 5, 19, 19, 10, 31, 18, 19, 3, 16, 20, 4, 16, 2, 25, 10, 16, 23, 18, 21, 23, 28, 6, 7, 29, 11, 11, 19, 20, 24, 19, 26, 12, 29, 29, 1, 14, 17, 26, 24, 7, 11, 28, 22, 14, 31, 12, 3, 19, 16, 26, 11};
+  // vector<int> ranks = {31, 31, 5, 19, 19, 10, 31, 18, 19, 3, 16, 20, 4, 16, 2, 25, 10, 16, 23, 18, 21, 23, 28, 6, 7, 29, 11, 11, 19, 20, 24, 19, 26, 12, 29, 29, 1, 14, 17, 26, 24, 7, 11, 28, 22, 14, 31, 12, 3, 19, 16, 26, 11};
 
-  std::cout << "Mechanics Ranks" << std::endl;
+  cout << "Mechanics Ranks" << endl;
   printArr(ranks);
-  std::cout << "Number of cars " << cars << std::endl;
+  cout << "Number of cars " << cars << endl;
   
   long long ans = repairCars(ranks, cars);
-  std::cout << "Max time to wait " << ans << std::endl;
+  cout << "Max time to wait " << ans << endl;
   
   return 0;
 }

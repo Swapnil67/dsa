@@ -22,20 +22,25 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Linear search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr) {
+int bruteForce(vector<int> arr) {
   int n = arr.size();
 
   // * Edge Cases
@@ -62,7 +67,7 @@ int bruteForce(std::vector<int> arr) {
 // * (odd, even) -> element is in the left half
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
-int singleNonDuplicate(std::vector<int> arr) {
+int singleNonDuplicate(vector<int> arr) {
   int n = arr.size();
   // * Edge Cases
   if (n == 1)
@@ -96,17 +101,27 @@ int singleNonDuplicate(std::vector<int> arr) {
 }
 
 int main() {
-  // std::vector<int> arr = {1};
-  std::vector<int> arr = {1, 1, 2, 3, 3, 4, 4, 8, 8};
-  // std::vector<int> arr = {1, 2, 2, 3, 3};
-  // std::vector<int> arr = {1, 1, 2, 2, 3};
-  printArr(arr);
+  // * testcase 1
+  // vector<int> nums = {1};
 
-  // int singleNumber = bruteForce(arr);
-  int singleNumber = singleNonDuplicate(arr);
-  std::cout<<"Single Number "<<singleNumber<<std::endl;
+  // * testcase 2
+  vector<int> nums = {1, 1, 2, 3, 3, 4, 4, 8, 8};
+
+  // * testcase 3
+  // vector<int> nums = {1, 2, 2, 3, 3};
+
+  // * testcase 4
+  // vector<int> nums = {1, 1, 2, 2, 3};
+
+  cout << "Input nums: ";
+  printArr(nums);
+
+  // int singleNumber = bruteForce(nums);
+  int singleNumber = singleNonDuplicate(nums);
+  cout << "Single Element: " << singleNumber << endl;
+
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 04-single-element.cpp -o output && ./output
+// * g++ --std=c++20 04-single-element.cpp -o output && ./output

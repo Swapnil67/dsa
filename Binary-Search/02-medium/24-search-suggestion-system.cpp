@@ -33,20 +33,20 @@ void printMatrix(vector<vector<string>>&mat) {
   int m = mat[0].size();
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
-      std::cout << mat[i][j] << " ";
+      cout << mat[i][j] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
-// * Two pointers
+// * Two pointers + BS
 // * TIME COMPLEXITY O(n * m)
 // * SPACE COMPLEXITY O(1)
 vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
   
-  std::sort(products.begin(), products.end()); // * O(nlogn)
+  sort(products.begin(), products.end()); // * O(nlogn)
   // printArr(products);
 
   vector<vector<string>> ans = {};
@@ -64,10 +64,10 @@ vector<vector<string>> suggestedProducts(vector<string>& products, string search
       r--;
     }
 
-    // std::cout << l << " " << r << std::endl;
+    // cout << l << " " << r << endl;
     // * Get the suggestion from l pointer (3 or less than 3)
-    int sliceTill = std::min(3, r - l + 1);
-    // std::cout << sliceTill << std::endl;
+    int sliceTill = min(3, r - l + 1);
+    // cout << sliceTill << endl;
     vector<string> suggestions(products.begin() + l, products.begin() + l + sliceTill);
     ans.push_back(suggestions);
   }
@@ -77,15 +77,15 @@ vector<vector<string>> suggestedProducts(vector<string>& products, string search
 
 int main(void) {
   // * testcase 1
-  std::string searchWord = "mouse";
-  std::vector<std::string> products = {"mobile", "mouse", "moneypot", "monitor", "mousepad"};
+  string searchWord = "mouse";
+  vector<string> products = {"mobile", "mouse", "moneypot", "monitor", "mousepad"};
 
-  std::cout << "Products: ";
+  cout << "Products: ";
   printArr(products);
-  std::cout << "Search Word: " << searchWord << std::endl;
+  cout << "Search Word: " << searchWord << endl;
 
-  std::vector<std::vector<std::string>> ans = suggestedProducts(products, searchWord);
-  std::cout << "Search Suggestions: " << std::endl;
+  vector<vector<string>> ans = suggestedProducts(products, searchWord);
+  cout << "Search Suggestions: " << endl;
   for (auto &words : ans)
     printArr(words);
 
@@ -94,4 +94,3 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 24-search-suggestion-system.cpp -o output && ./output
-

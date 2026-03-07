@@ -1,6 +1,7 @@
 /*
 * Leetcode - 33
 * Search In Rotated Sorted Array
+*
 * There is an integer array nums sorted in ascending order (with distinct values).
 * Given the array nums after the possible rotation and an integer target, return the index of target
 * if it is in nums, or -1 if it is not in nums.
@@ -22,11 +23,25 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
+
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Linear search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr, int target) {
+int bruteForce(vector<int> arr, int target) {
   int ans = -1;
   int n = arr.size();
   for(int i=0; i<n; i++) {
@@ -41,7 +56,7 @@ int bruteForce(std::vector<int> arr, int target) {
 // * Find which part of array is sorted and search there
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
-int findInRotatedSortedArray(std::vector<int> arr, int target) {
+int findInRotatedSortedArray(vector<int> arr, int target) {
   int n = arr.size();
   int l = 0, r = n - 1;
   while (l <= r) {
@@ -80,21 +95,25 @@ int findInRotatedSortedArray(std::vector<int> arr, int target) {
 int main() {
   // * testcase 1
   // int target = 0;
-  // std::vector<int> arr = {4, 5, 6, 0, 1, 2};
+  // vector<int> arr = {4, 5, 6, 0, 1, 2};
 
   // * testcase 2
   int target = 8;
-  std::vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
+  vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
 
   // * testcase 3
   // * This will fail
   // int target = 0;
-  // std::vector<int> arr = {1, 0, 1, 1, 1};
+  // vector<int> arr = {1, 0, 1, 1, 1};
+
+  cout << "Target: " << target << endl;
+  cout << "Input nums: ";
+  printArr(arr);
 
   // int idx = bruteForce(arr, target);
   int idx = findInRotatedSortedArray(arr, target);
-  std::cout << "Index " << idx << std::endl;
+  cout << "Index " << idx << endl;
 }
 
 // * Run the code
-// * g++ --std=c++17 08-search-in-rotated-sorted-arr.cpp -o output && ./output
+// * g++ --std=c++20 00-search-in-rotated-sorted-arr.cpp -o output && ./output

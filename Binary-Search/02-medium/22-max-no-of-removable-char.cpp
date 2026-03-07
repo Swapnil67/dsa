@@ -28,31 +28,37 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * Check if string 'p' is subsequence of string 's'
-int isSubsequence(std::string s, std::string p, std::vector<int> removable) {
+int isSubsequence(string s, string p, vector<int> removable) {
   int i = 0, j = 0;
   int n1 = s.size(), n2 = p.size();
   while (i < n1 && j < n2) {
-    if (!std::count(begin(removable), end(removable), i) && s[i] == p[j]) {
+    if (!count(begin(removable), end(removable), i) && s[i] == p[j]) {
       j++;
     }
     i++;
   }
-  // std::cout << "Remove following indexes" << std::endl;
+  // cout << "Remove following indexes" << endl;
   // printArr(removable);
-  // std::cout << "isSubsequence " << (j == n2) << std::endl;
+  // cout << "isSubsequence " << (j == n2) << endl;
   return j == n2;
 }
 
-int isSubsequence2(std::string &s, std::string &p) {
+int isSubsequence2(string &s, string &p) {
   int i = 0, j = 0;
   int n1 = s.size(), n2 = p.size();
   while (i < n1 && j < n2) {
@@ -63,26 +69,33 @@ int isSubsequence2(std::string &s, std::string &p) {
   return j == n2;
 }
 
-int bruteForce(std::string s, std::string p, std::vector<int> removable) {
+// * ------------------------- APPROACH 1: Brute Force -------------------------
+// * Nested Loop
+// * TIME COMPLEXITY O(n^2)
+// * SPACE COMPLEXITY O(1)
+int bruteForce(string s, string p, vector<int> removable) {
   int n = removable.size();
   int ans = 0;
-  for (int i = 0; i < n; ++i) {
-    std::vector<int> temp(removable.begin(), removable.begin() + i);
+  for (int k = 0; k < n; ++k) {
+    vector<int> temp(removable.begin(), removable.begin() + k);
     if (isSubsequence(s, p, temp))
-      ans = i;
+      ans = k;
   }
   return ans;
 }
 
-int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * TIME COMPLEXITY O((n1 * n2) * log(n))
+// * SPACE COMPLEXITY O(n)
+int maximumRemovals(string s, string p, vector<int> removable) {
   int n = removable.size();
   int ans = 0;
-  int l = 0, r = n - 1;
+  int l = 0, r = n;
   while (l <= r) {
     int m = l + (r - l) / 2;
     
     // * Replace all the indexes with '#'
-    std::string removed = s;
+    string removed = s;
     for (int i = 0; i < m; ++i)
       removed[removable[i]] = '#';
 
@@ -98,23 +111,23 @@ int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
 
 int main(void) {
   // * testcase 1
-  std::string s = "abcacb", p = "ab";
-  std::vector<int> removable = {3, 1, 0};
+  string s = "abcacb", p = "ab";
+  vector<int> removable = {3, 1, 0};
 
   // * testcase 2
-  // std::string s = "abcbddddd", p = "abcd";
-  // std::vector<int> removable = {3, 2, 1, 4, 5, 6};
+  // string s = "abcbddddd", p = "abcd";
+  // vector<int> removable = {3, 2, 1, 4, 5, 6};
 
   // * testcase 3
-  // std::string s = "abcab", p = "abc";
-  // std::vector<int> removable = {0, 1, 2, 3, 4};
+  // string s = "abcab", p = "abc";
+  // vector<int> removable = {0, 1, 2, 3, 4};
 
-  std::cout << "s: " << s << " p: " << p << std::endl;
+  cout << "s: " << s << " p: " << p << endl;
   printArr(removable);
 
   // int ans = bruteForce(s, p, removable);
   int ans = maximumRemovals(s, p, removable);
-  std::cout << "Maximum Number of Removable Characters: " << ans << std::endl;
+  cout << "Maximum Number of Removable Characters: " << ans << endl;
 
   return 0;
 }

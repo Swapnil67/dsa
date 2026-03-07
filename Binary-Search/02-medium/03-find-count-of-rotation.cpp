@@ -24,12 +24,18 @@
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
 // ! this is same as find minimum in rotated sorted array
@@ -82,17 +88,18 @@ int findKRotation(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {5, 6, 0, 1, 2};
+  std::vector<int> nums = {5, 6, 0, 1, 2};
 
   // * testcase 2
-  // std::vector<int> arr = {2, 3, 4, 1};
+  // std::vector<int> nums = {2, 3, 4, 1};
 
-  printArr(arr);
+  cout << "Input nums: ";
+  printArr(nums);
 
-  int count = findKRotation(arr);
-  std::cout << "Rotation Count " << count << std::endl;
+  int count = findKRotation(nums);
+  std::cout << "Rotation Count: " << count << std::endl;
   return 0;
 }
 
 // * Run the code 
-// * g++ --std=c++17 03-find-count-of-rotation.cpp -o output && ./output
+// * g++ --std=c++20 03-find-count-of-rotation.cpp -o output && ./output

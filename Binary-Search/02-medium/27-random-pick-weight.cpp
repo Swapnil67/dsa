@@ -23,6 +23,7 @@ public:
   std::vector<int> prefix_vec;
   Solution(std::vector<int>& w) {
     int n = w.size();
+    // * Build the prefix array
     for (int& x : w) {
       if (prefix_vec.empty()) {
         prefix_vec.push_back(x);
@@ -36,8 +37,8 @@ public:
   // * TIME COMPLEXITY O(log(n))
   // * SPACE COMPLEXITY O(n)
   int pickIndex() {
-    int x = prefix_vec.back();
-    int random_val = rand() % x;
+    int max_num = prefix_vec.back(); // * Maximum number in our prefix array
+    int random_val = rand() % max_num; // * Pick a random number b/w 0 - max_num
     int l = 0, r = prefix_vec.size() - 1;
     int ans = -1;
     while (l <= r) { // * Upper Bound

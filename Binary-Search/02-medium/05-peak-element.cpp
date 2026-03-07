@@ -21,22 +21,28 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Linear search
-int bruteForce(std::vector<int> arr) {
-  int n = arr.size();
+int bruteForce(vector<int> nums) {
+  int n = nums.size();
   int peakEle;
   for (int i = 0; i < n; i++) {
-    if ((i == 0 || arr[i] > arr[i - 1]) && (i == n || arr[i] > arr[i + 1])) {
-      peakEle = arr[i];
+    if ((i == 0 || nums[i] > nums[i - 1]) && (i == n || nums[i] > nums[i + 1])) {
+      peakEle = nums[i];
       break;
     }
   }
@@ -46,26 +52,26 @@ int bruteForce(std::vector<int> arr) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
-int findPeakElement(std::vector<int> arr) {
-  int n = arr.size();
+int findPeakElement(vector<int> nums) {
+  int n = nums.size();
 
   // * Array with only one element
   if(n == 1)
-    return arr[0];
-  if (arr[0] > arr[1])
-    return arr[0];
-  if (arr[n - 1] > arr[n - 2])
-    return arr[n - 1];
+    return nums[0];
+  if (nums[0] > nums[1])
+    return nums[0];
+  if (nums[n - 1] > nums[n - 2])
+    return nums[n - 1];
 
   int l = 1, r = n - 2; // * '0' & 'n-1' handled above
   while (l <= r) {
     int m = l + (r - l) / 2;
-    if (arr[m] > arr[m - 1] && arr[m] > arr[m + 1]) {
-      return arr[m];
+    if (nums[m] > nums[m - 1] && nums[m] > nums[m + 1]) {
+      return nums[m];
     }
 
     // * Increasing curve
-    if (arr[m] > arr[m - 1]) {
+    if (nums[m] > nums[m - 1]) {
       l = m + 1;
     } else {
       // * Decreasing curve
@@ -77,22 +83,24 @@ int findPeakElement(std::vector<int> arr) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> arr = {1, 10, 13, 7, 6, 5, 4, 2, 1, 0};
+  vector<int> nums = {1, 10, 13, 7, 6, 5, 4, 2, 1, 0};
 
   // * testcase 2
-  // std::vector<int> arr = {5, 4, 3, 2, 1};
+  // vector<int> nums = {5, 4, 3, 2, 1};
 
   // * testcase 3
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // vector<int> nums = {1, 2, 3, 4, 5};
 
   // * testcase 4
-  // std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
+  // vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 5, 1};
 
-  printArr(arr);
+  cout << "Input nums: ";
+  printArr(nums);
 
-  // int peakEle = bruteForce(arr);
-  int peakEle = findPeakElement(arr);
-  std::cout << "Peak Element " << peakEle << std::endl;
+  // int peakEle = bruteForce(nums);
+  int peakEle = findPeakElement(nums);
+  cout << "Peak Element: " << peakEle << endl;
+  
   return 0;
 }
 

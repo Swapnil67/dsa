@@ -24,19 +24,21 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool bSearch(std::vector<int> &nums, int &target) {
+bool bSearch(vector<int> &nums, int &target) {
   int n = nums.size();
   int l = 0, r = n - 1;
   while (l <= r) {
@@ -56,7 +58,7 @@ bool bSearch(std::vector<int> &nums, int &target) {
 // * n = no. of cols.
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(1)
-bool bruteForce(std::vector<std::vector<int>> &matrix, int target) {
+bool bruteForce(vector<vector<int>> &matrix, int target) {
   int r = matrix.size();
   int c = matrix[0].size();
 
@@ -75,7 +77,7 @@ bool bruteForce(std::vector<std::vector<int>> &matrix, int target) {
 // * n = no. of cols.
 // * TIME COMPLEXITY O(m * log(n))
 // * SPACE COMPLEXITY O(1)
-bool betterApproach(std::vector<std::vector<int>> &matrix, int target) {
+bool betterApproach(vector<vector<int>> &matrix, int target) {
   int m = matrix.size(), n = matrix[0].size();
   for (int r = 0; r < m; ++r) {
     if (bSearch(matrix[r], target) == true)
@@ -91,7 +93,7 @@ bool betterApproach(std::vector<std::vector<int>> &matrix, int target) {
 // * n = no. of cols.
 // * TIME COMPLEXITY O(m + n)
 // * SPACE COMPLEXITY O(1)
-bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
   int m = matrix.size(), n = matrix[0].size();
   int r = 0, c = n - 1;
   while (r < m && c > 0) {
@@ -100,7 +102,7 @@ bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
     else if (matrix[r][c] < target) 
       r++;
     else 
-      c++;
+      c--;
   }
 }
 
@@ -108,29 +110,29 @@ bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
 int main(void) {
   // * testcase 1
   int target = 3;
-  std::vector<std::vector<int>> matrix = {{1, 4, 7, 11, 15},
-                                          {2, 5, 8, 12, 19},
-                                          {3, 6, 9, 16, 22},
-                                          {10, 13, 14, 17, 24},
-                                          {18, 21, 23, 26, 30}};
+  vector<vector<int>> matrix = {{1, 4, 7, 11, 15},
+                                {2, 5, 8, 12, 19},
+                                {3, 6, 9, 16, 22},
+                                {10, 13, 14, 17, 24},
+                                {18, 21, 23, 26, 30}};
 
   // * testcase 2
   // int target = 20;
-  // std::vector<std::vector<int>> matrix = {{1, 4, 7, 11, 15},
-  //                                         {2, 5, 8, 12, 19},
-  //                                         {3, 6, 9, 16, 22},
-  //                                         {10, 13, 14, 17, 24},
-  //                                         {18, 21, 23, 26, 30}};
+  // vector<vector<int>> matrix = {{1, 4, 7, 11, 15},
+  //                               {2, 5, 8, 12, 19},
+  //                               {3, 6, 9, 16, 22},
+  //                               {10, 13, 14, 17, 24},
+  //                               {18, 21, 23, 26, 30}};
 
-  std::cout << "Target: " << target << std::endl;
-  std::cout << "Input Matrix" << std::endl;
+  cout << "Target: " << target << endl;
+  cout << "Input Matrix" << endl;
   for (auto &vec : matrix)
     printArr(vec);
 
   // bool isFound = bruteForce(matrix, target);
   // bool isFound = betterApproach(matrix, target);
   bool isFound = searchMatrix(matrix, target);
-  std::cout << "Target Found: " << isFound << std::endl;
+  cout << "Target Found: " << isFound << endl;
   return 0;
 }
 

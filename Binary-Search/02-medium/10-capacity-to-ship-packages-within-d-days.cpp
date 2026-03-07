@@ -21,7 +21,6 @@
 
 * https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/
 * https://www.naukri.com/code360/problems/capacity-to-ship-packages-within-d-days_1229379
-
 */
 
 #include <vector>
@@ -29,23 +28,25 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * O(N) 
-bool findIsLeastPossibleWeight(std::vector<int> weights, int maximumDays, long long capacity) {
+bool findIsLeastPossibleWeight(vector<int> weights, int maximumDays, long long capacity) {
   int daysTook = 1, totalWeight = 0;
   for (auto &w : weights) {
-    // std::cout << "totalWeight " << totalWeight << std::endl;
+    // cout << "totalWeight " << totalWeight << endl;
     if (totalWeight + w > capacity) {
       daysTook++;
       totalWeight = w;
@@ -59,8 +60,8 @@ bool findIsLeastPossibleWeight(std::vector<int> weights, int maximumDays, long l
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(total - max) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> weights, int maximumDays) {
-  long long maxWeight = *std::max_element(begin(weights), end(weights));
+int bruteForce(vector<int> weights, int maximumDays) {
+  long long maxWeight = *max_element(begin(weights), end(weights));
   long long totalWeight = accumulate(weights.begin(), weights.end(), 0);
 
   for (int i = maxWeight; i <= totalWeight; i++) {
@@ -75,8 +76,8 @@ int bruteForce(std::vector<int> weights, int maximumDays) {
 // * Search Space [MaxWeight, SumOfWeights]
 // * TIME COMPLEXITY O(log(total - max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int findLeastPossileWeight(std::vector<int> weights, int maximumDays) {
-  long long maxWeight = *std::max_element(begin(weights), end(weights));
+int findLeastPossileWeight(vector<int> weights, int maximumDays) {
+  long long maxWeight = *max_element(begin(weights), end(weights));
   long long totalWeight = accumulate(weights.begin(), weights.end(), 0);
 
   long long l = maxWeight, r = totalWeight;
@@ -95,24 +96,24 @@ int findLeastPossileWeight(std::vector<int> weights, int maximumDays) {
 
 int main() {
   // * testcase 1
-  // int days = 5;
-  // std::vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int days = 5;
+  vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   
   // * testcase 2
   // int days = 5;
-  // std::vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
+  // vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
   
   // * testcase 3
-  int days = 4;
-  std::vector<int> weights = {1, 2, 3, 1, 1};
+  // int days = 4;
+  // vector<int> weights = {1, 2, 3, 1, 1};
 
-  std::cout << "days: " << days << std::endl;
-  std::cout << "Weights: ";
+  cout << "days: " << days << endl;
+  cout << "Weights: ";
   printArr(weights);
 
   // int leastWeight = bruteForce(weights, days);
   int leastWeight = findLeastPossileWeight(weights, days);
-  std::cout << "Ship should take atleast " << leastWeight << " weights to transfer all weights in " << days << " days." << std::endl;
+  cout << "Ship should take atleast " << leastWeight << " weights to transfer all weights in " << days << " days." << endl;
 
   return 0;
 }

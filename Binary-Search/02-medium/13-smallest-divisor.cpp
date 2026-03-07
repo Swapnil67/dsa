@@ -1,6 +1,7 @@
 /*
   * Leetcode - 1283
   * Smallest Divisor
+  * 
   * You are given an array of integers 'arr' and an integer 'limit'.
   * Your task is to find the smallest positive integer divisor, such that upon dividing all the elements
   * of the given array by it, the sum of the division's result is less than or equal to the given integer's limit
@@ -19,36 +20,41 @@
 
 #include <vector>
 #include <math.h>
-#include <climits>
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- Utility Functions -------------------------`
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-bool findIsPossibleDivisor(std::vector<int> &nums, int &threshold, int &divisor) {
+bool findIsPossibleDivisor(vector<int> &nums, int &threshold, int &divisor) {
   int divisor_sum = 0;
   for(auto &x: nums) {
-    divisor_sum = divisor_sum + std::ceil((float)x / (float)(divisor));
+    divisor_sum += ceil((float)x / (float)(divisor));
+    if (divisor_sum >= threshold)
+      break;
   }
-  // std::cout << "divisor " << divisor << " | " << "divisor_sum " << divisor_sum << std::endl;
+  // cout << "divisor " << divisor << " | " << "divisor_sum " << divisor_sum << endl;
   return divisor_sum <= threshold;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(Max) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr, int threshold) {
+int bruteForce(vector<int> arr, int threshold) {
   int n = arr.size();
   // * O(Max)
-  int maxEle = *std::max_element(arr.begin(), arr.end());
+  int maxEle = *max_element(arr.begin(), arr.end());
   int start = 1, end = maxEle;
   for (int i = start; i <= end; i++) {
     // * O(N)
@@ -62,8 +68,8 @@ int bruteForce(std::vector<int> arr, int threshold) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(log(Max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int findSmallestDivisor(std::vector<int> arr, int threshold) {
-  int l = 1, r = *std::max_element(arr.begin(), arr.end());;
+int findSmallestDivisor(vector<int> arr, int threshold) {
+  int l = 1, r = *max_element(arr.begin(), arr.end());;
   // * O(log(Max))
   while (l <= r) {
     int m = l + (r - l) / 2;
@@ -80,19 +86,20 @@ int findSmallestDivisor(std::vector<int> arr, int threshold) {
 
 int main() {
   // * testcase 1
-  // int threshold = 8;
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  int threshold = 8;
+  vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  int threshold = 6;
-  std::vector<int> arr = {1, 2, 5, 9};
+  // int threshold = 6;
+  // vector<int> arr = {1, 2, 5, 9};
 
-  std::cout << "Threshold " << threshold << std::endl;
+  cout << "Threshold " << threshold << endl;
+  std::cout << "Input nums: ";
   printArr(arr);
 
   // int smallestDivisor = bruteForce(arr, threshold);
   int smallestDivisor = findSmallestDivisor(arr, threshold);
-  std::cout << "The smallest divisor is " << smallestDivisor << std::endl;
+  cout << "The smallest divisor is " << smallestDivisor << endl;
 
   return 0;
 }

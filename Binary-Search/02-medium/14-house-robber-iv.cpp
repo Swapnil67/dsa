@@ -4,7 +4,7 @@
   * 
   * There are several consecutive houses along a street, each of which has some money inside. 
   * There is also a robber, who wants to steal money from the homes, but he refuses to steal from adjacent homes.
-
+  * 
   * The capability of the robber is the maximum amount of money he steals from one house of all the houses he robbed.
   * You are given an integer array nums representing how much money is stashed in each house. 
   * More formally, the ith house from the left has nums[i] dollars.
@@ -30,22 +30,24 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // ! Binary Search on Answers
 
 // * Checks if roober can rob from 'min_houses' which contains atleast 'amount' money
-bool isValidCapability(std::vector<int> &nums, int &amount, int min_houses) {
+bool isValidCapability(vector<int> &nums, int &amount, int min_houses) {
   int n = nums.size();
   for (int i = 0; i < n; ++i) {
     // * If current house money is less than or equal than amount then we can rob this house.
@@ -56,9 +58,11 @@ bool isValidCapability(std::vector<int> &nums, int &amount, int min_houses) {
 
     // * We have robbed the desired number of homes
     if (min_houses == 0)
-      return true;
+      break;
   }
-  return false;
+  // cout << "Amount: " << amount << ", houses Remaining: " << min_houses << endl;
+
+  return (min_houses == 0); // * We successfully robbed all the houses with min capability of 'amount'
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
@@ -67,14 +71,14 @@ bool isValidCapability(std::vector<int> &nums, int &amount, int min_houses) {
 
 // * ------------------------- APPROACH 2: Better APPROACH -------------------------
 // * Nested Loop
-int betterApproach(std::vector<int> &nums, int k) {
+int betterApproach(vector<int> &nums, int k) {
   int n = nums.size();
   int ans = INT_MAX;
   for (int i = 0; i < n; ++i) {
     int cur = 0;
     for (int j = i + 2; j < n; ++j) {
-      int money = std::max(nums[i], nums[j]);
-      ans = std::min(ans, money);
+      int money = max(nums[i], nums[j]);
+      ans = min(ans, money);
     }
   }
   return ans;
@@ -83,9 +87,9 @@ int betterApproach(std::vector<int> &nums, int k) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Binary Search on Answers
 // * Checks if roober can rob from 'min_houses' which contains atleast 'amount' money
-int minCapability(std::vector<int> &nums, int k) {
-  int l = *std::min_element(nums.begin(), nums.end());
-  int r = *std::max_element(nums.begin(), nums.end());
+int minCapability(vector<int> &nums, int k) {
+  int l = *min_element(nums.begin(), nums.end());
+  int r = *max_element(nums.begin(), nums.end());
   int ans = l;
   while (l <= r) {
     int m = l + (r - l) / 2;
@@ -101,19 +105,20 @@ int minCapability(std::vector<int> &nums, int k) {
 }
 
 int main(void) {
-  // * testcase 1
-  int k = 2;
-  std::vector<int> nums = {2, 3, 5, 9};
-  
-  // * testcase 2
+  // * testcase 1 (Ans 2)
   // int k = 2;
-  // std::vector<int> nums = {2, 7, 9, 3, 1};
+  // vector<int> nums = {2, 3, 5, 9};
+  
+  // * testcase 2 (Ans 2)
+  int k = 2;
+  vector<int> nums = {2, 7, 9, 3, 1};
 
-  std::cout << "Houses" << std::endl;
+  cout << "Houses" << endl;
   printArr(nums);
 
   int ans = minCapability(nums, k);
-  std::cout << ans << std::endl;
+  cout << "minimum capability: " << ans << endl;
+
   return 0;
 }
 

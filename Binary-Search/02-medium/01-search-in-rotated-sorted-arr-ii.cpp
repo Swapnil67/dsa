@@ -22,12 +22,18 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -43,7 +49,7 @@ void printArr(std::vector<int> arr) {
 
 // * Search In Rotated Sorted Array
 // ! Array has duplicates
-int searchInRotatedSorted(std::vector<int> arr, int target) {
+int searchInRotatedSorted(vector<int> arr, int target) {
   int n = arr.size();
   int l = 0, r = n - 1;
   while(l <= r) {
@@ -84,24 +90,25 @@ int searchInRotatedSorted(std::vector<int> arr, int target) {
 
 int main() {
   // * testcase 1
-  // int target = 0;
-  // std::vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
+  int target = 0;
+  vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
 
   // * testcase 2
   // int target = 1;
-  // std::vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
+  // vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
 
   // * testcase 3
-  int target = 0;
-  std::vector<int> arr = {1, 0, 1, 1, 1};
+  // int target = 0;
+  // vector<int> arr = {1, 0, 1, 1, 1};
 
+  cout << "Target: " << target << endl;
+  cout << "Input nums: ";
   printArr(arr);
-
   int idx = searchInRotatedSorted(arr, target);
-  std::cout << "Index " << idx << std::endl;
+  cout << "Index: " << idx << endl;
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 01-search-in-rotated-sorted-arr-ii.cpp -o output && ./output
+// * g++ --std=c++20 01-search-in-rotated-sorted-arr-ii.cpp -o output && ./output

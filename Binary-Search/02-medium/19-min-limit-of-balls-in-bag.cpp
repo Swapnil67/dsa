@@ -42,12 +42,18 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 /*
@@ -58,7 +64,7 @@ void printArr(std::vector<int> arr) {
 
 // * Find how many operations does it takes of we divide nums[i] by the max_balls
 // * Find the total operations for all the bags of balls
-bool isValidPenalty(std::vector<int> &nums, int &max_ops, int &max_balls) {
+bool isValidPenalty(vector<int> &nums, int &max_ops, int &max_balls) {
   int n = nums.size();
   long long cur_ops = 0;
   for (int &balls : nums) {
@@ -69,16 +75,16 @@ bool isValidPenalty(std::vector<int> &nums, int &max_ops, int &max_balls) {
       cur_ops--;
   }
 
-  // std::cout << max_balls << " => " << cur_ops << std::endl;
+  cout << max_balls << " => " << cur_ops << endl;
   return cur_ops <= max_ops;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
 // * TIME COMPLEXITY O(maxPenalty * logn)
 // * SPACE COMPLEXITY O(1)
-int burteForce(std::vector<int> &nums, int operations) {
+int burteForce(vector<int> &nums, int operations) {
   int n = nums.size();
-  int maxPenalty = *std::max_element(nums.begin(), nums.end());
+  int maxPenalty = *max_element(nums.begin(), nums.end());
   int ans = 0;
   for (int i = 1; i < maxPenalty; ++i) {
     int currentPenalty = i;
@@ -93,10 +99,10 @@ int burteForce(std::vector<int> &nums, int operations) {
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(log(maxPenalty) * log(n))
 // * SPACE COMPLEXITY O(1)
-int minimumSize(std::vector<int> &nums, int operations) {
+int minimumSize(vector<int> &nums, int operations) {
   int n = nums.size();
   int ans = 0;
-  int l = 0, r = *std::max_element(nums.begin(), nums.end());;
+  int l = 1, r = *max_element(nums.begin(), nums.end());;
   while (l <= r) {
     int m = l + (r - l) / 2;
     if (isValidPenalty(nums, operations, m)) {
@@ -110,19 +116,21 @@ int minimumSize(std::vector<int> &nums, int operations) {
 }
 
 int main(void) {
-  // int maxOperations = 2;
-  // std::vector<int> nums = {9};
+  // * testcase 1
+  int maxOperations = 2;
+  vector<int> nums = {9};
   
-  int maxOperations = 4;
-  std::vector<int> nums = {2, 4, 8, 2};
+  // * testcase 2
+  // int maxOperations = 4;
+  // vector<int> nums = {2, 4, 8, 2};
 
-  std::cout << "Balls" << std::endl;
+  cout << "Balls" << endl;
   printArr(nums);
-  std::cout << "Operations " << maxOperations << std::endl;
+  cout << "Operations " << maxOperations << endl;
 
   // int ans = burteForce(nums, maxOperations);
   int ans = minimumSize(nums, maxOperations);
-  std::cout << "Min balls in bag: " << ans << std::endl;
+  cout << "Min balls in bag: " << ans << endl;
 
   return 0;
 }

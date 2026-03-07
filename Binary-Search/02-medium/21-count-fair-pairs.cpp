@@ -19,7 +19,10 @@
  * Explanation : There is a single fair pair: (2,3).
  * 
  * https://leetcode.com/problems/count-the-number-of-fair-pairs/description/
- */
+*/
+
+// * Prerequisite
+// * https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/
 
 // ! Google, Amazon
 
@@ -27,17 +30,23 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 typedef long long ll;
 
-ll lowerBound(std::vector<int> &nums, int target, int l , int r) {
+ll lowerBound(vector<int> &nums, int target, int l , int r) {
   int n = nums.size();
   int ans = n;
   while (l <= r) {
@@ -52,7 +61,7 @@ ll lowerBound(std::vector<int> &nums, int target, int l , int r) {
   return ans;
 }
 
-ll upperBound(std::vector<int> &nums, int target, int l , int r) {
+ll upperBound(vector<int> &nums, int target, int l , int r) {
   int n = nums.size();
   int ans = n;
   while (l <= r) {
@@ -67,7 +76,7 @@ ll upperBound(std::vector<int> &nums, int target, int l , int r) {
   return ans;
 }
 
-ll helper(std::vector<int> &nums, int target) {
+ll helper(vector<int> &nums, int target) {
   ll l = 0, r = nums.size() - 1;
   ll sum = 0;
   while (l < r) {
@@ -86,7 +95,7 @@ ll helper(std::vector<int> &nums, int target) {
 // * Nested Loop
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(1)
-long long bruteForce(std::vector<int> nums, int lower, int upper) {
+long long bruteForce(vector<int> nums, int lower, int upper) {
   int n = nums.size();
   int pairs = 0;
   for (int i = 0; i < n; ++i) {
@@ -105,21 +114,21 @@ long long bruteForce(std::vector<int> nums, int lower, int upper) {
 // * lower <= nums[i] + nums[j] <= upper
 // * TIME COMPLEXITY O(n * log(n))
 // * SPACE COMPLEXITY O(1)
-ll countFairPairs(std::vector<int> nums, int lower, int upper) {
+ll countFairPairs(vector<int> nums, int lower, int upper) {
   // * sort the input array
-  std::sort(nums.begin(), nums.end());
+  sort(nums.begin(), nums.end());
 
   int n = nums.size();
   ll ans = 0;
   for (int i = 0; i < n; ++i) {
-    std::cout << "nums[i] = " << nums[i] << std::endl;
+    cout << "nums[i] = " << nums[i] << endl;
 
     // * Count how many numbers are < than lower - nums[i]
-    long long lb = lowerBound(nums, lower - nums[i], i + 1, n - 1);
+    ll lb = lowerBound(nums, lower - nums[i], i + 1, n - 1);
     lb = lb - i;
 
     // * Count how many numbers are <= than upper - nums[i]
-    long long ub = upperBound(nums, upper - nums[i], i + 1, n - 1);
+    ll ub = upperBound(nums, upper - nums[i], i + 1, n - 1);
     ub = ub - i;
 
     // * Using SDL
@@ -128,8 +137,8 @@ ll countFairPairs(std::vector<int> nums, int lower, int upper) {
     // idx = upper_bound(begin(nums) + i + 1, end(nums), upper - nums[i]) - begin(nums);
     // int ub = idx - 1 - i;
 
-    std::cout << "lower bound: " << lb << " & upper bound: " << ub << std::endl;
-    std::cout << "----------------------------" << std::endl;
+    cout << "lower bound: " << lb << " & upper bound: " << ub << endl;
+    cout << "----------------------------" << endl;
 
     ans += (ub - lb);
   }
@@ -146,28 +155,28 @@ ll countFairPairs(std::vector<int> nums, int lower, int upper) {
 // *                     <========================= Orange ======================>
 // * Orange = Red - Blue
 // * SPACE COMPLEXITY O(1)
-ll countFairPairs2(std::vector<int> nums, int lower, int upper) {
-  std::sort(nums.begin(), nums.end());
+ll countFairPairs2(vector<int> nums, int lower, int upper) {
+  sort(nums.begin(), nums.end());
   return helper(nums, upper) - helper(nums, lower - 1);
 }
 
 int main(void) {
   int lower = 3, upper = 6;
-  std::vector<int> nums = {0, 1, 7, 4, 4, 5};
+  vector<int> nums = {0, 1, 7, 4, 4, 5};
 
   // int lower = 11, upper = 11;
-  // std::vector<int> nums = {1, 7, 9, 2, 5};
+  // vector<int> nums = {1, 7, 9, 2, 5};
 
   // int lower = 8, upper = 13;
-  // std::vector<int> nums = {1, 4, 5, 1, 7, 4, 20};
+  // vector<int> nums = {1, 4, 5, 1, 7, 4, 20};
 
-  std::cout << "Lower: " << lower << " & Upper: " << upper << std::endl;
+  cout << "Lower: " << lower << " & Upper: " << upper << endl;
   printArr(nums);
 
   // long long pairs = bruteForce(nums, lower, upper);
   long long pairs = countFairPairs(nums, lower, upper);
   // long long pairs = countFairPairs2(nums, lower, upper);
-  std::cout << "Fair Pairs: " << pairs << std::endl;
+  cout << "Fair Pairs: " << pairs << endl;
 
   return 0;
 }

@@ -1,3 +1,5 @@
+// ! Binary Search Medium Practice 
+
 #include <math.h>
 #include <vector>
 #include <numeric>
@@ -5,47 +7,50 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << nums[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
+
 
 // * ------------------------------------------------------------------
 
 // * 00 - Search In Rotated Sorted Array (Without duplicates)
-// int findInRotatedSortedArray(std::vector<int> arr, int target) {
+// int findInRotatedSortedArray(vector<int> &nums, int &target) {
 // TODO
 // }
 
 // * 01 - Search In Rotated Sorted Array - II (With duplicates)
-// int searchInRotatedSorted(std::vector<int> arr, int target) {
+// int searchInRotatedSorted(vector<int> &nums, int &target) {
 // TODO
 // }
 
 // * 02 - Find Minimum in Rotated Sorted Array
-// int findMinimum(std::vector<int> arr) {
+// int findMinimum(vector<int> &nums) {
 // TODO
 // }
 
 // * 03 - Count of rotation
-// int findKRotation(std::vector<int> arr) {
+// int findKRotation(vector<int> &nums) {
 // TODO
 // }
 
 // * 04 - Single element in a Sorted Array
-// int singleNonDuplicate(std::vector<int> &arr) {
+// int singleNonDuplicate(vector<int> &nums) {
 // TODO
 // }
 
 // * 05 - Find Peak Element
-// int findPeakElement(std::vector<int> &arr) {
+// int findPeakElement(vector<int> &nums) {
 // TODO
 // }
 
@@ -55,61 +60,65 @@ void printArr(std::vector<T> &arr) {
 // }
 
 // * 07 - Successful Pairs of Spells and Potions
-// std::vector<int> successfulPairs(std::vector<int> &spells,
-//                                  std::vector<int> &potions,
-//                                  long long success) {
+// vector<int> successfulPairs(
+//     vector<int> &spells,
+//     vector<int> &potions,
+//     long long success)
+// {
 // TODO
 // }
 
 // * 08 - search-in-2D-matrix
-// bool searchMatrix(std::vector<std::vector<int>> matrix, int target) {
+// bool searchMatrix(vector<vector<int>> &matrix, int &target) {
 // TODO
 // }
 
 // * 09 - Koko eating bananas
-// int findMinimumBananasToEat(std::vector<int> &piles, int h) {
+// int findMinimumBananasToEat(vector<int> &piles, int h) {
 // TODO
 // }
 
 // * 10 - Capacity To Ship Packages Within D Days
-// int findLeastPossileWeight(std::vector<int> &weights, int days) {
+// int findLeastPossileWeight(vector<int> &weights, int days) {
 // TODO
 // }
 
 // * 11 - Maximum Candies Allocated to K Children
-// int maximumCandies(std::vector<int> &candies, long long k) {
+// int maximumCandies(vector<int> &candies, long long k) {
 // TODO
 // }
 
 // * 12 - Rose Garden
-// int findMinimumDaysToMakeBouquets(std::vector<int> &bloomDay,
-//                                   int &flowersInAbouquet,
-//                                   int &bouquetsRequired) {
+// int findMinimumDaysToMakeBouquets(
+//     vector<int> &days,
+//     int &roses,
+//     int &bouquets)
+// {
 // TODO
 // }
 
 // * 13 - Smallest Divisor
-// int findSmallestDivisor(std::vector<int> &arr, int threshold) {
+// int findSmallestDivisor(vector<int> &nums, int threshold) {
 // TODO
 // } 
 
 // * 14 - House Robber IV
-// int minCapability(std::vector<int>& nums, int k) {
+// int minCapability(vector<int>& nums, int k) {
 // TODO
 // }
 
 // * 15 - Minimize the Maximum Difference of Pairs
-// int minimizeMax(std::vector<int>& nums, int p) {
+// int minimizeMax(vector<int>& nums, int p) {
 // TODO
 // }
 
 // * 16 - Minimized Maximum of Products Distributed to Any Store
-// int minimizedMaximum(std::vector<int> &quantities, int stores) {
+// int minimizedMaximum(vector<int> &quantities, int stores) {
 // TODO
-// } 
+// }
 
 // * 17 - Minimize Maximum of Array
-// int minimizeArrayValue(std::vector<int> &arr) {
+// int minimizeArrayValue(vector<int> &nums) {
 // TODO
 // } 
 
@@ -120,40 +129,40 @@ void printArr(std::vector<T> &arr) {
 // }
 
 // * 19 - Minimum Limit of Balls in a Bag
-// int minimumSize(std::vector<int> &nums, int maxOperations) {
+// int minimumSize(vector<int> &nums, int maxOperations) {
 // TODO
 // }
 
 // * 20 - Minimum Time to Repair Cars
-// long long repairCars(std::vector<int> ranks, int cars) {
+// long long repairCars(vector<int> ranks, int cars) {
 // TODO
 // } 
 
 // * 21 - Count the Number of Fair Pairs
-// long long countFairPairs(std::vector<int> &nums, int lower, int upper) {
+// long long countFairPairs(vector<int> &nums, int lower, int upper) {
 // TODO
 // } 
 
 // * 22 - Maximum Number of Removable Characters
-// int maximumRemovals(std::string s, std::string p, std::vector<int> removable) {
+// int maximumRemovals(string s, string p, vector<int> removable) {
 // TODO
 // }
 
 // * 23 - Most Beautiful Item for Each Query
-// std::vector<int> maximumBeauty(std::vector<std::vector<int>> &items, std::vector<int> queries) {
+// vector<int> maximumBeauty(vector<vector<int>> &items, vector<int> queries) {
 // TODO
 // }
 
 // * 24 - Search Suggestions System
-// std::vector<std::vector<std::string>> suggestedProducts(
-//     std::vector<std::string> &products,
-//     std::string &searchWord)
+// vector<vector<string>> suggestedProducts(
+//     vector<string> &products,
+//     string &searchWord)
 // {
 // TODO
 // }
 
 // * 25 - Minimum Speed to Arrive on Time
-// int minSpeedOnTime(std::vector<int>& dist, double hour) {
+// int minSpeedOnTime(vector<int>& dist, double hour) {
 // TODO
 // }
 
@@ -164,12 +173,12 @@ void printArr(std::vector<T> &arr) {
 // TODO (Do this on leetcode)
 
 // * 28 - Search a 2D Matrix II
-// bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
+// bool searchMatrix(vector<vector<int>>& matrix, int target) {
 // TODO
 // }
 
 int main(void) {
-  return 0;
+ return 0;
 }
 
 // * Run the code

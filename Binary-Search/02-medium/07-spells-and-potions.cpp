@@ -26,33 +26,38 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(n x m)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> &spells, std::vector<int> &potions, int success) {
+vector<int> bruteForce(vector<int> &spells, vector<int> &potions, int success) {
   int n = spells.size();
   int m = potions.size();
 
-  std::vector<int> pairs;
+  vector<int> pairs;
   
-  for (int i = 0; i < n; ++i) {
-    int cur_spell = spells[i];
-    int curPairs = 0;
-    for (int j = 0; j < m; ++j) {
-      if (cur_spell * potions[j] >= success) {
-        curPairs++;
+  for (auto &s: spells) {
+    int cur = 0;
+    for (auto &p: potions) {
+      if ((s * p) >= success) {
+        cur++;
       }
     }
-    pairs.push_back(curPairs);
+    pairs.push_back(cur);
   }
 
   return pairs;
@@ -60,7 +65,7 @@ std::vector<int> bruteForce(std::vector<int> &spells, std::vector<int> &potions,
 
 // * TIME COMPLEXITY O(logn) 
 // * Lower Bound
-int bSearch(std::vector<int> &potions, long long min_potion) {
+int lower_bound(vector<int> &potions, long long min_potion) {
   int n = potions.size();
   int l = 0, r = n - 1;
   int ans = -1;
@@ -84,29 +89,26 @@ int bSearch(std::vector<int> &potions, long long min_potion) {
 // * Find min potion index
 // * TIME COMPLEXITY O(n * logn)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> successfulPairs(std::vector<int> &spells, std::vector<int> &potions, int success) {
+vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, int success) {
   int n = spells.size();
   int m = potions.size();
-  std::vector<int> pairs;
+  vector<int> pairs;
 
-  std::sort(potions.begin(), potions.end());
+  sort(potions.begin(), potions.end());
   int max_potion_val = potions[m - 1];
 
-  for (int i = 0; i < n; ++i) {
-    int cur_spell = spells[i];
-
+  for (auto &cur_spell : spells) {
     // * Small but important optimization
     // * spell = '1' cannot multiply with any potions[j] to give atleast 'success' 
     // * min_potion * cur_spell >= success
-    long long min_potion = std::ceil((1.0 * success) / cur_spell);
+    int min_potion = ceil((float)success / (float)cur_spell);
     if (min_potion > max_potion_val) {
       pairs.push_back(0);
       continue;
     }
-
-    int index = bSearch(potions, min_potion);
-    // std::cout << min_potion << " " << index << std::endl;
-    pairs.push_back(m - index);
+    int lb = lower_bound(potions, min_potion);
+    // std::cout << min_potion << ", lb: " << lb << std::endl;
+    pairs.push_back(m - lb);
   }
 
   return pairs;
@@ -115,24 +117,25 @@ std::vector<int> successfulPairs(std::vector<int> &spells, std::vector<int> &pot
 int main(void) {
   // * testcase 1
   int success = 7;
-  std::vector<int> spells = {5, 1, 3};
-  std::vector<int> potions = {1, 2, 3, 4, 5};
+  vector<int> spells = {5, 1, 3};
+  vector<int> potions = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int success = 16;
-  // std::vector<int> spells = {3, 1, 2};
-  // std::vector<int> potions = {8, 5, 8};
+  // vector<int> spells = {3, 1, 2};
+  // vector<int> potions = {8, 5, 8};
 
-  std::cout << "Success:    " << success << std::endl;
-  std::cout << "Spell:      ";
+  cout << "Success:    " << success << endl;
+  cout << "Spell:      ";
   printArr(spells);
-  std::cout << "Potions:    ";
+  cout << "Potions:    ";
   printArr(potions);
   
-  std::cout << "Successful Pairs" << std::endl;
-  // std::vector<int> pairs = bruteForce(spells, potions, success);
-  std::vector<int> pairs = successfulPairs(spells, potions, success);
+  cout << "Successful Pairs" << endl;
+  // vector<int> pairs = bruteForce(spells, potions, success);
+  vector<int> pairs = successfulPairs(spells, potions, success);
   printArr(pairs);
+
   return 0;
 }
 

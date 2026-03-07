@@ -1,6 +1,7 @@
 /*
  * Leetcode - 2226 
  * Maximum Candies Allocated to K Children
+ * 
  * You are given a 0-indexed integer array candies. Each element in the array denotes a pile of candies of size candies[i].
  * You can divide each pile into any number of sub piles, but you cannot merge two piles together.
  * 
@@ -28,23 +29,25 @@
 // ! Google, Meta
 
 #include <vector>
+#include <numeric>
 #include <iostream>
 #include <algorithm>
-#include <numeric>
+
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool checkIsChildrenSatisfied(std::vector<int> candies, long long k, int &min_candies) {
+bool checkIsChildrenSatisfied(vector<int> candies, long long k, int &min_candies) {
   for (auto &c : candies) {
     k -= (c / min_candies);
     if (k <= 0) // * all children got min_candies
@@ -53,17 +56,13 @@ bool checkIsChildrenSatisfied(std::vector<int> candies, long long k, int &min_ca
   return k <= 0;
 }
 
-int maximumCandies(std::vector<int> &candies, long long k) {
+int maximumCandies(vector<int> &candies, long long k) {
   int n = candies.size();
-  int max_candies = *std::max_element(candies.begin(), candies.end());
-  long long total_candies = accumulate(candies.begin(), candies.end(), 0);
-
-
   int max_candies = 0;
   long long total_candies = 0;
   for (auto &c : candies) {
     total_candies += c;
-    max_candies = std::max(max_candies, c);
+    max_candies = max(max_candies, c);
   }
 
   // * There are more children than available candies
@@ -76,7 +75,7 @@ int maximumCandies(std::vector<int> &candies, long long k) {
   while (l <= r) {
     int curCandies = l + (r - l) / 2;
     bool areChildrenSatisfied = checkIsChildrenSatisfied(candies, k, curCandies);
-    // std::cout << curCandies << " -> " << areChildrenSatisfied << std::endl;
+    // cout << curCandies << " -> " << areChildrenSatisfied << endl;
     if (areChildrenSatisfied) {
       ans = curCandies;
       l = curCandies + 1;
@@ -89,26 +88,26 @@ int maximumCandies(std::vector<int> &candies, long long k) {
 }
 
 int main(void) {
-  // * testcase 1
+  // * testcase 1 (Ans 5)
   // long long k = 3;
-  // std::vector<int> candies = {5, 8, 6};
+  // vector<int> candies = {5, 8, 6};
 
-  // * testcase 2
+  // * testcase 2 (Ans 0)
   // long long k = 11;
-  // std::vector<int> candies = {2, 5};
+  // vector<int> candies = {2, 5};
 
-  // * testcase 3
-  long long k = 4;
-  std::vector<int> candies = {4, 7, 5};
+  // * testcase 3 (Ans 3)
+  // long long k = 4;
+  // vector<int> candies = {4, 7, 5};
 
-  // * testcase 4
-  // long long k = 1;
-  // std::vector<int> candies = {1};
+  // * testcase 4 (Ans 0)
+  long long k = 1; 
+  vector<int> candies = {1};
 
-  std::cout << "Pile of candies" << std::endl;
+  cout << "Pile of candies" << endl;
   printArr(candies);
   int ans = maximumCandies(candies, k);
-  std::cout << "Maximum Candies Allocated to K Children " << ans << std::endl;
+  cout << "Maximum Candies Allocated to K Children " << ans << endl;
 
   return 0;
 }

@@ -22,7 +22,7 @@ int checkRoot(int m, int mid, int power) {
   long long nthRoot = 1;
   // std::cout << "---------- " << mid << " --------------- " << std::endl;
   for (int i = 1; i <= power; i++) {
-    nthRoot = mid * nthRoot;
+    nthRoot *= mid;
     // std::cout << "nthRoot " << nthRoot << std::endl;
     // * Don't go to extreme nth root 
     if (nthRoot > m)  {
@@ -77,7 +77,7 @@ int findNthRoot(int n, int m) {
 
 int main() {
   // * testcase 1
-  // int n = 3, m = 27;
+  int n = 3, m = 27;
 
   // * testcase 2
   // int n = 4, m = 69;
@@ -86,7 +86,9 @@ int main() {
   // int n = 9, m = 1953125;
 
   // * testcase 4
-  int n = 5, m = 32768;
+  // int n = 5, m = 32768;
+
+  std::cout << "n: " << n << ", m: " << m << std::endl;
 
   // int nthRoot = bruteForce(n, m);
   int nthRoot = findNthRoot(n, m);

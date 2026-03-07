@@ -40,23 +40,28 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  std::cout << "[";
-  for (auto &x : arr) {
-    std::cout << x << ", ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool isValidSpeed(std::vector<int> &dist, int &speed, double &maxHours) {
+bool isValidSpeed(vector<int> &dist, int &speed, double &maxHours) {
   int n = dist.size();
   double currentHrs = 0;
 
   for (int i = 0; i < n - 1; ++i) {
     double km = (double)(dist[i]);
-    double hr = std::ceil((double)km / (double)speed);
-    // std::cout << dist[i] << " => " << hr << std::endl;
+    double hr = ceil((double)km / (double)speed);
+    // cout << dist[i] << " => " << hr << endl;
     currentHrs += hr;
 
     if (currentHrs > maxHours) // * Took more time (no need to check further)
@@ -66,16 +71,16 @@ bool isValidSpeed(std::vector<int> &dist, int &speed, double &maxHours) {
   double hr = ((double)(dist[n - 1]) / (double)speed);
   currentHrs += hr;
 
-  // std::cout << dist[n - 1] << " => " << hr << std::endl;
-  // std::cout << speed << " -> " << currentHrs << std::endl;
-  // std::cout << "------------------------------" << std::endl;
+  // cout << dist[n - 1] << " => " << hr << endl;
+  // cout << speed << " -> " << currentHrs << endl;
+  // cout << "------------------------------" << endl;
   return currentHrs <= maxHours;
 }
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(log(1e9-7)) * O(n)
 // * SPACE COMPLEXITY O(1)
-int minSpeedOnTime(std::vector<int>& dist, double hour) {
+int minSpeedOnTime(vector<int>& dist, double hour) {
   int l = 0, r = 1e7;
   int ans = -1;
   while (l <= r) {
@@ -93,17 +98,17 @@ int minSpeedOnTime(std::vector<int>& dist, double hour) {
 
 int main(void) {
   // double hour = 6;
-  // std::vector<int> dist = {1, 3, 2};
+  // vector<int> dist = {1, 3, 2};
 
   double hour = 2.7;
-  std::vector<int> dist = {1, 3, 2};
+  vector<int> dist = {1, 3, 2};
   
-  std::cout << "Total Hours " << hour << std::endl;
-  std::cout << "Distance in km" << std::endl;
+  cout << "Total Hours " << hour << endl;
+  cout << "Distance in km" << endl;
   printArr(dist);
 
   int speed = minSpeedOnTime(dist, hour);
-  std::cout << "Minimum Speed to Arrive on Time: " << speed << std::endl;
+  cout << "Minimum Speed to Arrive on Time: " << speed << endl;
 
   return 0;
 }
