@@ -72,16 +72,14 @@ int bruteForce(vector<int> days, int roses, int bouquets) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 int findMinimumDaysToMakeBouquets(vector<int> days, int roses, int bouquets) {
   // * Don't have enough flowers to make bouquets
-  if (days.size() < roses * bouquets)
+  if (days.size() < (long)roses * bouquets)
     return -1;
 
   vector<int> intitialVal = findMinMax(days);
   int l = intitialVal[0], r = intitialVal[1];
-  // cout << l << " " << r << endl;
   int ans = -1;
   while(l <= r) {
     int m = l + (r - l) / 2;
-    // cout << "Days " << m << endl;
     bool isPossible = findIsPossibleDay(days, roses, bouquets, m);
     cout << "isPossible " << isPossible << endl;
     if(isPossible) {

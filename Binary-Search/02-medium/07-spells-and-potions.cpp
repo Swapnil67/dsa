@@ -101,7 +101,9 @@ vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, int succe
     // * Small but important optimization
     // * spell = '1' cannot multiply with any potions[j] to give atleast 'success' 
     // * min_potion * cur_spell >= success
-    int min_potion = ceil((float)success / (float)cur_spell);
+    // * min_potion >= (success / cur_spell)
+
+    int min_potion = ceil((double)success / (double)cur_spell);
     if (min_potion > max_potion_val) {
       pairs.push_back(0);
       continue;

@@ -41,7 +41,7 @@ void printArr(vector<T> &arr) {
 // ! this is same as find minimum in rotated sorted array
 // ! just return the index of min element
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Linear search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

@@ -94,12 +94,12 @@ int findInRotatedSortedArray(vector<int> arr, int target) {
 
 int main() {
   // * testcase 1
-  // int target = 0;
-  // vector<int> arr = {4, 5, 6, 0, 1, 2};
+  int target = 0;
+  vector<int> arr = {4, 5, 6, 0, 1, 2};
 
   // * testcase 2
-  int target = 8;
-  vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
+  // int target = 8;
+  // vector<int> arr = {7, 8, 9, 1, 2, 3, 4, 5, 6};
 
   // * testcase 3
   // * This will fail

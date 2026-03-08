@@ -35,7 +35,7 @@ void printArr(vector<T> &nums) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Linear search
 int bruteForce(vector<int> nums) {
   int n = nums.size();

@@ -20,7 +20,6 @@
 // ! Amazon, Meta, Google, MIcrosoft, Apple, Uber, Flipkart, IBM
 
 #include <vector>
-#include <climits>
 #include <iostream>
 
 using namespace std;
@@ -37,7 +36,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Linear search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
@@ -47,42 +46,42 @@ void printArr(vector<T> &arr) {
 // * Minimum element is not present in sorted part [Exclude that part]
 // * TIME COMPLEXITY O(logn)
 // * SPACE COMPLEXITY O(1)
-int findMinimum(vector<int> arr) {
-  int n = arr.size();
+int findMinimum(vector<int> nums) {
+  int n = nums.size();
   if (n == 1)
-    return arr[0];
+    return nums[0];
 
   int l = 0, r = n - 1;
-  int ans = INT_MAX;
+  int ans = nums[0];
   while (l <= r) {
     // * If the whole search space is sorted
     // * then find the ans & break
-    if(arr[l] <= arr[r]) {
-      ans = min(ans, arr[l]);
+    if(nums[l] <= nums[r]) {
+      ans = min(ans, nums[l]);
       break;
     }
     
     int m = l + (r - l) / 2;
     // * Left part is sorted
-    if (arr[l] <= arr[m]) {
-      ans = min(ans, arr[l]);
+    if (nums[l] <= nums[m]) {
+      ans = min(ans, nums[l]);
       l = m + 1;
     } else {
       // * Right part is sorted
-      ans = min(ans, arr[m]);
+      ans = min(ans, nums[m]);
       r = m - 1;
     }
   }
 
-  return ans == INT_MAX ? -1 : ans;
+  return ans;
 }
 
 int main() {
   // * testcase 1
-  vector<int> nums = {2, 3, 4, 1};
+  // vector<int> nums = {2, 3, 4, 1};
 
   // * testcase 2
-  // vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
+  vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
 
   // * testcase 3
   // vector<int> nums = {25, 30, 5, 10, 15, 20};

@@ -102,8 +102,8 @@ int main() {
   cout << "Koko eating bananas" << endl;
 
   // * testcase 1 (Ans = 4)
-  // vector<int> piles = {3, 6, 7, 11};
-  // int h = 8;
+  vector<int> piles = {3, 6, 7, 11};
+  int h = 8;
 
   // * testcase 2 (Ans = 30)
   // vector<int> piles = {30, 11, 23, 4, 20};
@@ -114,8 +114,8 @@ int main() {
   // int h = 6;
 
   // * testcase 4 (Not Work in Bruteforce)
-  vector<int> piles = {1000000000};
-  int h = 2;
+  // vector<int> piles = {1000000000};
+  // int h = 2;
 
   cout << "Piles of bananas" << endl;
   printArr(piles);

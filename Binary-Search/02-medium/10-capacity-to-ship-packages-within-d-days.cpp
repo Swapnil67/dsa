@@ -77,21 +77,21 @@ int bruteForce(vector<int> weights, int maximumDays) {
 // * TIME COMPLEXITY O(log(total - max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int findLeastPossileWeight(vector<int> weights, int maximumDays) {
-  long long maxWeight = *max_element(begin(weights), end(weights));
-  long long totalWeight = accumulate(weights.begin(), weights.end(), 0);
-
-  long long l = maxWeight, r = totalWeight;
+  long long l = *max_element(begin(weights), end(weights));
+  long long r = accumulate(weights.begin(), weights.end(), 0);
   // * O(log(total - max))
-  while(l <= r) {
+  int ans = r;
+  while (l <= r) {
     long long m = l + (r - l) / 2;
-    bool isLeastPossibleWeight = findIsLeastPossibleWeight(weights, maximumDays, m);
-    if(isLeastPossibleWeight) {
+    bool is_valid = findIsLeastPossibleWeight(weights, maximumDays, m);
+    if (is_valid) {
+      ans = m;
       r = m - 1;
     } else {
       l = m + 1;
     }
   }
-  return l;
+  return ans;
 } 
 
 int main() {

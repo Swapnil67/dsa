@@ -21,82 +21,6 @@ void printArr(vector<T> &nums) {
   cout << " ]" << endl;
 }
 
-
-// * ------------------------------------------------------------------
-
-// * 00 - Search In Rotated Sorted Array (Without duplicates)
-// int findInRotatedSortedArray(vector<int> &nums, int &target) {
-// TODO
-// }
-
-// * 01 - Search In Rotated Sorted Array - II (With duplicates)
-// int searchInRotatedSorted(vector<int> &nums, int &target) {
-// TODO
-// }
-
-// * 02 - Find Minimum in Rotated Sorted Array
-// int findMinimum(vector<int> &nums) {
-// TODO
-// }
-
-// * 03 - Count of rotation
-// int findKRotation(vector<int> &nums) {
-// TODO
-// }
-
-// * 04 - Single element in a Sorted Array
-// int singleNonDuplicate(vector<int> &nums) {
-// TODO
-// }
-
-// * 05 - Find Peak Element
-// int findPeakElement(vector<int> &nums) {
-// TODO
-// }
-
-// * 06 - Nth Root of a number
-// int findNthRoot(int n, int m) {
-// TODO
-// }
-
-// * 07 - Successful Pairs of Spells and Potions
-// vector<int> successfulPairs(
-//     vector<int> &spells,
-//     vector<int> &potions,
-//     long long success)
-// {
-// TODO
-// }
-
-// * 08 - search-in-2D-matrix
-// bool searchMatrix(vector<vector<int>> &matrix, int &target) {
-// TODO
-// }
-
-// * 09 - Koko eating bananas
-// int findMinimumBananasToEat(vector<int> &piles, int h) {
-// TODO
-// }
-
-// * 10 - Capacity To Ship Packages Within D Days
-// int findLeastPossileWeight(vector<int> &weights, int days) {
-// TODO
-// }
-
-// * 11 - Maximum Candies Allocated to K Children
-// int maximumCandies(vector<int> &candies, long long k) {
-// TODO
-// }
-
-// * 12 - Rose Garden
-// int findMinimumDaysToMakeBouquets(
-//     vector<int> &days,
-//     int &roses,
-//     int &bouquets)
-// {
-// TODO
-// }
-
 // * 13 - Smallest Divisor
 // int findSmallestDivisor(vector<int> &nums, int threshold) {
 // TODO
@@ -174,6 +98,74 @@ void printArr(vector<T> &nums) {
 
 // * 28 - Search a 2D Matrix II
 // bool searchMatrix(vector<vector<int>>& matrix, int target) {
+// TODO
+// }
+
+// * ------------------------------------------------------------------
+
+// * 00 - Search In Rotated Sorted Array (Without duplicates)
+// int findInRotatedSortedArray(vector<int> &nums, int &target) {
+// TODO
+// }
+
+// * 01 - Search In Rotated Sorted Array - II (With duplicates)
+// int searchInRotatedSorted(vector<int> &nums, int &target) {
+// TODO
+// }
+
+// * 02 - Find Minimum in Rotated Sorted Array
+// int findMinimum(vector<int> &nums) {
+// TODO
+// }
+
+// * 03 - Count of rotation
+// int findKRotation(vector<int> &nums) {
+// TODO
+// }
+
+// * 04 - Single element in a Sorted Array
+// int singleNonDuplicate(vector<int> &nums) {
+// TODO
+// }
+
+// * 05 - Find Peak Element
+// int findPeakElement(vector<int> &nums) {
+// TODO
+// }
+
+// * 06 - Nth Root of a number
+// int findNthRoot(int n, int m) {
+// TODO
+// }
+
+// * 07 - Successful Pairs of Spells and Potions
+// vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, long long success)
+// {
+// TODO
+// }
+
+// * 08 - search-in-2D-matrix
+// bool searchMatrix(vector<vector<int>> &matrix, int &target) {
+// TODO
+// }
+
+// * 09 - Koko eating bananas
+// int findMinimumBananasToEat(vector<int> &piles, int h) {
+// TODO
+// }
+
+// * 10 - Capacity To Ship Packages Within D Days
+// int findLeastPossileWeight(vector<int> &weights, int days) {
+// TODO
+// }
+
+// * 11 - Maximum Candies Allocated to K Children
+// int maximumCandies(vector<int> &candies, long long k) {
+// TODO
+// }
+
+// * 12 - Rose Garden
+// int findMinimumDaysToMakeBouquets(vector<int> &days, int &roses, int &bouquets) {
 // TODO
 // }
 

@@ -70,8 +70,7 @@ int maximumCandies(vector<int> &candies, long long k) {
     return 0;
 
   int ans = 0;
-  int l = 0, r = max_candies;
-
+  int l = 1, r = max_candies;
   while (l <= r) {
     int curCandies = l + (r - l) / 2;
     bool areChildrenSatisfied = checkIsChildrenSatisfied(candies, k, curCandies);

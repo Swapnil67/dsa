@@ -90,12 +90,12 @@ int searchInRotatedSorted(vector<int> arr, int target) {
 
 int main() {
   // * testcase 1
-  int target = 0;
-  vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
+  // int target = 0;
+  // vector<int> arr = {2, 5, 6, 0, 0, 1, 2};
 
   // * testcase 2
-  // int target = 1;
-  // vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
+  int target = 1;
+  vector<int> arr = {3, 1, 2, 3, 3, 3, 3};
 
   // * testcase 3
   // int target = 0;
