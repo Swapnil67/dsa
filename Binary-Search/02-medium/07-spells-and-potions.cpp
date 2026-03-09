@@ -90,8 +90,7 @@ int lower_bound(vector<int> &potions, long long min_potion) {
 // * TIME COMPLEXITY O(n * logn)
 // * SPACE COMPLEXITY O(1)
 vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, int success) {
-  int n = spells.size();
-  int m = potions.size();
+  int n = spells.size(), m = potions.size();
   vector<int> pairs;
 
   sort(potions.begin(), potions.end());

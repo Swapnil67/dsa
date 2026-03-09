@@ -96,12 +96,12 @@ int findLeastPossileWeight(vector<int> weights, int maximumDays) {
 
 int main() {
   // * testcase 1
-  int days = 5;
-  vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  // int days = 5;
+  // vector<int> weights = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   
   // * testcase 2
-  // int days = 5;
-  // vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
+  int days = 5;
+  vector<int> weights = {5, 4, 5, 2, 3, 4, 5, 6};
   
   // * testcase 3
   // int days = 4;

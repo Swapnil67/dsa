@@ -77,7 +77,7 @@ int maximumCandies(vector<int> &candies, long long k) {
     // cout << curCandies << " -> " << areChildrenSatisfied << endl;
     if (areChildrenSatisfied) {
       ans = curCandies;
-      l = curCandies + 1;
+      l = curCandies + 1; // * becoz we need allocated maximum amount of candies
     }
     else {
       r = curCandies - 1;

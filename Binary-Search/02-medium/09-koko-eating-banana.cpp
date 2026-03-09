@@ -82,7 +82,7 @@ int bruteForce(vector<int> piles, int maxHrs) {
 // * TIME COMPLEXITY O(N) * log(maxBananas) 
 // * SPACE COMPLEXITY O(1)
 int findMinimumBananasToEat(vector<int> piles, int hr) {
-  int l = 0, r = *max_element(piles.begin(), piles.end());
+  int l = 1, r = *max_element(piles.begin(), piles.end());
   int ans = r;
   while(l <= r) {
     int mid = l + (r - l) / 2;
@@ -102,12 +102,12 @@ int main() {
   cout << "Koko eating bananas" << endl;
 
   // * testcase 1 (Ans = 4)
-  vector<int> piles = {3, 6, 7, 11};
-  int h = 8;
+  // vector<int> piles = {3, 6, 7, 11};
+  // int h = 8;
 
   // * testcase 2 (Ans = 30)
-  // vector<int> piles = {30, 11, 23, 4, 20};
-  // int h = 5;
+  vector<int> piles = {30, 11, 23, 4, 20};
+  int h = 5;
 
   // * testcase 3 (Ans = 23)
   // vector<int> piles = {30, 11, 23, 4, 20};
