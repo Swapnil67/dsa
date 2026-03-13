@@ -115,6 +115,7 @@ int maxWidthRampA(vector<int> &nums) {
 }
 
 int main() {
+  std::cout << "Maximum Width Ramp" << std::endl;
   // * testcase 1
   vector<int> nums = {6, 0, 8, 2, 1, 5};
 
@@ -124,6 +125,7 @@ int main() {
   // * testcase 3
   // vector<int> nums = {2, 2, 1};
 
+  std::cout << "Input Nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums);

@@ -1,9 +1,10 @@
 /*
  * Leetcode - 1750
  * Minimum Length of String After Deleting Similar Ends
+ * 
  * Given a string s consisting only of characters 'a', 'b', and 'c'. You are asked to apply the following algorithm 
  * on the string any number of times:
-
+ * 
  * 1. Pick a non-empty prefix from the string s where all the characters in the prefix are equal.
  * 2. Pick a non-empty suffix from the string s where all the characters in this suffix are equal.
  * 3. The prefix and the suffix should not intersect at any index.
@@ -22,6 +23,7 @@
  * https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/
 */
 
+#include <vector>
 #include <iostream>
 
 using namespace std;
@@ -53,18 +55,18 @@ int minimumLength(string s) {
 }
 
 int main() {
-  // * testcase 1
-  string s = "cabaabac";
+  std::cout << "Minimum Length of String After Deleting Similar Ends" << std::endl;
+  vector<string> testcases = {"cabaabac", "aabccabba", "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb"};
 
-  // * testcase 2
-  // string s = "aabccabba";
-  
-  // * testcase 3
-  // string s = "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb";
-
-  cout << s << endl;
-  int length = minimumLength(s);
-  cout << length << endl;
+  for (size_t i = 0; i < testcases.size(); ++i) {
+    cout << "-------------------- testcase " << i << "-----------------------\n" << endl;
+    string s = testcases[i];
+    std::cout << "Input string: " << s << std::endl;
+    int length = minimumLength(s);
+    std::cout << "Answer: " << length << std::endl;
+    cout << endl;
+  }
+  return 0;
 }
 
 // * Run the code

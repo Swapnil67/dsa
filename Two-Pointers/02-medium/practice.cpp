@@ -24,7 +24,6 @@ void printArr(std::vector<T> &arr) {
   std::cout << " ]" << std::endl;
 }
 
-
 // * ----------------------------------------------------------------
 
 // * 01 - Remove Duplicates from Sorted Array II
@@ -83,17 +82,17 @@ void printArr(std::vector<T> &arr) {
 // }
 
 // * 12 - Partition Array According to Given Pivot
-// vector<int> pivotArray(vector<int> arr, int pivot) {
+// vector<int> pivotArray(vector<int> &nums, int pivot) {
 // TODO
 // }
 
 // * 13 - Rotate array by K places
-// vector<int> rotate(vector<int> &arr, int k) {
+// vector<int> rotate(vector<int> &nums, int k) {
 // TODO
 // } 
 
 // * 14 - Minimum Time to Make Rope Colorful
-// int minTimeToMakeRopeColorful(string colors, vector<int> neededTime) {
+// int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime) {
 // TODO
 // }
 
@@ -138,7 +137,7 @@ void printArr(std::vector<T> &arr) {
 // }
 
 int main(void) {
-  return 0;
+
 }
 
 // * Run the code

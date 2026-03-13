@@ -51,7 +51,6 @@ int compress(vector<char>& chars) {
   int n = chars.size();
 
   int i = 0, j = 0;
-  
   while (j < n) {
     char cur_char = chars[j];
     int cur_count = 0;
@@ -81,8 +80,13 @@ int compress(vector<char>& chars) {
 }
 
 int main(void) {
-  // vector<char> chars = {'a'};
-  vector<char> chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
+  // * testcase 1
+  vector<char> chars = {'a', 'b', 'c'};
+
+  // * testcase 2
+  // vector<char> chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
+
+  // * testcase 3
   // vector<char> chars = {'a','b','b','b','b','b','b','b','b','b','b','b','b'};
 
   std::cout << "Chars: ";

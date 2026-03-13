@@ -138,12 +138,12 @@ vector<int> pivotArray2(vector<int> &arr, int pivot) {
 
 int main() {
   // * testcase 1
-  int pivot = 10;
-  vector<int> nums = {9, 12, 5, 10, 14, 3, 10};
+  // int pivot = 10;
+  // vector<int> nums = {9, 12, 5, 10, 14, 3, 10};
   
   // * testcase 2
-  // int pivot = 2;
-  // vector<int> nums = {-3, 4, 3, 2};
+  int pivot = 2;
+  vector<int> nums = {-3, 4, 3, 2};
 
   std::cout << "pivot: " << pivot << std::endl;
   std::cout << "Input nums: ";

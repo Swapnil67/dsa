@@ -99,8 +99,7 @@ void rotate(vector<int> &arr, int k) {
   // * Or using SDL
   // reverse(arr.begin(), arr.end());
   // reverse(arr.begin(), arr.begin() + k);
-  // reverse(arr.begin() + k, arr.begin() + n);
-
+  // reverse(arr.begin() + k, arr.end());
 }
 
 int main() {
@@ -125,5 +124,5 @@ int main() {
 }
 
 // * Run the code
-// * g++ --std=c++17 13-rotate-array-by-k-places.cpp -o output && ./output
+// * g++ --std=c++20 13-rotate-array-by-k-places.cpp -o output && ./output
 

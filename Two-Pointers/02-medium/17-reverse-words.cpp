@@ -18,6 +18,7 @@
  * https://www.naukri.com/code360/problems/reverse-words_696444
 */
 
+#include <vector>
 #include <sstream>
 #include <iostream>
 #include <algorithm>
@@ -86,8 +87,8 @@ string reverseWords(string &s) {
   // * Reverse complete string
   reverse(s.begin(), s.end());
 
+  // * Declare pointers
   int i = 0;
-  // * Declare Two pointers
   int l = 0, r = 0;
   while (i < n) {
     // * put the char from 'i' to 'r'
@@ -105,28 +106,35 @@ string reverseWords(string &s) {
       r++;        // * Incr the r ptr
       l = r;      // * Bring l to r
     }
-    i++;
+    i++; // * this will take care of extra spaces.
   }
 
   return s.substr(0, r - 1);
 }
 
 int main() {
-  // string s = "I am zoro";
-  // string s = "   Roronoa      Zoro     ";
-  // string s = "  hello world  ";
-  string s = "blue is sky the";
-  cout << "Input string: " << s << endl;
+  vector<string> testcases = {
+      "I am zoro",
+      "   Roronoa      Zoro     ",
+      "  hello world  ",
+      "blue is sky the"};
 
-  // string ans = bruteForce(s);
-  string ans = reverseWords(s);
-  std::cout << "Answer: " << ans << std::endl;
+  for (size_t i = 0; i < testcases.size(); ++i)
+  {
+    cout << "-------------------- testcase " << i << "-----------------------\n" << endl;
+    string s = testcases[i];
+    cout << "Input string: " << s << endl;
+    // string ans = bruteForce(s);
+    string ans = reverseWords(s);
+    cout << "Output String: " << ans << endl;
+    cout << endl;
+  }
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++17 17-reverse-words.cpp -o output && ./output
+// * g++ --std=c++20 17-reverse-words.cpp -o output && ./output
 
 
 // * Dry Run

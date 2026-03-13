@@ -31,14 +31,16 @@ void printArr(std::vector<T> &arr) {
   std::cout << " ]" << std::endl;
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Find the peak element and then count on left & right elements
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int longestMountain(std::vector<int> &arr) {
   int n = arr.size();
+  if (n < 3)
+    return 0;
+  
   int ans = 0;
-
   // * 1 to n - 2 (only possible peak elements)
   for (int i = 1; i <= n - 2;) {
     // * Found peak element (Greater than both the neighbours)

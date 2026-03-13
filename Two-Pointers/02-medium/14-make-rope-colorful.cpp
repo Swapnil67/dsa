@@ -8,7 +8,7 @@
  * You are given a 0-indexed integer array neededTime where neededTime[i] is the time (in seconds) that Bob 
  * needs to remove the ith balloon from the rope.
  * Return the minimum time Bob needs to make the rope colorful.
-
+ * 
  * Example 1
  * Input  : colors = "abaac", neededTime = [1, 2, 3, 4, 5]
  * Output : 3
@@ -44,22 +44,19 @@ void printArr(vector<T> &arr) {
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime) {
-  int n = neededTime.size();
-  int l = 0, time = 0;
-  for (int r = 1; r < n; ++r) {
-    if (colors[l] == colors[r]) {
-      if (neededTime[l] < neededTime[r]) {
-        time += neededTime[l];
-        l = r;
-      } else {
-        time += neededTime[r];
-      }
-    } else {
-      l = r;
+int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime)
+{
+  int n = colors.size();
+  int time = 0, max_time = -1;
+  for (int i = 0; i < n; ++i) {
+    if (i > 0 && colors[i] == colors[i - 1]) {
+      time += min(max_time, neededTime[i]);    // * Take the min here
+      max_time = max(max_time, neededTime[i]); // * Max time for same color
+    }
+    else {
+      max_time = neededTime[i]; // * Update the max time for new color.
     }
   }
-
   return time;
 }
 
@@ -73,12 +70,12 @@ int main() {
   // vector<int> neededTime = {1, 2, 3};
 
   // * testcase 3
-  string colors = "aabaa";
-  vector<int> neededTime = {1, 2, 3, 4, 1};
+  // string colors = "aabaa";
+  // vector<int> neededTime = {1, 2, 3, 4, 1};
   
   // * testcase 4
-  // string colors = "aaabbbabbbb";
-  // vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
+  string colors = "aaabbbabbbb";
+  vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
 
   cout << "Rope: " << colors << endl;
   printArr(neededTime);
