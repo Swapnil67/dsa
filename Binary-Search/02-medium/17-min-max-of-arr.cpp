@@ -100,13 +100,13 @@ int minimizeArrayValue2(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  // vector<int> arr = {3, 7, 1, 6};
+  vector<int> arr = {3, 7, 1, 6};
 
   // * testcase 2
   // vector<int> arr = {10, 1};
 
   // * testcase 3
-  vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
+  // vector<int> arr = {13, 13, 20, 0, 8, 9, 9};
 
   cout << "Input Array: ";
   printArr(arr);

@@ -1,16 +1,17 @@
 /*
 * Leetcode - 154
 * Find Minimum in Rotated Sorted Array II
+*
 * Given the sorted rotated array nums of unique elements, return the minimum element of this array.
-
+*
 * Example 1:
 * Input: nums = [3, 4, 5, 1, 2]
 * Output: 1
-
+*
 * Example 2:
 * Input: nums = [10, 1, 10, 10, 10]
 * Output: 1
-
+*
 * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
 */
 
@@ -18,13 +19,20 @@
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
+
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Linear search

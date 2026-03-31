@@ -23,7 +23,7 @@
 
 #include<iostream>
 
-// * ------------------------- Utility Functions -------------------------`
+// * ------------------------- Utility Functions -------------------------
 
 void printArr(std::vector<int> arr) {
   int n = arr.size();

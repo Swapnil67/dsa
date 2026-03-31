@@ -2,7 +2,7 @@
  * First and Last Position of an Element In Sorted Array
  * You have been given a sorted array/list 'arr' consisting of ‘n’ elements. You are also given an integer ‘k’.
  * Now, your task is to find the first and last occurrence of ‘k’ in 'arr'.
-
+ * 
  * Note :
  * 1. If ‘k’ is not present in the array, then the first and the last occurrence will be -1. 
  * 2. 'arr' may contain duplicate elements.
@@ -10,7 +10,7 @@
  * Example 1:
  * Input: arr = [ 0, 1, 1, 5 ],  k = 1
  * Output: [1,2]
-
+ * 
  * Example 2:
  * Input: arr = [ 1, 3, 3, 5 ], k = 9
  * Output: [-1, -1]
@@ -24,18 +24,22 @@
 
 // * Using Lower & Upper Bound concept
 
-// * ------------------------- Utility Functions -------------------------
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
 // * Lower bound -> arr[i] >= k
-int findLowerBound(std::vector<int> arr, int k) {
+int findLowerBound(vector<int> arr, int k) {
   int n = arr.size();
   int l = 0, r = n - 1;
   int idx = n;
@@ -54,14 +58,14 @@ int findLowerBound(std::vector<int> arr, int k) {
 }
 
 // * Upper bound -> arr[i] > k
-int findUpperBound(std::vector<int> arr, int k) {
+int findUpperBound(vector<int> arr, int k) {
   int n = arr.size();
   int l = 0, r = n - 1;
   int idx = n;
   while(l <= r) {
     int m = l + (r - l) / 2;
-    if(arr[m] > k) {
-      idx = m-1;
+    if (arr[m] > k) {
+      idx = m - 1;
       r = m - 1;
     }
     else {
@@ -75,8 +79,8 @@ int findUpperBound(std::vector<int> arr, int k) {
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::pair<int, int> bruteForce(std::vector<int> arr, int k) {
-  std::pair<int, int> ans(-1, -1);
+pair<int, int> bruteForce(vector<int> arr, int k) {
+  pair<int, int> ans(-1, -1);
   int n = arr.size();
   for (int i = 0; i < n; i++) {
     if(arr[i] == k) {
@@ -94,37 +98,38 @@ std::pair<int, int> bruteForce(std::vector<int> arr, int k) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(2logN)
 // * SPACE COMPLEXITY O(1)
-std::pair<int, int> firstAndLastOccurence(std::vector<int> arr, int k) {
+pair<int, int> firstAndLastOccurence(vector<int> arr, int k) {
   int n = arr.size();
   int firstOccurence = findLowerBound(arr, k);
+  
   // * If k not found
-  if(firstOccurence == n || arr[firstOccurence] != k) {
-    return { -1, -1 };
+  if (firstOccurence == n || arr[firstOccurence] != k) {
+    return {-1, -1};
   }
 
   int lastOccurence = findUpperBound(arr, k);
-  std::pair<int, int> ans(firstOccurence, lastOccurence);
+  pair<int, int> ans(firstOccurence, lastOccurence);
   return ans;
 }
 
 int main() {
   // * testcase 1
   int k = 1;
-  std::vector<int> arr = {0, 1, 1, 5};
+  vector<int> arr = {0, 1, 1, 5};
 
   // * testcase 2
-  // std::vector<int> arr = {1, 3, 9, 15};
+  // vector<int> arr = {1, 3, 9, 15};
   // int k = 9;
 
   // * testcase 3
-  // std::vector<int> arr = {1, 3, 3, 5};
+  // vector<int> arr = {1, 3, 3, 5};
   // int k = 9;
   
   printArr(arr);
-  // std::pair<int, int> ans = bruteForce(arr, k);
-  std::pair<int, int> ans = firstAndLastOccurence(arr, k);
-  std::cout << "First Occurence of '" << k << "' is at index " << ans.first << std::endl;
-  std::cout << "Last Occurence of '" << k << "' is at index " << ans.second << std::endl;
+  // pair<int, int> ans = bruteForce(arr, k);
+  pair<int, int> ans = firstAndLastOccurence(arr, k);
+  cout << "First Occurence of '" << k << "' is at index " << ans.first << endl;
+  cout << "Last Occurence of '" << k << "' is at index " << ans.second << endl;
 
   return 0;
 }

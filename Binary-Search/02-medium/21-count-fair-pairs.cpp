@@ -121,22 +121,22 @@ ll countFairPairs(vector<int> nums, int lower, int upper) {
   int n = nums.size();
   ll ans = 0;
   for (int i = 0; i < n; ++i) {
-    cout << "nums[i] = " << nums[i] << endl;
-
+    
     // * Count how many numbers are < than lower - nums[i]
     ll lb = lowerBound(nums, lower - nums[i], i + 1, n - 1);
     lb = lb - i;
-
+    
     // * Count how many numbers are <= than upper - nums[i]
     ll ub = upperBound(nums, upper - nums[i], i + 1, n - 1);
     ub = ub - i;
-
+    
     // * Using SDL
     // int idx = lower_bound(begin(nums) + i + 1, end(nums), lower - nums[i]) - begin(nums);
     // int lb = idx - 1 - i;
     // idx = upper_bound(begin(nums) + i + 1, end(nums), upper - nums[i]) - begin(nums);
     // int ub = idx - 1 - i;
-
+    
+    cout << "nums[i] = " << nums[i] << endl;
     cout << "lower bound: " << lb << " & upper bound: " << ub << endl;
     cout << "----------------------------" << endl;
 
@@ -153,7 +153,7 @@ ll countFairPairs(vector<int> nums, int lower, int upper) {
 // * <------------------------------- Red --------------------------------------->
 // * <------ blue ------->
 // *                     <========================= Orange ======================>
-// * Orange = Red - Blue
+// * Orange = Red (Lower - 1) - Blue (Upper)
 // * SPACE COMPLEXITY O(1)
 ll countFairPairs2(vector<int> nums, int lower, int upper) {
   sort(nums.begin(), nums.end());
@@ -161,12 +161,15 @@ ll countFairPairs2(vector<int> nums, int lower, int upper) {
 }
 
 int main(void) {
+  // * testcase 1
   int lower = 3, upper = 6;
   vector<int> nums = {0, 1, 7, 4, 4, 5};
-
+  
+  // * testcase 2
   // int lower = 11, upper = 11;
   // vector<int> nums = {1, 7, 9, 2, 5};
-
+  
+  // * testcase 3
   // int lower = 8, upper = 13;
   // vector<int> nums = {1, 4, 5, 1, 7, 4, 20};
 

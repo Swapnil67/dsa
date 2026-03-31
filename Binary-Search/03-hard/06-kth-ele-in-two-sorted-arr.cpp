@@ -12,19 +12,21 @@
 
 #include <vector>
 #include <iostream>
+using namespace std;
 
-// * ------------------------- Utility Functions -------------------------`
-
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
-
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Merge two sorted arrays
 // * TIME COMPLEXITY O(n1 + n2)
 // * SPACE COMPLEXITY O(n1 + n2)
@@ -37,26 +39,21 @@ int bruteForce(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
   int i = 0, j = 0;
   while (i < n1 && j < n2) {
     if (nums1[i] < nums2[j]) {
-      mergedVec.push_back(nums1[i]);
-      i++;
+      mergedVec.push_back(nums1[i++]);
     } else {
-      mergedVec.push_back(nums2[j]);
-      j++;
+      mergedVec.push_back(nums2[j++]);
     }
   }
 
   while (i < n1) {
-    mergedVec.push_back(nums1[i]);
-    i++; 
+    mergedVec.push_back(nums1[i++]);
   }
 
   while (j < n2) {
-    mergedVec.push_back(nums2[j]);
-    j++;
+    mergedVec.push_back(nums2[j++]);
   }
 
   // printArr(mergedVec);
-
   return mergedVec[k - 1];
 }
 
@@ -74,27 +71,23 @@ int kthElement(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
   int i = 0, j = 0;
   while (i < n1 && j < n2) {
     if (nums1[i] < nums2[j]) {
-      if (cnt == k)
-        return nums1[i];
+      if (cnt == k) return nums1[i];
       i++;
     } else {
-      if (cnt == k)
-        return nums2[j];
+      if (cnt == k) return nums2[j];
       j++;
     }
     cnt++;
   }
 
   while (i < n1) {
-    if (cnt == k)
-      return nums1[i];
+    if (cnt == k) return nums1[i];
     i++; 
     cnt++;
   }
 
   while (j < n2) {
-    if (cnt == k)
-      return nums2[j];
+    if (cnt == k) return nums2[j];
     j++;
     cnt++;
   }

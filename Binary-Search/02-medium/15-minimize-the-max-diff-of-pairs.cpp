@@ -105,7 +105,7 @@ int main(void) {
   printArr(nums);
 
   int ans = minimizeMax(nums, p);
-  cout << "Answer: " << ans << endl;
+  cout << "Minimize the Maximum Difference of Pairs: " << ans << endl;
 
   return 0;
 }

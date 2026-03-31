@@ -39,7 +39,6 @@ void printMatrix(vector<vector<string>>&mat) {
   }
 }
 
-
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * Two pointers + BS
 // * TIME COMPLEXITY O(n * m)
@@ -85,6 +84,7 @@ int main(void) {
   cout << "Search Word: " << searchWord << endl;
 
   vector<vector<string>> ans = suggestedProducts(products, searchWord);
+
   cout << "Search Suggestions: " << endl;
   for (auto &words : ans)
     printArr(words);

@@ -1,5 +1,6 @@
 /*
 * Painter's Partition Problem 
+*
 * Given an array/list of length ‘n’, where the array/list represents the boards and each element of the
 * given array/list represents the length of each board. 
 * Some ‘k’ numbers of painters are available to paint these boards. Consider that each unit of a 
@@ -25,17 +26,21 @@
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- Utility Functions -------------------------`
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout<<arr[i]<<" ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
-int findPaintersUsed(std::vector<int> boards, int &painters, int &maxTime) {
+int findPaintersUsed(vector<int> boards, int &painters, int &maxTime) {
   int paintersRequired = 1, curTime = 0;
   for (int i = 0; i < boards.size(); i++) {
     if (curTime + boards[i] > maxTime) {
@@ -53,14 +58,14 @@ int findPaintersUsed(std::vector<int> boards, int &painters, int &maxTime) {
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(total) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> boards, int painters) {
-  int maxEle = *std::max_element(boards.begin(), boards.end());
+int bruteForce(vector<int> boards, int painters) {
+  int maxEle = *max_element(boards.begin(), boards.end());
   int total = accumulate(boards.begin(), boards.end(), 0); 
   int ans = total;
   for (int i = maxEle; i <= total; i++) {
     int time = i;
     int check = findPaintersUsed(boards, painters, time);
-    // std::cout << "Time "<< time << " painters used " << check << std::endl;
+    // cout << "Time "<< time << " painters used " << check << endl;
     if(check) {
       ans = time;
       break;
@@ -72,8 +77,8 @@ int bruteForce(std::vector<int> boards, int painters) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(log(total - max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int findMinTimeToPaintBoards(std::vector<int> boards, int painters) {
-  int l = *std::max_element(boards.begin(), boards.end());
+int findMinTimeToPaintBoards(vector<int> boards, int painters) {
+  int l = *max_element(boards.begin(), boards.end());
   int r = accumulate(boards.begin(), boards.end(), 0); 
 
   // * O(log(total - max)) 
@@ -91,16 +96,16 @@ int findMinTimeToPaintBoards(std::vector<int> boards, int painters) {
 int main() {
   // * testcase 1
   // int painters = 2;
-  // std::vector<int> boards = {2, 1, 5, 6, 2, 3};
+  // vector<int> boards = {2, 1, 5, 6, 2, 3};
 
   // * testcase 2
   int painters = 2;
-  std::vector<int> boards = {48, 90}; 
+  vector<int> boards = {48, 90}; 
 
   printArr(boards);
   // int minTime = bruteForce(boards, painters);
   int minTime = findMinTimeToPaintBoards(boards, painters);
-  std::cout << "Minimum time required to paint above boards is " << minTime << " units." << std::endl;
+  cout << "Minimum time required to paint above boards is " << minTime << " units." << endl;
 
   return 0;
 }

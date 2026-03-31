@@ -106,12 +106,12 @@ int minCapability(vector<int> &nums, int k) {
 
 int main(void) {
   // * testcase 1 (Ans 2)
-  // int k = 2;
-  // vector<int> nums = {2, 3, 5, 9};
+  int k = 2;
+  vector<int> nums = {2, 3, 5, 9};
   
   // * testcase 2 (Ans 2)
-  int k = 2;
-  vector<int> nums = {2, 7, 9, 3, 1};
+  // int k = 2;
+  // vector<int> nums = {2, 7, 9, 3, 1};
 
   cout << "Houses" << endl;
   printArr(nums);

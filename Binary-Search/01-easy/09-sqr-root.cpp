@@ -42,21 +42,27 @@ int bruteForce(int n) {
 // * Binary Search on answers
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
-int findSquareRoot(int n) {
-  if(n == 0) return 0;
-  if(n < 0) return 0;
-  int l = 1, r = n;
-  while(l <= r) {
-    long long m = l + (r - l) / 2;
-    long long val = m * m;
-    if(val <= (long long)n) {
+int findSquareRoot(int x) {
+  if (x < 2)
+    return x;
+
+  int l = 0, r = x / 2;
+  int ans = 0;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    long long cur = (long long)m * m;
+    if (cur == x)
+      return m;
+
+    if (cur < x) {
+      ans = m;
       l = m + 1;
-    }
-    else {
+    } else {
       r = m - 1;
     }
   }
-  return r;
+
+  return ans;
 }
 
 int main() {

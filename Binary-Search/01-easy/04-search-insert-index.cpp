@@ -8,7 +8,7 @@
  * Output: 3
 
  * Example 2:
- * Input: arr = [ 1 2 4 7 ], target = 9
+ * Input: arr = [1, 2, 4, 7] target = 9
  * Output: 4
  * 
  * https://leetcode.com/problems/search-insert-position/description/
@@ -51,8 +51,7 @@ int findInsertIndex(std::vector<int> arr, int target) {
     if(arr[m] >= target) {
       idx = m;
       r = m - 1;
-    }
-    else {
+    } else {
       l = m + 1;
     }
   }

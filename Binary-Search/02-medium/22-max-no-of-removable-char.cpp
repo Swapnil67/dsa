@@ -111,16 +111,16 @@ int maximumRemovals(string s, string p, vector<int> removable) {
 
 int main(void) {
   // * testcase 1
-  string s = "abcacb", p = "ab";
-  vector<int> removable = {3, 1, 0};
+  // string s = "abcacb", p = "ab";
+  // vector<int> removable = {3, 1, 0};
 
   // * testcase 2
   // string s = "abcbddddd", p = "abcd";
   // vector<int> removable = {3, 2, 1, 4, 5, 6};
 
   // * testcase 3
-  // string s = "abcab", p = "abc";
-  // vector<int> removable = {0, 1, 2, 3, 4};
+  string s = "abcab", p = "abc";
+  vector<int> removable = {0, 1, 2, 3, 4};
 
   cout << "s: " << s << " p: " << p << endl;
   printArr(removable);

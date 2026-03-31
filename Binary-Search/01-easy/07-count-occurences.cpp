@@ -1,5 +1,5 @@
 /*
- * First and Last Position of an Element In Sorted Array
+ * Count Occurences
  * You have been given a sorted array/list of integers 'arr' of size 'n' and an integer 'x'.
  * Find the total number of occurrences of 'x' in the array/list.
  * 
@@ -76,7 +76,8 @@ int findLastOccurence(std::vector<int> arr, int k) {
 
 int countOccurences(std::vector<int> arr, int k) {
   int firstOccurence = findFirstOccurence(arr, k);
-  if(firstOccurence == -1) return 0;
+  if (firstOccurence == -1)
+    return 0;
   int secondOccurence = findLastOccurence(arr, k);
   return secondOccurence - firstOccurence + 1;
 }

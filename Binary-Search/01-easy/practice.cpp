@@ -1,37 +1,21 @@
+// ! Binary Search Easy Practice 
+
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << nums[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
-
-// * 03 - Upper Bound
-// int findUpperBound(std::vector<int> &arr, int x) {
-// TODO
-// }
-
-// * 04 - Search Insert Position
-// int findInsertIndex(std::vector<int> arr, int x) {
-// TODO
-// }
-
-// * 05 - Ceil The Floor
-// std::pair<int, int> getFloorAndCeil(std::vector<int> &arr, int x) {
-// TODO
-// }
-
-// * 06 - First and Last Position of an Element In Sorted Array
-// std::pair<int, int> firstAndLastOccurence(std::vector<int> &arr, int k) {
-// TODO
-// }
 
 // * 09 - Square Root of a number
 // int findSquareRoot(int n) {
@@ -39,19 +23,80 @@ void printArr(std::vector<T> &arr) {
 // }
 
 // * 10 - Kth Missing Positive Number 
-// int findKthMissingNumber(std::vector<int> &arr, int k) {
+// int findKthMissingNumber(vector<int> &nums, int k) {
 // TODO
 // }
 
 // * -----------------------------------------------------------------------------
 
 // * 01 - Binary Search
-// int binarySearch(std::vector<int> arr, int target) {
+// int binarySearch(vector<int> nums, int target) {
 // TODO
 // }
 
 // * 02 - Lower Bound
-// int findLowerBound(std::vector<int> &arr, int x) {
+int findLowerBound(vector<int> &nums, int x) {
+  int n = nums.size();
+  int l = 0, r = n - 1;
+  int ans = n;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    if (nums[m] >= x) {
+      ans = m;
+      r = m - 1;
+    } else {
+      l = m + 1;
+    }
+  }
+
+  return ans;
+}
+
+// * 03 - Upper Bound
+int findUpperBound(vector<int> &nums, int x) {
+  int n = nums.size();
+  int l = 0, r = n - 1;
+  int idx = n;
+  while(l <= r) {
+    int m = l + (r - l) / 2;
+    if (nums[m] > x) {
+      idx = m - 1;
+      r = m - 1;
+    } else {
+      l = m + 1;
+    }
+  }
+
+  return idx;
+}
+
+// * 04 - Search Insert Position
+// int findInsertIndex(vector<int> nums, int x) {
+// TODO
+// }
+
+// * 05 - Ceil The Floor
+// pair<int, int> getFloorAndCeil(vector<int> &nums, int x) {
+// TODO
+// }
+
+// * 06 - First and Last Position of an Element In Sorted Array
+// pair<int, int> firstAndLastOccurence(vector<int> &nums, int k) {
+// TODO
+// }
+
+// * 07 - Count Occurences
+// int countOccurences(std::vector<int> &nums, int x) {
+// TODO
+// }
+
+// * 08 - Square Root of a number
+// int findSquareRoot(int n) {
+// TODO
+// }
+
+// * 08 - Square Root of a number
+// int findSquareRoot(int n) {
 // TODO
 // }
 

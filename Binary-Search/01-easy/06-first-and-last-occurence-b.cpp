@@ -2,7 +2,7 @@
  * First and Last Position of an Element In Sorted Array
  * You have been given a sorted array/list 'arr' consisting of ‘n’ elements. You are also given an integer ‘k’.
  * Now, your task is to find the first and last occurrence of ‘k’ in 'arr'.
-
+ * 
  * Note :
  * 1. If ‘k’ is not present in the array, then the first and the last occurrence will be -1. 
  * 2. 'arr' may contain duplicate elements.
@@ -10,7 +10,7 @@
  * Example 1:
  * Input: arr = [ 0, 1, 1, 5 ],  k = 1
  * Output: [1,2]
-
+ * 
  * Example 2:
  * Input: arr = [ 1, 3, 3, 5 ], k = 9
  * Output: [-1, -1]
@@ -40,13 +40,12 @@ int findFirstOccurence(std::vector<int> arr, int k) {
   int n = arr.size();
   int l = 0, r = n - 1;
   int ans = -1;
-  while(l <= r) {
+  while (l <= r) {
     int m = l + (r - l) / 2;
-    if(arr[m] >= k) {
+    if (arr[m] >= k) {
       ans = m;
       r = m - 1;
-    }
-    else {
+    } else {
       l = m + 1;
     }
   }
@@ -59,16 +58,14 @@ int findLastOccurence(std::vector<int> arr, int k) {
   int n = arr.size();
   int l = 0, r = n - 1;
   int ans = -1;
-  while(l <= r) {
+  while (l <= r) {
     int m = l + (r - l) / 2;
-    if(arr[m] == k) {
+    if (arr[m] == k) {
       ans = m;
       l = m + 1;
-    }
-    else if(arr[m] < k) {
+    } else if (arr[m] < k) {
       l = m + 1;
-    }
-    else {
+    } else {
       r = m - 1;
     }
   }

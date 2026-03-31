@@ -67,9 +67,7 @@ bool isValidSpeed(vector<int> &dist, int &speed, double &maxHours) {
     if (currentHrs > maxHours) // * Took more time (no need to check further)
       break;
   }
-
-  double hr = ((double)(dist[n - 1]) / (double)speed);
-  currentHrs += hr;
+  currentHrs += (double(dist[n-1] / (double)speed));
 
   // cout << dist[n - 1] << " => " << hr << endl;
   // cout << speed << " -> " << currentHrs << endl;

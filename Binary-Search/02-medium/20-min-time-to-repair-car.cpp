@@ -85,9 +85,11 @@ long long repairCars(vector<int> &ranks, int cars) {
 }
 
 int main(void) {
+  // * testcase 1
   int cars = 10;
   vector<int> ranks = {4, 2, 3, 1};
   
+  // * testcase 2
   // int cars = 736185;
   // vector<int> ranks = {31, 31, 5, 19, 19, 10, 31, 18, 19, 3, 16, 20, 4, 16, 2, 25, 10, 16, 23, 18, 21, 23, 28, 6, 7, 29, 11, 11, 19, 20, 24, 19, 26, 12, 29, 29, 1, 14, 17, 26, 24, 7, 11, 28, 22, 14, 31, 12, 3, 19, 16, 26, 11};
 

@@ -69,13 +69,12 @@ bool isValidPenalty(vector<int> &nums, int &max_ops, int &max_balls) {
   long long cur_ops = 0;
   for (int &balls : nums) {
     cur_ops += (balls / max_balls);
-
     // * Since it can fit in one bag so no need to perform operation
     if (balls % max_balls == 0)
       cur_ops--;
   }
 
-  cout << max_balls << " => " << cur_ops << endl;
+  // cout << max_balls << " => " << cur_ops << endl;
   return cur_ops <= max_ops;
 }
 

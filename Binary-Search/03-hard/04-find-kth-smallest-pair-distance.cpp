@@ -1,11 +1,11 @@
 /*
 * Leetcode - 719
 * Find K-th Smallest Pair Distance
-
+*
 * The distance of a pair of integers a and b is defined as the absolute difference between a and b.
 * Given an integer array nums and an integer k, 
 * return the kth smallest distance among all the pairs nums[i] and nums[j] where 0 <= i < j < nums.length.
-
+*
 * Example 1:
 * Input: nums = [1,3,1], k = 1
 * Output: 0
@@ -14,11 +14,11 @@
 * (1,1) -> 0
 * (3,1) -> 2
 * Then the 1st smallest distance pair is (1,1), and its distance is 0.
-
+*
 * Example 1:
 * Input: nums = [1,6,1], k = 3
 * Output: 5
-
+*
 * https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/
 */
 
@@ -27,15 +27,20 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << std::endl;
-}
+using namespace std;
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // ! TLE
 // * TIME COMPLEXITY O(N^2) + O(slog(s))
 // * SPACE COMPLEXITY O(N)
@@ -43,21 +48,21 @@ int bruteForce(std::vector<int>& nums, int k) {
   int n = nums.size();
 
   // * 1. Create a vector of abs diff of pairs O(N^2)
-  std::vector<int> distanceVec;
+  std::vector<int> diff_vec;
   for (int i = 0; i < n; ++i) {
     for(int j = i + 1; j < n; ++j) {
-      distanceVec.push_back(std::abs(nums[j] - nums[i]));
+      diff_vec.push_back(std::abs(nums[j] - nums[i]));
     }
   }
 
-  // * 2. Sort the distanceVec in Ascenting O(slog(s))
-  std::sort(distanceVec.begin(), distanceVec.end());
+  // * 2. Sort the diff_vec in Ascenting O(slog(s))
+  std::sort(diff_vec.begin(), diff_vec.end());
 
   // * 3. return the kth smallest distance
-  return distanceVec[k - 1];
+  return diff_vec[k - 1];
 }
 
-// * ------------------------- APPROACH 2: BETTER APPROACH -------------------------`
+// * ------------------------- APPROACH 2: BETTER APPROACH -------------------------
 // ! TLE
 // * kth Smallest = Max Heap
 // * TIME COMPLEXITY O(N^2 * log(k))
@@ -108,60 +113,28 @@ int smallestDistancePair2(std::vector<int> &nums, int k) {
   return pairsDiff[k - 1];
 }
 
-// * ------------------------- APPROACH 3B: Optimal APPROACH -------------------------`
-// * Count every possible abs diff of pair in a vector
-// * Eg: Nums = {1,6,1} & k = 3, therefore pairsCnt = {0: 1, 1: 0, 2: 0, 3: 0, 4: 0, 5: 2, 6: 0}
-// * TIME COMPLEXITY O(N^2) + O(maxEle)
-// * SPACE COMPLEXITY O(maxEle)
-int smallestDistancePair(std::vector<int> &nums, int k) {
-  int n = nums.size();
-
-  // * 1. Create a vector of size max element from nums vector
-  int maxEle = *std::max_element(nums.begin(), nums.end());
-  std::vector<int> pairsCnt(maxEle + 1, 0);
-
-  // * 2. Count abs diff pairs using pairsCnt vector
-  for (int i = 0; i < n; ++i) {
-    for (int j = i + 1; j < n; ++j) {
-      pairsCnt[std::abs(nums[j] - nums[i])]++;
-    }
-  }
-
-  // * 3. Find till what distance k > 0 
-  for (int d = 0; d < maxEle + 1; ++d) {
-    k -= pairsCnt[d];
-    if (k <= 0)
-      return d;
-  }
-
-  return -1;
-}
-
-// * ------------------------- APPROACH 3C: Most Optimal APPROACH -------------------------`
-
+// * ------------------------- APPROACH 3C: Most Optimal APPROACH -------------------------
 // * Find how many pairs are possible with abs diff less than or equal to maxDist
 // * Sliding window
-bool isPossible(std::vector<int> &nums, int k, int maxDist) {
+bool isPossible(std::vector<int> &nums, int max_pairs, int maxDist) {
   int n = nums.size();
-  int curPairs = 0;
+  int pairs = 0;
   int i = 0, j = 1;
   while (j < n) {  
     while (nums[j] - nums[i] > maxDist) {
       i++;
     }
-    curPairs += (j - i);
+    pairs += (j - i);
     j++;
   }
-
-  // std::cout << "dist: " << maxDist << ", pairs " << curPairs << std::endl;
-
-  return curPairs >= k;
+  // std::cout << "dist: " << maxDist << ", pairs " << pairs << std::endl;
+  return pairs >= max_pairs;
 }
 
 // * Sliding Window + Binary Search
 // * TIME COMPLEXITY O(n*log(n)) + O(n*log(r))
 // * SPACE COMPLEXITY O(1)
-int smallestDistancePair3(std::vector<int> &nums, int k) {
+int smallestDistancePair(std::vector<int> &nums, int k) {
   int n = nums.size();
 
   // * Sort the nums array O(n*log(n))
@@ -198,9 +171,8 @@ int main(void) {
 
   // int ans = bruteForce(nums, k);
   // int ans = betterApproach(nums, k);
-  // int ans = smallestDistancePair(nums, k);
+  int ans = smallestDistancePair(nums, k);
   // int ans = smallestDistancePair2(nums, k);
-  int ans = smallestDistancePair3(nums, k);
   std::cout << "Kth smallest distance " << ans << std::endl;
 
   return 0;

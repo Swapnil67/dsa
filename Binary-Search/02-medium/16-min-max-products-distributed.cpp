@@ -78,9 +78,11 @@ int minimizedMaximum(vector<int> quantities, int stores) {
 }
 
 int main(void) {
+  // * testcase 1
   int stores = 6;
   vector<int> quantities = {11, 6};
-
+  
+  // * testcase 2
   // int stores = 7;
   // vector<int> quantities = {15, 10, 10};
 

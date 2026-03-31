@@ -5,43 +5,49 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 typedef long long ll;
 
 // * 01 - Find Minimum in Rotated Sorted Array II
-// int findMinimum(std::vector<int> arr) {
+// int findMinimum(vector<int> arr) {
 // TODO
 // }
 
 // * 02 - Split Array Largest Sum
-// int splitArray(std::vector<int> &nums, int k) {
+// int splitArray(vector<int> &nums, int k) {
 // TODO
 // }
 
 // * 03 - Painter's Partition Problem
-// int findMinTimeToPaintBoards(std::vector<int> &boards, int painters) {
+// int findMinTimeToPaintBoards(vector<int> &boards, int painters) {
 // TODO
 // }
   
 // * 04 - Find K-th Smallest Pair Distance
-// int smallestDistancePair(std::vector<int> &nums, int k) {
+// int smallestDistancePair(vector<int> &nums, int k) {
 // TODO
 // }
   
 // * 05 - Median of Two Sorted Arrays
-// double findMedian(std::vector<int> &nums1, std::vector<int> &nums2) {
+// double findMedian(vector<int> &nums1, vector<int> &nums2) {
 // TODO
 // }
 
 // * 06 - K-th Element of Two Sorted Arrays
-// int kthElement(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
+// int kthElement(vector<int> &nums1, vector<int> &nums2, int k) {
 // TODO
 // }
 
@@ -50,8 +56,8 @@ typedef long long ll;
 // TODO Solve this on leetcode
 // }
 
-// * 08 - Find in Mountain Array
-// ll kthSmallestProduct(std::vector<int> &nums1, std::vector<int> &nums2, ll k) {
+// * 09 - Kth Smallest Product of Two Sorted Arrays
+// ll kthSmallestProduct(vector<int> &nums1, vector<int> &nums2, ll k) {
 // TODO
 // }
 
@@ -60,4 +66,5 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++17 practice.cpp -o output && ./output
+// * g++ --std=c++20 practice.cpp -o output && ./output
+

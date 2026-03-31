@@ -1,15 +1,16 @@
 /*
 * Leetcode - 410
 * Split Array Largest Sum
-* Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized.
-* Return the minimized largest sum of the split.
-
+*
+* Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any 
+* subarray is minimized. Return the minimized largest sum of the split.
+*
 * Example 1:
 * Input: nums = [7,2,5,10,8], k = 2
 * Output: 18
 * Explanation: There are four ways to split nums into two subarrays.
 * The best way is to split it into [7,2,5] and [10,8], where the largest sum among the two subarrays is only 18.
-
+*
 * https://leetcode.com/problems/split-array-largest-sum/
 * https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557
 */
@@ -19,17 +20,21 @@
 #include <iostream>
 #include <algorithm>
 
-// * ------------------------- Utility Functions -------------------------`
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
-int isValidPartition(std::vector<int> arr, int maxSum, int k) {
+int isValidPartition(vector<int> arr, int maxSum, int k) {
   int n = arr.size();
   long long curSum = 0;
   int splits = 1;
@@ -45,11 +50,11 @@ int isValidPartition(std::vector<int> arr, int maxSum, int k) {
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
-// * TIME COMPLEXITY O(log(total - max)) * O(N) 
+// * TIME COMPLEXITY O(nlog(total - max)) ~ O(nlogS)
 // * SPACE COMPLEXITY O(1)
-int splitArray(std::vector<int> a, int k) {
+int splitArray(vector<int> a, int k) {
   int n = a.size();
-  int l = *std::max_element(a.begin(), a.end());
+  int l = *max_element(a.begin(), a.end());
   int r = accumulate(a.begin(), a.end(), 0);
 
   while (l <= r) {
@@ -65,16 +70,17 @@ int splitArray(std::vector<int> a, int k) {
 }
 
 int main() {
-  std::cout << "Split Array Largest Sum" << std::endl;
-  int k = 2;
-  std::vector<int> arr = {7, 2, 5, 10, 8};
+  cout << "Split Array Largest Sum" << endl;
 
+  int k = 2;
+  vector<int> arr = {7, 2, 5, 10, 8};
+  
   // int k = 3;
-  // std::vector<int> arr = {1, 4, 4};
+  // vector<int> arr = {1, 4, 4};
   
   printArr(arr);
   int ans = splitArray(arr, k);
-  std::cout << "Largest minimum sum is " << ans << std::endl;
+  cout << "Largest minimum sum is " << ans << endl;
   
   return 0;
 }
