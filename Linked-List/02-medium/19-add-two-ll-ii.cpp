@@ -22,43 +22,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
-
-class ListNode {
-  public:
-  int data;
-  ListNode* next;
-
-  ListNode(int d) {
-    this->data = d;
-    this->next = NULL;
-  }
-};
-
-// * ------------------- Utility Functions ---------------------
-
-ListNode* arrayToLL(std::vector<int> arr) {
-  if(arr.size() == 0) {
-    return NULL;
-  }
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* temp = head;
-  for (int i = 1; i < arr.size(); i++) {
-    ListNode *newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
-  }
-  return head;
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
+#include "../common.hpp"
 
 ListNode* reverseLL(ListNode* head) {
   if (head == nullptr || head->next == nullptr)
@@ -85,8 +49,10 @@ ListNode* bruteForce(ListNode* h1, ListNode* h2) {
   // * Edge Cases
   if (!h1 && !h2)
     return h1;
+
   if (!h1 && h2)
     return h2;
+    
   if (h1 && !h2)
     return h1;
 

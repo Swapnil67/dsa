@@ -22,48 +22,7 @@
 
 #include <vector>
 #include <iostream>
-
-class ListNode {
-  public:
-  int data;
-  ListNode* next;
-
-  ListNode(int d) {
-    this->data = d;
-    this->next = NULL;
-  }
-
-  ListNode(int d, ListNode* n) {
-    this->data = d;
-    this->next = n;
-  }
-};
-
-// * ------------------- Utility Functions ---------------------
-
-ListNode* arrayToLL(std::vector<int> arr) {
-  if(arr.size() == 0) {
-    return NULL;
-  }
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* temp = head;
-  for (int i = 1; i < arr.size(); i++) {
-    ListNode *newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
-  }
-  return head;
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
+#include "../common.hpp"
 
 // * ------------------ APPROACH 2: Brute Force ---------------------
 // * TIME COMPLEXITY O(max(h1, h1))
@@ -74,14 +33,14 @@ ListNode* bruteForce(ListNode* head) {
 
   // * Step 1. Create a vector from given LL
   ListNode* temp = head;
-  std::vector<int> arr;
+  vector<int> arr;
   while (temp) {
     arr.push_back(temp->data);
     temp = temp->next;
   }
 
   // * Step 2. Separate even & odd indices nodes from arr
-  std::vector<int> even_arr, odd_arr;
+  vector<int> even_arr, odd_arr;
   for (int i = 1; i <= arr.size(); ++i) {
     if (i % 2 == 0)
       even_arr.push_back(arr[i - 1]);
@@ -107,8 +66,8 @@ ListNode* bruteForce(ListNode* head) {
 // * TIME COMPLEXITY O(max(h1, h1))
 // * SPACE COMPLEXITY O(max(h1, h1))
 ListNode* addTwoLL(ListNode* h1, ListNode* h2) {
-  ListNode* sumHead = new ListNode(0);
-  ListNode* temp = sumHead;
+  ListNode* ans = new ListNode(0);
+  ListNode* mover = ans;
   int carry = 0;
   while (h1 != NULL || h2 != NULL) {
     int sum = carry;
@@ -125,43 +84,43 @@ ListNode* addTwoLL(ListNode* h1, ListNode* h2) {
 
     ListNode *node = new ListNode(sum % 10);
     carry = sum / 10;
-    temp->next = node;
-    temp = node;
+    mover->next = node;
+    mover = node;
   }
 
   // * check if carry set
   if(carry > 0) {
     ListNode* carryNode = new ListNode(carry);
-    temp->next = carryNode;
+    mover->next = carryNode;
   }
 
-  return sumHead->next;
+  return ans->next;
 }
 
 int main() {
   // * testcase 1
-  // std::vector<int> nums1 = { 1, 2, 3 };
-  // std::vector<int> nums2 = { 4, 5, 9 };
+  // vector<int> nums1 = { 1, 2, 3 };
+  // vector<int> nums2 = { 4, 5, 9 };
 
   // * testcase 2
-  // std::vector<int> nums1 = { 0, 1 };
-  // std::vector<int> nums2 = { 0 };
+  // vector<int> nums1 = { 0, 1 };
+  // vector<int> nums2 = { 0 };
 
   // * testcase 2
-  std::vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
-  std::vector<int> nums2 = {9, 9, 9, 9};
+  vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
+  vector<int> nums2 = {9, 9, 9, 9};
 
   ListNode* n1_head = arrayToLL(nums1);
   ListNode* n2_head = arrayToLL(nums2);
 
-  std::cout<<"First Linked List"<<std::endl;
+  cout<<"First Linked List"<<endl;
   printLL(n1_head);
-  std::cout<<"Second Linked List"<<std::endl;
+  cout<<"Second Linked List"<<endl;
   printLL(n2_head);
 
   ListNode* addHead = addTwoLL(n1_head, n2_head);
-  std::cout<<"-----------------------------------------"<<std::endl;
-  // std::cout<<"Sum of two Linked List"<<std::endl;
+  cout<<"-----------------------------------------"<<endl;
+  // cout<<"Sum of two Linked List"<<endl;
   printLL(addHead);
 
   return 0;

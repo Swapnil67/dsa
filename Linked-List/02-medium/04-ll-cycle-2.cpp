@@ -1,23 +1,24 @@
-/**
- * * Leetcode - 142
- * * Linked List Cycle II
- * * You are given a singly linked list that may or may not contain a cycle. 
- * * You are supposed to return the node where the cycle begins, if a cycle exists, else return 'NULL'.
+/*
+ * Leetcode - 142
+ * Linked List Cycle II
  * 
- * * Example 1
- * * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 1
- * * Output : 1
-
- * * Example 2
- * * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 3
- * * Output : 3
+ * You are given a singly linked list that may or may not contain a cycle. 
+ * You are supposed to return the node where the cycle begins, if a cycle exists, else return 'NULL'.
  * 
- * * Example 3
- * * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
- * * Output : NULL
+ * Example 1
+ * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 1
+ * Output : 1
 
- * * https://leetcode.com/problems/linked-list-cycle-ii/description/
- * * https://www.naukri.com/code360/problems/linked-list-cycle-ii_1112628
+ * Example 2
+ * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 3
+ * Output : 3
+ * 
+ * Example 3
+ * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
+ * Output : NULL
+
+ * https://leetcode.com/problems/linked-list-cycle-ii/description/
+ * https://www.naukri.com/code360/problems/linked-list-cycle-ii_1112628
 */
 
 // ! Microsoft
@@ -25,50 +26,7 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
-
-class ListNode {
-  public: 
-    int data;
-    ListNode* next;
-
-    ListNode(int d) {
-      this->data = d;
-      this->next = nullptr;
-    }
-
-    ListNode(int d, ListNode* n) {
-      this->data = d;
-      this->next = n;
-    }
-};
-
-// * ------------------- Utility Functions ---------------------
-
-// * Array to LL
-ListNode* arrayToLL(std::vector<int>arr) {
-  if(!arr.size()) return nullptr;
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* temp = head;
-
-  for(int i=1; i<arr.size(); i++) {
-    ListNode* newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
-  }
-
-  return head;
-}
-
-// * Traverse the LL
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while(temp) {
-    std::cout<<temp->data<<" ";
-    temp = temp->next;
-  }
-  std::cout<<std::endl;
-}
+#include "../common.hpp"
 
 // * Make Loop in LL
 ListNode *makeLoop(ListNode *head) {
@@ -99,10 +57,11 @@ ListNode* bruteForce(ListNode* head) {
     return nullptr;
 
   ListNode* temp = head;
-  std::unordered_map<ListNode*, ListNode*> nodeMap;
-  
+  unordered_map<ListNode *, ListNode *> nodeMap;
+
   // * O(N)
-  while(temp) {
+  while(temp)
+  {
     // * O(logN)
     if (nodeMap.count(temp))
       return temp;
@@ -127,14 +86,10 @@ ListNode* detectCycle(ListNode* head) {
 
   while (fast && fast->next) {
     slow = slow->next;
-    fast = fast->next;
-    if (fast) {
-      fast = fast->next;
-    }
-    
-    if (slow == fast) {
+    fast = fast->next->next;
+
+    if (slow == fast)
       break;
-    };
   }
 
   // * If Loop
@@ -146,7 +101,7 @@ ListNode* detectCycle(ListNode* head) {
 }
 
 int main() {
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  vector<int> arr = {1, 2, 3, 4, 5};
   ListNode* head = arrayToLL(arr);
   // printLL(head);
 
@@ -156,9 +111,9 @@ int main() {
   // ListNode *loopStart = bruteForce(head);
   ListNode *loopStart = detectCycle(head);
   if (loopStart == nullptr) {
-    std::cout << "Linear Linked List" << std::endl;
+    cout << "Linear Linked List" << endl;
   } else {
-    std::cout << "Start of Loop " << loopStart->data<<std::endl;
+    cout << "Start of Loop " << loopStart->data << endl;
   }
   
   return 0;

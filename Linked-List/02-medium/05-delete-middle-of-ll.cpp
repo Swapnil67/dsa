@@ -23,48 +23,7 @@
 
 #include <vector>
 #include <iostream>
-
-class ListNode {
-  public:
-    int data;
-    ListNode* next;
-  
-  ListNode(int d) {
-    this->data = d;
-    this->next = nullptr;
-  }
-
-  ListNode(int d, ListNode* n) {
-    this->data = d;
-    this->next = n;
-  }
-};
-
-// * ------------------- Utility Functions ---------------------
-
-ListNode* arrayToLL(std::vector<int> arr) {
-  if(!arr.size()) return nullptr;
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* temp = head;
-
-  for(int i=1; i<arr.size(); i++) {
-    ListNode* newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
-  }
-
-  return head;
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
+#include "../common.hpp"
 
 int countLL(ListNode* head) {
   ListNode* temp = head;
@@ -108,7 +67,7 @@ ListNode* bruteForce(ListNode* head) {
 // * SPACE COMPLEXITY O(1)
 ListNode* deleteMiddle(ListNode* head) {
   if (!head || !head->next)
-    return head;
+    return nullptr;
 
   ListNode* slow = head;
   ListNode* fast = head;

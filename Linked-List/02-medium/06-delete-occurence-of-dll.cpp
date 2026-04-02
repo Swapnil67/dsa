@@ -21,6 +21,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 class DLListNode {
   public: 
     int data;
@@ -46,7 +48,7 @@ class DLListNode {
 
 // * ------------------- Utility Functions ---------------------
 
-DLListNode* arrayToDLL(std::vector<int> arr) {
+DLListNode* arrayToDLL(vector<int> arr) {
   if(!arr.size()) return nullptr;
   DLListNode* head = new DLListNode(arr[0]);
   DLListNode* back = head;
@@ -62,10 +64,10 @@ DLListNode* arrayToDLL(std::vector<int> arr) {
 void printDLL(DLListNode* head) {
   DLListNode* temp = head;
   while(temp) {
-    std::cout<<temp->data<<" ";
+    cout<<temp->data<<" ";
     temp = temp->next;
   }
-  std::cout<<std::endl;
+  cout<<endl;
 }
 
 // * TIME COMPLEXITY  O(N)
@@ -104,7 +106,7 @@ DLListNode* deleteOccurences(DLListNode* head, int k) {
       if (back)
         back->next = front;
 
-      std::free(del_node);
+      free(del_node);
       temp = front;
     }
     else {
@@ -116,19 +118,19 @@ DLListNode* deleteOccurences(DLListNode* head, int k) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {2, 1, 2, 3, 2, 4, 5, 2};
+  // vector<int> arr = {2, 1, 2, 3, 2, 4, 5, 2};
 
   // * testcase 2
-  // std::vector<int> arr = {2, 2, 2, 2};
+  // vector<int> arr = {2, 2, 2, 2};
 
   // * testcase 3
-  std::vector<int> arr = {2};
+  vector<int> arr = {2};
 
   DLListNode* head = arrayToDLL(arr);
-  std::cout << "Before Deleting" << std::endl;
+  cout << "Before Deleting" << endl;
   printDLL(head);
 
-  std::cout << "After Deleting" << std::endl;
+  cout << "After Deleting" << endl;
   head = deleteOccurences(head, 2);
   printDLL(head);
 

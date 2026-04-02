@@ -21,48 +21,9 @@
 
 #include <vector>
 #include <iostream>
+#include "../common.hpp"
 
-class ListNode {
-  public:
-  int data;
-  ListNode* next;
-
-  ListNode(int d) {
-    this->data = d;
-    this->next = NULL;
-  }
-
-  ListNode(int d, ListNode* n) {
-    this->data = d;
-    this->next = n;
-  }
-};
-
-// * ------------------- Utility Functions ---------------------
-
-ListNode* arrayToLL(std::vector<int> arr) {
-  if(arr.size() == 0) {
-    return NULL;
-  }
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* temp = head;
-  for (int i = 1; i < arr.size(); i++) {
-    ListNode *newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
-  }
-  return head;
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
+using namespace std;
 
 ListNode *reverse_ll(ListNode *head) {
   ListNode *tail = nullptr;
@@ -80,8 +41,8 @@ ListNode *reverse_ll(ListNode *head) {
 
 // * ------------------ Optimal ---------------------
 
-// * TIME COMPLEXITY O(max(h1, h1))
-// * SPACE COMPLEXITY O(max(h1, h1))
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)
 ListNode* addOne(ListNode* head) {
   if (!head)
     return head;
@@ -98,7 +59,7 @@ ListNode* addOne(ListNode* head) {
 
   while (carry && temp) { // * if carry 
     int val = temp->data;
-    // std::cout << val << std::endl;
+    // cout << val << endl;
     temp->data = (val + 1) % 10;
     carry = (val + 1) / 10;
     prev = temp;
@@ -116,21 +77,21 @@ ListNode* addOne(ListNode* head) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> nums1 = {1, 2, 3};
+  // vector<int> nums1 = {1, 2, 3};
 
   // * testcase 2
-  // std::vector<int> nums1 = {9, 9};
+  // vector<int> nums1 = {9, 9};
 
   // * testcase 2
-  std::vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
+  vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
 
   ListNode* n1_head = arrayToLL(nums1);
 
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(n1_head);
 
   ListNode* addHead = addOne(n1_head);
-  std::cout<<"------------------- Answer ----------------------"<<std::endl;
+  cout<<"------------------- Answer ----------------------"<<endl;
   printLL(addHead);
 
   return 0;

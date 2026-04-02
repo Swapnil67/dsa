@@ -19,47 +19,7 @@
 
 #include <vector>
 #include <iostream>
-
-class ListNode {
-  public:
-    int data;
-    ListNode* next;
-    
-    ListNode(int val) {
-      this->data = val;
-      this->next = nullptr;
-    }
-    
-    ListNode(int val, ListNode* node) {
-      this->data = val;
-      this->next = node;
-    }
-};
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while(temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode* arrayToLL(std::vector<int> &arr) {
-  if (!arr.size())
-    return nullptr;
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* mover = head;
-
-  for (int i = 1; i < arr.size(); ++i) {
-    ListNode* node = new ListNode(arr[i]);
-    mover->next = node;
-    mover = node;
-  }
-
-  return head;
-}
+#include "../common.hpp"
 
 ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
 

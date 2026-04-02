@@ -8,6 +8,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 class MyCircularDeque {
   struct DLLNode {
     int data;
@@ -125,15 +127,15 @@ public:
 
 int main(void) {
  MyCircularDeque* obj = new MyCircularDeque(5);
- std::cout << "Circular Deque" << std::endl;
- std::cout << "obj->insertFront(1):     " << obj->insertFront(1) << std::endl; // * return true
- std::cout << "obj->insertLast(2):      " << obj->insertLast(2) << std::endl;  // * return true
- std::cout << "obj->deleteFront():      " << obj->deleteFront() << std::endl;  // * return true
- std::cout << "obj->deleteLast():       " << obj->deleteLast() << std::endl;    // * return true
- std::cout << "obj->getFront():         " << obj->getFront() << std::endl;        // * return -1
- std::cout << "obj->getRear():          " << obj->getRear() << std::endl;          // * return -1
- std::cout << "obj->isEmpty():          " << obj->isEmpty() << std::endl;          // * return true
- std::cout << "obj->isFull():           " << obj->isFull() << std::endl;             // * return false
+ cout << "Circular Deque" << endl;
+ cout << "obj->insertFront(1):     " << obj->insertFront(1) << endl; // * return true
+ cout << "obj->insertLast(2):      " << obj->insertLast(2) << endl;  // * return true
+ cout << "obj->deleteFront():      " << obj->deleteFront() << endl;  // * return true
+ cout << "obj->deleteLast():       " << obj->deleteLast() << endl;    // * return true
+ cout << "obj->getFront():         " << obj->getFront() << endl;        // * return -1
+ cout << "obj->getRear():          " << obj->getRear() << endl;          // * return -1
+ cout << "obj->isEmpty():          " << obj->isEmpty() << endl;          // * return true
+ cout << "obj->isFull():           " << obj->isFull() << endl;             // * return false
 
  return 0;
 }

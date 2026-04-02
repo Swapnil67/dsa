@@ -1,6 +1,7 @@
 /*
  * Leetcode - 622 
  * Design Circular Queue
+ * 
  * Design your implementation of the circular queue. The circular queue is a linear data structure in which 
  * the operations are performed based on FIFO (First In First Out) principle, and the last position is 
  * connected back to the first position to make a circle. It is also called "Ring Buffer".
@@ -14,6 +15,8 @@
 
 #include <vector>
 #include <iostream>
+
+using namespace std;
 
 class MyCircularQueue {
   struct DLLNode {
@@ -107,24 +110,24 @@ int main(void) {
   // myCircularQueue->enQueue(3);                         // return True
   // myCircularQueue->enQueue(4);                         // return False
   // int ans = myCircularQueue->Rear();                   // return 3
-  // std::cout << "Rear value : " << ans << std::endl;
+  // cout << "Rear value : " << ans << endl;
   // bool isFull = myCircularQueue->isFull();             // return True
-  // std::cout << "Is Full " << isFull << std::endl;
+  // cout << "Is Full " << isFull << endl;
   // myCircularQueue->deQueue();                          // return True
   // myCircularQueue->enQueue(4);                         // return True
   // ans = myCircularQueue->Rear();                       // return 4
-  // std::cout << "Rear value : " << ans << std::endl;
+  // cout << "Rear value : " << ans << endl;
   
   MyCircularQueue *myCircularQueue = new MyCircularQueue(3);
   myCircularQueue->enQueue(1);                      // return True
   int ans = myCircularQueue->Rear();                // return 3
-  std::cout << "Rear value : " << ans << std::endl;
+  cout << "Rear value : " << ans << endl;
   bool isFull = myCircularQueue->isFull();          // return True
-  std::cout << "Is Full " << isFull << std::endl;
+  cout << "Is Full " << isFull << endl;
   myCircularQueue->deQueue();                       // return True
   myCircularQueue->enQueue(4);                      // return True
   ans = myCircularQueue->Rear();                // return 4
-  std::cout << "Rear value : " << ans << std::endl;
+  cout << "Rear value : " << ans << endl;
 
   return 0;
 }

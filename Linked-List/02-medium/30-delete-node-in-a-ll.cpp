@@ -9,20 +9,15 @@
 
 #include <vector>
 #include <iostream>
+#include "../common.hpp"
 
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
+// * Copy the next node to given node and then we can delete the next node easily.
+// * TIME COMPLEXITY O(1)
+// * SPACE COMPLEXITY O(1)
+void deleteNode(ListNode *node) {
+  node->data = node->next->data; // * copying the next node value
+  node->next = node->next->next;   // * deleting the next node
 }
-
-// TODO
 
 int main(void) {
   return 0;

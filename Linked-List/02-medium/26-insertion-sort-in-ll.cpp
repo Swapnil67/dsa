@@ -17,54 +17,14 @@
  * https://www.geeksforgeeks.org/problems/insertion-sort-for-singly-linked-list/1
 */
 
+// ! Amazon, Google, Meta, Microsoft
+
 #include <vector>
 #include <climits>
 #include <iostream>
+#include "../common.hpp"
 
-struct ListNode {
-  public:
-    int data;
-    ListNode* next;
-
-    ListNode(int val) {
-      data = val;
-      next = nullptr;
-    }
-};
-
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  printf("\n");
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode *arrayToLL(std::vector<int> &nums) {
-  int n = nums.size();
-  if (n == 0)
-    return nullptr;
-
-  ListNode* head = new ListNode(nums[0]);
-  ListNode* mover = head;
-
-  for (int i = 1; i < n; ++i) {
-    ListNode* newNode = new ListNode(nums[i]);
-    mover->next = newNode;
-    mover = newNode;
-  }
-
-  return head;
-} 
+using namespace std;
 
 // * ------------------ Optimal Approach ---------------------
 // * TIME COMPLEXITY  O(N^2)
@@ -79,7 +39,7 @@ ListNode* insertionSortList(ListNode* head) {
   ListNode* prev = dummy;
   ListNode* cur = dummy->next;
   while (cur) {
-    // * cur node is greater than prev
+    // * cur node is greater than prev (Already Sorted)
     if (cur->data > prev->data) {
       prev = cur;
       cur = cur->next;

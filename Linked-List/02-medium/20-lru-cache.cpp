@@ -38,7 +38,7 @@ public:
   }
 };
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Use pair of vector
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N)
@@ -86,7 +86,7 @@ public:
   }
 };
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Use DLL
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
@@ -124,8 +124,6 @@ public:
     }
 
     int get(int key) {
-      // std::cout << "--- get ---" << std::endl;
-      // std::cout << "cache size " << cache.size() << std::endl;
       // * cache does not exits
       if (!cache.count(key))
         return -1;
@@ -134,33 +132,30 @@ public:
       deleteNode(node);
       insertAtHead(node);
 
-      // std::cout << node->data << std::endl;
       return node->data;
     }
 
     void put(int key, int value) {
-        // std::cout << "put" << std::endl;
-        if (cache.count(key) > 0) {
-          // * Update the existing node
-          ListNode* node = cache[key];
-          node->data = value;
-          cache[key] = node;
-          
-          // * Update the LRU DLL
+      if (cache.count(key) > 0) {
+        // * Update the existing node
+        ListNode* node = cache[key];
+        node->data = value;
+        cache[key] = node;
+        
+        // * Update the LRU DLL
+        deleteNode(node);
+        insertAtHead(node);
+      } else {
+        // * Cache is full remove LRU node
+        if (n == cache.size()) { 
+          ListNode *node = tail->prev;
+          cache.erase(node->key);
           deleteNode(node);
-          insertAtHead(node);
-        } else {
-          // std::cout << "cache size: " << cache.size() << std::endl;
-          if (n == cache.size()) { // * Cache is full remove LRU node
-                ListNode* node = tail->prev;
-                // std::cout << "Erase node: " << node->data << std::endl;
-                cache.erase(node->key);
-                deleteNode(node);
-            }
-            ListNode* newNode = new ListNode(key, value);
-            insertAtHead(newNode);
-            cache[key] = newNode;
         }
+        ListNode *newNode = new ListNode(key, value);
+        insertAtHead(newNode);
+        cache[key] = newNode;
+      }
     }
 };
 

@@ -1,23 +1,23 @@
-/**
- * * Leetcode - 19
- * * Remove Nth Node From End of List
+/*
+ * Leetcode - 19
+ * Remove Nth Node From End of List
  * 
- * * Given the head of a linked list, remove the nth node from the end of the list and return its head.
-
- * * Example 1
- * * Input  : head = [1,2,3,4,5], n = 2
- * * Output : [1,2,3,5]
-
- * * Example 2
- * * Input  : head = [1], n = 1
- * * Output : []
-
- * * Example 3
- * * Input  : head = [1,2], n = 1
- * * Output : [1]
-
- * * https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
- * * https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912
+ * Given the head of a linked list, remove the nth node from the end of the list and return its head.
+ * 
+ * Example 1
+ * Input  : head = [1,2,3,4,5], n = 2
+ * Output : [1,2,3,5]
+ * 
+ * Example 2
+ * Input  : head = [1], n = 1
+ * Output : []
+ * 
+ * Example 3
+ * Input  : head = [1,2], n = 1
+ * Output : [1]
+ * 
+ * https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+ * https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912
 */
 
 // ! Microsoft, Amazon, Meta, Oracle
@@ -25,43 +25,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
-
-// struct ListNode ListNode;
-
-struct ListNode {
-  public:
-    int data;
-    ListNode* next;
-
-    ListNode(int val) {
-      data = val;
-      next = nullptr;
-    }
-};
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode* arrayToLL(std::vector<int> &arr) {
-  ListNode *head = new ListNode(arr[0]);
-  ListNode *mover = head;
-
-  int n = arr.size();
-  
-  for(int i = 1; i < n; ++i) {
-    ListNode *node = new ListNode(arr[i]);
-    mover->next = node;
-    mover = node;
-  }
-
-  return head;
-}
+#include "../common.hpp"
 
 int count_ll(ListNode *head) {
   ListNode *temp = head;
@@ -91,7 +55,7 @@ ListNode* reverseLL(ListNode* node) {
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head, int n) {
   // * 1. Push all elements to the stack
-  std::stack<int> st;
+  stack<int> st;
   ListNode* temp = head;
   while (temp) {
     st.push(temp->data);
@@ -102,10 +66,8 @@ ListNode* bruteForce(ListNode* head, int n) {
   ListNode* new_head = new ListNode(-1);
   ListNode* mover = new_head;
 
-  int i = 0;
+  int i = 1;
   while (!st.empty()) {
-    i++;
-
     int val = st.top();
     st.pop();
 
@@ -116,6 +78,7 @@ ListNode* bruteForce(ListNode* head, int n) {
     ListNode* node = new ListNode(val);
     mover->next = node;
     mover = node;
+    i++;
   }
 
   // * 3. Reverse the newly created LL && return
@@ -130,21 +93,23 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
   if (!head)
       return head;
 
+  // * Count LL Nodes
   int cnt = count_ll(head);
-  if (cnt == n) { // * Since we are removing from end
-      // * Remove Head
-      ListNode* new_head = head->next;
-      delete head;
-      return new_head;
+
+  // * Since we are removing from end
+  if (cnt == n) { 
+    // * Remove Head
+    ListNode *new_head = head->next;
+    delete head;
+    return new_head;
   }
-  
+
   ListNode* temp = head;
 
   // * Traverse to the node just before the one to delete
-  int node_idx = (cnt - n) - 1;
-  while (node_idx != 0) {
-      temp = temp->next;
-      node_idx--;
+  int k = (cnt - n) - 1;
+  while (k--) {
+    temp = temp->next;
   }
 
   // * Delete the Nth node from the end
@@ -168,6 +133,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
     fastp = fastp->next;
   }
 
+  // * Remove the head pointer
   if (!fastp)
     return head->next;
     
@@ -186,16 +152,16 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 
 int main(void) {
   // int n = 2;
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // vector<int> arr = {1, 2, 3, 4, 5};
 
   // int n = 1;
-  // std::vector<int> arr = {1};
+  // vector<int> arr = {1};
 
   int n = 1;
-  std::vector<int> arr = {1, 2};
+  vector<int> arr = {1, 2};
 
   ListNode* head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
   // ListNode *ans = bruteForce(head, n);

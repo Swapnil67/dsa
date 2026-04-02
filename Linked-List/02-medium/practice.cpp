@@ -1,166 +1,11 @@
-
 #include <stack>
 #include <vector>
 #include <climits>
 #include <iostream>
 #include <unordered_map>
+#include "../common.hpp"
 
-class ListNode {
-  public:
-  int data;
-  ListNode* next;
-
-  ListNode(int d) {
-    this->data = d;
-    this->next = NULL;
-  }
-
-  ListNode(int d, ListNode* n) {
-    this->data = d;
-    this->next = n;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
-}
-
-ListNode* arrayToLL(std::vector<int> &arr) {
-  int n = arr.size();
-
-  ListNode *head = new ListNode(arr[0]);
-  ListNode* mover = head;
-  for (int i = 1; i < n; ++i) {
-    ListNode *newNode = new ListNode(arr[i], nullptr);
-    mover->next = newNode;
-    mover = newNode;
-  }
-  return head;
-}
-
-int lengthOfLL(ListNode *node) {
-  ListNode* temp = node;
-  int c = 0;
-  while(temp) {
-    c++;
-    temp = temp->next;
-  }
-  return c;
-}
-
-template <typename T>
-void printLL(T* head) {
-  T *temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-template <typename T>
-class DLListNode {
-public:
-  T data;
-  DLListNode* next;
-  DLListNode* prev;
-
-  DLListNode(T d) {
-    this->data = d;
-    this->next = NULL;
-    this->prev = NULL;
-  }
-
-  DLListNode(T d, DLListNode *n, DLListNode *p) {
-    this->data = d;
-    this->next = n;
-    this->prev = p;
-  }
-};
-
-template <typename T>
-DLListNode<T> *arrayToDLL(std::vector<T> &arr) {
-  int n = arr.size();
-  if (!n)
-    return nullptr;
-
-  DLListNode<T>* head = new DLListNode<T>(arr[0]);
-  DLListNode<T>* mover = head;
-
-  for (int i = 1; i < n; ++i) {
-    DLListNode<T> *new_node = new DLListNode<T>(arr[i], nullptr, mover);
-    mover->next = new_node;
-    mover = new_node;
-  }
-
-  return head;
-}
-
-template <typename T>
-void printDLL(DLListNode<T> *head) {
-  DLListNode<T> *temp = head;
-  while (temp)
-  {
-    std::cout << temp->data << " ";
-    temp = temp->next;
-  }
-  std::cout << std::endl;
-}
-
-void swap(int &a, int &b) {
-  int temp = a;
-  a = b;
-  b = temp;
-}
-
-// * 21 - Swap Nodes in Pairs
-// ListNode *swapPairs(ListNode *head) {
-// TODO
-// }
-
-// * 22 - Sort List
-// ListNode *sortList(ListNode *head) {
-// TODO 
-// }
-
-// * 23 - Partition List
-// ListNode *partition(ListNode *head, int x) {
-// TODO
-// }
-
-// * 24 - Rotate List
-// ListNode *rotateRight(ListNode *head, int k) {
-// TODO
-// }
-
-// * 25 - Design Circular Queue
-// TODO (Do this on leetcode)
-
-// * 26 - Insertion Sort List
-// ListNode* insertionSortList(ListNode* head) {
-// TODO
-// }
-
-// * 27 - Split Linked List in Parts
-// std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
-// TODO
-// }
-
-// * 28 - Add 1 to a Linked List Number
-// ListNode* addOne(ListNode* head) {
-// TODO
-// }
-
-// * 29 - Design Circular Deque
-// TODO (Do this on leetcode)
+using namespace std;
 
 // * --------------------------------------------------------------------------------
 
@@ -205,7 +50,7 @@ void swap(int &a, int &b) {
 // }
 
 // * 09 - Find the Minimum and Maximum Number of Nodes Between Critical Points
-// std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+// vector<int> nodesBetweenCriticalPoints(ListNode* head) {
 // TODO
 // }
 
@@ -230,12 +75,12 @@ void swap(int &a, int &b) {
 // }
 
 // * 14 - Linked List Components
-// int numComponents(ListNode *head, std::vector<int> &nums) {
+// int numComponents(ListNode *head, vector<int> &nums) {
 // TODO
 // }
 
 // * 15 - Delete Nodes From Linked List Present in Array
-// ListNode *modifiedList(std::vector<int> &nums, ListNode *head) {
+// ListNode *modifiedList(vector<int> &nums, ListNode *head) {
 // TODO
 // }
 
@@ -259,6 +104,52 @@ void swap(int &a, int &b) {
 
 // * 20 - LRU Cache
 // TODO (Do this on leetcode)
+
+// * 21 - Swap Nodes in Pairs
+// ListNode *swapPairs(ListNode *head) {
+// TODO
+// }
+
+// * 22 - Sort List
+// ListNode *sortList(ListNode *head) {
+// TODO 
+// }
+
+// * 23 - Partition List
+// ListNode *partition(ListNode *head, int x) {
+// TODO
+// }
+
+// * 24 - Rotate List
+// ListNode *rotateRight(ListNode *head, int k) {
+// TODO
+// }
+
+// * 25 - Design Circular Queue
+// TODO (Do this on leetcode)
+
+// * 26 - Insertion Sort List
+// ListNode* insertionSortList(ListNode* head) {
+// TODO
+// }
+
+// * 27 - Split Linked List in Parts
+// vector<ListNode *> splitListToParts(ListNode *head, int k) {
+// TODO
+// }
+
+// * 28 - Add 1 to a Linked List Number
+// ListNode* addOne(ListNode* head) {
+// TODO
+// }
+
+// * 29 - Design Circular Deque
+// TODO (Do this on leetcode)
+
+// * 30 - Delete Node in a Linked List
+// void deleteNode(ListNode *node) {
+// TODO
+// }
 
 int main(void) {
   return 0;

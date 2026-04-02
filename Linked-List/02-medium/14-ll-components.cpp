@@ -21,44 +21,12 @@
  * https://leetcode.com/problems/linked-list-components/description/
 */
 
+// ! Google
+
 #include <vector>
 #include <iostream>
 #include <unordered_set>
-
-struct ListNode {
-  public:
-    int data;
-    ListNode* next;
-
-    ListNode(int val) {
-      data = val;
-      next = nullptr;
-    }
-};
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode* arrayToLL(std::vector<int> &arr) {
-  ListNode *head = new ListNode(arr[0]);
-  ListNode *mover = head;
-
-  int n = arr.size();
-  
-  for(int i = 1; i < n; ++i) {
-    ListNode *node = new ListNode(arr[i]);
-    mover->next = node;
-    mover = node;
-  }
-
-  return head;
-}
+#include "../common.hpp"
 
 // * ------------------ Optimal Approach ---------------------
 // * Use set data structure

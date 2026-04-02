@@ -21,48 +21,7 @@
 
 #include <vector>
 #include <iostream>
-
-class ListNode {
-  public:
-    int data;
-    ListNode* next;
-
-    ListNode(int d) {
-      this->data = d;
-      this->next = nullptr;
-    }
-
-    ListNode(int d, ListNode* n) {
-      this->data = d;
-      this->next = n;
-    }
-
-};
-
-// * ------------------- Utility Functions ---------------------
-
-// * Convert array to LL
-ListNode* arrayToLL(std::vector<int> arr) {
-  if(arr.size() == 0) return nullptr;
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* temp = head;
-  for(int i=1; i<arr.size(); i++) {
-    ListNode* newNode = new ListNode(arr[i]);
-    temp->next = newNode;
-    temp = newNode;
-  }
-  return head;
-}
-
-// * Traverse the LL
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
+#include "../common.hpp"
 
 // * Re Arrange Even and Odd Indices
 
@@ -76,7 +35,7 @@ ListNode* bruteForce(ListNode* head) {
   // * Insert Odd index in arr O(N/2)
   while (temp) {
     arr.push_back(temp->data);
-    if(temp->next == nullptr) {
+    if (temp->next == nullptr) {
       break;
     }
     temp = temp->next->next;
@@ -84,7 +43,7 @@ ListNode* bruteForce(ListNode* head) {
 
   // * Insert Even index in arr O(N/2)
   temp = head->next;
-  while(temp) {
+  while (temp) {
     arr.push_back(temp->data);
     if(temp->next == nullptr) {
       break;
@@ -147,14 +106,15 @@ ListNode* oddEvenList(ListNode* head) {
   ListNode* even = head->next;
   ListNode* even_head = head->next;
 
-  while(even != NULL && even->next != NULL) {
+  // * Since even pointer will end first we'll loop over even node
+  while (even && even->next) {
     // * Note this order matters
     odd->next = odd->next->next;
     even->next = even->next->next;
 
     odd = odd->next;
     even = even->next;
-  }  
+  }
   odd->next = even_head;
   return head;
 }

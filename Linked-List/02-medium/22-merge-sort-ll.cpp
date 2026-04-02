@@ -24,80 +24,9 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "../common.hpp"
 
-struct ListNode {
-  public:
-    int data;
-    ListNode* next;
-
-    ListNode(int val) {
-      data = val;
-      next = nullptr;
-    }
-};
-
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  printf("\n");
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode *arrayToLL(std::vector<int> &arr) {
-  int n = arr.size();
-  if (n == 0)
-    return nullptr;
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* mover = head;
-
-  for(int i = 1; i < n; ++i) {
-    ListNode *newNode = new ListNode(arr[i]);
-    mover->next = newNode;
-    mover = newNode;
-  }
-
-  return head;
-}
-
-// * ------------------ Brute Force Approach ---------------------
-// * TIME COMPLEXITY  O(N) + O(NlogN) + O(N)
-// * SPACE COMPLEXITY O(N)
-ListNode* bruteForce(ListNode* head) {
-  if (!head || !head->next)
-    return head;
-
-  // * 1. Create the array of LL nodes
-  std::vector<int> arr;
-  ListNode* temp = head;
-  while(temp) {
-    arr.push_back(temp->data);
-    temp = temp->next;
-  }
-
-  // * 2. Sort the array
-  std::sort(arr.begin(), arr.end());
-
-  // * 3. Update the existing LL with sorted values
-  int i = 0;
-  temp = head;
-  while (temp) {
-    temp->data = arr[i++];
-    temp = temp->next;
-  }
-
-  return head;
-}
+using namespace std;
 
 ListNode* findMiddle(ListNode* head) {
   ListNode* slow = head;
@@ -143,6 +72,36 @@ ListNode* mergeSort(ListNode* h1, ListNode* h2) {
   return dummy->next;
 }
 
+// * ------------------ Brute Force Approach ---------------------
+// * Create Array from LL and sort the Array.
+// * TIME COMPLEXITY  O(N) + O(NlogN) + O(N)
+// * SPACE COMPLEXITY O(N)
+ListNode* bruteForce(ListNode* head) {
+  if (!head || !head->next)
+    return head;
+
+  // * 1. Create the array of LL nodes
+  vector<int> arr;
+  ListNode* temp = head;
+  while(temp) {
+    arr.push_back(temp->data);
+    temp = temp->next;
+  }
+
+  // * 2. Sort the array
+  sort(arr.begin(), arr.end());
+
+  // * 3. Update the existing LL with sorted values
+  int i = 0;
+  temp = head;
+  while (temp) {
+    temp->data = arr[i++];
+    temp = temp->next;
+  }
+
+  return head;
+}
+
 // * ------------------ Optimal Approach ---------------------
 // * Merge Sort
 // * TIME COMPLEXITY  O(NlogN)
@@ -161,8 +120,8 @@ ListNode* sortList(ListNode* head) {
 
   printLL(leftHead);
   printLL(rightHead);
-  std::cout << "------------------------------------" << std::endl;
-  // std::cout << leftHead->data << " " << rightHead->data << std::endl;
+  cout << "------------------------------------" << endl;
+  // cout << leftHead->data << " " << rightHead->data << endl;
 
   // * recursively divide in half
   leftHead = sortList(leftHead);
@@ -174,17 +133,19 @@ ListNode* sortList(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums = {4, 2, 1, 3};
+  // vector<int> nums = {4, 2, 1, 3};
 
   // * testcase 2
-  std::vector<int> nums = {-1, 5, 3, 4, 0};
+  vector<int> nums = {-1, 5, 3, 4, 0};
 
   ListNode* head = arrayToLL(nums);
-  std::cout << "Linked List Before Sorting" << std::endl;
+  cout << "Linked List Before Sorting" << endl;
   printLL(head);
 
-  std::cout << "Linked List After Sorting" << std::endl;
+  // ListNode* ans = bruteForce(head);
   ListNode* ans = sortList(head);
+
+  cout << "Linked List After Sorting" << endl;
   printLL(ans);
 
   return 0;

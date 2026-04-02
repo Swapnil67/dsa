@@ -25,51 +25,9 @@
 
 #include <vector>
 #include <iostream>
+#include "../common.hpp"
 
-struct ListNode {
-public:
-  int data;
-  ListNode *next;
-
-  ListNode(int val) {
-    data = val;
-    next = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
-  }
-  printf("\n");
-}
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while (temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode *arrayToLL(std::vector<int> &nums) {
-  int n = nums.size();
-  if (n == 0)
-    return nullptr;
-
-  ListNode* head = new ListNode(nums[0]);
-  ListNode* mover = head;
-
-  for (int i = 1; i < n; ++i) {
-    ListNode* newNode = new ListNode(nums[i]);
-    mover->next = newNode;
-    mover = newNode;
-  }
-
-  return head;
-} 
+using namespace std;
 
 int lengthOfll(ListNode* head) {
   ListNode* temp = head;
@@ -81,12 +39,11 @@ int lengthOfll(ListNode* head) {
   return c;
 }
 
-
 // * ------------------ Optimal Approach ---------------------
 // * TIME COMPLEXITY  O(K + N)
 // * SPACE COMPLEXITY O(1)
-std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
-  std::vector<ListNode *> ans(k, nullptr);
+vector<ListNode *> splitListToParts(ListNode *head, int k) {
+  vector<ListNode *> ans(k, nullptr);
   if (!head || k == 0)
     return ans;
 
@@ -104,7 +61,7 @@ std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
 
     // * Total nodes for this kth split
     int nodes = nodes_per_bucket + ((extra_nodes > 0) ? 1 : 0);
-    // std::cout << nodes << std::endl;
+    // cout << nodes << endl;
     while (nodes--) {
       prev = cur;
       cur = cur->next;
@@ -120,17 +77,17 @@ std::vector<ListNode *> splitListToParts(ListNode *head, int k) {
 int main(void) {
   // * testcase 1
   // int k = 5;
-  // std::vector<int> nums = {1, 2, 3};
+  // vector<int> nums = {1, 2, 3};
 
   // * testcase 2
   int k = 3;
-  std::vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
   ListNode* head = arrayToLL(nums);
-  std::cout << "Linked List Before Sorting" << std::endl;
+  cout << "Linked List Before Sorting" << endl;
   printLL(head);
 
-  std::vector<ListNode *> ans = splitListToParts(head, k);
+  vector<ListNode *> ans = splitListToParts(head, k);
   for (auto &ll : ans)
     printLL(ll);
   return 0;

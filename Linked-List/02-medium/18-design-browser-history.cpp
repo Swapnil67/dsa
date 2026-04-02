@@ -13,6 +13,8 @@
  * Output :
  * [null,null,null,null,"facebook.com","tsoding.com","facebook.com",null,"linkedin.com","tsoding.com","leetcode.com"]
 
+ * https://www.naukri.com/code360/problems/browser_2427908
+ * https://www.geeksforgeeks.org/problems/design-browser-history/1
  * https://leetcode.com/problems/design-browser-history/description/
 */
 

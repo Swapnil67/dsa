@@ -24,47 +24,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
-
-class ListNode {
-  public:
-    int data;
-    ListNode* next;
-    
-    ListNode(int val) {
-      this->data = val;
-      this->next = nullptr;
-    }
-    
-    ListNode(int val, ListNode* node) {
-      this->data = val;
-      this->next = node;
-    }
-};
-
-void printLL(ListNode* head) {
-  ListNode* temp = head;
-  while(temp) {
-    std::cout << temp->data << " -> ";
-    temp = temp->next;
-  }
-  std::cout << "NULL" << std::endl;
-}
-
-ListNode* arrayToLL(std::vector<int> &arr) {
-  if (!arr.size())
-    return nullptr;
-
-  ListNode* head = new ListNode(arr[0]);
-  ListNode* mover = head;
-
-  for (int i = 1; i < arr.size(); ++i) {
-    ListNode* node = new ListNode(arr[i]);
-    mover->next = node;
-    mover = node;
-  }
-
-  return head;
-}
+#include "../common.hpp"
 
 ListNode* reverse_ll(ListNode* head) {
   ListNode *tail = nullptr;
@@ -99,7 +59,6 @@ void reorderList(ListNode* head) {
   // * now slow will point at the middle node
   ListNode* rev = reverse_ll(slow->next);
   // printLL(rev);
-
   slow->next = nullptr; // * make two ll here
   // printLL(head);
   
@@ -118,7 +77,6 @@ void reorderList(ListNode* head) {
   }
 }
 
-
 // * ------------------ APPROACH 2: Optimal Approach ---------------------
 // * Using stack
 // * TIME COMPLEXITY O(N)
@@ -129,24 +87,24 @@ void reorderList2(ListNode* head) {
 
   // * Push all the nodes to stack
   std::stack<ListNode *> st;
-  ListNode* curr = head;
-  while (curr) {
-    st.push(curr);
-    curr = curr->next;
+  ListNode* cur = head;
+  while (cur) {
+    st.push(cur);
+    cur = cur->next;
   }
 
-  curr = head;
+  cur = head;
   size_t k = st.size() / 2;
   while (k--) {
     ListNode* top_node = st.top();
     st.pop();
 
-    ListNode *front_node = curr->next;
-    curr->next = top_node;
+    ListNode *front_node = cur->next;
+    cur->next = top_node;
     top_node->next = front_node;
-    curr = front_node;
+    cur = front_node;
   }
-  curr->next = nullptr;
+  cur->next = nullptr;
 }
 
 int main(void) {
