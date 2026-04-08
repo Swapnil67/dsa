@@ -21,21 +21,29 @@
 #include <algorithm>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-void helper_brute(std::vector<int> arr,
-            std::vector<int> &temp,
-            std::set<std::vector<int>> &arr_set,
-            std::vector<bool> &used) {
+void helper_brute(
+    vector<int> arr,
+    vector<int> &temp,
+    set<vector<int>> &st,
+    vector<bool> &used)
+{
   // * Base case
   if (temp.size() == arr.size()) {
-    arr_set.insert(temp);
+    st.insert(temp);
     return;
   }
 
@@ -47,17 +55,19 @@ void helper_brute(std::vector<int> arr,
     temp.push_back(arr[i]);
     used[i] = true;
 
-    helper_brute(arr, temp, arr_set, used);
+    helper_brute(arr, temp, st, used);
 
     temp.pop_back();
     used[i] = false;
   }
 }
 
-void helper(std::vector<int> &arr,
-            std::vector<int> &temp,
-            std::unordered_map<int, int> freq_map,
-            std::vector<std::vector<int>> &ans) {
+void helper(
+    vector<int> &arr,
+    vector<int> &temp,
+    unordered_map<int, int> &freq_map,
+    vector<vector<int>> &ans)
+{
 
   // * Base case
   if (temp.size() == arr.size()) {
@@ -71,6 +81,7 @@ void helper(std::vector<int> &arr,
 
     freq_map[num]--;
     temp.push_back(num);
+
     helper(arr, temp, freq_map, ans);
 
     freq_map[num]++;
@@ -81,14 +92,14 @@ void helper(std::vector<int> &arr,
 // * ------------------------- Brute Force Approach -------------------------`
 // * TIME COMPLEXITY O(n * n!)
 // * SPACE COMPLEXITY O(n)
-std::vector<std::vector<int>> bruteForce(std::vector<int> &arr) {
+vector<vector<int>> bruteForce(vector<int> &arr) {
   int n = arr.size();
-  std::set<std::vector<int>> arr_set;
-  std::vector<int> temp;
-  std::vector<bool> used(n);
+  set<vector<int>> arr_set;
+  vector<int> temp;
+  vector<bool> used(n);
   
   helper_brute(arr, temp, arr_set, used);
-  std::vector<std::vector<int>> ans(arr_set.begin(), arr_set.end());
+  vector<vector<int>> ans(arr_set.begin(), arr_set.end());
 
   return ans;
 }
@@ -96,13 +107,13 @@ std::vector<std::vector<int>> bruteForce(std::vector<int> &arr) {
 // * ------------------------- Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n * n!)
 // * SPACE COMPLEXITY O(n * n!)
-std::vector<std::vector<int>> permutations(std::vector<int> &arr) {
+vector<vector<int>> permutations(vector<int> &arr) {
   int n = arr.size();
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
+  vector<vector<int>> ans;
+  vector<int> temp;
 
   // * count freq of each num in arr
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   for (auto &num : arr) {
     freq_map[num]++;
   }
@@ -112,13 +123,13 @@ std::vector<std::vector<int>> permutations(std::vector<int> &arr) {
 }
 
 int main(void) {
-  std::vector<int> arr = {1, 1, 2};
-  std::cout << "Input Array: ";
+  vector<int> arr = {1, 1, 2};
+  cout << "Input Array: ";
   printArr(arr);
 
-  // std::vector<std::vector<int>> ans = bruteForce(arr);
-  std::vector<std::vector<int>> ans = permutations(arr);
-  std::cout << "Permutations: " << std::endl;
+  // vector<vector<int>> ans = bruteForce(arr);
+  vector<vector<int>> ans = permutations(arr);
+  cout << "Permutations: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

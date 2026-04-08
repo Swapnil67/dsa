@@ -23,25 +23,34 @@
  * https://leetcode.com/problems/letter-tile-possibilities/description/
 */
 
+// ! Amazon, Google
+
 #include <vector>
 #include <iostream>
 #include <unordered_set>
 
-void printArr(std::vector<std::string> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-
-void solveBrute(std::string &s,
-                std::string cur,
-                std::vector<bool> &used,
-                std::unordered_set<std::string> &ans) {
+void solveBrute(
+    string &s,
+    string cur,
+    vector<bool> &used,
+    unordered_set<string> &ans)
+{
   ans.insert(cur); // * Add to set
-  // std::cout << cur << std::endl;
+  // cout << cur << endl;
 
   for (int i = 0; i < s.size(); ++i) {
     if (used[i]) // * prevent using repetative index
@@ -57,7 +66,7 @@ void solveBrute(std::string &s,
   }
 }
 
-void solve(int &total, std::vector<int> &freq_vec) {
+void solve(int &total, vector<int> &freq_vec) {
   total++;
   for (int i = 0; i < 26; ++i) {
     if (freq_vec[i] == 0)
@@ -70,12 +79,13 @@ void solve(int &total, std::vector<int> &freq_vec) {
 }
 
 // * ------------------------- Approach 1 : Brute Force Approach -------------------------`
+// * Subsets + Permutation
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n! * n)
-int bruteForce(std::string tiles) {
+int bruteForce(string tiles) {
   int n = tiles.length();
-  std::vector<bool> used(n, false);
-  std::unordered_set<std::string> ans;
+  vector<bool> used(n, false);
+  unordered_set<string> ans;
   
   solveBrute(tiles, "", used, ans);
   return ans.size() - 1; // * exclude the empty sequence
@@ -84,9 +94,10 @@ int bruteForce(std::string tiles) {
 // * ------------------------- Approach 2 : Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(1)
-int numTilePossibilities(std::string tiles) {
+int numTilePossibilities(string tiles) {
   int n = tiles.length();
-  std::vector<int> freq_vec(26, 0);
+  // * Count freq of each char
+  vector<int> freq_vec(26, 0);
   for (char &c : tiles) {
     freq_vec[c - 'A']++;
   }
@@ -97,12 +108,12 @@ int numTilePossibilities(std::string tiles) {
 }
 
 int main(void) {
-  std::string s = "AAB";
-  std::cout << "Input string: " << s << std::endl;
+  string s = "AAB";
+  cout << "Input string: " << s << endl;
 
   // int ans = bruteForce(s);
   int ans = numTilePossibilities(s);
-  std::cout << "Letter Tile Possibilities " << ans << std::endl;
+  cout << "Letter Tile Possibilities " << ans << endl;
   return 0;
 }
 

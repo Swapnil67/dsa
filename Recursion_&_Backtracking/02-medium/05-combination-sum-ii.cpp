@@ -25,20 +25,22 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+using namespace std;
+
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Using Set DS for avoiding duplicates
-void solveBrute(std::vector<int> &candidates,
+void solveBrute(vector<int> &candidates,
                 int i,
                 int target,
-                std::vector<int> &temp,
-                std::set<std::vector<int>> &st)
+                vector<int> &temp,
+                set<vector<int>> &st)
 {
   if (target < 0)
     return;
@@ -64,22 +66,21 @@ void solveBrute(std::vector<int> &candidates,
 // * - 'k' = is the average length of the combinations (temp array)
 // * TIME COMPLEXITY O(2^t * klogk)
 // * SPACE COMPLEXITY O(n * k)
-std::vector<std::vector<int>> bruteForce(std::vector<int> &candidates, int target) {
-  std::sort(begin(candidates), end(candidates));
-  std::set<std::vector<int>> st;
-  std::vector<int> temp;
+vector<vector<int>> bruteForce(vector<int> &candidates, int target) {
+  sort(begin(candidates), end(candidates));
+  set<vector<int>> st;
+  vector<int> temp;
   solveBrute(candidates, 0, target, temp, st);
-  std::vector<std::vector<int>> ans(st.begin(), st.end());
+  vector<vector<int>> ans(st.begin(), st.end());
   return ans;
 }
 
-
-void solve(std::vector<int> &candidates,
-           int i,
-           int target,
-           std::vector<int> &temp,
-           std::vector<std::vector<int>> &ans)
-{
+void solve(
+    int i,
+    int target,
+    vector<int> &nums,
+    vector<int> &temp,
+    vector<vector<int>> &ans) {
   if (target < 0)
     return;
     
@@ -88,19 +89,19 @@ void solve(std::vector<int> &candidates,
     return;
   }
 
-  if (i >= candidates.size() || candidates[i] > target)
+  if (i >= nums.size() || nums[i] > target)
     return;
 
-  temp.push_back(candidates[i]);
-  solve(candidates, i + 1, target - candidates[i], temp, ans);
+  temp.push_back(nums[i]);
+  solve(i + 1, target - nums[i], nums, temp, ans);
 
   // * To avoid duplicates
-  while (i < candidates.size() && candidates[i] == candidates[i + 1]) {
+  while (i < nums.size() && nums[i] == nums[i + 1]) {
     i += 1;
   }
 
   temp.pop_back();
-  solve(candidates, i + 1, target, temp, ans);
+  solve(i + 1, target, nums, temp, ans);
 }
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -109,25 +110,25 @@ void solve(std::vector<int> &candidates,
 // * - 'k' = is the average length of the combinations (temp array)
 // * TIME COMPLEXITY O(2^n * n)
 // * SPACE COMPLEXITY O(n)
-std::vector<std::vector<int>> combinationSum(std::vector<int> &candidates, int target) {
-  std::sort(begin(candidates), end(candidates));
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
-  solve(candidates, 0, target, temp, ans);
+vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+  sort(begin(candidates), end(candidates));
+  vector<int> temp;
+  vector<vector<int>> ans;
+  solve(0, target, candidates, temp, ans);
   return ans;
 }
 
 int main(void) {
   int target = 8;
-  std::vector<int> candidates = {10, 1, 2, 7, 6, 1, 5};
+  vector<int> candidates = {10, 1, 2, 7, 6, 1, 5};
   
-  std::cout << "target: " << target << std::endl;
-  std::cout << "Candidates: ";
+  cout << "target: " << target << endl;
+  cout << "Candidates: ";
   printArr(candidates);
 
-  // std::vector<std::vector<int>> ans = bruteForce(candidates, target);
-  std::vector<std::vector<int>> ans = combinationSum(candidates, target);
-  std::cout << "Combination sum: " << std::endl;
+  // vector<vector<int>> ans = bruteForce(candidates, target);
+  vector<vector<int>> ans = combinationSum(candidates, target);
+  cout << "Combination sum: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

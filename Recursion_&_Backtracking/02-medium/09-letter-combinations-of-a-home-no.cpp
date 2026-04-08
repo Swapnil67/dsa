@@ -19,32 +19,39 @@
  * https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
 */
 
+// ! Amazon, Google, Meta, Microsoft, Apple, Oracle, Uber
+
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<std::string> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
   std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  std::cout << " ]" << std::endl;
 }
 
-std::vector<std::string> digitToChar = {"", "", "abc", "def", "ghi", "jkl",
-                                        "mno", "qprs", "tuv", "wxyz"};
-std::vector<std::string> ans;
-void solve(std::string &digits, int idx, std::string temp) {
+vector<string> digitToChar = {"", "", "abc", "def", "ghi", "jkl",
+                              "mno", "qprs", "tuv", "wxyz"};
+
+vector<string> ans;
+void solve(string &digits, int idx, string temp) {
   if (idx >= digits.length()) {
     ans.push_back(temp);
     return;
   }
 
-  std::string str = digitToChar[digits[idx] - '0'];
+  string str = digitToChar[digits[idx] - '0'];
   for (int i = 0; i < str.length(); ++i) {
     temp.push_back(str[i]);
-
     solve(digits, idx + 1, temp);
-
     temp.pop_back();
   }
 }
@@ -53,18 +60,18 @@ void solve(std::string &digits, int idx, std::string temp) {
 // * N = length of substring
 // * TIME COMPLEXITY O(4^n * n)
 // * SPACE COMPLEXITY O(n)
-std::vector<std::string> letterCombinations(std::string digits) {
-  std::string temp = "";
+vector<string> letterCombinations(string digits) {
+  string temp = "";
   solve(digits, 0, temp);
   return ans;
 }
 
 int main(void) {
-  std::string digits = "23";
-  std::cout << "Input digits: " << digits << std::endl;
+  string digits = "23";
+  cout << "Input digits: " << digits << endl;
 
-  std::vector<std::string> ans = letterCombinations(digits);
-  std::cout << "Letter Combinations of a Phone Number: " << std::endl;
+  vector<string> ans = letterCombinations(digits);
+  cout << "Letter Combinations of a Phone Number: " << endl;
   printArr(ans);
 
   return 0;

@@ -19,24 +19,29 @@
  * https://www.naukri.com/code360/problems/permutations-of-a-string_985254
 */
 
+// ! Amazon, Google, Meta, Microsoft, Bloomberg, Apple, Uber, Oracle
+
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+using namespace std;
+
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void helper(std::vector<int> arr,
-            std::vector<int> &temp,
-            std::vector<std::vector<int>> &ans,
-            std::vector<bool> &used) {
+void helper(vector<int> arr,
+            vector<int> &cur,
+            vector<vector<int>> &ans,
+            vector<bool> &used)
+{
   // * Base case
-  if (temp.size() == arr.size()) {
-    ans.push_back(temp);
+  if (cur.size() == arr.size()) {
+    ans.push_back(cur);
     return;
   }
 
@@ -45,36 +50,36 @@ void helper(std::vector<int> arr,
     if (used[i])
       continue;
 
-    temp.push_back(arr[i]);
+    cur.push_back(arr[i]);
     used[i] = true;
 
-    helper(arr, temp, ans, used);
+    helper(arr, cur, ans, used);
 
-    temp.pop_back();
+    cur.pop_back();
     used[i] = false;
   }
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n * n!)
 // * SPACE COMPLEXITY O(n * n!)
-std::vector<std::vector<int>> permutations(std::vector<int> &arr) {
+vector<vector<int>> permutations(vector<int> &arr) {
   int n = arr.size();
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
-  std::vector<bool> used(n);
+  vector<vector<int>> ans;
+  vector<int> cur;
+  vector<bool> used(n);
   
-  helper(arr, temp, ans, used);
+  helper(arr, cur, ans, used);
   return ans;
 }
 
 int main(void) {
-  std::vector<int> arr = {1, 2, 3};
-  std::cout << "Input Array: ";
+  vector<int> arr = {1, 2, 3};
+  cout << "Input Array: ";
   printArr(arr);
 
-  std::vector<std::vector<int>> ans = permutations(arr);
-  std::cout << "Permutations: " << std::endl;
+  vector<vector<int>> ans = permutations(arr);
+  cout << "Permutations: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

@@ -28,46 +28,47 @@
  * https://leetcode.com/problems/word-search/description/
 */
 
+// ! Amazon, Google, Meta, Microsoft, Adobe, Apple, Uber
+
 #include <vector>
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "{ ";
+void printArr(vector<T> arr) {
+  cout << "{ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << "}" << std::endl;
+  cout << "}" << endl;
 }
 
-std::vector<std::vector<int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-bool find(std::vector<std::vector<char>> &board,
-          std::string &word,
-          int i, int j, int idx)
+bool dfs(int r, int c, int idx, string &word,
+         vector<vector<char>> &board)
 {
-  int m = board.size();
-  int n = board[0].size();
+  int m = board.size(), n = board[0].size();
 
   if (idx == word.length())
     return true;
 
-  if (i < 0 || j < 0 || i >= m || j >= n || board[i][j] != word[idx])
+  if (r < 0 || c < 0 || r >= m || c >= n || board[r][c] != word[idx])
     return false;
 
-  char temp = board[i][j];
-  board[i][j] = '$'; // * visited
+  char temp = board[r][c];
+  board[r][c] = '$'; // * visited
 
-  for (auto &dir : directions) {
-    int new_i = i + dir[0];
-    int new_j = j + dir[1];
-    if (find(board, word, new_i, new_j, idx + 1)) {
+  for (auto &dir : dirs) {
+    int dr = r + dir[0], dc = c + dir[1];
+    if (dfs(dr, dc, idx + 1, word, board)) {
       return true;
     }
   }
 
-  board[i][j] = temp;
+  board[r][c] = temp;
   return false;
 }
 
@@ -76,12 +77,12 @@ bool find(std::vector<std::vector<char>> &board,
 // * L = length of word
 // * TIME COMPLEXITY O(m * n * 4^L)
 // * SPACE COMPLEXITY O(L)
-bool exist(std::vector<std::vector<char>> &board, std::string &word) {
-  int m = board.size();
-  int n = board[0].size();
+bool exist(vector<vector<char>> &board, string &word) {
+  int m = board.size(), n = board[0].size();
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) {
-      if (board[i][j] == word[0] && find(board, word, i, j, 0)) {
+      if (board[i][j] == word[0] && dfs(i, j, 0, word, board))
+      {
         return true;
       }
     }
@@ -92,22 +93,27 @@ bool exist(std::vector<std::vector<char>> &board, std::string &word) {
 
 int main(void) {
   // * testcase 1
-  // std::string word = "ABCCED";
+  // string word = "ABCCED";
 
   // * testcase 2
-  // std::string word = "SEE";
+  // string word = "SEE";
 
   // * testcase 3
-  std::string word = "ABCB";
+  // string word = "ABCB";
 
-  std::cout << "Search Word: " << word << std::endl;
+  // * testcase 4
+  string word = "a";
 
-  std::vector<std::vector<char>> board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
+  cout << "Search Word: " << word << endl;
+
+  // vector<vector<char>> board = {{'A', 'B', 'C', 'E'}, {'S', 'F', 'C', 'S'}, {'A', 'D', 'E', 'E'}};
+
+  vector<vector<char>> board = {{'a'}};
   for (auto &vec : board)
     printArr(vec);
 
   bool ans = exist(board, word);
-  std::cout << "Found: " << ans << std::endl;
+  cout << "Found: " << ans << endl;
 
   return 0;
 }

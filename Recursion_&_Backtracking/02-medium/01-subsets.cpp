@@ -16,58 +16,68 @@
  * https://leetcode.com/problems/subsets/description/
 */
 
+// ! Unique elements in array.
+
+// ! Amazon, Google, Meta, Microsoft, Apple, Adobe
+
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- Optimal Approach -------------------------
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
-void helper(std::vector<int> &nums,
-            int i,
-            std::vector<int> &temp,
-            std::vector<std::vector<int>> &ans)
+void helper(int i,
+            vector<int> &cur,
+            vector<int> &nums,
+            vector<vector<int>> &ans)
 {
   if (i >= nums.size()) {
-    ans.push_back(temp);
+    ans.push_back(cur);
     return;
   }
 
   // * All subsets that include nums[i]
-  temp.push_back(nums[i]); // * take
-  helper(nums, i + 1, temp, ans);
-  
+  cur.push_back(nums[i]); // * take
+  helper(i + 1, cur, nums, ans);
+
   // * All subsets that don't include nums[i]
-  temp.pop_back();  // * Not take
-  helper(nums, i + 1, temp, ans);
+  cur.pop_back(); // * Not take
+  helper(i + 1, cur, nums, ans);
 }
 
-std::vector<std::vector<int>> subsets(std::vector<int> &nums) {
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
-  helper(nums, 0, temp, ans);
+vector<vector<int>> subsets(vector<int> &nums) {
+  vector<vector<int>> ans;
+  vector<int> temp;
+  helper(0, temp, nums, ans);
   return ans;
 }
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {1, 2, 3};
+  vector<int> nums = {1, 2, 3};
 
   // * testcase 2
-  // std::vector<int> nums = {1, 2, 3, 4};
+  // vector<int> nums = {1, 2, 3, 4};
 
-  std::cout<<"Input nums: ";
+  cout<<"Input nums: ";
   printArr(nums);
   
-  std::vector<std::vector<int>> ans = subsets(nums);
-  std::cout << "Subsets: " << std::endl;
+  vector<vector<int>> ans = subsets(nums);
+  cout << "Subsets: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

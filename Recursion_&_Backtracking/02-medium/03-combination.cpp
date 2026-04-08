@@ -16,18 +16,21 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+using namespace std;
+
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void helper(int i,
-            std::vector<int> &temp,
-            int k, int &n,
-            std::vector<std::vector<int>> &ans)
+void helper(
+    int i,
+    vector<int> &temp,
+    int k, int &n,
+    vector<vector<int>> &ans)
 {
   if (temp.size() == k) {
     ans.push_back(temp);
@@ -48,9 +51,9 @@ void helper(int i,
 
 // * OR
 void helper2(int start,
-             std::vector<int> &temp,
+             vector<int> &temp,
              int k, int &n,
-             std::vector<std::vector<int>> &ans)
+             vector<vector<int>> &ans)
 {
   if (k == 0) {
     ans.push_back(temp);
@@ -70,9 +73,9 @@ void helper2(int start,
 // * ------------------------- Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(nCk)
 // * SPACE COMPLEXITY O(n)
-std::vector<std::vector<int>> combine(int n, int k) {
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
+vector<vector<int>> combine(int n, int k) {
+  vector<vector<int>> ans;
+  vector<int> temp;
   // helper(1, temp, k, n, ans);
   helper2(1, temp, k, n, ans);
   return ans;
@@ -88,10 +91,10 @@ int main(void) {
   // * testcase 3
   // int n = 3, k = 3;
 
-  std::cout << "n: " << n << " k: " << k << std::endl;
+  cout << "n: " << n << " k: " << k << endl;
 
-  std::vector<std::vector<int>> ans = combine(n, k);
-  std::cout << "Combinations: " << std::endl;
+  vector<vector<int>> ans = combine(n, k);
+  cout << "Combinations: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

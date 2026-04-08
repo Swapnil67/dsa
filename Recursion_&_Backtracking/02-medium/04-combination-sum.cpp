@@ -28,19 +28,21 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
+using namespace std;
+
+void printArr(vector<int> arr) {
+  cout << "[ ";
   for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void solve(std::vector<int> &nums,
+void solve(vector<int> &nums,
            int i,
            int target,
-           std::vector<int> &temp,
-           std::vector<std::vector<int>> &ans)
+           vector<int> &temp,
+           vector<vector<int>> &ans)
 {
   if (target < 0)
     return;
@@ -60,17 +62,15 @@ void solve(std::vector<int> &nums,
   solve(nums, i + 1, target, temp, ans);
 }
 
-
-
 // * ------------------------- Optimal Approach -------------------------`
 // * - 'n' = no. of elements in the input candidates array
 // * - 't' = target sum
 // * - 'k' = is the average length of the combinations (temp array)
 // * TIME COMPLEXITY O(2^t * k)
 // * SPACE COMPLEXITY O(n * k)
-std::vector<std::vector<int>> combinationSum(std::vector<int> &candidates, int target) {
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
+vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+  vector<vector<int>> ans;
+  vector<int> temp;
   solve(candidates, 0, target, temp, ans);
   return ans;
 }
@@ -79,18 +79,18 @@ int main(void) {
   
   // * testcase 1
   // int target = 7;
-  // std::vector<int> candidates = {2, 3, 6, 7};
+  // vector<int> candidates = {2, 3, 6, 7};
 
   // * testcase 2
   int target = 14;
-  std::vector<int> candidates = {13, 3, 2, 17};
+  vector<int> candidates = {13, 3, 2, 17};
 
-  std::cout << "target: " << target << std::endl;
-  std::cout << "Candidates: ";
+  cout << "target: " << target << endl;
+  cout << "Candidates: ";
   printArr(candidates);
 
-  std::vector<std::vector<int>> ans = combinationSum(candidates, target);
-  std::cout << "Combination sum: " << std::endl;
+  vector<vector<int>> ans = combinationSum(candidates, target);
+  cout << "Combination sum: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

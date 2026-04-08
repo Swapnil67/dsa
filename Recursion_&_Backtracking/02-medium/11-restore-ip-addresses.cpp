@@ -26,67 +26,84 @@
  * https://leetcode.com/problems/restore-ip-addresses/description/
 */
 
+// ! Amazon, Google, Meta, Microsoft, Apple, Adobe, Oracle
+
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<std::string> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool isvalid(std::string s) {
-  if (s[0] == '0')
-    return false;
-  int val = std::stoi(s);
-  return val <= 255;
+bool isvalid(string s) {
+  return (s[0] != '0') && (stoi(s) <= 255);
 }
 
-void solve(std::string &s, int idx,
-           int parts, std::string ip,
-           std::vector<std::string> &ans)
+void solve(int idx, int parts,
+           string &s, string ip,
+           vector<string> &ans)
 {
-  // std::cout << ip << std::endl;
+  // cout << ip << endl;
   if (idx == s.length() && parts == 4) {
     ip.pop_back(); // * removing the extra decimal from end
     ans.push_back(ip);
     return;
   }
 
-  if (idx + 1 <= s.length())
-  solve(s, idx + 1, parts + 1, ip + (s.substr(idx, 1) + "."), ans);
+  int n = s.length();
+  // * take 1 digit
+  if (idx + 1 <= n)
+    solve(idx + 1, parts + 1, s, ip + (s.substr(idx, 1) + "."), ans);
+  
+  // * take 2 digits
+  if (idx + 2 <= n && isvalid(s.substr(idx, 2)))
+    solve(idx + 2, parts + 1, s, ip + (s.substr(idx, 2) + "."), ans);
 
-  if (idx + 2 <= s.length() && isvalid(s.substr(idx, 2)))
-    solve(s, idx + 2, parts + 1, ip + (s.substr(idx, 2) + "."), ans);
-
-  if (idx + 3 <= s.length() && isvalid(s.substr(idx, 3)))
-    solve(s, idx + 3, parts + 1, ip + (s.substr(idx, 3) + "."), ans);
+  // * take 3 digits
+  if (idx + 3 <= n && isvalid(s.substr(idx, 3)))
+    solve(idx + 3, parts + 1, s, ip + (s.substr(idx, 3) + "."), ans);
 }
 
 // * ------------------------- Approach : Optimal Approach -------------------------`
 // * Where m = 3 as there are at most three digits in a valid segment
 // * n = 4 as there are four segments in a valid IP.
-// * TIME COMPLEXITY O(m^n * n)
-// * SPACE COMPLEXITY O(m * n)
-std::vector<std::string> restoreIpAddresses(std::string s) {
-  std::vector<std::string> ans;
+// * TIME COMPLEXITY O(m^n * n) ~ O(1)
+// * SPACE COMPLEXITY O(m * n)  ~ O(1)
+vector<string> restoreIpAddresses(string s) {
+  vector<string> ans;
   int n = s.size();
   if (n > 12 || n < 4) // * Cannot form IP
     return ans;
 
-  solve(s, 0, 0, "", ans);
+  int parts = 0;
+  solve(0, parts, s, "", ans);
   return ans;
 }
 
 int main(void) {
-  std::string s = "25525511135";
-  // std::string s = "0000";
-  std::cout << "Input IP: " << s << std::endl;
+  // * testcase 1
+  // string s = "25525511135";
 
-  std::vector<std::string> ans = restoreIpAddresses(s);
-  std::cout << "Restored IP Addresses" << std::endl;
+  // * testcase 2
+  // string s = "0000";
+
+  // * testcase 3
+  string s = "101023";
+
+  cout << "Input IP: " << s << endl;
+
+  vector<string> ans = restoreIpAddresses(s);
+  cout << "Restored IP Addresses" << endl;
   printArr(ans);
 
   return 0;

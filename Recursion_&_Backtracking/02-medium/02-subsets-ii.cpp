@@ -17,23 +17,33 @@
  * https://www.naukri.com/code360/problems/unique-subsets_3625236
 */
 
+// ! Contains Duplicates in array.
+
+// ! Amazon, Google, Meta, Microsoft, Apple
+
 #include <set>
 #include <vector>
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-
-void helperBrute(std::vector<int> &nums,
-                 std::vector<int> temp, int idx,
-                 std::set<std::vector<int>> &ans_set)
+void helperBrute(
+    vector<int> &nums,
+    vector<int> temp, int idx,
+    set<vector<int>> &ans_set)
 {
   if (idx >= nums.size()) {
     ans_set.insert(temp);
@@ -47,19 +57,8 @@ void helperBrute(std::vector<int> &nums,
   helperBrute(nums, temp, idx + 1, ans_set);
 }
 
-// * ------------------------- Brute Force Approach -------------------------`
-std::vector<std::vector<int>> bruteForce(std::vector<int> &nums) {
-  std::set<std::vector<int>> st;
-  std::vector<int> temp;
-  helperBrute(nums, temp, 0, st);
-  std::vector<std::vector<int>> ans(st.begin(), st.end());
-  return ans;
-}
 
-// * ------------------------- Optimal Approach -------------------------`
-// * TIME COMPLEXITY O(2^n)
-// * SPACE COMPLEXITY O(n * 2^n)
-void helper(std::vector<int> &nums, int i, std::vector<int> &temp, std::vector<std::vector<int>> &ans) {
+void helper(vector<int> &nums, int i, vector<int> &temp, vector<vector<int>> &ans) {
   if (i >= nums.size()) {
     ans.push_back(temp);
     return;
@@ -77,31 +76,45 @@ void helper(std::vector<int> &nums, int i, std::vector<int> &temp, std::vector<s
 
   temp.pop_back();  // * Not take
   helper(nums, i + 1, temp, ans);
-
 }
 
-std::vector<std::vector<int>> subsets(std::vector<int> &nums) {
-  std::sort(nums.begin(), nums.end()); // * to handle duplicates
+// * ------------------------- Brute Force Approach -------------------------`
+// * TIME COMPLEXITY  O(n * 2^n)
+// * SPACE COMPLEXITY O(2^n)
+vector<vector<int>> bruteForce(vector<int> &nums) {
+  set<vector<int>> st;
+  vector<int> temp;
+  helperBrute(nums, temp, 0, st);
+  vector<vector<int>> ans(st.begin(), st.end());
+  return ans;
+}
 
-  std::vector<std::vector<int>> ans;
-  std::vector<int> temp;
+// * ------------------------- Optimal Approach -------------------------`
+// * TIME COMPLEXITY  O(n * 2^n)
+// * SPACE COMPLEXITY O(n)
+vector<vector<int>> subsets(vector<int> &nums) {
+  // ! Important step
+  sort(nums.begin(), nums.end()); // * to handle duplicates
+
+  vector<vector<int>> ans;
+  vector<int> temp;
   helper(nums, 0, temp, ans);
   return ans;
 }
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {1, 2, 2};
+  vector<int> nums = {1, 2, 2};
 
   // * testcase 2
-  // std::vector<int> nums = {1, 2, 2, 3};
+  // vector<int> nums = {1, 2, 2, 3};
 
-  std::cout<<"Input nums: ";
+  cout<<"Input nums: ";
   printArr(nums);
   
-  // std::vector<std::vector<int>> ans = bruteForce(nums);
-  std::vector<std::vector<int>> ans = subsets(nums);
-  std::cout << "Subsets: " << std::endl;
+  // vector<vector<int>> ans = bruteForce(nums);
+  vector<vector<int>> ans = subsets(nums);
+  cout << "Subsets: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 
