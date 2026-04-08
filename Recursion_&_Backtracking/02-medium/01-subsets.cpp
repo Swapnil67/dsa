@@ -73,15 +73,15 @@ int main(void) {
   // * testcase 2
   // vector<int> nums = {1, 2, 3, 4};
 
-  cout<<"Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
-  
+
   vector<vector<int>> ans = subsets(nums);
   cout << "Subsets: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 
- return 0;
+  return 0;
 }
 
 // * Run the code

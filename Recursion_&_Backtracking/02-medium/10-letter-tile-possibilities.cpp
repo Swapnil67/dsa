@@ -78,7 +78,7 @@ void solve(int &total, vector<int> &freq_vec) {
   }
 }
 
-// * ------------------------- Approach 1 : Brute Force Approach -------------------------`
+// * ------------------------- Approach 1 : Brute Force Approach -------------------------
 // * Subsets + Permutation
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n! * n)
@@ -86,16 +86,14 @@ int bruteForce(string tiles) {
   int n = tiles.length();
   vector<bool> used(n, false);
   unordered_set<string> ans;
-  
   solveBrute(tiles, "", used, ans);
   return ans.size() - 1; // * exclude the empty sequence
 }
 
-// * ------------------------- Approach 2 : Optimal Approach -------------------------`
+// * ------------------------- Approach 2 : Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(1)
 int numTilePossibilities(string tiles) {
-  int n = tiles.length();
   // * Count freq of each char
   vector<int> freq_vec(26, 0);
   for (char &c : tiles) {

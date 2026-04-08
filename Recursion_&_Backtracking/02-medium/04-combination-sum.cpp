@@ -25,6 +25,8 @@
  * https://www.naukri.com/code360/problems/combination-sum_981296
 */
 
+// ! Amazon, Google, Meta, Microsoft, Apple, Tiktok, Walmart
+
 #include <vector>
 #include <iostream>
 
@@ -62,7 +64,7 @@ void solve(vector<int> &nums,
   solve(nums, i + 1, target, temp, ans);
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * - 'n' = no. of elements in the input candidates array
 // * - 't' = target sum
 // * - 'k' = is the average length of the combinations (temp array)

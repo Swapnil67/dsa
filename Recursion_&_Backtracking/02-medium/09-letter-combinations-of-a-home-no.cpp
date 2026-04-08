@@ -27,15 +27,15 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 vector<string> digitToChar = {"", "", "abc", "def", "ghi", "jkl",
@@ -56,7 +56,7 @@ void solve(string &digits, int idx, string temp) {
   }
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * N = length of substring
 // * TIME COMPLEXITY O(4^n * n)
 // * SPACE COMPLEXITY O(n)

@@ -58,7 +58,7 @@ void dfs(
   }
 
   for (int j = i; j < s.size(); ++j) {
-    // cout << s.substr(i, j - i + 1) << endl;
+    cout << s.substr(i, j - i + 1) << endl;
     if (check_palindrome(s, i, j)) {
       cur.push_back(s.substr(i, j - i + 1));
       dfs(j + 1, s, cur, ans);
@@ -83,7 +83,7 @@ void dfs(int i, string s, vector<string> &parts, vector<vector<bool>> &t,
   }
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * Top Down
 // * N = length of substring
 // * TIME COMPLEXITY O(2^n * n)
@@ -134,8 +134,8 @@ int main(void) {
   string s = "aab";
   cout << "Input string: " << s << endl;
 
-  // vector<vector<string>> ans = partition(s);
-  vector<vector<string>> ans = partition2(s);
+  vector<vector<string>> ans = partition(s);
+  // vector<vector<string>> ans = partition2(s);
   cout << "Palindrome Partitioning: " << endl;
   for (auto &vec : ans)
     printArr(vec);

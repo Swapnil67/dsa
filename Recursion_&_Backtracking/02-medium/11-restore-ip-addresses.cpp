@@ -54,13 +54,13 @@ void solve(int idx, int parts,
            vector<string> &ans)
 {
   // cout << ip << endl;
-  if (idx == s.length() && parts == 4) {
+  int n = s.length();
+  if (idx == n && parts == 4) {
     ip.pop_back(); // * removing the extra decimal from end
     ans.push_back(ip);
     return;
   }
 
-  int n = s.length();
   // * take 1 digit
   if (idx + 1 <= n)
     solve(idx + 1, parts + 1, s, ip + (s.substr(idx, 1) + "."), ans);
@@ -79,7 +79,8 @@ void solve(int idx, int parts,
 // * n = 4 as there are four segments in a valid IP.
 // * TIME COMPLEXITY O(m^n * n) ~ O(1)
 // * SPACE COMPLEXITY O(m * n)  ~ O(1)
-vector<string> restoreIpAddresses(string s) {
+vector<string> restoreIpAddresses(string s)
+{
   vector<string> ans;
   int n = s.size();
   if (n > 12 || n < 4) // * Cannot form IP

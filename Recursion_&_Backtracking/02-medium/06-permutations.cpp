@@ -26,12 +26,16 @@
 
 using namespace std;
 
-void printArr(vector<int> arr) {
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
   cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << " ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  cout << "]" << endl;
+  cout << " ]" << endl;
 }
 
 void helper(vector<int> arr,

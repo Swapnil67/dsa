@@ -109,9 +109,9 @@ int main(void) {
   // * testcase 2
   // vector<int> nums = {1, 2, 2, 3};
 
-  cout<<"Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
-  
+
   // vector<vector<int>> ans = bruteForce(nums);
   vector<vector<int>> ans = subsets(nums);
   cout << "Subsets: " << endl;

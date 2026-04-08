@@ -36,16 +36,22 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<std::string> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<std::string> strings;
-void solveBrute(std::string &str, int &n) {
+vector<string> strings;
+void solveBrute(string &str, int &n) {
   if (str.size() == n) {
     strings.push_back(str);
     return;
@@ -56,15 +62,17 @@ void solveBrute(std::string &str, int &n) {
     if (str.size() > 0 && str.back() == ch)
       continue;
 
+    // * take
     str.push_back(ch);
-
+    
     solveBrute(str, n);
-
+    
+    // * not take
     str.pop_back();
   }
 }
 
-void solve(std::string &str, std::string &ans, int &cnt, int k, int &n) {
+void solve(string &str, string &ans, int &cnt, int &k, int &n) {
   if (str.size() == n) {
     cnt++;
     if (cnt == k)
@@ -85,12 +93,12 @@ void solve(std::string &str, std::string &ans, int &cnt, int k, int &n) {
   }
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach -------------------------
 // * Generate all possible 'n' length strings
 // * TIME COMPLEXITY O(n * 2^n)
 // * SPACE COMPLEXITY O(n * 2^n)
-std::string bruteForce(int n, int k) {
-  std::string str = "";
+string bruteForce(int n, int k) {
+  string str = "";
   solveBrute(str, n);
   
   if (strings.size() < k) {
@@ -99,13 +107,13 @@ std::string bruteForce(int n, int k) {
   return strings[k - 1];
 }
 
-// * ------------------------- Approach 2: Optimal Approach -------------------------`
+// * ------------------------- Approach 2: Optimal Approach -------------------------
 // * Count all possible 'n' length strings 
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-std::string getHappyString(int n, int k) {
+string getHappyString(int n, int k) {
   int count = 0;
-  std::string str = "", ans = "";
+  string str = "", ans = "";
   solve(str, ans, count, k, n);
   return ans;
 }
@@ -120,11 +128,11 @@ int main(void) {
   // * testcase 3
   int n = 3, k = 9;
 
-  std::cout << "n: " << n << ", k: " << k << std::endl;
+  cout << "n: " << n << ", k: " << k << endl;
 
-  // std::string ans = bruteForce(n, k);
-  std::string ans = getHappyString(n, k);
-  std::cout << "kth happy string: " << ans << std::endl;
+  // string ans = bruteForce(n, k);
+  string ans = getHappyString(n, k);
+  cout << "kth happy string: " << ans << endl;
 
   return 0;
 }

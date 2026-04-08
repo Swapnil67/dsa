@@ -32,7 +32,6 @@
 
 #include <vector>
 #include <iostream>
-#include <unordered_set>
 
 using namespace std;
 
@@ -72,7 +71,7 @@ bool dfs(int r, int c, int idx, string &word,
   return false;
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * Go in all 4 direction on each co-ordinate
 // * L = length of word
 // * TIME COMPLEXITY O(m * n * 4^L)
@@ -81,8 +80,7 @@ bool exist(vector<vector<char>> &board, string &word) {
   int m = board.size(), n = board[0].size();
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) {
-      if (board[i][j] == word[0] && dfs(i, j, 0, word, board))
-      {
+      if (board[i][j] == word[0] && dfs(i, j, 0, word, board)) {
         return true;
       }
     }

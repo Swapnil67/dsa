@@ -18,7 +18,6 @@
 #include <set>
 #include <vector>
 #include <iostream>
-#include <algorithm>
 #include <unordered_map>
 
 using namespace std;
@@ -89,36 +88,35 @@ void helper(
   }
 }
 
-// * ------------------------- Brute Force Approach -------------------------`
+// * ------------------------- Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(n * n!)
 // * SPACE COMPLEXITY O(n)
-vector<vector<int>> bruteForce(vector<int> &arr) {
-  int n = arr.size();
-  set<vector<int>> arr_set;
+vector<vector<int>> bruteForce(vector<int> &nums) {
+  int n = nums.size();
+  set<vector<int>> nums_set;
   vector<int> temp;
   vector<bool> used(n);
   
-  helper_brute(arr, temp, arr_set, used);
-  vector<vector<int>> ans(arr_set.begin(), arr_set.end());
+  helper_brute(nums, temp, nums_set, used);
+  vector<vector<int>> ans(nums_set.begin(), nums_set.end());
 
   return ans;
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n * n!)
-// * SPACE COMPLEXITY O(n * n!)
-vector<vector<int>> permutations(vector<int> &arr) {
-  int n = arr.size();
+// * SPACE COMPLEXITY O(n * n!) ~ For output list
+vector<vector<int>> permutations(vector<int> &nums) {
   vector<vector<int>> ans;
-  vector<int> temp;
-
-  // * count freq of each num in arr
+  
+  // * count freq of each num in nums
   unordered_map<int, int> freq_map;
-  for (auto &num : arr) {
+  for (auto &num : nums) {
     freq_map[num]++;
   }
-
-  helper(arr, temp, freq_map, ans);
+  
+  vector<int> temp;
+  helper(nums, temp, freq_map, ans);
   return ans;
 }
 

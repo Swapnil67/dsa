@@ -20,6 +20,11 @@ void printArr(vector<T> &arr) {
 }
 
 
+// * 14 - Matchsticks to Square
+// bool makesquare(vector<int> &matchsticks) {
+// TODO
+// }
+
 // * 15 - Splitting a String Into Descending Consecutive Values
 // bool splitString(string s) {
 // TODO
@@ -97,11 +102,6 @@ void printArr(vector<T> &arr) {
 // }
 
 // * 13 - The k-th Lexicographical String of All Happy Strings of Length n
-// bool makesquare(vector<int> &matchsticks) {
-// TODO
-// }
-
-// * 14 - Matchsticks to Square
 // bool makesquare(vector<int> &matchsticks) {
 // TODO
 // }
