@@ -1,7 +1,7 @@
 /*
  * Leetcode - 133
- * Clone Graph 
- * 
+ * Clone Graph
+ *
  * Given a reference of a node in a connected undirected graph.
  * Return a deep copy (clone) of the graph.
 
@@ -14,21 +14,23 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 class Node {
 public:
   int val;
-  std::vector<Node *> neighbors;
+  vector<Node *> neighbors;
   Node() {
     val = 0;
-    neighbors = std::vector<Node *>();
+    neighbors = vector<Node *>();
   }
 
   Node(int _val) {
     val = _val;
-    neighbors = std::vector<Node *>();
+    neighbors = vector<Node *>();
   }
 
-  Node(int _val, std::vector<Node *> _neighbors) {
+  Node(int _val, vector<Node *> _neighbors) {
     val = _val;
     neighbors = _neighbors;
   }
@@ -37,15 +39,15 @@ public:
 // * Follow up question
 class Graph {
 public:
-  std::vector<Node *> roots;
+  vector<Node *> roots;
   Graph() {
-    roots = std::vector<Node *>();
+    roots = vector<Node *>();
   }
 };
 
 void dfs(Node *&node,
          Node *&clone_node,
-         std::unordered_map<Node *, Node *> &nodes_mp)
+         unordered_map<Node *, Node *> &nodes_mp)
 {
   // * Visit neighbours
   for (auto &ngbr : node->neighbors) {
@@ -77,7 +79,7 @@ Node *cloneGraph(Node *node) {
   Node *clone = new Node(node->val);
 
   // * Create an unordered_map to prevent creating duplicate nodes
-  std::unordered_map<Node *, Node *> nodes_mp;
+  unordered_map<Node *, Node *> nodes_mp;
   nodes_mp[node] = clone;
 
   dfs(node, clone, nodes_mp);
@@ -92,10 +94,10 @@ int main(void) {
   Node *node_three = new Node(3);
   Node *node_four = new Node(4);
 
-  std::vector<Node *> one_ngbr = {node_two, node_four};
-  std::vector<Node *> two_ngbr = {node_one, node_three};
-  std::vector<Node *> three_ngbr = {node_two, node_four};
-  std::vector<Node *> four_ngbr = {node_one, node_three};
+  vector<Node *> one_ngbr = {node_two, node_four};
+  vector<Node *> two_ngbr = {node_one, node_three};
+  vector<Node *> three_ngbr = {node_two, node_four};
+  vector<Node *> four_ngbr = {node_one, node_three};
 
   node_one->neighbors = one_ngbr;
   node_two->neighbors = two_ngbr;

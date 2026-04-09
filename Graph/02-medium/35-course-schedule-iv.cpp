@@ -37,31 +37,32 @@
 #include <unordered_map>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * TC = O(E)
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) 
-{
-  std::unordered_map<int, std::vector<int>> adj;
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges) {
     int u = it[0], v = it[1];
     adj[u].push_back(v);
@@ -70,11 +71,11 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
 }
 
 // * TC = O(E)
-std::unordered_map<int, std::vector<int>> constructadj(
-    std::vector<int> &indegree,
-    std::vector<std::vector<int>> &edges)
+unordered_map<int, vector<int>> constructadj(
+    vector<int> &indegree,
+    vector<vector<int>> &edges)
 {
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges) {
     int u = it[0], v = it[1];
     adj[u].push_back(v);
@@ -86,8 +87,8 @@ std::unordered_map<int, std::vector<int>> constructadj(
 // * DFS for check if we arrive at a dest node if we start traversing from src node
 bool dfs(
     int src, int dest,
-    std::vector<bool> &visited,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    unordered_map<int, vector<int>> &adj)
 {
   visited[src] = true; // * mark visited
 
@@ -102,27 +103,27 @@ bool dfs(
   return false;
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Check if we can reach src -> dest for each query
 // * TIME COMPLEXITY O(Q * (V + E))
 // * SPACE COMPLEXITY O(V + E)
-std::vector<bool> checkIfPrerequisite(
+vector<bool> checkIfPrerequisite(
     int numCourses,
-    std::vector<std::vector<int>> &prerequisites,
-    std::vector<std::vector<int>> &queries)
+    vector<vector<int>> &prerequisites,
+    vector<vector<int>> &queries)
 {
   // * Create a Adj list
-  std::unordered_map<int, std::vector<int>> adj = constructadj(prerequisites);
+  unordered_map<int, vector<int>> adj = constructadj(prerequisites);
   printAdjList(adj); // * For debugging
   
   int Q = queries.size();
-  std::vector<bool> ans(Q, false);
+  vector<bool> ans(Q, false);
   
   // * TC = O(Q)
   // * Go to src -> dest for all queries
   for (int i = 0; i < Q; ++i) {
     int src = queries[i][0], dest = queries[i][1];
-    std::vector<bool> visited(numCourses, false);
+    vector<bool> visited(numCourses, false);
     if (dfs(src, dest, visited, adj)) // * TC = O(V + E)
       ans[i] = true;
   }
@@ -131,38 +132,36 @@ std::vector<bool> checkIfPrerequisite(
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * Q - No of queries
 // * Topological Sort (Kahn's Algo)
-// * TIME COMPLEXITY O(V^2 * (V + E))
-// * SPACE COMPLEXITY O(V + E)
-std::vector<bool> checkIfPrerequisite2(
+// * TIME COMPLEXITY O(V^2 * (V + E)) ~ O(numCourses² + Q)
+// * SPACE COMPLEXITY O(V + E)        ~ O(numCourses²)
+vector<bool> checkIfPrerequisite2(
     int numCourses,
-    std::vector<std::vector<int>> &prerequisites,
-    std::vector<std::vector<int>> &queries)
+    vector<vector<int>> &prerequisites,
+    vector<vector<int>> &queries)
 {
   // * Create a adjaency list & indegree vector
-  std::vector<int> indegree(numCourses);
-  std::unordered_map<int, std::vector<int>> adj = constructadj(indegree, prerequisites);
+  vector<int> indegree(numCourses);
+  unordered_map<int, vector<int>> adj = constructadj(indegree, prerequisites);
   printAdjList(adj); // * For debugging
   
-  int Q = queries.size();
-  std::vector<bool> ans(Q, false);
-
   // * Push all the vertices whose indegree is '0'
-  std::queue<int> q;
+  queue<int> q;
   for (int i = 0; i < numCourses; ++i) {
     if (indegree[i] == 0)
       q.push(i);
   }
   
   // * Map from the node as key to the set of prerequisite nodes.
-  std::unordered_map<int, std::unordered_set<int>> mp_st;
+  unordered_map<int, unordered_set<int>> mp_st;
   while (!q.empty()) {
-    int node = q.front();
+    int u = q.front();
     q.pop();
 
-    for (auto &v : adj[node]) { // * O(V)
-      mp_st[v].insert(node);
-      for (auto &prereq : mp_st[node]) { // * O(V) - add the prerequisites of parent node to the current prereq set
+    for (auto &v : adj[u]) { // * O(V)
+      mp_st[v].insert(u);
+      for (auto &prereq : mp_st[u]) { // * O(V) - add the prerequisites of parent 'u' to the current prereq set
         mp_st[v].insert(prereq);
       }
 
@@ -173,6 +172,8 @@ std::vector<bool> checkIfPrerequisite2(
     }
   }
 
+  int Q = queries.size();
+  vector<bool> ans(Q, false);
   // * TC = O(Q)
   for (int i = 0; i < Q; ++i) {
     int src = queries[i][0], dest = queries[i][1];
@@ -185,29 +186,29 @@ std::vector<bool> checkIfPrerequisite2(
 int main(void) {
   // * testcase 1
   // int numCourses = 2;
-  // std::vector<std::vector<int>> prerequisites = {{1, 0}}, queries = {{0, 1}, {1, 0}};
+  // vector<vector<int>> prerequisites = {{1, 0}}, queries = {{0, 1}, {1, 0}};
   
   // * testcase 2
   // int numCourses = 2;
-  // std::vector<std::vector<int>> prerequisites = {}, queries = {{1, 0}, {0, 1}};
+  // vector<vector<int>> prerequisites = {}, queries = {{1, 0}, {0, 1}};
 
   // * testcase 3
   int numCourses = 3;
-  std::vector<std::vector<int>> prerequisites = {{1, 2}, {1, 0}, {2, 0}}, queries = {{1, 0}, {1, 2}};
+  vector<vector<int>> prerequisites = {{1, 2}, {1, 0}, {2, 0}}, queries = {{1, 0}, {1, 2}};
 
-  std::cout << "-------- prerequisites -------- " << std::endl;
+  cout << "-------- prerequisites -------- " << endl;
   for (auto &vec : prerequisites)
   printArr(vec);
-  std::cout << "-------- queries -------- " << std::endl;
+  cout << "-------- queries -------- " << endl;
   for (auto &vec : queries)
   printArr(vec);
   
-  // std::vector<bool> ans = checkIfPrerequisite(numCourses, prerequisites, queries);
-  std::vector<bool> ans = checkIfPrerequisite2(numCourses, prerequisites, queries);
-  std::cout << "-------- Answer -------- " << std::endl;
+  // vector<bool> ans = checkIfPrerequisite(numCourses, prerequisites, queries);
+  vector<bool> ans = checkIfPrerequisite2(numCourses, prerequisites, queries);
+  cout << "-------- Answer -------- " << endl;
   for (int i = 0; i < queries.size(); ++i) {
     auto it = queries[i];
-    std::cout << "query: (" << it[0] << ", " << it[1] << ")" << " -> " << ans[i] << std::endl;
+    cout << "query: (" << it[0] << ", " << it[1] << ")" << " -> " << ans[i] << endl;
   }
 
   return 0;

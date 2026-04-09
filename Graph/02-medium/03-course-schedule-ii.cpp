@@ -30,35 +30,37 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Print adjacency list
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
 // * Kahn's Algo
-std::vector<int> bfs(
+vector<int> bfs(
     int n,
-    std::vector<int> &indegree,
-    std::unordered_map<int, std::vector<int>> adj)
+    vector<int> &indegree,
+    unordered_map<int, vector<int>> adj)
 {
 
   int count = 0;
-  std::queue<int> q;
+  queue<int> q;
 
   // * Push all the vertices with indegree = 0
   for (int u = 0; u < n; ++u) {
@@ -69,7 +71,7 @@ std::vector<int> bfs(
   }
 
   // * Classic BFS
-  std::vector<int> ans;
+  vector<int> ans;
   while (!q.empty()) {
     int u = q.front();
     ans.push_back(u);
@@ -94,11 +96,10 @@ std::vector<int> bfs(
 // * Kahn's Algo
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-std::vector<int> canFinish(int numCourses, std::vector<std::vector<int>> &prerequisites) {
-  std::vector<int> indegree(numCourses, 0);
-
-  // * Step 1. Create a Adj list with indegree
-  std::unordered_map<int, std::vector<int>> adj;
+vector<int> canFinish(int numCourses, vector<vector<int>> &prerequisites) {
+  // * Step 1. Create a Adj list with indegree vector
+  vector<int> indegree(numCourses, 0);
+  unordered_map<int, vector<int>> adj;
   for (auto &it: prerequisites) {
     int a = it[0], b = it[1];
     // * b ---> a
@@ -107,9 +108,9 @@ std::vector<int> canFinish(int numCourses, std::vector<std::vector<int>> &prereq
   }
 
   // * For Debugging
-  // std::cout << "Adjacency List" << std::endl;
+  // cout << "Adjacency List" << endl;
   // printAdjList(adj);
-  // std::cout << "Indegree" << std::endl;
+  // cout << "Indegree" << endl;
   // printArr(indegree);
 
   // * Step 2. Kahn's Algo
@@ -120,23 +121,23 @@ int main(void) {
 
   // * testcase 1
   // int numCourses = 2;
-  // std::vector<std::vector<int>> prerequisites = {{1, 0}};
+  // vector<vector<int>> prerequisites = {{1, 0}};
 
   // * testcase 2
   // int numCourses = 2;
-  // std::vector<std::vector<int>> prerequisites = {{1, 0}, {0, 1}};
+  // vector<vector<int>> prerequisites = {{1, 0}, {0, 1}};
 
   // * testcase 3
   int numCourses = 4;
-  std::vector<std::vector<int>> prerequisites = {{1, 0}, {2, 0}, {3, 1}, {3, 2}};
+  vector<vector<int>> prerequisites = {{1, 0}, {2, 0}, {3, 1}, {3, 2}};
 
-  std::cout << "numCourses: " << numCourses << std::endl;
-  std::cout << "prerequisites: " << std::endl;
+  cout << "numCourses: " << numCourses << endl;
+  cout << "prerequisites: " << endl;
   for (auto &vec : prerequisites)
     printArr(vec);
 
-  std::vector<int> ans = canFinish(numCourses, prerequisites);
-  std::cout << "Course Schedule: ";
+  vector<int> ans = canFinish(numCourses, prerequisites);
+  cout << "Course Schedule: ";
   printArr(ans);
 
   return 0;

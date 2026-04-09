@@ -27,28 +27,30 @@
 #include <numeric>
 #include <iostream>
 
+using namespace std;
+
 // ! Google, Microsoft, Amazon, Meta, Oracle
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-int find(int x, std::vector<int> &parent) {
+int find(int x, vector<int> &parent) {
   if (x == parent[x]) {
     return x;
   }
   return parent[x] = find(parent[x], parent);
 }
 
-void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
+void Union(int x, int y, vector<int> &parent, vector<int> &rank) {
   int x_parent = find(x, parent);
   int y_parent = find(y, parent);
 
@@ -71,7 +73,7 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
 // * Loop over the whole grid
 // * TIME COMPLEXITY O(m * n^2)
 // * SPACE COMPLEXITY O(1)
-int countServersBrute(std::vector<std::vector<int>>& grid) {
+int countServersBrute(vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
   int res = 0;
 
@@ -113,17 +115,17 @@ int countServersBrute(std::vector<std::vector<int>>& grid) {
 // * Using DSU
 // * TIME COMPLEXITY O(m ∗ n ∗ Alpha(m ∗ n))
 // * SPACE COMPLEXITY O(m * n)
-int countServers(std::vector<std::vector<int>>& grid) {
+int countServers(vector<vector<int>>& grid) {
   int ROWS = grid.size(), COLS = grid[0].size();
 
   // * DSU boilerplate
   int n = ROWS * COLS;
-  std::vector<int> rank(n, 1);
-  std::vector<int> parent(n);
-  std::iota(begin(parent), end(parent), 0);
+  vector<int> rank(n, 1);
+  vector<int> parent(n);
+  iota(begin(parent), end(parent), 0);
   
-  std::vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
-  std::vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
+  vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
+  vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
   for (int r = 0; r < ROWS; ++r) {
     for (int c = 0; c < COLS; ++c) {
       if (grid[r][c] == 1) {
@@ -140,7 +142,7 @@ int countServers(std::vector<std::vector<int>>& grid) {
   }
 
   // * For debugging
-  std::cout << "Servers count in each row & col" << std::endl;
+  cout << "Servers count in each row & col" << endl;
   printArr(row_servers_cnt);
   printArr(col_servers_cnt);
 
@@ -148,7 +150,7 @@ int countServers(std::vector<std::vector<int>>& grid) {
   for (int r = 0; r < ROWS; ++r) {
     for (int c = 0; c < COLS; ++c) {
       // * If either of current row & col has more than 1 server
-      if (grid[r][c] == 1 && std::max(row_servers_cnt[r], col_servers_cnt[c]) > 1) {
+      if (grid[r][c] == 1 && max(row_servers_cnt[r], col_servers_cnt[c]) > 1) {
         res += 1;
       }
     }
@@ -157,17 +159,16 @@ int countServers(std::vector<std::vector<int>>& grid) {
   return res;
 }
 
-
 // * ------------------------- Approach 3: Better Approach -------------------------
 // * More easy
 // * Save the server count on each row and col in separate array
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n)
-int countServersBetter(std::vector<std::vector<int>>& grid) {
+int countServersBetter(vector<vector<int>>& grid) {
   int ROWS = grid.size(), COLS = grid[0].size();
 
-  std::vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
-  std::vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
+  vector<int> row_servers_cnt(ROWS, 0); // * no of servers in each row
+  vector<int> col_servers_cnt(COLS, 0); // * no of servers in each col
 
   for (int r = 0; r < ROWS; ++r) {
     for (int c = 0; c < COLS; ++c) {
@@ -179,7 +180,7 @@ int countServersBetter(std::vector<std::vector<int>>& grid) {
   }
 
   // * For debugging
-  std::cout << "Servers count in each row & col" << std::endl;
+  cout << "Servers count in each row & col" << endl;
   printArr(row_servers_cnt);
   printArr(col_servers_cnt);
   
@@ -187,7 +188,7 @@ int countServersBetter(std::vector<std::vector<int>>& grid) {
   for (int r = 0; r < ROWS; ++r) {
     for (int c = 0; c < COLS; ++c) {
       // * If either of current row & col has more than 1 server
-      if (grid[r][c] == 1 && std::max(row_servers_cnt[r], col_servers_cnt[c]) > 1) {
+      if (grid[r][c] == 1 && max(row_servers_cnt[r], col_servers_cnt[c]) > 1) {
         res += 1;
       }
     }
@@ -199,31 +200,31 @@ int countServersBetter(std::vector<std::vector<int>>& grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{1, 0}, {0, 1}};
+  // vector<vector<int>> grid = {{1, 0}, {0, 1}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> grid = {{1, 0}, {1, 1}};
+  // vector<vector<int>> grid = {{1, 0}, {1, 1}};
 
   // * testcase 3
-  std::vector<std::vector<int>> grid = {{1, 1, 0, 0},
-                                        {0, 0, 1, 0},
-                                        {0, 0, 1, 0},
-                                        {0, 0, 0, 1}};
+  vector<vector<int>> grid = {{1, 1, 0, 0},
+                              {0, 0, 1, 0},
+                              {0, 0, 1, 0},
+                              {0, 0, 0, 1}};
 
   // * testcase 4
-  // std::vector<std::vector<int>> grid = {{0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-  //                                       {1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-  //                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-  //                                       {0, 1, 0, 0, 0, 0, 0, 1, 0, 0}};
+  // vector<vector<int>> grid = {{0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+  //                             {1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+  //                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+  //                             {0, 1, 0, 0, 0, 0, 0, 1, 0, 0}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   // int ans = countServersBrute(grid);
   int ans = countServersBetter(grid);
   // int ans = countServers(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

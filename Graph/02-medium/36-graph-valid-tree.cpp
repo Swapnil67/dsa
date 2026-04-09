@@ -16,7 +16,7 @@
  * https://neetcode.io/problems/valid-tree/question
  * https://leetcode.com/problems/graph-valid-tree/description/
  * https://www.naukri.com/code360/problems/graph-valid-tree_1376618
- * http://geeksforgeeks.org/problems/is-it-a-tree/1
+ * https://www.geeksforgeeks.org/problems/is-it-a-tree/1
 */
 
 // ! Cycle Detection
@@ -27,29 +27,30 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
 // * TC = O(E)
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) 
-{
-  std::unordered_map<int, std::vector<int>> adj;
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges)  {
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges) {
     int u = it[0], v = it[1];
     adj[u].push_back(v);
@@ -60,8 +61,8 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
 
 bool dfs(
     int u, int parent,
-    std::vector<bool> &visited,
-    std::unordered_map<int, std::vector<int>> adj)
+    vector<bool> &visited,
+    unordered_map<int, vector<int>> adj)
 {
   visited[u] = true;
   for (auto &v : adj[u]) {
@@ -85,13 +86,13 @@ bool dfs(
 // * SPACE COMPLEXITY O(V + E)
 bool validTree(
     int n,
-    std::vector<std::vector<int>> &edges)
+    vector<vector<int>> &edges)
 {
   // * 1. Create a adjaency list
-  std::unordered_map<int, std::vector<int>> adj = constructadj(edges); 
-  printAdjList(adj); // * For debugging
+  unordered_map<int, vector<int>> adj = constructadj(edges); 
+  // printAdjList(adj); // * For debugging
   
-  std::vector<bool> visited(n + 1, false);
+  vector<bool> visited(n + 1, false);
 
   // * 2. Check if there is any cycle in graph
   if (dfs(0, -1, visited, adj)) {
@@ -109,20 +110,19 @@ bool validTree(
 
 int main(void) {
   // * testcase 1
-  int n = 2;
-  std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {0, 3}, {1, 4}};
+  // int n = 2;
+  // vector<vector<int>> edges = {{0, 1}, {0, 2}, {0, 3}, {1, 4}};
 
   // * testcase 2
-  // int n = 2;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}};
+  int n = 2;
+  vector<vector<int>> edges = {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}};
 
-  std::cout << "-------- edges -------- " << std::endl;
+  cout << "-------- edges -------- " << endl;
   for (auto &vec : edges)
   printArr(vec);
   
   bool ans = validTree(n, edges);
-  std::cout << "Is Graph Valid Tree: " << ans << std::endl;
-  std::cout << "-------- Answer -------- " << std::endl;
+  cout << "Is Graph Valid Tree: " << ans << endl;
 
   return 0;
 }

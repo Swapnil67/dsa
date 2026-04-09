@@ -28,6 +28,7 @@
  *              ["Hanzo","Hanzo0@m.co","Hanzo1@m.co","Hanzo3@m.co"],["Kevin","Kevin0@m.co","Kevin3@m.co","Kevin5@m.co"],
  *              ["Fern","Fern0@m.co","Fern1@m.co","Fern5@m.co"]]
  * 
+ * https://neetcode.io/problems/accounts-merge/question
  * https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/
 */
 
@@ -37,28 +38,30 @@
 #include <algorithm>
 #include <unordered_map>
 
-// ! Meta, Google
+using namespace std;
+
+// ! Amazon, Google, Meta, Microsoft, Apple, Rippling, PhonePe
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 
-int find(int x, std::vector<int> &parent) {
+int find(int x, vector<int> &parent) {
   if (x == parent[x])
     return x;
   return parent[x] = find(parent[x], parent);
 }
 
-void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
+void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
   int x_parent = find(x, parent);
   int y_parent = find(y, parent);
 
@@ -77,19 +80,19 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
   }
 }
 
-std::vector<std::vector<std::string>> accountsMerge(std::vector<std::vector<std::string>> &accounts) {
+vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
   int n = accounts.size();
 
   // * 1. Initialize rank and parent vectors
-  std::vector<int> rank(n + 1, 1);
-  std::vector<int> parent(n + 1);
-  std::iota(begin(parent), end(parent), 0);
+  vector<int> rank(n + 1, 1);
+  vector<int> parent(n + 1);
+  iota(begin(parent), end(parent), 0);
 
   // * 2. Mark parents for each mail id
-  std::unordered_map<std::string, int> mail_parent_mp;
+  unordered_map<string, int> mail_parent_mp;
   for (int i = 0; i < n; ++i) {
     for (int j = 1; j < accounts[i].size(); ++j) {
-      std::string mail = accounts[i][j];
+      string mail = accounts[i][j];
       if (!mail_parent_mp.count(mail)) {
         mail_parent_mp[mail] = i;
       }
@@ -100,29 +103,29 @@ std::vector<std::vector<std::string>> accountsMerge(std::vector<std::vector<std:
   }
   // * For Debugging
   for (auto &it: mail_parent_mp) {
-    std::cout << it.first << ": " << it.second << std::endl;
+    cout << it.first << ": " << it.second << endl;
   }
   
   // * 3. merge mail of same parents
-  std::vector<std::vector<std::string>> merged_mails(n);
+  vector<vector<string>> merged_mails(n);
   for (auto &it: mail_parent_mp) {
-    std::string mail = it.first;
+    string mail = it.first;
     int ultimate_parent = find(it.second, parent);
-    std::cout << mail << " -> " << ultimate_parent << std::endl;
     merged_mails[ultimate_parent].push_back(mail);
+    cout << mail << " -> " << ultimate_parent << endl;
   }
 
   // * 4. Create answer vector
-  std::vector<std::vector<std::string>> ans;
+  vector<vector<string>> ans;
   for (int i = 0; i < n; ++i) {
     if (merged_mails[i].size() == 0)
       continue;
 
     // * create a sorted mail array for each account
-    std::vector<std::string> temp;
+    vector<string> temp;
     temp.push_back(accounts[i][0]);
-    std::sort(begin(merged_mails[i]), end(merged_mails[i]));
-    temp.insert(temp.end(), merged_mails[i].begin(), merged_mails[i].end());
+    sort(begin(merged_mails[i]), end(merged_mails[i]));
+    temp.insert(temp.end(), begin(merged_mails[i]), end(merged_mails[i]));
     ans.push_back(temp);
   }
   return ans;
@@ -130,26 +133,26 @@ std::vector<std::vector<std::string>> accountsMerge(std::vector<std::vector<std:
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<std::string>> accounts = {
+  vector<vector<string>> accounts = {
       {"John", "johnsmith@mail.com", "john_newyork@mail.com"},
       {"John", "johnsmith@mail.com", "john00@mail.com"},
       {"Mary", "mary@mail.com"},
       {"John", "johnnybravo@mail.com"}};
 
   // * testcase 2
-  // std::vector<std::vector<std::string>> accounts = {
+  // vector<vector<string>> accounts = {
   //     {"Gabe", "Gabe0@m.co", "Gabe3@m.co", "Gabe1@m.co"},
   //     {"Kevin", "Kevin3@m.co", "Kevin5@m.co", "Kevin0@m.co"},
   //     {"Ethan", "Ethan5@m.co", "Ethan4@m.co", "Ethan0@m.co"},
   //     {"Hanzo", "Hanzo3@m.co", "Hanzo1@m.co", "Hanzo0@m.co"},
   //     {"Fern", "Fern5@m.co", "Fern1@m.co", "Fern0@m.co"}};
 
-  std::cout << "accounts: " << std::endl;
+  cout << "accounts: " << endl;
   for (auto &vec : accounts)
   printArr(vec);
   
-  std::vector<std::vector<std::string>> ans = accountsMerge(accounts);
-  std::cout << "Merged accounts: " << std::endl;
+  vector<vector<string>> ans = accountsMerge(accounts);
+  cout << "Merged accounts: " << endl;
   for (auto &vec : ans)
     printArr(vec);
     

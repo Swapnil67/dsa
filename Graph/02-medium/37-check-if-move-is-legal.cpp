@@ -50,37 +50,39 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << "'" << arr[i] << "' ";
+    cout << "'" << arr[i] << "' ";
     if (i != n - 1)
-      std::cout << "  ";
+      cout << "  ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
+vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1}};
 
 bool check_legal(
     int r, int c,
     char &color,
-    std::vector<int> &dir,
-    std::vector<std::vector<char>> &board)
+    vector<int> &dir,
+    vector<vector<char>> &board)
 { 
   int m = board.size(), n = board[0].size();
   int dr = dir[0], dc = dir[1];
   r += dr;
   c += dc;
 
-  // std::cout << "dr: " << dr << ", dc: " << dc << std::endl;
+  // cout << "dr: " << dr << ", dc: " << dc << endl;
   int length = 1;
   
   // * out of bound check
   while (r >= 0 && r < m && c >= 0 && c < n) {
-    // std::cout << r << " " << c << " -> " << board[r][c] << std::endl;
+    // cout << r << " " << c << " -> " << board[r][c] << endl;
     length++;
     if (board[r][c] == '.') {
       return false;
@@ -101,11 +103,9 @@ bool check_legal(
 // * SPACE COMPLEXITY O(1)
 bool checkMove(
     int rMove, int cMove, char color,
-    std::vector<std::vector<char>> &board)
+    vector<vector<char>> &board)
 {
-  int r = board.size(), c = board[0].size();
   board[rMove][cMove] = color;
-
   for (auto &dir: dirs) { // * go to all 8 directions
     if (check_legal(rMove, cMove, color, dir, board))
       return true;
@@ -117,34 +117,34 @@ int main(void) {
   // * testcase 1
   // int rMove = 4, cMove = 3;
   // char color = 'W';
-  // std::vector<std::vector<char>> board = {{'.', '.', '.', 'B', '.', '.', '.', '.'},
-  //                                         {'.', '.', '.', 'W', '.', '.', '.', '.'},
-  //                                         {'.', '.', '.', 'W', '.', '.', '.', '.'},
-  //                                         {'.', '.', '.', 'W', '.', '.', '.', '.'},
-  //                                         {'W', 'B', 'B', '.', 'W', 'W', 'W', 'B'},
-  //                                         {'.', '.', '.', 'B', '.', '.', '.', '.'},
-  //                                         {'.', '.', '.', 'B', '.', '.', '.', '.'},
-  //                                         {'.', '.', '.', 'W', '.', '.', '.', '.'}};
+  // vector<vector<char>> board = {{'.', '.', '.', 'B', '.', '.', '.', '.'},
+  //                               {'.', '.', '.', 'W', '.', '.', '.', '.'},
+  //                               {'.', '.', '.', 'W', '.', '.', '.', '.'},
+  //                               {'.', '.', '.', 'W', '.', '.', '.', '.'},
+  //                               {'W', 'B', 'B', '.', 'W', 'W', 'W', 'B'},
+  //                               {'.', '.', '.', 'B', '.', '.', '.', '.'},
+  //                               {'.', '.', '.', 'B', '.', '.', '.', '.'},
+  //                               {'.', '.', '.', 'W', '.', '.', '.', '.'}};
 
   // * testcase 2
   int rMove = 4, cMove = 4;
   char color = 'W';
-  std::vector<std::vector<char>> board = {{'.', '.', '.', '.', '.', '.', '.', '.'},
-                                          {'.', 'B', '.', '.', 'W', '.', '.', '.'},
-                                          {'.', '.', 'W', '.', '.', '.', '.', '.'},
-                                          {'.', '.', '.', 'W', 'B', '.', '.', '.'},
-                                          {'.', '.', '.', '.', '.', '.', '.', '.'},
-                                          {'.', '.', '.', '.', 'B', 'W', '.', '.'},
-                                          {'.', '.', '.', '.', '.', '.', 'W', '.'},
-                                          {'.', '.', '.', '.', '.', '.', '.', 'B'}};
+  vector<vector<char>> board = {{'.', '.', '.', '.', '.', '.', '.', '.'},
+                                {'.', 'B', '.', '.', 'W', '.', '.', '.'},
+                                {'.', '.', 'W', '.', '.', '.', '.', '.'},
+                                {'.', '.', '.', 'W', 'B', '.', '.', '.'},
+                                {'.', '.', '.', '.', '.', '.', '.', '.'},
+                                {'.', '.', '.', '.', 'B', 'W', '.', '.'},
+                                {'.', '.', '.', '.', '.', '.', 'W', '.'},
+                                {'.', '.', '.', '.', '.', '.', '.', 'B'}};
 
-  std::cout << "color: " << color << ", rMove: " << rMove << ", cMove: " << cMove << std::endl;
-  std::cout << "---------------- board ---------------- " << std::endl;
+  cout << "color: " << color << ", rMove: " << rMove << ", cMove: " << cMove << endl;
+  cout << "---------------- board ---------------- " << endl;
   for (auto &vec : board)
-  printArr(vec);
+    printArr(vec);
 
   bool ans = checkMove(rMove, cMove, color, board);
-  std::cout << "Is Move Legal: " << ans << std::endl;
+  cout << "Is Move Legal: " << ans << endl;
 
   return 0;
 }

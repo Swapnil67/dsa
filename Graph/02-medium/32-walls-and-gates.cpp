@@ -29,32 +29,34 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // ! Multi Source BFS
 
 // ! Uber, Meta, Amazon, Google, Spotify, Microsoft, Tiktok
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 
 // * ------------------------- APPROACH : Optimal Approach -------------------------`
 // * Multi Source BFS
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-void islandsAndTreasure(std::vector<std::vector<int>>& grid) {
+void islandsAndTreasure(vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
 
   // * push all the treasure into queue
   for (int r = 0; r < m; ++r) {
@@ -64,7 +66,7 @@ void islandsAndTreasure(std::vector<std::vector<int>>& grid) {
       }
     }
   }
-  // std::cout << q.size() << std::endl;
+  // cout << q.size() << endl;
 
   // * Out of bound check
   const auto is_safe = [&](const int &r, const int &c) {
@@ -89,24 +91,24 @@ void islandsAndTreasure(std::vector<std::vector<int>>& grid) {
 }
 
 int main(void) {
+  
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {
+  // vector<vector<int>> grid = {
   //     {2147483647, -1, 0, 2147483647},
   //     {2147483647, 2147483647, 2147483647, -1},
   //     {2147483647, -1, 2147483647, -1},
   //     {0, -1, 2147483647, 2147483647}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {
-      {0, -1},
-      {2147483647, 2147483647}};
+  vector<vector<int>> grid = {{0, -1},
+                              {2147483647, 2147483647}};
 
-  std::cout
-      << "-------- Grid Before -------- " << std::endl;
+  cout
+      << "-------- Grid Before -------- " << endl;
   for (auto &vec : grid)
   printArr(vec);
   
-  std::cout << "-------- Grid After -------- " << std::endl;
+  cout << "-------- Grid After -------- " << endl;
   islandsAndTreasure(grid);
   for (auto &vec : grid)
     printArr(vec);

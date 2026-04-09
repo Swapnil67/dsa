@@ -149,8 +149,8 @@ int main(void) {
   for (auto &vec : grid)
     printArr(vec);
 
-  // int ans = maxAreaOfIslandDFS(grid);
-  int ans = maxAreaOfIslandDFS2(grid);
+  int ans = maxAreaOfIslandDFS(grid);
+  // int ans = maxAreaOfIslandDFS2(grid);
   std::cout << "Ans: " << ans << std::endl;
 
   return 0;

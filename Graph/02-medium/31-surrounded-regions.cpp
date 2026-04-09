@@ -45,8 +45,8 @@ const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 void mark_visited(int x, int y, std::vector<std::vector<char>> &board) {
   board[x][y] = 'T';
-  int m = board.size(), n = board[0].size();
   
+  int m = board.size(), n = board[0].size();
   const auto is_safe = [&](const int &r, const int &c) {
     return r >= 0 && r < m && c >= 0 && c < n;
   };

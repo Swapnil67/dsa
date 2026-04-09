@@ -118,8 +118,7 @@ int shortestPathBinaryMatrixDij(std::vector<std::vector<int>> &grid)
   if (m == 0 || n == 0 || grid[0][0] != 0)
     return -1;
 
-  auto is_safe = [&](const int &r, const int &c)
-  {
+  auto is_safe = [&](const int &r, const int &c) {
     return r >= 0 && r < m && c >= 0 && c < n;
   };
 

@@ -33,23 +33,25 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // ! BFS
 
 // ! Meta
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-std::pair<int, int> intToPos(int square, int n) {
+pair<int, int> intToPos(int square, int n) {
   int r = (square - 1) / n;
   int c = (square - 1) % n;
   if (r % 2 == 1) {
@@ -63,12 +65,12 @@ std::pair<int, int> intToPos(int square, int n) {
 // * Since we need a shortest path we'll use BFS approach 
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)
-int snakesAndLadders(std::vector<std::vector<int>>& board) {
+int snakesAndLadders(vector<vector<int>>& board) {
   int n = board.size(); // * rows == cols
   int dest = n * n;  // * Destination Cell
 
   board[n - 1][0] = 0; // * bottom-Left Cell visited
-  std::queue<int> q;
+  queue<int> q;
   q.push(1);
 
   int steps = 0;
@@ -107,18 +109,18 @@ int snakesAndLadders(std::vector<std::vector<int>>& board) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> board = {{-1, -1, -1, -1, -1, -1},
-                                        {-1, -1, -1, -1, -1, -1},
-                                        {-1, -1, -1, -1, -1, -1},
-                                        {-1, 35, -1, -1, 13, -1},
-                                        {-1, -1, -1, -1, -1, -1},
-                                        {-1, 15, -1, -1, -1, -1}};
-  std::cout << "-------- Board -------- " << std::endl;
+  vector<vector<int>> board = {{-1, -1, -1, -1, -1, -1},
+                               {-1, -1, -1, -1, -1, -1},
+                               {-1, -1, -1, -1, -1, -1},
+                               {-1, 35, -1, -1, 13, -1},
+                               {-1, -1, -1, -1, -1, -1},
+                               {-1, 15, -1, -1, -1, -1}};
+  cout << "-------- Board -------- " << endl;
   for (auto &vec : board)
     printArr(vec);
   
   int steps = snakesAndLadders(board);
-  std::cout << "Steps: " << steps << std::endl;
+  cout << "Steps: " << steps << endl;
 
   return 0;
 }

@@ -76,11 +76,10 @@ std::vector<std::vector<int>> updateMatrix(std::vector<std::vector<int>>& mat) {
 
     // * Go to adjacent cells
     for (auto &dir: dirs) {
-      int n_r = r + dir[0];
-      int n_c = c + dir[1];
-      if (is_safe(n_r, n_c) && dist[n_r][n_c] == -1) {
-          dist[n_r][n_c] = dist[r][c] + 1;
-          q.push({n_r, n_c});
+      int dr = r + dir[0], dc = c + dir[1];
+      if (is_safe(dr, dc) && dist[dr][dc] == -1) {
+          dist[dr][dc] = dist[r][c] + 1;
+          q.push({dr, dc});
       }
     }
   }

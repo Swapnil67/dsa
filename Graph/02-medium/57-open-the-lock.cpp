@@ -53,10 +53,11 @@ void printArr(std::vector<T> &arr) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
+// * D is the number of deadends.
 // * n = no. of slots (We have 10)
 // * w = no. of wheels (we have 4)
-// * TIME COMPLEXITY O(n^w)
-// * SPACE COMPLEXITY O(n^w)
+// * TIME COMPLEXITY O(n^w + D)   ~ O(10^4 + D)
+// * SPACE COMPLEXITY O(n^w + D)  ~ O(10^4 + D) 
 int openLock(std::vector<std::string> &deadends, std::string target) {
   // * For checking deadends
   std::unordered_set<std::string> dead_st(begin(deadends), end(deadends));

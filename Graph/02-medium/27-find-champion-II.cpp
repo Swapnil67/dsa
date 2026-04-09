@@ -3,7 +3,26 @@
  * Find Champion II
  * 
  * There are n teams numbered from 0 to n - 1 in a tournament; each team is also a node in a DAG.
- TODO
+ * You are given the integer n and a 0-indexed 2D integer array edges of length m representing the DAG,
+ * where edges[i] = [ui, vi] indicates that there is a directed edge from team ui to team vi in the graph.
+ * 
+ * A directed edge from a to b in the graph means that team a is stronger than team b and team b is weaker than team a.
+ * 
+ * Team a will be the champion of the tournament if there is no team b that is stronger than team a.
+ * 
+ * Return the team that will be the champion of the tournament if there is a unique champion, otherwise, return -1.
+ * 
+ * Example 2    :
+ * Input        : n = 3, edges = [[0,1],[1,2]]
+ * Output       : 0
+ * Explanation  : 
+ * 
+ * Example 1    :
+ * Input        : n = 4, edges = [[0,2],[1,3],[1,2]]
+ * Output       : -1
+ * Explanation  : 
+ * 
+ * https://leetcode.com/problems/find-champion-ii/
 */
 
 #include <queue>
@@ -22,7 +41,7 @@ void printArr(std::vector<T> &arr) {
   std::cout << "]" << std::endl;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Find the indgree of 'v' node
 // * TIME COMPLEXITY O(M + N) 
 // * SPACE COMPLEXITY O(n)
@@ -38,9 +57,9 @@ int findChampion(int n, std::vector<std::vector<int>>& edges) {
   for (int i = 0; i < n; ++i) { // * O(N)
     if (indegree[i] == 0) {
       // * only one can be champion
-      if (champ != -1) {
+      if (champ != -1)
         return -1;
-      }
+      
       champ = i;
     }
   }

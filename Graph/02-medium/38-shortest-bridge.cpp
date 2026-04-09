@@ -28,22 +28,24 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // ! DFS + BFS 
 // ! Microsoft, Meta, Uber, Google
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * check out of bound
 bool check_oob(int n, const int &row, const int &col) {
@@ -51,9 +53,9 @@ bool check_oob(int n, const int &row, const int &col) {
 };
 
 void dfs(int r, int c,
-         std::queue<std::pair<int, int>> &q,
-         std::vector<std::vector<bool>> &visited,
-         std::vector<std::vector<int>> &grid)
+         queue<pair<int, int>> &q,
+         vector<vector<bool>> &visited,
+         vector<vector<int>> &grid)
 {
   int n = grid.size(); // * rows == cols
   visited[r][c] = true; // * mark visited
@@ -68,20 +70,21 @@ void dfs(int r, int c,
   }
 }
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * ------------------------- APPROACH : Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)
-int shortestBridge(std::vector<std::vector<int>>& grid) {
+int shortestBridge(vector<vector<int>>& grid) {
   int n = grid.size(); // * rows == cols
-  std::vector<std::vector<bool>> visited(n, std::vector<bool>(n, false));
+  vector<vector<bool>> visited(n, vector<bool>(n, false));
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
 
   // * Do DFS on 1st Island and save all the land nodes to queue
   bool found = false;
   for (int r = 0; r < n; ++r) {
     if (found)
       break;
+      
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) {
         dfs(r, c, q, visited, grid);
@@ -94,7 +97,7 @@ int shortestBridge(std::vector<std::vector<int>>& grid) {
   // * For Debugging
   // while (!q.empty()) {
   //   auto p = q.front();
-  //   std::cout << "(" << p.first << " " << p.second << ")" << std::endl;
+  //   cout << "(" << p.first << " " << p.second << ")" << endl;
   //   q.pop();
   // }
 
@@ -121,7 +124,7 @@ int shortestBridge(std::vector<std::vector<int>>& grid) {
     min_dist++;
   }
 
-  // std::cout << std::endl;
+  // cout << endl;
   // for (auto &vec : visited)
   //   printArr(vec);
 
@@ -130,33 +133,33 @@ int shortestBridge(std::vector<std::vector<int>>& grid) {
 
 int main(void) {
   // * testcase 1 // * Ans = 1
-  // std::vector<std::vector<int>> grid = {{0, 1}, {1, 0}};
+  // vector<vector<int>> grid = {{0, 1}, {1, 0}};
 
   // * testcase 2 // * Ans = 2
-  // std::vector<std::vector<int>> grid = {{0, 1, 0},
-  //                                       {0, 0, 0},
-  //                                       {0, 0, 1}};
+  // vector<vector<int>> grid = {{0, 1, 0},
+  //                             {0, 0, 0},
+  //                             {0, 0, 1}};
 
   // * testcase 3 // * Ans = 1
-  // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1},
-  //                                       {1, 0, 0, 0, 1},
-  //                                       {1, 0, 1, 0, 1},
-  //                                       {1, 0, 0, 0, 1},
-  //                                       {1, 1, 1, 1, 1}};
+  // vector<vector<int>> grid = {{1, 1, 1, 1, 1},
+  //                             {1, 0, 0, 0, 1},
+  //                             {1, 0, 1, 0, 1},
+  //                             {1, 0, 0, 0, 1},
+  //                             {1, 1, 1, 1, 1}};
 
   // * testcase 3 // * Ans = 1
-  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 1},
-                                        {0, 1, 1, 0, 1},
-                                        {0, 1, 0, 0, 1},
-                                        {0, 0, 0, 0, 0},
-                                        {0, 0, 0, 0, 0}};
+  vector<vector<int>> grid = {{0, 0, 1, 0, 1},
+                              {0, 1, 1, 0, 1},
+                              {0, 1, 0, 0, 1},
+                              {0, 0, 0, 0, 0},
+                              {0, 0, 0, 0, 0}};
 
-  std::cout << "-------- Board -------- " << std::endl;
+  cout << "-------- Board -------- " << endl;
   for (auto &vec : grid)
     printArr(vec);
   
   int steps = shortestBridge(grid);
-  std::cout << "Steps: " << steps << std::endl;
+  cout << "Steps: " << steps << endl;
 
   return 0;
 }

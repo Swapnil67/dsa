@@ -32,22 +32,39 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
+}
+
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &isConnected) {
+  unordered_map<int, vector<int>> adj;
+  int n = isConnected.size();
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+      if (isConnected[i][j] == 1) {
+        adj[i].push_back(j);
+        adj[i].push_back(i);
+      }
+    }
+  }
+
+  return adj;
 }
 
 void dfsBrute(
     int u,
-    std::vector<bool> &visited,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    unordered_map<int, vector<int>> &adj)
 {
   visited[u] = true;
 
@@ -60,8 +77,8 @@ void dfsBrute(
 
 void dfs(
     int u,
-    std::vector<bool> &visited,
-    std::vector<std::vector<int>> &isConnected)
+    vector<bool> &visited,
+    vector<vector<int>> &isConnected)
 {
   int n = isConnected.size();
   visited[u] = true;
@@ -73,61 +90,12 @@ void dfs(
   }
 }
 
-// * ------------------------- Brute Force Approach -------------------------
-// * TIME COMPLEXITY  O(N) + O(V + 2E) ~ O(N)
-// * SPACE COMPLEXITY O(v)
-int findCircleNumDfsBrute(std::vector<std::vector<int>> &isConnected) {
-  int n = isConnected.size();
-
-  // * make Adjacency graph
-  std::unordered_map<int, std::vector<int>> adj;
-  for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (isConnected[i][j] == 1) {
-        adj[i].push_back(j);
-        adj[j].push_back(i);
-      }
-    }
-  }
-
-  // * Classic DFS
-  int ans = 0;
-  std::vector<bool> visited(n, false);
-  for (int i = 0; i < n; ++i) {
-    if (!visited[i]) {
-      dfsBrute(i, visited, adj);
-      ans++;
-    }
-  }
-
-  return ans;
-}
-
-// * ------------------------- Optimal Approach -------------------------`
-// * Using DFS
-// * TIME COMPLEXITY O(N) + O(V + 2E) ~ O(N)
-// * SPACE COMPLEXITY O(1)
-int findCircleNumDfs(std::vector<std::vector<int>> &isConnected) {
-  int n = isConnected.size();
-  std::vector<bool> visited(n, false);
-
-  int ans = 0;
-  for (int i = 0; i < n; ++i) {
-    if (!visited[i]) {
-      dfs(i, visited, isConnected);
-      ans++;
-    }
-  }
-
-  return ans;
-}
-
 void bfs(
     int u,
-    std::vector<bool> &visited,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    unordered_map<int, vector<int>> &adj)
 {
-  std::queue<int> q;
+  queue<int> q;
   q.push(u);
   
   visited[u] = true;
@@ -146,26 +114,59 @@ void bfs(
   }
 }
 
+// * ------------------------- Brute Force Approach -------------------------
+// * TIME COMPLEXITY  O(N) + O(V + 2E) ~ O(N)
+// * SPACE COMPLEXITY O(v)
+int findCircleNumDfsBrute(vector<vector<int>> &isConnected) {
+  int n = isConnected.size();
+
+  // * make Adjacency graph
+  unordered_map<int, vector<int>> adj = constructadj(isConnected);
+
+  // * Classic DFS
+  int ans = 0;
+  vector<bool> visited(n, false);
+  for (int i = 0; i < n; ++i) {
+    if (!visited[i]) {
+      dfsBrute(i, visited, adj);
+      ans++;
+    }
+  }
+
+  return ans;
+}
+
+// * ------------------------- Optimal Approach -------------------------`
+// * Using DFS
+// * TIME COMPLEXITY O(N) + O(V + 2E) ~ O(N)
+// * SPACE COMPLEXITY O(1)
+int findCircleNumDfs(vector<vector<int>> &isConnected) {
+  int n = isConnected.size();
+  vector<bool> visited(n, false);
+
+  int ans = 0;
+  for (int i = 0; i < n; ++i) {
+    if (!visited[i]) {
+      dfs(i, visited, isConnected);
+      ans++;
+    }
+  }
+
+  return ans;
+}
+
 // * ------------------------- Optimal Approach -------------------------`
 // * Using BFS
 // * TIME COMPLEXITY O(v + e)
 // * SPACE COMPLEXITY O(1)
-int findCircleNumBfs(std::vector<std::vector<int>> &isConnected) {
+int findCircleNumBfs(vector<vector<int>> &isConnected) {
   int n = isConnected.size();
 
   // * 1. make graph
-  std::unordered_map<int, std::vector<int>> adj;
-  for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < n; ++j) {
-      if (isConnected[i][j] == 1) {
-        adj[i].push_back(j);
-        adj[j].push_back(i);
-      }
-    }
-  }
+  unordered_map<int, vector<int>> adj = constructadj(isConnected);
 
   // * 2. Classic BFS
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
   int ans = 0;
   for (int u = 0; u < n; ++u) {
     if (!visited[u]) {
@@ -179,19 +180,19 @@ int findCircleNumBfs(std::vector<std::vector<int>> &isConnected) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> isConnected = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
+  vector<vector<int>> isConnected = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
   
   // * testcase 2
-  // std::vector<std::vector<int>> isConnected = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+  // vector<vector<int>> isConnected = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
 
-  std::cout << "isConnected Cities: " << std::endl;
+  cout << "isConnected Cities: " << endl;
   for (auto &vec : isConnected)
     printArr(vec);
 
   int ans = findCircleNumDfsBrute(isConnected);
   // int ans = findCircleNumDfs(isConnected);
   // int ans = findCircleNumBfs(isConnected);
-  std::cout << "Number of Provinces: " << ans << std::endl;
+  cout << "Number of Provinces: " << ans << endl;
 
   return 0;
 }

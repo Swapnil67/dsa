@@ -28,31 +28,33 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Print adjacency list
 template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(vector<T> &adj) {
   int n = adj.size();
   for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
+    cout << i << " -> ";
     printArr(adj[i]);
   }
 }
 
 // * Construct adjacency list for DFS
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges) {
     int a = it[0], b = it[1];
     adj[b].push_back(a);
@@ -61,11 +63,11 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
 }
 
 // * Construct adjacency list for BFS
-std::unordered_map<int, std::vector<int>> constructadj(
-    std::vector<int> &indegree,
-    std::vector<std::vector<int>> &prerequisites)
+unordered_map<int, vector<int>> constructadj(
+    vector<int> &indegree,
+    vector<vector<int>> &prerequisites)
 {
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
   for (auto &it: prerequisites) {
     int a = it[0], b = it[1];
     // * b ---> a
@@ -77,12 +79,12 @@ std::unordered_map<int, std::vector<int>> constructadj(
 
 bool bfs(
     int N,
-    std::vector<int> &indegree,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<int> &indegree,
+    unordered_map<int, vector<int>> &adj)
 {
 
   int count = 0; // * to check if cycle
-  std::queue<int> q;
+  queue<int> q;
   
   // * Push all the vertices with indegree = 0
   for (int i = 0; i < N; ++i) {
@@ -91,7 +93,7 @@ bool bfs(
       count++;
     }
   }
-  // std::cout << count << std::endl;
+  // cout << count << endl;
 
   // * Classic BFS
   while (!q.empty()) {
@@ -107,15 +109,15 @@ bool bfs(
     }
   }
 
-  // std::cout << "N: " << N << ", Count: " << count << std::endl;
+  // cout << "N: " << N << ", Count: " << count << endl;
   return count == N; // * Not found cycle means we managed to finish all courses
 }
 
 bool dfs(
     int u,
-    std::vector<bool> &visited,
-    std::vector<bool> &in_recursion,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    vector<bool> &in_recursion,
+    unordered_map<int, vector<int>> &adj)
 {
   visited[u] = true;
   in_recursion[u] = true;
@@ -139,10 +141,10 @@ bool dfs(
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-bool canFinishDFS(int numCourses, std::vector<std::vector<int>> &prerequisites) {
-  std::vector<bool> visited(numCourses, false);
-  std::vector<bool> in_recursion(numCourses, false);
-  std::unordered_map<int, std::vector<int>> adj = constructadj(prerequisites);
+bool canFinishDFS(int numCourses, vector<vector<int>> &prerequisites) {
+  vector<bool> visited(numCourses, false);
+  vector<bool> in_recursion(numCourses, false);
+  unordered_map<int, vector<int>> adj = constructadj(prerequisites);
 
   for (int u = 0; u < numCourses; ++u) {
     if (!visited[u]) {
@@ -157,15 +159,15 @@ bool canFinishDFS(int numCourses, std::vector<std::vector<int>> &prerequisites) 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-bool canFinishBFS(int numCourses, std::vector<std::vector<int>> &prerequisites) {
-  std::vector<int> indegree(numCourses, 0);
-  std::unordered_map<int, std::vector<int>> adj = constructadj(indegree, prerequisites);
+bool canFinishBFS(int numCourses, vector<vector<int>> &prerequisites) {
+  vector<int> indegree(numCourses, 0);
+  unordered_map<int, vector<int>> adj = constructadj(indegree, prerequisites);
 
   // * For Debugging
-  // std::cout << "Adjacency List" << std::endl;
+  // cout << "Adjacency List" << endl;
   // printAdjList(adj);
-  std::cout << "Indegree" << std::endl;
-  printArr(indegree);
+  // cout << "Indegree" << endl;
+  // printArr(indegree);
 
   return bfs(numCourses, indegree, adj);
 }
@@ -173,28 +175,28 @@ bool canFinishBFS(int numCourses, std::vector<std::vector<int>> &prerequisites) 
 int main(void) {
   // * testcase 1
   // int numCourses = 2;
-  // std::vector<std::vector<int>> prerequisites = {{1, 0}};
+  // vector<vector<int>> prerequisites = {{1, 0}};
 
   // * testcase 2
   // int numCourses = 2;
-  // std::vector<std::vector<int>> prerequisites = {{1, 0}, {0, 1}};
+  // vector<vector<int>> prerequisites = {{1, 0}, {0, 1}};
 
   // * testcase 2
   // int numCourses = 4;
-  // std::vector<std::vector<int>> prerequisites = {{2, 3}, {3, 2}};
+  // vector<vector<int>> prerequisites = {{2, 3}, {3, 2}};
 
   // * testcase 2
   int numCourses = 4;
-  std::vector<std::vector<int>> prerequisites = {{1, 0}, {2, 0}, {3, 1}, {3, 2}};
+  vector<vector<int>> prerequisites = {{1, 0}, {2, 0}, {3, 1}, {3, 2}};
 
-  std::cout << "numCourses: " << numCourses << std::endl;
-  std::cout << "prerequisites: " << std::endl;
+  cout << "numCourses: " << numCourses << endl;
+  cout << "prerequisites: " << endl;
   for (auto &vec : prerequisites)
     printArr(vec);
 
   // bool ans = canFinishDFS(numCourses, prerequisites);
   bool ans = canFinishBFS(numCourses, prerequisites);
-  std::cout << "is Course Schedule: " << ans << std::endl;
+  cout << "is Course Schedule: " << ans << endl;
 
   return 0;
 }

@@ -42,15 +42,15 @@ void dfs(int u, int &target, std::vector<int> &path,
 {
   path.push_back(u);
 
-  if (u == target - 1) {
+  if (u == target - 1) { // * Reched Destination
     // printArr(path);
     ans.push_back(path);
   }
 
   for (auto &v : graph[u]) {
     dfs(v, target, path, graph, ans);
-    path.pop_back();
   }
+  path.pop_back();
 }
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * Using DFS

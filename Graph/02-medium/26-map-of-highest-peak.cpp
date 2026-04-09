@@ -54,7 +54,6 @@ const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 // * Just explain this don't code
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Find the distance from 0s to 1s instead of 1s to 0s
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
 std::vector<std::vector<int>> highestPeak(std::vector<std::vector<int>>& mat) {
@@ -84,11 +83,10 @@ std::vector<std::vector<int>> highestPeak(std::vector<std::vector<int>>& mat) {
 
     // * Go to adjacent cells
     for (auto &dir: dirs) {
-      int n_r = r + dir[0];
-      int n_c = c + dir[1];
-      if (is_safe(n_r, n_c) && result[n_r][n_c] == -1) {
-          result[n_r][n_c] = result[r][c] + 1;
-          q.push({n_r, n_c});
+      int dr = r + dir[0], dc = c + dir[1];
+      if (is_safe(dr, dc) && result[dr][dc] == -1) {
+          result[dr][dc] = result[r][c] + 1;
+          q.push({dr, dc});
       }
     }
   }

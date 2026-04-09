@@ -33,27 +33,29 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * Multi Source BFS (Overwriting Input)
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int maxDistance(std::vector<std::vector<int>> &grid) {
+int maxDistance(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) {
@@ -82,7 +84,7 @@ int maxDistance(std::vector<std::vector<int>> &grid) {
     }
   }
   // * For debugging
-  // std::cout << "Distance Grid" << std::endl;
+  // cout << "Distance Grid" << endl;
   // for (auto &vec : grid)
   //   printArr(vec);
 
@@ -92,11 +94,11 @@ int maxDistance(std::vector<std::vector<int>> &grid) {
 // * Multi Source BFS
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N^2)
-int maxDistance2(std::vector<std::vector<int>> &grid) {
+int maxDistance2(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
-  std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
-  std::queue<std::pair<int, int>> q;
+  vector<vector<bool>> visited(m, vector<bool>(n, false));
+  queue<pair<int, int>> q;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) {
@@ -133,18 +135,18 @@ int maxDistance2(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{1, 0, 1}, {0, 0, 0}, {1, 0, 1}};
+  // vector<vector<int>> grid = {{1, 0, 1}, {0, 0, 0}, {1, 0, 1}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {{1, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+  vector<vector<int>> grid = {{1, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
-  std::cout << "grid" << std::endl;
+  cout << "grid" << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = maxDistance(grid);
   // int ans = maxDistance2(grid);
-  std::cout << "Max Distance: " << ans << std::endl;
+  cout << "Max Distance: " << ans << endl;
 
   return 0;
 }

@@ -34,43 +34,34 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
-typedef std::pair<int, int> pii;
 
-void printAdjList(std::unordered_map<int, std::vector<pii>> &adj) {
+typedef pair<int, int> pii;
+
+void printAdjList(unordered_map<int, vector<pii>> &adj) {
   for (auto &[key, pairs] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     for (auto &it: pairs) {
-      std::cout << "(" << it.first << ", " << it.second << ") ";
+      cout << "(" << it.first << ", " << it.second << ") ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
-}
-
-std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<pii>> adj;
-  for (auto &it: edges) {
-    int u = it[0], v = it[1]; // * u -> v (default)
-    // * {node, is_real_path} 
-    adj[u].push_back({v, 1});  // * real path (1)
-    adj[v].push_back({u, 0});  // * fake path (0)
-  }
-  return adj;
 }
 
 void dfs(int u, int parent, int &reorder,
-         std::unordered_map<int, std::vector<pii>> &adj)
-{
+         unordered_map<int, vector<pii>> &adj) {
   for (auto &[v, path]: adj[u]) {
     if (v == parent) // * don't go to parent again
       continue;
@@ -88,10 +79,17 @@ void dfs(int u, int parent, int &reorder,
 // * edges which we need to flip.
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int minReorder(int n, std::vector<std::vector<int>>& connections) {
+int minReorder(int n, vector<vector<int>>& connections) {
+
   // * 1. Create an Adj with Real & fake paths
-  std::unordered_map<int, std::vector<pii>> adj = constructadj(connections);
-  // std::cout << "Adjacency List" << std::endl;
+  unordered_map<int, vector<pii>> adj;
+  for (auto &it : connections) {
+    int u = it[0], v = it[1]; // * u -> v (default)
+    // * {node, is_real_path} 
+    adj[u].push_back({v, 1});  // * real path (1)
+    adj[v].push_back({u, 0});  // * fake path (0)
+  }
+  // cout << "Adjacency List" << endl;
   // printAdjList(adj); // * For Debugging
 
   int reorder = 0;
@@ -101,23 +99,23 @@ int minReorder(int n, std::vector<std::vector<int>>& connections) {
 
 int main(void) {
   // * testcase 1
-  // int n = 6;
-  // std::vector<std::vector<int>> connections = {{0, 1}, {1, 3}, {2, 3}, {4, 0}, {4, 5}};
+  int n = 6;
+  vector<vector<int>> connections = {{0, 1}, {1, 3}, {2, 3}, {4, 0}, {4, 5}};
   
   // * testcase 2
   // int n = 5;
-  // std::vector<std::vector<int>> connections = {{1, 0}, {1, 2}, {3, 2}, {3, 4}};
+  // vector<vector<int>> connections = {{1, 0}, {1, 2}, {3, 2}, {3, 4}};
   
   // * testcase 3
-  int n = 3;
-  std::vector<std::vector<int>> connections = {{1, 0}, {2, 0}};
+  // int n = 3;
+  // vector<vector<int>> connections = {{1, 0}, {2, 0}};
 
-  std::cout << "-------- Connections -------- " << std::endl;
+  cout << "-------- Connections -------- " << endl;
   for (auto &vec : connections)
     printArr(vec);
 
   int reorder = minReorder(n, connections);
-  std::cout << "Min reorder: " << reorder << std::endl;
+  cout << "Min reorder: " << reorder << endl;
 
   return 0;
 }

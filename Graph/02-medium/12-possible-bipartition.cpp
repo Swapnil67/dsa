@@ -27,6 +27,8 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
 void printArr(std::vector<T> &arr) {
   int n = arr.size();
@@ -58,6 +60,22 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
   return adj;
 }
 
+bool dfs(int u, int color, vector<int> &colors,
+         unordered_map<int, vector<int>> &adj) {
+  colors[u] = color;
+  for (auto &v : adj[u]) {
+    if (colors[u] == colors[v])
+      return false;
+
+    if (colors[v] == -1) {
+      int new_color = 1 - color;
+      if (dfs(v, new_color, colors, adj) == false)
+        return false;
+    }
+  }
+  return true;
+}
+
 bool bfs(int node, std::vector<int> &color, std::unordered_map<int, std::vector<int>> &adj) {
   std::queue<int> q;
   q.push(node);
@@ -84,8 +102,23 @@ bool bfs(int node, std::vector<int> &color, std::unordered_map<int, std::vector<
   return true;
 }
 
-bool possibleBipartition(int n, std::vector<std::vector<int>> &dislikes) {
-  
+bool possibleBipartitionDFS(int n, std::vector<std::vector<int>> &dislikes) {
+  // * 1. construct adjacency list
+  std::unordered_map<int, std::vector<int>> adj = constructadj(dislikes);
+  printAdjList(adj); // * For debugging 
+
+  // * 2. Classic dfs
+  std::vector<int> color(n + 1, -1); // * Also acts a visited vector
+  for (int i = 1; i <= n; ++i) {
+    if (color[i] == -1)
+      if (!dfs(i, 1, color, adj))
+        return false;
+  }
+
+  return true;
+}
+
+bool possibleBipartitionBFS(int n, std::vector<std::vector<int>> &dislikes) {
   // * 1. construct adjacency list
   std::unordered_map<int, std::vector<int>> adj = constructadj(dislikes);
   printAdjList(adj); // * For debugging 
@@ -115,8 +148,10 @@ int main(void) {
   for (auto &vec : dislikes)
     printArr(vec);
 
-  bool ans = possibleBipartition(n, dislikes);
+  bool ans = possibleBipartitionDFS(n, dislikes);
+  // bool ans = possibleBipartitionBFS(n, dislikes);
   std::cout << "Possible Bipartition: " << ans << std::endl;
+  
   return 0;
 }
 

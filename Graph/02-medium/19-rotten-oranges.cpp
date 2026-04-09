@@ -37,39 +37,41 @@
 #include <vector>
 #include <iostream>
 
-typedef std::vector<char> vc;
+using namespace std;
+
+typedef vector<char> vc;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Print adjacency list
 template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(vector<T> &adj) {
   int n = adj.size();
   for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
+    cout << i << " -> ";
     printArr(adj[i]);
   }
 }
-const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
 // * ------------------------- Approach 1: Optimal -------------------------
 // * Multi Source BFS
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int orangesRotting(std::vector<std::vector<int>> &grid)
+int orangesRotting(vector<vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   
   // * Add all the rotten oranges to queue
   int fresh_oranges = 0;
@@ -86,6 +88,10 @@ int orangesRotting(std::vector<std::vector<int>> &grid)
   // * There are no fresh oranges
   if (fresh_oranges == 0)
     return 0;
+
+  // * There is no rotten orange
+  if (q.empty() && fresh_oranges > 0)
+    return -1;
 
   // * Out of bound check
   const auto is_safe = [&](const int &r, const int &c) {
@@ -117,17 +123,17 @@ int orangesRotting(std::vector<std::vector<int>> &grid)
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
+  vector<vector<int>> grid = {{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> grid = {{2, 1, 1}, {0, 1, 1}, {1, 0, 1}};
+  // vector<vector<int>> grid = {{2, 1, 1}, {0, 1, 1}, {1, 0, 1}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = orangesRotting(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

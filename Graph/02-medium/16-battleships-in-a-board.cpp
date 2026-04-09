@@ -40,7 +40,7 @@ void printArr(std::vector<T> &arr) {
 
 const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-// * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
+// * ------------------------- APPROACH 1: Brute Force Approach -------------------------
 // * BFS
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n)
@@ -57,8 +57,11 @@ int bruteForce(std::vector<std::vector<char>>& board) {
       }
     }
   }
-
   std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
+  
+  const auto is_safe = [&](const int &r, const int &c) {
+    return r >= 0 && r < m && c >= 0 && c < n;
+  };
 
   int total_battleships = 0;
   while (!q.empty()) {
@@ -71,9 +74,6 @@ int bruteForce(std::vector<std::vector<char>>& board) {
       visited[r][c] = true;
     }
 
-    const auto is_safe = [&](const int &r, const int &c) {
-      return r >= 0 && r < m && c >= 0 && c < n;
-    };
 
     for (auto &dir: dirs) {
       int dr = r + dir[0], dc = c + dir[1];
@@ -116,17 +116,19 @@ int m = board.size(), n = board[0].size();
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<char>> board = {{'X', '.', '.', 'X'}, {'.', '.', '.', 'X'}, {'.', '.', '.', 'X'}};
+  std::vector<std::vector<char>> board = {{'X', '.', '.', 'X'},
+                                          {'.', '.', '.', 'X'},
+                                          {'.', '.', '.', 'X'}};
 
   // * testcase 2
-  std::vector<std::vector<char>> board = {{'X', 'X', 'X'}};
+  // std::vector<std::vector<char>> board = {{'X', 'X', 'X'}};
 
   std::cout << "Board" << std::endl;
   for (auto &vec : board)
     printArr(vec);
 
-  // int ans = bruteForce(board);
-  int ans = countBattleships(board);
+  int ans = bruteForce(board);
+  // int ans = countBattleships(board);
   std::cout << "Answer: " << ans << std::endl;
 
   return 0;

@@ -180,5 +180,3 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 28-count-sub-islands.cpp -o output && ./output
-
- 

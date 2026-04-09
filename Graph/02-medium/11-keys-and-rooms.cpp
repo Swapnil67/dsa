@@ -1,44 +1,46 @@
-/**
- * * Leetcode - 841
- * * Keys and Rooms
+/*
+ * Leetcode - 841
+ * Keys and Rooms
  *
- * * There are n rooms labeled from 0 to n - 1 and all the rooms are locked except for room 0. 
- * * Your goal is to visit all the rooms. However, you cannot enter a locked room without having its key.
+ * There are n rooms labeled from 0 to n - 1 and all the rooms are locked except for room 0. 
+ * Your goal is to visit all the rooms. However, you cannot enter a locked room without having its key.
  
- * * When you visit a room, you may find a set of distinct keys in it. Each key has a number on it, 
- * * denoting which room it unlocks, and you can take all of them with you to unlock the other rooms.
+ * When you visit a room, you may find a set of distinct keys in it. Each key has a number on it, 
+ * denoting which room it unlocks, and you can take all of them with you to unlock the other rooms.
 
- * * Given an array rooms where rooms[i] is the set of keys that you can obtain if you visited room i, 
- * * return true if you can visit all the rooms, or false otherwise.
+ * Given an array rooms where rooms[i] is the set of keys that you can obtain if you visited room i, 
+ * return true if you can visit all the rooms, or false otherwise.
 
- * * Example 1  :
- * * Input      : grid = [[1,1,1,1,1,1,1,0],[1,0,0,0,0,1,1,0],[1,0,1,0,1,1,1,0],[1,0,0,0,0,1,0,1],[1,1,1,1,1,1,1,0]]
- * * Output     : 2
+ * Example 1  :
+ * Input      : grid = [[1,1,1,1,1,1,1,0],[1,0,0,0,0,1,1,0],[1,0,1,0,1,1,1,0],[1,0,0,0,0,1,0,1],[1,1,1,1,1,1,1,0]]
+ * Output     : 2
 
- * * Example 2  :
- * * Input      : grid = [[0,0,1,0,0],[0,1,0,1,0],[0,1,1,1,0]]
- * * Output     : 1
+ * Example 2  :
+ * Input      : grid = [[0,0,1,0,0],[0,1,0,1,0],[0,1,1,1,0]]
+ * Output     : 1
  * 
- * * https://leetcode.com/problems/keys-and-rooms/description/
- * * https://www.naukri.com/code360/problems/rooms_1214959
+ * https://leetcode.com/problems/keys-and-rooms/description/
+ * https://www.naukri.com/code360/problems/rooms_1214959
 */
 
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void dfs(int room, std::vector<bool> &visited, std::vector<std::vector<int>> &rooms) {
+void dfs(int room, vector<bool> &visited, vector<vector<int>> &rooms) {
   visited[room] = true;
   
   for (auto &key : rooms[room]) {
@@ -49,9 +51,9 @@ void dfs(int room, std::vector<bool> &visited, std::vector<std::vector<int>> &ro
 }
 
 // * Note: rooms is similar to adjacency list of graph
-bool canVisitAllRooms(std::vector<std::vector<int>>& rooms) {
+bool canVisitAllRooms(vector<vector<int>>& rooms) {
   int n = rooms.size();
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
   dfs(0, visited, rooms);
   // printArr(visited); // * For debugging
 
@@ -64,17 +66,18 @@ bool canVisitAllRooms(std::vector<std::vector<int>>& rooms) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> rooms = {{1}, {2}, {3}, {}};
-  
+  vector<vector<int>> rooms = {{1}, {2}, {3}, {}};
+
   // * testcase 2
-  std::vector<std::vector<int>> rooms = {{1, 3}, {3, 0, 1}, {2}, {0}};
+  // vector<vector<int>> rooms = {{1, 3}, {3, 0, 1}, {2}, {0}};
 
   bool ans = canVisitAllRooms(rooms);
-  std::cout << "rooms: " << std::endl;
+  cout << "rooms: " << endl;
   for (auto &vec : rooms)
     printArr(vec);
 
-  std::cout << "Can visit all rooms: " << ans << std::endl;
+  cout << "Can visit all rooms: " << ans << endl;
+
   return 0;
 }
 

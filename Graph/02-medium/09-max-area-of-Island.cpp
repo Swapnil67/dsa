@@ -1,25 +1,25 @@
-/**
- * * Leetcode - 695
- * * Max Area of Island
+/*
+ * Leetcode - 695
+ * Max Area of Island
  *
- * * You are given an m x n binary matrix grid. An island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
+ * You are given an m x n binary matrix grid. An island is a group of 1's (representing land) connected 4-directionally (horizontal or vertical.) You may assume all four edges of the grid are surrounded by water.
 
- * * The area of an island is the number of cells with a value 1 in the island.
- * * Return the maximum area of an island in grid. If there is no island, return 0.
+ * The area of an island is the number of cells with a value 1 in the island.
+ * Return the maximum area of an island in grid. If there is no island, return 0.
 
- * * Example 1  :
- * * Input      : grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
- * *                      [0,0,0,0,0,0,0,1,1,1,0,0,0], [0,1,1,0,1,0,0,0,0,0,0,0,0],
- * *                      [0,1,0,0,1,1,0,0,1,0,1,0,0], [0,1,0,0,1,1,0,0,1,1,1,0,0],
+ * Example 1  :
+ * Input      : grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+ *                      [0,0,0,0,0,0,0,1,1,1,0,0,0], [0,1,1,0,1,0,0,0,0,0,0,0,0],
+ *                      [0,1,0,0,1,1,0,0,1,0,1,0,0], [0,1,0,0,1,1,0,0,1,1,1,0,0],
  *  *                     [0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]
- * * Output     : 6
+ * Output     : 6
 
- * * Example 2  :
- * * Input      : grid = [[0,0,0,0,0,0,0,0]]
- * * Output     : 0
+ * Example 2  :
+ * Input      : grid = [[0,0,0,0,0,0,0,0]]
+ * Output     : 0
  * 
- * * https://leetcode.com/problems/max-area-of-island/description/
- * * https://www.geeksforgeeks.org/problems/length-of-largest-region-of-1s-1587115620/1
+ * https://leetcode.com/problems/max-area-of-island/description/
+ * https://www.geeksforgeeks.org/problems/length-of-largest-region-of-1s-1587115620/1
 */
 
 // ! Meta, Microsoft, Google, Apple, Amazon, Uber
@@ -28,24 +28,26 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
 // * Using visited matrix
 void dfs(int r, int c, int &area,
-         std::vector<std::vector<int>> &visited,
-         std::vector<std::vector<int>> &grid)
+         vector<vector<int>> &visited,
+         vector<vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
 
@@ -68,7 +70,7 @@ void dfs(int r, int c, int &area,
 }
 
 // * Using grid as matrix
-void dfs2(int r, int c, int& area, std::vector<std::vector<int>>& grid) {
+void dfs2(int r, int c, int& area, vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
   area++;
 
@@ -89,19 +91,19 @@ void dfs2(int r, int c, int& area, std::vector<std::vector<int>>& grid) {
 // * ------------------------- Approach 1: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
+int maxAreaOfIslandDFS(vector<vector<int>>& grid) {
   int m = grid.size(); 
   int n = grid[0].size(); 
   int max_area = 0;
 
-  std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
+  vector<vector<int>> visited(m, vector<int>(n, 0));
 
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) {
       if (grid[i][j] == 1 && !visited[i][j]) {
         int cur_area = 0;
         dfs(i, j, cur_area, visited, grid);
-        max_area = std::max(max_area, cur_area);
+        max_area = max(max_area, cur_area);
       }
     }
   }
@@ -109,11 +111,11 @@ int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
   return max_area;
 }
 
-int bfs(int x, int y, std::vector<std::vector<int>> &grid)
+int bfs(int x, int y, vector<vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   q.push({x, y});
   int area = 1;
   grid[x][y] = 0;
@@ -143,7 +145,7 @@ int bfs(int x, int y, std::vector<std::vector<int>> &grid)
 // * ------------------------- Approach 2: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
+int maxAreaOfIslandBFS(vector<vector<int>> &grid) {
   int m = grid.size(); 
   int n = grid[0].size(); 
   int max_area = 0;
@@ -154,8 +156,8 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) {
         int cur_area = bfs(r, c, grid);
-        std::cout << r << ", " << c << ": " << cur_area << std::endl;
-        max_area = std::max(max_area, cur_area);
+        cout << r << ", " << c << ": " << cur_area << endl;
+        max_area = max(max_area, cur_area);
       }
     }
   }
@@ -165,31 +167,31 @@ int maxAreaOfIslandBFS(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-                                        // {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-                                        // {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                                        // {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
-                                        // {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
-                                        // {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                                        // {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
-                                        // {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
+  // vector<vector<int>> grid = {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+  //                             {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+  //                             {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+  //                             {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+  //                             {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+  //                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+  //                             {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+  //                             {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> grid = {{0, 0, 0, 0, 0, 0, 0, 0}};
+  // vector<vector<int>> grid = {{0, 0, 0, 0, 0, 0, 0, 0}};
 
   // * testcase 3
-  std::vector<std::vector<int>> grid = {{1, 1, 0, 0, 0},
+  vector<vector<int>> grid = {{1, 1, 0, 0, 0},
                                         {1, 1, 0, 0, 0},
                                         {0, 0, 0, 1, 1},
                                         {0, 0, 0, 1, 1}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   // int ans = maxAreaOfIslandDFS(grid);
   int ans = maxAreaOfIslandBFS(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

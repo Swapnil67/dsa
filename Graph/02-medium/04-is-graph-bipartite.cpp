@@ -103,8 +103,8 @@ bool bfs(
       }
 
       if (color[v] == -1) {
-        color[v] = 1 - color[u];
         q.push(v);
+        color[v] = 1 - color[u];
       }
     }
 

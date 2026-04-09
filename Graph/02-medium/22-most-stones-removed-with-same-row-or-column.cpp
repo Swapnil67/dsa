@@ -20,8 +20,8 @@
  * Input      : stones = [[0,0]]
  * Output     : 0
  * 
- * https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/
  * https://www.geeksforgeeks.org/problems/maximum-stone-removal-1662179442/1
+ * https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/
  * https://www.naukri.com/code360/problems/most-stones-removed-with-same-row-or-column_1376597
 */
 
@@ -31,35 +31,37 @@
 #include <numeric>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Print adjacency list
 template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(vector<T> &adj) {
   int n = adj.size();
   for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
+    cout << i << " -> ";
     printArr(adj[i]);
   }
 }
 
-int find(int x, std::vector<int> &parent) {
+int find(int x, vector<int> &parent) {
   if (x == parent[x])
     return x;
   return parent[x] = find(parent[x], parent);
 }
 
-void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
+void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
   int x_parent = find(x, parent);
   int y_parent = find(y, parent);
 
@@ -79,13 +81,12 @@ void Union(int x, int y, std::vector<int> &rank, std::vector<int> &parent) {
   }
 }
 
-void dfs(int i, std::vector<bool> &visited, std::vector<std::vector<int>> &stones) {
+void dfs(int i, vector<bool> &visited, vector<vector<int>> &stones) {
   int n = stones.size();
   visited[i] = true;
   for (int j = 0; j < n; ++j) {
-    int r = stones[i][0];
-    int c = stones[i][1];
-    if (!visited[j] && (stones[j][0] == r || stones[j][0] == c)) {
+    int r = stones[i][0], c = stones[i][1];
+    if (!visited[j] && (stones[j][0] == r || stones[j][1] == c)) {
       dfs(j, visited, stones);
     }
   }
@@ -106,9 +107,9 @@ void dfs(int i, std::vector<bool> &visited, std::vector<std::vector<int>> &stone
 // * Ans = no. of stones - no. of groups
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n)
-int removeStones(std::vector<std::vector<int>> &stones) {
+int removeStones(vector<vector<int>> &stones) {
   int n = stones.size();
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
 
   int groups = 0;
   for (int i = 0; i < n; ++i) {
@@ -126,13 +127,12 @@ int removeStones(std::vector<std::vector<int>> &stones) {
 // * Ans = no. of stones - no. of groups
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n)
-int removeStonesDSU(std::vector<std::vector<int>> &stones) {
+int removeStonesDSU(vector<vector<int>> &stones) {
   int n = stones.size();
-  std::vector<bool> visited(n, false);
 
-  std::vector<int> rank(n, 1);
-  std::vector<int> parent(n);
-  std::iota(begin(parent), end(parent), 0); // * fill from 0 to n
+  vector<int> rank(n, 1);
+  vector<int> parent(n);
+  iota(begin(parent), end(parent), 0); // * fill from 0 to n
 
   for (int i = 0; i < n; ++i) {
     int r = stones[i][0], c = stones[i][1];
@@ -146,7 +146,7 @@ int removeStonesDSU(std::vector<std::vector<int>> &stones) {
 
   int groups = 0;
   for (int i = 0; i < n; i++) {
-    if (parent[i] == i)
+    if (parent[i] == i) // * not in any group
       groups++;
   }
   
@@ -155,18 +155,18 @@ int removeStonesDSU(std::vector<std::vector<int>> &stones) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> stones = {{0, 0}, {0, 1}, {1, 0}, {1, 2}, {2, 1}, {2, 2}};
+  // vector<vector<int>> stones = {{0, 0}, {0, 1}, {1, 0}, {1, 2}, {2, 1}, {2, 2}};
 
   // * testcase 2
-  std::vector<std::vector<int>> stones = {{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}};
+  vector<vector<int>> stones = {{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}};
 
-  std::cout << "Stones: " << std::endl;
+  cout << "Stones: " << endl;
   for (auto &vec : stones)
     printArr(vec);
 
-  // int ans = removeStones(stones);
-  int ans = removeStonesDSU(stones);
-  std::cout << "Max stones that can be removed: " << ans << std::endl;
+  int ans = removeStones(stones);
+  // int ans = removeStonesDSU(stones);
+  cout << "Max stones that can be removed: " << ans << endl;
   return 0;
 }
 

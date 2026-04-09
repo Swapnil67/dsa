@@ -23,21 +23,21 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-bool dfs(int r, int c,
-         std::vector<std::vector<int>> &grid)
-{
+bool dfs(int r, int c, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
   if (r < 0 || r >= m || c < 0 || c >= n) // * out of bound
@@ -59,7 +59,7 @@ bool dfs(int r, int c,
 // * ------------------------- Approach 1: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(1)
-int closedIslandDFS(std::vector<std::vector<int>> &grid) {
+int closedIslandDFS(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
   int closed_islands = 0;
@@ -75,33 +75,34 @@ int closedIslandDFS(std::vector<std::vector<int>> &grid) {
 }
 
 int main(void) {
+  std::cout << "Number of Closed Islands" << std::endl;
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1, 0},
-  //                                       {1, 0, 0, 0, 0, 1, 1, 0},
-  //                                       {1, 0, 1, 0, 1, 1, 1, 0},
-  //                                       {1, 0, 0, 0, 0, 1, 0, 1},
-  //                                       {1, 1, 1, 1, 1, 1, 1, 0}};
+  // vector<vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1, 0},
+  //                             {1, 0, 0, 0, 0, 1, 1, 0},
+  //                             {1, 0, 1, 0, 1, 1, 1, 0},
+  //                             {1, 0, 0, 0, 0, 1, 0, 1},
+  //                             {1, 1, 1, 1, 1, 1, 1, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {{0, 0, 1, 0, 0},
-                                        {0, 1, 0, 1, 0},
-                                        {0, 1, 1, 1, 0}};
+  // vector<vector<int>> grid = {{0, 0, 1, 0, 0},
+                              // {0, 1, 0, 1, 0},
+                              // {0, 1, 1, 1, 0}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1},
-  //                                       {1, 0, 0, 0, 0, 0, 1},
-  //                                       {1, 0, 1, 1, 1, 0, 1},
-  //                                       {1, 0, 1, 0, 1, 0, 1},
-  //                                       {1, 0, 1, 1, 1, 0, 1},
-  //                                       {1, 0, 0, 0, 0, 0, 1},
-  //                                       {1, 1, 1, 1, 1, 1, 1}};
+  vector<vector<int>> grid = {{1, 1, 1, 1, 1, 1, 1},
+                              {1, 0, 0, 0, 0, 0, 1},
+                              {1, 0, 1, 1, 1, 0, 1},
+                              {1, 0, 1, 0, 1, 0, 1},
+                              {1, 0, 1, 1, 1, 0, 1},
+                              {1, 0, 0, 0, 0, 0, 1},
+                              {1, 1, 1, 1, 1, 1, 1}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = closedIslandDFS(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

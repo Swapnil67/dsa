@@ -1,5 +1,5 @@
 /**
-* * Leetcode - 684
+ * * Leetcode - 684
  * * Redundant Connection
  *
  * * In this problem, a tree is an undirected graph that is connected and has no cycles.
@@ -20,6 +20,7 @@
  * * Input      : edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]
  * * Output     : [1,4]
  * 
+ * * https://neetcode.io/problems/redundant-connection/question
  * * https://leetcode.com/problems/redundant-connection/description/
  * * https://www.naukri.com/code360/problems/redundant-connection-i_1281198
  */
@@ -30,6 +31,7 @@
 
 #include <queue>
 #include <vector>
+#include <numeric>
 #include <iostream>
 #include <unordered_map>
 
@@ -81,20 +83,18 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
 }
 
 bool dfs(
-    int u, int v,
+    int u, int dst,
     std::vector<bool> visited,
     std::unordered_map<int, std::vector<int>> &adj)
 {
   visited[u] = true;
-  if (u == v)
+  if (u == dst)
     return true;
 
   // * Go to neighbours
-  for (auto &ngbr : adj[u]) {
-    if (!visited[ngbr]) {
-      if(dfs(ngbr, v, visited, adj)) {
-        return true;
-      }
+  for (auto &v : adj[u]) {
+    if (!visited[v] && dfs(v, dst, visited, adj)) {
+      return true;
     }
   }
 
@@ -198,9 +198,7 @@ std::vector<int> findRedundantConnectionDSU(std::vector<std::vector<int>> &edges
   // * 1. Initialize rank and parent vectors
   std::vector<int> rank(n + 1, 1);
   std::vector<int> parent(n + 1);
-  for (int i = 1; i <= n; i++) {
-    parent[i] = i;
-  }
+  iota(begin(parent), end(parent), 0);
   
   for (auto &edge: edges) { // * O(N)
     int u = edge[0], v = edge[1];

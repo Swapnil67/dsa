@@ -25,25 +25,27 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-int find(int x, std::vector<int> &parent) {
+int find(int x, vector<int> &parent) {
   if (x == parent[x])
     return x;
   return parent[x] = find(parent[x], parent);
 }
 
-void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
+void Union(int x, int y, vector<int> &parent, vector<int> &rank) {
   int x_parent = find(x, parent);
   int y_parent = find(y, parent);
 
@@ -66,11 +68,11 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-bool equationsPossible(std::vector<std::string>& equations) {
+bool equationsPossible(vector<string>& equations) {
   int N = 26;
 
   // * Initialize rank and parent vectors
-  std::vector<int> rank(N, 0), parent(N);
+  vector<int> rank(N, 0), parent(N);
   for (int i = 0; i < N; ++i) {
     parent[i] = i;
   }
@@ -79,7 +81,7 @@ bool equationsPossible(std::vector<std::string>& equations) {
   for (auto &s : equations) {
     if (s[1] == '=') {
       int a = s[0] - 'a', b = s[3] - 'a';
-      // std::cout << a << " " << b << std::endl;
+      // cout << a << " " << b << endl;
       Union(a, b, parent, rank);
     }
   }
@@ -90,7 +92,7 @@ bool equationsPossible(std::vector<std::string>& equations) {
       int a = s[0] - 'a', b = s[3] - 'a';
       int a_parent = find(a, parent);
       int b_parent = find(b, parent);
-      // std::cout << a_parent << " " << b_parent << std::endl;
+      // cout << a_parent << " " << b_parent << endl;
 
       if (a_parent == b_parent)
         return false;
@@ -102,22 +104,22 @@ bool equationsPossible(std::vector<std::string>& equations) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::string> equations = {"a==b", "b!=a"};
+  // vector<string> equations = {"a==b", "b!=a"};
 
   // * testcase 2
-  // std::vector<std::string> equations = {"a==b", "b==a"};
+  // vector<string> equations = {"a==b", "b==a"};
 
   // * testcase 3
-  // std::vector<std::string> equations = {"a==b", "b!=c", "c==a"};
+  // vector<string> equations = {"a==b", "b!=c", "c==a"};
 
   // * testcase 4
-  std::vector<std::string> equations = {"c==c", "b==d", "x!=z"};
+  vector<string> equations = {"c==c", "b==d", "x!=z"};
 
-  std::cout << "Equations: " << std::endl;
+  cout << "Equations: " << endl;
   printArr(equations);
 
   bool ans = equationsPossible(equations);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

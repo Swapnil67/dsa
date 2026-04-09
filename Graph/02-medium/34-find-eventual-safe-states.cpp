@@ -29,24 +29,26 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Detect Cycle in DG
 bool dfs(
     int u,
-    std::vector<bool> &visited,
-    std::vector<bool> &in_recursion,
-    std::vector<std::vector<int>> &graph)
+    vector<bool> &visited,
+    vector<bool> &in_recursion,
+    vector<vector<int>> &graph)
 {
   visited[u] = true;
   in_recursion[u] = true;
@@ -66,17 +68,17 @@ bool dfs(
 
 // * ------------------------- APPROACH : Optimal Approach -------------------------`
 // * Cycle detection in Directed Graph
-// * 
+// * Nodes which are part of cycle cannot be a terminal node
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-std::vector<int> eventualSafeNodes(std::vector<std::vector<int>>& graph) {
-    std::vector<int> ans;
+vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+    vector<int> ans;
     int n = graph.size();
     if (n == 0)
         return ans;
 
-    std::vector<bool> visited(n + 1, false);
-    std::vector<bool> in_recursion(n + 1, false);
+    vector<bool> visited(n + 1, false);
+    vector<bool> in_recursion(n + 1, false);
 
     for (int u = 0; u < n; ++u) {
       if (!visited[u]) {
@@ -100,14 +102,15 @@ std::vector<int> eventualSafeNodes(std::vector<std::vector<int>>& graph) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> graph = {{1, 2}, {2, 3}, {5}, {0}, {5}, {}, {}};
-  // std::vector<std::vector<int>> graph = {{1, 2, 3, 4}, {1, 2}, {3, 4}, {0, 4}, {}};
+  vector<vector<int>> graph = {{1, 2}, {2, 3}, {5}, {0}, {5}, {}, {}};
+  
+  // vector<vector<int>> graph = {{1, 2, 3, 4}, {1, 2}, {3, 4}, {0, 4}, {}};
 
-  std::cout << "-------- graph -------- " << std::endl;
+  cout << "-------- graph -------- " << endl;
   for (auto &vec : graph)
   printArr(vec);
 
-  std::vector<int> ans = eventualSafeNodes(graph);
+  vector<int> ans = eventualSafeNodes(graph);
   printArr(ans);
 
   return 0;

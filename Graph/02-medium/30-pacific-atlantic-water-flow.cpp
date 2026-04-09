@@ -23,8 +23,9 @@
  * Example 1:
  * Input     : heights = [[1]]
  * Output    : [[0,0]]
-
- * https://leetcode.com/problems/pacific-atlantic-water-flow/description/
+ 
+ * https://neetcode.io/problems/pacific-atlantic-water-flow
+ * https://leetcode.com/problems/pacific-atlantic-water-flow
  * https://www.geeksforgeeks.org/problems/pacific-atlantic-water-flow/1
 */
 
@@ -34,25 +35,27 @@
 #include <climits>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 void dfs(
     int r, int c,
     int prev_val,
     bool &atlantic, bool &pacific,
-    std::vector<std::vector<int>> &heights)
+    vector<vector<int>> &heights)
 {
 
   int m = heights.size(), n = heights[0].size();
@@ -87,8 +90,8 @@ void dfs(
 
 void dfs(
     int r, int c,
-    std::vector<std::vector<bool>> &ocean,
-    std::vector<std::vector<int>> &heights)
+    vector<vector<bool>> &ocean,
+    vector<vector<int>> &heights)
 {
   ocean[r][c] = true;
   int m = heights.size(), n = heights[0].size();
@@ -107,18 +110,19 @@ void dfs(
   }
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE Approach -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE Approach -------------------------
 // * Traverse all the cell in grid & check if it can reach both oceans.
 // * Backtracking
 // * TIME COMPLEXITY O((m x n) x 4^(m x n))
 // * SPACE COMPLEXITY O(m x n)
-std::vector<std::vector<int>> bruteForce(std::vector<std::vector<int>> &heights) {
+vector<vector<int>> bruteForce(vector<vector<int>> &heights) {
   int m = heights.size(), n = heights[0].size();
-  std::vector<std::vector<int>> ans;
+  vector<vector<int>> ans;
 
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       bool atlantic = false, pacific = false;
+      // ! Here it is important to send prev_val = INT_MAX
       dfs(r, c, INT_MAX, atlantic, pacific, heights);
       if (atlantic && pacific) {
         ans.push_back({r, c});
@@ -135,10 +139,10 @@ std::vector<std::vector<int>> bruteForce(std::vector<std::vector<int>> &heights)
 // * mark cells in which water can flow.
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-std::vector<std::vector<int>> pacificAtlantic(std::vector<std::vector<int>> &heights) {
+vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights) {
   int m = heights.size(), n = heights[0].size();
-  std::vector<std::vector<bool>> pac(m, std::vector<bool>(n, false));
-  std::vector<std::vector<bool>> atl(m, std::vector<bool>(n, false));
+  vector<vector<bool>> pac(m, vector<bool>(n, false));
+  vector<vector<bool>> atl(m, vector<bool>(n, false));
 
   for (int c = 0; c < n; ++c) {
     dfs(0, c, pac, heights);         // * top pacific
@@ -150,7 +154,7 @@ std::vector<std::vector<int>> pacificAtlantic(std::vector<std::vector<int>> &hei
     dfs(r, n - 1, atl, heights);    // * right atlantic
   }
 
-  std::vector<std::vector<int>> ans;
+  vector<vector<int>> ans;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (pac[r][c] && atl[r][c]) {
@@ -164,22 +168,22 @@ std::vector<std::vector<int>> pacificAtlantic(std::vector<std::vector<int>> &hei
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> heights = {{1, 2, 2, 3, 5},
-                                           {3, 2, 3, 4, 4},
-                                           {2, 4, 5, 3, 1},
-                                           {6, 7, 1, 4, 5},
-                                           {5, 1, 1, 2, 4}};
+  vector<vector<int>> heights = {{1, 2, 2, 3, 5},
+                                 {3, 2, 3, 4, 4},
+                                 {2, 4, 5, 3, 1},
+                                 {6, 7, 1, 4, 5},
+                                 {5, 1, 1, 2, 4}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> heights = {{1}};
+  // vector<vector<int>> heights = {{1}};
 
-  std::cout << "-------- heights -------- " << std::endl;
+  cout << "-------- heights -------- " << endl;
   for (auto &vec : heights)
   printArr(vec);
   
-  std::cout << "-------- Pacific Atlantic Water Flow -------- " << std::endl;
-  std::vector<std::vector<int>> ans = bruteForce(heights);
-  // std::vector<std::vector<int>> ans = pacificAtlantic(heights);
+  cout << "-------- Pacific Atlantic Water Flow -------- " << endl;
+  vector<vector<int>> ans = bruteForce(heights);
+  // vector<vector<int>> ans = pacificAtlantic(heights);
   for (auto &vec : ans)
     printArr(vec);
 
