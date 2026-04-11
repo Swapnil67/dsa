@@ -25,23 +25,28 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool is_beautiful(std::vector<int> &nums, int &k) {
+bool is_beautiful(vector<int> &nums, int &k) {
   printArr(nums);
   int n = nums.size();
 
   for (int i = 0; i < n - 1; ++i) {
     for (int j = i; j < n - 1; ++j) {
-      if (std::abs(nums[i] - nums[j + 1]) == k) {
-        std::cout << nums[i] << " " << nums[j + 1] << std::endl;
+      if (abs(nums[i] - nums[j + 1]) == k) {
+        cout << nums[i] << " " << nums[j + 1] << endl;
         return false;
       }
     }
@@ -50,8 +55,8 @@ bool is_beautiful(std::vector<int> &nums, int &k) {
 }
 
 int ans;
-void solveBrute(std::vector<int> &nums,
-                std::vector<int> temp,
+void solveBrute(vector<int> &nums,
+                vector<int> temp,
                 int &k, int i)
 {
   if (i >= nums.size()) {
@@ -68,8 +73,8 @@ void solveBrute(std::vector<int> &nums,
   solveBrute(nums, temp, k, i + 1);
 }
 
-void solve(std::vector<int> &nums,
-           std::unordered_map<int, int> mp,
+void solve(vector<int> &nums,
+           unordered_map<int, int> mp,
            int &k, int i)
 {
   if (i >= nums.size()) {
@@ -88,22 +93,22 @@ void solve(std::vector<int> &nums,
   }
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
-int bruteForce(std::vector<int>& nums, int k) {
+int bruteForce(vector<int>& nums, int k) {
   ans = 0;
-  std::vector<int> temp;
+  vector<int> temp;
   solveBrute(nums, temp, k, 0);
   return ans - 1; // * exclude empty subset
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
-int beautifulSubsets(std::vector<int>& nums, int k) {
+int beautifulSubsets(vector<int>& nums, int k) {
   ans = 0;
-  std::unordered_map<int, int> mp;
+  unordered_map<int, int> mp;
   solve(nums, mp, k, 0);
 
   return ans - 1; // * exclude empty subset
@@ -112,24 +117,24 @@ int beautifulSubsets(std::vector<int>& nums, int k) {
 int main(void) {
   // * testcase 1
   // int k = 2;
-  // std::vector<int> nums = {2, 4, 6};
+  // vector<int> nums = {2, 4, 6};
 
   // * testcase 2
   // int k = 3;
-  // std::vector<int> nums = {1, 2, 3, 4};
+  // vector<int> nums = {1, 2, 3, 4};
 
   // * testcase 3
   int k = 3;
-  std::vector<int> nums = {1, 1, 2, 2, 2};
+  vector<int> nums = {1, 1, 2, 2, 2};
 
-  std::cout << "k: " << k << std::endl;
-  std::cout << "Input nums: ";
+  cout << "k: " << k << endl;
+  cout << "Input nums: ";
   printArr(nums);
 
 
   // int ans = bruteForce(nums, k);
   int ans = beautifulSubsets(nums, k);
-  std::cout << "Beautiful Subsets: " << ans << std::endl;
+  cout << "Beautiful Subsets: " << ans << endl;
 
   return 0;
 }

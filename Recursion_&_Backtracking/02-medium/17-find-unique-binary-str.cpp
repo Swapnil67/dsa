@@ -35,76 +35,80 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::string to_binary_string(int &num, int &length) {
-  std::string binary;
+string to_binary_string(int &num, int &length) {
+  string binary = "";
   for (int i = length - 1; i >= 0; --i) {
     binary += (num & (1 << i)) ? '1' : '0';
   }
   return binary;
 }
 
-bool dfs_permutation(
-    std::vector<std::string> &nums,
-    std::unordered_set<std::string> &st,
-    std::string &cur)
+bool dfs(
+    string &ans,
+    vector<string> &nums,
+    unordered_set<string> &st)
 {
-  if (cur.size() == nums.size()) {
-    std::cout << cur << std::endl;
-    return st.count(cur) == 0;
+  if (ans.size() == nums.size()) {
+    return (st.count(ans) == 0);
   }
 
-  for (int i = 0; i < nums.size(); ++i) {
-    cur.push_back('0');
-    if (dfs_permutation(nums, st, cur))
-      return true;
-    cur.pop_back();
+  ans.push_back('0');
+  if (dfs(ans, nums, st))
+    return true;
+  ans.pop_back();
 
-    cur.push_back('1');
-    if (dfs_permutation(nums, st, cur))
-      return true; 
-    cur.pop_back();
-  }
+  ans.push_back('1');
+  if (dfs(ans, nums, st))
+    return true;
+  ans.pop_back();
+
   return false;
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-std::string bruteForce(std::vector<std::string>& nums) {
-  std::unordered_set<std::string> st(nums.begin(), nums.end());
-  std::string ans = "";
-  dfs_permutation(nums, st, ans);
+string bruteForce(vector<string>& nums) {
+  unordered_set<string> st(nums.begin(), nums.end());
+  string ans = "";
+  dfs(ans, nums, st);
   return ans;
 }
 
-// * ------------------------- Approach 2: Better Approach -------------------------`
+// * ------------------------- Approach 2: Better Approach -------------------------
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n)
-std::string betterApproach(std::vector<std::string>& nums) {
+string betterApproach(vector<string>& nums) {
   int n = nums.size();
-  std::unordered_set<std::string> st(nums.begin(), nums.end());
+  unordered_set<string> st(nums.begin(), nums.end());
   for (int num = 0; num < n + 1; ++num) {
-    std::string res = to_binary_string(num, n);
+    string res = to_binary_string(num, n);
+    // std::cout << num << " -> " << res << std::endl;
     if (st.find(res) == st.end())
       return res;
   }
   return "";
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
-std::string findDifferentBinaryString(std::vector<std::string>& nums) {
-  std::string ans = "";
+string findDifferentBinaryString(vector<string>& nums) {
+  string ans = "";
   for (int i = 0; i < nums.size(); ++i) {
     ans += (nums[i][i] == '0') ? '1' : '0';
   }
@@ -113,21 +117,21 @@ std::string findDifferentBinaryString(std::vector<std::string>& nums) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::string> nums = {"01", "10"};
+  // vector<string> nums = {"01", "10"};
 
   // * testcase 2
-  // std::vector<std::string> nums = {"00", "01"};
+  vector<string> nums = {"00", "01"};
 
   // * testcase 3
-  std::vector<std::string> nums = {"111", "011", "001"};
+  // vector<string> nums = {"111", "011", "001"};
 
-  std::cout << "Input: ";
+  cout << "Input: ";
   printArr(nums);
 
-  // std::string ans = bruteForce(nums);
-  // std::string ans = betterApproach(nums);
-  std::string ans = findDifferentBinaryString(nums);
-  std::cout << "Unique Binary String: " << ans << std::endl;
+  string ans = bruteForce(nums);
+  // string ans = betterApproach(nums);
+  // string ans = findDifferentBinaryString(nums);
+  cout << "Unique Binary String: " << ans << endl;
 
   return 0;
 }

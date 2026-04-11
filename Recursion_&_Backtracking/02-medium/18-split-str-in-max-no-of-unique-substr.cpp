@@ -32,30 +32,45 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+/*
+* How is pruning helping here eg below
+* String: "aabbc", ans (best so far) = 4.
+* Current state: You've picked ["a", "ab"]. st.size() is 2.
+* Remaining string: "bc" (length 2, starting at index i = 3).
+* Calculation: 2 (current) + 2 (remaining) <= 4
+* Result: Since 4 <= 4, this branch cannot possibly result in a better answer (it can only match it at best).
+* The code returns early.
+*/
+
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(2^n * n)
 // * SPACE COMPLEXITY O(n)
-void dfs(std::string &s, int &ans, std::unordered_set<std::string> &st, int i) {
-  if ((st.size() - 1) + (s.size() - i + 1) <= ans) // * pruning
+void dfs(string &s, int &ans, unordered_set<string> &st, int i) {
+  if ((st.size() + (s.length() - i)) <= ans) // * pruning
     return;
 
   if (i >= s.size()) {
-    ans = std::max(ans, (int)st.size());
+    ans = max(ans, (int)st.size());
     return;
   }
 
   for (int j = i; j < s.size(); ++j) {
-    std::string str = s.substr(i, (j - i + 1));
-    // std::cout << str << std::endl;
+    string str = s.substr(i, (j - i + 1));
+    cout << str << endl;
 
     if (st.find(str) == st.end()) {
       st.insert(str);
@@ -65,8 +80,8 @@ void dfs(std::string &s, int &ans, std::unordered_set<std::string> &st, int i) {
   }
 }
 
-int maxUniqueSplit(std::string &s) {
-  std::unordered_set<std::string> st;
+int maxUniqueSplit(string &s) {
+  unordered_set<string> st;
   int ans = 0;
   dfs(s, ans, st, 0);
   return ans;
@@ -74,21 +89,65 @@ int maxUniqueSplit(std::string &s) {
 
 int main(void) {
   // * testcase 1
-  // std::string s = "ababccc";
+  string s = "ababccc";
 
   // * testcase 2
-  // std::string s = "aba";
+  // string s = "aba";
 
-  // * testcase 2
-  std::string s = "aa";
+  // * testcase 3
+  // string s = "aa";
 
-  std::cout << "Input string: " << s << std::endl;
+  cout << "Input string: " << s << endl;
 
   int ans = maxUniqueSplit(s);
-  std::cout << "Unique Binary String: " << ans << std::endl;
+  cout << "Unique Binary String: " << ans << endl;
 
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 18-split-str-in-max-no-of-unique-substr.cpp -o output && ./output
+
+/*
+*
+* DFS = i = 0, j = 0
+*      i
+* s = "ababccc";
+*      j
+* substr = "a"
+*
+* ---------------------------
+*
+* DFS = i = 1, j = 1
+*       i
+* s = "ababccc";
+*       j
+* substr = "b"
+*
+* ---------------------------
+*
+* DFS = i = 2, j = 3
+*        i 
+* s = "ababccc";
+*         j
+* substr = "ab"
+*
+* ---------------------------
+*
+* DFS = i = 4, j = 4
+*          i 
+* s = "ababccc";
+*          j
+* substr = "c"
+*
+* ---------------------------
+*
+* DFS = i = 5, j = 6
+*           i 
+* s = "ababccc";
+*            j
+* substr = "cc"
+* 
+* Substrs = ["a", "b", "ab", "c", "cc"]
+*
+*/

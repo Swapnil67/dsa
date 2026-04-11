@@ -31,33 +31,36 @@
 #include <vector>
 #include <iostream>
 
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << "]" << std::endl;
-}
+using namespace std;
 
-bool is_matching_pattern(std::string &num, std::string &pattern) {
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
+bool is_matching_pattern(string &num, string &pattern) {
   for (int i = 0; i <= pattern.size(); ++i) {
     if ((pattern[i] == 'I' && num[i] > num[i + 1]) ||
-        (pattern[i] == 'D' && num[i] < num[i + 1]))
-    {
+        (pattern[i] == 'D' && num[i] < num[i + 1])) {
       return false;
     }
   }
   return true;
 }
 
-bool dfs_permutation(std::string num,
-                     std::string &cur,
-                     std::string &pattern,
-                     std::vector<bool> used)
+bool dfs_permutation(string num,
+                     string &cur,
+                     string &pattern,
+                     vector<bool> used)
 {
   if (cur.size() == num.size()) {
-    // std::cout << cur << " -> " << is_matching_pattern(cur, pattern) << std::endl;
+    // cout << cur << " -> " << is_matching_pattern(cur, pattern) << endl;
     return is_matching_pattern(cur, pattern);
   }
 
@@ -77,41 +80,41 @@ bool dfs_permutation(std::string num,
   return false;
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach -------------------------
 // * Find all permutation
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-std::string splitString(std::string pattern) {
-  std::string num = "";
+string smallestNumber(string pattern) {
+  string num = "";
   for (int i = 1; i <= pattern.size() + 1; ++i) {
     num += (i + '0');
   }
-  // std::cout << "num: " << num << std::endl;
+  // cout << "num: " << num << endl;
 
-  std::vector<bool> used(num.size());
-  std::string ans = "";
+  vector<bool> used(num.size());
+  string ans = "";
   dfs_permutation(num, ans, pattern, used);
   return ans;
 }
 
-// * ------------------------- Approach 2: Optimal Approach -------------------------`
+// * ------------------------- Approach 2: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
 
 int main(void) {
   // * testcase 1
-  // std::string pattern = "III";
+  // string pattern = "III";
 
   // * testcase 2
-  // std::string pattern = "DDD";
+  // string pattern = "DDD";
   
   // * testcase 3
-  std::string pattern = "IIIDIDDD";
+  string pattern = "IIIDIDDD";
   
-  std::cout << "pattern string: " << pattern << std::endl;
+  cout << "pattern string: " << pattern << endl;
 
-  std::string ans = splitString(pattern);
-  std::cout << "is possible to split: " << ans << std::endl;
+  string ans = smallestNumber(pattern);
+  cout << "is possible to split: " << ans << endl;
 
   return 0;
 }

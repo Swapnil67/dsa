@@ -18,13 +18,13 @@
  * input       : s = "1234"
  * output      : false
  * Explanation : There is no valid way to split s.
-
+ *
  * Example 2
  * input       : s = "050043"
  * output      : true
  * Explanation : s can be split into ["05", "004", "3"] with numerical values [5,4,3].
  *               The values are in descending order with adjacent values differing by 1.
-
+ *
  * Example 3
  * input       : s = "9080701"
  * output      : false
@@ -33,19 +33,26 @@
  * https://leetcode.com/problems/splitting-a-string-into-descending-consecutive-values/description/
 */
 
+// ! Google
+
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool isValid(std::vector<long long> &arr) {
+bool isValid(vector<long long> &arr) {
   for (int i = 1; i < arr.size(); ++i) {
     if (arr[i] != arr[i - 1] - 1)
       return false;
@@ -53,7 +60,7 @@ bool isValid(std::vector<long long> &arr) {
   return arr.size() > 1;
 }
 
-bool dfs(std::string &s, int i, std::vector<long long> &splits) {
+bool dfs(string &s, int i, vector<long long> &splits) {
   if (i >= s.size()) {
     printArr(splits);
     return isValid(splits);
@@ -73,7 +80,7 @@ bool dfs(std::string &s, int i, std::vector<long long> &splits) {
   return false;
 }
 
-bool dfs2(std::string &s, int i, unsigned long long prev) {
+bool dfs2(string &s, int i, unsigned long long prev) {
   if (i == s.size()) {
     return true;
   }
@@ -85,6 +92,7 @@ bool dfs2(std::string &s, int i, unsigned long long prev) {
     if (num + 1 == prev && dfs2(s, j + 1, num))
       return true;
 
+    // * pruning
     if (num >= prev)
       break;
   }
@@ -92,20 +100,22 @@ bool dfs2(std::string &s, int i, unsigned long long prev) {
   return false;
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach -------------------------
+// * Splits string into all possible subsstrings
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-bool bruteForce(std::string s) {
-  std::vector<long long> splits;
+bool bruteForce(string s) {
+  vector<long long> splits;
   return dfs(s, 0, splits);
 }
 
-// * ------------------------- Approach 2: Optimal Approach -------------------------`
+// * ------------------------- Approach 2: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-bool splitString(std::string s) {
+bool splitString(string s) {
   int n = s.size();
   unsigned long long val = 0;
+
   for (int i = 0; i < n - 1; ++i) {
     val = val * 10 + (s[i] - '0');
     if (dfs2(s, i + 1, val)) {
@@ -118,19 +128,19 @@ bool splitString(std::string s) {
 
 int main(void) {
   // * testcase 1
-  std::string s = "1234";
+  string s = "1234";
   
   // * testcase 2
-  // std::string s = "050043";
+  // string s = "050043";
   
   // * testcase 3
-  // std::string s = "9080701";
+  // string s = "9080701";
 
-  std::cout << "numerical string: " << s << std::endl;
+  cout << "numerical string: " << s << endl;
 
-  // bool ans = bruteForce(s);
-  bool ans = splitString(s);
-  std::cout << "is possible to split: " << ans << std::endl;
+  bool ans = bruteForce(s);
+  // bool ans = splitString(s);
+  cout << "is possible to split: " << ans << endl;
 
   return 0;
 }

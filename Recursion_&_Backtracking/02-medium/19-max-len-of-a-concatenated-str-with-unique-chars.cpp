@@ -39,29 +39,34 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool overlap(std::unordered_set<char> &st, std::string s) {
-  std::unordered_set<char> prev;
+bool overlap(unordered_set<char> &st, string s) {
+  unordered_set<char> duplicates;
   for (char &c : s) {
-    if (st.count(c) || prev.count(c)) {
+    if (st.count(c) || duplicates.count(c)) {
       return true;
     }
-    prev.insert(c);
+    duplicates.insert(c);
   }
   return false;
 }
 
-void dfs(std::vector<std::string> &strs, std::unordered_set<char> st, int &ans, int i) {
-  ans = std::max(ans, (int)st.size());
-  
+void dfs(vector<string> &strs, unordered_set<char> st, int &ans, int i) {
+  ans = max(ans, (int)st.size());
+
   if (i >= strs.size()) {
     return;
   }
@@ -79,32 +84,32 @@ void dfs(std::vector<std::string> &strs, std::unordered_set<char> st, int &ans, 
   }
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * - 'm' is the length of all strings in strs
 // * TIME COMPLEXITY O(2^n * m)
 // * SPACE COMPLEXITY O(n)
-int maxLength(std::vector<std::string> &strs) {
+int maxLength(vector<string> &strs) {
   int ans = 0;
-  std::unordered_set<char> st;
+  unordered_set<char> st;
   dfs(strs, st, ans, 0);
   return ans;
 }
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::string> strs = {"un", "iq", "ue"};
+  // vector<string> strs = {"un", "iq", "ue"};
   
   // * testcase 2
-  // std::vector<std::string> strs = {"cha", "r", "act", "ers"};
+  // vector<string> strs = {"cha", "r", "act", "ers"};
 
   // * testcase 3
-  std::vector<std::string> strs = {"abcdefghijklmnopqrstuvwxyz"};
+  vector<string> strs = {"abcdefghijklmnopqrstuvwxyz"};
 
-  std::cout << "Input strings: ";
+  cout << "Input strings: ";
   printArr(strs);
 
   int ans = maxLength(strs);
-  std::cout << "Unique Binary String: " << ans << std::endl;
+  cout << "Unique Binary String: " << ans << endl;
 
   return 0;
 }

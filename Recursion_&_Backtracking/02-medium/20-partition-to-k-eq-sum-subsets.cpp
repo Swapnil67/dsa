@@ -19,93 +19,96 @@
  * output      : false
 
  * https://leetcode.com/problems/partition-to-k-equal-sum-subsets
+ * https://neetcode.io/problems/partition-to-k-equal-sum-subsets
 */
+
+// ! Amazon, Google, Meta, Microsoft, LinkedIn
 
 #include <vector>
 #include <numeric>
 #include <iostream>
-#include <algorithm>
+
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<bool> used;
-bool solve(std::vector<int> &nums,
-           int cur_sum, int &target_sum,
-           int k, int i)
-{
-  // std::cout << cur_sum << std::endl;
-
+vector<bool> used;
+int target;
+bool dfs(int start, int k, int cur_sum, vector<int>& nums) {
   if (k == 0)
-    return true;
-
-  if (cur_sum == target_sum) {
-    return solve(nums, 0, target_sum, k - 1, 0);
-  }
-
-  for (int j = i; j < nums.size(); ++j) {
-    if (used[i] || cur_sum + nums[j] > target_sum)
-      continue;
-
-    used[j] = true;
-    
-    if (solve(nums, cur_sum + nums[i], target_sum, k, j + 1))
       return true;
 
-    used[j] = false;
+  if (cur_sum == target)
+      return dfs(0, k - 1, 0, nums);
+
+  for (int i = start; i < nums.size(); ++i) {
+      if (used[i] || cur_sum + nums[i] > target)
+          continue;
+
+      used[i] = true;
+
+      if (dfs(i + 1, k, cur_sum + nums[i], nums))
+          return true;
+
+      used[i] = false;
+
+      if (cur_sum == 0) 
+          return false;
   }
 
   return false;
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
-// * - 'm' is the length of all strings in strs
-// * TIME COMPLEXITY O(2^n * m)
+
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * - 'k' is number of subsets
+// * TIME COMPLEXITY O(2^n * k)
 // * SPACE COMPLEXITY O(n)
-bool canPartitionKSubsets(std::vector<int>& nums, int k) {
-  int sum = std::accumulate(begin(nums), end(nums), 0);
+bool canPartitionKSubsets(vector<int>& nums, int k) {
+  int sum = accumulate(begin(nums), end(nums), 0);
   if (sum % k != 0)
     return false;
 
-  int n = nums.size();
-  used.assign(n, false);
+  used.assign(nums.size(), false);
 
-  int cur_sum = 0;
-  int target_sum = sum / k;
-  std::cout << "target_sum: " << target_sum << std::endl;
-  // std::sort(nums.rbegin(), nums.rend());
-  
-  return solve(nums, cur_sum, target_sum, k, 0);
+  target = sum / k;
+  cout << "target: " << target << endl;
+
+  return dfs(0, k, 0, nums);
 }
 
 int main(void) {
   // * testcase 1
-  // int k = 4;
-  // std::vector<int> nums = {4, 3, 2, 3, 5, 2, 1};
+  int k = 4;
+  vector<int> nums = {4, 3, 2, 3, 5, 2, 1};
 
   // * testcase 2
   // int k = 3;
-  // std::vector<int> nums = {1, 2, 3, 4};
+  // vector<int> nums = {1, 2, 3, 4};
 
   // * testcase 3
   // int k = 3;
-  // std::vector<int> nums = {1, 1, 2, 2, 2};
+  // vector<int> nums = {1, 1, 2, 2, 2};
 
   // * testcase 4
-  int k = 4;
-  std::vector<int> nums = {2, 2, 2, 2, 3, 4, 5};
+  // int k = 4;
+  // vector<int> nums = {2, 2, 2, 2, 3, 4, 5};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
 
   bool ans = canPartitionKSubsets(nums, k);
-  std::cout << "Can partition: " << ans << std::endl;
+  cout << "Can partition: " << ans << endl;
 
   return 0;
 }

@@ -19,17 +19,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-
-// * 14 - Matchsticks to Square
-// bool makesquare(vector<int> &matchsticks) {
-// TODO
-// }
-
-// * 15 - Splitting a String Into Descending Consecutive Values
-// bool splitString(string s) {
-// TODO
-// }
-
 // * 23 - Construct the Lexicographically Largest Valid Sequence
 // vector<int> constructDistancedSequence(int n) {
 // TODO
@@ -103,6 +92,41 @@ void printArr(vector<T> &arr) {
 
 // * 13 - The k-th Lexicographical String of All Happy Strings of Length n
 // bool makesquare(vector<int> &matchsticks) {
+// TODO
+// }
+
+// * 14 - Matchsticks to Square
+// bool makesquare(vector<int> &matchsticks) {
+// TODO
+// }
+
+// * 15 - Splitting a String Into Descending Consecutive Values
+// bool splitString(string s) {
+// TODO
+// }
+
+// * 16 - Construct Smallest Number From DI String
+// std::string smallestNumber(std::string pattern) {
+// TODO
+// }
+
+// * 17 - Find Unique Binary String
+// string findDifferentBinaryString(vector<string>& nums) {
+// TODO
+// }
+
+// * 18 - Split a String Into the Max Number of Unique Substrings
+// string findDifferentBinaryString(vector<string>& nums) {
+// TODO
+// }
+
+// * 19 - Maximum Length of a Concatenated String with Unique Characters
+// int maxLength(vector<string>& arr) {
+// TODO
+// }
+
+// * 20 - Partition to K Equal Sum Subsets
+// bool canPartitionKSubsets(vector<int>& nums, int k) {
 // TODO
 // }
 
