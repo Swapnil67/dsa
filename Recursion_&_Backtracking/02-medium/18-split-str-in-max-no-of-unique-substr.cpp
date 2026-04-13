@@ -70,8 +70,8 @@ void dfs(string &s, int &ans, unordered_set<string> &st, int i) {
 
   for (int j = i; j < s.size(); ++j) {
     string str = s.substr(i, (j - i + 1));
-    cout << str << endl;
-
+    // cout << str << endl;
+    // * Unique substr then find next substr
     if (st.find(str) == st.end()) {
       st.insert(str);
       dfs(s, ans, st, j + 1);

@@ -106,6 +106,7 @@ int numTilePossibilities(string tiles) {
 }
 
 int main(void) {
+  // * testcase 1
   string s = "AAB";
   cout << "Input string: " << s << endl;
 

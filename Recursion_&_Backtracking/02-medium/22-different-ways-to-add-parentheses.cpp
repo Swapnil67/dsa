@@ -1,6 +1,6 @@
 /*
  * Leetcode - 2597
- * The Number of Beautiful Subsets
+ * Different Ways to Add Parentheses
  * 
  * Given an integer array nums and an integer k, return true if it is possible to divide this array into 
  * k non-empty subsets whose sums are all equal.
@@ -24,23 +24,31 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<int> solve(std::string expr) {
-  std::vector<int> result;
-
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * TIME COMPLEXITY O(2^n * n)
+// * SPACE COMPLEXITY O(n)
+vector<int> diffWaysToCompute(string expr) {
+  vector<int> result;
+  
   for (int i = 0; i < expr.size(); ++i) {
     if (expr[i] == '+' || expr[i] == '-' || expr[i] == '*') {
-      std::vector<int> left_result = solve(expr.substr(0, i));
-      std::vector<int> right_result = solve(expr.substr(i + 1, expr.size() - 1));
-
+      vector<int> left_result = diffWaysToCompute(expr.substr(0, i));
+      vector<int> right_result = diffWaysToCompute(expr.substr(i + 1, expr.size() - 1));
+  
       for (int &x: left_result) {
         for (int &y : right_result) {
           if (expr[i] == '+') {
@@ -58,30 +66,23 @@ std::vector<int> solve(std::string expr) {
   }
   
   if (result.empty()) {
-    result.push_back(std::stoi(expr));
+    result.push_back(stoi(expr));
   }
-
+  
   return result;
-}
-
-// * ------------------------- Approach: Optimal Approach -------------------------`
-// * TIME COMPLEXITY O(2^n * n)
-// * SPACE COMPLEXITY O(n)
-std::vector<int> diffWaysToCompute(std::string expression) {
-  return solve(expression);
 }
 
 int main(void) {
   // * testcase 1
-  // std::string expression = "2-1-1";
+  // string expression = "2-1-1";
   
   // * testcase 2
-  std::string expression = "2*3-4*5";
+  string expression = "2*3-4*5";
 
-  std::cout << "Expression: " << expression << std::endl;
+  cout << "Expression: " << expression << endl;
 
-  std::cout << "Expression Values: ";
-  std::vector<int> ans = diffWaysToCompute(expression);
+  cout << "Expression Values: ";
+  vector<int> ans = diffWaysToCompute(expression);
   printArr(ans);
 
   return 0;

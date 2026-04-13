@@ -54,7 +54,7 @@ bool is_matching_pattern(string &num, string &pattern) {
   return true;
 }
 
-bool dfs_permutation(string num,
+bool dfs_permutation(string &num,
                      string &cur,
                      string &pattern,
                      vector<bool> used)
@@ -64,17 +64,17 @@ bool dfs_permutation(string num,
     return is_matching_pattern(cur, pattern);
   }
 
-  for (int j = 0; j < num.size(); ++j) {
-    if (used[j])
+  for (int i = 0; i < num.size(); ++i) {
+    if (used[i])
       continue;
 
-    used[j] = true;
-    cur.push_back(num[j]);
+    used[i] = true;
+    cur.push_back(num[i]);
 
     if (dfs_permutation(num, cur, pattern, used))
       return true;
 
-    used[j] = false;
+    used[i] = false;
     cur.pop_back();
   }
   return false;

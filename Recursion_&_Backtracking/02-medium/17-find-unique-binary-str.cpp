@@ -128,8 +128,8 @@ int main(void) {
   cout << "Input: ";
   printArr(nums);
 
-  string ans = bruteForce(nums);
-  // string ans = betterApproach(nums);
+  // string ans = bruteForce(nums);
+  string ans = betterApproach(nums);
   // string ans = findDifferentBinaryString(nums);
   cout << "Unique Binary String: " << ans << endl;
 

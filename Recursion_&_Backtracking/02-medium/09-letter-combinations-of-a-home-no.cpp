@@ -58,7 +58,7 @@ void solve(string &digits, int idx, string temp) {
 
 // * ------------------------- Optimal Approach -------------------------
 // * N = length of substring
-// * TIME COMPLEXITY O(4^n * n)
+// * TIME COMPLEXITY O(4^n * n) (Exponential)
 // * SPACE COMPLEXITY O(n)
 vector<string> letterCombinations(string digits) {
   string temp = "";

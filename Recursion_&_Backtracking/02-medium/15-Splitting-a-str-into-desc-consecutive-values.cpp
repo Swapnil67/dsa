@@ -128,10 +128,10 @@ bool splitString(string s) {
 
 int main(void) {
   // * testcase 1
-  string s = "1234";
+  // string s = "1234";
   
   // * testcase 2
-  // string s = "050043";
+  string s = "050043";
   
   // * testcase 3
   // string s = "9080701";

@@ -123,10 +123,10 @@ int main(void) {
   // int n = 1, k = 3;
   
   // * testcase 2
-  // int n = 1, k = 4;
+  int n = 1, k = 4;
   
   // * testcase 3
-  int n = 3, k = 9;
+  // int n = 3, k = 9;
 
   cout << "n: " << n << ", k: " << k << endl;
 

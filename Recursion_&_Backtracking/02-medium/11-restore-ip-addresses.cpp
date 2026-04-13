@@ -49,32 +49,32 @@ bool isvalid(string s) {
   return (s[0] != '0') && (stoi(s) <= 255);
 }
 
-void solve(int idx, int parts,
+void dfs(int i, int parts,
            string &s, string ip,
            vector<string> &ans)
 {
   // cout << ip << endl;
   int n = s.length();
-  if (idx == n && parts == 4) {
+  if (i == n && parts == 4) {
     ip.pop_back(); // * removing the extra decimal from end
     ans.push_back(ip);
     return;
   }
 
   // * take 1 digit
-  if (idx + 1 <= n)
-    solve(idx + 1, parts + 1, s, ip + (s.substr(idx, 1) + "."), ans);
+  if (i + 1 <= n)
+    dfs(i + 1, parts + 1, s, ip + (s.substr(i, 1) + "."), ans);
   
   // * take 2 digits
-  if (idx + 2 <= n && isvalid(s.substr(idx, 2)))
-    solve(idx + 2, parts + 1, s, ip + (s.substr(idx, 2) + "."), ans);
+  if (i + 2 <= n && isvalid(s.substr(i, 2)))
+    dfs(i + 2, parts + 1, s, ip + (s.substr(i, 2) + "."), ans);
 
   // * take 3 digits
-  if (idx + 3 <= n && isvalid(s.substr(idx, 3)))
-    solve(idx + 3, parts + 1, s, ip + (s.substr(idx, 3) + "."), ans);
+  if (i + 3 <= n && isvalid(s.substr(i, 3)))
+    dfs(i + 3, parts + 1, s, ip + (s.substr(i, 3) + "."), ans);
 }
 
-// * ------------------------- Approach : Optimal Approach -------------------------`
+// * ------------------------- Approach : Optimal Approach -------------------------
 // * Where m = 3 as there are at most three digits in a valid segment
 // * n = 4 as there are four segments in a valid IP.
 // * TIME COMPLEXITY O(m^n * n) ~ O(1)
@@ -87,7 +87,7 @@ vector<string> restoreIpAddresses(string s)
     return ans;
 
   int parts = 0;
-  solve(0, parts, s, "", ans);
+  dfs(0, parts, s, "", ans);
   return ans;
 }
 

@@ -104,7 +104,7 @@ int bruteForce(vector<int>& nums, int k) {
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
-// * TIME COMPLEXITY O(2^n)
+// * TIME COMPLEXITY (2^n)
 // * SPACE COMPLEXITY O(n)
 int beautifulSubsets(vector<int>& nums, int k) {
   ans = 0;
@@ -116,21 +116,20 @@ int beautifulSubsets(vector<int>& nums, int k) {
 
 int main(void) {
   // * testcase 1
-  // int k = 2;
-  // vector<int> nums = {2, 4, 6};
+  int k = 2;
+  vector<int> nums = {2, 4, 6};
 
   // * testcase 2
   // int k = 3;
   // vector<int> nums = {1, 2, 3, 4};
 
   // * testcase 3
-  int k = 3;
-  vector<int> nums = {1, 1, 2, 2, 2};
+  // int k = 3;
+  // vector<int> nums = {1, 1, 2, 2, 2};
 
   cout << "k: " << k << endl;
   cout << "Input nums: ";
   printArr(nums);
-
 
   // int ans = bruteForce(nums, k);
   int ans = beautifulSubsets(nums, k);

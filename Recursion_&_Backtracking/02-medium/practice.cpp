@@ -130,6 +130,16 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 21 - The Number of Beautiful Subsets
+// int beautifulSubsets(vector<int>& nums, int k) {
+// TODO
+// }
+
+// * 22 - Different Ways to Add Parentheses
+// vector<int> diffWaysToCompute(string expression) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }

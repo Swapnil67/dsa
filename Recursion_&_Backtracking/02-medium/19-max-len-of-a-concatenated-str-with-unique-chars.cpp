@@ -100,10 +100,10 @@ int main(void) {
   // vector<string> strs = {"un", "iq", "ue"};
   
   // * testcase 2
-  // vector<string> strs = {"cha", "r", "act", "ers"};
+  vector<string> strs = {"cha", "r", "act", "ers"};
 
   // * testcase 3
-  vector<string> strs = {"abcdefghijklmnopqrstuvwxyz"};
+  // vector<string> strs = {"abcdefghijklmnopqrstuvwxyz"};
 
   cout << "Input strings: ";
   printArr(strs);
