@@ -92,7 +92,7 @@ vector<int> bfs(
   return {};
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Kahn's Algo
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)

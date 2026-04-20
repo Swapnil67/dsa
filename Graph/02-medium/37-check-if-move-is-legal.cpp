@@ -71,7 +71,7 @@ bool check_legal(
     char &color,
     vector<int> &dir,
     vector<vector<char>> &board)
-{ 
+{
   int m = board.size(), n = board[0].size();
   int dr = dir[0], dc = dir[1];
   r += dr;
@@ -79,14 +79,14 @@ bool check_legal(
 
   // cout << "dr: " << dr << ", dc: " << dc << endl;
   int length = 1;
-  
+
   // * out of bound check
-  while (r >= 0 && r < m && c >= 0 && c < n) {
+  while (r >= 0 && r < m && c >= 0 && c < n)
+  {
     // cout << r << " " << c << " -> " << board[r][c] << endl;
     length++;
-    if (board[r][c] == '.') {
+    if (board[r][c] == '.')
       return false;
-    }
 
     // * We should get the same color only if we get the same color after 3 or more cells
     if (board[r][c] == color) // * same color found on line
@@ -98,16 +98,15 @@ bool check_legal(
   return false;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(1)
 // * SPACE COMPLEXITY O(1)
-bool checkMove(
-    int rMove, int cMove, char color,
-    vector<vector<char>> &board)
+bool checkMove(int r, int c, char color,
+               vector<vector<char>> &board)
 {
-  board[rMove][cMove] = color;
+  board[r][c] = color;
   for (auto &dir: dirs) { // * go to all 8 directions
-    if (check_legal(rMove, cMove, color, dir, board))
+    if (check_legal(r, c, color, dir, board))
       return true;
   }
   return false;

@@ -1,29 +1,29 @@
-/**
- * * Leetcode - 684
- * * Redundant Connection
+/*
+ * Leetcode - 684
+ * Redundant Connection
  *
- * * In this problem, a tree is an undirected graph that is connected and has no cycles.
-
- * * You are given a graph that started as a tree with n nodes labeled from 1 to n, with one additional edge added. 
- * * The added edge has two different vertices chosen from 1 to n, and was not an edge that already existed. 
- * * The graph is represented as an array edges of length n where edges[i] = [ai, bi] indicates that there is an edge
- * * between nodes ai and bi in the graph.
-
- * * Return an edge that can be removed so that the resulting graph is a tree of n nodes. If there are multiple answers,
- * * return the answer that occurs last in the input.
+ * In this problem, a tree is an undirected graph that is connected and has no cycles.
+ *
+ * You are given a graph that started as a tree with n nodes labeled from 1 to n, with one additional edge added. 
+ * The added edge has two different vertices chosen from 1 to n, and was not an edge that already existed. 
+ * The graph is represented as an array edges of length n where edges[i] = [ai, bi] indicates that there is an edge
+ * between nodes ai and bi in the graph.
+ *
+ * Return an edge that can be removed so that the resulting graph is a tree of n nodes. If there are multiple answers,
+ * return the answer that occurs last in the input.
  * 
- * * Example 1  :
- * * Input      : edges = [[1,2],[1,3],[2,3]]
- * * Output     : [2,3]
+ * Example 1  :
+ * Input      : edges = [[1,2],[1,3],[2,3]]
+ * Output     : [2,3]
  * 
- * * Example 2  :
- * * Input      : edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]
- * * Output     : [1,4]
+ * Example 2  :
+ * Input      : edges = [[1,2],[2,3],[3,4],[1,4],[1,5]]
+ * Output     : [1,4]
  * 
- * * https://neetcode.io/problems/redundant-connection/question
- * * https://leetcode.com/problems/redundant-connection/description/
- * * https://www.naukri.com/code360/problems/redundant-connection-i_1281198
- */
+ * https://neetcode.io/problems/redundant-connection/question
+ * https://leetcode.com/problems/redundant-connection/description/
+ * https://www.naukri.com/code360/problems/redundant-connection-i_1281198
+*/
 
 // ! DSU
 
@@ -35,36 +35,38 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Print adjacency list
 template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(vector<T> &adj) {
   int n = adj.size();
   for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
+    cout << i << " -> ";
     printArr(adj[i]);
   }
 }
 
-int find(int x, std::vector<int> &parent) {
+int find(int x, vector<int> &parent) {
   if (x == parent[x])
     return x;
 
   return parent[x] = find(parent[x], parent);
 }
 
-void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
+void Union(int x, int y, vector<int> &parent, vector<int> &rank) {
   int x_parent = find(x, parent);
   int y_parent = find(y, parent);
   if (x_parent == y_parent)
@@ -84,8 +86,8 @@ void Union(int x, int y, std::vector<int> &parent, std::vector<int> &rank) {
 
 bool dfs(
     int u, int dst,
-    std::vector<bool> visited,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> visited,
+    unordered_map<int, vector<int>> &adj)
 {
   visited[u] = true;
   if (u == dst)
@@ -103,11 +105,11 @@ bool dfs(
 
 bool bfs(
     int u, int v,
-    std::vector<bool> visited,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> visited,
+    unordered_map<int, vector<int>> &adj)
 {
 
-  std::queue<int> q;
+  queue<int> q;
   q.push(u);
   visited[u] = true;
 
@@ -131,15 +133,15 @@ bool bfs(
 }
 
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Using DFS
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> findRedundantConnectionDFS(std::vector<std::vector<int>> &edges) {
+vector<int> findRedundantConnectionDFS(vector<vector<int>> &edges) {
   int n = edges.size();
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
 
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
 
   for (auto &edge: edges) { // * O(N)
     int u = edge[0], v = edge[1];
@@ -160,15 +162,15 @@ std::vector<int> findRedundantConnectionDFS(std::vector<std::vector<int>> &edges
   return {};
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Using BFS
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> findRedundantConnectionBFS(std::vector<std::vector<int>> &edges) {
+vector<int> findRedundantConnectionBFS(vector<vector<int>> &edges) {
   int n = edges.size();
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
 
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
 
   for (auto &edge: edges) { // * O(N)
     int u = edge[0], v = edge[1];
@@ -192,12 +194,12 @@ std::vector<int> findRedundantConnectionBFS(std::vector<std::vector<int>> &edges
 // * Using DSU [Most Optimal]
 // * TIME COMPLEXITY O(N * alpha(n))
 // * SPACE COMPLEXITY O(N)
-std::vector<int> findRedundantConnectionDSU(std::vector<std::vector<int>> &edges) {
+vector<int> findRedundantConnectionDSU(vector<vector<int>> &edges) {
   int n = edges.size();
 
   // * 1. Initialize rank and parent vectors
-  std::vector<int> rank(n + 1, 1);
-  std::vector<int> parent(n + 1);
+  vector<int> rank(n + 1, 1);
+  vector<int> parent(n + 1);
   iota(begin(parent), end(parent), 0);
   
   for (auto &edge: edges) { // * O(N)
@@ -217,19 +219,19 @@ std::vector<int> findRedundantConnectionDSU(std::vector<std::vector<int>> &edges
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> edges = {{1, 2}, {1, 3}, {2, 3}};
+  vector<vector<int>> edges = {{1, 2}, {1, 3}, {2, 3}};
   
   // * testcase 2
-  // std::vector<std::vector<int>> edges = {{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1,5}};
+  // vector<vector<int>> edges = {{1, 2}, {2, 3}, {3, 4}, {1, 4}, {1,5}};
 
-  std::cout << "Edges: " << std::endl;
+  cout << "Edges: " << endl;
   for (auto &vec : edges)
     printArr(vec);
 
-  // std::vector<int> ans = findRedundantConnectionDFS(edges);
-  // std::vector<int> ans = findRedundantConnectionBFS(edges);
-  std::vector<int> ans = findRedundantConnectionDSU(edges);
-  std::cout << "Redundant Connection: " << std::endl;
+  // vector<int> ans = findRedundantConnectionDFS(edges);
+  // vector<int> ans = findRedundantConnectionBFS(edges);
+  vector<int> ans = findRedundantConnectionDSU(edges);
+  cout << "Redundant Connection: " << endl;
   printArr(ans);
 
   return 0;

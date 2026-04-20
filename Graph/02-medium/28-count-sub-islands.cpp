@@ -30,29 +30,31 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * check out of bound
-bool check_not_oob(const int &r, const int &c, std::vector<std::vector<int>> &grid) {
+bool check_not_oob(const int &r, const int &c, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   return r >= 0 && r < m && c >= 0 && c < n;
 }
 
 
-void dfs(int r, int c, std::vector<std::vector<int>>& grid1,
-        std::vector<std::vector<int>>& grid2, bool& ans) {
+void dfs(int r, int c, vector<vector<int>>& grid1,
+        vector<vector<int>>& grid2, bool& ans) {
   int m = grid1.size(), n = grid1[0].size();
   if (grid1[r][c] == 0) {
       ans = false;
@@ -72,12 +74,12 @@ void dfs(int r, int c, std::vector<std::vector<int>>& grid1,
 
 bool bfs(
     int row, int col,
-    std::vector<std::vector<int>> &grid1,
-    std::vector<std::vector<int>> &grid2)
+    vector<vector<int>> &grid1,
+    vector<vector<int>> &grid2)
 {
   int m = grid1.size(), n = grid1[0].size();
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   q.push({row, col});
   grid2[row][col] = 0; // * mark visited by making the cell water
   
@@ -108,7 +110,7 @@ bool bfs(
 // * DFS
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int countSubIslandsDFS(std::vector<std::vector<int>> &grid1, std::vector<std::vector<int>> &grid2) {
+int countSubIslandsDFS(vector<vector<int>> &grid1, vector<vector<int>> &grid2) {
   int m = grid2.size(), n = grid2[0].size();
   
   int sub_islands = 0;
@@ -129,7 +131,7 @@ int countSubIslandsDFS(std::vector<std::vector<int>> &grid1, std::vector<std::ve
 // * BFS
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int countSubIslandsBFS(std::vector<std::vector<int>> &grid1, std::vector<std::vector<int>> &grid2) {
+int countSubIslandsBFS(vector<vector<int>> &grid1, vector<vector<int>> &grid2) {
   int m = grid2.size(), n = grid2[0].size();
   
   int sub_islands = 0;
@@ -147,11 +149,11 @@ int countSubIslandsBFS(std::vector<std::vector<int>> &grid1, std::vector<std::ve
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid1 = {{1, 1, 1, 0, 0}, {0, 1, 1, 1, 1}, {0, 0, 0, 0, 0}, {1, 0, 0, 0, 0}, {1, 1, 0, 1, 1}},
+  // vector<vector<int>> grid1 = {{1, 1, 1, 0, 0}, {0, 1, 1, 1, 1}, {0, 0, 0, 0, 0}, {1, 0, 0, 0, 0}, {1, 1, 0, 1, 1}},
   //                               grid2 = {{1, 1, 1, 0, 0}, {0, 0, 1, 1, 1}, {0, 1, 0, 0, 0}, {1, 0, 1, 1, 0}, {0, 1, 0, 1, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid1 = {{1, 0, 1, 0, 1},
+  vector<vector<int>> grid1 = {{1, 0, 1, 0, 1},
                                          {1, 1, 1, 1, 1},
                                          {0, 0, 0, 0, 0},
                                          {1, 1, 1, 1, 1},
@@ -163,17 +165,17 @@ int main(void) {
                                          {0, 1, 0, 1, 0},
                                          {1, 0, 0, 0, 1}};
 
-  std::cout << "-------- Grid 1 -------- " << std::endl;
+  cout << "-------- Grid 1 -------- " << endl;
   for (auto &vec : grid1)
     printArr(vec);
 
-  std::cout << "-------- Grid 2 -------- " << std::endl;
+  cout << "-------- Grid 2 -------- " << endl;
   for (auto &vec : grid2)
     printArr(vec);
 
   // int sub_islands = countSubIslandsDFS(grid1, grid2);
   int sub_islands = countSubIslandsBFS(grid1, grid2);
-  std::cout << "Sub Islands: " << sub_islands << std::endl;
+  cout << "Sub Islands: " << sub_islands << endl;
 
   return 0;
 }

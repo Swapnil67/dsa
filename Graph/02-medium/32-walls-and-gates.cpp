@@ -50,7 +50,7 @@ void printArr(vector<T> &arr) {
 const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * ------------------------- APPROACH : Optimal Approach -------------------------
 // * Multi Source BFS
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)

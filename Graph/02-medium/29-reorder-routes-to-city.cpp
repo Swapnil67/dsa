@@ -74,7 +74,7 @@ void dfs(int u, int parent, int &reorder,
   }
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Create the two way path b/w all nodes to traverse the complete graph and then find the 
 // * edges which we need to flip.
 // * TIME COMPLEXITY O(m x n)

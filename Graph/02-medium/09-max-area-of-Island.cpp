@@ -181,9 +181,9 @@ int main(void) {
 
   // * testcase 3
   vector<vector<int>> grid = {{1, 1, 0, 0, 0},
-                                        {1, 1, 0, 0, 0},
-                                        {0, 0, 0, 1, 1},
-                                        {0, 0, 0, 1, 1}};
+                              {1, 1, 0, 0, 0},
+                              {0, 0, 0, 1, 1},
+                              {0, 0, 0, 1, 1}};
 
   cout << "grid: " << endl;
   for (auto &vec : grid)

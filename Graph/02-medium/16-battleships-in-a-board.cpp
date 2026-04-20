@@ -26,38 +26,40 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------
 // * BFS
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n)
-int bruteForce(std::vector<std::vector<char>>& board) {
+int bruteForce(vector<vector<char>>& board) {
   int m = board.size(), n = board[0].size();
   if (m == 0 || n == 0)
     return 0;
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (board[r][c] == 'X') {
-        q.push(std::make_pair(r, c));
+        q.push(make_pair(r, c));
       }
     }
   }
-  std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
+  vector<vector<bool>> visited(m, vector<bool>(n, false));
   
   const auto is_safe = [&](const int &r, const int &c) {
     return r >= 0 && r < m && c >= 0 && c < n;
@@ -74,12 +76,11 @@ int bruteForce(std::vector<std::vector<char>>& board) {
       visited[r][c] = true;
     }
 
-
     for (auto &dir: dirs) {
       int dr = r + dir[0], dc = c + dir[1];
       if (is_safe(dr, dc) && !visited[dr][dc] && board[dr][dc] == 'X') {
-        q.push(std::make_pair(dr, dc));
         visited[dr][dc] = true;
+        q.push(make_pair(dr, dc));
       }
     }
   }
@@ -91,7 +92,7 @@ int bruteForce(std::vector<std::vector<char>>& board) {
 // * Only count new battleship if it has '.' in its top or left cell
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int countBattleships(std::vector<std::vector<char>>& board) {
+int countBattleships(vector<vector<char>>& board) {
 int m = board.size(), n = board[0].size();
   if (m == 0 || n == 0)
     return 0;
@@ -116,20 +117,20 @@ int m = board.size(), n = board[0].size();
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<char>> board = {{'X', '.', '.', 'X'},
+  vector<vector<char>> board = {{'X', '.', '.', 'X'},
                                           {'.', '.', '.', 'X'},
                                           {'.', '.', '.', 'X'}};
 
   // * testcase 2
-  // std::vector<std::vector<char>> board = {{'X', 'X', 'X'}};
+  // vector<vector<char>> board = {{'X', 'X', 'X'}};
 
-  std::cout << "Board" << std::endl;
+  cout << "Board" << endl;
   for (auto &vec : board)
     printArr(vec);
 
-  int ans = bruteForce(board);
-  // int ans = countBattleships(board);
-  std::cout << "Answer: " << ans << std::endl;
+  // int ans = bruteForce(board);
+  int ans = countBattleships(board);
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

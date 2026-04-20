@@ -30,29 +30,31 @@
 #include <unordered_map>
 #include <unordered_set>
 
+using namespace std;
+
 // ! Amazon
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
+  unordered_map<int, vector<int>> adj;
   for (auto &it: edges) {
     int a = it[0], b = it[1];
     adj[a].push_back(b);
@@ -66,48 +68,48 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
 
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)
-std::vector<int> shortestAlternatingPaths(
+vector<int> shortestAlternatingPaths(
     int n,
-    std::vector<std::vector<int>> &redEdges,
-    std::vector<std::vector<int>> &blueEdges)
+    vector<vector<int>> &redEdges,
+    vector<vector<int>> &blueEdges)
 {
   // * Adj list for red edges
-  std::unordered_map<int, std::vector<int>> red_adj = constructadj(redEdges);
+  unordered_map<int, vector<int>> red_adj = constructadj(redEdges);
   // printAdjList(red_adj); // * For Debugging
   
   // * Adj list for blue edges
-  std::unordered_map<int, std::vector<int>> blue_adj = constructadj(blueEdges);
+  unordered_map<int, vector<int>> blue_adj = constructadj(blueEdges);
   // printAdjList(blue_adj); // * For Debugging
 
-  std::unordered_set<std::string> visit;
+  unordered_set<string> visit;
   visit.insert("0,-1");
 
-  std::vector<int> ans(n, -1);
-  std::queue<std::vector<int>> q;
+  vector<int> ans(n, -1);
+
+  // * Initially we have edge_color = -1 becoz we'll try to search for both edge i.e., red & blue edge
+  queue<vector<int>> q;
   q.push({0, 0, -1}); // * {node, length, edge_color}
-  // * Initially we have edge_color = -1 becoz we'll try to search for both edge
-  // * i.e., red & blue edge
 
   while (!q.empty()) {
-    std::vector<int> data = q.front();
+    vector<int> data = q.front();
     q.pop();
     int node = data[0], length = data[1], edge_color = data[2];
-    // std::cout << "q.front(): " << "(" << node << " " << length << " " << edge_color << ")" << std::endl;
+    // cout << "q.front(): " << "(" << node << " " << length << " " << edge_color << ")" << endl;
     if (ans[node] == -1)
       ans[node] = length;
 
-    if (edge_color != 0) {
+    if (edge_color != 0) { // * Blue -> Red Edge
       for (int &ngbr: red_adj[node]) {
-        std::string key = std::to_string(ngbr) + ",0";
+        string key = to_string(ngbr) + ",0";
         if (visit.insert(key).second) {
           q.push({ngbr, length + 1, 0});
         }
       }
     }
-
-    if (edge_color != 1) {
+    
+    if (edge_color != 1) { // * Red -> Blue Edge
       for (int &ngbr: blue_adj[node]) {
-        std::string key = std::to_string(ngbr) + ",1";
+        string key = to_string(ngbr) + ",1";
         if (visit.insert(key).second) {
           q.push({ngbr, length + 1, 1});
         }
@@ -120,25 +122,25 @@ std::vector<int> shortestAlternatingPaths(
 
 int main(void) {
   // * testcase 1
-  // int n = 3;
-  // std::vector<std::vector<int>> redEdges = {{0, 1}, {1, 2}}, blueEdges = {};
-  
-  // * testcase 2
-  // int n = 3;
-  // std::vector<std::vector<int>> redEdges = {{0, 1}}, blueEdges = {{2, 1}};
-  
-  // * testcase 2
   int n = 3;
-  std::vector<std::vector<int>> redEdges = {{0, 1}}, blueEdges = {{0, 2}, {1, 2}};
+  vector<vector<int>> redEdges = {{0, 1}, {1, 2}}, blueEdges = {};
+  
+  // * testcase 2
+  // int n = 3;
+  // vector<vector<int>> redEdges = {{0, 1}}, blueEdges = {{2, 1}};
+  
+  // * testcase 2
+  // int n = 3;
+  // vector<vector<int>> redEdges = {{0, 1}}, blueEdges = {{0, 2}, {1, 2}};
 
-  std::cout << "-------- red edges -------- " << std::endl;
+  cout << "-------- red edges -------- " << endl;
   for (auto &vec : redEdges)
     printArr(vec);
-  std::cout << "-------- blue edges -------- " << std::endl;
+  cout << "-------- blue edges -------- " << endl;
   for (auto &vec : blueEdges)
     printArr(vec);
 
-  std::vector<int> ans = shortestAlternatingPaths(n, redEdges, blueEdges);
+  vector<int> ans = shortestAlternatingPaths(n, redEdges, blueEdges);
   printArr(ans);
 
   return 0;

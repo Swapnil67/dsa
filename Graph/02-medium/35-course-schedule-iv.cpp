@@ -114,7 +114,7 @@ vector<bool> checkIfPrerequisite(
 {
   // * Create a Adj list
   unordered_map<int, vector<int>> adj = constructadj(prerequisites);
-  printAdjList(adj); // * For debugging
+  // printAdjList(adj); // * For debugging
   
   int Q = queries.size();
   vector<bool> ans(Q, false);
@@ -131,7 +131,7 @@ vector<bool> checkIfPrerequisite(
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Q - No of queries
 // * Topological Sort (Kahn's Algo)
 // * TIME COMPLEXITY O(V^2 * (V + E)) ~ O(numCourses² + Q)

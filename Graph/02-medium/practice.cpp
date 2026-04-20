@@ -37,6 +37,16 @@ void printAdjList2(unordered_map<int, vector<int>> &adj) {
   }
 }
 
+void printAdjList(unordered_map<int, vector<pii>> &adj) {
+  for (auto &[key, pairs] : adj) {
+    cout << key << " -> ";
+    for (auto &it: pairs) {
+      cout << "(" << it.first << ", " << it.second << ") ";
+    }
+    cout << endl;
+  }
+}
+
 const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 typedef pair<int, int> pii;
@@ -84,30 +94,8 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
   }
 }
 
-// * 39 - Find Closest Node to Given Two Nodes
-// int closestMeetingNode(vector<int> &edges, int node1, int node2) {
-// TODO
-// }
-
-// * 40 - Number of Connected Components in an Undirected Graph
-// int countComponents(int n, vector<int> &edges) {
-// TODO
-// }
-
-// * 41 - Shortest Path with Alternating Colors
-// vector<int> shortestAlternatingPaths(
-//     int n,
-//     vector<vector<int>> &redEdges,
-//     vector<vector<int>> &blueEdges) 
-// {
-// TODO
-// }
-
 // * 42 - Minimum Fuel Cost to Report to the Capital
-// long long minimumFuelCost(
-//     int seats,
-//     vector<vector<int>> &roads)
-// {
+// long long minimumFuelCost(int seats, vector<vector<int>> &roads) {
 // TODO
 // }
 
@@ -125,7 +113,6 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // int regionsBySlashes(vector<string> &grid) {
 // TODO
 // }
-
 
 // * 46 - Minimum Number of Vertices to Reach All Nodes
 // vector<int> findSmallestSetOfVertices(int n, vector<vector<int>> edges) {
@@ -190,7 +177,6 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // int openLock(vector<string> &deadends, string target) {
 // TODO
 // }
-
 
 // * ------------------------------------------------------------------------------------------
 
@@ -330,9 +316,7 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // }
 
 // * 28 - Count Sub Islands
-// int countSubIslandsBFS(
-//     vector<vector<int>> &grid1,
-//     vector<vector<int>> &grid2)
+// int countSubIslandsBFS(vector<vector<int>> &grid1, vector<vector<int>> &grid2)
 // {
 // TODO
 // }
@@ -368,8 +352,11 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // }
 
 // * 35 - Course Schedule IV
-// vector<bool> checkIfPrerequisite(int numCourses,
-//                                  vector<vector<int>> &prerequisites, vector<vector<int>> &queries) {
+// vector<bool> checkIfPrerequisite(
+//     int numCourses,
+//     vector<vector<int>> &prerequisites,
+//     vector<vector<int>> &queries)
+// {
 //   TODO
 // }
 
@@ -388,8 +375,23 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // TODO
 // }
 
+// * 39 - Find Closest Node to Given Two Nodes
+// int closestMeetingNode(vector<int> &edges, int node1, int node2) {
+// TODO
+// }
+
+// * 40 - Number of Connected Components in an Undirected Graph
+// int countComponents(int n, vector<int> &edges) {
+// TODO
+// }
+
+// * 41 - Shortest Path with Alternating Colors
+// vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &blueEdges) 
+// {
+// TODO
+// }
+
 int main(void) {
-  
   return 0;
 }
 

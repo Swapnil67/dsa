@@ -98,14 +98,14 @@ void dfs(int i, vector<bool> &visited, vector<vector<int>> &stones) {
 // * G1 = (s1 - 1) stones remaining
 // * G2 = (s2 - 1) stones remaining
 // * G3 = (s3 - 1) stones remaining
-// * G4 = (s4 - 1) stones remaining
 // * Gn = (sn - 1) stones remaining
+// * G4 = (s4 - 1) stones remaining
 // * (s1 - 1) + (s2 - 1) + (s3 - 1) + (s4 - 1) + (s5 - 1) .... (sn - 1)
 // * (s1 + s2 + s3 + s4 + .... + sn) - (1 + 1 + 1 + 1 + .... + 1)
 // * Total Number of stones = (s1 + s2 + s3 + s4 + .... + sn)
 // * Total Number of Groups = (1 + 1 + 1 + 1 + .... + 1)
 // * Ans = no. of stones - no. of groups
-// * TIME COMPLEXITY O(n^2)
+// * TIME COMPLEXITY O(N²)
 // * SPACE COMPLEXITY O(n)
 int removeStones(vector<vector<int>> &stones) {
   int n = stones.size();
@@ -119,6 +119,7 @@ int removeStones(vector<vector<int>> &stones) {
     }
   }
 
+  cout << "n: " << n << ", groups: " << groups << endl;
   return n - groups;
 }
 
@@ -155,10 +156,10 @@ int removeStonesDSU(vector<vector<int>> &stones) {
 
 int main(void) {
   // * testcase 1
-  // vector<vector<int>> stones = {{0, 0}, {0, 1}, {1, 0}, {1, 2}, {2, 1}, {2, 2}};
+  vector<vector<int>> stones = {{0, 0}, {0, 1}, {1, 0}, {1, 2}, {2, 1}, {2, 2}};
 
   // * testcase 2
-  vector<vector<int>> stones = {{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}};
+  // vector<vector<int>> stones = {{0, 0}, {0, 2}, {1, 1}, {2, 0}, {2, 2}};
 
   cout << "Stones: " << endl;
   for (auto &vec : stones)

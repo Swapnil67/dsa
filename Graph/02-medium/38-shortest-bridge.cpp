@@ -84,7 +84,6 @@ int shortestBridge(vector<vector<int>>& grid) {
   for (int r = 0; r < n; ++r) {
     if (found)
       break;
-      
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) {
         dfs(r, c, q, visited, grid);

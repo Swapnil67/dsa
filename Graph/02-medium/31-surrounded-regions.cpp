@@ -29,21 +29,23 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-void mark_visited(int x, int y, std::vector<std::vector<char>> &board) {
+void mark_visited(int x, int y, vector<vector<char>> &board) {
   board[x][y] = 'T';
   
   int m = board.size(), n = board[0].size();
@@ -63,7 +65,7 @@ void mark_visited(int x, int y, std::vector<std::vector<char>> &board) {
 // * DFS
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-void solve(std::vector<std::vector<char>> &board) {
+void solve(vector<vector<char>> &board) {
   int m = board.size(), n = board[0].size();
 
   // * Mark Top & bottom border of board
@@ -104,22 +106,22 @@ void solve(std::vector<std::vector<char>> &board) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<char>> board = {{'X', 'X', 'X', 'X'},
+  // vector<vector<char>> board = {{'X', 'X', 'X', 'X'},
   //                                         {'X', 'O', 'O', 'X'},
   //                                         {'X', 'X', 'O', 'X'},
   //                                         {'X', 'O', 'X', 'X'}};
 
   // * testcase 2
-  // std::vector<std::vector<char>> board= {{1}};
+  // vector<vector<char>> board= {{1}};
 
   // * testcase 3
-  // std::vector<std::vector<char>> board = {{'X', 'X', 'X'}, {'X', 'O', 'X'}, {'X', 'X', 'X'}};
+  // vector<vector<char>> board = {{'X', 'X', 'X'}, {'X', 'O', 'X'}, {'X', 'X', 'X'}};
 
   // * testcase 4
-  // std::vector<std::vector<char>> board = {{'O', 'O', 'O'}, {'O', 'O', 'O'}, {'O', 'O', 'O'}};
+  // vector<vector<char>> board = {{'O', 'O', 'O'}, {'O', 'O', 'O'}, {'O', 'O', 'O'}};
 
   // * testcase 4
-  std::vector<std::vector<char>> board = {{'O', 'X', 'O'},
+  vector<vector<char>> board = {{'O', 'X', 'O'},
                                           {'O', 'X', 'O'},
                                           {'X', 'O', 'X'},
                                           {'O', 'O', 'X'},
@@ -128,11 +130,11 @@ int main(void) {
                                           {'O', 'O', 'O'},
                                           {'X', 'O', 'X'}};
 
-  std::cout << "-------- board -------- " << std::endl;
+  cout << "-------- board -------- " << endl;
   for (auto &vec : board)
     printArr(vec);
   
-  std::cout << "-------- Surrounded Regions -------- " << std::endl;
+  cout << "-------- Surrounded Regions -------- " << endl;
   solve(board);
   for (auto &vec : board)
     printArr(vec);

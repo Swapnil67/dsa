@@ -28,30 +28,28 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * check out of bound
-bool check_not_oob(const int &row, const int &col, std::vector<std::vector<int>> &grid) {
+bool check_not_oob(const int &row, const int &col, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   return row >= 0 && row < m && col >= 0 && col < n;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-void mark_visited(
-  int r, int c,
-  std::vector<std::vector<bool>> &visited,
-  std::vector<std::vector<int>> &grid)
-{
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+void mark_visited(int r, int c, vector<vector<bool>> &visited, vector<vector<int>> &grid) {
   visited[r][c] = true;
 
   for (auto &dir : dirs) {
@@ -62,8 +60,7 @@ void mark_visited(
   }
 }
 
-void mark_visited(int r, int c, std::vector<std::vector<int>> &grid)
-{
+void mark_visited(int r, int c, vector<vector<int>> &grid) {
   grid[r][c] = 0;
 
   for (auto &dir : dirs) {
@@ -79,9 +76,9 @@ void mark_visited(int r, int c, std::vector<std::vector<int>> &grid)
 // * use a visited matrix
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int numEnclaves(std::vector<std::vector<int>>& grid) {
+int numEnclaves(vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
-  std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
+  vector<vector<bool>> visited(m, vector<bool>(n, false));
 
   for (int r = 0; r < m; ++r) {
     // * first column
@@ -120,7 +117,7 @@ int numEnclaves(std::vector<std::vector<int>>& grid) {
 // * use a input matrix as visited
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int numEnclaves2(std::vector<std::vector<int>>& grid) {
+int numEnclaves2(vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
   for (int r = 0; r < m; ++r) {
     // * first column
@@ -156,20 +153,26 @@ int numEnclaves2(std::vector<std::vector<int>>& grid) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {{0, 0, 0, 0}, {1, 0, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}};
+  vector<vector<int>> grid = {{0, 0, 0, 0},
+                              {1, 0, 1, 0},
+                              {0, 1, 1, 0},
+                              {0, 0, 0, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> grid = {{0, 1, 1, 0}, {0, 0, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 0}};
+  // vector<vector<int>> grid = {{0, 1, 1, 0},
+  //                             {0, 0, 1, 0},
+  //                             {0, 0, 1, 0},
+  //                             {0, 0, 0, 0}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> grid = {{0, 1, 1, 0, 0}};
+  // vector<vector<int>> grid = {{0, 1, 1, 0, 0}};
 
-  std::cout << "grid" << std::endl;
+  cout << "grid" << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = numEnclaves(grid);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

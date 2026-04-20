@@ -61,7 +61,7 @@ pair<int, int> intToPos(int square, int n) {
   return {r, c};
 }
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * ------------------------- APPROACH : Optimal Approach -------------------------
 // * Since we need a shortest path we'll use BFS approach 
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)

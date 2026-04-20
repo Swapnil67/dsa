@@ -28,54 +28,58 @@
 #include <climits>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 void dfs(int node,
-         std::vector<int> &dist,
-         std::vector<int> &edges)
+         vector<int> &dist,
+         vector<int> &edges)
 {
-  int v = edges[node]; // * ngbr of current node
-  if (v != -1 && dist[v] != -1) {
-    dist[v] = dist[node] + 1;
-    dfs(v, dist, edges);
+  int nei = edges[node]; // * ngbr of current node
+  if (nei != -1 && dist[nei] == -1) {
+    dist[nei] = dist[node] + 1;
+    dfs(nei, dist, edges);
   }
 }
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * ------------------------- APPROACH : Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)
-int closestMeetingNode(std::vector<int> &edges, int node1, int node2)
-{
+int closestMeetingNode(vector<int> &edges, int node1, int node2) {
   int n = edges.size();
+
   // * get the distance from node1 to its ngbrs
-  std::vector<int> dist_node1(n, -1);
-  dist_node1[node1] = 0; // * distance to itself will be zero
-  dfs(node1, dist_node1, edges);
-  // printArr(dist_node1);
+  vector<int> dist1(n, -1);
+  dist1[node1] = 0; // * distance to itself will be zero
+  dfs(node1, dist1, edges);
+  printArr(dist1);
   
   // * get the distance from node2 to its ngbrs 
-  std::vector<int> dist_node2(n, -1);
-  dist_node2[node2] = 0; // * distance to itself will be zero
-  dfs(node2, dist_node2, edges);
-  // printArr(dist_node2);
+  vector<int> dist2(n, -1);
+  dist2[node2] = 0; // * distance to itself will be zero
+  dfs(node2, dist2, edges);
+  printArr(dist2);
 
   int ans = -1;
   int cur_max = INT_MAX;
   for (int i = 0; i < n; ++i) {
-    int max_d = std::max(dist_node1[i], dist_node2[i]);
-    if (cur_max > max_d) {
-      ans = i;
-      cur_max = max_d;
+    if (min(dist1[i], dist2[i]) != -1) {
+      int dist = max(dist1[i], dist2[i]);
+      if (cur_max > dist) {
+        ans = i;
+        cur_max = dist;
+      }
     }
   }
 
@@ -85,19 +89,19 @@ int closestMeetingNode(std::vector<int> &edges, int node1, int node2)
 int main(void) {
   // * testcase 1 // * Ans = 1
   int node1 = 0, node2 = 1;
-  std::vector<int> edges = {2, 2, 3, -1};
+  vector<int> edges = {2, 2, 3, -1};
   
   // * testcase 2 // * Ans = 2
   // int node1 = 0, node2 = 2;
-  // std::vector<int> edges = {1, 2, -1};
+  // vector<int> edges = {1, 2, -1};
 
-  std::cout << "node1: " << node1 << " " << "node2: " << node2 << std::endl;
-  std::cout << "Edges:  ";
+  cout << "node1: " << node1 << " " << "node2: " << node2 << endl;
+  cout << "Edges:  ";
   printArr(edges);
 
   int steps = closestMeetingNode(edges, node1, node2);
 
-  std::cout << "Steps: " << steps << std::endl;
+  cout << "Steps: " << steps << endl;
 
   return 0;
 }

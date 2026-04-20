@@ -138,7 +138,7 @@ bool dfs(
   return false;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
 bool canFinishDFS(int numCourses, vector<vector<int>> &prerequisites) {
@@ -156,7 +156,7 @@ bool canFinishDFS(int numCourses, vector<vector<int>> &prerequisites) {
   return true;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
 bool canFinishBFS(int numCourses, vector<vector<int>> &prerequisites) {

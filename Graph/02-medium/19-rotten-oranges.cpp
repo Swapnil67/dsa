@@ -1,31 +1,31 @@
-/**
- * * Leetcode - 994
- * * Rotting Oranges
+/*
+ * Leetcode - 994
+ * Rotting Oranges
  *
- * * You are given an m x n grid where each cell can have one of three values:
- * * - 0 representing an empty cell,
- * * - 1 representing a fresh_oranges orange, or
- * * - 2 representing a rotten orange.
+ * You are given an m x n grid where each cell can have one of three values:
+ * - 0 representing an empty cell,
+ * - 1 representing a fresh_oranges orange, or
+ * - 2 representing a rotten orange.
  *
- * * Every minute, any fresh_oranges orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+ * Every minute, any fresh_oranges orange that is 4-directionally adjacent to a rotten orange becomes rotten.
 
- * * Return the minimum number of minutes that must elapse until no cell has a fresh_oranges orange. If this is impossible, return -1.
+ * Return the minimum number of minutes that must elapse until no cell has a fresh_oranges orange. If this is impossible, return -1.
 
- * * Example 1  :
- * * Input      : grid = [[2,1,1],[1,1,0],[0,1,1]]
- * * Output     : 4
+ * Example 1  :
+ * Input      : grid = [[2,1,1],[1,1,0],[0,1,1]]
+ * Output     : 4
  * 
- * * Example 2  :
- * * Input      : grid = [[2,1,1],[0,1,1],[1,0,1]]
- * * Output     : -1
+ * Example 2  :
+ * Input      : grid = [[2,1,1],[0,1,1],[1,0,1]]
+ * Output     : -1
 
- * * Example 2  :
- * * Input      : grid = [[0,2]]
- * * Output     : 0
+ * Example 2  :
+ * Input      : grid = [[0,2]]
+ * Output     : 0
  * 
- * * https://leetcode.com/problems/rotting-oranges/description/
- * * https://www.geeksforgeeks.org/problems/rotten-oranges2536/1
- * * https://www.naukri.com/code360/problems/rotting-oranges_701655
+ * https://leetcode.com/problems/rotting-oranges/description/
+ * https://www.geeksforgeeks.org/problems/rotten-oranges2536/1
+ * https://www.naukri.com/code360/problems/rotting-oranges_701655
 */
 
 

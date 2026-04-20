@@ -27,19 +27,21 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
 // * Go to every co-ordinate of 0 and do BFS from that position and find distance
@@ -49,17 +51,17 @@ const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 // * Find the distance from 0s to 1s instead of 1s to 0s
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-std::vector<std::vector<int>> updateMatrix(std::vector<std::vector<int>>& mat) {
+vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
   int m = mat.size(), n = mat[0].size();
-  std::vector<std::vector<int>> dist(m, std::vector<int>(n, -1));
-  std::queue<std::pair<int, int>> q;
+  vector<vector<int>> dist(m, vector<int>(n, -1));
+  queue<pair<int, int>> q;
 
   // * push all the co-ordinates which has element 0 to `q`
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (mat[r][c] == 0) {
         dist[r][c] = 0;
-        q.push(std::make_pair(r, c));
+        q.push(make_pair(r, c));
       }
     }
   }
@@ -89,20 +91,20 @@ std::vector<std::vector<int>> updateMatrix(std::vector<std::vector<int>>& mat) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+  // vector<vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {1, 1, 1}};
+  // vector<vector<int>> mat = {{0, 0, 0}, {0, 1, 0}, {1, 1, 1}};
 
   // * testcase 3
-  std::vector<std::vector<int>> mat = {{0, 1, 1}, {1, 1, 1}, {1, 1, 1}};
+  vector<vector<int>> mat = {{0, 1, 1}, {1, 1, 1}, {1, 1, 1}};
 
-  std::cout << "mat" << std::endl;
+  cout << "mat" << endl;
   for (auto &vec : mat)
     printArr(vec);
 
-  std::vector<std::vector<int>> ans = updateMatrix(mat);
-  std::cout << "Answer: " << std::endl;
+  vector<vector<int>> ans = updateMatrix(mat);
+  cout << "Answer: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

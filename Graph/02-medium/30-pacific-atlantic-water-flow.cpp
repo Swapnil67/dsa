@@ -133,7 +133,7 @@ vector<vector<int>> bruteForce(vector<vector<int>> &heights) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * DFS
 // * Here we need to go in reverse directions i.e., from All 4 borders to center of cube and
 // * mark cells in which water can flow.

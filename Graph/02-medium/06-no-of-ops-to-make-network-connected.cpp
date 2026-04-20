@@ -21,6 +21,7 @@
  * Input      : n = 6, connections = [[0,1],[0,2],[0,3],[1,2],[1,3]]
  * Output     : 2
  * 
+ * https://www.geeksforgeeks.org/problems/connecting-the-graph/1
  * https://www.geeksforgeeks.org/problems/minimize-connections/1
  * https://leetcode.com/problems/number-of-operations-to-make-network-connected
  * https://www.naukri.com/code360/problems/number-of-operations-to-make-graph-connected_1385179
@@ -28,7 +29,7 @@
 
 // ! DSU
 
-// ! Microsoft, Meta, Amazon
+// ! Amazon, Google, Microsoft, Meta, Uber
 
 #include <vector>
 #include <numeric>
@@ -58,42 +59,53 @@ void printAdjList(vector<T> &adj) {
   }
 }
 
-int find(int x, vector<int> &parent) {
-  if (x == parent[x])
-    return x;
+class DSU {
+  vector<int> parent;
+  vector<int> rank;
 
-  return parent[x] = find(parent[x], parent);
-}
+public:
+  DSU(int n) {
+    parent.resize(n);
+    rank.resize(n);
+    iota(begin(parent), end(parent), 0);
+  }
 
-void Union(int x, int y, vector<int> &parent, vector<int> &rank) {
-  int x_parent = find(x, parent);
-  int y_parent = find(y, parent);
-  if (x_parent == y_parent)
-    return;
+  int find(int x) {
+    if (x == parent[x])
+      return x;
+    return parent[x] = find(parent[x]);
+  }
 
-  if (rank[x_parent] > rank[y_parent]) {
-    parent[y_parent] = x_parent;
+  void Union(int x, int y) {
+    int x_parent = find(x);
+    int y_parent = find(y);
+    if (x_parent == y_parent)
+      return;
+
+    if (rank[x_parent] > rank[y_parent]) {
+      parent[y_parent] = x_parent;
+    } else {
+      parent[x_parent] = y_parent;
+      rank[y_parent]++;
+    }
   }
-  else if (rank[x_parent] < rank[y_parent]) {
-    parent[x_parent] = y_parent;
-  }
-  else {
-    parent[x_parent] = y_parent;
-    rank[y_parent]++;
-  }
-}
+};
 
 // * Intuition
 // * To connect 'n' nodes we need 'n-1' edges
 // * Eg: n = 2, edges = 1
 // * Eg: n = 3, edges = 2
 // * Eg: n = 4, edges = 3
+
+// * First Figure out number of connected components
 int makeConnected(int n, vector<vector<int>> &connections) {
   int e = connections.size(); // * Edges
 
   // * Edge case
   if (n - 1 > e)
     return -1;
+
+  DSU du(n);
 
   // * 1. Initialize rank and parent vectors
   vector<int> rank(n, 0);
@@ -103,12 +115,12 @@ int makeConnected(int n, vector<vector<int>> &connections) {
   // * 2. Classic DSU
   for (auto &vec : connections) {
     int u = vec[0], v = vec[1];
-    int u_parent = find(u, parent);
-    int v_parent = find(v, parent);
+    int u_parent = du.find(u);
+    int v_parent = du.find(v);
 
     // * Merge into one set
     if (u_parent != v_parent) {
-      Union(u, v, parent, rank);
+      du.Union(u, v);
       n--;
     }
   }
@@ -122,12 +134,12 @@ int main(void) {
   // vector<vector<int>> connections = {{0, 1}, {0, 2}, {1, 2}};
   
   // * testcase 2
-  int n = 6;
-  vector<vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
+  // int n = 6;
+  // vector<vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
   
   // * testcase 3
-  // int n = 6;
-  // vector<vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}};
+  int n = 6;
+  vector<vector<int>> connections = {{0, 1}, {0, 2}, {0, 3}, {1, 2}};
   
   cout << "Components: " << n << endl;
   cout << "Connections: " << endl;

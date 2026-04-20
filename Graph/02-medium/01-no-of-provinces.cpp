@@ -136,7 +136,7 @@ int findCircleNumDfsBrute(vector<vector<int>> &isConnected) {
   return ans;
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * Using DFS
 // * TIME COMPLEXITY O(N) + O(V + 2E) ~ O(N)
 // * SPACE COMPLEXITY O(1)
@@ -155,7 +155,7 @@ int findCircleNumDfs(vector<vector<int>> &isConnected) {
   return ans;
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * Using BFS
 // * TIME COMPLEXITY O(v + e)
 // * SPACE COMPLEXITY O(1)

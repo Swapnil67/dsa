@@ -35,19 +35,21 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
 // * Go to every co-ordinate of 0 and do BFS from that position and find distance
@@ -56,10 +58,10 @@ const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-std::vector<std::vector<int>> highestPeak(std::vector<std::vector<int>>& mat) {
+vector<vector<int>> highestPeak(vector<vector<int>>& mat) {
   int m = mat.size(), n = mat[0].size();
-  std::vector<std::vector<int>> result(m, std::vector<int>(n, -1));
-  std::queue<std::pair<int, int>> q;
+  vector<vector<int>> result(m, vector<int>(n, -1));
+  queue<pair<int, int>> q;
 
   // * push all the co-ordinates which has element 0 to `q`
   for (int r = 0; r < m; ++r) {
@@ -96,17 +98,17 @@ std::vector<std::vector<int>> highestPeak(std::vector<std::vector<int>>& mat) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> isWater = {{0, 1}, {0, 0}};
+  vector<vector<int>> isWater = {{0, 1}, {0, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> isWater = {{0, 0, 1}, {1, 0, 0}, {0, 0, 0}};
+  // vector<vector<int>> isWater = {{0, 0, 1}, {1, 0, 0}, {0, 0, 0}};
 
-  std::cout << "isWater" << std::endl;
+  cout << "isWater" << endl;
   for (auto &vec : isWater)
     printArr(vec);
 
-  std::vector<std::vector<int>> ans = highestPeak(isWater);
-  std::cout << "Answer: " << std::endl;
+  vector<vector<int>> ans = highestPeak(isWater);
+  cout << "Answer: " << endl;
   for (auto &vec : ans)
     printArr(vec);
 

@@ -100,7 +100,7 @@ void Union(int x, int y, vector<int> &parent, vector<int> &rank) {
   }
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * DFS (More Easy)
 // * TIME COMPLEXITY O(N + E)
 // * SPACE COMPLEXITY O(N + E)
@@ -127,7 +127,7 @@ long long countPairsDFS(int n, vector<vector<int>> &edges) {
   return res;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * DSU
 // * TIME COMPLEXITY O(N + E)
 // * SPACE COMPLEXITY O(N + E)
@@ -188,6 +188,7 @@ int main(void) {
 
   long long ans = countPairsDFS(n, edges);
   // long long ans = countPairsDSU(n, edges);
+  
   cout << "Ans: " << ans << endl;
 
   return 0;

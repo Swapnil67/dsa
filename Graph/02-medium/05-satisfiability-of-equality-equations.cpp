@@ -65,7 +65,7 @@ void Union(int x, int y, vector<int> &parent, vector<int> &rank) {
   }
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 bool equationsPossible(vector<string>& equations) {

@@ -66,10 +66,10 @@ bool canVisitAllRooms(vector<vector<int>>& rooms) {
 
 int main(void) {
   // * testcase 1
-  vector<vector<int>> rooms = {{1}, {2}, {3}, {}};
+  // vector<vector<int>> rooms = {{1}, {2}, {3}, {}};
 
   // * testcase 2
-  // vector<vector<int>> rooms = {{1, 3}, {3, 0, 1}, {2}, {0}};
+  vector<vector<int>> rooms = {{1, 3}, {3, 0, 1}, {2}, {0}};
 
   bool ans = canVisitAllRooms(rooms);
   cout << "rooms: " << endl;

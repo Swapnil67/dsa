@@ -54,39 +54,45 @@ void printArr(vector<T> &arr) {
   cout << "]" << endl;
 }
 
+class DSU
+{
+public:
+  vector<int> parent;
+  vector<int> rank;
 
-int find(int x, vector<int> &parent) {
-  if (x == parent[x])
-    return x;
-  return parent[x] = find(parent[x], parent);
-}
-
-void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
-  int x_parent = find(x, parent);
-  int y_parent = find(y, parent);
-
-  if (x_parent == y_parent)
-    return;
-
-  if (rank[x_parent] > rank[y_parent]) {
-    parent[y_parent] = parent[x_parent];
+  DSU(int n) {
+    rank.resize(n, 1);
+    parent.resize(n);
+    iota(begin(parent), end(parent), 0);
   }
-  else if (rank[x_parent] < rank[y_parent]) {
-    parent[x_parent] = parent[y_parent];
-  } 
-  else {
-    parent[x_parent] = parent[y_parent];
-    rank[y_parent]++;
+
+  int find(int x) {
+    if (x == parent[x])
+      return x;
+    return parent[x] = find(parent[x]);
   }
-}
+
+  void Union(int x, int y) {
+    int parent_x = find(x);
+    int parent_y = find(y);
+    if (parent_x == parent_y)
+      return;
+
+    if (rank[parent_x] > rank[parent_y]) {
+      parent[parent_y] = parent_x;
+    }
+    else {
+      parent[parent_x] = parent_y;
+      rank[parent_y]++;
+    }
+  }
+};
 
 vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
   int n = accounts.size();
 
-  // * 1. Initialize rank and parent vectors
-  vector<int> rank(n + 1, 1);
-  vector<int> parent(n + 1);
-  iota(begin(parent), end(parent), 0);
+  // * 1. Initialize dsu obj
+  DSU dsu(n);
 
   // * 2. Mark parents for each mail id
   unordered_map<string, int> mail_parent_mp;
@@ -97,7 +103,7 @@ vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
         mail_parent_mp[mail] = i;
       }
       else {
-        Union(i, mail_parent_mp[mail], rank, parent);
+        dsu.Union(i, mail_parent_mp[mail]);
       }
     }
   }
@@ -110,7 +116,7 @@ vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
   vector<vector<string>> merged_mails(n);
   for (auto &it: mail_parent_mp) {
     string mail = it.first;
-    int ultimate_parent = find(it.second, parent);
+    int ultimate_parent = dsu.find(it.second);
     merged_mails[ultimate_parent].push_back(mail);
     cout << mail << " -> " << ultimate_parent << endl;
   }

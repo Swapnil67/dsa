@@ -66,38 +66,37 @@ bool dfs(
   return false;
 }
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * ------------------------- APPROACH : Optimal Approach -------------------------
 // * Cycle detection in Directed Graph
 // * Nodes which are part of cycle cannot be a terminal node
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
 vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-    vector<int> ans;
-    int n = graph.size();
-    if (n == 0)
-        return ans;
+  vector<int> ans;
+  int n = graph.size();
+  if (n == 0)
+      return ans;
 
-    vector<bool> visited(n + 1, false);
-    vector<bool> in_recursion(n + 1, false);
+  vector<bool> visited(n + 1, false);
+  vector<bool> in_recursion(n + 1, false);
 
-    for (int u = 0; u < n; ++u) {
-      if (!visited[u]) {
-        dfs(u, visited, in_recursion, graph);
-      }
+  for (int u = 0; u < n; ++u) {
+    if (!visited[u]) {
+      dfs(u, visited, in_recursion, graph);
     }
+  }
 
-    // * In cycle detection the `in_recursion` array will contain following values
-    // * True Vertices = They have cycle 
-    // * False Vertices = They don't have cycle 
-    // printArr(in_recursion);
-    
-    for (int i = 0; i < n; ++i) {
-      if (!in_recursion[i]) {
-        ans.push_back(i);
-      }
-    }
+  // * In cycle detection the `in_recursion` array will contain following values
+  // * True Vertices = They have cycle 
+  // * False Vertices = They don't have cycle 
+  // printArr(in_recursion);
 
-    return ans;
+  for (int i = 0; i < n; ++i) {
+    if (!in_recursion[i])
+      ans.push_back(i);
+  }
+
+  return ans;
 }
 
 int main(void) {

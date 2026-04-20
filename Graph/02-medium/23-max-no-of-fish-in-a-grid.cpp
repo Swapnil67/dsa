@@ -31,24 +31,26 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
 // * Using visited matrix
 void dfs(int r, int c, int &fishes,
-         std::vector<std::vector<int>> &visited,
-         std::vector<std::vector<int>> &grid)
+         vector<vector<int>> &visited,
+         vector<vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
 
@@ -71,7 +73,7 @@ void dfs(int r, int c, int &fishes,
 
 // * Using visited matrix
 void dfs2(int r, int c, int &fishes,
-          std::vector<std::vector<int>> &grid)
+          vector<vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
 
@@ -96,19 +98,19 @@ void dfs2(int r, int c, int &fishes,
 // * Using visited vector
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
+int maxAreaOfIslandDFS(vector<vector<int>>& grid) {
   int m = grid.size(); 
   int n = grid[0].size(); 
   int max_area = 0;
 
-  std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
+  vector<vector<int>> visited(m, vector<int>(n, 0));
 
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) {
       if (grid[i][j] != 0 && !visited[i][j]) {
         int cur_area = 0;
         dfs(i, j, cur_area, visited, grid);
-        max_area = std::max(max_area, cur_area);
+        max_area = max(max_area, cur_area);
       }
     }
   }
@@ -120,7 +122,7 @@ int maxAreaOfIslandDFS(std::vector<std::vector<int>>& grid) {
 // * Using Grid as visited vector
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(1)
-int maxAreaOfIslandDFS2(std::vector<std::vector<int>>& grid) {
+int maxAreaOfIslandDFS2(vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
   int max_area = 0;
 
@@ -129,7 +131,7 @@ int maxAreaOfIslandDFS2(std::vector<std::vector<int>>& grid) {
       if (grid[i][j] != 0) {
         int cur_area = 0;
         dfs2(i, j, cur_area, grid);
-        max_area = std::max(max_area, cur_area);
+        max_area = max(max_area, cur_area);
       }
     }
   }
@@ -140,18 +142,18 @@ int maxAreaOfIslandDFS2(std::vector<std::vector<int>>& grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{0, 2, 1, 0}, {4, 0, 0, 3}, {1, 0, 0, 4}, {0, 3, 2, 0}};
+  // vector<vector<int>> grid = {{0, 2, 1, 0}, {4, 0, 0, 3}, {1, 0, 0, 4}, {0, 3, 2, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {{1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 1}};
+  vector<vector<int>> grid = {{1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 1}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = maxAreaOfIslandDFS(grid);
   // int ans = maxAreaOfIslandDFS2(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

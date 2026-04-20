@@ -42,33 +42,35 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr)
+void printArr(vector<T> &arr)
 {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i)
   {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
-const std::vector<std::vector<int>> dirs = {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // ! use this more optimal & easy
 // * Using BFS
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int shortestPathBinaryMatrixBFS(std::vector<std::vector<int>> &grid)
+int shortestPathBinaryMatrixBFS(vector<vector<int>> &grid)
 {
   int m = grid.size(), n = grid[0].size();
   if (m == 0 || n == 0 || grid[0][0] != 0) // * Edge cases
     return -1;
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   q.push({0, 0}); // * starting position
   grid[0][0] = 1; // * we'll use inupt matrix as visited matrix
 
@@ -111,7 +113,7 @@ int shortestPathBinaryMatrixBFS(std::vector<std::vector<int>> &grid)
 // * e = no of edges
 // * TIME COMPLEXITY O(E * Log(V))
 // * SPACE COMPLEXITY O(E + V)
-int shortestPathBinaryMatrixDij(std::vector<std::vector<int>> &grid)
+int shortestPathBinaryMatrixDij(vector<vector<int>> &grid)
 {
   int m = grid.size();
   int n = grid[0].size();
@@ -125,12 +127,12 @@ int shortestPathBinaryMatrixDij(std::vector<std::vector<int>> &grid)
   grid[0][0] = 1; // * mark visited
 
   // * distance matrix
-  std::vector<std::vector<int>> dist(m, std::vector<int>(n, INT_MAX));
+  vector<vector<int>> dist(m, vector<int>(n, INT_MAX));
   dist[0][0] = 0; // * Initial distance
 
   // * min heap = {distance, {x, y}}
-  typedef std::pair<int, std::pair<int, int>> P;
-  std::priority_queue<P, std::vector<P>, std::greater<>> min_heap;
+  typedef pair<int, pair<int, int>> P;
+  priority_queue<P, vector<P>, greater<>> min_heap;
   min_heap.push({0, {0, 0}}); // * initial source
 
   while (!min_heap.empty())
@@ -144,7 +146,7 @@ int shortestPathBinaryMatrixDij(std::vector<std::vector<int>> &grid)
     for (auto &dir : dirs)
     {
       int dr = r + dir[0], dc = c + dir[1];
-      // std::cout << d << " -> " << dr << " " << dc << std::endl;
+      // cout << d << " -> " << dr << " " << dc << endl;
       if (is_safe(dr, dc) && grid[dr][dc] == 0 && dist[dr][dc] > w)
       {
         dist[dr][dc] = w;
@@ -162,21 +164,21 @@ int shortestPathBinaryMatrixDij(std::vector<std::vector<int>> &grid)
 int main(void)
 {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{0, 1}, {1, 0}};
+  // vector<vector<int>> grid = {{0, 1}, {1, 0}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {{0, 0, 0}, {1, 1, 0}, {1, 1, 0}};
+  vector<vector<int>> grid = {{0, 0, 0}, {1, 1, 0}, {1, 1, 0}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> grid = {{1, 0, 0}, {1, 1, 0}, {1, 1, 0}};
+  // vector<vector<int>> grid = {{1, 0, 0}, {1, 1, 0}, {1, 1, 0}};
 
-  std::cout << "Grid" << std::endl;
+  cout << "Grid" << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   // int ans = shortestPathBinaryMatrixBFS(grid);
   int ans = shortestPathBinaryMatrixDij(grid);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

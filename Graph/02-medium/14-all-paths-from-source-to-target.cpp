@@ -24,21 +24,23 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void dfs(int u, int &target, std::vector<int> &path,
-         std::vector<std::vector<int>> &graph,
-         std::vector<std::vector<int>> &ans)
+void dfs(int u, int &target, vector<int> &path,
+         vector<vector<int>> &graph,
+         vector<vector<int>> &ans)
 {
   path.push_back(u);
 
@@ -57,30 +59,30 @@ void dfs(int u, int &target, std::vector<int> &path,
 // * V = Number of vertices
 // * TIME COMPLEXITY O(2^V)
 // * SPACE COMPLEXITY O(N) * O(V + E)
-std::vector<std::vector<int>> allPathsSourceTarget(std::vector<std::vector<int>> &graph) {
-  std::vector<std::vector<int>> ans;
+vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &graph) {
+  vector<vector<int>> ans;
   int n = graph.size();
   if (n == 0)
     return ans;
 
-  std::vector<int> path;
+  vector<int> path;
   dfs(0, n, path, graph, ans);
   return ans;
 }
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> graph = {{1, 2}, {3}, {3}, {}};
+  vector<vector<int>> graph = {{1, 2}, {3}, {3}, {}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> graph = {{4, 3, 1}, {3, 2, 4}, {3}, {4}, {}};
+  // vector<vector<int>> graph = {{4, 3, 1}, {3, 2, 4}, {3}, {4}, {}};
 
-  std::cout << "graph: " << std::endl;
+  cout << "graph: " << endl;
   for (auto &vec : graph)
     printArr(vec);
 
-  std::vector<std::vector<int>> ans = allPathsSourceTarget(graph);
-  std::cout << "All Paths From Source to Target: " << std::endl;
+  vector<vector<int>> ans = allPathsSourceTarget(graph);
+  cout << "All Paths From Source to Target: " << endl;
   for (auto &vec : ans)
     printArr(vec);
   return 0;
