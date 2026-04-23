@@ -147,7 +147,7 @@ vector<vector<int>> threeSum(vector<int> arr) {
   return ans;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   // vector<int> arr = {-1, 0, 1, 2, -1, -4};
 

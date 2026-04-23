@@ -22,15 +22,21 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-
-void moveZerosToEnd(std::vector<int>& nums) {
+void moveZerosToEnd(vector<int>& nums) {
   int n = nums.size();
 
   // * go to first zero index
@@ -55,7 +61,7 @@ void moveZerosToEnd(std::vector<int>& nums) {
 
 }
 
-std::vector<int> applyOperations(std::vector<int>& nums) {
+vector<int> applyOperations(vector<int>& nums) {
   int n = nums.size();
 
   int i = 0;
@@ -76,12 +82,12 @@ std::vector<int> applyOperations(std::vector<int>& nums) {
 
 int main(void) {
   
-  std::vector<int> nums = {1, 2, 2, 1, 1, 0};
-  std::cout << "Before Applying operations" << std::endl;
+  vector<int> nums = {1, 2, 2, 1, 1, 0};
+  cout << "Before Applying operations" << endl;
   printArr(nums);
 
-  std::cout << "After Applying operations" << std::endl;
-  std::vector<int> ans = applyOperations(nums);
+  cout << "After Applying operations" << endl;
+  vector<int> ans = applyOperations(nums);
   printArr(ans);
   
   return 0;

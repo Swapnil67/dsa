@@ -162,7 +162,7 @@ vector<vector<int>> fourSum(vector<int> arr, int target) {
   return ans;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   int target = 0;
   vector<int> arr = {1, 0, -1, 0, -2, 2};

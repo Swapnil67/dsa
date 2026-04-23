@@ -20,10 +20,12 @@
 
 #include <iostream>
 
-std::string mergeAlternately(std::string word1, std::string word2) {
+using namespace std;
+
+string mergeAlternately(string word1, string word2) {
   int n1 = word1.size(), n2 = word2.size();
   int i = 0, j = 0;
-  std::string ans = "";
+  string ans = "";
   while (i < n1 && j < n2) {
     ans += word1[i++];
     ans += word2[j++];
@@ -41,15 +43,15 @@ std::string mergeAlternately(std::string word1, std::string word2) {
 
 int main() {
   // * testcase 1
-  // std::string word1 = "abc", word2 = "pqr";
+  // string word1 = "abc", word2 = "pqr";
 
   // * testcase 2
-  std::string word1 = "ab", word2 = "pqrs";
+  string word1 = "ab", word2 = "pqrs";
 
-  std::cout << word1 << " " << word2 << std::endl;
+  cout << word1 << " " << word2 << endl;
 
-  std::string ans = mergeAlternately(word1, word2);
-  std::cout << ans << std::endl;
+  string ans = mergeAlternately(word1, word2);
+  cout << ans << endl;
 
   return 0;
 }

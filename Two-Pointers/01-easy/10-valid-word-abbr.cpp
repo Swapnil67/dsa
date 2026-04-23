@@ -27,7 +27,7 @@
 
 #include <iostream>
 
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n + m)
 // * SPACE COMPLEXITY O(1)
 bool validWordAbbreviation(std::string word, std::string abbr) {

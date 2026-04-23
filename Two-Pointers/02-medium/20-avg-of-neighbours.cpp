@@ -94,13 +94,13 @@ vector<int> rearrangeArray2(vector<int> &nums) {
 int main(void) {
   vector<int> nums = {1, 2, 3, 4, 5};
 
-  std::cout << "Input Nums: ";
+  cout << "Input Nums: ";
   printArr(nums);
   
   // vector<int> ans = rearrangeArray(nums);
   vector<int> ans = rearrangeArray2(nums);
   
-  std::cout << "Output Nums: ";
+  cout << "Output Nums: ";
   printArr(ans);
 
   return 0;

@@ -18,23 +18,25 @@
 #include <iostream>
 #include <vector>
 
-void printMatrix(std::vector<std::vector<int>> matrix) {
+using namespace std;
+
+void printMatrix(vector<vector<int>> matrix) {
   int r = matrix.size();
   if(r == 0) return;
   int c = matrix[0].size();
   for (int i = 0; i < r; ++i) {
     for (int j = 0; j < c; ++j) {
-      std::cout << matrix[i][j] << " ";
+      cout << matrix[i][j] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
-  std::cout << std::endl;
+  cout << endl;
 }
 
-std::vector<std::vector<int>> mergeArrays(
-    std::vector<std::vector<int>> &nums1,
-    std::vector<std::vector<int>> &nums2) {
-  std::vector<std::vector<int>> ans;
+vector<vector<int>> mergeArrays(
+    vector<vector<int>> &nums1,
+    vector<vector<int>> &nums2) {
+  vector<vector<int>> ans;
   int i = 0, j = 0;
   while (i < nums1.size() && j < nums2.size()) {
     int a = nums1[i][0];
@@ -65,12 +67,12 @@ std::vector<std::vector<int>> mergeArrays(
 }
 
 int main() {
-  std::vector<std::vector<int>> nums1 = {{1, 2}, {2, 3}, {4, 5}};
-  std::vector<std::vector<int>> nums2 = {{1, 4}, {3, 2}, {4, 1}};
+  vector<vector<int>> nums1 = {{1, 2}, {2, 3}, {4, 5}};
+  vector<vector<int>> nums2 = {{1, 4}, {3, 2}, {4, 1}};
   printMatrix(nums1);
   printMatrix(nums2);
   
-  std::vector<std::vector<int>> ans = mergeArrays(nums1, nums2);
+  vector<vector<int>> ans = mergeArrays(nums1, nums2);
   printMatrix(ans);
   return 0;
 }

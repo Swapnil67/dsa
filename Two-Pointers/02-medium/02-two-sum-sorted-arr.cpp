@@ -78,7 +78,7 @@ bool findTwoSum(vector<int> arr, int target) {
   return false;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   int target = 9;
   vector<int> arr = {2, 7, 11, 15};

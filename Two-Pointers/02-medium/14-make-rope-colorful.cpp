@@ -60,7 +60,7 @@ int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime)
   return time;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   // string colors = "abaac";
   // vector<int> neededTime = {1, 2, 3, 4, 5};

@@ -87,7 +87,7 @@ int numSubseq(vector<int> nums, int target)
   return ans;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   // int target = 9;
   // vector<int> arr = {3, 5, 6, 7};

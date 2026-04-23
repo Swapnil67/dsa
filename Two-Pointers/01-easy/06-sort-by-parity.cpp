@@ -22,12 +22,14 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
+void printArr(vector<T> arr) {
   for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << std::endl;
+  cout << endl;
 }
 
 void swap(int &a, int &b) {
@@ -39,10 +41,10 @@ void swap(int &a, int &b) {
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
 // * TIME COMPLEXITY (N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> bruteForce(std::vector<int> &arr) {
+vector<int> bruteForce(vector<int> &arr) {
   int n = arr.size();
   int l = 0, r = n - 1;
-  std::vector<int> ans(n);
+  vector<int> ans(n);
   for(int i = 0; i < n; ++i) {
     if (arr[i] % 2 == 0) {
       ans[l] = arr[i];
@@ -56,12 +58,12 @@ std::vector<int> bruteForce(std::vector<int> &arr) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * TIME COMPLEXITY (N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> sortArrayByParity(std::vector<int> nums) {
+vector<int> sortArrayByParity(vector<int> nums) {
   int n = nums.size();
-  std::vector<int> ans(nums.begin(), nums.end());
+  vector<int> ans(nums.begin(), nums.end());
   int i = 0, j = 0;
 
   while (j < n) {
@@ -82,26 +84,26 @@ static bool comparator(int &a, int &b) {
 // * using built in sort function
 // * TIME COMPLEXITY (N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> sortArrayByParity2(std::vector<int> nums) {
-  std::sort(nums.begin(), nums.end(), comparator);
+vector<int> sortArrayByParity2(vector<int> nums) {
+  sort(nums.begin(), nums.end(), comparator);
   return nums;
 }
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {3, 1, 2, 4};
+  vector<int> arr = {3, 1, 2, 4};
 
   // * testcase 2
-  // std::vector<int> arr = {0, 1, 2};
+  // vector<int> arr = {0, 1, 2};
 
-  std::cout << "Before Sorting" << std::endl;
+  cout << "Before Sorting" << endl;
   printArr(arr);
   
-  // std::vector<int> ans = bruteForce(arr);
-  std::vector<int> ans = sortArrayByParity(arr);
-  // std::vector<int> ans = sortArrayByParity2(arr);
+  // vector<int> ans = bruteForce(arr);
+  vector<int> ans = sortArrayByParity(arr);
+  // vector<int> ans = sortArrayByParity2(arr);
 
-  std::cout << "After Sorting" << std::endl;
+  cout << "After Sorting" << endl;
   printArr(ans);
   
   return 0;

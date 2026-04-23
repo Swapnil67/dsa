@@ -74,15 +74,15 @@ vector<int> rearrangeArray(vector<int> arr) {
   vector<int> ans(n);
 
   // * Intialize the positive & negative indexes
-  int p_index = 0; // * even index
-  int n_index = 1; // * odd index
+  int pos_idx = 0; // * positive index
+  int neg_idx = 1; // * negative index
   for (int i = 0; i < n; i++) {
     if(arr[i] < 0) {
-      ans[n_index] = arr[i];
-      n_index += 2; // * next negative index
+      ans[neg_idx] = arr[i];
+      neg_idx += 2; // * next negative index
     } else {
-      ans[p_index] = arr[i];
-      p_index += 2; // * next positive index
+      ans[pos_idx] = arr[i];
+      pos_idx += 2; // * next positive index
     }
   }
   return ans;

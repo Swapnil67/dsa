@@ -31,12 +31,12 @@ using namespace std;
 int minimumLength(string s) {
   int n = s.size();
   int i = 0, j = n - 1;
-  while(i < j) {
+  while (i < j) {
     // cout << i << " " << j << endl;
-    if(s[i] != s[j]) {
+    if (s[i] != s[j]) {
       break;
     }
-    
+
     // * move both pointers once
     i++;
     j--;

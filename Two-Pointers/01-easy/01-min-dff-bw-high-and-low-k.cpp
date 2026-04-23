@@ -1,6 +1,7 @@
 /*
  * Leetcode - 1984
  * Minimum Difference Between Highest and Lowest of K Scores
+ * 
  * You are given a 0-indexed integer array nums, where nums[i] represents the score of the ith student. 
  * You are also given an integer k.
  * 
@@ -24,28 +25,35 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * Sliding Window Approach
 // * Time Complexity = nlogn + O(N)
 // * Space Complexity = O(1)
-int minimumDifference(std::vector<int> arr, int k) {
+int minimumDifference(vector<int> arr, int k) {
   int n = arr.size();
   // * Step 1. Sort the given array
-  std::sort(arr.begin(), arr.end());
+  sort(arr.begin(), arr.end());
 
   // * Step 2. Loop over the window
-  int l = 0, r = k - 1;
+  int i = 0, j = k - 1;
   int res = INT_MAX;
-  while(r < n) {
-    res = std::min(res, arr[r] - arr[l]);
-    l += 1;
-    r += 1;
+  while(j < n) {
+    res = min(res, arr[j] - arr[i]);
+    i += 1;
+    j += 1;
   }
   return res;
 }
@@ -54,10 +62,10 @@ int minimumDifference(std::vector<int> arr, int k) {
 int main() {
   int k = 3;
   // int k = 2;
-  std::vector<int> nums = {9, 4, 1, 7};
+  vector<int> nums = {9, 4, 1, 7};
   printArr(nums);
   int ans = minimumDifference(nums, k);
-  std::cout << "Minimum Difference Between Highest and Lowest of K Scores: " << ans << std::endl;
+  cout << "Minimum Difference Between Highest and Lowest of K Scores: " << ans << endl;
   return 0;
 }
 

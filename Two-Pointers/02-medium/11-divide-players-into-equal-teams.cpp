@@ -108,10 +108,10 @@ int main() {
   // vector<int> skill = {3, 4};
 
   // * testcase 2
-  // vector<int> skill = {1, 1, 2, 3};
+  vector<int> skill = {1, 1, 2, 3};
 
   // * testcase 3
-  vector<int> skill = {3, 2, 5, 1, 3, 4};
+  // vector<int> skill = {3, 2, 5, 1, 3, 4};
 
   cout << "Input skill: ";
   printArr(skill);

@@ -18,16 +18,18 @@
 #include <iostream>
 #include <vector>
 
-void printVectorString(std::vector<std::string> strs) {
+using namespace std;
+
+void printVectorString(vector<string> strs) {
   int n = strs.size();
-  std::cout << "[ "; 
-  for (std::string s : strs) {
-    std::cout << '"' << s << '"' << ", ";
+  cout << "[ "; 
+  for (string s : strs) {
+    cout << '"' << s << '"' << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-bool checkPalindrome(std::string str) {
+bool checkPalindrome(string str) {
   int n = str.size();
   int l = 0, r = n - 1;
   while (l < r) {
@@ -40,9 +42,9 @@ bool checkPalindrome(std::string str) {
 // * TIME COMPLEXITY O(n * m)
 // * m -> size of the largest string
 // * SPACE COMPLEXITY O(1)
-std::string firstPalindrome(std::vector<std::string> &words) {
+string firstPalindrome(vector<string> &words) {
   int n = words.size();
-  for (std::string str : words) {
+  for (string str : words) {
     bool is_palindrome = checkPalindrome(str);
     if (is_palindrome)
       return str;
@@ -51,10 +53,10 @@ std::string firstPalindrome(std::vector<std::string> &words) {
 }
 
 int main() {
-  std::vector<std::string> words = {"notapalindrome", "racecar"};
+  vector<string> words = {"notapalindrome", "racecar"};
   printVectorString(words);
-  std::string ans = firstPalindrome(words);
-  std::cout << ans << std::endl;
+  string ans = firstPalindrome(words);
+  cout << ans << endl;
 }
 
 // * Run the code

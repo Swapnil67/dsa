@@ -82,7 +82,7 @@ int betterApproach(vector<int> &nums) {
 }
 
 
-// * ------------------------- APPROACH 3A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3A: Optimal Approach -------------------------
 // * Two Pointers
 // * Pre calculate next greater element to the right of each element
 // * TIME COMPLEXITY O(N)
@@ -97,15 +97,16 @@ int maxWidthRampA(vector<int> &nums) {
     curMax = max(curMax, nums[i]);
     maxToRight[i] = curMax;
   }
-  // printArr(maxToRight);
+  printArr(maxToRight);
   
   int ans = INT_MIN;
-  int i = 0, j = 0;
+  int i = 0; // * for nums
+  int j = 0; // * for maxToRight
   while (j < n) {
-    if(nums[i] <= maxToRight[j]) {
+    if (nums[i] <= maxToRight[j]) {
+      cout << "num: " << nums[i] << " " << (j - i) << endl;
       ans = max(ans, j - i);
-    }
-    else {
+    } else {
       i++;
     }
     j++;

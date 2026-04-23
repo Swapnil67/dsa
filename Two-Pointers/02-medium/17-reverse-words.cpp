@@ -112,7 +112,7 @@ string reverseWords(string &s) {
   return s.substr(0, r - 1);
 }
 
-int main() {
+int main(void) {
   vector<string> testcases = {
       "I am zoro",
       "   Roronoa      Zoro     ",

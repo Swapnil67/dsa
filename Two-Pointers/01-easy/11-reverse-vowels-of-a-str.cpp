@@ -18,19 +18,21 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 void swap(char &a, char &b) {
   char temp = a;
   a = b;
   b = temp;
 }
 
-std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u',
+unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u',
                                    'A', 'E', 'I', 'O', 'U'};
 bool isVowel(char ch) {
   return (vowels.count(ch) != 0);
 }
 
-std::string reverseVowels(std::string s) {
+string reverseVowels(string s) {
   int n = s.size();
   int i = 0, j = n - 1;
 
@@ -51,12 +53,12 @@ std::string reverseVowels(std::string s) {
 }
 
 int main(void) {
-  std::string s = "IceCreAm";
-  std::cout << "Input String" << std::endl;
-  std::cout << s << std::endl;
+  string s = "IceCreAm";
+  cout << "Input String" << endl;
+  cout << s << endl;
   
-  std::string ans = reverseVowels(s);
-  std::cout << ans << std::endl;
+  string ans = reverseVowels(s);
+  cout << ans << endl;
   return 0;
 }
 

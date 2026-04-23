@@ -68,9 +68,10 @@ int kthGrammar(int n, int k) {
   return cur;
 }
 
-int main() {
+int main(void) {
   int n = 4, k = 2;
   cout << "n: " << n << " k: " << k << endl;
+  
   int ans = kthGrammar(n, k);
   cout << "Answer " << ans << endl;
 

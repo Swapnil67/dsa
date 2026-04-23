@@ -1,22 +1,22 @@
-/**
- * * Leetcode - 189
- * * Rotate array by K places
- * * Given an array 'arr' with 'n' elements, the task is to rotate the array to the left by 'k' steps, where 'k' is non-negative.
+/*
+ * Leetcode - 189
+ * Rotate array by K places
+ * Given an array 'arr' with 'n' elements, the task is to rotate the array to the left by 'k' steps, where 'k' is non-negative.
 
- * * Example 1
- * * Input  : 'k' = 1, 'arr '= [1,2,3,4,5]
- * * Output : [2, 3, 4, 5, 1]
+ * Example 1
+ * Input  : 'k' = 1, 'arr '= [1,2,3,4,5]
+ * Output : [2, 3, 4, 5, 1]
  * 
- * * Example 2
- * * Input  : 'k' = 3, 'arr '= [1,2,3,4,5]
- * * Output : [3, 4, 5, 1, 2]
+ * Example 2
+ * Input  : 'k' = 3, 'arr '= [1,2,3,4,5]
+ * Output : [3, 4, 5, 1, 2]
 
- * * Example 3
- * * Input  : 'k' = 3, 'arr '= [1,2,3,4,5]
- * * Output : [4, 5, 1, 2, 3]
+ * Example 3
+ * Input  : 'k' = 3, 'arr '= [1,2,3,4,5]
+ * Output : [4, 5, 1, 2, 3]
 
- * * https://leetcode.com/problems/rotate-array/
- * * https://www.naukri.com/code360/problems/rotate-array_1230543
+ * https://leetcode.com/problems/rotate-array/
+ * https://www.naukri.com/code360/problems/rotate-array_1230543
 */
 
 #include <vector>

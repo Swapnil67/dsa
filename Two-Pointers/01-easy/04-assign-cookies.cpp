@@ -24,13 +24,27 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
+
 // * ------------------------- Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(nlogn + mlogm)
 // * SPACE COMPLEXITY O(1)
-int findContentChildren(std::vector<int> children, std::vector<int> cookies) {
+int findContentChildren(vector<int> children, vector<int> cookies) {
   // * sort both arrays
-  std::sort(children.begin(), children.end()); // * children greed
-  std::sort(cookies.begin(), cookies.end());   // * cookies size
+  sort(children.begin(), children.end()); // * children greed
+  sort(cookies.begin(), cookies.end());   // * cookies size
 
   int i = 0, j = 0;
   while(i < children.size() && j < cookies.size()) {
@@ -44,18 +58,18 @@ int findContentChildren(std::vector<int> children, std::vector<int> cookies) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> children = {1, 2};
-  // std::vector<int> cookies = {0, 0, 0, 1, 1, 3};
+  // vector<int> children = {1, 2};
+  // vector<int> cookies = {0, 0, 0, 1, 1, 3};
 
   // * testcase 2
-  std::vector<int> children = {10, 9, 8, 7};
-  std::vector<int> cookies = {5, 6, 7, 8};
+  vector<int> children = {10, 9, 8, 7};
+  vector<int> cookies = {5, 6, 7, 8};
 
   // * 7, 8, 9, 10
   // * 5, 6, 7, 8
 
   int ans = findContentChildren(children, cookies);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
   return 0;
 }
 

@@ -22,19 +22,26 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Set Data Structure
 // * TIME COMPLEXITY O(NLogN) + O(N)
 // * SPACE COMPLEXITY O(N)
-int bruteForce(std::vector<int> arr) {
-  std::set<int> st;
+int bruteForce(vector<int> arr) {
+  set<int> st;
   int n = arr.size();
   // * O(N)
   for (int i = 0; i < n; i++) {
@@ -54,7 +61,7 @@ int bruteForce(std::vector<int> arr) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int removeDuplicates(std::vector<int> arr) {
+int removeDuplicates(vector<int> arr) {
   int n = arr.size();
   int i = 0, j = 1;
   while (j < n) {
@@ -68,12 +75,12 @@ int removeDuplicates(std::vector<int> arr) {
 }
 
 int main() {
-  std::vector<int> arr = {1, 2, 2, 3, 3, 3, 4, 4, 5, 5};
-  std::cout << "Input Vector " << std::endl;
+  vector<int> arr = {1, 2, 2, 3, 3, 3, 4, 4, 5, 5};
+  cout << "Input Vector " << endl;
   printArr(arr);
   // int uniqueElements = bruteForce(arr);
   int uniqueElements = removeDuplicates(arr);
-  std::cout << "Unique Elements " << uniqueElements << std::endl;
+  cout << "Unique Elements " << uniqueElements << endl;
 }
 
 

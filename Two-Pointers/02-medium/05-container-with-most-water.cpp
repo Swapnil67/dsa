@@ -73,7 +73,7 @@ int maxArea(vector<int> height) {
   return max_area;
 }
 
-int main() {
+int main(void) {
   vector<int> nums = {3, 1, 2, 3};
   // vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
   // vector<int> nums = {1, 1};

@@ -27,9 +27,11 @@
 #include <stack>
 #include <iostream>
 
-std::string getValidString(std::string s) {
+using namespace std;
+
+string getValidString(string s) {
   int n = s.size();
-  std::stack<char> st;
+  stack<char> st;
 
   for (int i = 0; i < n; ++i) {
     if (s[i] == '#') {
@@ -39,13 +41,13 @@ std::string getValidString(std::string s) {
     }
   }
 
-  std::string s_temp = "";
+  string s_temp = "";
   while (!st.empty()) {
     s_temp += st.top();
     st.pop();
   }
 
-  // std::cout << s_temp << " " << std::endl;
+  // cout << s_temp << " " << endl;
   return s_temp;
 }
 
@@ -53,54 +55,15 @@ std::string getValidString(std::string s) {
 // * Use Stack DS
 // * TIME COMPLEXITY O(n + m) + O(n + m)
 // * SPACE COMPLEXITY O(n)
-bool bruteForce(std::string s, std::string t) {
+bool bruteForce(string s, string t) {
   return getValidString(s) == getValidString(t);
-}
-
-char getNextValidChar(int &i, std::string s) {
-  int n = s.size();
-  int backspace = 0;
-  while (i >= 0) {
-    if(s[i] == '#') {
-      backspace++;
-      i--;
-    }
-    else if(backspace > 0) {
-      backspace--;
-      i--;
-    } else {
-      // * Found character
-      break;
-    }
-  }
-  return i < 0 ? '$' : s[i];
-}
-
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
-// * loop from end of string
-// * TIME COMPLEXITY O(n) + O(m)
-// * SPACE COMPLEXITY O(1)
-bool backspaceCompare(std::string s, std::string t) {
-  int n1 = s.size(), n2 = t.size();
-  int i = n1 - 1, j = n2 - 1;
-  while(i >= 0 || j >= 0) {
-    char ch1 = getNextValidChar(i, s);
-    char ch2 = getNextValidChar(j, t);
-    std::cout << ch1 << " " << ch2 << std::endl;
-    if (ch1 != ch2)
-      return false;
-
-    i--;
-    j--;
-  }
-  return true;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * Two Pointer Approach
 // * TIME COMPLEXITY O(n) 
 // * SPACE COMPLEXITY O(1)
-bool backspaceCompare2(std::string s, std::string t) {
+bool backspaceCompare(string s, string t) {
   int n1 = s.size(), n2 = t.size();
   int i = n1 - 1, j = n2 - 1;
   int back = 0;
@@ -119,8 +82,7 @@ bool backspaceCompare2(std::string s, std::string t) {
 
     if (i >= 0 && j >= 0 && s[i] == t[j]) {
       i--, j--;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -130,16 +92,16 @@ bool backspaceCompare2(std::string s, std::string t) {
 
 int main() {
   // * testcase 1
-  std::string word1 = "ab#c", word2 = "ad#c";
+  string word1 = "ab#c", word2 = "ad#c";
   
   // * testcase 2
-  // std::string word1 = "ab##", word2 = "c#d#";
+  // string word1 = "ab##", word2 = "c#d#";
 
-  std::cout << word1 << " " << word2 << std::endl;
+  cout << word1 << " " << word2 << endl;
 
   // bool ans = bruteForce(word1, word2);
   bool ans = backspaceCompare(word1, word2);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }

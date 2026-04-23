@@ -64,7 +64,7 @@ int numRescueBoats(vector<int>& people, int limit) {
   return boats_required;
 }
 
-int main() {
+int main(void) {
   // * testcase 1
   int limit = 6;
   vector<int> people = {5, 1, 4, 2};

@@ -19,14 +19,16 @@
 #include <iostream>
 #include <vector>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+void printArr(vector<int> arr) {
   for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
-  std::cout << std::endl;
+  cout << endl;
 }
 
-void moveZeroes(std::vector<int> &nums) {
+void moveZeroes(vector<int> &nums) {
   int n = nums.size();
   int i = -1;
     
@@ -52,14 +54,14 @@ void moveZeroes(std::vector<int> &nums) {
 }
 
 int main(void) {
-  std::vector<int> arr = {1, 2, 0, 0, 2, 3};
-  // std::vector<int> arr = {0, 0, 0, 1};
-  // std::vector<int> arr = {8, 6, 9};
+  vector<int> arr = {1, 2, 0, 0, 2, 3};
+  // vector<int> arr = {0, 0, 0, 1};
+  // vector<int> arr = {8, 6, 9};
 
-  std::cout<<"Before Moving Zero's"<<std::endl;
+  cout<<"Before Moving Zero's"<<endl;
   printArr(arr);
 
-  std::cout<<"After Moving Zero's"<<std::endl;
+  cout<<"After Moving Zero's"<<endl;
   moveZeroes(arr);
   printArr(arr);
 

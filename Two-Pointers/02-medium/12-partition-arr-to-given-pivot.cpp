@@ -153,7 +153,7 @@ int main() {
   // vector<int> ans = pivotArray(nums, pivot);
   vector<int> ans = pivotArray2(nums, pivot);
 
-  std::cout << "Answer: ";
+  std::cout << "Partition Array: ";
   printArr(ans);
   
   return 0;

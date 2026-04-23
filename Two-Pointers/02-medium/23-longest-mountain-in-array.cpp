@@ -19,23 +19,25 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Find the peak element and then count on left & right elements
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int longestMountain(std::vector<int> &arr) {
+int longestMountain(vector<int> &arr) {
   int n = arr.size();
   if (n < 3)
     return 0;
@@ -59,7 +61,7 @@ int longestMountain(std::vector<int> &arr) {
         i++;
         cnt++;
       }
-      ans = std::max(ans, cnt);
+      ans = max(ans, cnt);
     }
     else {
       i++;
@@ -71,16 +73,16 @@ int longestMountain(std::vector<int> &arr) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {2, 1, 4, 7, 3, 2, 5};
+  vector<int> nums = {2, 1, 4, 7, 3, 2, 5};
 
   // * testcase 2
-  // std::vector<int> nums = {2, 2, 2, 2};
+  // vector<int> nums = {2, 2, 2, 2};
 
-  std::cout << "Input Array: ";
+  cout << "Input Array: ";
   printArr(nums);
 
   int ans = longestMountain(nums);
-  std::cout << "Longest Mountain: " << ans << std::endl;
+  cout << "Longest Mountain: " << ans << endl;
   return 0;
 }
  

@@ -10,26 +10,34 @@
  * Input  : nums1 = [1], m = 1, nums2 = [], n = 0
  * Output : [1]
 
+ * https://neetcode.io/problems/merge-sorted-array/question
  * https://leetcode.com/problems/merge-sorted-array/description/
 */
 
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Classic Merge Sort Algo
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-void mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
+void mergeBrute(vector<int> &nums1, int m, vector<int> &nums2, int n) {
   int l = 0, r = 0;
-  std::vector<int> ans;
+  vector<int> ans;
   while(l < m && r < n) {
     if(nums1[l] < nums2[r]) {
       ans.push_back(nums1[l++]);
@@ -59,7 +67,7 @@ void mergeBrute(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) 
 // * Merge sort but using one of input arr as output array
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
+void merge(vector<int> &nums1, int m, vector<int> &nums2, int n) {
   int last = m + n - 1;
 
   // * merge in reverse order
@@ -91,19 +99,19 @@ void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
 
 int main() {
   int m = 3, n = 3;
-  std::vector<int> nums1 = {2, 2, 3, 0, 0, 0};
-  std::vector<int> nums2 = {1, 5, 6};
+  vector<int> nums1 = {2, 2, 3, 0, 0, 0};
+  vector<int> nums2 = {1, 5, 6};
 
-  std::cout << "Before Merging" << std::endl;
-  std::cout<<"nums1: ";
+  cout << "Before Merging" << endl;
+  cout<<"nums1: ";
   printArr(nums1);
-  std::cout<<"nums2: ";
+  cout<<"nums2: ";
   printArr(nums2);
   
   // mergeBrute(nums1, m, nums2, n);
   merge(nums1, m, nums2, n);
 
-  std::cout << "After Merging" << std::endl;
+  cout << "After Merging" << endl;
   printArr(nums1);
 }
 

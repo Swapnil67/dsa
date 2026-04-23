@@ -36,6 +36,12 @@ void printArr(std::vector<T> &arr) {
   std::cout << " ]" << std::endl;
 }
 
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
+// * Nested Loop
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(N^2)
+// TODO
+
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Sorting + Two Pointer
 // * TIME COMPLEXITY O(nlogn)

@@ -15,85 +15,39 @@
  * https://leetcode.com/problems/reverse-words-in-a-string-iii/description/
 */
 
-#include<iostream>
+#include <iostream>
+#include <algorithm>
 
-void swap(char& a, char& b) {
-  char temp = a;
-  a = b;
-  b = temp;
-}
-
-std::string reverseString(std::string s) {
-  int n = s.size();
-  int l = 0, r = n - 1;
-  while (l < r)
-    swap(s[l++], s[r--]);
-  return s;
-}
-
-void reverseWord(std::string &str, int l, int r) {
-  while (l < r) {
-    swap(str[l], str[r]);
-    l++;
-    r--;
-  }
-}
-
-// * TIME COMPLEXITY (N)
-// * SPACE COMPLEXITY O(1)
-std::string reverseWords(std::string s) {
-  int n = s.size();
-  int c = 0;
-  std::string ans = "";
-  for (int i = 0; i < n; ++i) {
-    if (isspace(s[i])) {
-      std::string t = s.substr(c, i - c);
-      t = reverseString(t);
-      ans += t;
-      ans += " ";
-      // std::cout << c << " to " << i - 1 << " => " << t << std::endl;
-      c = i + 1;
-    }
-  }
-
-  std::string t = reverseString(s.substr(c, n - c));
-  ans += t;
-
-  return ans;
-}
+using namespace std;
 
 // * Inplace Reverse
-std::string reverseWords(std::string s) {
+string reverseWords(string s) {
   int n = s.size();
-  int i = 0;
-  for (int j = 0; j < n; ++j) {
-    if (isspace(s[j])) {
-      // * Reverse word
-      reverseWord(s, i, j - 1);
-      i = j + 1;
+  int i = 0, j = 0;
+  while (j < n) {
+    while (j < n && !isspace(s[j])) {
+      j++;
     }
-  }
-
-  // * Reverse the last word in 's'
-  if (i < n) {
-    reverseWord(s, i, n - 1);
+    reverse(s.begin() + i, s.begin() + j);
+    j += 1;
+    i = j;
   }
   return s;
 }
 
 int main(void) {
   // * testcase 1
-  // std::string s = "Let's take LeetCode contest";
+  // string s = "Let's take LeetCode contest";
 
   // * testcase 2
-  // std::string s = "Roronoa Zoro";
+  // string s = "Roronoa Zoro";
 
   // * testcase 3
-  std::string s = "Mr Ding";
+  string s = "Mr Ding";
 
-  std::cout << s << std::endl;
-  std::string ans = reverseWords(s);
-  std::cout << ans << std::endl;
+  cout << s << endl;
+  string ans = reverseWords(s);
+  cout << ans << endl;
 
   return 0;
 }

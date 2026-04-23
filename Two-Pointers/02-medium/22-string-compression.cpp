@@ -81,10 +81,10 @@ int compress(vector<char>& chars) {
 
 int main(void) {
   // * testcase 1
-  vector<char> chars = {'a', 'b', 'c'};
+  // vector<char> chars = {'a', 'b', 'c'};
 
   // * testcase 2
-  // vector<char> chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
+  vector<char> chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
 
   // * testcase 3
   // vector<char> chars = {'a','b','b','b','b','b','b','b','b','b','b','b','b'};

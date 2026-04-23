@@ -3,40 +3,42 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-void printMatrix(std::vector<std::vector<int>> matrix) {
+void printMatrix(vector<vector<int>> matrix) {
   int r = matrix.size();
   if(r == 0) return;
   int c = matrix[0].size();
   for (int i = 0; i < r; ++i) {
-    std::cout << "{ ";
+    cout << "{ ";
     for (int j = 0; j < c; ++j) {
-      std::cout << matrix[i][j] << " ";
+      cout << matrix[i][j] << " ";
     }
-    std::cout << "},";
-    std::cout << std::endl;
+    cout << "},";
+    cout << endl;
   }
-  std::cout << std::endl;
+  cout << endl;
 }
 
-void printVectorString(std::vector<std::string> strs) {
+void printVectorString(vector<string> strs) {
   int n = strs.size();
-  std::cout << "[ "; 
-  for (std::string s : strs) {
-    std::cout << '"' << s << '"' << ", ";
+  cout << "[ "; 
+  for (string s : strs) {
+    cout << '"' << s << '"' << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 template <typename T>
@@ -46,93 +48,92 @@ void swap(T &a, T &b) {
   b = temp;
 }
 
-
-// * ------------------------------------------------------------------------ 
-
-// * 01 - Minimum Difference Between Highest and Lowest of K Scores
-// int minimumDifference(std::vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 02 - Merge Two Sorted Arrays
-// void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n) {
-// TODO
-// }
-
-// * 03 - Remove Duplicates from Sorted Array
-// int removeDuplicates(std::vector<int> &arr) {
-// TODO
-// }
-
-// * 04 - Assign Cookies
-// int findContentChildren(std::vector<int> &g, std::vector<int> &s) {
-// TODO
-// }
-
-// * 05 - Find First Palindromic String in the Array
-// std::string firstPalindrome(std::vector<std::string> &words) {
-// TODO
-// }
-
-// * 06 - Sort Array By Parity
-// std::vector<int> sortArrayByParity(std::vector<int> &nums) {
-// TODO
-// }
-
-// * 07 - Reverse Words in a String III
-// std::string reverseWords(std::string s) {
-// TODO
-// }
-
-// * 08 - Merge Two 2D Arrays by Summing Values
-// std::vector<std::vector<int>> mergeArrays(
-//     std::vector<std::vector<int>> nums1,
-//     std::vector<std::vector<int>> nums2) {
-// TODO
-// }
-
-// * 09 - Move Zero's to End
-// void moveZeroes(std::vector<int> &arr) {
-// TODO
-// }
-
-// * 10 - Valid Word Abbreviation
-// bool validWordAbbreviation(std::string &word, std::string &abbr) {
-// TODO
-// }
-
-// * 11 - Reverse Vowels of a String
-// bool reverseVowels(std::string &word, std::string &abbr) {
-// TODO
-// }
-
-// * 12 - Apply Operations to an Array
-// std::vector<int> applyOperations(std::vector<int>& nums) {
-// TODO
-// }
-
-// * 13 - Backspace String Compare
-// bool backspaceCompare(std::string word1, std::string word2) {
-// TODO
-// }
-
-// * 14 - Check If Two String Arrays are Equivalent
-// bool arrayStringsAreEqual(std::vector<std::string> &word1, std::vector<std::string> &word2) {
-// TODO
-// }
-
 // * 15 - Squares of a Sorted Array
-// std::vector<int> sortedSquares(std::vector<int> &nums) {
+// vector<int> sortedSquares(vector<int> &nums) {
 // TODO
 // }
 
 // * 16 - Remove Element
-// int removeElement(int val, std::vector<int> &nums) {
+// int removeElement(int val, vector<int> &nums) {
 // TODO
 // }
 
 // * 17 - Sort Array By Parity II
-// std::vector<int> sortArrayByParityII(std::vector<int> &nums) {
+// vector<int> sortArrayByParityII(vector<int> &nums) {
+// TODO
+// }
+
+// * ------------------------------------------------------------------------ 
+
+// * 01 - Minimum Difference Between Highest and Lowest of K Scores
+// int minimumDifference(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 02 - Merge Two Sorted Arrays
+// void merge(vector<int> &nums1, int m, vector<int> &nums2, int n) {
+// TODO
+// }
+
+// * 03 - Remove Duplicates from Sorted Array
+// int removeDuplicates(vector<int> &arr) {
+// TODO
+// }
+
+// * 04 - Assign Cookies
+// int findContentChildren(vector<int> &g, vector<int> &s) {
+// TODO
+// }
+
+// * 05 - Find First Palindromic String in the Array
+// string firstPalindrome(vector<string> &words) {
+// TODO
+// }
+
+// * 06 - Sort Array By Parity
+// vector<int> sortArrayByParity(vector<int> &nums) {
+// TODO
+// }
+
+// * 07 - Reverse Words in a String III
+// string reverseWords(string s) {
+// TODO
+// }
+
+// * 08 - Merge Two 2D Arrays by Summing Values
+// vector<vector<int>> mergeArrays(
+//     vector<vector<int>> nums1,
+//     vector<vector<int>> nums2) {
+// TODO
+// }
+
+// * 09 - Move Zero's to End
+// void moveZeroes(vector<int> &arr) {
+// TODO
+// }
+
+// * 10 - Valid Word Abbreviation
+// bool validWordAbbreviation(string &word, string &abbr) {
+// TODO
+// }
+
+// * 11 - Reverse Vowels of a String
+// bool reverseVowels(string &word, string &abbr) {
+// TODO
+// }
+
+// * 12 - Apply Operations to an Array
+// vector<int> applyOperations(vector<int>& nums) {
+// TODO
+// }
+
+// * 13 - Backspace String Compare
+// bool backspaceCompare(string word1, string word2) {
+// TODO
+// }
+
+// * 14 - Check If Two String Arrays are Equivalent
+// bool arrayStringsAreEqual(vector<string> &word1, vector<string> &word2) {
 // TODO
 // }
 
