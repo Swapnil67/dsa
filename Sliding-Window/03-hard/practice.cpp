@@ -4,19 +4,25 @@
 #include <climits>
 #include <iostream>
 #include <algorithm>
-#include <unordered_map>
 #include <unordered_set>
+#include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * 01 - Subarrays with K Different Integers
-// int subarraysWithKDistinct(std::vector<int> &arr, int k) {
+// int subarraysWithKDistinct(std::vector<int> &nums, int k) {
 // TODO
 // }
 
@@ -26,7 +32,7 @@ void printArr(std::vector<int> arr) {
 // }
 
 // * 03 - Sliding Window Maximum
-// std::vector<int> maxSlidingWindow(std::vector<int> arr, int k) {
+// std::vector<int> maxSlidingWindow(std::vector<int> &nums, int k) {
 // TODO
 // }
 
@@ -41,7 +47,7 @@ void printArr(std::vector<int> arr) {
 // }
 
 int main(void) {
-  return 0;
+
 }
 
 // * Run the code

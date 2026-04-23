@@ -1,26 +1,26 @@
 
-/**
- * * Leetcode - 2779
- * * Maximum Beauty of an Array After Applying Operation
- * * You are given a 0-indexed array nums and a non-negative integer k.
- * * In one operation, you can do the following:
+/*
+ * Leetcode - 2779
+ * Maximum Beauty of an Array After Applying Operation
+ * You are given a 0-indexed array nums and a non-negative integer k.
+ * In one operation, you can do the following:
  *    * Choose an index i that hasn't been chosen before from the range [0, nums.length - 1].
  *    * Replace nums[i] with any integer from the range [nums[i] - k, nums[i] + k].
  * 
- * * The beauty of the array is the length of the longest subsequence consisting of equal elements.
- * * Return the maximum possible beauty of the array nums after applying the operation any number of times.
+ * The beauty of the array is the length of the longest subsequence consisting of equal elements.
+ * Return the maximum possible beauty of the array nums after applying the operation any number of times.
  * 
- * * Note that you can apply the operation to each index only once.
+ * Note that you can apply the operation to each index only once.
 
- * * Example 1
- * * Input  : nums = [4, 6, 1, 2], k = 2
- * * Output : 3
+ * Example 1
+ * Input  : nums = [4, 6, 1, 2], k = 2
+ * Output : 3
 
- * * Example 2
- * * Input  : nums = [1, 1, 1, 1], k = 10
- * * Output : 4
+ * Example 2
+ * Input  : nums = [1, 1, 1, 1], k = 10
+ * Output : 4
 
- * * https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/
+ * https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/
 */
 
 #include <deque>
@@ -28,14 +28,21 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(N)
 
@@ -48,43 +55,43 @@ void printArr(std::vector<int> arr) {
 // *        <------>              (2, 6)
 // *            <------>          (4, 8)
 
-int bruteForce(std::vector<int> arr, int k) {
+int bruteForce(vector<int> arr, int k) {
   int n = arr.size();
   
   // * 1. Create pair of intervals
-  std::vector<std::pair<int, int>> intervals;
+  vector<pair<int, int>> intervals;
   for (int i = 0; i < n; ++i) {
     intervals.push_back({arr[i] - k, arr[i] + k});
   }
 
   // * 2. Sort the intervals in ASC order
-  std::sort(intervals.begin(), intervals.end()); // * o(nlogn)
+  sort(intervals.begin(), intervals.end()); // * o(nlogn)
 
   // * For debugging
   // for(auto a: intervals) {
-  //   std::cout << "(" << a.first << ", " << a.second << ")" << std::endl;
+  //   cout << "(" << a.first << ", " << a.second << ")" << endl;
   // }
 
   int max_beauty = 0;
-  std::deque<int> dq;
-  for (std::pair<int, int> &interval : intervals) { // * o(n)
+  deque<int> dq;
+  for (pair<int, int> &interval : intervals) { // * o(n)
     // * Here we are checking are the intervals overlapping, if not the pop the front interval
     while (!dq.empty() && dq.front() < interval.first) {
       dq.pop_front();
     }
     dq.push_back(interval.second);
-    max_beauty = std::max(max_beauty, (int)dq.size());
+    max_beauty = max(max_beauty, (int)dq.size());
   }
 
   return max_beauty;
 }
 
-// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------
 // * Binary Search + Math Equation
 // * TIME COMPLEXITY 2 * O(nlogn)
 // * SPACE COMPLEXITY O(1)
 
-int binarySearch(std::vector<int> &nums, int target) {
+int binarySearch(vector<int> &nums, int target) {
   int n = nums.size();
   int l = 0, r = n - 1, ans = 0;
   while(l <= r) {
@@ -105,9 +112,9 @@ int binarySearch(std::vector<int> &nums, int target) {
 // * (x + k) >= (y - k) -> For overlapping we know 
 // * x + 2k >= y   (adding 'k' on both sides)
 // * y <= (x + 2k)
-int maximumBeauty(std::vector<int> arr, int k) {
+int maximumBeauty(vector<int> arr, int k) {
   int n = arr.size();
-  std::sort(arr.begin(), arr.end());
+  sort(arr.begin(), arr.end());
 
   int max_beauty = 0;
   for (int i = 0; i < n; ++i) {
@@ -116,22 +123,22 @@ int maximumBeauty(std::vector<int> arr, int k) {
 
     // * Find the max index of element who is >= 'y'
     int j = binarySearch(arr, y);
-    max_beauty = std::max(max_beauty, j - i + 1);
+    max_beauty = max(max_beauty, j - i + 1);
   }
 
   return max_beauty;
 }
 
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------
 // * Sliding Window
 // * y <= (x + 2k)
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(1)
-int maximumBeauty2(std::vector<int> arr, int k) {
+int maximumBeauty2(vector<int> arr, int k) {
   int n = arr.size();
 
   // * 1. Sort the arr
-  std::sort(arr.begin(), arr.end());
+  sort(arr.begin(), arr.end());
 
   int max_beauty = 0;
   int i = 0, j = 0;
@@ -143,7 +150,7 @@ int maximumBeauty2(std::vector<int> arr, int k) {
     }
 
     // * Find new max window
-    max_beauty = std::max(max_beauty, (j - i + 1));
+    max_beauty = max(max_beauty, (j - i + 1));
     j++;
   }
 
@@ -154,22 +161,22 @@ int maximumBeauty2(std::vector<int> arr, int k) {
 int main() {
   // * testcase 1 (Ans = 3)
   int k = 2;
-  std::vector<int> arr = {4, 6, 1, 2};
+  vector<int> arr = {4, 6, 1, 2};
 
   // * testcase 2 (Ans = 4)
   // int k = 10;
-  // std::vector<int> arr = {1, 1, 1, 1};
+  // vector<int> arr = {1, 1, 1, 1};
 
   // * testcase 3 (Ans = 6)
   // int k = 2;
-  // std::vector<int> arr = {3, 2, 3, 2, 3, 2};
+  // vector<int> arr = {3, 2, 3, 2, 3, 2};
 
   printArr(arr);
 
   // int ans = bruteForce(arr, k);
   // int ans = maximumBeauty(arr, k);
   int ans = maximumBeauty2(arr, k);
-  std::cout << "Maximum Beauty of an Array After Applying Operation: " << ans << std::endl;
+  cout << "Maximum Beauty of an Array After Applying Operation: " << ans << endl;
 
   return 0;
 }

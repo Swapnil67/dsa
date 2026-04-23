@@ -1,60 +1,67 @@
-/**
- * * Minimum Window Substring
- * * Example 1
- * * Input  : s = "ADOBECODEBANC", t = "ABC"
- * * Output : "BANC"
- * * Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+/*
+ * Leetcode - 76
+ * Minimum Window Substring
+ *
+ * Example 1
+ * Input  : s = "ADOBECODEBANC", t = "ABC"
+ * Output : "BANC"
+ * Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
 
- * * Example 2
- * * Input  : s = "a", t = "a"
- * * Output : 'a'
- * * Explanation: The entire string s is the minimum window.
+ * Example 2
+ * Input  : s = "a", t = "a"
+ * Output : 'a'
+ * Explanation: The entire string s is the minimum window.
  * 
- * * Example 3
- * * Input  : s = "a", t = "aa"
- * * Output : 1
- * * Explanation: Both 'a's from t must be included in the window.
- * * Since the largest window of s only has one 'a', return empty string.
+ * Example 3
+ * Input  : s = "a", t = "aa"
+ * Output : 1
+ * Explanation: Both 'a's from t must be included in the window.
+ * Since the largest window of s only has one 'a', return empty string.
  * 
- * * https://leetcode.com/problems/minimum-window-substring/description/
+ * https://leetcode.com/problems/minimum-window-substring/description/
 */
+
+// ! Amazon, Google, Meta, Microsoft, Adobe, Oracle, Tiktok, Apple
 
 #include <vector>
 #include <string>
 #include <climits>
 #include <iostream>
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+using namespace std;
+
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
-// * SPACE COMPLEXITY O(256)
-std::string bruteForce(std::string s, std::string t) {
+// * SPACE COMPLEXITY O(256) ~ O(1)
+string bruteForce(string s, string t) {
   int n1 = s.length(), n2 = t.length();
+
+  if (n2 > n1)
+    return "";
 
   int start_i = -1, min_window_size = INT_MAX;
 
   // * Create 't' char frequency vector
-  std::vector<int> t_vec_saved(256, 0);
+  vector<int> t_vec_saved(256, 0);
   for(char &c: t) {
     t_vec_saved[c]++;
   }
 
   for(int i = 0; i <= n1 - n2; ++i) {
-
     // * use the pre-savaed t_vec
-    std::vector<int> hash = t_vec_saved;
-
+    vector<int> hash = t_vec_saved;
     int cur_count = 0;
     for(int j = i; j < n1; ++j) {
       if (hash[s[j]] > 0)
         cur_count++;
       
       hash[s[j]]--;
-      if(cur_count == n2) {
+      if (cur_count == n2) {
         int cur_window = j - i + 1;
-        if(cur_window < min_window_size) {
-          min_window_size = cur_window;
+        if (cur_window < min_window_size) {
           start_i = i;
+          min_window_size = cur_window;
         }
         break;
       }
@@ -66,18 +73,18 @@ std::string bruteForce(std::string s, std::string t) {
 }
 
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(256)
-std::string minWindow(std::string s, std::string t) {
+string minWindow(string s, string t) {
   int n1 = s.length(), n2 = t.length();
 
   if (n2 > n1)
     return "";
 
   // * calculate the frequency map for string 't'
-  std::vector<int> t_vec(256, 0);
+  vector<int> t_vec(256, 0);
   for (char &ch : t)
     t_vec[ch]++;
 
@@ -94,7 +101,7 @@ std::string minWindow(std::string s, std::string t) {
 
     // * found substring now shrink the window
     while (countRequired == 0) {
-      // std::cout << i << " " << j << std::endl;
+      // cout << i << " " << j << endl;
 
       // * get the substring count
       if((j - i + 1) < min_window_size) {
@@ -118,21 +125,21 @@ std::string minWindow(std::string s, std::string t) {
 
 int main() {
   // * testcase 1
-  // std::string s = "ADOBECODEBANC", t = "ABC";
+  // string s = "ADOBECODEBANC", t = "ABC";
 
   // * testcase 2
-  // std::string s = "flight", t = "it";
+  string s = "flight", t = "it";
 
   // * testcase 3
-  std::string s = "ninjas", t = "sin";
+  // string s = "ninjas", t = "sin";
 
-  std::cout << "s: " << s << std::endl;
-  std::cout << "t: " << t << std::endl;
+  cout << "s: " << s << endl;
+  cout << "t: " << t << endl;
 
-  // std::string ans = bruteForce(s, t);
-  std::string ans = minWindow(s, t);
+  // string ans = bruteForce(s, t);
+  string ans = minWindow(s, t);
 
-  std::cout << "Minimum Window Substring: " << ans << std::endl;
+  cout << "Minimum Window Substring: " << ans << endl;
 
   return 0;
 }

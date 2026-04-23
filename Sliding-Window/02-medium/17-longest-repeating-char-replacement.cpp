@@ -25,7 +25,7 @@
 
 using namespace std;
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * use => replacements = len_of_substr - max_frequency
 // *                        (j - i + 1) - max_frequency
@@ -52,7 +52,7 @@ int bruteForce(string s, int k) {
   return max_len;
 }
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // * Keep char frequency vector
 // * keep max_frequency character and find replacing characters by following formula
 // * replacements = len_of_substr - max_frequency
@@ -91,7 +91,7 @@ int betterApproach(string s, int k) {
   return max_len;
 }
 
-// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3: Optimal Approach -------------------------
 // * Keep char frequency vector
 // * keep max_frequency character and find replacing characters by following formula
 // * replacements = len_of_substr - max_frequency

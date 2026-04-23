@@ -33,7 +33,7 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(26)

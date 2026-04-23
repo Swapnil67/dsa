@@ -45,7 +45,7 @@ void printArr(vector<int> &arr) {
 // * Nexted Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr, int k) {
+int bruteForce(vector<int> arr, int k) {
   int n = arr.size();
   int ans = INT_MAX;
   for (int i = 0; i < n; ++i) {
@@ -53,7 +53,7 @@ int bruteForce(std::vector<int> arr, int k) {
     for (int j = i; j < n; ++j) {
       cur_sum += arr[j];
       if(cur_sum >= k) {
-        ans = std::min((j - i + 1), ans);
+        ans = min((j - i + 1), ans);
       }
     }
   }
@@ -64,14 +64,14 @@ int bruteForce(std::vector<int> arr, int k) {
 // * Sliding Window + Monotonic Stack
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-int shortestSubarray(std::vector<int>& nums, int k) {
+int shortestSubarray(vector<int>& nums, int k) {
   int n = nums.size();
 
   int j = 0, ans = INT_MAX;
 
   // * monotonic increasing 
-  std::deque<int> dq;
-  std::vector<long long> prefixSums(n, 0);
+  deque<int> dq;
+  vector<long long> prefixSums(n, 0);
 
   while (j < n) {
     // * keep calculating the prefix array
@@ -83,14 +83,14 @@ int shortestSubarray(std::vector<int>& nums, int k) {
 
     // * Check if cur sum is atleast 'k'
     if (prefixSums[j] >= k) {
-      ans = std::min(ans, j + 1);
+      ans = min(ans, j + 1);
     }
 
     // * shrink the window
     // * Check if subracting from dq front elements will keep the following true
     // * prefix_sum >= k
     while (!dq.empty() && prefixSums[j] - prefixSums[dq.front()] >= k) {
-      ans = std::min(ans, j - dq.front());
+      ans = min(ans, j - dq.front());
       dq.pop_front();
     }
 
@@ -110,17 +110,17 @@ int shortestSubarray(std::vector<int>& nums, int k) {
 
 int main() {
   // int k = 3;
-  // std::vector<int> nums = {2, -1, 2};
+  // vector<int> nums = {2, -1, 2};
 
   int k = 167;
-  std::vector<int> nums = {84, -37, 32, 40, 95};
+  vector<int> nums = {84, -37, 32, 40, 95};
 
-  std::cout << "Input Array: " << std::endl;
+  cout << "Input Array: " << endl;
   printArr(nums);
 
   // int ans = bruteForce(nums, k);
   int ans = shortestSubarray(nums, k);
-  std::cout << "Shortest Subarray with Sum at Least K is " << ans << std::endl;
+  cout << "Shortest Subarray with Sum at Least K is " << ans << endl;
 
   return 0;
 }

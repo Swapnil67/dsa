@@ -30,25 +30,32 @@
 #include <unordered_map>
 #include <unordered_set>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-long long bruteForce(std::string s, int k) {
+long long bruteForce(string s, int k) {
   int n = s.size();
-  std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+  unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   int i = 0, j = 0, ans = 0;
   
   for (int i = 0; i < n; ++i) {
     int consonants = 0;
-    std::unordered_set<char> st;
+    unordered_set<char> st;
     for (int j = i; j < n; ++j) {
       if (vowels.count(s[j])) { 
         st.insert(s[j]);
@@ -67,15 +74,15 @@ long long bruteForce(std::string s, int k) {
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-long long countOfSubstrings(std::string s, int k) {
+long long countOfSubstrings(string s, int k) {
   int n = s.size();
-  std::unordered_map<char, int> vowels_map;
-  std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+  unordered_map<char, int> vowels_map;
+  unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   
   // * Pre calculate the next consonant index
   // *  a e i o q q
   // * [4 4 4 4 5 6]
-  std::vector<int> next_consonant_idx_vec(n);
+  vector<int> next_consonant_idx_vec(n);
   int last_consonant_idx = n;
   for (int i = n - 1; i >= 0; --i) {
     next_consonant_idx_vec[i] = last_consonant_idx;
@@ -108,7 +115,7 @@ long long countOfSubstrings(std::string s, int k) {
     }
 
     // * Add the subarrays to ans
-    if (consonants == k && vowels_map.size() == vowels.size()) { // * Valid Window
+    if (consonants == k && vowels_map.size() == 5) { // * Valid Window
       // * because we want to include those subarrays to ans
       // * Eg: 
       // * a e i o u s a e s
@@ -136,11 +143,11 @@ long long countOfSubstrings(std::string s, int k) {
   return ans;
 }
 
-long long countOfSubstrings2(std::string s, int k) {
-  const std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+long long countOfSubstrings2(string s, int k) {
+  const unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   int ans = 0;
   int n = s.size();
-  std::vector<int> next_consonant(n, n);
+  vector<int> next_consonant(n, n);
   int next_consonant_idx = n;
   for (int i = n - 1; i >= 0; --i) {
     next_consonant[i] = next_consonant_idx;
@@ -149,7 +156,7 @@ long long countOfSubstrings2(std::string s, int k) {
     }
   }
 
-  std::unordered_map<char, int> cur_vowels;
+  unordered_map<char, int> cur_vowels;
   int cur_consonants = 0;
   int i = 0, j = 0;
   while (j < n) {
@@ -192,28 +199,28 @@ long long countOfSubstrings2(std::string s, int k) {
 
 int main() {
   // int k = 1;
-  // std::string word = "aeioqq"; 
+  // string word = "aeioqq"; 
 
   int k = 0;
-  std::string word = "aeueio"; 
+  string word = "aeueio"; 
 
   // int k = 0;
-  // std::string word = "aeiou"; 
+  // string word = "aeiou"; 
 
   // int k = 1;
-  // std::string word = "ieaouqqieaouqq"; 
+  // string word = "ieaouqqieaouqq"; 
 
   // int k = 0;
-  // std::string word = "aouiei"; 
+  // string word = "aouiei"; 
 
   // int k = 2;
-  // std::string word = "iqeaouqi"; 
+  // string word = "iqeaouqi"; 
 
-  std::cout << word << std::endl;
+  cout << word << endl;
 
   // long long ans = bruteForce(word, k);
   long long ans = countOfSubstrings2(word, k);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }

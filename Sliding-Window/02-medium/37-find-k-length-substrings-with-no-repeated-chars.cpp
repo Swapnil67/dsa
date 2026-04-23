@@ -1,5 +1,5 @@
 /*
- * Leetcode - 
+ * Leetcode - ? 
  * Find K-Length Substrings With No Repeated Characters
  * 
  * Given a string s and an integer k, return the number of substrings in s of length k with no repeated characters.
@@ -52,6 +52,7 @@ int numKLenSubstrNoRepeats(std::string s, int k) {
   while(j < n) {
     freq_mp[s[j]]++;
 
+    // * Shrink Window
     while (i < j && ((j - i + 1) > k || freq_mp[s[j]] > 1)) {
       freq_mp[s[i]]--;
       if (freq_mp[s[i]] == 0)

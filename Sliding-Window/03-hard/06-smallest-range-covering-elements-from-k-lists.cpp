@@ -1,3 +1,26 @@
+/*
+ * Leetcode - 632
+ * Smallest Range Covering Elements from K Lists
+ * 
+ * You have k lists of sorted integers in non-decreasing order. Find the smallest range that includes at least one
+ * number from each of the k lists.
+ * 
+ * We define the range [a, b] is smaller than range [c, d] if b - a < d - c or a < c if b - a == d - c.
+ * 
+ * Example 1    :
+ * Input        : nums = [[4,10,15,24,26],[0,9,12,20],[5,18,22,30]]
+ * Output       : [20,24]
+ * Explanation  : 
+ * 
+ * Example 2    :
+ * Input        : nums = [[1,2,3],[1,2,3],[1,2,3]]
+ * Output       : [1,1]
+ * Explanation  : 
+ * 
+ * 
+ * https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
+*/
+
 #include <queue>
 #include <vector>
 #include <climits>
@@ -6,14 +29,19 @@
 
 using namespace std;
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-bool searchRange(std::vector<int> &arr, int n1, int n2) {
+bool searchRange(vector<int> &arr, int n1, int n2) {
   for (int k = 0; k < arr.size() - 1; ++k) {
     if (n1 <= arr[k] && n2 <= arr[k])
       return true;
@@ -21,17 +49,17 @@ bool searchRange(std::vector<int> &arr, int n1, int n2) {
   return false;
 }
 
-std::vector<int> bruteForce(vector<vector<int>> nums) {
+vector<int> bruteForce(vector<vector<int>> nums) {
   
   // * Merge All the vectors into One
-  std::vector<int> temp;
+  vector<int> temp;
   for (auto &vec : nums) {
     temp.insert(temp.end(), vec.begin(), vec.end());
   }
   printArr(temp);
-  // std::sort(temp.begin(), temp.end());
+  // sort(temp.begin(), temp.end());
 
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = 0; i < temp.size() - 1; ++i) {
     int n1 = temp[i];
     for (int j = i + 1; j < temp.size() - 1; ++j) {
@@ -55,7 +83,7 @@ std::vector<int> bruteForce(vector<vector<int>> nums) {
         }
       }
 
-      std::cout << n1 << " " << n2 << " => " << isValidRange << std::endl;
+      cout << n1 << " " << n2 << " => " << isValidRange << endl;
     }
   }
 
@@ -66,14 +94,14 @@ std::vector<int> bruteForce(vector<vector<int>> nums) {
 // * sliding window
 // * TIME COMPLEXITY O(N * K)
 // * SPACE COMPLEXITY O(K)
-std::vector<int> betterApproach(vector<vector<int>> nums) {
+vector<int> betterApproach(vector<vector<int>> nums) {
   int k = nums.size();
 
   // * This will contain current index of element of nums vec
-  std::vector<int> temp(k, 0); // * {0, 0, 0, ...}
+  vector<int> temp(k, 0); // * {0, 0, 0, ...}
 
   // * Range => (a, b)
-  std::vector<int> ans = {-1000000, 1000000};
+  vector<int> ans = {-1000000, 1000000};
 
   
   while (true) {
@@ -89,10 +117,10 @@ std::vector<int> betterApproach(vector<vector<int>> nums) {
         minEleListIdx = listIdx;
       }
   
-      maxEle = std::max(maxEle, ele);
+      maxEle = max(maxEle, ele);
     }
   
-    // std::cout << minEle << " " << maxEle << " -> " << minEleListIdx << std::endl;
+    // cout << minEle << " " << maxEle << " -> " << minEleListIdx << endl;
 
     // * Did we found a better range
     if (maxEle - minEle < ans[1] - ans[0]) {
@@ -117,11 +145,11 @@ std::vector<int> betterApproach(vector<vector<int>> nums) {
 // * sliding window + Heap
 // * TIME COMPLEXITY O(N * logK)
 // * SPACE COMPLEXITY O(K)
-std::vector<int> smallestRange(vector<vector<int>> nums) {
+vector<int> smallestRange(vector<vector<int>> nums) {
   int n = nums.size();
 
   // * This will contain current index of element of nums vec
-  std::vector<int> temp(n, 0); // * {0, 0, 0, ...}
+  vector<int> temp(n, 0); // * {0, 0, 0, ...}
   
   // * min heap => {minEle, listIdx, eleIdx}
   int maxEle = INT_MIN;
@@ -130,11 +158,11 @@ std::vector<int> smallestRange(vector<vector<int>> nums) {
   // * Poplulate min heap with first elements of all vector
   for(int i = 0; i < n; ++i) {
     pq.push({nums[i][0], i, 0}); // * {minEle, listIdx, eleIdx} 
-    maxEle = std::max(nums[i][0], maxEle);
+    maxEle = max(nums[i][0], maxEle);
   }
 
   // * Range => (a, b)
-  std::vector<int> ans = {-1000000, 1000000};
+  vector<int> ans = {-1000000, 1000000};
 
   while (!pq.empty()) {
     vector<int> cur = pq.top();
@@ -157,7 +185,7 @@ std::vector<int> smallestRange(vector<vector<int>> nums) {
     int nextIdx = eleIdx + 1;
     int nextElement = nums[listIdx][nextIdx];
     pq.push({nextElement, listIdx, nextIdx});
-    maxEle = std::max(maxEle, nextElement);
+    maxEle = max(maxEle, nextElement);
   }
 
   return ans;
@@ -166,14 +194,14 @@ std::vector<int> smallestRange(vector<vector<int>> nums) {
 int main(void) {
   vector<vector<int>> nums = {{4, 10, 15, 24, 26}, {0, 9, 12, 20}, {5, 18, 22, 30}};
 
-  std::cout << "Input Ranges" << std::endl;
+  cout << "Input Ranges" << endl;
   for (auto &vec : nums) {
     printArr(vec);
   }
 
-  // std::vector<int> ans = bruteForce(nums);
-  // std::vector<int> ans = betterApproach(nums);
-  std::vector<int> ans = smallestRange(nums);
+  // vector<int> ans = bruteForce(nums);
+  // vector<int> ans = betterApproach(nums);
+  vector<int> ans = smallestRange(nums);
   printArr(ans);
 
   return 0;

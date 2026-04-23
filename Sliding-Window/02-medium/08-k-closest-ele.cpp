@@ -91,7 +91,6 @@ vector<int> betterApproach(vector<int> &arr, int k, int x) {
 
   // * sort the ans
   sort(ans.begin(), ans.end());
-
   return ans;
 }
 
