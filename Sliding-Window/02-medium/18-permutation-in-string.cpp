@@ -23,6 +23,8 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 // * ------------------------- APPROACH 1: Brute Force -------------------------
 // * TIME COMPLEXITY O(n! * n)
 // TODO
@@ -32,20 +34,20 @@
 // * Check all substring of length string s1 in string s2 
 // * TIME COMPLEXITY O(m - n) * O(nlogn)
 // * SPACE COMPLEXITY O(n)
-bool betterApproach(std::string s1, std::string s2) {
+bool betterApproach(string s1, string s2) {
   int n1 = s1.size(), n2 = s2.size();
 
   // * This is not possible
   if (n1 > n2)
     return false;
   
-  std::sort(s1.begin(), s1.end()); // * Sort the s1 string
+  sort(s1.begin(), s1.end()); // * Sort the s1 string
 
   for (int i = 0; i < n2 - n1; ++i) {
     // * take n1 len of substrings from s2
-    std::string temp = s2.substr(i, n1);
-    std::sort(temp.begin(), temp.end());
-    // std::cout << temp << " -> " << s1.compare(temp) << std::endl;
+    string temp = s2.substr(i, n1);
+    sort(temp.begin(), temp.end());
+    // cout << temp << " -> " << s1.compare(temp) << endl;
     if (s1.compare(temp) == 0)
       return true;
   }
@@ -58,17 +60,17 @@ bool betterApproach(std::string s1, std::string s2) {
 // * Compare frequecy vectors of s1 & s2 using sliding window approach
 // * TIME COMPLEXITY O(m + n)
 // * SPACE COMPLEXITY O(26)
-bool checkInclusion(std::string s1, std::string s2) {
+bool checkInclusion(string s1, string s2) {
   int n1 = s1.size(), n2 = s2.size();
 
   // * Calculate s1 string character frequency
-  std::vector<int> s1_freq_vec(26, 0);
+  vector<int> s1_freq_vec(26, 0);
   for(char &ch : s1) {
     s1_freq_vec[ch - 'a']++;
   }
 
   int i = 0, j = 0;
-  std::vector<int> s2_freq_vec(26, 0);
+  vector<int> s2_freq_vec(26, 0);
   while (j < n2) {
     s2_freq_vec[s2[j] - 'a']++;
 
@@ -92,17 +94,17 @@ bool checkInclusion(std::string s1, std::string s2) {
 
 int main() {
   // * testcase 1
-  // std::string s1 = "ab", s2 = "eidbaooo";
+  string s1 = "ab", s2 = "eidbaooo";
 
   // * testcase 2
-  std::string s1 = "ab", s2 = "eidboaoo";
+  // string s1 = "ab", s2 = "eidboaoo";
 
-  std::cout << "String 1: " << s1 << std::endl;
-  std::cout << "String 2: " << s2 << std::endl;
+  cout << "String 1: " << s1 << endl;
+  cout << "String 2: " << s2 << endl;
 
   bool ans = betterApproach(s1, s2);
   // bool ans = checkInclusion(s1, s2);
-  std::cout << "Permutation in String: " << ans << std::endl;
+  cout << "Permutation in String: " << ans << endl;
 
   return 0;
 }

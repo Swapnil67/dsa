@@ -88,7 +88,7 @@ int bSearch(
   return ans;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // ! Sort the array & calculate prefix_sum for array
 // * TIME COMPLEXITY O(N * nlogn)
 // * SPACE COMPLEXITY O(1)
@@ -111,7 +111,7 @@ int bruteForce(vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 3A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3A: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * Keep cur_sum & window_sum
 // * TIME COMPLEXITY O(2N)

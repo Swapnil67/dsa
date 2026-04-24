@@ -20,14 +20,17 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
+unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Check all possible substrings of less than k
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(26)
-int bruteForce(std::string s, int k) {
+int bruteForce(string s, int k) {
   int n = s.size();
   int ans = INT_MIN;
-  std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   for (int i = 0; i < n - k; ++i) {
     int vowels_cnt = 0;
     for (int j = i; j < i + k; ++j) {
@@ -35,7 +38,7 @@ int bruteForce(std::string s, int k) {
         vowels_cnt++;
       }
     }
-    ans = std::max(ans, vowels_cnt);
+    ans = max(ans, vowels_cnt);
   }
   return ans;
 }
@@ -44,11 +47,10 @@ int bruteForce(std::string s, int k) {
 // * Keep count c for cur vowel substring length
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int maxVowels(std::string s, int k) {
+int maxVowels(string s, int k) {
   int n = s.size();
   int max_vowels_cnt = INT_MIN;
   int i = 0, j = 0, vowel_cnt = 0;
-  std::unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   while(j < n) {
     // * Check if vowel
     if (vowels.count(s[j]))
@@ -62,7 +64,7 @@ int maxVowels(std::string s, int k) {
     }
 
     // * count vowels substring
-    max_vowels_cnt = std::max(max_vowels_cnt, vowel_cnt);
+    max_vowels_cnt = max(max_vowels_cnt, vowel_cnt);
     j++;
   }
   return max_vowels_cnt;
@@ -72,22 +74,22 @@ int maxVowels(std::string s, int k) {
 int main() {
   // * testcase 1
   int k = 3;
-  std::string s = "abciiidef";
+  string s = "abciiidef";
 
   // * testcase 2
   // int k = 2;
-  // std::string s = "aeiou";
+  // string s = "aeiou";
 
   // * testcase 3
   // int k = 3;
-  // std::string s = "leetcode";
+  // string s = "leetcode";
 
-  std::cout << "k: " << k << std::endl;
-  std::cout << "Input String: " << s << std::endl;
+  cout << "k: " << k << endl;
+  cout << "Input String: " << s << endl;
 
   // int ans = bruteForce(s, k);
   int ans = maxVowels(s, k);
-  std::cout << "Maximum Number of Vowels: " << ans << std::endl;
+  cout << "Maximum Number of Vowels: " << ans << endl;
   
   return 0;
 }

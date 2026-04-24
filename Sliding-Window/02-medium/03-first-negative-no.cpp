@@ -57,7 +57,7 @@ vector<int> bruteForce(vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Save the -ve numbers to deque
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

@@ -127,12 +127,12 @@ int characterReplacement(string s, int k) {
 
 int main() {
   // * testcase 1
-  int k = 1;
-  string s = "AABABBA";
+  // int k = 1;
+  // string s = "AABABBA";
   
   // * testcase 2
-  // int k = 2;
-  // string s = "ABAB";
+  int k = 2;
+  string s = "ABAB";
   
   cout << "Input String: " << s << endl;
 

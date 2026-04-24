@@ -98,7 +98,7 @@ vector<int> betterApproach(vector<int> &arr, int k, int x) {
 // * 1st no in window will always be closer to x than the last+1 element
 // * g(m) = f(m) <= f(m + k)
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Sliding Window + Binary Search
 // * (x - arr[m]) > (arr[m + k] - x)
 // * TIME COMPLEXITY O(logn)

@@ -92,12 +92,12 @@ int minSubArrayLen(vector<int> arr, int target) {
 
 int main() {
   // * testcase 1
-  // int target = 7;
-  // vector<int> arr = {2, 3, 1, 2, 4, 3};
+  int target = 7;
+  vector<int> arr = {2, 3, 1, 2, 4, 3};
 
   // * testcase 2
-  int target = 11;
-  vector<int> arr = {1, 1, 1, 1, 1, 1, 1, 1};
+  // int target = 11;
+  // vector<int> arr = {1, 1, 1, 1, 1, 1, 1, 1};
 
   // * testcase 3
   // int target = 4;

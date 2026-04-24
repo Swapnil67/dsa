@@ -60,7 +60,7 @@ int bruteForce(vector<int> &arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * Note: subarrays ending at 'j' => (n - j)
 // * TIME COMPLEXITY O(2N)

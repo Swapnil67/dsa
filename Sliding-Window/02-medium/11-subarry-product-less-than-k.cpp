@@ -99,12 +99,12 @@ int numSubarrayProductLessThanK(vector<int>& nums, int k) {
 
 int main(void) {
   // * testcase 1
-  int k = 100;
-  vector<int> arr = {10, 5, 2, 6};
+  // int k = 100;
+  // vector<int> arr = {10, 5, 2, 6};
 
   // * testcase 2
-  // int k = 0;
-  // vector<int> arr = {1, 2, 3};
+  int k = 0;
+  vector<int> arr = {1, 2, 3};
 
   printf("Product: %d\n", k);
   printf("Input Array\n");

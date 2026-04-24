@@ -43,7 +43,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Using prefix sum map
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(X)
@@ -81,7 +81,7 @@ int minOperations2(vector<int> &arr, int x) {
   return ans < 0 ? -1 : n - ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Classic Sliding Window + Basic Algebra
 // * left_sum + right_sum == x
 // * _______________ sum ________________

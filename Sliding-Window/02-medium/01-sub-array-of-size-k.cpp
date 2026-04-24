@@ -56,7 +56,7 @@ int bruteForce(vector<int> &arr, int &k, int &threshold) {
 }
 
 
-// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
@@ -83,7 +83,7 @@ int numOfSubarrays1(vector<int> &arr, int k, int threshold) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------
 // * Classic Sliding Window without 'i' or 'j'
 // * Sliding Window Approach 2
 // * For threshold average the sum of subarray must be >= (k * threshold)

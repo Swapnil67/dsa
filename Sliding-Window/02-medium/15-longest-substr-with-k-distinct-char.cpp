@@ -29,7 +29,7 @@
 
 using namespace std;
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(256)
@@ -50,7 +50,7 @@ int bruteForce(string s, int k) {
 }
 
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // * Classic Sliding Window
 // * Keep frequency map of character occurences
 // * If frequency map size becomes greater than k then remove frequency map till it gets to k size
@@ -73,7 +73,7 @@ int betterApproach(string s, int k) {
       i++;
     }
 
-    if(freq_map.size() <= k) {
+    if (freq_map.size() <= k) {
       max_len = max(max_len, j - i + 1);
     }
 
@@ -83,7 +83,7 @@ int betterApproach(string s, int k) {
   return max_len;
 }
 
-// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * Keep frequency map of character occurences
 // * Only calculate max_len if map size is within k or else decrease the frequency map
@@ -97,14 +97,13 @@ int kDistinctChars(string s, int k) {
     freq_map[s[j]]++;
 
     // * Keep frequency map with k distinct elements
-    if(freq_map.size() > k) {
-        freq_map[s[i]]--;
-        if(freq_map[s[i]] == 0) {
-          freq_map.erase(s[i]);
-        }
-        i++;
-    }
-    else {
+    if (freq_map.size() > k) {
+      freq_map[s[i]]--;
+      if (freq_map[s[i]] == 0) {
+        freq_map.erase(s[i]);
+      }
+      i++;
+    } else {
       // * Only calculate if we have k distinct characters
       max_len = max(max_len, (j - i + 1));
     }

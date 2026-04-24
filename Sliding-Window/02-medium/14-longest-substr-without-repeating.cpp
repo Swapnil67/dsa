@@ -54,7 +54,7 @@ int bruteForce(string s) {
   return max_len;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Keep the map of character positions & using sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(256)
@@ -83,7 +83,7 @@ int lengthOfLongestSubstring(string s) {
   return max_len;
 }
 
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------
 // * Keep the map of character positions & using sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(256)

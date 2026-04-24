@@ -43,7 +43,7 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -64,7 +64,7 @@ int bruteForce(std::vector<int> arr, int goal) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: BETTER APPROACH -------------------------`
+// * ------------------------- APPROACH 2: BETTER APPROACH -------------------------
 // * Prefix Sum [Map Data Structure]
 // * TIME COMPLEXITY O(NlogN) [Ordered Map]
 // * TIME COMPLEXITY O(N) [Best Case Unordered Map] or O(N^2) [Worst Case Unordered Map]
@@ -85,7 +85,9 @@ int betterApproach(std::vector<int> arr, int goal) {
   return ans;
 }
 
-// * ------------------------- APPROACH 3A: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 3A: Optimal APPROACH -------------------------
+// * When we have a valid window [i, j] with sum <= goal, we're not just counting that one subarray 
+// * we're counting all subarrays ending at position 'j' that have sum <= goal.
 // * Clever apprach
 // * Sliding Window for ans <= goal
 int helper(std::vector<int> arr, int goal) {
