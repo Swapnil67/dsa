@@ -1,26 +1,27 @@
-/**
- * * leetcode - 3208
- * * Alternating Groups II
- * * There is a circle of red and blue tiles. You are given an array of integers colors and an integer k. 
- * * The color of tile i is represented by colors[i]:
- * * An alternating group is every k contiguous tiles in the circle with alternating colors
- * * (each tile in the group except the first and last one has a different color from its left and right tiles).
- * * Return the number of alternating groups.
- * * Note that since colors represents a circle, the first and the last tiles are considered to be next to each other.
+/*
+ * leetcode - 3208
+ * Alternating Groups II
  * 
- * * Example 1
- * * Input  : colors = [0, 1, 0, 1, 0], k = 3
- * * Output : 3
+ * There is a circle of red and blue tiles. You are given an array of integers colors and an integer k. 
+ * The color of tile i is represented by colors[i]:
+ * An alternating group is every k contiguous tiles in the circle with alternating colors
+ * (each tile in the group except the first and last one has a different color from its left and right tiles).
+ * Return the number of alternating groups.
+ * Note that since colors represents a circle, the first and the last tiles are considered to be next to each other.
  * 
- * * Example 2
- * * Input  : colors = [0, 1, 0, 0, 1, 0, 1], k = 6
- * * Output : 2
+ * Example 1
+ * Input  : colors = [0, 1, 0, 1, 0], k = 3
+ * Output : 3
  * 
- * * Example 3
- * * Input  : colors = [1, 1, 0, 1], k = 4
- * * Output : 0
+ * Example 2
+ * Input  : colors = [0, 1, 0, 0, 1, 0, 1], k = 6
+ * Output : 2
  * 
- * * https://leetcode.com/problems/alternating-groups-ii/description/
+ * Example 3
+ * Input  : colors = [1, 1, 0, 1], k = 4
+ * Output : 0
+ * 
+ * https://leetcode.com/problems/alternating-groups-ii/description/
 */
 
 #include<vector>
@@ -34,7 +35,7 @@ void printArr(std::vector<int> arr) {
   printf("\n");
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N * K)
 // * SPACE COMPLEXITY O(1)
@@ -64,7 +65,7 @@ int bruteForce(std::vector<int> &arr, int k) {
 }
 
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Add k - 1 elements to the input array for making it circular
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N + K)
@@ -81,7 +82,7 @@ int numberOfAlternatingGroups(std::vector<int> &arr, int k) {
   int i = 0 , j = 1;
   while (j < n) {
     // * If j same as previous one then bring i to j
-    if(arr[j] == arr[j - 1]) {
+    if (arr[j] == arr[j - 1]) {
       i = j;
       j += 1;
       continue;

@@ -75,16 +75,16 @@ int equalSubstring(string s, string t, int max_cost) {
 int main() {
 
   // * testcase 1
-  // int max_cost = 3;
-  // string s = "abcd", t = "bcdf";
+  int max_cost = 3;
+  string s = "abcd", t = "bcdf";
 
   // * testcase 2
   // int max_cost = 3;
   // string s = "abcd", t = "cdef";
 
   // * testcase 3
-  int max_cost = 0;
-  string s = "abcd", t = "acde";
+  // int max_cost = 0;
+  // string s = "abcd", t = "acde";
 
   cout << "s: " << s << endl;
   cout << "t: " << t << endl;

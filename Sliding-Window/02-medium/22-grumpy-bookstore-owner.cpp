@@ -18,20 +18,26 @@
 #include <climits>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Calculate max no of unsatisfied customer within minutes window
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minutes) {
+int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
   int n = customers.size();
   int max_unsatisfied_customers = INT_MIN;
   int cur_unsatisfied_customers = 0;
@@ -57,7 +63,7 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
 
     // * Max unsatisfied customer in window
     if ((j - i + 1) == minutes) {
-      max_unsatisfied_customers = std::max(max_unsatisfied_customers, cur_unsatisfied_customers);
+      max_unsatisfied_customers = max(max_unsatisfied_customers, cur_unsatisfied_customers);
     }
 
     j++;
@@ -68,21 +74,21 @@ int maxSatisfied(std::vector<int> &customers, std::vector<int> &grumpy, int minu
 int main() {
   // * testcase 1
   // int minutes = 3;
-  // std::vector<int> customers = {1, 0, 1, 2, 1, 1, 7, 5};
-  // std::vector<int> grumpy = {0, 1, 0, 1, 0, 1, 0, 1};
+  // vector<int> customers = {1, 0, 1, 2, 1, 1, 7, 5};
+  // vector<int> grumpy = {0, 1, 0, 1, 0, 1, 0, 1};
 
   // * testcase 2
   int minutes = 1;
-  std::vector<int> customers = {1};
-  std::vector<int> grumpy = {0};
+  vector<int> customers = {1};
+  vector<int> grumpy = {0};
 
-  std::cout << "Grumpy " << std::endl;
+  cout << "Grumpy " << endl;
   printArr(grumpy);
-  std::cout << "customers " << std::endl;
+  cout << "customers " << endl;
   printArr(customers);
   
   int ans = maxSatisfied(customers, grumpy, minutes);
-  std::cout << "Number of customers satisfied are " << ans << std::endl;
+  cout << "Number of customers satisfied are " << ans << endl;
 
   return 0;
 }

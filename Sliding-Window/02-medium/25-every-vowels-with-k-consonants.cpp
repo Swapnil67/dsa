@@ -1,28 +1,29 @@
 
-/**
- * * Leetcode - 3306
- * * Count of Substrings Containing Every Vowel and K Consonants II
- * * You are given a string word and a non-negative integer k.
- * * Return the total number of substrings of word that contain every vowel ('a', 'e', 'i', 'o', and 'u') 
- * * at least once and exactly k consonants.
+/*
+ * Leetcode - 3306
+ * Count of Substrings Containing Every Vowel and K Consonants II
  * 
- * * Example 1
- * * Input  : word = "aeioqq", k = 1
- * * Output : 0
+ * You are given a string word and a non-negative integer k.
+ * Return the total number of substrings of word that contain every vowel ('a', 'e', 'i', 'o', and 'u') 
+ * at least once and exactly k consonants.
  * 
- * * Example 1
- * * Input  : word = "aeiou", k = 0
- * * Output : 1
+ * Example 1
+ * Input  : word = "aeioqq", k = 1
+ * Output : 0
  * 
- * * Example 1
- * * Input  : word = "ieaouqqieaouqq", k = 1
- * * Output : 3
+ * Example 1
+ * Input  : word = "aeiou", k = 0
+ * Output : 1
  * 
- * * Example 1
- * * Input  : word = "iqeaouqi", k = 2
- * * Output : 3
+ * Example 1
+ * Input  : word = "ieaouqqieaouqq", k = 1
+ * Output : 3
  * 
- * * https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii/description/
+ * Example 1
+ * Input  : word = "iqeaouqi", k = 2
+ * Output : 3
+ * 
+ * https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii/description/
 */
 
 #include <vector>
@@ -44,13 +45,14 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+
 // * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 long long bruteForce(string s, int k) {
   int n = s.size();
-  unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   int i = 0, j = 0, ans = 0;
   
   for (int i = 0; i < n; ++i) {
@@ -155,6 +157,7 @@ long long countOfSubstrings2(string s, int k) {
       next_consonant_idx = i;
     }
   }
+  printArr(next_consonant);
 
   unordered_map<char, int> cur_vowels;
   int cur_consonants = 0;
@@ -169,9 +172,8 @@ long long countOfSubstrings2(string s, int k) {
     if(cur_consonants > k) {
       if (vowels.count(s[i])) {
         cur_vowels[s[i]]--;
-        if (cur_vowels[s[i]] == 0) {
+        if (cur_vowels[s[i]] == 0)
           cur_vowels.erase(s[i]);
-        }
       } else {
         cur_consonants--;
       }
@@ -179,12 +181,13 @@ long long countOfSubstrings2(string s, int k) {
     }
 
     while (cur_consonants == k && cur_vowels.size() == vowels.size()) {
-      ans += (next_consonant[j] - j);
+      ans += (next_consonant[j] - j); // * Here we took all the possible substr starting from 'i'.
+
+      // * So we need to skip this 'i'
       if (vowels.count(s[i])) {
         cur_vowels[s[i]]--;
-        if (cur_vowels[s[i]] == 0) {
+        if (cur_vowels[s[i]] == 0)
           cur_vowels.erase(s[i]);
-        }
       } else {
         cur_consonants--;
       }
@@ -201,8 +204,8 @@ int main() {
   // int k = 1;
   // string word = "aeioqq"; 
 
-  int k = 0;
-  string word = "aeueio"; 
+  // int k = 0;
+  // string word = "aeueio"; 
 
   // int k = 0;
   // string word = "aeiou"; 
@@ -213,8 +216,8 @@ int main() {
   // int k = 0;
   // string word = "aouiei"; 
 
-  // int k = 2;
-  // string word = "iqeaouqi"; 
+  int k = 2;
+  string word = "iqeaouqi"; 
 
   cout << word << endl;
 

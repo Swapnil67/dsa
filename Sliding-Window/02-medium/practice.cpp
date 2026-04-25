@@ -22,35 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 20 - Minimum Number of Flips to Make the Binary String Alternating
-// int minFlips(string s) {
-// TODO
-// }
-
-// * 21 - get Equal Substrings Within Budget
-// int equalSubstring(string s, string t, int max_cost) {
-// TODO
-// }
-
-// * 22 - Grumpy Bookstore Owner
-// int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
-// TODO
-// }
-
-// * 23 - Alternating Groups II
-// int numberOfAlternatingGroups(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 24 - Count Number of Nice Subarrays
-// int numberOfSubarrays(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
-// long long countOfSubstrings(string s, int k) {
-// TODO
-// }
 
 // * 26 - Find the Power of K-Size Subarrays I
 // vector<int> resultsArray(vector<int> &arr, int k) {
@@ -176,6 +147,36 @@ void printArr(vector<T> &arr) {
 
 // * 19 - Maximum Number of Vowels in a Substring of Given Length
 // int maxVowels(string &s, int k) {
+// TODO
+// }
+
+// * 20 - Minimum Number of Flips to Make the Binary String Alternating
+// int minFlips(string s) {
+// TODO
+// }
+
+// * 21 - get Equal Substrings Within Budget
+// int equalSubstring(string s, string t, int max_cost) {
+// TODO
+// }
+
+// * 22 - Grumpy Bookstore Owner
+// int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
+// TODO
+// }
+
+// * 23 - Alternating Groups II
+// int numberOfAlternatingGroups(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 24 - Count Number of Nice Subarrays
+// int numberOfSubarrays(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
+// long long countOfSubstrings(string s, int k) {
 // TODO
 // }
 
