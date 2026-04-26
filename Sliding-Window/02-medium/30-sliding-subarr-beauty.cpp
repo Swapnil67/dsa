@@ -1,14 +1,42 @@
-/**
- * * Leetcode - 2653
- * * Sliding Subarray Beauty
+/*
+ * Leetcode - 2653
+ * Sliding Subarray Beauty
  * 
- * * Given an integer array nums containing n integers, find the beauty of each subarray of size k.
- * * The beauty of a subarray is the xth smallest integer in the subarray if it is negative, or 0 
- * * if there are fewer than x negative integers.
- * * Return an integer array containing n - k + 1 integers, which denote the beauty of the subarrays in order 
- * * from the first index in the array.
+ * Given an integer array nums containing n integers, find the beauty of each subarray of size k.
+ * The beauty of a subarray is the xth smallest integer in the subarray if it is negative, or 0 
+ * if there are fewer than x negative integers.
+ * Return an integer array containing n - k + 1 integers, which denote the beauty of the subarrays in order 
+ * from the first index in the array.
  * 
- * * https://leetcode.com/problems/sliding-subarray-beauty/description/
+ * Example 1    :
+ * Input        : nums = [1,-1,-3,-2,3], k = 3, x = 2
+ * Output       : [-1,-2,-2]
+ * Explanation  : There are 3 subarrays with size k = 3. 
+ *                1st - [1, -1, -3] and the 2nd smallest negative integer is -1. 
+ *                2nd - [-1, -3, -2] and the 2nd smallest negative integer is -2. 
+ *                3rd - [-3, -2, 3] and the 2nd smallest negative integer is -2.
+ * 
+ * Example 2    :
+ * Input        : nums = [-1,-2,-3,-4,-5], k = 2, x = 2
+ * Output       : [-1,-2,-3,-4]
+ * Explanation  : There are 4 subarrays with size k = 2.
+ *                For [-1, -2], the 2nd smallest negative integer is -1.
+ *                For [-2, -3], the 2nd smallest negative integer is -2.
+ *                For [-3, -4], the 2nd smallest negative integer is -3.
+ *                For [-4, -5], the 2nd smallest negative integer is -4. 
+ * 
+ * Example 3    :
+ * Input        : nums = [-3,1,2,-3,0,-3], k = 2, x = 1
+ * Output       : [-3,0,-3,-3,-3]
+ * Explanation  : There are 5 subarrays with size k = 2.
+ *                For [-3, 1], the 1st smallest negative integer is -3.
+ *                For [1, 2], there is no negative integer so the beauty is 0.
+ *                For [2, -3], the 1st smallest negative integer is -3.
+ *                For [-3, 0], the 1st smallest negative integer is -3.
+ *                For [0, -3], the 1st smallest negative integer is -3.
+ * 
+ * 
+ * https://leetcode.com/problems/sliding-subarray-beauty/description/
 */
 
 #include <vector>
@@ -16,34 +44,38 @@
 #include <algorithm>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * TIME COMPLEXITY O(N * K)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> &nums, int k, int x) {
-  std::vector<int> ans;
+vector<int> bruteForce(vector<int> &nums, int k, int x) {
   int n = nums.size();
 
+  vector<int> ans(n - k + 1, 0);
   // * O(N * K)
   for(int i = 0; i <= n - k; ++i) {
-    std::vector<int> temp;
+    vector<int> temp;
     for (int j = i; j < (i + k); ++j) {
       temp.push_back(nums[j]);
     }
 
-    int val = 0;
     if (temp.size() >= x) {
-      std::sort(temp.begin(), temp.end());  // * O(KlogK)
-      val = temp[x - 1] <= 0 ? temp[x - 1] : 0;
+      sort(temp.begin(), temp.end());  // * O(KlogK)
+      ans[i] = temp[x - 1] <= 0 ? temp[x - 1] : 0;
     }
-    ans.push_back(val);
   }
 
   return ans;
@@ -53,15 +85,15 @@ std::vector<int> bruteForce(std::vector<int> &nums, int k, int x) {
 // * Classic Sliding Window + Counting Sort
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
+vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
   int n = nums.size();
-  std::vector<int> ans;
+  vector<int> ans;
 
   if (n == 0)
     return ans;
 
   // * map[number, count]
-  std::unordered_map<int, int> mp;
+  unordered_map<int, int> mp;
 
   int i = 0, j = 0;
   while (j < n) {
@@ -77,16 +109,16 @@ std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
     // * Counting sort
     if ((j - i + 1) == k) {
       int f = 0, val = 0;
-      for (int i = -50; i <= -1; ++i) {
-        f += mp[i];
+      for (int k = -50; k <= -1; ++k) {
+        f += mp[k];
         if (f >= x) {
-          val = i;
+          val = k;
           break;
         }
       }
       ans.push_back(val);
     }
-
+    
     j++;
   }
 
@@ -96,26 +128,26 @@ std::vector<int> getSubarrayBeauty(std::vector<int> &nums, int k, int x) {
 int main(void) {
   // * testcase 1
   // int k = 3, x = 2;
-  // std::vector<int> nums = {1, -1, -3, -2, 3};
+  // vector<int> nums = {1, -1, -3, -2, 3};
 
   // * testcase 2
   int k = 2, x = 2;
-  std::vector<int> nums = {-1, -2, -3, -4, -5};
+  vector<int> nums = {-1, -2, -3, -4, -5};
 
   // * testcase 3
   // int k = 2, x = 1;
-  // std::vector<int> nums = {-3, 1, 2, -3, 0, -3};
+  // vector<int> nums = {-3, 1, 2, -3, 0, -3};
 
   // * testcase 3
   // int k = 9, x = 4;
-  // std::vector<int> nums = {-14, 9, 13, -26, 47, -39, -49, -14, 29};
+  // vector<int> nums = {-14, 9, 13, -26, 47, -39, -49, -14, 29};
 
-  std::cout << "k = " << k << ", x = " << x << std::endl;
-  std::cout << "Input Array" << std::endl;
+  cout << "k = " << k << ", x = " << x << endl;
+  cout << "Input Array" << endl;
   printArr(nums);
   
-  // std::vector<int> ans = bruteForce(nums, k, x);
-  std::vector<int> ans = getSubarrayBeauty(nums, k, x);
+  // vector<int> ans = bruteForce(nums, k, x);
+  vector<int> ans = getSubarrayBeauty(nums, k, x);
   printArr(ans);
 
   return 0;

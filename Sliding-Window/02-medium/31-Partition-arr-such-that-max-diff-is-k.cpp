@@ -28,23 +28,29 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(1)
-int partitionArray(std::vector<int> &nums, int k) {
+int partitionArray(vector<int> &nums, int k) {
   int n = nums.size();
 
   // * sort the input array
-  std::sort(nums.begin(), nums.end());
+  sort(nums.begin(), nums.end());
 
   int j = 0, ans = 1;
   int cur_min = nums[0]; // * start the current subseq with first ele
@@ -64,22 +70,22 @@ int partitionArray(std::vector<int> &nums, int k) {
 int main(void) {
   // * testcase 1 (ans = 2)
   // int k = 2;
-  // std::vector<int> nums = {3, 6, 1, 2, 5};
+  // vector<int> nums = {3, 6, 1, 2, 5};
 
   // * testcase 2 (ans = 2)
   // int k = 1;
-  // std::vector<int> nums = {1,2,3};
+  // vector<int> nums = {1,2,3};
 
   // * testcase 3 (ans = 3)
   int k = 0;
-  std::vector<int> nums = {2, 2, 4, 5};
+  vector<int> nums = {2, 2, 4, 5};
 
-  std::cout << "k = " << k << std::endl;
-  std::cout << "Input Array" << std::endl;
+  cout << "k = " << k << endl;
+  cout << "Input Array" << endl;
   printArr(nums);
   
   int ans = partitionArray(nums, k);
-  std::cout << "Count: " << ans << std::endl;
+  cout << "Count: " << ans << endl;
 
   return 0;
 }

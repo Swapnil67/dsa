@@ -2,6 +2,7 @@
 /*
  * Leetcode - 2779
  * Maximum Beauty of an Array After Applying Operation
+ * 
  * You are given a 0-indexed array nums and a non-negative integer k.
  * In one operation, you can do the following:
  *    * Choose an index i that hasn't been chosen before from the range [0, nums.length - 1].
@@ -121,8 +122,11 @@ int maximumBeauty(vector<int> arr, int k) {
     int x = arr[i];
     int y = x + 2 * k;
 
+    cout << "x: " << x << ", y: " << y << endl;
+
     // * Find the max index of element who is >= 'y'
     int j = binarySearch(arr, y);
+    cout << "j: " << j << endl;
     max_beauty = max(max_beauty, j - i + 1);
   }
 
@@ -174,8 +178,8 @@ int main() {
   printArr(arr);
 
   // int ans = bruteForce(arr, k);
-  // int ans = maximumBeauty(arr, k);
-  int ans = maximumBeauty2(arr, k);
+  int ans = maximumBeauty(arr, k);
+  // int ans = maximumBeauty2(arr, k);
   cout << "Maximum Beauty of an Array After Applying Operation: " << ans << endl;
 
   return 0;

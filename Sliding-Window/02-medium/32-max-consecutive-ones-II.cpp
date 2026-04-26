@@ -3,11 +3,11 @@
  * Max Consecutive Ones II
  * 
  * Given a binary array nums, return the maximum number of consecutive 1's in the array if you can flip at most one 0.
-
+ *
  * Example 1
  * * Input  : nums = [1,0,1,1,0]
  * * Output : 4
-
+ *
  * Example 2
  * * Input  : nums = [1,0,1,1,0,1]
  * * Output : 4
@@ -20,18 +20,24 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(n)
-int findMaxConsecutiveOnes(std::vector<int> &nums) {
+int findMaxConsecutiveOnes(vector<int> &nums) {
 // * SPACE COMPLEXITY O(1)
   int n = nums.size();
   int ans = 0;
@@ -46,7 +52,7 @@ int findMaxConsecutiveOnes(std::vector<int> &nums) {
       i++;
     }
 
-    ans = std::max(ans, (j - i + 1));
+    ans = max(ans, (j - i + 1));
     j++;
   }
 
@@ -55,19 +61,19 @@ int findMaxConsecutiveOnes(std::vector<int> &nums) {
 
 int main(void) {
   // * testcase 1 (ans = 4)
-  // std::vector<int> nums = {1, 0, 1, 1, 0};
+  // vector<int> nums = {1, 0, 1, 1, 0};
 
   // * testcase 2 (ans = 2)
-  std::vector<int> nums = {1, 0, 1, 1, 0, 1};
+  vector<int> nums = {1, 0, 1, 1, 0, 1};
 
   // * testcase 3 (ans = 3)
-  // std::vector<int> nums = {2, 2, 4, 5};
+  // vector<int> nums = {2, 2, 4, 5};
 
-  std::cout << "Input Array" << std::endl;
+  cout << "Input Array" << endl;
   printArr(nums);
   
   int ans = findMaxConsecutiveOnes(nums);
-  std::cout << "Count: " << ans << std::endl;
+  cout << "Count: " << ans << endl;
 
   return 0;
 }

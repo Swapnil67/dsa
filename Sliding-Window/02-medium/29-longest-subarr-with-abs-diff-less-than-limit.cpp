@@ -1,61 +1,69 @@
-/**
- * * Leetcode - 1438
- * * Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+/*
+ * Leetcode - 1438
+ * Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 
- * * Given an array of integers nums and an integer limit, return the size of the longest non-empty subarray such 
- * * that the absolute difference between any two elements of this subarray is less than or equal to limit.
+ * Given an array of integers nums and an integer limit, return the size of the longest non-empty subarray such 
+ * that the absolute difference between any two elements of this subarray is less than or equal to limit.
  * 
- * * Example 1
- * * Input  : nums = [8,2,4,7], limit = 4
- * * Output : 2
- * * Explanation: 
- * * Maximum absolute difference
- * * 8             |8 - 8| = 0
- * * 8, 2,         |8 - 2| = 6
- * * 8, 2, 4,      |8 - 2| = 6
- * * 8, 2, 4, 7,   |8 - 2| = 6
+ * Example 1
+ * Input  : nums = [8,2,4,7], limit = 4
+ * Output : 2
+ * Explanation: 
+ * Maximum absolute difference
+ * 8             |8 - 8| = 0
+ * 8, 2,         |8 - 2| = 6
+ * 8, 2, 4,      |8 - 2| = 6
+ * 8, 2, 4, 7,   |8 - 2| = 6
 
- * * 
- * * 2             |2 - 2| = 0
- * * 2, 4,         |2 - 4| = 2
- * * 2, 4, 7       |2 - 7| = 5
+ * 
+ * 2             |2 - 2| = 0
+ * 2, 4,         |2 - 4| = 2
+ * 2, 4, 7       |2 - 7| = 5
 
- * * 
- * * 4             |4 - 4| = 0
- * * 4, 7          |4 - 7| = 3  (Answer = [4, 7])
- * * 
- * * 7             |7 - 7| = 0
+ * 
+ * 4             |4 - 4| = 0
+ * 4, 7          |4 - 7| = 3  (Answer = [4, 7])
+ * 
+ * 7             |7 - 7| = 0
 
- * * https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/
+ * https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
 */
+
+// ! Amazon, Google, Meta, Microsoft, Visa, PhonePe, Uber
 
 #include <set>
 #include <queue>
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> nums, int limit) {
+int bruteForce(vector<int> nums, int limit) {
   int n = nums.size();
   int ans = 0;
   for (int i = 0; i < n; ++i) {
     int cur_max_abs_diff = -1;
     for (int j = i; j < n; ++j) {
       // * Max diff means that diff b/w largest and smallest elements
-      cur_max_abs_diff = std::max(cur_max_abs_diff, std::abs(nums[i] - nums[j]));
+      cur_max_abs_diff = max(cur_max_abs_diff, abs(nums[i] - nums[j]));
       if (cur_max_abs_diff <= limit) {
-        ans = std::max(ans, j - i + 1);
+        ans = max(ans, j - i + 1);
       }
     }
   }
@@ -70,13 +78,13 @@ int bruteForce(std::vector<int> nums, int limit) {
 
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(N + N)
-int longestSubarray(std::vector<int> &nums, int limit) {
+int longestSubarray(vector<int> &nums, int limit) {
   int n = nums.size();
 
-  typedef std::pair<int, int> P;
-  std::priority_queue<P, std::vector<P>> maxPq;                  // * Max Heap
-  std::priority_queue<P, std::vector<P>, std::greater<P>> minPq; // * Min Heap
-  
+  typedef pair<int, int> P;
+  priority_queue<P, vector<P>> maxPq;             // * Max Heap
+  priority_queue<P, vector<P>, greater<P>> minPq; // * Min Heap
+
   int i = 0, j = 0, ans = 0;
 
   while(j < n) { // * O(nlogn)
@@ -88,7 +96,7 @@ int longestSubarray(std::vector<int> &nums, int limit) {
     // * then shrink window
     while (maxPq.top().first - minPq.top().first > limit) {
       // * Find the next position for 'i'
-      i = std::min(maxPq.top().second, minPq.top().second) + 1;
+      i = min(maxPq.top().second, minPq.top().second) + 1;
 
       // * Remove all index less than 'i' from 'maxPq'
       while (i > maxPq.top().second) {
@@ -101,7 +109,7 @@ int longestSubarray(std::vector<int> &nums, int limit) {
       }
     }
 
-    ans = std::max(ans, j - i + 1);
+    ans = max(ans, j - i + 1);
     j++;
   }
 
@@ -121,9 +129,9 @@ int longestSubarray(std::vector<int> &nums, int limit) {
 */
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(2N)
-int longestSubarray2(std::vector<int> &nums, int limit) {
+int longestSubarray2(vector<int> &nums, int limit) {
   int n = nums.size();
-  std::deque<int> minDq, maxDq;
+  deque<int> minDq, maxDq;
   int i = 0, j = 0, ans = 0;
   while (j < n) {
     // * Maintain minDq (increasing)
@@ -148,7 +156,7 @@ int longestSubarray2(std::vector<int> &nums, int limit) {
       i++;
     }
 
-    ans = std::max(ans, j - i + 1);
+    ans = max(ans, j - i + 1);
     j++;
   }
   return ans;
@@ -159,11 +167,11 @@ int longestSubarray2(std::vector<int> &nums, int limit) {
 // * Using multiset data-structure
 // * TIME COMPLEXITY O(n * log(n))
 // * SPACE COMPLEXITY O(N)
-int longestSubarray3(std::vector<int> &nums, int limit) {
+int longestSubarray3(vector<int> &nums, int limit) {
   int n = nums.size();
   
   int i = 0, j = 0, ans = 0;
-  std::multiset<int> ms;
+  multiset<int> ms;
 
   while (j < n) { // * (n * log(n))
     ms.insert(nums[j]);
@@ -173,7 +181,7 @@ int longestSubarray3(std::vector<int> &nums, int limit) {
       i++;
     }
 
-    ans = std::max(ans, j - i + 1);
+    ans = max(ans, j - i + 1);
     j++;
   }
 
@@ -183,24 +191,24 @@ int longestSubarray3(std::vector<int> &nums, int limit) {
 int main() {
   // * testcase 1 (ans = 2)
   // int limit = 4;
-  // std::vector<int> nums = {8, 2, 4, 7};
+  // vector<int> nums = {8, 2, 4, 7};
   
   // * testcase 2 (ans = 4)
   int limit = 5; 
-  std::vector<int> nums = {10, 1, 2, 4, 7, 2};
+  vector<int> nums = {10, 1, 2, 4, 7, 2};
   
   // * testcase 3 (ans = 3)
   // int limit = 0;
-  // std::vector<int> nums = {4, 2, 2, 2, 4, 4, 2, 2};
+  // vector<int> nums = {4, 2, 2, 2, 4, 4, 2, 2};
 
-  std::cout << "Limit: " << limit << std::endl;
-  std::cout << "Input array: ";
+  cout << "Limit: " << limit << endl;
+  cout << "Input array: ";
   printArr(nums);
 
   // int ans = bruteForce(nums, limit);
   // int ans = longestSubarray(nums, limit);
   int ans = longestSubarray2(nums, limit);
-  std::cout << "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit: " << ans << std::endl;
+  cout << "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit: " << ans << endl;
 
   return 0;
 }

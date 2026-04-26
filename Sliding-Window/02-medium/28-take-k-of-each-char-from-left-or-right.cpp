@@ -22,15 +22,17 @@
 #include <climits>
 #include <iostream>
 
+using namespace std;
+
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int takeCharacters(std::string s, int k) {
+int takeCharacters(string s, int k) {
   int n = s.length();
 
   // * Calculate total number of 'a', 'b' & 'c' characters
-  std::vector<int> char_freq(3, 0); // * a, b, c
+  vector<int> char_freq(3, 0); // * a, b, c
   for (char &ch : s) {
     char_freq[ch - 'a']++;
   }
@@ -53,11 +55,11 @@ int takeCharacters(std::string s, int k) {
 
     // * 'a' >= k || 'b' >= k || 'c' >= k
     if (char_freq[0] >= k && char_freq[1] >= k && char_freq[2] >= k) {
-      max_window = std::max(max_window, (j - i + 1));
+      max_window = max(max_window, (j - i + 1));
     }
     j++;    
   }
-  // std::cout << max_window << std::endl;
+  // cout << max_window << endl;
 
   return n - max_window; // * minutes 
 }
@@ -66,19 +68,19 @@ int main() {
 
   // * testcase 1
   int k = 2;
-  std::string s = "aabaaaacaabc";
+  string s = "aabaaaacaabc";
   
   // * testcase 2
   // int k = 1;
-  // std::string s = "a";
+  // string s = "a";
   
   // * testcase 3
   // int k = 1;
-  // std::string s = "abc";
+  // string s = "abc";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
   int ans = takeCharacters(s, k);
-  std::cout << "Minimum number of minutes needed: " << ans << std::endl;
+  cout << "Minimum number of minutes needed: " << ans << endl;
   
   return 0;
 }

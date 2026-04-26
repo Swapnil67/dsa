@@ -22,27 +22,35 @@
  * Input  : nums = [3,2,3,2,3,2], k = 2
  * Output : [-1,3,-1,3,-1]
  * 
- * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/description/
+ * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-ii/
+ * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/
 */
 
 #include <deque>
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible k sized subarrays
 // * TIME COMPLEXITY O(N * K)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int> arr, int k) {
+vector<int> bruteForce(vector<int> arr, int k) {
   int n = arr.size();
-  std::vector<int> ans;
+  vector<int> ans;
 
   for (int i = 0; i <= n - k; ++i) {
     int cur_power = -1;
@@ -50,8 +58,7 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
       if (j > i) {
         if(arr[j] == arr[j - 1] + 1) {
           cur_power = arr[j];
-        }
-        else {
+        } else {
           cur_power = -1;
           break;
         }
@@ -62,14 +69,14 @@ std::vector<int> bruteForce(std::vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2A: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * Keep the consecutive_count variable
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> resultsArray(std::vector<int> arr, int k) {
+vector<int> resultsArray(vector<int> arr, int k) {
   int n = arr.size();
-  std::vector<int> ans((n - k + 1), -1);
+  vector<int> ans((n - k + 1), -1);
   int consecutive_cnt = 0; // * count of consecutive elements
 
   // * Find the answer in first k subarray
@@ -80,9 +87,8 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
       consecutive_cnt = 1;
     }
   }
-  if(consecutive_cnt == k) {
+  if (consecutive_cnt == k)
     ans[0] = arr[k - 1];
-  }
 
   // * Find the remaining ans through sliding window
   int i = 1;  // * here 'i' acts a current index for ans vector
@@ -106,16 +112,16 @@ std::vector<int> resultsArray(std::vector<int> arr, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2B: Optimal Approach -------------------------
 // * Monotonic Deque
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> resultsArray2(std::vector<int> &arr, int k) {
+vector<int> resultsArray2(vector<int> &arr, int k) {
   int n = arr.size();
-  std::deque<int> dq;
+  deque<int> dq;
 
-  std::vector<int> ans;
+  vector<int> ans;
   int j = 0;
   while (j < n) {
     
@@ -148,21 +154,21 @@ std::vector<int> resultsArray2(std::vector<int> &arr, int k) {
 int main() {
   // * testcase 1
   // int k = 3;
-  // std::vector<int> arr = {1, 2, 3, 4, 3, 2, 5};
+  // vector<int> arr = {1, 2, 3, 4, 3, 2, 5};
   
   // * testcase 2
   // int k = 4;
-  // std::vector<int> arr = {2, 2, 2, 2, 2};
+  // vector<int> arr = {2, 2, 2, 2, 2};
   
   // * testcase 3
   int k = 2;
-  std::vector<int> arr = {3, 2, 3, 2, 3, 2};
+  vector<int> arr = {3, 2, 3, 2, 3, 2};
 
   printArr(arr);
 
-  // std::vector<int> ans = bruteForce(arr, k);
-  std::vector<int> ans = resultsArray(arr, k);
-  std::cout << "Find the Power of K-Size Subarrays: " << std::endl;
+  // vector<int> ans = bruteForce(arr, k);
+  vector<int> ans = resultsArray(arr, k);
+  cout << "Find the Power of K-Size Subarrays: " << endl;
   printArr(ans);
 
   return 0;

@@ -22,37 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-
-// * 26 - Find the Power of K-Size Subarrays I
-// vector<int> resultsArray(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 27 - Maximum Beauty of an Array After Applying Operation
-// int maximumBeauty(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 28 - Take K of Each Character From Left and Right
-// int takeCharacters(string s, int k) {
-// TODO
-// } 
-
-// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
-// int longestSubarray(vector<int> &nums, int limit) {
-// TODO
-// }
-
-// * 30 - Sliding Subarray Beauty
-// vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
-// TODO
-// }
-
-// * 32 - Max Consecutive Ones II
-// int findMaxConsecutiveOnes(vector<int> &nums) {
-// TODO
-// }
-
 // * ------------------------------------------------------------------------------------------
 
 // * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
@@ -177,6 +146,41 @@ void printArr(vector<T> &arr) {
 
 // * 25 - Count of Substrings Containing Every Vowel and K Consonants II
 // long long countOfSubstrings(string s, int k) {
+// TODO
+// }
+
+// * 26 - Find the Power of K-Size Subarrays I
+// vector<int> resultsArray(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 27 - Maximum Beauty of an Array After Applying Operation
+// int maximumBeauty(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 28 - Take K of Each Character From Left and Right
+// int takeCharacters(string s, int k) {
+// TODO
+// } 
+
+// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+// int longestSubarray(vector<int> &nums, int limit) {
+// TODO
+// }
+
+// * 30 - Sliding Subarray Beauty
+// vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
+// TODO
+// }
+
+// * 31 - Partition Array Such That Maximum Difference Is K
+// int partitionArray(vector<int> &nums, int k) {
+// TODO
+// }
+
+// * 32 - Max Consecutive Ones II
+// int findMaxConsecutiveOnes(vector<int> &nums) {
 // TODO
 // }
 
