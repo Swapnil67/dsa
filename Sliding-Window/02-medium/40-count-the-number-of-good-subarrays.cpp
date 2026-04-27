@@ -50,8 +50,9 @@ long long countGood(vector<int> &nums, int k) {
   while (j < n) {
     pairs += freq_mp[nums[j]]; // * Add the possible pairs
     freq_mp[nums[j]]++;
-    
-    while (pairs >= k) {
+
+    while (pairs >= k)
+    {                            // * atleast 'k' pairs
       ans += (n - j);            // * Take all subarray after and including 'j'
       freq_mp[nums[i]]--;        // * Decr freq
       pairs -= freq_mp[nums[i]]; // * Remove the pairs
@@ -66,12 +67,12 @@ long long countGood(vector<int> &nums, int k) {
 
 int main(void) {
   // * testcase 1
-  // int k = 10;
-  // vector<int> nums = {1, 1, 1, 1, 1};
+  int k = 10;
+  vector<int> nums = {1, 1, 1, 1, 1};
 
   // * testcase 2
-  int k = 2 ;
-  vector<int> nums = {3, 1, 4, 3, 2, 2, 4};
+  // int k = 2 ;
+  // vector<int> nums = {3, 1, 4, 3, 2, 2, 4};
 
   cout << "k: " << k << endl;
   cout << "Input nums: ";

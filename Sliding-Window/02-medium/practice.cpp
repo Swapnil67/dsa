@@ -184,6 +184,33 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 33 - TODO
+
+// * 34 - Longest Subarray with Sum K
+// int longestSubarray(vector<int> &nums, int &k) {
+// TODO
+// }
+
+// * 35 - Longest Substring with At Most Two Distinct Characters
+// int lengthOfLongestSubstringTwoDistinct(std::string s) {
+// TODO
+// }
+
+// * 36 - Maximum Erasure Value
+// int maximumUniqueSubarray(vector<int> &nums) {
+// TODO
+// }
+
+// * 37 - Find K-Length Substrings With No Repeated Characters
+// int numKLenSubstrNoRepeats(std::string s, int k) {
+// TODO
+// }
+
+// * 38 - Maximum Points You Can Obtain from Cards
+// int numKLenSubstrNoRepeats(std::vector<int> &cardPoints, int k) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }

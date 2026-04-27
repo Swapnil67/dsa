@@ -39,24 +39,25 @@
 #include <iostream>
 #include <unordered_map>
 
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^3)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> &nums, int k) {
+int bruteForce(vector<int> &nums, int k) {
   int n = nums.size();
   int max_len = 0;
   for (int i = 0; i < n; ++i) {
@@ -65,12 +66,12 @@ int bruteForce(std::vector<int> &nums, int k) {
       for (int k = i; k <= j; ++k) {
         cur_sum += nums[k];
       }
-      // std::cout << cur_sum << " ";
+      // cout << cur_sum << " ";
       if (cur_sum == k) {
-        max_len = std::max(max_len, (j - i + 1));
+        max_len = max(max_len, (j - i + 1));
       }
     }
-    // std::cout << std::endl;
+    // cout << endl;
   }
   return max_len;
 }
@@ -82,11 +83,11 @@ int bruteForce(std::vector<int> &nums, int k) {
 // *   Ordered Map    - O(nlogn) - (No Collisions)
 // *   UnOrdered Map  - O(n^2)   - (Collisions)
 // * SPACE COMPLEXITY O(n)
-int betterApproach(std::vector<int> &nums, int &k) {
+int betterApproach(vector<int> &nums, int &k) {
   int n = nums.size();
   
   // * {sum, index} Map
-  std::unordered_map<long long, int> prefix_mp;
+  unordered_map<long long, int> prefix_mp;
   
   int max_len = 0;
   long long cur_sum = 0;
@@ -94,13 +95,13 @@ int betterApproach(std::vector<int> &nums, int &k) {
     cur_sum += (nums[j] * 1ll);
 
     if (cur_sum == k) {
-      max_len = std::max(max_len, j + 1);
+      max_len = max(max_len, j + 1);
     }
 
     // * check if (x - k) exists in map
     int rem_sum = cur_sum - k;
     if (prefix_mp.count(rem_sum)) {
-      max_len = std::max(max_len, j - prefix_mp[rem_sum]);
+      max_len = max(max_len, j - prefix_mp[rem_sum]);
     }
 
     // * Only update sub array if it does not exists previously 
@@ -117,7 +118,7 @@ int betterApproach(std::vector<int> &nums, int &k) {
 // * Two Pointer + Sliding Window
 // * TIME COMPLEXITY  O(n)
 // * SPACE COMPLEXITY O(1)
-int longestSubarray(std::vector<int> &nums, int &k) {
+int longestSubarray(vector<int> &nums, int &k) {
   int n = nums.size();
   int max_len = 0;
   long long sum = 0;
@@ -129,10 +130,10 @@ int longestSubarray(std::vector<int> &nums, int &k) {
       sum -= nums[i];
       i++;
     }
-    // std::cout << sum << std::endl;
+    // cout << sum << endl;
     
     if (sum == k) {
-      max_len = std::max(max_len, (j - i + 1));
+      max_len = max(max_len, (j - i + 1));
     }
 
     j++;
@@ -146,23 +147,23 @@ int main(void) {
 
   // * testcase 1
   // int k = 3;
-  // std::vector<int> nums = {1, 2, 3, 1, 1, 1, 1, 4, 2, 3};
+  // vector<int> nums = {1, 2, 3, 1, 1, 1, 1, 4, 2, 3};
 
   // * testcase 2 // * (Will work in betterApproach)
   // int k = 15;
-  // std::vector<int> nums = {10, 5, 2, 7, 1, -10};
+  // vector<int> nums = {10, 5, 2, 7, 1, -10};
 
   // * testcase 3 // * (Will work in betterApproach)
   int k = -5;
-  std::vector<int> nums = {-5, 8, -14, 2, 4, 12};
+  vector<int> nums = {-5, 8, -14, 2, 4, 12};
 
-  std::cout << "Nums: ";
+  cout << "Nums: ";
   printArr(nums);
   
   // int ans = bruteForce(nums, k);
   int ans = betterApproach(nums, k);
   // int ans = longestSubarray(nums, k);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
   return 0;
 }
 

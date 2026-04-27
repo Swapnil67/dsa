@@ -23,16 +23,18 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
@@ -40,14 +42,14 @@ void printArr(std::vector<T> &arr) {
 // * Keep frequency map of character occurences
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int numKLenSubstrNoRepeats(std::string s, int k) {
+int numKLenSubstrNoRepeats(string s, int k) {
   int n = s.size();
   int ans = 0;
 
   if (k > n) // * Edge case
     return ans;
 
-  std::unordered_map<char, int> freq_mp;
+  unordered_map<char, int> freq_mp;
   int i = 0, j = 0;
   while(j < n) {
     freq_mp[s[j]]++;
@@ -73,17 +75,17 @@ int numKLenSubstrNoRepeats(std::string s, int k) {
 int main(void) {
   // * testcase 1
   int k = 5;
-  std::string s = "havefunonneetcode";
+  string s = "havefunonneetcode";
 
   // * testcase 2
   // int k = 5;
-  // std::string s = "home";
+  // string s = "home";
 
-  std::cout << "Max Length: " << k << std::endl;
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Max Length: " << k << endl;
+  cout << "Input String: " << s << endl;
 
   int ans = numKLenSubstrNoRepeats(s, k);
-  std::cout << "K-length Substring with Distinct Characters: " << ans << std::endl;
+  cout << "K-length Substring with Distinct Characters: " << ans << endl;
   return 0;
 }
  

@@ -54,7 +54,7 @@ void printArr(std::vector<T> &arr) {
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Classic Sliding Window
-// * Find the smallest subarray with (n-k) size then we'll get the max sum circular subarray
+// * Find the smallest subarray with (n - k) size then we'll get the max sum circular subarray
 // * Keep frequency map of character occurences
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
@@ -66,8 +66,8 @@ int numKLenSubstrNoRepeats(std::vector<int> &cardPoints, int k) {
   int k2 = n - k; // * smallest subarray size
   while (j < n) {
     total_sum += cardPoints[j];
-
     cur_sum += cardPoints[j];
+
     if ((j - i + 1) > k2) {
       cur_sum -= cardPoints[i];
       i++;

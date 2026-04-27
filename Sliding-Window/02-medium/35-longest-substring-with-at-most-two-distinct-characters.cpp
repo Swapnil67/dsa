@@ -1,4 +1,5 @@
 /*
+ * Leetcode - ?
  * Longest Substring with At Most Two Distinct Characters
  * 
  * You are given a string s, return the length of the longest substring that contains at most two distinct characters.
@@ -15,8 +16,8 @@
  * Output : 5
  * Explanation: The substring is "aabbb" which its length is 5.
 
- * https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/description/
- * https://neetcode.io/problems/longest-substring-with-at-most-two-distinct-characters/question?list=neetcode250
+ * https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters
+ * https://neetcode.io/problems/longest-substring-with-at-most-two-distinct-characters
  * https://www.naukri.com/code360/problems/longest-substring-with-at-most-two-distinct-characters_3125863
 */
 
