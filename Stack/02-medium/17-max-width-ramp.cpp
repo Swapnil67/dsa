@@ -49,7 +49,7 @@ void printStack(stack<int> st) {
   printf("\n");
 }
 
-// * ------------------------- APPROACH 1: Brute Approach -------------------------`
+// * ------------------------- APPROACH 1: Brute Approach -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -66,7 +66,7 @@ int bruteForce(vector<int> &nums) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -87,35 +87,11 @@ int betterApproach(vector<int> &nums) {
 }
 
 
-// * ------------------------- APPROACH 3A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3A: Optimal Approach -------------------------
 // * Find Max to right for input nums + Two Pointers
 // * TIME COMPLEXITY O(2N) ~ O(N)
 // * SPACE COMPLEXITY O(N)
-int maxWidthRampA(vector<int> &nums) {
-  int n = nums.size();
-  int ans = INT_MIN;
-
-  // * Create a vector where for each element next greater element
-  vector<int> max_to_right(n);
-  int curMax = INT_MIN;
-  for (int i = n - 1; i >= 0; --i) {
-    curMax = max(curMax, nums[i]);
-    max_to_right[i] = curMax;
-  }
-  printArr(max_to_right);
-
-  int i = 0, j = 0;
-  while (j < n) {
-    if (nums[i] <= max_to_right[j]) {
-      ans = max(ans, j - i);
-    } else {
-      i++;
-    }
-    j++;
-  }
-
-  return ans < 0 ? 0 : ans;
-}
+// * Go to two pointer folder
 
 // * ------------------------- APPROACH 3B: Optimal Approach -------------------------`
 // * Monotonic Stack

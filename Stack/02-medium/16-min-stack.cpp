@@ -23,8 +23,7 @@ using namespace std;
 class MinStackBrute {
   public: 
     stack<pair<int, int>> st;
-    MinStackBrute() {
-    }
+    MinStackBrute() {}
 
     void push(int val) {
       if (st.empty()) {

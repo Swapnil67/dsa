@@ -36,9 +36,13 @@
 #include <stack>
 #include <iostream>
 
+using namespace std;
 
-int minInsertions(std::string s) {
-  std::stack<char> st;
+
+// * Intuition
+// * Whenever popping make sure we have '()' on the top of stack
+int minInsertions(string s) {
+  stack<char> st;
   int insertions = 0;
   for (char &c : s) {
     if (c == '(') { // * Two Cases
@@ -75,9 +79,6 @@ int minInsertions(std::string s) {
     }
   }
 
-  if (st.empty())
-    return insertions;
-
   while (!st.empty()) { // * Two Cases
     if (st.top() == '(') {
       insertions += 2;
@@ -95,17 +96,17 @@ int minInsertions(std::string s) {
 
 int main() {
   // * testcase 1
-  // std::string s = "(()))";
+  // string s = "(()))";
 
   // * testcase 2
-  // std::string s = "())";
+  // string s = "())";
 
   // * testcase 3
-  std::string s = "))())(";
+  string s = "))())(";
 
-  std::cout << "Input string: " << s << std::endl;
+  cout << "Input string: " << s << endl;
   int ans = minInsertions(s);
-  std::cout << "Minimum Insertions to Balance a Parentheses String is " << ans << std::endl;
+  cout << "Minimum Insertions to Balance a Parentheses String is " << ans << endl;
 
   return 0;
 }

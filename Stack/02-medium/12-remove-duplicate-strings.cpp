@@ -26,18 +26,20 @@
 * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/
 */
 
-#include <iostream>
 #include <stack>
 #include <vector>
+#include <iostream>
 #include <unordered_map>
+
+using namespace std;
 
 // * Using Plain Stack + Unordered Map
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
-std::string removeDuplicates(std::string s, int k) {
+string removeDuplicates(string s, int k) {
   int n = s.size();
-  std::stack<char> st;
-  std::unordered_map<char, int> freqHash;
+  stack<char> st;
+  unordered_map<char, int> freqHash;
   for (char &ch : s) {
     freqHash[ch]++;
     if (!st.empty() && st.top() == ch) {
@@ -47,7 +49,7 @@ std::string removeDuplicates(std::string s, int k) {
     }
     st.push(ch);
 
-    // std::cout << ch << " => " << freqHash[ch] << std::endl;
+    // cout << ch << " => " << freqHash[ch] << endl;
     // * If frequency becomes 'k'
     if (freqHash[ch] == k) {
       while (!st.empty() && freqHash[ch] != 0) {
@@ -56,10 +58,10 @@ std::string removeDuplicates(std::string s, int k) {
       }
     }
   }
-  // std::cout << st.size() << std::endl;
+  // cout << st.size() << endl;
 
   // * Create the answer
-  std::string ans = "";
+  string ans = "";
   while(!st.empty()) {
     ans = st.top() + ans;
     st.pop();
@@ -72,9 +74,9 @@ std::string removeDuplicates(std::string s, int k) {
 // ! This will pass all testcases 
 // * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(N)
-std::string removeDuplicates2(std::string s, int k) {
+string removeDuplicates2(string s, int k) {
   int n = s.size();
-  std::vector<std::pair<char, int>> st;
+  vector<pair<char, int>> st;
   for(char ch: s) {
     if (st.empty() || st.back().first != ch) {
       // * New character
@@ -90,9 +92,9 @@ std::string removeDuplicates2(std::string s, int k) {
       st.pop_back();
     }
   }
-  // std::cout << st.size() << std::endl;
+  // cout << st.size() << endl;
 
-  std::string ans = "";
+  string ans = "";
   for (auto &it : st) {
     ans.append(it.second, it.first);
   }
@@ -103,23 +105,23 @@ std::string removeDuplicates2(std::string s, int k) {
 int main() {
   // * testcase 1
   // int k = 2;
-  // std::string s = "abcd";
+  // string s = "abcd";
 
   // * testcase 2
   // int k = 3;
-  // std::string s = "deeedbbcccbdaa";
+  // string s = "deeedbbcccbdaa";
 
   // * testcase 3
   // int k = 2;
-  // std::string s = "pbbcggttciiippooaais";
+  // string s = "pbbcggttciiippooaais";
 
   // * testcase 4
   int k = 4;
-  std::string s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy";
+  string s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy";
 
-  std::cout << "Input String: " << s << std::endl;
-  std::string ans = removeDuplicates2(s, k);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Input String: " << s << endl;
+  string ans = removeDuplicates2(s, k);
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

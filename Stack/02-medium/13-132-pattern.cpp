@@ -82,7 +82,7 @@ bool betterApproach(vector<int> nums) {
   return false;
 }
 
-// * ------------------------- APPROACH 3: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 3: Optimal Approach -------------------------
 // * num1 < num3 < num2 
 // * num2 will be largest & num3 will be second largest
 // * Using Monotonic Stack

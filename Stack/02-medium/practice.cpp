@@ -38,20 +38,11 @@ void reverseArr(vector<int> &arr, int i, int j) {
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
-    i++;
-    j--;
+    i++, j--;
   }
 }
 
-// * 25 - Minimum Swaps To Make Balance String
-// int minSwaps(string s) {
-// TODO
-// }
 
-// * 26 - Minimum Insertions to Balance a Parentheses String
-// int minInsertions(string s) {
-// TODO
-// }
 
 // * 27 - Minimum Remove to Make Valid Parentheses
 // string minRemoveToMakeValid(string s) {
@@ -178,6 +169,16 @@ void reverseArr(vector<int> &arr, int i, int j) {
 
 // * 24 - Construct Smallest Number From DI String
 // string smallestNumber(string pattern) {
+// TODO
+// }
+
+// * 25 - Minimum Swaps To Make Balance String
+// int minSwaps(string s) {
+// TODO
+// }
+
+// * 26 - Minimum Insertions to Balance a Parentheses String
+// int minInsertions(string s) {
 // TODO
 // }
 

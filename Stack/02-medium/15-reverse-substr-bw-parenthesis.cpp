@@ -98,8 +98,8 @@ int main() {
 
   // * testcase 2
   string s = "(ed(et(oc))el)";
-  
-  cout << s << endl;
+
+  cout << "Input: " << s << endl;
 
   // string ans = reverseParentheses(s);
   string ans = reverseParentheses2(s);

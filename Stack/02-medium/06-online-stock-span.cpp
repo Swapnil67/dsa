@@ -20,12 +20,14 @@
 #include <stack>
 #include <iostream>
 
+using namespace std;
+
 class StockSpanner {
   public: 
     // * pair of price & stock_span
-    std::stack<std::pair<int, int>> st;
-    StockSpanner() {
-    }
+    stack<pair<int, int>> st;
+
+    StockSpanner() {}
 
     // * Brute Force
     int nextBrute(int price) {
@@ -35,8 +37,8 @@ class StockSpanner {
         return stock_span;
       }
 
-      std::stack<std::pair<int, int>> temp = st;
-      // std::cout << temp.size() << " " << temp.top() << std::endl;
+      stack<pair<int, int>> temp = st;
+      // cout << temp.size() << " " << temp.top() << endl;
 
       while (!temp.empty()) {
         if (temp.top().first > price) {
@@ -69,13 +71,13 @@ class StockSpanner {
 
 int main() {
   StockSpanner *obj = new StockSpanner();
-  std::cout << obj->next(100) << std::endl;
-  std::cout << obj->next(80) << std::endl;
-  std::cout << obj->next(60) << std::endl;
-  std::cout << obj->next(70) << std::endl;
-  std::cout << obj->next(60) << std::endl;
-  std::cout << obj->next(75) << std::endl;
-  std::cout << obj->next(85) << std::endl;
+  cout << obj->next(100) << endl;
+  cout << obj->next(80) << endl;
+  cout << obj->next(60) << endl;
+  cout << obj->next(70) << endl;
+  cout << obj->next(60) << endl;
+  cout << obj->next(75) << endl;
+  cout << obj->next(85) << endl;
 }
 
 // * Run the code

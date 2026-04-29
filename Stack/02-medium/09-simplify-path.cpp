@@ -60,7 +60,7 @@ string simplifyPath(string s) {
   return ans;
 }
 
-int main() {
+int main(void) {
   cout << "Simplified Path: " << simplifyPath("/home/user/Documents/../Pictures") << endl;
   cout << "Simplified Path: " << simplifyPath("/../") << endl;
   cout << "Simplified Path: " << simplifyPath("/..hidden/") << endl;

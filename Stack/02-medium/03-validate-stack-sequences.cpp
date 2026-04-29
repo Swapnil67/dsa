@@ -31,6 +31,8 @@ void printArr(vector<int> &arr) {
   printf("\n");
 }
 
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
 bool validateStackSequences(vector<int> &pushed, vector<int> &popped) {
   int n = pushed.size();
   stack<int> st;

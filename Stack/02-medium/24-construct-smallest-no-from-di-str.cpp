@@ -126,6 +126,7 @@ int main(void) {
 
   string ans = betterApproach(pattern);
   // string ans = smallestNumber(pattern);
+  
   cout << "Smallest Number From DI String: " << ans << endl;
 
   return 0;

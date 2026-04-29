@@ -157,6 +157,7 @@ int main() {
 
   string ans = bruteForce(num, k);
   // string ans = removeKdigits(num, k);
+  
   cout << "Smallest Num: " << ans << endl;
 
   return 0;

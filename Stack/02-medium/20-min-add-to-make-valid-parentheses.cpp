@@ -13,6 +13,8 @@
  * Output      : 3
  * 
  * https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/
+ * https://www.geeksforgeeks.org/problems/min-add-to-make-parentheses-valid/1
+ * https://www.naukri.com/code360/problems/minimum-parentheses-_1075018
 */
 
 #include <stack>

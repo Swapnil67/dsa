@@ -82,6 +82,7 @@ int main(void) {
   
   cout << "s: " << s << endl;
   vector<int> ans = findPermutation(s);
+  
   cout << "Ans: ";
   printArr(ans);
 

@@ -24,7 +24,7 @@
 #include <stack>
 #include <iostream>
 
-// * ------------------------- APPROACH 1A: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1A: Optimal Approach -------------------------
 // ! TLE
 // * Using stack
 // * TIME COMPLEXITY O(N)
@@ -49,7 +49,7 @@ std::string removeStars(std::string s) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1B: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1B: Optimal Approach -------------------------
 // * Using string as stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

@@ -94,25 +94,22 @@ int carFleetOld(int target, vector<int> &position, vector<int> &speed) {
 int carFleet(int target, vector<int> &position, vector<int> &speed) {
   int n = position.size();
 
+  // * Create pairs of cars
   vector<pair<int, double>> cars;
   for (int i = 0; i < n; i++) {
-    double time = (double)(target - position[i]) / speed[i];
-    cars.push_back({position[i], time});
+    cars.push_back({position[i], speed[i]});
   }
-
-  // sort cars by positions descending(target ke pass wali pahle)
-  sort(cars.rbegin(), cars.rend());
-
+  sort(begin(cars), end(cars));
+  
   stack<double> st;
-  for (auto &car : cars) {
-    double time = car.second;
-
-    // New fleet condition
+  for (int i = n - 1; i >= 0; --i) {
+    double time = (double)(target - position[i]) / speed[i];
+    // * Add fleet in increasing order
     if (st.empty() || time > st.top()) {
       st.push(time);
     }
-    // else: same fleet --> isme kuch nhi karna
   }
+  
   return st.size();
 }
 

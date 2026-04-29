@@ -37,15 +37,16 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
 
 // * ------------------------- Approach 1: Brute Force Approach -------------------------
 // * Use stack to identify what extra brackets we should remove
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::string bruteForce(std::string s) {
+string bruteForce(string s) {
   int n = s.size();
-  std::stack<int> st; // * to track indexes of extra open brackets
-  std::unordered_set<int> remove_set;
+  stack<int> st; // * to track indexes of extra open brackets
+  unordered_set<int> remove_set;
 
   for (int i = 0; i < n; ++i) {
     char c = s[i];
@@ -60,7 +61,7 @@ std::string bruteForce(std::string s) {
       }
     } 
   }
-  // std::cout << st.size() << std::endl;
+  // cout << st.size() << endl;
 
   // * Add all the extra brackets index to unordered_set
   while (!st.empty()) {
@@ -68,7 +69,7 @@ std::string bruteForce(std::string s) {
     st.pop();
   }
 
-  std::string ans = "";
+  string ans = "";
   for (int i = 0; i < n; ++i) {
     if (remove_set.count(i))
       continue;
@@ -82,11 +83,11 @@ std::string bruteForce(std::string s) {
 // * Count extra_opens
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::string minRemoveToMakeValid(std::string s) {
+string minRemoveToMakeValid(string s) {
   int extra_opens = 0;
   int total_opens = 0;
 
-  std::string temp = "";
+  string temp = "";
   for (auto &c: s) {
     if (c =='(') {
       extra_opens++;
@@ -104,13 +105,13 @@ std::string minRemoveToMakeValid(std::string s) {
       temp += c;
     }
   }
-  // std::cout << "temp: " << temp << std::endl;
-  // std::cout << "total_opens: " << total_opens << std::endl;
-  // std::cout << "extra_opens: " << extra_opens << std::endl;
+  // cout << "temp: " << temp << endl;
+  // cout << "total_opens: " << total_opens << endl;
+  // cout << "extra_opens: " << extra_opens << endl;
   int keep = total_opens - extra_opens; // * Final Ans should have only 'keep' number of open brackets
-  // std::cout << "keep open: " << keep << std::endl;
+  // cout << "keep open: " << keep << endl;
 
-  std::string ans = "";
+  string ans = "";
   for (auto &c: temp) {
     if (c == '(') {
       if (keep == 0) 
@@ -128,11 +129,11 @@ std::string minRemoveToMakeValid(std::string s) {
 // * In place (Follow up question)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
-std::string minRemoveToMakeValid2(std::string s) {
+string minRemoveToMakeValid2(string s) {
   int extra_opens = 0;
   int total_opens = 0;
 
-  std::string temp = "";
+  string temp = "";
   int j = 0;
   for (auto &c: s) {
     if (c == ')') {
@@ -162,28 +163,29 @@ std::string minRemoveToMakeValid2(std::string s) {
     s[j++] = c;
   }
 
-  std::string ans = s.substr(0, j);
+  string ans = s.substr(0, j);
   return ans;
 }
 
 int main() {
   // * testcase 1
-  // std::string s = "lee(t(c)o)de)";
+  // string s = "lee(t(c)o)de)";
 
   // * testcase 2
-  // std::string s = "a)b(c)d";
+  // string s = "a)b(c)d";
 
   // * testcase 3
-  // std::string s = "))((";
+  // string s = "))((";
 
   // * testcase 4
-  std::string s = ")())m(s)(";
+  string s = ")())m(s)(";
 
-  std::cout << "Input string: " << s << std::endl;
-  // std::string ans = bruteForce(s);
-  // std::string ans = minRemoveToMakeValid(s);
-  std::string ans = minRemoveToMakeValid2(s);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Input string: " << s << endl;
+  // string ans = bruteForce(s);
+  // string ans = minRemoveToMakeValid(s);
+  string ans = minRemoveToMakeValid2(s);
+  
+  cout << "Ans: " << ans << endl;
   return 0;
 }
 

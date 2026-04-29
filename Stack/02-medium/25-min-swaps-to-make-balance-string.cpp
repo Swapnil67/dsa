@@ -86,6 +86,7 @@ int main() {
 
   cout << "Input string: " << s << endl;
   int ans = minSwaps(s);
+  
   cout << "Minimum swaps required to make balanced string is " << ans << endl;
   return 0;
 }

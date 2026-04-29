@@ -132,10 +132,10 @@ int main() {
   // string s = " 3/2 ";
   
   // * testcase 3 (Ans: 5)
-  // string s = " 3+5 / 2 ";
+  string s = " 3+5 / 2 ";
   
   // * testcase 4 (Ans: 1)
-  string s = "1";
+  // string s = "1";
 
   cout << "Expression: " << s << endl;
 

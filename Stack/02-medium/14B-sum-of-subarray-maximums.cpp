@@ -138,6 +138,7 @@ int main() {
   
   // long long ans = bruteForce(nums);
   long long ans = sumSubarrayMaxs(nums);
+  
   cout << "Sum of Subarray Minimums: " << ans << endl;
   return 0;
 }

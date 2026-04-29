@@ -118,10 +118,10 @@ vector<int> nextGreaterElementB(vector<int> arr) {
 
 int main(void) {
   // * testcase 1
-  // vector<int> arr = {1, 2, 3, 4, 3};
+  vector<int> arr = {1, 2, 3, 4, 3};
 
   // * testcase 2
-  vector<int> arr = {1, 2, 1};
+  // vector<int> arr = {1, 2, 1};
 
   cout << "Input Array:" << endl;
   printArr(arr);

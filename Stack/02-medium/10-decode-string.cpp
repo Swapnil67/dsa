@@ -2,7 +2,6 @@
  * Leetcode - 394
  * Decode String
  * 
- * 
  * Example 1
  * Input: s = "3[a]2[bc]"
  * Output: "aaabcbc"

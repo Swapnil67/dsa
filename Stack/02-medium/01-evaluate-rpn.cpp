@@ -74,9 +74,11 @@ int main() {
   // * testcase 3
   vector<string> tokens = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
 
+  std::cout << "Tokens: ";
   printArr(tokens);
+
   int ans = evalRPN(tokens);
-  cout << ans << endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

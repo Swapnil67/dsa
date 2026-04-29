@@ -12,6 +12,7 @@
  * Output       : 0
  * Explanation  : 
  * 
+ * https://leetcode.com/problems/steps-to-make-array-non-decreasing/
 */
 
 #include <stack>
@@ -38,18 +39,23 @@ void printArr(std::vector<T> &arr) {
 // * SPACE COMPLEXITY O(1)
 int totalSteps(vector<int> &nums) {
   int n = nums.size();
+  
   // * pair = { val , cnt }
   stack<pair<int, int>> st;
   int max_cnt = 0;
+
   for (int i = n - 1; i >= 0; --i) {
     int cnt = 0;
+
     while (!st.empty() && nums[i] > st.top().first) {
       cnt = max(cnt + 1, st.top().second);
       st.pop();
     }
+
     max_cnt = max(max_cnt, cnt);
     st.push({nums[i], cnt});
   }
+
   return max_cnt;
 }
 
@@ -58,7 +64,10 @@ int main(void) {
   // std::vector<int> nums = {5, 3, 4, 4, 7, 3, 6, 11, 8, 5, 11};
 
   // * testcase 2
-  std::vector<int> nums = {4, 5, 7, 7, 13};
+  // std::vector<int> nums = {4, 5, 7, 7, 13};
+
+  // * testcase 3
+  std::vector<int> nums = {7, 14, 4, 14, 13, 2, 6, 13};
 
   std::cout << "Input nums: ";
   printArr(nums);

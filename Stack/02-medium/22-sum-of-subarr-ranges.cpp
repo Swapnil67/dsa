@@ -44,73 +44,34 @@ void printArr(vector<T> &arr) {
   }
   cout << " ]" << endl;
 }
-
-// * Previous Smaller or Equal Element
-vector<int> get_pse(vector<int> &nums) {
-  int n = nums.size();
-  stack<int> st;
-  vector<int> pse(n, -1);
-  for (int i = 0; i < n; ++i) {
-    while (!st.empty() && nums[st.top()] > nums[i]) {
-      st.pop();
+void getSmallerElements(vector<int>& nums, vector<int>& pse,
+                        vector<int>& nse) {
+    int n = nums.size();
+    stack<int> st;
+    for (int i = 0; i < n; ++i) {
+        while (!st.empty() && nums[st.top()] >= nums[i]) {
+            nse[st.top()] = i;
+            st.pop();
+        }
+        if (!st.empty())
+            pse[i] = st.top();
+        st.push(i);
     }
-    // * top will be smaller than current element
-    // * since stack is in increasing order
-    if (st.size())
-      pse[i] = st.top();
-
-    st.push(i);
-  }
-  return pse;
 }
 
-// * Next Smaller element
-vector<int> get_nse(vector<int> &nums) {
-  int n = nums.size();
-  vector<int> nse(n, n);
-  stack<int> st;
-  for (int i = 0; i < n; ++i) {
-    while (!st.empty() && nums[st.top()] > nums[i]) {
-      nse[st.top()] = i;
-      st.pop();
+void getGreaterElements(vector<int>& nums, vector<int>& pge,
+                        vector<int>& nge) {
+    int n = nums.size();
+    stack<int> st;
+    for (int i = 0; i < n; ++i) {
+        while (!st.empty() && nums[st.top()] <= nums[i]) {
+            nge[st.top()] = i;
+            st.pop();
+        }
+        if (!st.empty())
+            pge[i] = st.top();
+        st.push(i);
     }
-    st.push(i);
-  }
-  return nse;
-}
-
-// * Previous Greater Element
-vector<int> get_pge(vector<int> &nums) {
-  int n = nums.size();
-  stack<int> st;
-  vector<int> pge(n, -1);
-  for (int i = 0; i < n; ++i) {
-    while (!st.empty() && nums[st.top()] <= nums[i]) {
-      st.pop();
-    }
-    if (st.size())
-      pge[i] = st.top();
-    
-    st.push(i);
-  }
-  return pge;
-}
-
-// * Next Greater Element
-vector<int> get_nge(vector<int> &nums) {
-  int n = nums.size();
-  vector<int> nge(n, n);
-  stack<int> st;
-  for (int i = 0; i < n; ++i) {
-    
-    while (!st.empty() && nums[st.top()] <= nums[i]) {
-      nge[st.top()] = i;
-      st.pop();
-    }
-
-    st.push(i);
-  }
-  return nge;
 }
 
 // * ------------------------- APPROACH 1: Brute Approach -------------------------
@@ -137,16 +98,19 @@ long long subArrayRanges(vector<int>& nums) {
   int n = nums.size();
 
   // * next/prev smaller elements
-  vector<int> pse = get_pse(nums);
-  vector<int> nse = get_nse(nums);
+  vector<int> pse(n, -1);
+  vector<int> nse(n, n);
+  getSmallerElements(nums, pse, nse);
   // cout << "Previous Smaller Elements" << endl;
   // printArr(pse);
   // cout << "Next Smaller Elements" << endl;
   // printArr(nse);
   
+
   // * next/prev greater elements
-  vector<int> nge = get_nge(nums);
-  vector<int> pge = get_pge(nums);
+  vector<int> pge(n, -1);
+  vector<int> nge(n, n);
+  getGreaterElements(nums, pge, nge);
   // cout << "Next Greater Elements" << endl;
   // printArr(nge);
   // cout << "Prev Greater Elements" << endl;
