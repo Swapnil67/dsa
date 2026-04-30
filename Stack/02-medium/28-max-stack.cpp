@@ -11,18 +11,23 @@
  * You must implement a solution with O(1) time complexity for each function.
  * 
  * https://www.geeksforgeeks.org/problems/get-max-from-stack/1
+ * https://www.naukri.com/code360/problems/max-stack_985280
 */
 
 #include <stack>
+#include <queue>
 #include <vector>
 #include <climits>
 #include <iostream>
+#include <unordered_set>
+
+using namespace std;
 
 // * Using stack with pair of {num, max_element}
 class MaxStackBrute {
   public: 
     // * {cur_num, max_ele}
-    std::stack<std::pair<int, int>> st;
+    stack<pair<int, int>> st;
     MaxStackBrute() {
     }
 
@@ -31,7 +36,7 @@ class MaxStackBrute {
         st.push({val, val});
       } else {
         int last_max = st.top().second;
-        st.push({val, std::max(val, last_max)});
+        st.push({val, max(val, last_max)});
       }
     }
     
@@ -62,7 +67,7 @@ class MaxStack {
   public: 
     int s_top;
     int last_max;
-    std::vector<int> stack;
+    vector<int> stack;
     MaxStack() {
       s_top = -1;
       last_max = INT_MIN;
@@ -85,7 +90,7 @@ class MaxStack {
         // * find new last_max
         last_max = INT_MAX;
         for(int i = 0; i <= s_top - 1; ++i) {
-          last_max = std::max(last_max, stack[i]);
+          last_max = max(last_max, stack[i]);
         }
       }
 
@@ -101,25 +106,76 @@ class MaxStack {
     }
 };
 
+class MaxStackVariant {
+ public:
+  stack<pair<int, int>> st;
+  priority_queue<pair<int, int>> pq;
+  unordered_set<int> removed_st;
+  int cnt;
+
+  MaxStackVariant() { cnt = 0; }
+
+  void push(int x) {
+    st.push({x, cnt});
+    pq.push({x, cnt});
+    cnt++;
+  }
+
+  int pop() {
+    while (removed_st.count(st.top().second)) st.pop();
+
+    pair<int, int> p = st.top();
+    st.pop();
+    removed_st.insert(p.second);
+
+    return p.first;
+  }
+
+  int top() {
+    while (removed_st.count(st.top().second)) st.pop();
+
+    pair<int, int> p = st.top();
+    return p.first;
+  }
+
+  int peekMax() {
+    while (removed_st.count(pq.top().second)) pq.pop();
+
+    pair<int, int> p = pq.top();
+    return p.first;
+  }
+
+  int popMax() {
+    while (removed_st.count(pq.top().second)) pq.pop();
+
+    pair<int, int> p = pq.top();
+    pq.pop();
+    removed_st.insert(p.second);
+
+    return p.first;
+  }
+};
+
+
 int main() {
   MaxStack *stack = new MaxStack();
   stack->push(2147483646);
   stack->push(2147483646);
   stack->push(2147483647);
-  std::cout << "top " << stack->top() << std::endl;
+  cout << "top " << stack->top() << endl;
   stack->pop();
-  std::cout << "max_stack " << stack->getMax() << std::endl;
+  cout << "max_stack " << stack->getMax() << endl;
   stack->pop();
-  std::cout << "max_stack " << stack->getMax() << std::endl;
+  cout << "max_stack " << stack->getMax() << endl;
   stack->pop();
   stack->push(2147483647);
-  std::cout << "top " << stack->top() << std::endl;
-  std::cout << "max_stack " << stack->getMax() << std::endl;
+  cout << "top " << stack->top() << endl;
+  cout << "max_stack " << stack->getMax() << endl;
   stack->push(-2147483648);
-  std::cout << "top " << stack->top() << std::endl;
-  std::cout << "max_stack " << stack->getMax() << std::endl;
+  cout << "top " << stack->top() << endl;
+  cout << "max_stack " << stack->getMax() << endl;
   stack->pop();
-  std::cout << "max_stack " << stack->getMax() << std::endl;
+  cout << "max_stack " << stack->getMax() << endl;
   return 0;
 }
 

@@ -182,6 +182,11 @@ void reverseArr(vector<int> &arr, int i, int j) {
 // TODO
 // }
 
+// * 27 -  Minimum Remove to Make Valid Parentheses
+// string minRemoveToMakeValid(string s) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }

@@ -84,8 +84,7 @@ string bruteForce(string s) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 string minRemoveToMakeValid(string s) {
-  int extra_opens = 0;
-  int total_opens = 0;
+  int extra_opens = 0, total_opens = 0;
 
   string temp = "";
   for (auto &c: s) {
@@ -133,18 +132,16 @@ string minRemoveToMakeValid2(string s) {
   int extra_opens = 0;
   int total_opens = 0;
 
-  string temp = "";
   int j = 0;
   for (auto &c: s) {
-    if (c == ')') {
-      if (extra_opens == 0) {
-        continue;
-      }
-      extra_opens--;
-    }
-    else if (c =='(') {
+    if (c =='(') {
       extra_opens++;
       total_opens++;
+    }
+    else if (c == ')') {
+      if (extra_opens == 0)
+        continue;
+      extra_opens--;
     }
     s[j++] = c; 
   }
@@ -163,8 +160,7 @@ string minRemoveToMakeValid2(string s) {
     s[j++] = c;
   }
 
-  string ans = s.substr(0, j);
-  return ans;
+  return s.substr(0, j);
 }
 
 int main() {
