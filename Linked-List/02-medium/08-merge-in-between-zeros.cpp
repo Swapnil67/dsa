@@ -1,22 +1,22 @@
-/**
- * * Leetcode - 2181
- * * Merge Nodes in Between Zeros
+/*
+ * Leetcode - 2181
+ * Merge Nodes in Between Zeros
 
- * * You are given the head of a linked list, which contains a series of integers separated by 0's. 
- * * The beginning and end of the linked list will have ListNode.val == 0.
+ * You are given the head of a linked list, which contains a series of integers separated by 0's. 
+ * The beginning and end of the linked list will have ListNode.val == 0.
 
- * * For every two consecutive 0's, merge all the nodes lying in between them into a single node whose value 
- * * is the sum of all the merged nodes. The modified list should not contain any 0's.
+ * For every two consecutive 0's, merge all the nodes lying in between them into a single node whose value 
+ * is the sum of all the merged nodes. The modified list should not contain any 0's.
 
- * * Example 1
- * * Input  : head = [0, 3, 1, 0, 4, 5, 2, 0]
- * * Output : [4, 11]
+ * Example 1
+ * Input  : head = [0, 3, 1, 0, 4, 5, 2, 0]
+ * Output : [4, 11]
 
- * * Example 2
- * * Input  : head = [0, 1, 0, 3, 0, 2, 2, 0]
- * * Output : [1, 3, 4]
+ * Example 2
+ * Input  : head = [0, 1, 0, 3, 0, 2, 2, 0]
+ * Output : [1, 3, 4]
 
- * * https://leetcode.com/problems/merge-nodes-in-between-zeros/description/
+ * https://leetcode.com/problems/merge-nodes-in-between-zeros/description/
 */
 
 #include <vector>

@@ -7,21 +7,6 @@
 
 using namespace std;
 
-// * 07 - Merge In Between Linked Lists
-// ListNode *mergeInBetween(ListNode *list1, int a, int b, ListNode *list2) {
-// TODO 
-// }
-
-// * 08 - Merge Nodes in Between Zeros
-// ListNode *mergeNodes(ListNode *head) {
-// TODO
-// }
-
-// * 09 - Find the Minimum and Maximum Number of Nodes Between Critical Points
-// vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-// TODO
-// }
-
 // * 10 - Double a Number Represented as a Linked List
 // ListNode* doubleIt(ListNode* head) {
 // TODO
@@ -148,6 +133,21 @@ using namespace std;
   
 // * 06 - Delete all occurrences of a given key in a doubly linked list
 // DLListNode<int> *deleteOccurences(DLListNode<int> *head, int k) {
+// TODO
+// }
+
+// * 07 - Merge In Between Linked Lists
+// ListNode *mergeInBetween(ListNode *list1, int a, int b, ListNode *list2) {
+// TODO 
+// }
+
+// * 08 - Merge Nodes in Between Zeros
+// ListNode *mergeNodes(ListNode *head) {
+// TODO
+// }
+
+// * 09 - Find the Minimum and Maximum Number of Nodes Between Critical Points
+// vector<int> nodesBetweenCriticalPoints(ListNode* head) {
 // TODO
 // }
 
