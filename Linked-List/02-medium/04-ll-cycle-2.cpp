@@ -101,9 +101,11 @@ ListNode* detectCycle(ListNode* head) {
 }
 
 int main() {
+  // * testcase 1
   vector<int> arr = {1, 2, 3, 4, 5};
+
   ListNode* head = arrayToLL(arr);
-  // printLL(head);
+  printLL(head);
 
   // * Comment this for normal LL (Linear LL)
   head = makeLoop(head);

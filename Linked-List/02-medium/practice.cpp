@@ -7,38 +7,6 @@
 
 using namespace std;
 
-// * --------------------------------------------------------------------------------
-
-// * 01 - Add Two Numbers
-// ListNode *addTwoLL(ListNode *head1, ListNode *head2) {
-// TODO
-// }
-
-// * 02 - Rearrange Odd and Even Places (Indexes)
-// ListNode* reArrangeEvenOddOptimal(ListNode* head) {
-// TODO
-// }
-
-// * 03 - Remove Nth Node From End of List
-// ListNode* removeNthFromEnd(ListNode* head, int n) {
-// TODO
-// }
-
-// * 04 - Cycle Detection in a Singly Linked List
-// ListNode* detectCycle(ListNode* head) {
-// TODO
-// }
-
-// * 05 - Delete the Middle ListNode of a Linked List
-// ListNode* deleteMiddle(ListNode* head) {
-// TODO
-// }
-  
-// * 06 - Delete all occurrences of a given key in a doubly linked list
-// DLListNode<int> *deleteOccurences(DLListNode<int> *head, int k) {
-// TODO
-// }
-
 // * 07 - Merge In Between Linked Lists
 // ListNode *mergeInBetween(ListNode *list1, int a, int b, ListNode *list2) {
 // TODO 
@@ -148,6 +116,38 @@ using namespace std;
 
 // * 30 - Delete Node in a Linked List
 // void deleteNode(ListNode *node) {
+// TODO
+// }
+
+// * --------------------------------------------------------------------------------
+
+// * 01 - Add Two Numbers
+// ListNode *addTwoLL(ListNode *head1, ListNode *head2) {
+// TODO
+// }
+
+// * 02 - Rearrange Odd and Even Places (Indexes)
+// ListNode* reArrangeEvenOddOptimal(ListNode* head) {
+// TODO
+// }
+
+// * 03 - Remove Nth Node From End of List
+// ListNode* removeNthFromEnd(ListNode* head, int n) {
+// TODO
+// }
+
+// * 04 - Cycle Detection in a Singly Linked List
+// ListNode* detectCycle(ListNode* head) {
+// TODO
+// }
+
+// * 05 - Delete the Middle ListNode of a Linked List
+// ListNode* deleteMiddle(ListNode* head) {
+// TODO
+// }
+  
+// * 06 - Delete all occurrences of a given key in a doubly linked list
+// DLListNode<int> *deleteOccurences(DLListNode<int> *head, int k) {
 // TODO
 // }
 

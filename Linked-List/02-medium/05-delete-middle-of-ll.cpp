@@ -1,22 +1,22 @@
-/**
- * * Leetcode - 2095
- * * Delete the Middle ListNode of a Linked List
- * * Given a singly linked list of 'N' nodes. Your task is to delete the middle node of this list and return the head of the modified list.
+/*
+ * Leetcode - 2095
+ * Delete the Middle ListNode of a Linked List
+ * Given a singly linked list of 'N' nodes. Your task is to delete the middle node of this list and return the head of the modified list.
 
- * * Example 1
- * * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> NULL
- * * Output : 1 -> 2 -> 4 -> 5 -> NULL
+ * Example 1
+ * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> NULL
+ * Output : 1 -> 2 -> 4 -> 5 -> NULL
 
- * * Example 2
- * * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
- * * Output : 1 -> 2 -> 3 -> 5 -> 6 -> NULL 
+ * Example 2
+ * Input  : 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> NULL
+ * Output : 1 -> 2 -> 3 -> 5 -> 6 -> NULL 
 
- * * Example 2
- * * Input  : 1 -> NULL
- * * Output : -1
+ * Example 2
+ * Input  : 1 -> NULL
+ * Output : -1
 
- * * https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
- * * https://www.naukri.com/code360/problems/delete-middle-node_763267?leftPanelTabValue=PROBLEM
+ * https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+ * https://www.naukri.com/code360/problems/delete-middle-node_763267?leftPanelTabValue=PROBLEM
 */
 
 // ! Microsoft

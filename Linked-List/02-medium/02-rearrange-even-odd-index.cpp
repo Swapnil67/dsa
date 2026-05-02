@@ -29,7 +29,7 @@
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
-  std::vector<int> arr;
+  vector<int> arr;
   ListNode* temp = head;
 
   // * Insert Odd index in arr O(N/2)
@@ -60,9 +60,9 @@ ListNode* bruteForce(ListNode* head) {
 
   // * For debugging
   // for (int i = 0; i < arr.size(); i++) {
-  //   std::cout << arr[i] << " ";
+  //   cout << arr[i] << " ";
   // }
-  // std::cout << std::endl;
+  // cout << endl;
 
   return head;
 }
@@ -116,26 +116,28 @@ ListNode* oddEvenList(ListNode* head) {
     even = even->next;
   }
   odd->next = even_head;
+  
   return head;
 }
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {1, 2, 3, 4, 5, 6};
+  vector<int> arr = {1, 2, 3, 4, 5, 6};
 
   // * testcase 2
-  // std::vector<int> arr = {2, 4, 6, 8, 10};
+  // vector<int> arr = {2, 4, 6, 8, 10};
 
   // * Create a Linked List
   ListNode* head = arrayToLL(arr);
-  std::cout<<"------------ Before Rearranging Linked List ------------"<<std::endl;
+  cout<<"------------ Before Rearranging Linked List ------------"<<endl;
   printLL(head);
 
   // * Rearrange even and odd numbers
-  std::cout<<"------------ After Rearranging Linked List ------------"<<std::endl;
+  cout<<"------------ After Rearranging Linked List ------------"<<endl;
   // head = bruteForce(head);
   // head = betterApproach(head);
   head = oddEvenList(head);
+
   printLL(head);
   return 0;
 }

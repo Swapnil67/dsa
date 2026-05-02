@@ -166,12 +166,12 @@ int main(void) {
 
   // ListNode *ans = bruteForce(head, n);
   ListNode *ans = removeNthFromEnd(head, n);
-  printLL(ans);
 
+  printLL(ans);
   return 0;
 }
 
 
 // * Run the code
-// * g++ --std=c++20 14-remove-nth-node-from-end.cpp -o output && ./output
+// * g++ --std=c++20 remove-nth-node-from-end-of-list.cpp -o output && ./output
 

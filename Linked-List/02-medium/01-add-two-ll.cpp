@@ -99,16 +99,16 @@ ListNode* addTwoLL(ListNode* h1, ListNode* h2) {
 
 int main() {
   // * testcase 1
-  // vector<int> nums1 = { 1, 2, 3 };
-  // vector<int> nums2 = { 4, 5, 9 };
+  vector<int> nums1 = { 1, 2, 3 };
+  vector<int> nums2 = { 4, 5, 9 };
 
   // * testcase 2
   // vector<int> nums1 = { 0, 1 };
   // vector<int> nums2 = { 0 };
 
   // * testcase 2
-  vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
-  vector<int> nums2 = {9, 9, 9, 9};
+  // vector<int> nums1 = {9, 9, 9, 9, 9, 9, 9};
+  // vector<int> nums2 = {9, 9, 9, 9};
 
   ListNode* n1_head = arrayToLL(nums1);
   ListNode* n2_head = arrayToLL(nums2);
