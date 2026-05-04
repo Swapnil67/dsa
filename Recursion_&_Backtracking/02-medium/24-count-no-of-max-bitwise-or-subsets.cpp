@@ -34,98 +34,94 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-void solveBrute(int &target, int cur_or, std::vector<int> &nums, int i, int &ans) {
-  // std::cout << cur_or << std::endl;
-  
+int max_or;
+void solveBrute(int cur_or, vector<int> &nums, int i, int &ans) {
   if (i >= nums.size()) {
-    if (cur_or == target)
-      ans++;
+    ans += (cur_or == max_or);
     return;
   }
 
-  solveBrute(target, cur_or | nums[i], nums, i + 1, ans);
-  solveBrute(target, cur_or, nums, i + 1, ans);
+  solveBrute(cur_or | nums[i], nums, i + 1, ans);
+  solveBrute(cur_or, nums, i + 1, ans);
 }
 
-int solve(int &max_or, int cur_or, std::vector<int> &nums,
-          std::vector<std::vector<int>> t,
-          int i)
-{
-  if (i >= nums.size()) {
-    if (cur_or == max_or)
-      return 1;
-    return 0;
-  }
+int solve(int i, int cur_or, vector<int> &nums, vector<vector<int>> dp) {
+  if (i >= nums.size())
+    return cur_or == max_or;
 
   // * Returned memoized result
-  if (t[i][cur_or] != -1)
-    return t[i][cur_or];
+  if (dp[i][cur_or] != -1)
+    return dp[i][cur_or];
 
-  int take_count = solve(max_or, cur_or | nums[i], nums, t, i + 1);
-  int not_take_count = solve(max_or, cur_or, nums, t, i + 1);
+  int take_count = solve(i + 1 ,cur_or | nums[i], nums, dp);
+  int not_take_count = solve(i + 1, cur_or, nums, dp);
 
-  t[i][cur_or] = take_count + not_take_count;
-  return t[i][cur_or];
+  return dp[i][cur_or] = take_count + not_take_count;
 }
 
-// * ------------------------- Approach 1: Brute Force Approach -------------------------`
+// * ------------------------- Approach 1: Brute Force Approach -------------------------
 // * without Memoization
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-int bruteForce(std::vector<int> nums) {
-  int max_or = 0;
+int bruteForce(vector<int> nums) {
+  max_or = 0;
   for (auto &x: nums) {
     max_or |= x;
   }
-  // std::cout << max_or << std::endl;
+  // cout << max_or << endl;
 
   int ans = 0;
-  solveBrute(max_or, 0, nums, 0, ans);
+  solveBrute(0, nums, 0, ans);
 
   return ans;
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * Memoizing to store subproblems result
 // * TIME COMPLEXITY O(n * max_or)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-int countMaxOrSubsets(std::vector<int> nums) {
-  int max_or = 0;
+int countMaxOrSubsets(vector<int> nums) {
+  max_or = 0;
   for (auto &x : nums) {
     max_or |= x;
   }
-  // std::cout << max_or << std::endl;
+  // cout << max_or << endl;
 
   int n = nums.size();
-  std::vector<std::vector<int>> t(n + 1, std::vector<int>(max_or + 1, -1));
-  return solve(max_or, 0, nums, t, 0);
+  vector<vector<int>> dp(n + 1, vector<int>(max_or + 1, -1));
+  return solve(0, 0, nums, dp);
 }
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums = {3, 1};
+  // vector<int> nums = {3, 1};
 
   // * testcase 2
-  // std::vector<int> nums = {2, 2, 2};
+  // vector<int> nums = {2, 2, 2};
 
   // * testcase 3
-  std::vector<int> nums = {3, 2, 1, 5};
+  vector<int> nums = {3, 2, 1, 5};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums);
   int ans = countMaxOrSubsets(nums);
-  std::cout << "Number of Maximum Bitwise-OR Subsets: " << ans << std::endl;
+  cout << "Number of Maximum Bitwise-OR Subsets: " << ans << endl;
 
   return 0;
 }

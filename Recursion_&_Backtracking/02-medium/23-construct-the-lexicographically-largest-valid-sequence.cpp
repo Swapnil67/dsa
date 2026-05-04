@@ -4,8 +4,8 @@
  * 
  * Given an integer n, find a sequence with elements in the range [1, n] that satisfies all of the following:
  * - The integer 1 occurs once in the sequence.
- * - Each integer between 2 and n occurs twice in the sequence.
- * - For every integer i between 2 and n, the distance between the two occurrences of i is exactly i.
+ * - Each integer between [2...n] occurs twice in the sequence.
+ * - For every integer 'i' between 2 & n, the distance between the two occurrences of 'i' is exactly 'i'.
 
  * The distance between two numbers on the sequence, a[i] and a[j], is the absolute difference of their indices, |j - i|.
 
@@ -29,17 +29,22 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<bool> used;
-bool solve(int& n, std::vector<int>& ans, int i) {
+vector<bool> used;
+bool solve(int& n, vector<int>& ans, int i) {
   if (i >= ans.size())
       return true;
 
@@ -52,8 +57,8 @@ bool solve(int& n, std::vector<int>& ans, int i) {
       continue;
 
     // * DO
-    used[num] = true;
     ans[i] = num;
+    used[num] = true;
 
     // * TRY
     if (num == 1) {
@@ -74,31 +79,34 @@ bool solve(int& n, std::vector<int>& ans, int i) {
     }
 
     // * UNDO
-    used[num] = false;
     ans[i] = -1;
+    used[num] = false;
   }
 
   return false;
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------`
+// * ------------------------- Approach: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n + n) (Recursion Stack + used array)
-std::vector<int> constructDistancedSequence(int n) {
+vector<int> constructDistancedSequence(int n) {
   used.assign(n + 1, false);
-  std::vector<int> ans(2 * n - 1, -1);
+  vector<int> ans((2 * n - 1), -1);
   solve(n, ans, 0);
   return ans;
 }
 
 int main(void) {
+  // * testcase 1
   // int n = 3;
+
+  // * testcase 1
   int n = 5;
 
-  std::cout << "n: " << n << std::endl;
+  cout << "n: " << n << endl;
 
-  std::vector<int> ans = constructDistancedSequence(n);
-  std::cout << "Answer" << std::endl;
+  vector<int> ans = constructDistancedSequence(n);
+  cout << "Lexicographically Largest Valid Sequence" << endl;
   printArr(ans);
 
   return 0;

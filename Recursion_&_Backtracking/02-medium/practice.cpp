@@ -19,15 +19,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 23 - Construct the Lexicographically Largest Valid Sequence
-// vector<int> constructDistancedSequence(int n) {
-// TODO
-// }
-
-// * 24 - Construct the Lexicographically Largest Valid Sequence
-// int countMaxOrSubsets(vector<int> nums) {
-// TODO
-// }
 
 // * --------------------------------------------------------------------------------
 
@@ -106,7 +97,7 @@ void printArr(vector<T> &arr) {
 // }
 
 // * 16 - Construct Smallest Number From DI String
-// std::string smallestNumber(std::string pattern) {
+// string smallestNumber(string pattern) {
 // TODO
 // }
 
@@ -140,10 +131,25 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 23 - Construct the Lexicographically Largest Valid Sequence
+// vector<int> constructDistancedSequence(int n) {
+// TODO
+// }
+
+// * 24 - Count Number of Maximum Bitwise-OR Subsets
+// int countMaxOrSubsets(vector<int> nums) {
+// TODO
+// }
+
+// * 25 - Generate Parentheses
+// vector<string> generateParenthesis(int n) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }
 
 
 // * Run the code
-// * g++ --std=c++20 practice.cpp -o output && ./output
+// * g++ --std=c++20 practice.cpp -o output && ./output 

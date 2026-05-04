@@ -22,19 +22,24 @@
 #include <vector>
 #include <iostream>
 
-void printStringVector(std::vector<std::string> strs) {
-  int n = strs.size();
-  std::cout << "[ "; 
-  for (std::string s : strs) {
-    std::cout << s << ", ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1A: BRUTE FORCE APPROACH -------------------------`
 
 // * TIME COMPLEXITY O(N)
-bool isValidParentheses(std::string s) {
+bool isValidParentheses(string s) {
   int n = 0;
   for (char &ch : s) {
     if (n < 0)
@@ -49,7 +54,7 @@ bool isValidParentheses(std::string s) {
 
 // * TIME COMPLEXITY O(2^2N) ~ O(2^N)
 // * Using Recursion & Backtracking
-void backtrackingBrute(std::vector<std::string> &ans, std::string &s, int n) {
+void backtrackingBrute(vector<string> &ans, string &s, int n) {
   if (s.size() == 2 * n) {
     if (isValidParentheses(s))
       ans.push_back(s);
@@ -68,16 +73,16 @@ void backtrackingBrute(std::vector<std::string> &ans, std::string &s, int n) {
 // * Backtracking
 // * TIME COMPLEXITY O(N * 2^2N)
 // * SPACE COMPLEXITY O(2N) (Recursion width)
-std::vector<std::string> bruteForce(int n) {
-  std::string s = "";
-  std::vector<std::string> ans;
+vector<string> bruteForce(int n) {
+  string s = "";
+  vector<string> ans;
   backtrackingBrute(ans, s, n);
   return ans;
 }
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
 // * TIME COMPLEXITY O(2^2N) ~ O(2^N)
-void backtracking(std::vector<std::string> &ans, int open_count, int close_count, int n, std::string s)
+void backtracking(vector<string> &ans, int open_count, int close_count, int n, string s)
 {
   // * No need to check isValidParentheses here
   if (s.size() == 2 * n) {
@@ -103,20 +108,27 @@ void backtracking(std::vector<std::string> &ans, int open_count, int close_count
 // * Backtracking With Safety Check
 // * TIME COMPLEXITY O(2^2N)
 // * SPACE COMPLEXITY O(2N) (Recursion width)
-std::vector<std::string> generateParenthesis(int n) {
-  std::string s = "";
-  std::vector<std::string> ans;
+vector<string> generateParenthesis(int n) {
+  string s = "";
+  vector<string> ans;
   int open_count = 0, close_count = 0;
   backtracking(ans, open_count, close_count, n, s);
   return ans;
 }
 
 int main() {
+  // * testcase 1
   // int n = 3;
+
+  // * testcase 2
   int n = 2;
-  // std::vector<std::string> ans = bruteForce(n);
-  std::vector<std::string> ans = generateParenthesis(n);
-  printStringVector(ans);
+
+  // vector<string> ans = bruteForce(n);
+  vector<string> ans = generateParenthesis(n);
+
+  std::cout << "Valid Parentheses: " << std::endl;
+  printArr(ans);
+
   return 0;
 }
 
