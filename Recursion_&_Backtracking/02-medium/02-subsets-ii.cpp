@@ -78,7 +78,7 @@ void helper(vector<int> &nums, int i, vector<int> &temp, vector<vector<int>> &an
   helper(nums, i + 1, temp, ans);
 }
 
-// * ------------------------- Brute Force Approach -------------------------`
+// * ------------------------- Brute Force Approach -------------------------
 // * TIME COMPLEXITY  O(n * 2^n)
 // * SPACE COMPLEXITY O(2^n)
 vector<vector<int>> bruteForce(vector<int> &nums) {
@@ -89,7 +89,7 @@ vector<vector<int>> bruteForce(vector<int> &nums) {
   return ans;
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * TIME COMPLEXITY  O(n * 2^n)
 // * SPACE COMPLEXITY O(n)
 vector<vector<int>> subsets(vector<int> &nums) {
@@ -104,10 +104,10 @@ vector<vector<int>> subsets(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  vector<int> nums = {1, 2, 2};
+  // vector<int> nums = {1, 2, 2};
 
   // * testcase 2
-  // vector<int> nums = {1, 2, 2, 3};
+  vector<int> nums = {1, 2, 2, 3};
 
   cout << "Input nums: ";
   printArr(nums);

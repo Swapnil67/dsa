@@ -32,6 +32,8 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+vector<vector<int>> ans;
+
 void helper(
     int i,
     vector<int> &temp,
@@ -58,8 +60,7 @@ void helper(
 // * OR
 void helper2(int start,
              vector<int> &temp,
-             int k, int &n,
-             vector<vector<int>> &ans)
+             int k, int &n)
 {
   if (k == 0) {
     ans.push_back(temp);
@@ -71,19 +72,18 @@ void helper2(int start,
 
   for (int i = start; i <= n; ++i) {
     temp.push_back(i);
-    helper2(i + 1, temp, k - 1, n, ans);
+    helper2(i + 1, temp, k - 1, n);
     temp.pop_back();
   }
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * TIME COMPLEXITY O(nCk)
 // * SPACE COMPLEXITY O(n)
 vector<vector<int>> combine(int n, int k) {
-  vector<vector<int>> ans;
   vector<int> temp;
   // helper(1, temp, k, n, ans);
-  helper2(1, temp, k, n, ans);
+  helper2(1, temp, k, n);
   return ans;
 }
 

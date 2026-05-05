@@ -131,6 +131,7 @@ int main(void) {
   // string ans = bruteForce(nums);
   string ans = betterApproach(nums);
   // string ans = findDifferentBinaryString(nums);
+  
   cout << "Unique Binary String: " << ans << endl;
 
   return 0;

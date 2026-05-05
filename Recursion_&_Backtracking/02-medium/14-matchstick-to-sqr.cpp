@@ -24,6 +24,7 @@
 #include <vector>
 #include <numeric>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -60,16 +61,51 @@ bool dfs(vector<int> &matchsticks, vector<int> &sides, int i) {
   return false;
 }
 
-// * ------------------------- Approach: Optimal Approach -------------------------
+
+bool dfs(int i, int &len, vector<int> &sides, vector<int> &matchsticks) {
+  if (i == matchsticks.size())
+    return true;
+
+  for (int j = 0; j < 4; ++j) {
+    if (sides[j] + matchsticks[i] <= len) {
+      sides[j] += matchsticks[i];
+
+      if (dfs(i + 1, len, sides, matchsticks))
+        return true;
+
+      sides[j] -= matchsticks[i];
+    }
+  }
+  return false;
+}
+
+
+// * ------------------------- Approach: Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(4^n)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-bool makesquare(vector<int> &matchsticks) {
+bool bruteForce(vector<int> &matchsticks) {
   int sum = accumulate(matchsticks.begin(), matchsticks.end(), 0);
   if (sum % 4 != 0)
     return false;
 
   vector<int> sides(4);
   return dfs(matchsticks, sides, 0);
+}
+
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * TIME COMPLEXITY O(4^n)
+// * SPACE COMPLEXITY O(n) (Recursion Stack)
+bool makesquare(vector<int>& matchsticks) {
+  int total = accumulate(begin(matchsticks), end(matchsticks), 0);
+  if (0 != total % 4) {
+    return false;
+  }
+
+  sort(rbegin(matchsticks), rend(matchsticks));
+
+  int len = total / 4;
+  vector<int> sides(4);
+  return dfs(0, len, sides, matchsticks);
 }
 
 int main(void) {
@@ -90,7 +126,6 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 14-matchstick-to-sqr.cpp -o output && ./output
-
 
 /*
 * # Time and Space Complexity Analysis

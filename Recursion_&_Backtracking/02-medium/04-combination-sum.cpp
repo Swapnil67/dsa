@@ -46,15 +46,12 @@ void solve(vector<int> &nums,
            vector<int> &temp,
            vector<vector<int>> &ans)
 {
-  if (target < 0)
-    return;
-    
   if (target == 0) {
     ans.push_back(temp);
     return;
   }
 
-  if (i >= nums.size())
+  if (target < 0 || i >= nums.size())
     return;
 
   temp.push_back(nums[i]);

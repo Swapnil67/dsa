@@ -44,15 +44,13 @@ void solveBrute(vector<int> &candidates,
                 vector<int> &temp,
                 set<vector<int>> &st)
 {
-  if (target < 0)
-    return;
-    
   if (target == 0) {
     st.insert(temp);
     return;
   }
 
-  if (i >= candidates.size())
+  // * Edge Case
+  if (target < 0 || i >= candidates.size())
     return;
 
   temp.push_back(candidates[i]);
@@ -62,7 +60,7 @@ void solveBrute(vector<int> &candidates,
   solveBrute(candidates, i + 1, target, temp, st);
 }
 
-// * ------------------------- Brute Force Approach -------------------------`
+// * ------------------------- Brute Force Approach -------------------------
 // * - 'n' = no. of elements in the input candidates array
 // * - 't' = target sum
 // * - 'k' = is the average length of the combinations (temp array)
@@ -106,7 +104,7 @@ void solve(
   solve(i + 1, target, nums, temp, ans);
 }
 
-// * ------------------------- Optimal Approach -------------------------`
+// * ------------------------- Optimal Approach -------------------------
 // * - 'n' = no. of elements in the input candidates array
 // * - 't' = target sum
 // * - 'k' = is the average length of the combinations (temp array)

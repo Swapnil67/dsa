@@ -81,9 +81,8 @@ bool dfs(string &s, int i, vector<long long> &splits) {
 }
 
 bool dfs2(string &s, int i, unsigned long long prev) {
-  if (i == s.size()) {
+  if (i == s.size())
     return true;
-  }
   
   unsigned long long num = 0;
   for (int j = i; j < s.size(); ++j) {
@@ -92,8 +91,7 @@ bool dfs2(string &s, int i, unsigned long long prev) {
     if (num + 1 == prev && dfs2(s, j + 1, num))
       return true;
 
-    // * pruning
-    if (num >= prev)
+    if (num >= prev) // * pruning
       break;
   }
 
@@ -116,6 +114,7 @@ bool splitString(string s) {
   int n = s.size();
   unsigned long long val = 0;
 
+  // * here 'n-1' since we are starting recursion from 'i+1' index
   for (int i = 0; i < n - 1; ++i) {
     val = val * 10 + (s[i] - '0');
     if (dfs2(s, i + 1, val)) {
@@ -140,6 +139,7 @@ int main(void) {
 
   bool ans = bruteForce(s);
   // bool ans = splitString(s);
+
   cout << "is possible to split: " << ans << endl;
 
   return 0;

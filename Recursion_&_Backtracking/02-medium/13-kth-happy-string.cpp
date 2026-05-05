@@ -100,11 +100,7 @@ void solve(string &str, string &ans, int &cnt, int &k, int &n) {
 string bruteForce(int n, int k) {
   string str = "";
   solveBrute(str, n);
-  
-  if (strings.size() < k) {
-      return "";
-  }
-  return strings[k - 1];
+  return (strings.size() < k) ? "" : strings[k - 1];
 }
 
 // * ------------------------- Approach 2: Optimal Approach -------------------------
@@ -120,10 +116,10 @@ string getHappyString(int n, int k) {
 
 int main(void) {
   // * testcase 1
-  // int n = 1, k = 3;
+  int n = 1, k = 3;
   
   // * testcase 2
-  int n = 1, k = 4;
+  // int n = 1, k = 4;
   
   // * testcase 3
   // int n = 3, k = 9;
@@ -132,6 +128,7 @@ int main(void) {
 
   // string ans = bruteForce(n, k);
   string ans = getHappyString(n, k);
+
   cout << "kth happy string: " << ans << endl;
 
   return 0;

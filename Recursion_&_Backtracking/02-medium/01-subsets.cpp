@@ -68,10 +68,10 @@ vector<vector<int>> subsets(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  vector<int> nums = {1, 2, 3};
+  // vector<int> nums = {1, 2, 3};
 
   // * testcase 2
-  // vector<int> nums = {1, 2, 3, 4};
+  vector<int> nums = {1, 2, 3, 4};
 
   cout << "Input nums: ";
   printArr(nums);

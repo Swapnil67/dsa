@@ -24,16 +24,18 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
+
+vector<vector<string>> ans;
 
 bool check_palindrome(string &s, int i, int j) {
   while (i <= j) {
@@ -45,11 +47,7 @@ bool check_palindrome(string &s, int i, int j) {
   return true;
 }
 
-void dfs(
-    int i,
-    string &s,
-    vector<string> cur,
-    vector<vector<string>> &ans)
+void dfs(int i, string &s, vector<string> cur)
 {
   // * Base case
   if (i == s.size()) {
@@ -61,14 +59,13 @@ void dfs(
     cout << s.substr(i, j - i + 1) << endl;
     if (check_palindrome(s, i, j)) {
       cur.push_back(s.substr(i, j - i + 1));
-      dfs(j + 1, s, cur, ans);
+      dfs(j + 1, s, cur);
       cur.pop_back();
     }
   }
 }
 
-void dfs(int i, string s, vector<string> &parts, vector<vector<bool>> &t,
-         vector<vector<string>> &ans) {
+void dfs(int i, string s, vector<string> &parts, vector<vector<bool>> &t) {
   if (i == s.size()) {
     ans.push_back(parts);
     return;
@@ -77,7 +74,7 @@ void dfs(int i, string s, vector<string> &parts, vector<vector<bool>> &t,
   for (int j = i; j < s.length(); ++j) {
     if (t[i][j] == true) {
       parts.push_back(s.substr(i, j - i + 1));
-      dfs(j + 1, s, parts, t, ans);
+      dfs(j + 1, s, parts, t);
       parts.pop_back();
     }
   }
@@ -90,8 +87,7 @@ void dfs(int i, string s, vector<string> &parts, vector<vector<bool>> &t,
 // * SPACE COMPLEXITY O(n)
 vector<vector<string>> partition(string s) {
   vector<string> cur;
-  vector<vector<string>> ans;
-  dfs(0, s, cur, ans);
+  dfs(0, s, cur);
   return ans;
 }
 
@@ -124,9 +120,8 @@ vector<vector<string>> partition2(string s) {
   // for (auto &vec : t)
   //   printArr(vec);
 
-  vector<vector<string>> ans;
   vector<string> parts;
-  dfs(0, s, parts, t, ans);
+  dfs(0, s, parts, t);
   return ans;
 }
 

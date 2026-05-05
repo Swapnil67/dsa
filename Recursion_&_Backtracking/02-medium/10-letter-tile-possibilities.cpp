@@ -44,13 +44,12 @@ void printArr(vector<T> &arr) {
 }
 
 void solveBrute(
-    string &s,
-    string cur,
+    string &s, string &cur,
     vector<bool> &used,
     unordered_set<string> &ans)
 {
-  ans.insert(cur); // * Add to set
   // cout << cur << endl;
+  ans.insert(cur); // * Add to set
 
   for (int i = 0; i < s.size(); ++i) {
     if (used[i]) // * prevent using repetative index
@@ -83,10 +82,10 @@ void solve(int &total, vector<int> &freq_vec) {
 // * TIME COMPLEXITY O(n!)
 // * SPACE COMPLEXITY O(n! * n)
 int bruteForce(string tiles) {
-  int n = tiles.length();
-  vector<bool> used(n, false);
+  string cur = "";
   unordered_set<string> ans;
-  solveBrute(tiles, "", used, ans);
+  vector<bool> used(tiles.length(), false);
+  solveBrute(tiles, cur, used, ans);
   return ans.size() - 1; // * exclude the empty sequence
 }
 

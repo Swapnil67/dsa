@@ -121,13 +121,16 @@ vector<vector<int>> permutations(vector<int> &nums) {
 }
 
 int main(void) {
+
   // * testcase 1
   vector<int> arr = {1, 1, 2};
+
   cout << "Input Array: ";
   printArr(arr);
 
   // vector<vector<int>> ans = bruteForce(arr);
   vector<vector<int>> ans = permutations(arr);
+  
   cout << "Permutations: " << endl;
   for (auto &vec : ans)
     printArr(vec);

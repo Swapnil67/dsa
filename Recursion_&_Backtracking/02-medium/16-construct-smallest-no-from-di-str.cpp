@@ -106,10 +106,10 @@ int main(void) {
   // string pattern = "III";
 
   // * testcase 2
-  // string pattern = "DDD";
+  string pattern = "DDD";
   
   // * testcase 3
-  string pattern = "IIIDIDDD";
+  // string pattern = "IIIDIDDD";
   
   cout << "pattern string: " << pattern << endl;
 

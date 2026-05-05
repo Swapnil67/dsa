@@ -78,7 +78,13 @@ vector<vector<int>> permutations(vector<int> &arr) {
 }
 
 int main(void) {
-  vector<int> arr = {1, 2, 3};
+
+  // * testcase 1
+  // vector<int> arr = {1, 2, 3};
+
+  // * testcase 2
+  vector<int> arr = {0, 1};
+
   cout << "Input Array: ";
   printArr(arr);
 

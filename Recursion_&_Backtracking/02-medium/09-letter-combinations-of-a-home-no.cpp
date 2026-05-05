@@ -57,7 +57,7 @@ void solve(string &digits, int idx, string temp) {
 }
 
 // * ------------------------- Optimal Approach -------------------------
-// * N = length of substring
+// * n = length of substring
 // * TIME COMPLEXITY O(4^n * n) (Exponential)
 // * SPACE COMPLEXITY O(n)
 vector<string> letterCombinations(string digits) {
@@ -67,7 +67,12 @@ vector<string> letterCombinations(string digits) {
 }
 
 int main(void) {
-  string digits = "23";
+  // * testcase 1
+  // string digits = "23";
+
+  // * testcase 2
+  string digits = "2";
+
   cout << "Input digits: " << digits << endl;
 
   vector<string> ans = letterCombinations(digits);

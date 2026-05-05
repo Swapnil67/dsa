@@ -93,13 +93,13 @@ vector<string> restoreIpAddresses(string s)
 
 int main(void) {
   // * testcase 1
-  // string s = "25525511135";
+  string s = "25525511135";
 
   // * testcase 2
   // string s = "0000";
 
   // * testcase 3
-  string s = "101023";
+  // string s = "101023";
 
   cout << "Input IP: " << s << endl;
 
