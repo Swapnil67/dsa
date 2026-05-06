@@ -37,10 +37,7 @@
 
 // ! Google
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 
@@ -67,13 +64,11 @@ TreeNode* addOneRow(TreeNode* root, int val, int depth) {
       TreeNode* node = q.front();
       q.pop();
 
-      if (node->left) {
+      if (node->left) 
         q.push(node->left);
-      }
       
-      if (node->right) {
+      if (node->right) 
         q.push(node->right);
-      }
 
       if (level == depth - 1) {
         // * Add new level to left

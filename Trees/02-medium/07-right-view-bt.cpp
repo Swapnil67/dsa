@@ -22,64 +22,10 @@
 * https://www.geeksforgeeks.org/problems/right-view-of-binary-tree/1
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
-
-using namespace std;
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(vector<int> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
-
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+#include "../common.hpp"
 
 // * Recursive Pre Order Traversal (Root -> Right -> Left)
-void dfs(TreeNode *root, std::vector<int> &ans, int level) {
+void dfs(TreeNode *root, vector<int> &ans, int level) {
   if (!root)
     return;
 
@@ -92,8 +38,8 @@ void dfs(TreeNode *root, std::vector<int> &ans, int level) {
 }
 
 // * DFS
-std::vector<int> rightViewDFS(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> rightViewDFS(TreeNode *root) {
+  vector<int> ans;
   dfs(root, ans, 0);
   return ans;
 }
@@ -102,12 +48,12 @@ std::vector<int> rightViewDFS(TreeNode *root) {
 // * Using Level Order Traversal
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> rightViewBFS(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> rightViewBFS(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
@@ -134,16 +80,16 @@ std::vector<int> rightViewBFS(TreeNode *root) {
 // * Variant1: Print Both Left & right side view in clockwise order (Do not repeat root node)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> rightViewVariant1(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> rightViewVariant1(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
-  std::vector<int> left_side;
-  std::vector<int> right_side;
+  vector<int> left_side;
+  vector<int> right_side;
 
   while (!q.empty()) {
     int n = q.size();
@@ -185,13 +131,13 @@ int main() {
 
   root->right->right = new TreeNode(7);
 
-  std::cout << "Input Tree" << std::endl;
+  cout << "Input Tree" << endl;
   levelOrderTraversal(root);
 
-  std::cout << "Right view of the BT" << std::endl;
-  // std::vector<int> ans = rightViewDFS(root);
-  // std::vector<int> ans = rightViewBFS(root);
-  std::vector<int> ans = rightViewVariant1(root);
+  cout << "Right view of the BT" << endl;
+  // vector<int> ans = rightViewDFS(root);
+  // vector<int> ans = rightViewBFS(root);
+  vector<int> ans = rightViewVariant1(root);
   printArr(ans);
 
   return 0;

@@ -20,24 +20,7 @@
 // ! Meta, Apple
 
 #include <stack>
-#include <iostream>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
+#include "../common.hpp"
 
 void inOrderTraversal(TreeNode *root) {
   if (root == nullptr)
@@ -72,8 +55,7 @@ TreeNode* flatten(TreeNode* root) {
   return root;
 }
 
-
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Stack Approach
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)

@@ -13,59 +13,6 @@
 using namespace std;
 
 
-
-// * 62 - Maximum Average Subtree
-// double maximumAverageSubtree(TreeNode* root) {
-// TODO
-// }
-
-// * ------------------------------------------------------------------------
-
-// * 01 - Binary Tree Level Order Traversal
-// vector<vector<int>> levelOrder(TreeNode *root) {
-// TODO
-// }
-
-// * 02 - Binary Tree Zigzag Level Order Traversal
-// vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-// TODO
-// }
-
-// * 03 - Boundary Traversal of tree
-// vector<int> boundaryTraversal(TreeNode* root) {
-// TODO
-// }
-
-// * 04 - Find Leaves of Binary Tree
-// vector<vector<int>> findLeaves(TreeNode *root) {
-// TODO
-// }
-
-// * 05 - Top View of Binary tree
-// vector<int> topView(TreeNode *root) {
-// TODO Tomorrow
-// }
-
-// * 06 - Bottom View of Binary tree
-// vector<int> bottomView(TreeNode *root) {
-// TODO Tomorrow
-// }
-
-// * 07 - Right View of Binary tree
-// vector<int> rightView(TreeNode *root) {
-// TODO Tomorrow
-// }
-
-// * 08 - left View of Binary tree
-// vector<int> leftView(TreeNode *root) {
-// TODO Tomorrow
-// }
-
-// * 09 - Root to Node
-// vector<int> rootToNode(TreeNode *root, int x) {
-// TODO
-// }
-
 // * 10 - Lowest Common Ancestor of a Binary Tree
 // TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q) {
 // TODO
@@ -75,7 +22,6 @@ using namespace std;
 // int widthOfBinaryTree(TreeNode *root) {
 // TODO
 // }
-
 // * 12 - All Nodes Distance K in Binary Tree
 // vector<int> distanceK(TreeNode *root, TreeNode *target, int k) {
 // TODO
@@ -200,7 +146,6 @@ using namespace std;
 // bool flipEquiv(TreeNode* root1, TreeNode* root2) {
 // TODO
 // }
-
 // * 37 - House Robber III
 // int rob(TreeNode* root) {
 // TODO
@@ -319,8 +264,60 @@ using namespace std;
 // TODO
 // }
 
-int main(void) {
+// * 62 - Maximum Average Subtree
+// double maximumAverageSubtree(TreeNode* root) {
+// TODO
+// }
 
+// * ------------------------------------------------------------------------
+
+// * 01 - Binary Tree Level Order Traversal
+// vector<vector<int>> levelOrder(TreeNode *root) {
+// TODO
+// }
+
+// * 02 - Binary Tree Zigzag Level Order Traversal
+// vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+// TODO
+// }
+
+// * 03 - Boundary Traversal of tree
+// vector<int> boundaryTraversal(TreeNode* root) {
+// TODO
+// }
+
+// * 04 - Find Leaves of Binary Tree
+// vector<vector<int>> findLeaves(TreeNode *root) {
+// TODO
+// }
+
+// * 05 - Top View of Binary tree
+// vector<int> topView(TreeNode *root) {
+// TODO
+// }
+
+// * 06 - Bottom View of Binary tree
+// vector<int> bottomView(TreeNode *root) {
+// TODO
+// }
+
+// * 07 - Right View of Binary tree
+// vector<int> rightView(TreeNode *root) {
+// TODO
+// }
+
+// * 08 - left View of Binary tree
+// vector<int> leftView(TreeNode *root) {
+// TODO
+// }
+
+// * 09 - Root to Node
+// vector<int> rootToNode(TreeNode *root, int x) {
+// TODO
+// }
+
+
+int main(void) {
   return 0;
 }
 

@@ -34,10 +34,7 @@
 
 // ! Google
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 

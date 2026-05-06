@@ -17,39 +17,7 @@
 
 // ! Amazon, Google, Meta, Microsoft, Flipkart
 
-#include <vector>
-#include <iostream>
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-
-  ~TreeNode() {
-    if (left)
-      delete left;
-    if (right)
-      delete right;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
+#include "../common.hpp"
 
 bool dfs(TreeNode *root, int x, std::vector<int> &ans) {
   if (!root)
@@ -72,7 +40,7 @@ bool dfs(TreeNode *root, int x, std::vector<int> &ans) {
   return false;
 }
 
-// * ------------------------- APPROACH: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 std::vector<int> rootToNode(TreeNode *root, int x) {

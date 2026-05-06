@@ -13,66 +13,13 @@
  * https://www.naukri.com/code360/problems/zig-zag-traversal_1062662
 */
 
-// ! Amazon, Flipkart
+// ! Amazon, Google, Meta, Microsoft, Adobe, Flipkart
 
 #include <queue>
 #include <vector>
 #include <iostream>
 #include <algorithm>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(vector<T> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    cout << endl;
-  }
-}
-
+#include "../common.hpp"
 
 vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
   vector<vector<int>> ans;

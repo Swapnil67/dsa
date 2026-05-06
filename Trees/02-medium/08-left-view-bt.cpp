@@ -16,41 +16,16 @@
 
 * Output: ans = [1, 2, 4, 6]
 
-* https://www.naukri.com/code360/problems/right-view_764605
+* https://www.naukri.com/code360/problems/left-view-of-binary-tree_625707
 * https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
+// ! Amazon, Apple, Uber, Adobe, Razorpay
 
-using namespace std;
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(vector<int> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
+#include "../common.hpp"
 
 // * Recursive Pre Order Traversal (Root -> Left -> Right)
-void dfs(TreeNode *root, std::vector<int> &ans, int level) {
+void dfs(TreeNode *root, vector<int> &ans, int level) {
   if (!root)
     return;
 
@@ -63,8 +38,8 @@ void dfs(TreeNode *root, std::vector<int> &ans, int level) {
 }
 
 // * DFS
-std::vector<int> leftViewDFS(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> leftViewDFS(TreeNode *root) {
+  vector<int> ans;
   dfs(root,ans,0);
   return ans;
 }
@@ -73,17 +48,17 @@ std::vector<int> leftViewDFS(TreeNode *root) {
 // * Using Level Order Traversal
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> leftViewBFS(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> leftViewBFS(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
 
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
     int n = q.size();
-    std::vector<int> level;
+    vector<int> level;
     while (n--) {
       TreeNode *node = q.front();
       q.pop();
@@ -114,9 +89,9 @@ int main() {
 
   root->right->right = new TreeNode(7);
   
-  std::cout << "Left view of the BT" << std::endl;
-  std::vector<int> ans = leftViewDFS(root);
-  // std::vector<int> ans = leftViewBFS(root);
+  cout << "Left view of the BT" << endl;
+  vector<int> ans = leftViewDFS(root);
+  // vector<int> ans = leftViewBFS(root);
   printArr(ans);
 
   return 0;

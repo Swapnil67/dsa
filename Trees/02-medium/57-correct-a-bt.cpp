@@ -33,11 +33,8 @@
  *             X      3
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_set>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 

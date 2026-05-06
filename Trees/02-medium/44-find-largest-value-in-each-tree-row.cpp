@@ -17,11 +17,7 @@
 * https://leetcode.com/problems/find-largest-value-in-each-tree-row
 */
 
-#include <queue>
-#include <vector>
-#include <climits>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 
@@ -40,7 +36,7 @@ vector<int> largestValues(TreeNode *root) {
 
   while (!q.empty()) {
     int N = q.size();
-    int cur_max = INT_MIN;
+    int cur_max = q.front()->data;
     while (N--) {
       auto node = q.front();
       q.pop();

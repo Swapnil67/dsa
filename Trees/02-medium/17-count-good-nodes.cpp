@@ -21,22 +21,7 @@
 */
 
 #include <iostream>
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
+#include "../common.hpp"
 
 void dfs(TreeNode* root, int &ans, int cur_max) {
   if (!root) // * Base case

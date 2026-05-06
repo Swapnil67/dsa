@@ -49,10 +49,8 @@
 * https://leetcode.com/problems/construct-string-from-binary-tree/description/
 */
 
-#include <vector>
-#include <iostream>
-#include "common.hpp"
-
+#include "../common.hpp"
+ 
 using namespace std;
 
 string tree2str(TreeNode* root) {

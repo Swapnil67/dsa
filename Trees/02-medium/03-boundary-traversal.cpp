@@ -23,34 +23,7 @@
 // ! Meta, Amazon, Google, Uber, Adobe, Microsoft
 
 #include <stack>
-#include <vector>
-#include <iostream>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(vector<int> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
+#include "../common.hpp";
 
 bool isLeaf(TreeNode *node) {
   return !node->left && !node->right;

@@ -23,42 +23,39 @@
 // ! DP
 // ! Amazon, Google
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_map>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 
 // * Recursion
 // * Draw recursion tree to understand more clearly
 // * Full Binary tree (FBT) is only possible with odd 'n' values
-std::vector<TreeNode *> solve_brute(int n) {
-  if (n % 2 == 0) // * Cannot create FBT with even nodes
+vector<TreeNode *> solve_brute(int n) {
+  // std::cout << n << std::endl;
+  // * Cannot create FBT with even nodes
+  if (n % 2 == 0)
     return {};
 
   if (n == 1) {
     return {new TreeNode(0)};
   }
 
-  std::vector<TreeNode *> ans;
+  vector<TreeNode *> ans;
   for (int i = 1; i < n; i += 2) { // * odd loop
 
     // * All possible FBT from left
     // * no of nodes in left = i
-    std::vector<TreeNode *> fbt_left = solve_brute(i);
+    vector<TreeNode *> fbt_left = solve_brute(i);
 
     // * All possible FBT from right
     // * no of nodes in right = n - i - 1
-    std::vector<TreeNode *> fbt_right = solve_brute(n - i - 1);
+    vector<TreeNode *> fbt_right = solve_brute(n - i - 1);
 
     // * Here we will try all the possibilites from left & right side
     for (auto &fbt_l : fbt_left) { // * Loop over the possible root nodes indexs
       for (auto &fbt_r : fbt_right) {
-        TreeNode *root = new TreeNode(0);
-        root->left = fbt_l;
-        root->right = fbt_r;
+        TreeNode *root = new TreeNode(0, fbt_l, fbt_r);
         ans.push_back(root);
       }
     }
@@ -70,7 +67,7 @@ std::vector<TreeNode *> solve_brute(int n) {
 // * Recursion + Memoization
 // * Draw recursion tree to understand more clearly
 // * Full Binary tree (FBT) is only possible with odd 'n' values
-std::vector<TreeNode *> solve(int n, std::unordered_map<int, std::vector<TreeNode *>> &cache) {
+vector<TreeNode *> solve(int n, unordered_map<int, vector<TreeNode *>> &cache) {
   // * Return from cache
   if (cache.count(n))
     return cache[n];
@@ -82,16 +79,16 @@ std::vector<TreeNode *> solve(int n, std::unordered_map<int, std::vector<TreeNod
     return {new TreeNode(0)};
   }
 
-  std::vector<TreeNode *> ans;
+  vector<TreeNode *> ans;
   for (int i = 1; i < n; i += 2) { // * odd loop
 
     // * All possible FBT from left
     // * no of nodes in left = i
-    std::vector<TreeNode *> fbt_left = solve(i, cache);
+    vector<TreeNode *> fbt_left = solve(i, cache);
 
     // * All possible FBT from right
     // * no of nodes in right = n - i - 1
-    std::vector<TreeNode *> fbt_right = solve(n - i - 1, cache);
+    vector<TreeNode *> fbt_right = solve(n - i - 1, cache);
 
     // * Here we will try all the possibilites from left & right side
     for (auto &fbt_l : fbt_left) {
@@ -110,9 +107,9 @@ std::vector<TreeNode *> solve(int n, std::unordered_map<int, std::vector<TreeNod
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * Recursion
-// * TIME COMPLEXITY O(N)
+// * TIME COMPLEXITY O(2^N)
 // * SPACE COMPLEXITY O(N) 
-std::vector<TreeNode *> bruteForce(int n) {
+vector<TreeNode *> bruteForce(int n) {
   return solve_brute(n);
 }
 
@@ -120,17 +117,18 @@ std::vector<TreeNode *> bruteForce(int n) {
 // * Recursion + Memoization
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N) 
-std::vector<TreeNode *> allPossibleFBT(int n) {
-  std::unordered_map<int, std::vector<TreeNode *>> cache;
+vector<TreeNode *> allPossibleFBT(int n) {
+  unordered_map<int, vector<TreeNode *>> cache;
   return solve(n, cache);
 }
 
 int main(void) {
   int n = 7;
   
-  std::vector<TreeNode *> trees = allPossibleFBT(n);
+  vector<TreeNode *> trees = bruteForce(n);
+  // vector<TreeNode *> trees = allPossibleFBT(n);
   for (int i = 0; i < trees.size(); ++i) {
-    std::cout << "--------- Tree " << i + 1 << " ---------" << std::endl;
+    cout << "--------- Tree " << i + 1 << " ---------" << endl;
     levelOrderTraversal(trees[i]);
   }
 

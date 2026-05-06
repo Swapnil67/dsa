@@ -37,10 +37,7 @@
 
 // ! Google, Amazon
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 
@@ -121,12 +118,12 @@ string getDirections(TreeNode* root, int src, int dest) {
   // * 1. Find Path from root to src
   string root_to_src = "";
   root_to_node(root, root_to_src, src);
-  // cout << "root_to_src : " << root_to_src << endl;
+  cout << "root_to_src : " << root_to_src << endl;
   
   // * 2. Find Path from root to Dest
   string root_to_dest = "";
   root_to_node(root, root_to_dest, dest);
-  // cout << "root_to_dest : " << root_to_dest << endl;
+  cout << "root_to_dest : " << root_to_dest << endl;
 
   // * The LCA Will be point at which both directions changed
   int i = 0;
@@ -178,4 +175,5 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 35-step-by-step-directions-from-a-bt-node-to-another.cpp -o output && ./output
+
 

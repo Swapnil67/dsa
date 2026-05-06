@@ -29,13 +29,11 @@
 * https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/description/
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
+
 #include <algorithm>
 #include <unordered_map>
-#include "common.hpp"
-
+#include "../common.hpp"
+ 
 using namespace std;
 
 void swap(int &a, int &b) {

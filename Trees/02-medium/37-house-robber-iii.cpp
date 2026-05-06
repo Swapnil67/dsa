@@ -39,13 +39,8 @@
 
 // ! Google, Adobe
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_map>
-#include "common.hpp"
-
-using namespace std;
+#include "../common.hpp"
 
 using namespace std;
 
@@ -53,18 +48,18 @@ int dfs_dp(TreeNode *root, unordered_map<TreeNode*, int> &cache) {
   if (cache.find(root) != cache.end())
     return cache[root];
     
+  // * Sum with robbing root 
   int with_root = root->data;
-  if (root->left) {
+  if (root->left)
     with_root += dfs_dp(root->left->left, cache) + dfs_dp(root->left->right, cache);
-  }
-  if (root->right) {
-    with_root += dfs_dp(root->right->left, cache) + dfs_dp(root->right->right, cache);
-  }
   
+  if (root->right) 
+    with_root += dfs_dp(root->right->left, cache) + dfs_dp(root->right->right, cache);
+  
+  // * Sum without robbing root 
   int without_root = dfs_dp(root->left, cache) + dfs_dp(root->right, cache);
-  int ans = max(with_root, without_root);
-  cache[root] = ans;
-  return ans;
+  
+  return cache[root] = max(with_root, without_root);
 }
 
 pair<int, int> dfs(TreeNode *root) {

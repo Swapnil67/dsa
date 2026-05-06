@@ -16,7 +16,7 @@
 
 using namespace std;
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)

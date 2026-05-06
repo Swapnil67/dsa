@@ -46,11 +46,8 @@
 
 // ! Amazon
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <algorithm>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 

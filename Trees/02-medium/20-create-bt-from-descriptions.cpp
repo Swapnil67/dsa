@@ -25,63 +25,13 @@
 */
 
 #include <map>
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_set>
-
+#include "../common.hpp"
+ 
 using namespace std;
 
-typedef struct TreeNode TreeNode;
 
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(vector<int> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    cout << endl;
-  }
-}
-
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {

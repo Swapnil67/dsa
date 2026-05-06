@@ -36,15 +36,10 @@
 
 // ! Google, Amazon
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_set>
-#include "common.hpp"
+#include "../common.hpp"
 
-using namespace std;
-
-TreeNode *dfs(TreeNode *root, vector<TreeNode *> &ans, unordered_set<int> &del_st ) {
+TreeNode *dfs(TreeNode *root, vector<TreeNode *> &ans, unordered_set<int> &del_st) {
   if (!root)
     return root;
 

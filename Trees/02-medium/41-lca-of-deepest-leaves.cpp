@@ -41,31 +41,28 @@
 
 // ! Google, Meta
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_map>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 
 // * Maps the depth of each node {node: depth}
 void build_depth_map(
     TreeNode *root, int d, int &max_depth,
-    std::unordered_map<TreeNode *, int> &depth_map)
+    unordered_map<TreeNode *, int> &depth_map)
 {
   if (!root)
     return;
 
   depth_map[root] = d;
-  max_depth = std::max(max_depth, d); // * check max_depth
+  max_depth = max(max_depth, d); // * check max_depth
 
   build_depth_map(root->left, d + 1, max_depth, depth_map);
   build_depth_map(root->right, d + 1, max_depth, depth_map);
 }
 
 TreeNode *dfs(TreeNode *root, int &max_depth,
-              std::unordered_map<TreeNode *, int> &depth_map)
+              unordered_map<TreeNode *, int> &depth_map)
 {
   // * Found null or node with max depth
   if (!root || max_depth == depth_map[root])
@@ -81,7 +78,7 @@ TreeNode *dfs(TreeNode *root, int &max_depth,
   return left != nullptr ? left : right;
 }
 
-std::pair<int, TreeNode*> dfs2(TreeNode *root)
+pair<int, TreeNode*> dfs2(TreeNode *root)
 {
   // * Found null or node with max depth
   if (!root)
@@ -106,13 +103,13 @@ std::pair<int, TreeNode*> dfs2(TreeNode *root)
 TreeNode* bruteForce(TreeNode* root) {
   // * 1. Build the depth map
   int max_depth = 0;
-  std::unordered_map<TreeNode *, int> depth_map;
+  unordered_map<TreeNode *, int> depth_map;
   build_depth_map(root, 0, max_depth, depth_map); // * O(N)
 
   // * For Debugging
-  // std::cout << "Max Depth: " << max_depth << std::endl;
+  // cout << "Max Depth: " << max_depth << endl;
   // for (auto &[node, depth]: depth_map) {
-  //   std::cout << node->data << " " << depth << std::endl;
+  //   cout << node->data << " " << depth << endl;
   // }
 
   // * 2. Return the LCA of max_depth nodes
@@ -151,10 +148,10 @@ int main(void) {
   root->right->right = new TreeNode(8);
   root->right->left->left = new TreeNode(10);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
-  std::cout << "Answer: " << std::endl;
+  cout << "Answer: " << endl;
   // TreeNode* ans = bruteForce(root);
   TreeNode* ans = lcaDeepestLeaves(root);
   levelOrderTraversal(ans);

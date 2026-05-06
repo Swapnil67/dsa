@@ -22,37 +22,8 @@
 * https://www.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_map>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(vector<T> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
+#include "../common.hpp"
 
 // * Map the parent node of each node in hashmap
 void markParents(TreeNode *root,

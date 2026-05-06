@@ -33,22 +33,7 @@
 // ! Google, Amazon
 
 #include <iostream>
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
+#include "../common.hpp"
 
 TreeNode* removeLeafNodes(TreeNode* root, int target) {
   // * Base Case

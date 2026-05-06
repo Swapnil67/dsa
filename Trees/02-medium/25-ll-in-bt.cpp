@@ -27,9 +27,7 @@
 * https://leetcode.com/problems/linked-list-in-binary-tree/description/
 */
 
-#include <vector>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
  
 using namespace std;
 

@@ -24,7 +24,6 @@ struct TreeNode {
   }
 };
 
-
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * BFS Brute 
 // * TIME COMPLEXITY O(n)

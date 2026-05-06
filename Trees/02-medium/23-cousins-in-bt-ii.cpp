@@ -28,11 +28,8 @@
 * https://leetcode.com/problems/cousins-in-binary-tree-ii/description/
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
-
+#include "../common.hpp"
+ 
 using namespace std;
 
 // * Finds the level sum at each level in given BT
@@ -173,14 +170,14 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   cout << "Input Tree" << endl;
-  inOrderTraversal(root);
+  levelOrderTraversal(root);
   cout << endl;
   
   // TreeNode *ans = bruteForce(root); 
   TreeNode *ans = replaceValueInTree(root); 
 
   cout << "Output Tree" << endl;
-  inOrderTraversal(ans);
+  levelOrderTraversal(ans);
   cout << endl;
 
   return 0;

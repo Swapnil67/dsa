@@ -46,13 +46,8 @@
 
 // ! Amazon
 
-#include <queue>
-#include <vector>
 #include <climits>
-#include <iostream>
-#include "common.hpp"
-
-using namespace std;
+#include "../common.hpp"
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * BFS
@@ -178,8 +173,9 @@ int main(void) {
   levelOrderTraversal(root);
 
   // * testcase 2
+  // bool ans = bruteForce(root);
   bool ans = isEvenOddTree(root);
-  std::cout << "Ans: " << ans << std::endl;
+  std::cout << "Even Odd Tree: " << ans << std::endl;
 
   return 0;
 }

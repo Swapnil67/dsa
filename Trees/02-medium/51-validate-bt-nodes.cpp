@@ -34,39 +34,8 @@
 
 // ! Meta
 
-#include <vector>
-#include <iostream>
 #include <unordered_map>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-
-template <typename T>
-void printArr(vector<T> &arr) {
-  int n = arr.size();
-  cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    cout << arr[i];
-    if (i != n - 1)
-      cout << ", ";
-  }
-  cout << " ]" << endl;
-}
+#include "../common.hpp"
 
 void dfs(int u, int &count,
          vector<bool> &visited,
@@ -85,11 +54,10 @@ void dfs(int u, int &count,
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 bool validateBinaryTreeNodes(int n, vector<int> &left_child, vector<int> &right_child) {
-
   // * { child_node: parent_node }
   unordered_map<int, int> child_to_parent_mp;
 
-  // * Adjacency List
+  // * Step 1: Check if any node has more than 1 parents & build Adjacency List
   // * { { node1: {left_child, right_child} }, { node2: {left_child, right_child}} }
   unordered_map<int, vector<int>> adj;
   for (int node = 0; node < n; ++node) {
@@ -115,7 +83,7 @@ bool validateBinaryTreeNodes(int n, vector<int> &left_child, vector<int> &right_
     }
   }
 
-  // * Find the root from map
+  // * Step 2: Find the root from map
   int root = -1;
   for (int node = 0; node < n; ++node) {
     // * Possible root
@@ -132,7 +100,7 @@ bool validateBinaryTreeNodes(int n, vector<int> &left_child, vector<int> &right_
   if (root == -1)
     return false;
 
-  // * Normal DFS to count the nodes of bt
+  // * Step 3: Normal DFS to count the nodes of bt
   int count = 0;
   vector<bool> visited(n, false);
   dfs(root, count, visited, adj);

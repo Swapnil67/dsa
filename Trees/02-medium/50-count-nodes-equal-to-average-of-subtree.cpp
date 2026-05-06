@@ -36,60 +36,8 @@
 
 // ! Amazon, Google
 
-#include <queue>
-#include <vector>
-#include <iostream>
 #include <unordered_map>
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
-
-void levelOrderTraversal(TreeNode *root) {
-  if (!root)
-    return;
-
-  std::queue<TreeNode *> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-    // * traverse the whole level
-    while (n--) {
-      TreeNode *node = q.front();
-      q.pop();
-
-      std::cout << node->data << " ";
-
-      if (node->left)
-        q.push(node->left);
-
-      if (node->right)
-        q.push(node->right);
-    }
-    std::cout << std::endl;
-  }
-}
+#include "../common.hpp"
 
 void findSumAndCount(int &sum, int &count, TreeNode *root) {
   if (!root)
@@ -106,7 +54,7 @@ void solve_brute(TreeNode *root, int &ans) {
 
   int sum = 0, count = 0;
   findSumAndCount(sum, count, root);
-  std::cout << "(" << sum << " / " << count << ")"  << std::endl;
+  cout << "(" << sum << " / " << count << ")"  << endl;
   if ((sum / count) == root->data) {
     ans += 1;
   }
@@ -115,7 +63,7 @@ void solve_brute(TreeNode *root, int &ans) {
   solve_brute(root->right, ans);
 }
 
-std::pair<int, int> solve(TreeNode *root, int &ans) {
+pair<int, int> solve(TreeNode *root, int &ans) {
   if (!root)
     return {0, 0};
 
@@ -140,8 +88,8 @@ int bruteForce(TreeNode* root) {
   return ans;
 }
 
-
 // * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------
+// * Bottom Up Approach
 // * Start calculating from the bottom of tree 
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) [Recursion Stack Space]  
@@ -163,12 +111,12 @@ int main(void) {
   // * testcase 2
   // TreeNode *root = new TreeNode(1);
 
-  std::cout << "Input Binary Tree:" << std::endl;
+  cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);
 
   // int ans = bruteForce(root);
   int ans = averageOfSubtree(root);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

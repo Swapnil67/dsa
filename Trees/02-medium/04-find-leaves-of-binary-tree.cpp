@@ -81,7 +81,7 @@ int height(TreeNode *root, vector<vector<int>> &ans) {
   return cur_height;
 }
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Depth First Search (DFS)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
@@ -94,13 +94,18 @@ vector<vector<int>> findLeaves1(TreeNode *root) {
   binaryTreeHeight(root, mp);
 
   for (auto &it: mp) {
-    ans.push_back(it.second);
+    // std::cout << "Height: " << it.first << std::endl;
+    printArr(it.second);
   }
+
+  for (auto &it : mp)
+    ans.push_back(it.second);
+  
   reverse(begin(ans), end(ans));
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Depth First Search (DFS)
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
@@ -123,8 +128,8 @@ int main() {
   root->left->right = new TreeNode(5);
 
   cout << "Vertical Traversal of tree: " << endl;
-  // vector<vector<int>> ans = findLeaves1(root);
-  vector<vector<int>> ans = findLeaves2(root);
+  vector<vector<int>> ans = findLeaves1(root);
+  // vector<vector<int>> ans = findLeaves2(root);
   for (auto &p : ans)
     printArr(p);
 

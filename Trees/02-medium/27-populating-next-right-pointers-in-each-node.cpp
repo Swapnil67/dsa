@@ -5,6 +5,8 @@
 * https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
 */
 
+// ! Amazon, Google, Meta, Microsoft
+
 #include <queue>
 #include <vector>
 #include <iostream>
@@ -95,8 +97,8 @@ Node *connect(Node *root) {
 }
 
 int main(void) {
+
   // * testcase 1
-  // * tree 1
   Node *root = new Node(1);
   root->left = new Node(2);
   root->right = new Node(3);

@@ -29,11 +29,7 @@
 * https://www.geeksforgeeks.org/problems/root-to-leaf-paths-sum/1
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
-
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 

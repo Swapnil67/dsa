@@ -27,37 +27,8 @@
 
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
+#include "../common.hpp"
 #include <unordered_map>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(vector<T> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
 
 void markParents(TreeNode *root,
                  unordered_map<TreeNode *, TreeNode *> &parent_map,

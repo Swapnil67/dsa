@@ -37,12 +37,7 @@
 
 // ! Google, Amazon, Tiktok, Walmart, IBM
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
-
-using namespace std;
+#include "../common.hpp"
 
 // * For every node we check if it's equal to its parent_val
 void dfs(int cur, int &ans, int parent_val, TreeNode* root) {

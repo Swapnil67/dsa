@@ -23,13 +23,7 @@
 */
 
 // ! Microsoft
-
-#include <queue>
-#include <vector>
-#include <iostream>
 #include "../common.hpp"
-
-using namespace std;
 
 int dfs(TreeNode *root, int &moves) {
   if (!root)
@@ -39,7 +33,7 @@ int dfs(TreeNode *root, int &moves) {
   int r_coins = dfs(root->right, moves); // * coins from right
 
   // * Here we'll do abs() becoz -ve moves indicates that its going from child to parent
-  moves += std::abs(l_coins) + std::abs(r_coins); // * save the moves
+  moves += abs(l_coins) + abs(r_coins); // * save the moves
 
   // * send the remaining candies to parent
   // * minus 1 becoz one candy it will keep for itself
@@ -68,12 +62,12 @@ int main(void) {
   // root->left = new TreeNode(3);
   // root->right = new TreeNode(0);
 
-  std::cout << "Input BT" << std::endl;
+  cout << "Input BT" << endl;
   levelOrderTraversal(root);
 
   // * testcase 2
   int ans = distributeCoins(root);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

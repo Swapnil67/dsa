@@ -28,32 +28,9 @@
 * https://www.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1
 */
 
-#include <vector>
-#include <iostream>
+// ! Amazon, Microsoft
 
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
-  }
-  std::cout << "]" << std::endl;
-}
+#include "../common.hpp"
 
 bool rootToNode(TreeNode* root, TreeNode* node, std::vector<int> &path) {
   if (!root)

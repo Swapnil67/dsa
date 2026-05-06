@@ -33,21 +33,16 @@
 
 // ! Google, Uber
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
-using namespace std;
-
-vector<int> solve(int &max_val, TreeNode *root) {
+vector<int> solve(int &ans, TreeNode *root) {
   if (!root)
     return {0, 0};
 
   int inr = 1, dcr = 1;
-
   if (root->left) {
-    vector<int> left = solve(max_val, root->left);
+    vector<int> left = solve(ans, root->left);
+    // cout << left[0] << " " << left[1] << endl;
     if (root->data == root->left->data + 1) {
       dcr = left[1] + 1; // * decreasing
     } else if (root->data == root->left->data - 1) {
@@ -56,7 +51,7 @@ vector<int> solve(int &max_val, TreeNode *root) {
   }
   
   if (root->right) {
-    vector<int> right = solve(max_val, root->right);
+    vector<int> right = solve(ans, root->right);
     if (root->data == root->right->data + 1) {
       dcr = right[1] + 1; // * decreasing
     } else if (root->data == root->right->data - 1) {
@@ -66,7 +61,7 @@ vector<int> solve(int &max_val, TreeNode *root) {
 
   // * When combining increasing and decreasing paths through a node, that node is counted in both. 
   // * The formula is inr + dcr - 1, not inr + dcr.
-  max_val = max(max_val, (inr + dcr - 1));
+  ans = max(ans, (inr + dcr - 1));
   return {inr, dcr};
 }
 
@@ -92,14 +87,20 @@ int longestConsecutive(TreeNode* root) {
 
 int main(void) {
   // * testcase 1
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
   
   // * testcase 2
   // TreeNode *root = new TreeNode(2);
   // root->left = new TreeNode(1);
   // root->right = new TreeNode(3);
+
+  // * testcase 3
+  TreeNode *root = new TreeNode(1);
+  root->left = new TreeNode(2);
+  root->right = new TreeNode(4);
+  root->left->left = new TreeNode(3);
 
   cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);

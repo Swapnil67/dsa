@@ -34,10 +34,7 @@
 * https://www.geeksforgeeks.org/problems/complete-binary-tree/1
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 

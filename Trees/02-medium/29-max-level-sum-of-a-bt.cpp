@@ -18,11 +18,8 @@
 * https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/description/
 */
 
-#include <queue>
-#include <vector>
 #include <climits>
-#include <iostream>
-#include "common.hpp"
+#include "../common.hpp"
 
 using namespace std;
 
@@ -60,7 +57,8 @@ int maxLevelSum(TreeNode* root) {
       if (node->right) 
         q.push(node->right);
     }
-    std::cout << "level_sum " << level_sum << std::endl;
+    
+    // std::cout << "level_sum " << level_sum << std::endl;
     if (level_sum > max_sum) {
       max_sum = level_sum;
       ans = level;
