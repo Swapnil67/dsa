@@ -32,7 +32,7 @@
 
 #include "../common.hpp"
 
-bool rootToNode(TreeNode* root, TreeNode* node, std::vector<int> &path) {
+bool rootToNode(TreeNode* root, TreeNode* node, vector<int> &path) {
   if (!root)
     return false;
 
@@ -60,12 +60,12 @@ bool rootToNode(TreeNode* root, TreeNode* node, std::vector<int> &path) {
 // * SPACE COMPLEXITY O(2N)
 TreeNode* bruteForce(TreeNode* root, TreeNode* p, TreeNode* q) {
   // * Find path for 'p' node
-  std::vector<int> pPathVec;
+  vector<int> pPathVec;
   rootToNode(root, p, pPathVec);
   printArr(pPathVec);
 
   // * Find path for 'q' node
-  std::vector<int> qPathVec;
+  vector<int> qPathVec;
   rootToNode(root, q, qPathVec);
   printArr(qPathVec);
 
@@ -120,11 +120,11 @@ int main(void) {
   TreeNode *p = new TreeNode(5);
   TreeNode *q = new TreeNode(2);
 
-  std::cout << "P: " << p->data << ", Q: " << q->data << std::endl;
+  cout << "P: " << p->data << ", Q: " << q->data << endl;
 
   // TreeNode *ans = bruteForce(root, p, q);
   TreeNode *ans = lowestCommonAncestor(root, p, q);
-  std::cout << "LCA of " << p->data << " & " << q->data << " is:  " << ans->data << std::endl;
+  cout << "LCA of " << p->data << " & " << q->data << " is:  " << ans->data << endl;
 
   return 0;
 }

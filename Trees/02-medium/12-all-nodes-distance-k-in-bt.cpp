@@ -131,6 +131,7 @@ int main(void) {
 
   int k = 2;
   cout << "All nodes at distance " << k << ": ";
+  
   vector<int> ans = distanceK(root, root->left, k);
   printArr(ans);
 

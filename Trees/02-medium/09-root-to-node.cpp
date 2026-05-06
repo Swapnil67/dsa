@@ -10,7 +10,7 @@
 *              \        \  
 *               5        7
 
-* Output: [ 1->2->5 ]
+* Output: [ 1 -> 2 -> 5 ]
 
 * https://www.naukri.com/code360/problems/path-in-a-tree_3843990
 */
@@ -19,7 +19,7 @@
 
 #include "../common.hpp"
 
-bool dfs(TreeNode *root, int x, std::vector<int> &ans) {
+bool dfs(TreeNode *root, int x, vector<int> &ans) {
   if (!root)
     return false;
 
@@ -43,10 +43,10 @@ bool dfs(TreeNode *root, int x, std::vector<int> &ans) {
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> rootToNode(TreeNode *root, int x) {
-  std::vector<int> ans;
+vector<int> rootToNode(TreeNode *root, int x) {
+  vector<int> ans;
   bool res = dfs(root, x, ans);
-  // std::cout << res << std::endl;
+  // cout << res << endl;
   return ans;  
 }
 
@@ -59,8 +59,8 @@ int main(void) {
 
   int node = 5;
 
-  std::vector<int> ans = rootToNode(root, node);
-  std::cout << "Root To Node: ";
+  vector<int> ans = rootToNode(root, node);
+  cout << "Root To Node: ";
   printArr(ans);
 
   return 0;

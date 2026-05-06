@@ -37,7 +37,7 @@
 
 #include "../common.hpp"
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Might go out of 'long long' range if input is too big.
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
