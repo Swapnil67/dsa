@@ -43,7 +43,6 @@ void dfs(TreeNode* root, int &sum, string &cur) {
 
   // * At leaf node
   if (!root->left && !root->right) {
-    // cout << cur << endl;
     sum += stoi(cur);
     return;
   }

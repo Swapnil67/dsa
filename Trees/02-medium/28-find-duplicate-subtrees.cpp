@@ -156,6 +156,7 @@ int main(void) {
 
   // vector<TreeNode *> ans = bruteForce(root);
   vector<TreeNode *> ans = findDuplicateSubtrees(root);
+  
   cout << "Duplicate Subtrees: " << endl;
   for (auto &tree : ans) {
     cout << "subtree: " << endl;

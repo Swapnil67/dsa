@@ -29,7 +29,7 @@
  
 using namespace std;
 
-// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------`
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * BFS + Vector sorting
 // * TIME COMPLEXITY O(level + wlogw) ('w' is sum of all nodes on each level)
 // * SPACE COMPLEXITY O(W)
@@ -65,7 +65,7 @@ int bruteForce(TreeNode *root, int k) {
   return level_sum_arr[level_sum_arr.size() - k];
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * BFS + Min Heap (It will have 'k' largest levels)
 // * TIME COMPLEXITY O(n + hlogk) ('h' height of tree & 'k' is no. of nodes in min_heap)
 // * SPACE COMPLEXITY O(k)

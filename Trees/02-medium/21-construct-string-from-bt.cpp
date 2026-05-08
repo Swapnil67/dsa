@@ -53,6 +53,8 @@
  
 using namespace std;
 
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
 string tree2str(TreeNode* root) {
   string ans = "";
   if (!root)

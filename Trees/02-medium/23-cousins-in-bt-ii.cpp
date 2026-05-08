@@ -62,7 +62,7 @@ vector<int> getTreeLevelSum(TreeNode *root) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------`
+// * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(N)
 TreeNode *bruteForce(TreeNode *root) {

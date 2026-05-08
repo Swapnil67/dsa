@@ -66,7 +66,7 @@ int findOps(vector<int> &arr, unordered_map<int, int> &level_idx_mp) {
 }
 
 
-// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
 // * Level Order Traversal + Find min ops to make array sorted
 // * TIME COMPLEXITY O(level * wlogw + w) ('w' is no. of nodes on each level)
 // * SPACE COMPLEXITY O(W)

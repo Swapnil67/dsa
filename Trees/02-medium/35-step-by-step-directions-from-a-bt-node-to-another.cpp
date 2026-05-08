@@ -138,24 +138,24 @@ string getDirections(TreeNode* root, int src, int dest) {
 
 int main(void) {
   // * testcase 1
-  // int startValue = 3, destValue = 6;
-  // TreeNode *root = new TreeNode(5);
-  // root->left = new TreeNode(1);
-  // root->right = new TreeNode(2);
-  // root->left->left = new TreeNode(3);
-  // root->right->left = new TreeNode(6);
-  // root->right->right = new TreeNode(4);
+  int startValue = 3, destValue = 6;
+  TreeNode *root = new TreeNode(5);
+  root->left = new TreeNode(1);
+  root->right = new TreeNode(2);
+  root->left->left = new TreeNode(3);
+  root->right->left = new TreeNode(6);
+  root->right->right = new TreeNode(4);
 
   // * testcase 2
-  int startValue = 3, destValue = 6;
-  TreeNode *root = new TreeNode(8);
-  root->left = new TreeNode(7);
-  root->right = new TreeNode(0);
-  root->left->left = new TreeNode(1);
-  root->left->right = new TreeNode(6);
-  root->left->left->left = new TreeNode(3);
-  root->right->right = new TreeNode(2);
-  root->right->right->right = new TreeNode(4);
+  // int startValue = 3, destValue = 6;
+  // TreeNode *root = new TreeNode(8);
+  // root->left = new TreeNode(7);
+  // root->right = new TreeNode(0);
+  // root->left->left = new TreeNode(1);
+  // root->left->right = new TreeNode(6);
+  // root->left->left->left = new TreeNode(3);
+  // root->right->right = new TreeNode(2);
+  // root->right->right->right = new TreeNode(4);
 
   // * testcase 3
   // int startValue = 2, destValue = 1;
@@ -168,8 +168,8 @@ int main(void) {
 
   // string ans = bruteForce(root, startValue, destValue);
   string ans = getDirections(root, startValue, destValue);
+  
   cout << "Ans: " << ans << endl;
-
   return 0;
 }
 

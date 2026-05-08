@@ -55,9 +55,8 @@ void makeGraph(TreeNode *root, TreeNode *prev,
     return;
 
   // * Save the leaf node to set
-  if (!root->left && !root->right) {
+  if (!root->left && !root->right)
     leaves.insert(root);
-  }
 
   if (prev) {
     adj[root].push_back(prev);

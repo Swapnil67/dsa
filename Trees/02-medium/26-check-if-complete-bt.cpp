@@ -112,6 +112,7 @@ int main(void) {
 
   // bool ans = isCompleteTreeBFS(root);
   bool ans = isCompleteTreeDFS(root);
+  
   cout << "Is BT complete: " << ans << endl;
 
   return 0;

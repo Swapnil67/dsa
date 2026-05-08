@@ -79,7 +79,7 @@ bool check(ListNode* head, TreeNode* root) {
 }
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------
-// * Recursion Leap of faith
+// * Recursion
 // * 'n' = bt nodes & 'L' = ll nodes & 'H' = Height of tree
 // * TIME COMPLEXITY O(n * Min(L,H))
 // * SPACE COMPLEXITY O(n + Min(L,H))

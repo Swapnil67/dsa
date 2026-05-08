@@ -65,9 +65,8 @@ TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
   // * Find the root
   for(vector<int> &vec: descriptions) {
     const int parent = vec[0];
-    if (!children.count(parent)) {
+    if (!children.count(parent))
       return hash[parent];
-    }
   }
 
   return nullptr;

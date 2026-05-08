@@ -156,7 +156,7 @@ void helper(TreeNode *p, TreeNode *q, int level) {
   helper(p->right, q->left, level + 1);
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) ~ Auxillary Recursion Space
 TreeNode* reverseOddLevelsDFS(TreeNode* root) {

@@ -12,137 +12,8 @@
 
 using namespace std;
 
-// * 12 - All Nodes Distance K in Binary Tree
-// vector<int> distanceK(TreeNode *root, TreeNode *target, int k) {
-// TODO
-// }
-
-// * 13 - Amount of Time for Binary Tree to Be Infected
-// int amountOfTime(TreeNode* root, int start) {
-// TODO
-// }
-
-// * 14 - Construct Binary Tree from Preorder and Inorder Traversal
-// TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
-// TODO Tomorrow
-// }
-
-// * 15 - Construct Binary Tree from Inorder and Postorder Traversal
-// TreeNode *buildTree(vector<int> &postorder, vector<int> &inorder) {
-// TODO Tomorrow
-// }
-
-// * 16 - Flatten Binary Tree to Linked List
-// void flatten(TreeNode* root) {
-// TODO
-// }
-
-// * 17 - Count Good Nodes in Binary Tree
-// int goodNodes(TreeNode* root) {
-// TODO
-// }
-
-// * 18 - Delete Leaves With a Given Value
-// TreeNode* removeLeafNodes(TreeNode* root, int target) {
-// TODO
-// }
-
-// * 19 - Reverse Odd Levels of Binary Tree
-// TreeNode* reverseOddLevelsBFS(TreeNode* root) {
-// TODO
-// }
-
-// * 20 - Create Binary Tree From Descriptions
-// TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
-// TODO
-// }
-
-// * 21 - Construct String from Binary Tree
-// string tree2str(TreeNode *root) {
-// TODO
-// }
-
-// * 22 - Kth Largest Sum in a Binary Tree
-// long long kthLargestLevelSum(TreeNode *root, int k) {
-// TODO
-// }
-
-// * 23 - Cousins in Binary Tree II
-// TreeNode* replaceValueInTree(TreeNode* root) {
-// TODO
-// }
-
-// * 24 - Min Number of Operations to Sort a Binary Tree by Level
-// int minimumOperations(TreeNode *root) {
-// TODO
-// }
-
-// * 25 - Linked List in Binary Tree
-// bool isSubPath(ListNode* head, TreeNode* root) {
-// TODO
-// }
-
-// * 26 - Check Completeness of a Binary Tree
-// bool isCompleteTreeBFS(TreeNode* root) {
-// TODO
-// }
-
-// * 27 - Populating Next Right Pointers in Each Node I
-// Node *connect(Node *root) {
-// TODO (Solve this on leetcode)
-// }
-
-// * 28 - Find Duplicate Subtrees
-// vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
-// TODO
-// }
-
-// * 29 - Maximum Level Sum of a Binary Tree
-// int maxLevelSum(TreeNode *root) {
-// TODO
-// }
-
-// * 30 - Construct Binary Tree From String
-// TreeNode *str2tree(string &str) {
-// TODO
-// }
-
-// * 31 - Populating Next Right Pointers in Each Node II
-// TreeNode *connect(TreeNode *root) {
-// TODO 
-// }
-
-// * 32 - Path Sum II
-// vector<vector<int>> pathSum(TreeNode *root, int target_sum) {
-// TODO
-// }
-
-// * 33 - Sum Root to Leaf Numbers
-// int sumNumbers(TreeNode* root) {
-// TODO
-// }
-
-// * 34 - Number of Good Leaf Nodes Pairs
-// int countPairs(TreeNode* root, int distance) {
-// TODO
-// }
-
-// * 35 - Step-By-Step Directions From a Binary Tree Node to Another
-// string getDirections(TreeNode* root, int src, int dest) {
-// TODO
-// }
-
-// * 36 - Flip Equivalent Binary Trees
-// bool flipEquiv(TreeNode* root1, TreeNode* root2) {
-// TODO
-// }
-// * 37 - House Robber III
-// int rob(TreeNode* root) {
-// TODO
-// }
-
 // * 38 - Operations on Tree
-// TODO TOMORROW (Solve this on leetcode)
+// TODO (Solve this on leetcode)
 
 // * 39 - Find Bottom Left Tree Value
 // int findBottomLeftValue(TreeNode* root) {
@@ -313,6 +184,136 @@ using namespace std;
 
 // * 11 - Maximum Width of Binary Tree
 // int widthOfBinaryTree(TreeNode *root) {
+// TODO
+// }
+
+// * 12 - All Nodes Distance K in Binary Tree
+// vector<int> distanceK(TreeNode *root, TreeNode *target, int k) {
+// TODO
+// }
+
+// * 13 - Amount of Time for Binary Tree to Be Infected
+// int amountOfTime(TreeNode* root, int start) {
+// TODO
+// }
+
+// * 14 - Construct Binary Tree from Preorder and Inorder Traversal
+// TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
+// TODO Tomorrow
+// }
+
+// * 15 - Construct Binary Tree from Inorder and Postorder Traversal
+// TreeNode *buildTree(vector<int> &postorder, vector<int> &inorder) {
+// TODO Tomorrow
+// }
+
+// * 16 - Flatten Binary Tree to Linked List
+// void flatten(TreeNode* root) {
+// TODO
+// }
+
+// * 17 - Count Good Nodes in Binary Tree
+// int goodNodes(TreeNode* root) {
+// TODO
+// }
+
+// * 18 - Delete Leaves With a Given Value
+// TreeNode* removeLeafNodes(TreeNode* root, int target) {
+// TODO
+// }
+
+// * 19 - Reverse Odd Levels of Binary Tree
+// TreeNode* reverseOddLevelsBFS(TreeNode* root) {
+// TODO
+// }
+
+// * 20 - Create Binary Tree From Descriptions
+// TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
+// TODO
+// }
+
+// * 21 - Construct String from Binary Tree
+// string tree2str(TreeNode *root) {
+// TODO
+// }
+
+// * 22 - Kth Largest Sum in a Binary Tree
+// long long kthLargestLevelSum(TreeNode *root, int k) {
+// TODO
+// }
+
+// * 23 - Cousins in Binary Tree II
+// TreeNode* replaceValueInTree(TreeNode* root) {
+// TODO
+// }
+
+// * 24 - Min Number of Operations to Sort a Binary Tree by Level
+// int minimumOperations(TreeNode *root) {
+// TODO
+// }
+
+// * 25 - Linked List in Binary Tree
+// bool isSubPath(ListNode* head, TreeNode* root) {
+// TODO
+// }
+
+// * 26 - Check Completeness of a Binary Tree
+// bool isCompleteTreeBFS(TreeNode* root) {
+// TODO
+// }
+
+// * 27 - Populating Next Right Pointers in Each Node I
+// Node *connect(Node *root) {
+// TODO (Solve this on leetcode)
+// }
+
+// * 28 - Find Duplicate Subtrees
+// vector<TreeNode *> findDuplicateSubtrees(TreeNode *root) {
+// TODO
+// }
+
+// * 29 - Maximum Level Sum of a Binary Tree
+// int maxLevelSum(TreeNode *root) {
+// TODO
+// }
+
+// * 30 - Construct Binary Tree From String
+// TreeNode *str2tree(string &str) {
+// TODO
+// }
+
+// * 31 - Populating Next Right Pointers in Each Node II
+// TreeNode *connect(TreeNode *root) {
+// TODO 
+// }
+
+// * 32 - Path Sum II
+// vector<vector<int>> pathSum(TreeNode *root, int target_sum) {
+// TODO
+// }
+
+// * 33 - Sum Root to Leaf Numbers
+// int sumNumbers(TreeNode* root) {
+// TODO
+// }
+
+// * 34 - Number of Good Leaf Nodes Pairs
+// int countPairs(TreeNode* root, int distance) {
+// TODO
+// }
+
+// * 35 - Step-By-Step Directions From a Binary Tree Node to Another
+// string getDirections(TreeNode* root, int src, int dest) {
+// TODO
+// }
+
+// * 36 - Flip Equivalent Binary Trees
+// bool flipEquiv(TreeNode* root1, TreeNode* root2) {
+// TODO
+// }
+
+// * 37 - House Robber III
+// int rob(TreeNode* root) {
 // TODO
 // }
 

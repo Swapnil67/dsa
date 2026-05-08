@@ -115,4 +115,3 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++17 27-populating-next-right-pointers-in-each-node.cpp -o output && ./output
-
