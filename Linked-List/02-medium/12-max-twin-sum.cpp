@@ -15,7 +15,7 @@
  * Input  : head = [4, 2, 2, 3]
  * Output : 7
 
- * * https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/
+ * https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/
 */
 
 #include <stack>
@@ -38,7 +38,7 @@ ListNode* reverseLL(ListNode* head) {
 // * Using Vector
 int bruteForce(ListNode *head) {
   ListNode* temp = head;
-  std::vector<int> vec;
+  vector<int> vec;
   while (temp) {
     vec.push_back(temp->data);
     temp = temp->next;
@@ -49,7 +49,7 @@ int bruteForce(ListNode *head) {
   int curSum = 0, maxSum = 0;
   while (i < j) {
     curSum = vec[i] + vec[j];
-    maxSum = std::max(maxSum, curSum);
+    maxSum = max(maxSum, curSum);
     i++, j--;
   }
   return maxSum;
@@ -58,7 +58,7 @@ int bruteForce(ListNode *head) {
 // * Using Stack
 int pairSumStack(ListNode *head) {
   ListNode* temp = head;
-  std::stack<int> st;
+  stack<int> st;
   while (temp) {
     st.push(temp->data);
     temp = temp->next;
@@ -68,7 +68,7 @@ int pairSumStack(ListNode *head) {
   int max_sum = 0;
   int count = 0,  N = st.size();
   while (count <= N / 2) {
-    max_sum = std::max(max_sum, temp->data + st.top());
+    max_sum = max(max_sum, temp->data + st.top());
     st.pop();
     count++;
     temp = temp->next;
@@ -92,8 +92,8 @@ int pairSum(ListNode *head) {
 
   int max_sum = 0;
   while (mid) {
-    // std::cout << cur->data + mid->data << std::endl;
-    max_sum = std::max(max_sum, cur->data + mid->data);
+    // cout << cur->data + mid->data << endl;
+    max_sum = max(max_sum, cur->data + mid->data);
     cur = cur->next;
     mid = mid->next;
   }
@@ -102,13 +102,13 @@ int pairSum(ListNode *head) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums = {5, 4, 2, 1};
+  // vector<int> nums = {5, 4, 2, 1};
 
   // * testcase 2
-  std::vector<int> nums = {4, 2, 2, 3};
+  vector<int> nums = {4, 2, 2, 3};
 
   // * testcase 3
-  // std::vector<int> nums = {47, 22, 81, 46, 94, 95, 90, 22, 55, 91, 6, 83, 49, 65, 10, 32, 41, 26, 83, 99, 14, 85, 42, 99, 89, 69, 30, 92, 32, 74, 9, 81, 5, 9};
+  // vector<int> nums = {47, 22, 81, 46, 94, 95, 90, 22, 55, 91, 6, 83, 49, 65, 10, 32, 41, 26, 83, 99, 14, 85, 42, 99, 89, 69, 30, 92, 32, 74, 9, 81, 5, 9};
   
   ListNode* head = arrayToLL(nums);
   printLL(head);
@@ -116,7 +116,7 @@ int main(void) {
   // int ans = bruteForce(head);
   // int ans = pairSumStack(head);
   int ans = pairSum(head);
-  std::cout << "Maximum Twin Sum of a Linked List " << ans << std::endl;
+  cout << "Maximum Twin Sum of a Linked List " << ans << endl;
 
   return 0;
 }

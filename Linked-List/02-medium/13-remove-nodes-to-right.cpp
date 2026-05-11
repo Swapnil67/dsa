@@ -22,6 +22,7 @@
 #include <stack>
 #include <vector>
 #include <iostream>
+
 #include "../common.hpp"
 
 ListNode* reverse_ll(ListNode* node) {
@@ -42,7 +43,7 @@ ListNode* reverse_ll(ListNode* node) {
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
   // * Push on to stack in monotonic decreasing way
-  std::stack<int> st;
+  stack<int> st;
   ListNode* temp = head;
   while (temp) { // * O(N)
     while (!st.empty() && st.top() < temp->data) {
@@ -56,7 +57,7 @@ ListNode* bruteForce(ListNode* head) {
   ListNode *ans = new ListNode(-1);
   ListNode* mover = ans;
   while (!st.empty()) { // * O(N)
-    // std::cout << st.top() << std::endl;
+    // cout << st.top() << endl;
     ListNode *node = new ListNode(st.top());
     mover->next = node;
     mover = node;
@@ -94,18 +95,18 @@ ListNode* removeNodes(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> arr = {5, 2, 13, 3, 8};
+  // vector<int> arr = {5, 2, 13, 3, 8};
 
   // * testcase 2
-  std::vector<int> arr = {1, 1, 1, 1};
+  vector<int> arr = {1, 1, 1, 1};
 
   ListNode* head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
   // ListNode *ans = bruteForce(head);
   ListNode *ans = removeNodes(head);
-  std::cout << "After Removing Nodes" << std::endl;
+  cout << "After Removing Nodes" << endl;
   printLL(ans);
   
   return 0;

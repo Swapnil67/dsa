@@ -70,13 +70,13 @@ ListNode* doubleIt(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> arr = {1, 8, 9};
+  // vector<int> arr = {1, 8, 9};
 
   // * testcase 2
-  std::vector<int> arr = {9, 9, 9};
+  vector<int> arr = {9, 9, 9};
 
   ListNode *head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
   ListNode* ans = doubleIt(head);

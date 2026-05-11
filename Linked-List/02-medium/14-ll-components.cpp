@@ -32,9 +32,9 @@
 // * Use set data structure
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int numComponents(ListNode *head, std::vector<int> &nums) {
+int numComponents(ListNode *head, vector<int> &nums) {
   // * Push the nums to set
-  std::unordered_set<int> st(begin(nums), end(nums)); // * O(N)
+  unordered_set<int> st(begin(nums), end(nums)); // * O(N)
 
   int components = 0;
   bool streak = false;
@@ -57,19 +57,19 @@ int numComponents(ListNode *head, std::vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> arr = {0, 1, 2, 3};
-  std::vector<int> nums = {0, 1, 3};
+  vector<int> arr = {0, 1, 2, 3};
+  vector<int> nums = {0, 1, 3};
 
   // * testcase 2
-  // std::vector<int> arr = {0, 1, 2, 3, 4};
-  // std::vector<int> nums = {0, 3, 1, 4};
+  // vector<int> arr = {0, 1, 2, 3, 4};
+  // vector<int> nums = {0, 3, 1, 4};
 
   ListNode* head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
   int ans = numComponents(head, nums);
-  std::cout << "Linked List Components: " << ans << std::endl;
+  cout << "Linked List Components: " << ans << endl;
   
   return 0;
 }
