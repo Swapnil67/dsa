@@ -23,6 +23,8 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 class ListNode {
 public:
   int data;
@@ -45,7 +47,7 @@ public:
 class LRUCacheBrute {
 public:
   int n;
-  std::vector<std::pair<int, int>> cache;
+  vector<pair<int, int>> cache;
   LRUCacheBrute(int capacity) {
     n = capacity;
   }
@@ -53,7 +55,7 @@ public:
   int get(int key) {
     for (int i = 0; i < cache.size(); ++i) {
       if (key == cache[i].first) {
-        std::pair<int, int> temp = cache[i];
+        pair<int, int> temp = cache[i];
         cache.erase(cache.begin() + i);
 
         cache.push_back(temp);
@@ -95,7 +97,7 @@ public:
     int n;
     ListNode *head = new ListNode(-1, -1);
     ListNode *tail = new ListNode(-1, -1);
-    std::unordered_map<int, ListNode*> cache;
+    unordered_map<int, ListNode*> cache;
 
     LRUCache(int capacity) {
       n = capacity;
@@ -136,7 +138,7 @@ public:
     }
 
     void put(int key, int value) {
-      if (cache.count(key) > 0) {
+      if (cache.count(key) > 0) { // * already exits
         // * Update the existing node
         ListNode* node = cache[key];
         node->data = value;
@@ -164,16 +166,16 @@ int main() {
   // LRUCacheBrute* obj = new LRUCacheBrute(capacity);
   LRUCache* obj = new LRUCache(capacity);
   int ans = obj->get(1);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
  
   obj->put(1, 1);
   obj->put(2, 2);
 
   ans = obj->get(1);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   ans = obj->get(2);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   obj->put(3, 3);
   obj->put(4, 4);
@@ -181,7 +183,7 @@ int main() {
   obj->put(6, 6);
   
   ans = obj->get(1);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }

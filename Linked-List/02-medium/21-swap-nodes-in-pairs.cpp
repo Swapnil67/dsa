@@ -67,8 +67,3 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 21-swap-nodes-in-pairs.cpp -o output && ./output
-
-
-/*
-temp = 2
-*/

@@ -104,6 +104,7 @@ public:
 };
 
 int main(void) {
+  // * testcase 1
   // MyCircularQueue *myCircularQueue = new MyCircularQueue(3);
   // myCircularQueue->enQueue(1);                         // return True
   // myCircularQueue->enQueue(2);                         // return True
@@ -118,6 +119,7 @@ int main(void) {
   // ans = myCircularQueue->Rear();                       // return 4
   // cout << "Rear value : " << ans << endl;
   
+  // * testcase 2
   MyCircularQueue *myCircularQueue = new MyCircularQueue(3);
   myCircularQueue->enQueue(1);                      // return True
   int ans = myCircularQueue->Rear();                // return 3

@@ -59,8 +59,6 @@ ListNode* bruteForce(ListNode* h1, ListNode* h2) {
   // * Reverse both linked list
   ListNode *rev_h1 = reverseLL(h1);
   ListNode *rev_h2 = reverseLL(h2);
-  // printLL(rev_h1);
-  // printLL(rev_h2);
 
   int carry = 0;
   ListNode *ans = new ListNode(-1);

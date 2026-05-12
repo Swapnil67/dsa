@@ -1,22 +1,23 @@
-/**
- * * Add 1 to a Linked List Number
+/*
+ * Add 1 to a Linked List Number
  *
- * * Example 1
- * * 'num1' : 1 -> 5 -> 2 -> NULL
- * * Output: 1 -> 5 -> 3 -> NULL
+ * Example 1
+ * 'num1' : 1 -> 5 -> 2 -> NULL
+ * Output: 1 -> 5 -> 3 -> NULL
  *
- * * Example 2
- * * 'num1' : 1 -> 5 -> 9 -> NULL
- * * Output:  1 -> 6 -> 0 -> NULL
+ * Example 2
+ * 'num1' : 1 -> 5 -> 9 -> NULL
+ * Output:  1 -> 6 -> 0 -> NULL
  *
- * * Example 2
- * * 'num1' : 0 -> 1 -> NULL
- * * 'num2' : 0 -> NULL
- * * Output: 0 -> 1 -> NULL
+ * Example 2
+ * 'num1' : 0 -> 1 -> NULL
+ * 'num2' : 0 -> NULL
+ * Output: 0 -> 1 -> NULL
  *
- * * https://leetcode.com/problems/plus-one-linked-list/description/
- * * https://www.naukri.com/code360/problems/add-one-to-a-number-represented-as-linked-list_920557
- * * https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1
+ * https://leetcode.com/problems/plus-one-linked-list/description/
+ * https://www.naukri.com/code360/problems/add-one-to-a-number-represented-as-linked-list_920557
+ * https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1
+ * 
  */
 
 #include <vector>

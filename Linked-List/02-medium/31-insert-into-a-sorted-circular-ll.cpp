@@ -4,8 +4,10 @@
  * 
  * Solve this on neetcode
  * 
- * https://neetcode.io/problems/insert-into-a-sorted-circular-linked-list/history?submissionIndex=0
+ * https://neetcode.io/problems/insert-into-a-sorted-circular-linked-list/
 */
+
+// ! Amazon, Google, Meta
 
 #include <vector>
 #include <cassert>
@@ -50,7 +52,7 @@ public:
 Node* node_insert(Node* head, int insertVal) {
   if (!head) {
     Node* new_head = new Node(insertVal);
-    new_head->next = new_head;
+    new_head->next = new_head; // * make it circular
     return new_head;
   }
 
@@ -62,7 +64,7 @@ Node* node_insert(Node* head, int insertVal) {
     }
     else if ( // * test_out_of_range
       (prev->val > cur->val) &&
-      (insertVal >= prev->val || insertVal <= cur->val))
+      (insertVal >= prev->val || insertVal <= cur->val)) 
     {
       break;
     }

@@ -21,21 +21,23 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // ! Can also be solved using two stack method
 
 struct DLListNode {
   public:
-    std::string data;
+    string data;
     DLListNode* next;
     DLListNode* prev;
 
-    DLListNode(std::string val) {
+    DLListNode(string val) {
       data = val;
       next = nullptr;
       prev = nullptr;
     }
 
-    DLListNode(std::string val, DLListNode* back) {
+    DLListNode(string val, DLListNode* back) {
       data = val;
       next = nullptr;
       prev = back;
@@ -43,9 +45,9 @@ struct DLListNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
   }
   printf("\n");
 }
@@ -53,26 +55,26 @@ void printArr(std::vector<T> &arr) {
 void printLL(DLListNode* head) {
   DLListNode* temp = head;
   while (temp) {
-    std::cout << temp->data << " -> ";
+    cout << temp->data << " -> ";
     temp = temp->next;
   }
-  std::cout << "NULL" << std::endl;
+  cout << "NULL" << endl;
 }
 
 class BrowserHistory {
 public:
   DLListNode* cur; 
-  BrowserHistory(std::string homepage) {
+  BrowserHistory(string homepage) {
     cur = new DLListNode(homepage);
   }
 
-  void visit(std::string url) {
+  void visit(string url) {
     DLListNode *page = new DLListNode(url, cur);
     cur->next = page;
     cur = page;
   }
 
-  std::string back(int steps) {
+  string back(int steps) {
     if (!cur)
       return "";
 
@@ -83,7 +85,7 @@ public:
     return cur->data;
   }
 
-  std::string forward(int steps) {
+  string forward(int steps) {
     if (!cur)
       return "";
 
@@ -100,17 +102,17 @@ int main(void) {
   BrowserHistory* browser = new BrowserHistory("xbox.com");
   browser->visit("test.com");
   browser->visit("tsoding.com");
-  std::cout << browser->cur->data << std::endl;
+  cout << browser->cur->data << endl;
   browser->back(2);
-  std::cout << browser->cur->data << std::endl;
+  cout << browser->cur->data << endl;
   browser->back(1);
-  std::cout << browser->cur->data << std::endl;
+  cout << browser->cur->data << endl;
   browser->forward(1);
-  std::cout << browser->cur->data << std::endl;
+  cout << browser->cur->data << endl;
   browser->visit("tiktok.com");
-  std::cout << browser->cur->data << std::endl;
+  cout << browser->cur->data << endl;
   browser->back(1);
-  std::cout << browser->cur->data << std::endl;
+  cout << browser->cur->data << endl;
   return 0;
 }
 

@@ -7,64 +7,6 @@
 
 using namespace std;
 
-
-// * 18 - Design Browser History
-// TODO (Do this on leetcode)
-
-// * 19 - Add Two Numbers II
-// ListNode *addTwoNumbers(ListNode *nums1, ListNode *nums2) {
-// TODO
-// }
-
-// * 20 - LRU Cache
-// TODO (Do this on leetcode)
-
-// * 21 - Swap Nodes in Pairs
-// ListNode *swapPairs(ListNode *head) {
-// TODO
-// }
-
-// * 22 - Sort List
-// ListNode *sortList(ListNode *head) {
-// TODO 
-// }
-
-// * 23 - Partition List
-// ListNode *partition(ListNode *head, int x) {
-// TODO
-// }
-
-// * 24 - Rotate List
-// ListNode *rotateRight(ListNode *head, int k) {
-// TODO
-// }
-
-// * 25 - Design Circular Queue
-// TODO (Do this on leetcode)
-
-// * 26 - Insertion Sort List
-// ListNode* insertionSortList(ListNode* head) {
-// TODO
-// }
-
-// * 27 - Split Linked List in Parts
-// vector<ListNode *> splitListToParts(ListNode *head, int k) {
-// TODO
-// }
-
-// * 28 - Add 1 to a Linked List Number
-// ListNode* addOne(ListNode* head) {
-// TODO
-// }
-
-// * 29 - Design Circular Deque
-// TODO (Do this on leetcode)
-
-// * 30 - Delete Node in a Linked List
-// void deleteNode(ListNode *node) {
-// TODO
-// }
-
 // * --------------------------------------------------------------------------------
 
 // * 01 - Add Two Numbers
@@ -149,6 +91,63 @@ using namespace std;
 
 // * 17 - Reverse Linked List II
 // ListNode *reverseBetween(ListNode *head, int left, int right) {
+// TODO
+// }
+
+// * 18 - Design Browser History
+// TODO (Do this on leetcode)
+
+// * 19 - Add Two Numbers II
+// ListNode *addTwoNumbers(ListNode *nums1, ListNode *nums2) {
+// TODO
+// }
+
+// * 20 - LRU Cache
+// TODO (Do this on leetcode)
+
+// * 21 - Swap Nodes in Pairs
+// ListNode *swapPairs(ListNode *head) {
+// TODO
+// }
+
+// * 22 - Sort List
+// ListNode *sortList(ListNode *head) {
+// TODO 
+// }
+
+// * 23 - Partition List
+// ListNode *partition(ListNode *head, int x) {
+// TODO
+// }
+
+// * 24 - Rotate List
+// ListNode *rotateRight(ListNode *head, int k) {
+// TODO
+// }
+
+// * 25 - Design Circular Queue
+// TODO (Do this on leetcode)
+
+// * 26 - Insertion Sort List
+// ListNode* insertionSortList(ListNode* head) {
+// TODO
+// }
+
+// * 27 - Split Linked List in Parts
+// vector<ListNode *> splitListToParts(ListNode *head, int k) {
+// TODO
+// }
+
+// * 28 - Add 1 to a Linked List Number
+// ListNode* addOne(ListNode* head) {
+// TODO
+// }
+
+// * 29 - Design Circular Deque
+// TODO (Do this on leetcode)
+
+// * 30 - Delete Node in a Linked List
+// void deleteNode(ListNode *node) {
 // TODO
 // }
 

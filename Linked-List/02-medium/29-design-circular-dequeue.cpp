@@ -17,15 +17,15 @@ class MyCircularDeque {
     DLLNode *prev;
 
     DLLNode(int val) {
-      this->data = val;
-      this->next = nullptr;
-      this->prev = nullptr;
+      data = val;
+      next = nullptr;
+      prev = nullptr;
     }
 
     DLLNode(int val, DLLNode *next, DLLNode *prev) {
-      this->data = val;
-      this->next = next;
-      this->prev = prev;
+      data = val;
+      next = next;
+      prev = prev;
     }
   };
 

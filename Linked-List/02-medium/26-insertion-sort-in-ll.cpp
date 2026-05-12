@@ -66,13 +66,13 @@ ListNode* insertionSortList(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {4, 2, 1, 3};
+  vector<int> nums = {4, 2, 1, 3};
 
   ListNode* head = arrayToLL(nums);
-  std::cout << "Linked List Before Sorting" << std::endl;
+  cout << "Linked List Before Sorting" << endl;
   printLL(head);
 
-  std::cout << "Linked List After Sorting" << std::endl;
+  cout << "Linked List After Sorting" << endl;
   ListNode *ans = insertionSortList(head);
   printLL(ans);
 
