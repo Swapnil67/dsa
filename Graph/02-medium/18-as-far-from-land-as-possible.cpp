@@ -47,6 +47,7 @@ void printArr(vector<T> &arr) {
 
 const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Multi Source BFS (Overwriting Input)
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -89,6 +90,8 @@ int maxDistance(vector<vector<int>> &grid) {
   return res > 1 ? res - 1 : -1;
 }
 
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Multi Source BFS
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N^2)

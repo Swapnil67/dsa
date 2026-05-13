@@ -94,6 +94,112 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
   }
 }
 
+// * 22 - Most Stones Removed with Same Row or Column
+// int removeStones(vector<vector<int>> &stones) {
+// TODO
+// }
+
+// * 23 - Maximum Number of Fish in a Grid
+// int maxAreaOfIslandDFS2(vector<vector<int>>& grid) {
+// TODO 
+// }
+
+// * 24 - Count Servers that Communicate
+// int countServers(vector<vector<int>>& grid) {
+// TODO
+// }
+
+// * 25 - Clone Graph 
+// int countServers(vector<vector<int>>& grid) {
+// TODO (Do this on leetcode)
+// }
+
+// * 26 - Map of Highest Peak
+// vector<vector<int>> highestPeak(vector<vector<int>>& mat) {
+// TODO
+// }
+
+// * 27 - Find Champion II
+// int findChampion(int n, vector<vector<int>>& edges) {
+// TODO
+// }
+
+// * 28 - Count Sub Islands
+// int countSubIslandsBFS(vector<vector<int>> &grid1, vector<vector<int>> &grid2)
+// {
+// TODO
+// }
+
+// * 29 - Reorder Routes to Make All Paths Lead to the City Zero
+// int minReorder(int n, vector<vector<int>>& connections) {
+// TODO
+// }
+
+// * 30 - Pacific Atlantic Water Flow
+// vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights) {
+// TODO
+// }
+
+// * 31 - Surrounded Regions
+// void solve(vector<vector<char>> &board) {
+// TODO
+// }
+
+// * 32 - Walls And Gates
+// void islandsAndTreasure(vector<vector<int>>& grid) {
+// TODO
+// }
+
+// * 33 - Snakes and Ladders
+// int snakesAndLadders(vector<vector<int>>& board) {
+// TODO
+// }
+
+// * 34 - Find Eventual Safe States
+// vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+// TODO
+// }
+
+// * 35 - Course Schedule IV
+// vector<bool> checkIfPrerequisite(
+//     int numCourses,
+//     vector<vector<int>> &prerequisites,
+//     vector<vector<int>> &queries)
+// {
+//   TODO
+// }
+
+// * 36 - Graph Valid Tree
+// bool validTree(int n, vector<vector<int>> &edges){
+// TODO
+// }
+
+// * 37 - Check if Move is Legal
+// bool validTree(int n, vector<vector<int>> &edges) {
+// TODO
+// }
+
+// * 38 - Shortest Bridge
+// int shortestBridge(vector<vector<int>>& grid) {
+// TODO
+// }
+
+// * 39 - Find Closest Node to Given Two Nodes
+// int closestMeetingNode(vector<int> &edges, int node1, int node2) {
+// TODO
+// }
+
+// * 40 - Number of Connected Components in an Undirected Graph
+// int countComponents(int n, vector<int> &edges) {
+// TODO
+// }
+
+// * 41 - Shortest Path with Alternating Colors
+// vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &blueEdges) 
+// {
+// TODO
+// }
+
 // * 42 - Minimum Fuel Cost to Report to the Capital
 // long long minimumFuelCost(int seats, vector<vector<int>> &roads) {
 // TODO
@@ -282,112 +388,6 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 
 // * 21 - Accounts Merge
 // vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
-// TODO
-// }
-
-// * 22 - Most Stones Removed with Same Row or Column
-// int removeStones(vector<vector<int>> &stones) {
-// TODO
-// }
-
-// * 23 - Maximum Number of Fish in a Grid
-// int maxAreaOfIslandDFS2(vector<vector<int>>& grid) {
-// TODO 
-// }
-
-// * 24 - Count Servers that Communicate
-// int countServers(vector<vector<int>>& grid) {
-// TODO
-// }
-
-// * 25 - Clone Graph 
-// int countServers(vector<vector<int>>& grid) {
-// TODO (Do this on leetcode)
-// }
-
-// * 26 - Map of Highest Peak
-// vector<vector<int>> highestPeak(vector<vector<int>>& mat) {
-// TODO
-// }
-
-// * 27 - Find Champion II
-// int findChampion(int n, vector<vector<int>>& edges) {
-// TODO
-// }
-
-// * 28 - Count Sub Islands
-// int countSubIslandsBFS(vector<vector<int>> &grid1, vector<vector<int>> &grid2)
-// {
-// TODO
-// }
-
-// * 29 - Reorder Routes to Make All Paths Lead to the City Zero
-// int minReorder(int n, vector<vector<int>>& connections) {
-// TODO
-// }
-
-// * 30 - Pacific Atlantic Water Flow
-// vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights) {
-// TODO
-// }
-
-// * 31 - Surrounded Regions
-// void solve(vector<vector<char>> &board) {
-// TODO
-// }
-
-// * 32 - Walls And Gates
-// void islandsAndTreasure(vector<vector<int>>& grid) {
-// TODO
-// }
-
-// * 33 - Snakes and Ladders
-// int snakesAndLadders(vector<vector<int>>& board) {
-// TODO
-// }
-
-// * 34 - Find Eventual Safe States
-// vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-// TODO
-// }
-
-// * 35 - Course Schedule IV
-// vector<bool> checkIfPrerequisite(
-//     int numCourses,
-//     vector<vector<int>> &prerequisites,
-//     vector<vector<int>> &queries)
-// {
-//   TODO
-// }
-
-// * 36 - Graph Valid Tree
-// bool validTree(int n, vector<vector<int>> &edges){
-// TODO
-// }
-
-// * 37 - Check if Move is Legal
-// bool validTree(int n, vector<vector<int>> &edges) {
-// TODO
-// }
-
-// * 38 - Shortest Bridge
-// int shortestBridge(vector<vector<int>>& grid) {
-// TODO
-// }
-
-// * 39 - Find Closest Node to Given Two Nodes
-// int closestMeetingNode(vector<int> &edges, int node1, int node2) {
-// TODO
-// }
-
-// * 40 - Number of Connected Components in an Undirected Graph
-// int countComponents(int n, vector<int> &edges) {
-// TODO
-// }
-
-// * 41 - Shortest Path with Alternating Colors
-// vector<int> shortestAlternatingPaths(int n, vector<vector<int>> &redEdges, vector<vector<int>> &blueEdges) 
-// {
 // TODO
 // }
 

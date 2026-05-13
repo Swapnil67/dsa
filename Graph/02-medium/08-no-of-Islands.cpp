@@ -38,32 +38,34 @@
 #include <vector>
 #include <iostream>
 
-typedef std::vector<char> vc;
+using namespace std;
+
+typedef vector<char> vc;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * Print adjacency list
 template <typename T>
-void printAdjList(std::vector<T> &adj) {
+void printAdjList(vector<T> &adj) {
   int n = adj.size();
   for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
+    cout << i << " -> ";
     printArr(adj[i]);
   }
 }
-const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
-void dfs(int r, int c, std::vector<std::vector<int>> &visited, std::vector<vc>& grid) {
+void dfs(int r, int c, vector<vector<int>> &visited, vector<vc>& grid) {
   int m = grid.size(), n = grid[0].size();
 
   // * Edge cases
@@ -85,12 +87,12 @@ void dfs(int r, int c, std::vector<std::vector<int>> &visited, std::vector<vc>& 
 // * ------------------------- Approach 1: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int numIslandsDFS(std::vector<vc>& grid) {
+int numIslandsDFS(vector<vc>& grid) {
   int m = grid.size(), n = grid[0].size();
   int islands = 0;
 
   // * Matrix to mark a cell visited
-  std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
+  vector<vector<int>> visited(m, vector<int>(n, 0));
 
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
@@ -104,10 +106,10 @@ int numIslandsDFS(std::vector<vc>& grid) {
   return islands;
 }
 
-void bfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<vc> &grid) {
+void bfs(int x, int y, vector<vector<int>> &visited, vector<vc> &grid) {
   int m = grid.size(), n = grid[0].size();
   visited[x][y] = 1;
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   q.push({x, y});
 
   while (!q.empty()) {
@@ -136,12 +138,12 @@ void bfs(int x, int y, std::vector<std::vector<int>> &visited, std::vector<vc> &
 // * ------------------------- Approach 2: Optimal -------------------------
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int numIslandsBFS(std::vector<vc>& grid) {
+int numIslandsBFS(vector<vc>& grid) {
   int m = grid.size(); 
   int n = grid[0].size(); 
   int islands = 0;
 
-  std::vector<std::vector<int>> visited(m, std::vector<int>(n, 0));
+  vector<vector<int>> visited(m, vector<int>(n, 0));
 
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) {
@@ -157,26 +159,26 @@ int numIslandsBFS(std::vector<vc>& grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<vc> grid = {
+  // vector<vc> grid = {
   //     {'1', '1', '1', '1', '0'},
   //     {'1', '1', '0', '1', '0'},
   //     {'1', '1', '0', '0', '0'},
   //     {'0', '0', '0', '0', '0'}};
 
   // * testcase 2
-  std::vector<vc> grid = {
+  vector<vc> grid = {
       {'1', '1', '0', '0', '0'},
       {'1', '1', '0', '0', '0'},
       {'0', '0', '1', '0', '0'},
       {'0', '0', '0', '1', '1'}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = numIslandsDFS(grid);
   // int ans = numIslandsBFS(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }
