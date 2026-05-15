@@ -48,24 +48,26 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * ------------------------- Approach 1: Optimal -------------------------
 // * Floyd Warshall
 // * TIME COMPLEXITY O(N^3)
 // * SPACE COMPLEXITY O(N^2)
-int findTheCity(int n, int &distanceThreshold, std::vector<std::vector<int>> &edges) {
-  std::vector<std::vector<int>> dist(n, std::vector<int>(n, INT_MAX));
+int findTheCity(int n, int &distanceThreshold, vector<vector<int>> &edges) {
+  vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
   for (auto &it : edges) {
     int u = it[0], v = it[1], w = it[2];
     dist[u][v] = w;
@@ -84,7 +86,7 @@ int findTheCity(int n, int &distanceThreshold, std::vector<std::vector<int>> &ed
           continue;
 
         // * dist[1][0] = dist[1][0] + dist[0][0] (eg: going via 0)
-        dist[i][j] = std::min(dist[i][j], (dist[i][via] + dist[via][j]));
+        dist[i][j] = min(dist[i][j], (dist[i][via] + dist[via][j]));
       }
     }
   }
@@ -98,6 +100,8 @@ int findTheCity(int n, int &distanceThreshold, std::vector<std::vector<int>> &ed
         city_cur_cnt++;
       }
     }
+    cout << "city: " << city << ", city_cur_cnt: " << city_cur_cnt << endl;
+    
     // * if it can reach less cities then updated max count
     if (city_cur_cnt <= city_max_cnt) {
       city_max_cnt = city_cur_cnt;
@@ -111,19 +115,19 @@ int findTheCity(int n, int &distanceThreshold, std::vector<std::vector<int>> &ed
 int main(void) {
   // * testcase 1
   int n = 4, distanceThreshold = 4;
-  std::vector<std::vector<int>> edges = {{0, 1, 3}, {1, 2, 1}, {1, 3, 4}, {2, 3, 1}};
+  vector<vector<int>> edges = {{0, 1, 3}, {1, 2, 1}, {1, 3, 4}, {2, 3, 1}};
 
   // * testcase 1
   // int n = 5, distanceThreshold = 2;
-  // std::vector<std::vector<int>> edges = {{0, 1, 2}, {0, 4, 8}, {1, 2, 3}, {1, 4, 2}, {2, 3, 1}, {3, 4, 1}};
+  // vector<vector<int>> edges = {{0, 1, 2}, {0, 4, 8}, {1, 2, 3}, {1, 4, 2}, {2, 3, 1}, {3, 4, 1}};
 
-  std::cout << "n: " << n << ", distanceThreshold: " << distanceThreshold << std::endl;
-  std::cout << "edges: " << std::endl;
+  cout << "n: " << n << ", distanceThreshold: " << distanceThreshold << endl;
+  cout << "edges: " << endl;
   for (auto &vec : edges)
     printArr(vec);
 
   int ans = findTheCity(n, distanceThreshold, edges);
-  std::cout << "City With the Smallest Number of Neighbors at a Threshold Distance: " << ans << std::endl;
+  cout << "City With the Smallest Number of Neighbors at a Threshold Distance: " << ans << endl;
 
   return 0;
 }

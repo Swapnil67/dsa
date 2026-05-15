@@ -38,40 +38,38 @@
 #include <iostream>
 #include <unordered_map>
 
-typedef std::vector<char> vc;
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
+typedef pair<int, int> pii;
 
 // * Print adjacency list
-template <typename T>
-void printAdjList(std::vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    std::cout << i << " -> ";
-    printArr(adj[i]);
+void printAdjList(unordered_map<int, vector<pii>> &adj) {
+  for (auto &[u, vec] : adj) {
+    cout << u << " -> "; 
+    for (auto &p: vec) {
+      cout << "(" << p.first << " " << p.second << ") ";
+    }
+    cout << endl;
   }
 }
 
-typedef std::pair<int, int> pii;
-
-bool canReachToZero(
-    int &n,
-    int &min_weight,
-    std::unordered_map<int, std::vector<pii>> &adj)
+bool canReachToZero(int &n, int &min_weight,
+                    unordered_map<int, vector<pii>> &adj)
 {
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
 
-  std::queue<int> q;
+  queue<int> q;
   q.push(0); // * Start from '0' and go to all nodes
 
   while (!q.empty()) {
@@ -99,14 +97,15 @@ bool canReachToZero(
 // * Here we'll check if its possible to reach node '0' from all nodes with min edge weight 'min_weight'
 // * TIME COMPLEXITY  O(log(max_edge_weight) * (V + E))
 // * SPACE COMPLEXITY O(V + E)
-int minMaxWeight(int n, int threshold, std::vector<std::vector<int>> &edges) {
+int minMaxWeight(int n, int threshold, vector<vector<int>> &edges) {
   int max_edge_weight = 0;
-  std::unordered_map<int, std::vector<pii>> adj;
+  unordered_map<int, vector<pii>> adj;
   for (auto &it: edges) {
     int u = it[0], v = it[1], w = it[2];
-    max_edge_weight = std::max(max_edge_weight, w);
+    max_edge_weight = max(max_edge_weight, w);
     adj[v].push_back({u, w}); // * with reversed edge
   }
+  printAdjList(adj);
 
   // * Binary Search on answers
   int ans = INT_MAX;
@@ -114,7 +113,7 @@ int minMaxWeight(int n, int threshold, std::vector<std::vector<int>> &edges) {
   while (l <= r) {
     int m = l + (r - l) / 2;
     bool ans = canReachToZero(n, m, adj);
-    // std::cout << "m: " << m << ", ans: " << ans << std::endl;
+    // cout << "m: " << m << ", ans: " << ans << endl;
     if (ans) {
       ans = m;
       r = m - 1;
@@ -129,24 +128,24 @@ int minMaxWeight(int n, int threshold, std::vector<std::vector<int>> &edges) {
 
 int main(void) {
   // * testcase 1
-  // int n = 5, threshold = 2;
-  // std::vector<std::vector<int>> edges = {{1, 0, 1}, {2, 0, 2}, {3, 0, 1}, {4, 3, 1}, {2, 1, 1}};
+  int n = 5, threshold = 2;
+  vector<vector<int>> edges = {{1, 0, 1}, {2, 0, 2}, {3, 0, 1}, {4, 3, 1}, {2, 1, 1}};
 
   // * testcase 2
-  int n = 5, threshold = 1;
-  std::vector<std::vector<int>> edges = {{0, 1, 1}, {0, 2, 2}, {0, 3, 1}, {0, 4, 1}, {1, 2, 1}, {1, 4, 1}};
+  // int n = 5, threshold = 1;
+  // vector<vector<int>> edges = {{0, 1, 1}, {0, 2, 2}, {0, 3, 1}, {0, 4, 1}, {1, 2, 1}, {1, 4, 1}};
 
   // * testcase 3
   // int n = 5, threshold = 1;
-  // std::vector<std::vector<int>> edges = {{1, 2, 1}, {1, 3, 3}, {1, 4, 5}, {2, 3, 2}, {3, 4, 2}, {4, 0, 1}};
+  // vector<vector<int>> edges = {{1, 2, 1}, {1, 3, 3}, {1, 4, 5}, {2, 3, 2}, {3, 4, 2}, {4, 0, 1}};
 
-  std::cout << "n: " << n << ", threshold: " << threshold << std::endl;
-  std::cout << "Edges: " << std::endl;
+  cout << "n: " << n << ", threshold: " << threshold << endl;
+  cout << "Edges: " << endl;
   for (auto &vec : edges)
     printArr(vec);
 
   int ans = minMaxWeight(n, threshold, edges);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

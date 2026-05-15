@@ -33,28 +33,30 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-typedef std::vector<int> vi;
+typedef vector<int> vi;
 
-void printAdjList(std::unordered_map<int, std::vector<std::pair<int, int>>> &adj) {
-  std::cout << "Adjacency List" << std::endl;
+void printAdjList(unordered_map<int, vector<pair<int, int>>> &adj) {
+  cout << "Adjacency List" << endl;
   for (auto &[u, vec] : adj) {
-    std::cout << u << " -> "; 
+    cout << u << " -> "; 
     for (auto &p: vec) {
-      std::cout << "(" << p.first << " " << p.second << ") ";
+      cout << "(" << p.first << " " << p.second << ") ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
@@ -62,23 +64,20 @@ void printAdjList(std::unordered_map<int, std::vector<std::pair<int, int>>> &adj
 // * BFS + Dijkstra's Algorithm
 // * TIME COMPLEXITY O(E+Vlogv)
 // * SPACE COMPLEXITY O(V + E)
-int findCheapestPrice(
-  int n, 
-  int src, int dst, int k,
-  std::vector<std::vector<int>> &flights) {
-
+int findCheapestPrice(int n, int src, int dst, int k, vector<vector<int>> &flights)
+{
   // * 1. Create a adj list
-  std::unordered_map<int, std::vector<std::pair<int, int>>> adj;
+  unordered_map<int, vector<pair<int, int>>> adj;
   for (auto &data : flights) {
     int from = data[0], to = data[1], cost = data[2];
     adj[from].push_back({to, cost});
   }
   // printAdjList(adj); // * For Debugging
 
-  std::vector<int> dist(n, INT_MAX);
+  vector<int> dist(n, INT_MAX);
   dist[src] = 0; // * dist to src is 0
 
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   q.push({src, 0}); // * start bfs from src node
   
   int min_cost = INT_MAX;
@@ -91,7 +90,7 @@ int findCheapestPrice(
   
       for (auto &[v, cost_to] : adj[u]) {
         int total_cost = cost + cost_to;
-        // std::cout << "v: " << v << ", total_cost: " << total_cost << std::endl;
+        // cout << "v: " << v << ", total_cost: " << total_cost << endl;
         if (dist[v] > total_cost) {
           dist[v] = total_cost;
           q.push({v, total_cost});
@@ -110,27 +109,27 @@ int findCheapestPrice(
 int main(void) {
   // * testcase 1
   // int n = 4, src = 0, dst = 3, k = 1;
-  // std::vector<std::vector<int>> flights = {{0, 1, 100}, {1, 2, 100}, {2, 0, 100}, {1, 3, 600}, {2, 3, 200}};
+  // vector<vector<int>> flights = {{0, 1, 100}, {1, 2, 100}, {2, 0, 100}, {1, 3, 600}, {2, 3, 200}};
   
   // * testcase 2
   // int n = 3, src = 0, dst = 2, k = 1;
-  // std::vector<std::vector<int>> flights = {{0,1,100},{1,2,100},{0,2,500}};
+  // vector<vector<int>> flights = {{0,1,100},{1,2,100},{0,2,500}};
   
   // * testcase 3
   // int n = 3, src = 0, dst = 2, k = 0;
-  // std::vector<std::vector<int>> flights = {{0,1,100},{1,2,100},{0,2,500}};
+  // vector<vector<int>> flights = {{0,1,100},{1,2,100},{0,2,500}};
   
   // * testcase 4
   int n = 5, src = 2, dst = 1, k = 1;
-  std::vector<std::vector<int>> flights = {{4, 1, 1}, {1, 2, 3}, {0, 3, 2}, {0, 4, 10}, {3, 1, 1}, {1, 4, 3}};
+  vector<vector<int>> flights = {{4, 1, 1}, {1, 2, 3}, {0, 3, 2}, {0, 4, 10}, {3, 1, 1}, {1, 4, 3}};
 
-  std::cout << "src: " << src << ", dst: " << dst << ", k: " << k << std::endl;
-  std::cout << "Flights: " << std::endl;
+  cout << "src: " << src << ", dst: " << dst << ", k: " << k << endl;
+  cout << "Flights: " << endl;
   for (auto &vec : flights)
     printArr(vec);
 
   int ans = findCheapestPrice(n, src, dst, k, flights);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

@@ -41,39 +41,40 @@
 #include <iostream>
 #include <unordered_map>
 
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 // * ------------------------- Approach 1: Optimal -------------------------
 // * Floyd Warshall
 // * TIME COMPLEXITY O(26)
 // * SPACE COMPLEXITY O(26)
 long long minimumCost(
-    std::string source,
-    std::string target,
-    std::vector<char> &original,
-    std::vector<char> &changed,
-    std::vector<int> &cost)
+    string source,
+    string target,
+    vector<char> &original,
+    vector<char> &changed,
+    vector<int> &cost)
 {
   // * Create an Adjacency Matrix
   long long N = 26;
-  std::vector<std::vector<long long>> dist(N, std::vector<long long>(N, INT_MAX));
+  vector<vector<long long>> dist(N, vector<long long>(N, INT_MAX));
   int n = original.size();
   for (int i = 0; i < n; ++i) {
     char s = original[i] - 'a', t = changed[i] - 'a';
-    dist[s][t] = std::min(dist[s][t], (long long)cost[i]);
+    dist[s][t] = min(dist[s][t], (long long)cost[i]);
   }
-  // std::cout << "dist: " << std::endl;
+  // cout << "dist: " << endl;
   // for (auto &vec : dist)
   //   printArr(vec);
 
@@ -89,11 +90,11 @@ long long minimumCost(
         if (dist[i][via] == INT_MAX || dist[via][j] == INT_MAX)
           continue;
 
-        dist[i][j] = std::min(dist[i][j], dist[i][via] + dist[via][j]);
+        dist[i][j] = min(dist[i][j], dist[i][via] + dist[via][j]);
       }
     }
   }
-  // std::cout << "dist: " << std::endl;
+  // cout << "dist: " << endl;
   // for (auto &vec : dist)
   //   printArr(vec);
 
@@ -105,7 +106,7 @@ long long minimumCost(
 
     long long min_cost = dist[source[i] - 'a'][target[i] - 'a'];
     if (min_cost == INT_MAX) { // * we never reached on this dest
-      std::cout << source[i] << " " << target[i] << std::endl;
+      // cout << source[i] << " " << target[i] << endl;
       return -1;
     }
     
@@ -117,33 +118,33 @@ long long minimumCost(
 
 int main(void) {
   // * testcase 1
-  // std::string source = "abcd", target = "acbe";
-  // std::vector<char> original = {'a', 'b', 'c', 'c', 'e', 'd'},
-  //                   changed = {'b', 'c', 'b', 'e', 'b', 'e'};
-  // std::vector<int> cost = {2, 5, 5, 1, 2, 20};
+  string source = "abcd", target = "acbe";
+  vector<char> original = {'a', 'b', 'c', 'c', 'e', 'd'},
+                    changed = {'b', 'c', 'b', 'e', 'b', 'e'};
+  vector<int> cost = {2, 5, 5, 1, 2, 20};
 
   // * testcase 2
-  std::string source = "aaaa", target = "bbbb";
-  std::vector<char> original = {'a', 'c'},
-                    changed = {'c', 'b'};
-  std::vector<int> cost = {1, 2};
+  // string source = "aaaa", target = "bbbb";
+  // vector<char> original = {'a', 'c'},
+  //                   changed = {'c', 'b'};
+  // vector<int> cost = {1, 2};
 
-  std::cout << "original: ";
+  cout << "original: ";
   printArr(original);
 
-  std::cout << "changed: ";
+  cout << "changed: ";
   printArr(changed);
 
-  std::cout << "cost: ";
+  cout << "cost: ";
   printArr(cost);
   
   // * testcase 2
-  // std::string source = "aaaa", target = "bbbb";
-  // std::vector<int> cost = {1, 2};
-  // std::vector<char> original = {'a', 'c'}, changed = {'c', 'b'};
+  // string source = "aaaa", target = "bbbb";
+  // vector<int> cost = {1, 2};
+  // vector<char> original = {'a', 'c'}, changed = {'c', 'b'};
 
   long long ans = minimumCost(source, target, original, changed, cost);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

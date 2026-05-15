@@ -22,7 +22,7 @@
  *                  - Step 3: 63 * 65 = 4095 % 100000 = 4095 
  *                  - Step 4: 4095 * 65 = 266175 % 100000 = 66175
  * 
- * * https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1
+ * https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1
 */
 
 #include <queue>
@@ -50,8 +50,8 @@ typedef std::pair<int, int> pii;
 // * TIME COMPLEXITY O(100000 * N) (Hypothetical depends on the size of nums array)
 // * SPACE COMPLEXITY O(1)
 int minimumMultiplications(int start, int end, std::vector<int> nums) {
-  int M = 100000;
-  std::vector<int> dist(100000, INT_MAX); // * (Given in question)
+  int M = 1000;
+  std::vector<int> dist(1001, INT_MAX); // * (Given in question)
   dist[start] = 0;
 
   // * Min heap = {steps, Val}

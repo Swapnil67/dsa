@@ -22,11 +22,12 @@
  * https://leetcode.com/problems/min-cost-to-connect-all-points/description/
  * https://www.naukri.com/code360/problems/minimum-cost-to-connect-all-points_1381518
  * https://www.geeksforgeeks.org/problems/minimum-cost-to-connect-all-houses-in-a-city/1
+ * 
 */
 
 // ! MST
 
-// ! Google, Meta
+// ! Google, Meta, Uber, Microsoft
 
 #include <queue>
 #include <vector>
@@ -35,34 +36,36 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<std::pair<int, int>>> &adj) {
+void printAdjList(unordered_map<int, vector<pair<int, int>>> &adj) {
   for (auto &[u, vec] : adj) {
-    std::cout << u << " -> "; 
+    cout << u << " -> "; 
     for (auto &p: vec) {
-      std::cout << "(" << p.first << " " << p.second << ") ";
+      cout << "(" << p.first << " " << p.second << ") ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
-typedef std::pair<int, int> pii;
+typedef pair<int, int> pii;
 
-int prims_algorithm(int &V, std::unordered_map<int, std::vector<pii>> &adj) {
-  std::vector<bool> in_mst(V, false);
+int prims_algorithm(int &V, unordered_map<int, vector<pii>> &adj) {
+  vector<bool> in_mst(V, false);
 
-  std::priority_queue<pii, std::vector<pii>, std::greater<>> min_heap;
+  priority_queue<pii, vector<pii>, greater<>> min_heap;
   min_heap.push({0, 0});
 
   int cost = 0;
@@ -86,20 +89,20 @@ int prims_algorithm(int &V, std::unordered_map<int, std::vector<pii>> &adj) {
   return cost;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * v = no of vertices
 // * e = no of edges
 // * TIME COMPLEXITY O(E*Log(V))
 // * SPACE COMPLEXITY O(E + V)
-int minCostConnectPoints(std::vector<std::vector<int>>& points) {
+int minCostConnectPoints(vector<vector<int>>& points) {
   // * 1. Create an Adj list
-  std::unordered_map<int, std::vector<pii>> adj;
+  unordered_map<int, vector<pii>> adj;
   int V = points.size();
   for (int i = 0; i < V; ++i) {
     int x1 = points[i][0], y1 = points[i][1];
     for (int j = i + 1; j < V; ++j) {
       int x2 = points[j][0], y2 = points[j][1];
-      int dist = std::abs(x2 - x1) + std::abs(y2 - y1);
+      int dist = abs(x2 - x1) + abs(y2 - y1);
       adj[i].push_back({j, dist});
       adj[j].push_back({i, dist});
     }
@@ -113,17 +116,17 @@ int minCostConnectPoints(std::vector<std::vector<int>>& points) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> points = {{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}};
+  vector<vector<int>> points = {{0, 0}, {2, 2}, {3, 10}, {5, 2}, {7, 0}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> points = {{3, 12}, {-2, 5}, {-4, 1}};
+  // vector<vector<int>> points = {{3, 12}, {-2, 5}, {-4, 1}};
 
-  std::cout << "Points" << std::endl;
+  cout << "Points" << endl;
   for (auto &vec : points)
     printArr(vec);
 
   int ans = minCostConnectPoints(points);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

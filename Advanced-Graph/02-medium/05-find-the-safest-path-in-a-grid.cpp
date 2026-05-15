@@ -21,19 +21,20 @@
  * The Manhattan distance between two cells (a, b) and (x, y) is equal to |a - x| + |b - y|, 
  * where |val| denotes the absolute value of val.
 
- * * Example 1  :
- * * Input      : grid = [[1,0,0],[0,0,0],[0,0,1]]
- * * Output     : 6
+ * Example 1  :
+ * Input      : grid = [[1,0,0],[0,0,0],[0,0,1]]
+ * Output     : 6
 
- * * Example 2  :
- * * Input      : grid = [[0,0,1],[0,0,0],[0,0,0]]
- * * Output     : 0
+ * Example 2  :
+ * Input      : grid = [[0,0,1],[0,0,0],[0,0,0]]
+ * Output     : 0
 
- * * Example 3  :
- * * Input      : grid = [[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,0]]
- * * Output     : 0
+ * Example 3  :
+ * Input      : grid = [[0,0,0,1],[0,0,0,0],[0,0,0,0],[1,0,0,0]]
+ * Output     : 0
  * 
- * * https://leetcode.com/problems/find-the-safest-path-in-a-grid/description/
+ * https://leetcode.com/problems/find-the-safest-path-in-a-grid/description/
+ * 
 */
 
 // ! Meta, Microsoft, Google, Apple, Amazon, Uber
@@ -43,42 +44,44 @@
 #include <climits>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-typedef std::pair<int, int> pii;
+typedef pair<int, int> pii;
 
-const std::vector<std::vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
 // * check out of bound
-bool check_not_oob(const int &row, const int &col, std::vector<std::vector<int>> &grid) {
+bool check_not_oob(const int &row, const int &col, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   return row >= 0 && row < m && col >= 0 && col < n;
 }
 
 // * Multi Source BFS
 // * We need to go to the cells where distance from thief is greater than on equal to min_dist (Safeness factor)
-bool bfs(int &min_dist, std::vector<std::vector<int>> &dist) {
+bool bfs(int &min_dist, vector<vector<int>> &dist) {
   int m = dist.size(), n = dist[0].size();
   if (dist[0][0] < min_dist) { // * Starting cell is not within the safeness factor
     return 0;
   }
 
   // * Classic BFS
-  std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
+  vector<vector<bool>> visited(m, vector<bool>(n, false));
   visited[0][0] = true;
 
-  std::queue<std::pair<int, int>> q;
-  q.push(std::make_pair(0, 0));
+  queue<pair<int, int>> q;
+  q.push(make_pair(0, 0));
 
   while (!q.empty()) {
     auto [r, c] = q.front();
@@ -91,7 +94,7 @@ bool bfs(int &min_dist, std::vector<std::vector<int>> &dist) {
       int dr = r + dir[0], dc = c + dir[1];
       if (check_not_oob(dr, dc, dist) && !visited[dr][dc] && dist[dr][dc] >= min_dist) {
         visited[dr][dc] = true;
-        q.push(std::make_pair(dr, dc));
+        q.push(make_pair(dr, dc));
       }
     }
   }
@@ -100,16 +103,16 @@ bool bfs(int &min_dist, std::vector<std::vector<int>> &dist) {
 }
 
 // * We need to go to the cell where distance from thief is greater than on equal to min_dist (Safeness factor)
-std::vector<std::vector<int>> distanceGrid(std::vector<std::vector<int>> &grid) {
+vector<vector<int>> distanceGrid(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
-  std::vector<std::vector<int>> dist(m, std::vector<int>(n, INT_MAX));
-  std::queue<pii> q;
+  vector<vector<int>> dist(m, vector<int>(n, INT_MAX));
+  queue<pii> q;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == 1) { // * Found thief
         dist[r][c] = 0;
-        q.push(std::make_pair(r, c));
+        q.push(make_pair(r, c));
       }
     }
   }
@@ -124,7 +127,7 @@ std::vector<std::vector<int>> distanceGrid(std::vector<std::vector<int>> &grid) 
         int dr = r + dir[0], dc = c + dir[1];
         if (check_not_oob(dr, dc, grid) && dist[dr][dc] == INT_MAX) {
           dist[dr][dc] = dist[r][c] + 1;
-          q.push(std::make_pair(dr, dc));
+          q.push(make_pair(dr, dc));
         }
       }
     }
@@ -137,7 +140,7 @@ std::vector<std::vector<int>> distanceGrid(std::vector<std::vector<int>> &grid) 
 // * Binary Search + Multi Source BFS
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int maximumSafenessFactor(std::vector<std::vector<int>> &grid) {
+int maximumSafenessFactor(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
   // * Cannot reach destination
@@ -145,8 +148,8 @@ int maximumSafenessFactor(std::vector<std::vector<int>> &grid) {
     return 0;
 
   // * 1. Precompute a distance grid
-  std::vector<std::vector<int>> dist = distanceGrid(grid); // * (m x n)
-  std::cout << "Distance: " << std::endl;
+  vector<vector<int>> dist = distanceGrid(grid); // * (m x n)
+  cout << "Distance: " << endl;
   for (auto &vec : dist)
     printArr(vec);
 
@@ -156,9 +159,9 @@ int maximumSafenessFactor(std::vector<std::vector<int>> &grid) {
   while (l <= r) {
     int m = l + (r - l) / 2; // * current safeness factor
     bool ans = bfs(m, dist);
-    // std::cout << m << "  " << ans << std::endl;
+    // cout << m << "  " << ans << endl;
     if (ans) {
-      l = m + 1;
+      l = m + 1; // * maximum safeness factor
       max_safe_factor = m;
     } else {
       r = m - 1;
@@ -171,7 +174,7 @@ int maximumSafenessFactor(std::vector<std::vector<int>> &grid) {
 // * Multi Source BFS + Dijkstra's Algorithm
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n)
-int maximumSafenessFactorDij(std::vector<std::vector<int>> &grid) {
+int maximumSafenessFactorDij(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
   // * Cannot reach destination
@@ -179,20 +182,20 @@ int maximumSafenessFactorDij(std::vector<std::vector<int>> &grid) {
     return 0;
 
   // * 1. Precompute a distance grid (Multi Source BFS)
-  std::vector<std::vector<int>> dist = distanceGrid(grid); // * (m x n)
-  std::cout << "Distance: " << std::endl;
+  vector<vector<int>> dist = distanceGrid(grid); // * (m x n)
+  cout << "Distance: " << endl;
   for (auto &vec : dist)
     printArr(vec);
 
   // * 2. Dijkstra Algorithm
-  std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
+  vector<vector<bool>> visited(m, vector<bool>(n, false));
   visited[0][0] = true;
 
-  std::priority_queue<std::vector<int>> max_heap;
+  priority_queue<vector<int>> max_heap;
   max_heap.push({dist[0][0], 0, 0});
 
   while (!max_heap.empty()) {
-    std::vector<int> data = max_heap.top();
+    vector<int> data = max_heap.top();
     max_heap.pop();
     int d = data[0], r = data[1], c = data[2];
 
@@ -204,8 +207,8 @@ int maximumSafenessFactorDij(std::vector<std::vector<int>> &grid) {
       int dr = r + dir[0], dc = c + dir[1];
       if (check_not_oob(dr, dc, grid) && !visited[dr][dc]) { 
         visited[dr][dc] = true;
-        int min_dist = std::min(d, dist[dr][dc]);
-        std::cout << "(" << dr << " " << dc << ") = " << min_dist << std::endl;
+        int min_dist = min(d, dist[dr][dc]);
+        cout << "(" << dr << " " << dc << ") = " << min_dist << endl;
         max_heap.push({min_dist, dr, dc});
       }
     }
@@ -216,24 +219,24 @@ int maximumSafenessFactorDij(std::vector<std::vector<int>> &grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> grid = {{1, 0, 0}, {0, 0, 0}, {0, 0, 1}};
+  // vector<vector<int>> grid = {{1, 0, 0}, {0, 0, 0}, {0, 0, 1}};
 
   // * testcase 2
-  std::vector<std::vector<int>> grid = {{0, 0, 1}, {0, 0, 0}, {0, 0, 0}};
+  vector<vector<int>> grid = {{0, 0, 1}, {0, 0, 0}, {0, 0, 0}};
 
   // * testcase 3
-  // std::vector<std::vector<int>> grid = {{0, 0, 0, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {1, 0, 0, 0}};
+  // vector<vector<int>> grid = {{0, 0, 0, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {1, 0, 0, 0}};
 
   // * testcase 4
-  // std::vector<std::vector<int>> grid = {{0, 1, 1}, {0, 1, 1}, {1, 1, 0}};
+  // vector<vector<int>> grid = {{0, 1, 1}, {0, 1, 1}, {1, 1, 0}};
 
-  std::cout << "grid: " << std::endl;
+  cout << "grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   // int ans = maximumSafenessFactor(grid);
   int ans = maximumSafenessFactorDij(grid);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

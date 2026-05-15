@@ -28,7 +28,7 @@
 
 // ! Dijkstra Algorithm
 
-// ! Google
+// ! Amazon, Google, Meta, Microsoft, Bloomberg, Tiktok, Netflix
 
 #include <queue>
 #include <vector>
@@ -37,32 +37,34 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<std::pair<int, int>>> &adj) {
+void printAdjList(unordered_map<int, vector<pair<int, int>>> &adj) {
   for (auto &[u, vec] : adj) {
-    std::cout << u << " -> "; 
+    cout << u << " -> "; 
     for (auto &p: vec) {
-      std::cout << "(" << p.first << " " << p.second << ") ";
+      cout << "(" << p.first << " " << p.second << ") ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
-typedef std::pair<int, int> pii;
+typedef pair<int, int> pii;
 
-std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<pii>> adj;
+unordered_map<int, vector<pii>> constructadj(vector<vector<int>> &edges) {
+  unordered_map<int, vector<pii>> adj;
   if (edges.size() == 0)
     return adj;
 
@@ -70,26 +72,26 @@ std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<i
     if (vec.size() == 0)
       continue;
     int u = vec[0], v = vec[1], w = vec[2];
-    adj[u].push_back(std::make_pair(v, w));
+    adj[u].push_back(make_pair(v, w));
   }
   return adj;
 }
 
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Using Dijkstra Algorithm
 // * v = no of vertices
 // * e = no of edges
 // * TIME COMPLEXITY O(E*Log(V))
 // * SPACE COMPLEXITY O(E + V)
-int networkDelayTime(std::vector<std::vector<int>>& times, int n, int k) {
-  std::unordered_map<int, std::vector<pii>> adj = constructadj(times);
+int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+  unordered_map<int, vector<pii>> adj = constructadj(times);
 
   // * pair = {distance, v}
-  std::priority_queue<pii, std::vector<pii>, std::greater<>> min_heap; 
-  min_heap.push(std::make_pair(0, k));
+  priority_queue<pii, vector<pii>, greater<>> min_heap; 
+  min_heap.push(make_pair(0, k));
 
-  std::vector<int> distance(n + 1, INT_MAX);
+  vector<int> distance(n + 1, INT_MAX);
   distance[k] = 0;
 
   // * Go to it's neighbour
@@ -112,36 +114,38 @@ int networkDelayTime(std::vector<std::vector<int>>& times, int n, int k) {
   for (int i = 1; i <= n; ++i) {
     if (distance[i] == INT_MAX)
       return -1;
-    min_time = std::max(min_time, distance[i]);
+    min_time = max(min_time, distance[i]);
   }
   return min_time;
 }
 
 int main(void) {
+  std::cout << "Network Delay Time" << std::endl;
+  
   // * testcase 1
   int k = 2, n = 4;
-  std::vector<std::vector<int>> times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
+  vector<vector<int>> times = {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}};
 
   // * testcase 2
   // int n = 2, k = 1;
-  // std::vector<std::vector<int>> times = {{1, 2, 1}};
+  // vector<vector<int>> times = {{1, 2, 1}};
   
   // * testcase 3
   // int n = 2, k = 2;
-  // std::vector<std::vector<int>> times = {{1, 2, 1}};
+  // vector<vector<int>> times = {{1, 2, 1}};
 
-  std::cout << "k: " << k << ", n: " << n << std::endl;
-  std::cout << "Times" << std::endl;
+  cout << "k: " << k << ", n: " << n << endl;
+  cout << "Times" << endl;
   for (auto &vec : times)
     printArr(vec);
 
   int ans = networkDelayTime(times, n, k);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 14-network-delay-time.cpp -o output && ./output
+// * g++ --std=c++20 02-network-delay-time.cpp -o output && ./output
 
  

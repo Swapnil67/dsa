@@ -36,34 +36,36 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
-typedef std::pair<int, double> pif;
+typedef pair<int, double> pif ;
 
-void printAdjList(std::unordered_map<int, std::vector<pif>> &adj) {
+void printAdjList(unordered_map<int, vector<pif>> &adj) {
   for (auto &[u, vec] : adj) {
-    std::cout << u << " -> "; 
+    cout << u << " -> "; 
     for (auto &p: vec) {
-      std::cout << "(" << p.first << " " << p.second << ") ";
+      cout << "(" << p.first << " " << p.second << ") ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
-std::unordered_map<int, std::vector<pif>> constructadj(
-    std::vector<double> &succProb,
-    std::vector<std::vector<int>> &edges)
+unordered_map<int, vector<pif>> constructadj(
+    vector<double> &succProb,
+    vector<vector<int>> &edges)
 {
-  std::unordered_map<int, std::vector<pif>> adj;
+  unordered_map<int, vector<pif>> adj;
   if (edges.size() == 0)
     return adj;
 
@@ -77,36 +79,36 @@ std::unordered_map<int, std::vector<pif>> constructadj(
   return adj;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Using Dijkstra Algorithm
 // * v = no of vertices
 // * e = no of edges
-// * TIME COMPLEXITY O(E*Log(V))
+// * TIME COMPLEXITY O(E * Log(V))
 // * SPACE COMPLEXITY O(E + V)
 double maxProbability(
     int n, int start, int end,
-    std::vector<double> succProb,
-    std::vector<std::vector<int>> &edges)
+    vector<double> succProb,
+    vector<vector<int>> &edges)
 {
   // * 1. Construct adj
-  std::unordered_map<int, std::vector<pif>> adj = constructadj(succProb, edges);
+  unordered_map<int, vector<pif>> adj = constructadj(succProb, edges);
   // printAdjList(adj); // * For debugging
 
-  std::vector<double> dist(n, 0.0);
+  vector<double> dist(n, 0.0);
   dist[start] = 1.0; // * Prob to reach start is 100% i.e. Probability = 1
 
   // * {probability, node}
-  std::priority_queue<std::pair<double, int>> max_heap;
+  priority_queue<pair<double, int>> max_heap;
   max_heap.push({1.0, start});
 
   while (!max_heap.empty()) {
     auto [u_prob, u] = max_heap.top();
     max_heap.pop();
-    // std::cout << "u: " << u << ", prob " << u_prob << std::endl;
+    // cout << "u: " << u << ", prob " << u_prob << endl;
 
     for (auto &[v, v_prob]: adj[u]) {
       double new_prob = u_prob * v_prob;
-      // std::cout << "v: " << v << ", new_prob " << new_prob << std::endl;
+      // cout << "v: " << v << ", new_prob " << new_prob << endl;
       if (new_prob > dist[v]) {
         dist[v] = new_prob;
         max_heap.push({new_prob, v});
@@ -120,28 +122,28 @@ double maxProbability(
 int main(void) {
   // * testcase 1
   int n = 3, start = 0, end = 2;
-  std::vector<double> succProb = {0.5, 0.5, 0.2};
-  std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {0, 2}};
+  vector<double> succProb = {0.5, 0.5, 0.2};
+  vector<vector<int>> edges = {{0, 1}, {1, 2}, {0, 2}};
   
   // * testcase 2
   // int n = 3, start = 0, end = 2;
-  // std::vector<double> succProb = {0.5, 0.5, 0.3};
-  // std::vector<std::vector<int>> edges = {{0, 1}, {1, 2}, {0, 2}};
+  // vector<double> succProb = {0.5, 0.5, 0.3};
+  // vector<vector<int>> edges = {{0, 1}, {1, 2}, {0, 2}};
 
   // * testcase 3
   // int n = 3, start = 0, end = 2;
-  // std::vector<double> succProb = {0.5};
-  // std::vector<std::vector<int>> edges = {{0, 1}};
+  // vector<double> succProb = {0.5};
+  // vector<vector<int>> edges = {{0, 1}};
 
-  std::cout << "start: " << start << ", end: " << end << std::endl;
-  std::cout << "Success Probability: ";
+  cout << "start: " << start << ", end: " << end << endl;
+  cout << "Success Probability: ";
   printArr(succProb);
-  std::cout << "Edegs" << std::endl;
+  cout << "Edegs" << endl;
   for (auto &vec : edges)
     printArr(vec);
 
   double ans = maxProbability(n, start, end, succProb, edges);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

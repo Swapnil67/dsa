@@ -34,38 +34,41 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-typedef std::pair<int, int> pii;
-typedef std::pair<long long, int> pli;
+typedef pair<int, int> pii;
+typedef pair<long long, int> pli;
 
-void printAdjList(std::unordered_map<int, std::vector<pii>> &adj) {
-  std::cout << "----------------- Adj ------------------" << std::endl;
+void printAdjList(unordered_map<int, vector<pii>> &adj) {
+  cout << "----------------- Adj ------------------" << endl;
   for (auto &[u, vec] : adj) {
-    std::cout << u << " -> "; 
+    cout << u << " -> "; 
     for (auto &p: vec) {
-      std::cout << "(" << p.first << " " << p.second << ") ";
+      cout << "(" << p.first << " " << p.second << ") ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
-  std::cout << "----------------- Adj ------------------" << std::endl;
+  cout << "----------------- Adj ------------------" << endl;
 }
-std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<int>> &roads) {
-  std::unordered_map<int, std::vector<pii>> adj;
+
+unordered_map<int, vector<pii>> constructadj(vector<vector<int>> &roads) {
+  unordered_map<int, vector<pii>> adj;
   for (auto &r: roads) {
     int u = r[0], v = r[1], t = r[2];
-    adj[u].push_back(std::make_pair(v, t));
-    adj[v].push_back(std::make_pair(u, t));
+    adj[u].push_back(make_pair(v, t));
+    adj[v].push_back(make_pair(u, t));
   }
   return adj;
 }
@@ -74,19 +77,19 @@ std::unordered_map<int, std::vector<pii>> constructadj(std::vector<std::vector<i
 // * BFS + Dijkstra's Algorithm
 // * TIME COMPLEXITY O(E + Vlogv)
 // * SPACE COMPLEXITY O(V + E)
-int countPaths(int n, std::vector<std::vector<int>> &roads) {
+int countPaths(int n, vector<vector<int>> &roads) {
   // * Construct adj 
-  std::unordered_map<int, std::vector<pii>> adj = constructadj(roads);
+  unordered_map<int, vector<pii>> adj = constructadj(roads);
   printAdjList(adj); // * For Debugging
   
   // * Min Heap = {dist, node}
-  std::priority_queue<pli, std::vector<pli>, std::greater<>> min_heap;
+  priority_queue<pli, vector<pli>, greater<>> min_heap;
   min_heap.push({0, 0});
   
-  std::vector<int> ways(n, 0);
+  vector<int> ways(n, 0);
   ways[0] = 1;
 
-  std::vector<long long> dist(n, LLONG_MAX);
+  vector<long long> dist(n, LLONG_MAX);
   dist[0] = 0;
   
   // * BFS (Dijkstra)
@@ -116,20 +119,29 @@ int countPaths(int n, std::vector<std::vector<int>> &roads) {
 int main(void) {
   // * testcase 1
   int n = 7;
-  std::vector<std::vector<int>> roads = {
-      {0, 6, 7}, {0, 1, 2}, {1, 2, 3}, {1, 3, 3}, {6, 3, 3}, {3, 5, 1}, {6, 5, 1}, {2, 5, 1}, {0, 4, 5}, {4, 6, 2}};
+  vector<vector<int>> roads = {
+      {0, 6, 7},
+      {0, 1, 2},
+      {1, 2, 3},
+      {1, 3, 3},
+      {6, 3, 3},
+      {3, 5, 1},
+      {6, 5, 1},
+      {2, 5, 1},
+      {0, 4, 5},
+      {4, 6, 2}};
 
   // * testcase 2
   // int n = 2;
-  // std::vector<std::vector<int>> roads = {{1, 0, 10}};
+  // vector<vector<int>> roads = {{1, 0, 10}};
 
-  std::cout << "n: " << n << std::endl;
-  std::cout << "roads: " << std::endl;
+  cout << "n: " << n << endl;
+  cout << "roads: " << endl;
   for (auto &vec : roads)
     printArr(vec);
 
   int ans = countPaths(n, roads);
-  std::cout << "Number of Ways to Arrive at Destination: " << ans << std::endl;
+  cout << "Number of Ways to Arrive at Destination: " << ans << endl;
 
   return 0;
 }
