@@ -19,27 +19,20 @@
  * https://www.geeksforgeeks.org/problems/count-ways-to-reach-the-nth-stair-1587115620/1
 */
 
+// ! Amazon, Adobe, Flipkart, Microsoft, Google, Meta, Apple, Uber, Tiktok
+
 #include <vector>
 #include <iostream>
 
-// * Amazon, Adobe, Flipkart, Microsoft, Google, Meta, Apple, Uber, Tiktok
+using namespace std;
+
+// * ------------------------- APPROACH: Brute Force -------------------------
 
 int dfs_brute(int n, int i) {
   if (i >= n)
     return i == n;
 
   return dfs_brute(n, i + 1) + dfs_brute(n, i + 2);
-}
-
-// * Top Down Recursion
-int dfs(int n, int i, std::vector<int> &cache) {
-  if (i >= n)
-    return i == n;
-
-  if (cache[i] != -1)
-    return cache[i];
-
-  return cache[i] = dfs(n, i + 1, cache) + dfs(n, i + 2, cache);
 }
 
 // * Plain Recursion
@@ -49,14 +42,29 @@ int bruteForce(int n) {
   return dfs_brute(n, 0);
 }
 
-// * Top Down approach 
-// * TIME COMPLEXITY O(N)
+// * ------------------------- APPROACH: Optimal Approach -------------------------
+
+// * Top Down Recursion
+int dfs(int n, int i, vector<int> &cache) {
+  if (i >= n)
+    return i == n;
+
+  if (cache[i] != -1)
+    return cache[i];
+
+  return cache[i] = dfs(n, i + 1, cache) + dfs(n, i + 2, cache);
+}
+
+// * Top Down approach with memoization
+// * TIME COMPLEXITY O(N) 
 // * SPACE COMPLEXITY O(N)
 int climbStairs(int n) {
   int ans = 0;
-  std::vector<int> cache(n, -1);
+  vector<int> cache(n, -1);
   return dfs(n, 0, cache);
 }
+
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 
 // * Bottom Up approach
 // * TIME COMPLEXITY O(N)
@@ -65,7 +73,7 @@ int climbStairs2(int n) {
   if (n <= 2)
     return n;
 
-  std::vector<int> dp(n + 1, 0);
+  vector<int> dp(n + 1, 0);
   dp[1] = 1;
   dp[2] = 2;
   for (int i = 3; i <= n; ++i) {
@@ -105,13 +113,14 @@ int main(void) {
   // * testcase 4
   int n = 44;
 
-  std::cout << "N: " << n << std::endl;
+  cout << "N: " << n << endl;
 
   // int ans = bruteForce(n);
   // int ans = climbStairs(n);
   // int ans = climbStairs2(n);
   int ans = climbStairs3(n);
-  std::cout << "Ans: " << ans << std::endl;
+
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

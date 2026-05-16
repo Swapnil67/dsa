@@ -1,27 +1,23 @@
 /*
- * Leetcode - 121
- * Best Time to Buy and Sell Stock - i
+ * Leetcode - 2016
+ * Maximum Difference Between Increasing Elements
  * 
- * You are given an array `prices` where prices[i] is the price of a given stock on the ith day.
- * You want to maximize your profit by choosing a single day to buy one stock and choosing a different day
- * in the future to sell that stock.
-
- * Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+ * Given a 0-indexed integer array nums of size n, find the maximum difference between nums[i] and nums[j] 
+ * (i.e., nums[j] - nums[i]), such that 0 <= i < j < n and nums[i] < nums[j].
+ * 
+ * Return the maximum difference. If no such i and j exists, return -1.
  * 
  * Example 1:
- * Input: prices = [7,1,5,3,6,4]
- * Output: 5
- * Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
- * Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
-
+ * Input: nums = [7,1,5,4]
+ * Output: 4
+ * Explanation: The maximum difference occurs with i = 1 and j = 2, nums[j] - nums[i] = 5 - 1 = 4.
  * 
  * Example 2:
- * Input: prices = [7,6,4,3,1]
- * Output: 0
- * Explanation: In this case, no transactions are done and the max profit = 0.
-
- * https://www.naukri.com/code360/problems/stocks-are-profitable_893405
- * https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+ * Input: nums = [9,4,3,2]
+ * Output: -1
+ * Explanation: There is no i and j such that i < j and nums[i] < nums[j].
+ * 
+ * https://leetcode.com/problems/maximum-difference-between-increasing-elements
 */
 
 // ! Amazon, Google, Meta, Microsoft, Uber, Apple, IBM
@@ -44,7 +40,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -63,7 +59,7 @@ int bruteForce(std::vector<int>& prices) {
   return maxProfit;
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
@@ -89,7 +85,7 @@ int maxProfit(std::vector<int>& prices) {
   return max_profit;
 }
 
-// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------
 // * Dynamic Programming
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
@@ -123,6 +119,7 @@ int main(void) {
   // int p = maxProfit(prices);
   // int p = maxProfitDP(prices);
   std::cout << "Maximum profit: " << p << std::endl;
+  
   return 0;
 }
 

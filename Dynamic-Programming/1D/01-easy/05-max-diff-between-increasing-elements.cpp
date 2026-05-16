@@ -71,13 +71,13 @@ int maximumDifference(vector<int> &nums) {
   int max_diff = -1;
   int i = 0, j = 1;
   while (j < n) {
-    if (i <= j && nums[i] >= nums[j]) // * As per constraints
+    int cur_diff = nums[j] - nums[i];
+    max_diff = max(max_diff, cur_diff);
+    if (nums[i] >= nums[j]) // * As per constraints
       i = j;
-    else
-      max_diff = max(max_diff, nums[j] - nums[i]);
     j++;
   }
-  return max_diff;
+  return max_diff <= 0 ? -1 : max_diff;
 }
 
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
@@ -102,21 +102,21 @@ int maximumDifferenceDP(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {1, 5, 2, 10};
+  vector<int> nums = {1, 5, 2, 10};
 
   // * testcase 2
-  // std::vector<int> nums = {9, 4, 3, 2};
+  // vector<int> nums = {9, 4, 3, 2};
 
   // * testcase 3
-  // std::vector<int> nums = {87, 68, 91, 86, 58, 63, 43, 98, 6, 40};
+  // vector<int> nums = {87, 68, 91, 86, 58, 63, 43, 98, 6, 40};
 
-  std::cout << "Stock Prices" << std::endl;
+  cout << "Stock Prices" << endl;
   printArr(nums);
 
   // int p = bruteForce(nums);
   int p = maximumDifference(nums);
   // int p = maximumDifferenceDP(nums);
-  std::cout << "Maximum Difference: " << p << std::endl;
+  cout << "Maximum Difference: " << p << endl;
   return 0;
 }
 

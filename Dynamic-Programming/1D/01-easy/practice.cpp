@@ -40,6 +40,11 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 05 - Maximum Difference Between Increasing Elements
+// int maxProfit(std::vector<int>& prices) {
+// TODO
+// }
+
 int main(void) {
   return 0;
 }

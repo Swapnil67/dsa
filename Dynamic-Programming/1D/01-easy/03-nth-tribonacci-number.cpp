@@ -18,8 +18,12 @@
  * https://www.geeksforgeeks.org/problems/tribonacci-number/1
 */
 
+// ! Amazon, Google, Meta
+
 #include <vector>
 #include <iostream>
+
+using namespace std;
 
 int dfs_brute(int n) {
   if (n <= 1)
@@ -31,7 +35,7 @@ int dfs_brute(int n) {
   return dfs_brute(n - 1) + dfs_brute(n - 2) + dfs_brute(n - 3);
 }
 
-int dfs(int n, std::vector<int> &cache) {
+int dfs(int n, vector<int> &cache) {
   if (cache[n] != -1)
     return cache[n];
   return cache[n] = dfs(n - 1, cache) + dfs(n - 2, cache) + dfs(n - 3, cache);
@@ -48,7 +52,7 @@ int bruteForce(int n) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 int betterApprach(int n) {
-  std::vector<int> cache(40, -1);
+  vector<int> cache(40, -1);
   cache[0] = 0;
   cache[1] = 1;
   cache[2] = 1;
@@ -59,7 +63,7 @@ int betterApprach(int n) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int tribonacci(int n) {
-  std::vector<int> dp(40, 0);
+  vector<int> dp(40, 0);
   dp[0] = 0;
   dp[1] = 1;
   dp[2] = 1;
@@ -97,13 +101,13 @@ int main(void) {
   // * testcase 2
   int n = 25;
 
-  std::cout << "n: " << n << std::endl;
+  cout << "n: " << n << endl;
   
   // int ans = bruteForce(n);
   // int ans = betterApprach(n);
   // int ans = tribonacci(n);
   int ans = tribonacci2(n);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

@@ -20,34 +20,34 @@
  * https://leetcode.com/problems/min-cost-climbing-stairs/description/
 */
 
+// ! Google
+
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-// * Google
 
-int dfs_brute(int i, std::vector<int> &cost) {
+int dfs_brute(int i, vector<int> &cost) {
   if (i >= cost.size()) // * base case
     return 0;
 
-  int cur_cost = cost[i];
-  int a = cur_cost + dfs_brute(i + 1, cost);
-  int b = cur_cost + dfs_brute(i + 2, cost);
-  return std::min(a, b);
+  return cost[i] + min(dfs_brute(i + 1, cost), dfs_brute(i + 2, cost));
 }
 
-int solve(int i, std::vector<int> &cost, std::vector<int> &dp) {
+int solve(int i, vector<int> &cost, vector<int> &dp) {
   if (i >= cost.size()) // * base case
     return 0;
 
@@ -57,55 +57,59 @@ int solve(int i, std::vector<int> &cost, std::vector<int> &dp) {
   int cur_cost = cost[i];
   int a = cur_cost + solve(i + 1, cost, dp);
   int b = cur_cost + solve(i + 2, cost, dp);
-  return dp[i] = std::min(a, b);
+  return dp[i] = min(a, b);
 }
+
+// * ------------------------- APPROACH: Brute Force -------------------------
 
 // * Top Down approach 
 // * TIME COMPLEXITY O(2^N)
 // * SPACE COMPLEXITY O(2^N)
-int bruteForce(std::vector<int> &cost) {
+int bruteForce(vector<int> &cost) {
   int n = cost.size();
-  return std::min(dfs_brute(0, cost), dfs_brute(1, cost));
+  return min(dfs_brute(0, cost), dfs_brute(1, cost));
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Top Down approach (With Memoization)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int minCostClimbingStairs(std::vector<int> &cost) {
+int minCostClimbingStairs(vector<int> &cost) {
   int n = cost.size();
-  std::vector<int> dp(1000, -1);
-  return std::min(solve(0, cost, dp), solve(1, cost, dp));
+  vector<int> dp(1000, -1);
+  return min(solve(0, cost, dp), solve(1, cost, dp));
 }
 
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Bottom Up Approach
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minCostClimbingStairs2(std::vector<int> &cost) {
+int minCostClimbingStairs2(vector<int> &cost) {
   int n = cost.size();
   if (n == 2)
-    return std::min(cost[0], cost[1]);
+    return min(cost[0], cost[1]);
 
   for (int i = 2; i < n; ++i) {
-    cost[i] = cost[i] + std::min(cost[i - 1], cost[i - 2]);
+    cost[i] = cost[i] + min(cost[i - 1], cost[i - 2]);
   }
-  // printArr(cost); // * For debugging
+  printArr(cost); // * For debugging
 
-  return std::min(cost[n - 1], cost[n - 2]);
+  return min(cost[n - 1], cost[n - 2]);
 }
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> cost = {10, 15, 20};
+  // vector<int> cost = {10, 15, 20};
 
   // * testcase 2
-  std::vector<int> cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+  vector<int> cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
 
-  std::cout << "Cost: " << std::endl;
+  cout << "Cost: " << endl;
   printArr(cost);
   
   // int ans = minCostClimbingStairs(cost);
   int ans = minCostClimbingStairs2(cost);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }
