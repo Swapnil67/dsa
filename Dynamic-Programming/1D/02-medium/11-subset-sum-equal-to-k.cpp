@@ -19,20 +19,27 @@
  * https://www.naukri.com/code360/problems/subset-sum-equal-to-k_1550954
 */
 
+// ! Amazon, Meta, Paypal, Microsoft
+
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool solve(int& k, std::vector<int>& nums, int cur_sum, int i) {
-  // std::cout<<cur_sum<<std::endl;
+bool solve(int& k, vector<int>& nums, int cur_sum, int i) {
+  cout << cur_sum << endl;
   if (cur_sum == k)
     return true;
 
@@ -42,35 +49,31 @@ bool solve(int& k, std::vector<int>& nums, int cur_sum, int i) {
   bool not_take = solve(k, nums, cur_sum, i + 1); 
 
   bool take = false;
-
-  if (cur_sum + nums[i] <= k)
+  if (k >= cur_sum + nums[i])
     take = solve(k, nums, cur_sum + nums[i], i + 1);
 
   return take || not_take;
-
-  // return solve(k, nums, cur_sum + nums[i], i + 1) ||
-  //        solve(k, nums, cur_sum, i + 1);
 }
 
 // TODO Apply DP
 // * ------------------------- Approach: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n) (Recursion Stack)
-bool subsetSumToK(std::vector<int> nums, int k) {
+bool subsetSumToK(vector<int> nums, int k) {
   return solve(k, nums, 0, 0);
 }
 
 int main(void) {
   // int n = 3;
   int k = 5;
-  std::vector<int> nums = {4, 3, 9, 2};
+  vector<int> nums = {4, 3, 9, 2};
 
-  std::cout << "k: " << k << std::endl;
-  std::cout << "Input nums: ";
+  cout << "k: " << k << endl;
+  cout << "Input nums: ";
   printArr(nums);
 
   bool ans = subsetSumToK(nums, k);
-  std::cout << "found: " << ans << std::endl;
+  cout << "found: " << ans << endl;
 
   return 0;
 }

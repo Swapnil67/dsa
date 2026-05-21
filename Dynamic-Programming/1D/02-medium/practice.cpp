@@ -8,24 +8,24 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * 01 - House Robber
-// int rob(std::vector<int> &nums) {
+// int rob(vector<int> &nums) {
 // TODO
 // }
 
 // * 02 - House Robber II
-// int rob(std::vector<int> &nums) {
+// int rob(vector<int> &nums) {
 // TODO
 // }
 
