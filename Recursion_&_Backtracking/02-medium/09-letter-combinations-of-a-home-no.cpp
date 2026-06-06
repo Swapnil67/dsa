@@ -16,10 +16,11 @@
  * input  : digits = "2"
  * output : ["a","b","c"]
  * 
- * https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+ * https://leetcode.com/problems/letter-combinations-of-a-phone-number  
+ * https://www.naukri.com/code360/problems/letter-combinations-of-a-phone-number_983623
 */
 
-// ! Amazon, Google, Meta, Microsoft, Apple, Oracle, Uber
+// ! Amazon, Google, Meta, Microsoft, Apple, Oracle, Uber, Dunzo
 
 #include <vector>
 #include <iostream>
@@ -42,17 +43,17 @@ vector<string> digitToChar = {"", "", "abc", "def", "ghi", "jkl",
                               "mno", "qprs", "tuv", "wxyz"};
 
 vector<string> ans;
-void solve(string &digits, int idx, string temp) {
+void solve(string &digits, int idx, string &cur) {
   if (idx >= digits.length()) {
-    ans.push_back(temp);
+    ans.push_back(cur);
     return;
   }
 
   string str = digitToChar[digits[idx] - '0'];
-  for (int i = 0; i < str.length(); ++i) {
-    temp.push_back(str[i]);
-    solve(digits, idx + 1, temp);
-    temp.pop_back();
+  for (auto& ch : str) {
+    cur.push_back(ch);
+    solve(digits, idx + 1, cur);
+    cur.pop_back();
   }
 }
 
@@ -60,7 +61,10 @@ void solve(string &digits, int idx, string temp) {
 // * n = length of substring
 // * TIME COMPLEXITY O(4^n * n) (Exponential)
 // * SPACE COMPLEXITY O(n)
-vector<string> letterCombinations(string digits) {
+vector<string> letterCombinations(string &digits) {
+  if (digits.size() == 0)
+    return ans;
+
   string temp = "";
   solve(digits, 0, temp);
   return ans;

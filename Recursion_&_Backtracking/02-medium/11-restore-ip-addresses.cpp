@@ -23,7 +23,8 @@
  * input       : s = "101023"
  * output      : ["1.0.10.23","1.0.102.3","10.1.0.23","10.10.2.3","101.0.2.3"]
  * 
- * https://leetcode.com/problems/restore-ip-addresses/description/
+ * https://leetcode.com/problems/restore-ip-addresses
+ * https://www.naukri.com/code360/problems/ip-address_992846
 */
 
 // ! Amazon, Google, Meta, Microsoft, Apple, Adobe, Oracle

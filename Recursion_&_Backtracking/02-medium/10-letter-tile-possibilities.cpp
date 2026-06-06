@@ -20,7 +20,7 @@
  * input       : tiles = "S"
  * output      : 1
  * 
- * https://leetcode.com/problems/letter-tile-possibilities/description/
+ * https://leetcode.com/problems/letter-tile-possibilities
 */
 
 // ! Amazon, Google

@@ -14,7 +14,7 @@
  * input  : nums = [0,1]
  * output : [[0,1],[1,0]]
  * 
- * https://leetcode.com/problems/permutations/
+ * https://leetcode.com/problems/permutations
  * https://www.naukri.com/code360/problems/permuatations_892989
  * https://www.naukri.com/code360/problems/permutations-of-a-string_985254
 */

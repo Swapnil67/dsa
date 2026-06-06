@@ -24,7 +24,8 @@
  *                   { "A","D","E","E" }}
  * output : false
  * 
- * https://leetcode.com/problems/word-search/description/
+ * https://leetcode.com/problems/word-search/
+ * https://www.naukri.com/code360/problems/word-search_892986
 */
 
 // ! Amazon, Google, Meta, Microsoft, Adobe, Apple, Uber

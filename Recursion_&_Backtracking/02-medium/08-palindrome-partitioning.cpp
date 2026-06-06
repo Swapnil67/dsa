@@ -13,7 +13,8 @@
  * input  : s = "a"
  * output : [["a"]]
  * 
- * https://leetcode.com/problems/palindrome-partitioning/description/
+ * https://leetcode.com/problems/palindrome-partitioning/
+ * https://www.naukri.com/code360/problems/palindrome-partitioning_799931
 */
 
 // ! Amazon, Google, Meta, Microsoft, Adobe, Apple, Uber
@@ -73,7 +74,7 @@ void dfs(int i, string s, vector<string> &parts, vector<vector<bool>> &t) {
 
   for (int j = i; j < s.length(); ++j) {
     if (t[i][j] == true) {
-      parts.push_back(s.substr(i, j - i + 1));
+      parts.push_back(s.substr(i, (j - i + 1)));
       dfs(j + 1, s, parts, t);
       parts.pop_back();
     }
@@ -97,7 +98,7 @@ vector<vector<string>> partition(string s) {
 // * if t[i][j] = false (This means s[i..j] is not a palindrome)
 // * N = length of substring
 // * TIME COMPLEXITY O(2^n)
-// * SPACE COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n^2)
 vector<vector<string>> partition2(string s) {
   int n = s.length();
   vector<vector<bool>> t(n, vector<bool>(n, false));
