@@ -32,7 +32,7 @@
  * output      : 26
  * Explanation : The only string in arr has all 26 characters.
 
- * https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/description/
+ * https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters
 */
 
 #include <vector>
@@ -104,6 +104,9 @@ int main(void) {
 
   // * testcase 3
   // vector<string> strs = {"abcdefghijklmnopqrstuvwxyz"};
+
+  // * testcase 4
+  // vector<string> strs = {"aa", "bb"};
 
   cout << "Input strings: ";
   printArr(strs);

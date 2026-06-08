@@ -20,7 +20,7 @@
  * Example 2
  * input            : nums = [3,2,1,5]
  * output           : 6
- * Explanation      : The maximum possible bitwise OR of a subset is 3. There are 2 subsets with a bitwise OR of 3:
+ * Explanation      : The maximum possible bitwise OR of a subset is 7. There are 6 subsets with a bitwise OR of 7:
  *                    - [3,5]
  *                    - [3,1,5]
  *                    - [3,2,5]
@@ -28,7 +28,7 @@
  *                    - [2,5]
  *                    - [2,1,5]
 
- * https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/description/
+ * https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets
 */
 
 #include <vector>
@@ -70,7 +70,7 @@ int solve(int i, int cur_or, vector<int> &nums, vector<vector<int>> dp) {
   int take_count = solve(i + 1 ,cur_or | nums[i], nums, dp);
   int not_take_count = solve(i + 1, cur_or, nums, dp);
 
-  return dp[i][cur_or] = take_count + not_take_count;
+  return dp[i][cur_or] = (take_count + not_take_count);
 }
 
 // * ------------------------- Approach 1: Brute Force Approach -------------------------
@@ -121,6 +121,7 @@ int main(void) {
 
   // int ans = bruteForce(nums);
   int ans = countMaxOrSubsets(nums);
+
   cout << "Number of Maximum Bitwise-OR Subsets: " << ans << endl;
 
   return 0;
@@ -128,3 +129,4 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 24-count-no-of-max-bitwise-or-subsets.cpp -o output && ./output 
+

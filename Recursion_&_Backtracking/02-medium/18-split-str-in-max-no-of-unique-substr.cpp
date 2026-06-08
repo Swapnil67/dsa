@@ -25,7 +25,7 @@
  * output      : 1
  * Explanation : It is impossible to split the string any further.
 
- * https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/description/
+ * https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings
 */
 
 #include <vector>

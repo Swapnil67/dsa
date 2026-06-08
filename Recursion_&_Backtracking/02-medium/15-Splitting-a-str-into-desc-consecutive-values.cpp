@@ -30,7 +30,7 @@
  * output      : false
  * Explanation : There is no valid way to split s.
  * 
- * https://leetcode.com/problems/splitting-a-string-into-descending-consecutive-values/description/
+ * https://leetcode.com/problems/splitting-a-string-into-descending-consecutive-values/
 */
 
 // ! Google

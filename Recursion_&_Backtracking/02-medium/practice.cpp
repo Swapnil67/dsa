@@ -19,36 +19,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 18 - Split a String Into the Max Number of Unique Substrings
-// string findDifferentBinaryString(vector<string>& nums) {
-// TODO
-// }
-
-// * 19 - Maximum Length of a Concatenated String with Unique Characters
-// int maxLength(vector<string>& arr) {
-// TODO
-// }
-
-// * 20 - Partition to K Equal Sum Subsets
-// bool canPartitionKSubsets(vector<int>& nums, int k) {
-// TODO
-// }
-
-// * 21 - The Number of Beautiful Subsets
-// int beautifulSubsets(vector<int>& nums, int k) {
-// TODO
-// }
-
-// * 22 - Different Ways to Add Parentheses
-// vector<int> diffWaysToCompute(string expression) {
-// TODO
-// }
-
-// * 23 - Construct the Lexicographically Largest Valid Sequence
-// vector<int> constructDistancedSequence(int n) {
-// TODO
-// }
-
 // * 24 - Count Number of Maximum Bitwise-OR Subsets
 // int countMaxOrSubsets(vector<int> nums) {
 // TODO
@@ -145,6 +115,37 @@ void printArr(vector<T> &arr) {
 // string findDifferentBinaryString(vector<string>& nums) {
 // TODO
 // }
+
+// * 18 - Split a String Into the Max Number of Unique Substrings
+// string findDifferentBinaryString(vector<string>& nums) {
+// TODO
+// }
+
+// * 19 - Maximum Length of a Concatenated String with Unique Characters
+// int maxLength(vector<string>& arr) {
+// TODO
+// }
+
+// * 20 - Partition to K Equal Sum Subsets
+// bool canPartitionKSubsets(vector<int>& nums, int k) {
+// TODO
+// }
+
+// * 21 - The Number of Beautiful Subsets
+// int beautifulSubsets(vector<int>& nums, int k) {
+// TODO
+// }
+
+// * 22 - Different Ways to Add Parentheses
+// vector<int> diffWaysToCompute(string expression) {
+// TODO
+// }
+
+// * 23 - Construct the Lexicographically Largest Valid Sequence
+// vector<int> constructDistancedSequence(int n) {
+// TODO
+// }
+
 
 int main(void) {
   return 0;

@@ -10,7 +10,8 @@
 
  * Example 1
  * input  : n = 4
- * output : [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+ * output : [[".Q..","...Q","Q...","..Q."],
+ *           ["..Q.","Q...","...Q",".Q.."]]
  * 
  * https://leetcode.com/problems/n-queens/description/
 */
@@ -19,18 +20,23 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<std::vector<std::string>> result;
+vector<vector<string>> result;
 
-bool is_valid(std::vector<std::string> &board, int &row, int &col, int &n) {
+bool is_valid(vector<string> &board, int &row, int &col, int &n) {
   // * Check if queen exists in upward direction in same column.
   for (int r = row - 1; r >= 0; --r) {
     if (board[r][col] == 'Q')
@@ -56,9 +62,10 @@ bool is_valid(std::vector<std::string> &board, int &row, int &col, int &n) {
   return true;
 }
 
-void solve(std::vector<std::string> &board, int row, int &n) {
+void solve(vector<string> &board, int row, int &n) {
   // * Base case
   if (row >= n) {
+    printArr(board);
     result.push_back(board);
     return;
   }
@@ -73,17 +80,16 @@ void solve(std::vector<std::string> &board, int row, int &n) {
   }
 }
 
-std::vector<std::vector<std::string>> solveNQueens(int n) {
-  std::vector<std::string> board(n, std::string(n, '.'));
+vector<vector<string>> solveNQueens(int n) {
+  vector<string> board(n, string(n, '.'));
   solve(board, 0, n);
   return result;
 }
 
-
-std::unordered_set<int> used_col;
-std::unordered_set<int> used_left_diagnol;
-std::unordered_set<int> used_right_diagnol;
-void solve2(std::vector<std::string> &board, int row, int &n) {
+unordered_set<int> used_col;
+unordered_set<int> used_left_diagnol;
+unordered_set<int> used_right_diagnol;
+void solve2(vector<string> &board, int row, int &n) {
   // * Base case
   if (row >= n) {
     result.push_back(board);
@@ -118,8 +124,8 @@ void solve2(std::vector<std::string> &board, int row, int &n) {
   }
 }
 
-std::vector<std::vector<std::string>> solveNQueens2(int n) {
-  std::vector<std::string> board(n, std::string(n, '.'));
+vector<vector<string>> solveNQueens2(int n) {
+  vector<string> board(n, string(n, '.'));
   solve2(board, 0, n);
   return result;
 }
@@ -131,8 +137,10 @@ int main(void) {
   // * testcase 1
   int n = 4;
 
-  // std::vector<std::vector<std::string>> board = solveNQueens(n);
-  std::vector<std::vector<std::string>> board = solveNQueens2(n);
+  vector<vector<string>> board = solveNQueens(n);
+  // vector<vector<string>> board = solveNQueens2(n);
+
+  cout << "Board" << endl;
   for (auto &row : board) {
     printArr(row);
   }
@@ -141,4 +149,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 01-n-queens.cpp -o output && ./output
+// * g++ --std=c++17 01-n-queens.cpp -o output && ./output

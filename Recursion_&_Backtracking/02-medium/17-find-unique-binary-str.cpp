@@ -97,7 +97,6 @@ string betterApproach(vector<string>& nums) {
   unordered_set<string> st(nums.begin(), nums.end());
   for (int num = 0; num < n + 1; ++num) {
     string res = to_binary_string(num, n);
-    // std::cout << num << " -> " << res << std::endl;
     if (st.find(res) == st.end())
       return res;
   }

@@ -47,25 +47,17 @@ vector<bool> used;
 int target;
 bool dfs(int start, int k, int cur_sum, vector<int>& nums) {
   if (k == 0)
-      return true;
+    return true;
 
   if (cur_sum == target)
-      return dfs(0, k - 1, 0, nums);
+    return dfs(0, k - 1, 0, nums);
 
   for (int i = start; i < nums.size(); ++i) {
-    // * Effect: Skip any element that would exceed the target.
+    // * Pruning 1: Skip any element that would exceed the target or visited.
     if (used[i] || cur_sum + nums[i] > target)
       continue;
 
-    // * PRUNING 1: Skip already used elements
-    if (used[i])
-      continue;
-
-    // * PRUNING 2: Skip if adding this element exceeds target
-    if (cur_sum + nums[i] > target)
-      continue;
-
-    // * PRUNING 3: Skip duplicate values that already failed
+    // * PRUNING 2: Skip duplicate values that already failed
     // * If nums[i-1] is the same value and not used, we already tried it
     // * and it failed, so don't try nums[i]
     if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1])
@@ -78,7 +70,7 @@ bool dfs(int start, int k, int cur_sum, vector<int>& nums) {
 
     used[i] = false;
 
-    // * PRUNING 4: Early exit on first element failure
+    // * PRUNING 3: Early exit on first element failure
     // * If we're starting a new subset (cur_sum == 0) and the first
     // * element we try fails, no other element will work either
     if (cur_sum == 0) {

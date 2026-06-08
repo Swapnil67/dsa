@@ -30,7 +30,7 @@
  *               ["aba", "abc", "aca", "acb", "bab", "bac", "bca", "bcb", "cab", "cac", "cba", "cbc"]. 
  *               You will find the 9th string = "cab"
  * 
- * https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/description/
+ * https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n
 */
 
 #include <vector>

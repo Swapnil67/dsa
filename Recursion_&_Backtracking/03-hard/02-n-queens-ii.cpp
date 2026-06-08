@@ -16,18 +16,23 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<std::vector<std::string>> result;
+vector<vector<string>> result;
 
-bool is_valid(std::vector<std::string> &board, int &row, int &col, int &n) {
+bool is_valid(vector<string> &board, int &row, int &col, int &n) {
   // * Check if queen exists in upward direction in same column.
   for (int r = row - 1; r >= 0; --r) {
     if (board[r][col] == 'Q')
@@ -53,7 +58,7 @@ bool is_valid(std::vector<std::string> &board, int &row, int &col, int &n) {
   return true;
 }
 
-void solve(std::vector<std::string> &board, int row, int &n, int &ans) {
+void solve(vector<string> &board, int row, int &n, int &ans) {
   // * Base case
   if (row >= n) {
     ans++;
@@ -71,15 +76,15 @@ void solve(std::vector<std::string> &board, int row, int &n, int &ans) {
 }
 
 void solveNQueens(int n, int &ans) {
-  std::vector<std::string> board(n, std::string(n, '.'));
+  vector<string> board(n, string(n, '.'));
   solve(board, 0, n, ans);
 }
 
 
-std::unordered_set<int> used_col;
-std::unordered_set<int> used_left_diagnol;
-std::unordered_set<int> used_right_diagnol;
-void solve2(std::vector<std::string> &board, int row, int &n, int &ans) {
+unordered_set<int> used_col;
+unordered_set<int> used_left_diagnol;
+unordered_set<int> used_right_diagnol;
+void solve2(vector<string> &board, int row, int &n, int &ans) {
   // * Base case
   if (row >= n) {
     ans++;
@@ -115,7 +120,7 @@ void solve2(std::vector<std::string> &board, int row, int &n, int &ans) {
 }
 
 void solveNQueens2(int n, int &ans) {
-  std::vector<std::string> board(n, std::string(n, '.'));
+  vector<string> board(n, string(n, '.'));
   solve2(board, 0, n, ans);
 }
 
@@ -126,12 +131,12 @@ int main(void) {
   // * testcase 1
   int n = 4;
   
-  std::cout << "Queens: " << n << std::endl;
+  cout << "Queens: " << n << endl;
 
   int ans = 0;
   // solveNQueens(n, ans);
   solveNQueens2(n, ans);
-  std::cout << "Possible boards: " << ans << std::endl;
+  cout << "Possible boards: " << ans << endl;
   
   return 0;
 }

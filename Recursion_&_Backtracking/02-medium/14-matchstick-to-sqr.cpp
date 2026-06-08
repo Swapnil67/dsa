@@ -16,7 +16,7 @@
  * input       : matchsticks = [3,3,3,3,4]
  * output      : false
  * 
- * https://leetcode.com/problems/matchsticks-to-square/description/
+ * https://leetcode.com/problems/matchsticks-to-square/
 */
 
 // ! Amazon, Google, Meta, Microsoft, Phonepe, Uber
@@ -62,15 +62,15 @@ bool dfs(vector<int> &matchsticks, vector<int> &sides, int i) {
 }
 
 
-bool dfs(int i, int &len, vector<int> &sides, vector<int> &matchsticks) {
+bool dfs(int i, int &max_side_len, vector<int> &sides, vector<int> &matchsticks) {
   if (i == matchsticks.size())
     return true;
 
   for (int j = 0; j < 4; ++j) {
-    if (sides[j] + matchsticks[i] <= len) {
+    if (sides[j] + matchsticks[i] <= max_side_len) { // * Pruning
       sides[j] += matchsticks[i];
 
-      if (dfs(i + 1, len, sides, matchsticks))
+      if (dfs(i + 1, max_side_len, sides, matchsticks))
         return true;
 
       sides[j] -= matchsticks[i];
@@ -103,9 +103,9 @@ bool makesquare(vector<int>& matchsticks) {
 
   sort(rbegin(matchsticks), rend(matchsticks));
 
-  int len = total / 4;
+  int max_side_len = total / 4;
   vector<int> sides(4);
-  return dfs(0, len, sides, matchsticks);
+  return dfs(0, max_side_len, sides, matchsticks);
 }
 
 int main(void) {
@@ -126,6 +126,43 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 14-matchstick-to-sqr.cpp -o output && ./output
+
+/* 
+* Brute Force Recursion Tree
+*                   dfs(i=0, sides=[0, 0, 0, 0])          <-- Matchstick[0] = 1
+*                  /       |              |       \
+*                 /        |              |        \
+*    (add to side0)  (add to side1) (add to side2) (add to side3)
+*               /          |              |          \
+*              v           v              v           v
+* dfs(1, [1,0,0,0])   dfs(1, [0,1,0,0])  ...         ...  <-- Matchstick[1] = 1
+* 
+*         |
+*     (add to side0)
+*         |
+*         v
+* dfs(2, [2,0,0,0])                                       <-- Matchstick[2] = 2
+*      /       \
+*     /         \
+* (add to side0) (add to side1)
+*   /             \
+*  /               \
+* v                 v
+* [4,0,0,0] (Exceeds 2!)  dfs(3, [2,2,0,0])                <-- Matchstick[3] = 2
+* 
+*                          |
+*                      (add to side2)
+*                          |
+*                          v
+*                     dfs(4, [2,2,2,0])                    <-- Matchstick[4] = 2
+* 
+*                          |
+*                      (add to side3)
+*                          |
+*                          v
+*                     dfs(5, [2,2,2,2])                    <-- Base Case Reached!
+* 
+*/
 
 /*
 * # Time and Space Complexity Analysis

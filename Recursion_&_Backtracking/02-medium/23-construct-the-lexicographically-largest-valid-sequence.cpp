@@ -23,7 +23,7 @@
  * input       : n = 5
  * output      : [5,3,1,4,3,5,2,4,2]
 
- * https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/description/
+ * https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence
 */
 
 #include <vector>
