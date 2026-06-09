@@ -20,6 +20,7 @@
  * Input        : s = ")("
  * Output       : [""]
  * 
+ * https://leetcode.com/problems/remove-invalid-parentheses
 */
 
 #include <vector>
@@ -29,15 +30,15 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 void dfs(int idx, string &s, string &cur, int &max_str_len, int left,
@@ -46,7 +47,7 @@ void dfs(int idx, string &s, string &cur, int &max_str_len, int left,
   if (idx >= s.length())
   {
     if (left == right) {
-      // * cout << cur << " \t---> l: " << left << ", r: " << right << endl;
+      cout << cur << " \t---> l: " << left << ", r: " << right << endl;
       // * since we need to remove min brackets so we'll give priority to the longest answer.
       if ((int)cur.length() > max_str_len) { 
         max_str_len = cur.length();
@@ -103,22 +104,22 @@ vector<string> removeInvalidParentheses(string s) {
 
 int main(void) {
   // * testcase 1
-  // string s = "()())()";
+  string s = "()())()";
   
   // * testcase 2
   // string s = "(a)())()";
 
   // * testcase 3
-  string s = ")(";
+  // string s = ")(";
   
-  std::cout << "Input string: " << s << std::endl;
+  cout << "Input string: " << s << endl;
   
-  std::vector<std::string> ans = removeInvalidParentheses(s);
+  vector<string> ans = removeInvalidParentheses(s);
   
-  std::cout << "Answer: " << s << std::endl;
+  cout << "Answer: " << s << endl;
   printArr(ans);
   return 0;
 }
  
 // * Run the code
-// * g++ --std=c++20 05-remove-invalid-parentheses.cpp -o output && ./output
+// * g++ --std=c++17 05-remove-invalid-parentheses.cpp -o output && ./output

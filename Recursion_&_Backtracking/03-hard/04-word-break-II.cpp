@@ -19,83 +19,122 @@
  * input  : s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
  * output : []
  * 
- * https://leetcode.com/problems/word-break-ii/description/
+ * https://leetcode.com/problems/word-break-ii/
 */
 
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-void solve(std::string &s, std::string &cur,
-           std::unordered_map<std::string, int> &dict_map,
+unordered_set<string> st;
+
+void solve(string &s, string &cur,
            int i,
-           std::vector<std::string> &result)
+           vector<string> &result)
 {
   // * base case
   if (i >= s.length()) {
-    // std::cout << cur.length() << " -> " << cur << std::endl;
+    // cout << cur.length() << " -> " << cur << endl;
     result.push_back(cur);
     return;
   }
 
   for (int j = i; j < s.size(); ++j) {
-    std::string word = s.substr(i, (j - i + 1));
-    if (dict_map[word]) {
-      // std::cout <<  cur << " ->: " << j << std::endl;
-      std::string temp_cur = cur;
+    string word = s.substr(i, (j - i + 1));
+    if (st.count(word)) {
+      // cout <<  cur << " ->: " << j << std::endl;
+      string temp_cur = cur;
       if (!cur.empty())
         cur += " ";
 
       cur += word; // * take word
-      solve(s, cur, dict_map, j + 1, result);
+      solve(s, cur, j + 1, result);
       cur = temp_cur; // * remove word
     }
   }
+}
 
+vector<string> dfs(int i, string &s, unordered_map<int, vector<string>> &memo) {
+  int n = s.length();
+  if (i >= n) {
+    return {""};
+  }
+
+  if (memo.count(i))
+    return memo[i];
+
+  vector<string> valid_sentences;
+  for (int j = i; j < n; ++j) {
+    string word = s.substr(i, (j - i + 1));
+    if (st.count(word)) {
+      vector<string> suffixes = dfs(j + 1, s, memo);
+      for (auto &suffix : suffixes) {
+        if (suffix.empty()) {
+          valid_sentences.push_back(suffix);
+        } else {
+          valid_sentences.push_back(word + " " + suffix);
+        }
+      }
+    }
+  }
+
+  return memo[i] = valid_sentences;
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(2^n)
-std::vector<std::string> wordBreak(std::string s, std::vector<std::string>& wordDict) {
-  // * save all the words from wordDict to map
-  std::unordered_map<std::string, int> dict_map;
-  for (auto &word : wordDict)
-    dict_map[word]++;
+vector<string> wordBreak(string s, vector<string>& wordDict) {
+  st.insert(begin(wordDict), end(wordDict));
 
-  std::vector<std::string> result;
-  std::string cur = "";
-  solve(s, cur, dict_map, 0, result);
+  string cur = "";
+  vector<string> result;
+  solve(s, cur, 0, result);
   return result;
+}
+
+// * ------------------------- Approach: Optimal Approach -------------------------`
+// * TIME COMPLEXITY O(n^2)
+// * SPACE COMPLEXITY O(2^n)
+vector<string> wordBreak(string s, vector<string>& wordDict) {
+  unordered_map<int, vector<string>> memo;
+  st.insert(begin(wordDict), end(wordDict));
+  return dfs(0, s, memo);
 }
 
 int main(void) {
   // * testcase 1
-  std::string s = "catsanddog";
-  std::vector<std::string> wordDict = {"cat", "cats", "and", "sand", "dog"};
+  string s = "catsanddog";
+  vector<string> wordDict = {"cat", "cats", "and", "sand", "dog"};
 
   // * testcase 2
-  // std::string s = "pineapplepenapple";
-  // std::vector<std::string> wordDict = {"apple", "pen", "applepen", "pine", "pineapple"};
+  // string s = "pineapplepenapple";
+  // vector<string> wordDict = {"apple", "pen", "applepen", "pine", "pineapple"};
 
   // * testcase 3
-  // std::string s = "catsandog";
-  // std::vector<std::string> wordDict = {"cats", "dog", "sand", "and", "cat"};
+  // string s = "catsandog";
+  // vector<string> wordDict = {"cats", "dog", "sand", "and", "cat"};
 
-  std::cout << "s: " << s << std::endl;
-  std::cout << "Input dict: ";
+  cout << "s: " << s << endl;
+  cout << "Input dict: ";
   printArr(wordDict);
   
-  std::vector<std::string> ans = wordBreak(s, wordDict);
+  vector<string> ans = wordBreak(s, wordDict);
   printArr(ans);
 
   return 0;
@@ -104,3 +143,27 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 04-word-break-II.cpp -o output && ./output
+
+
+/*
+* Recursion Tree Diagram
+*
+*                                  dfs(i=0, cur="")
+*                                   /            \
+*                       "cat" (j=2)/              \"cats" (j=3)
+*                                 /                \
+*                     dfs(i=3, cur="cat")       dfs(i=4, cur="cats")
+*                            /                           \
+*               "sand" (j=6)/                             \"and" (j=6)
+*                          /                               \
+*               dfs(i=7, cur="cat sand")              dfs(i=7, cur="cats and")
+*                        /                                   /
+*            "dog" (j=9)/                         "dog" (j=9)/
+*                      /                                   /
+*         dfs(i=10, cur="cat sand dog")       dfs(i=10, cur="cats and dog")
+*
+*                      |                                   |
+*                (i == n) SUCCESS                    (i == n) SUCCESS
+*             [Added to result]                   [Added to result]
+*
+*/
