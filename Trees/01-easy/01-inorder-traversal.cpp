@@ -70,19 +70,20 @@ void inOrderIterative(TreeNode* root, vector<int> &ans) {
 
   stack<TreeNode *> st;
   TreeNode *node = root;
-  while (root || st.size()) {
+
+  while (node || st.size()) {
     // * Go to extreme left
-    while (root) {
-      st.push(root);
-      root = root->left;
+    while (node) {
+      st.push(node);
+      node = node->left;
     }
 
-    root = st.top();
+    node = st.top();
     st.pop();
-    ans.push_back(root->data);
+    ans.push_back(node->data);
 
     // * Go to right
-    root = root->right;
+    node = node->right;
   }
 }
 

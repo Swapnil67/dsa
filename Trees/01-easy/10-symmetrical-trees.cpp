@@ -24,7 +24,7 @@
 
 * Output: false
 
-* https://leetcode.com/problems/symmetric-tree/description/
+* https://leetcode.com/problems/symmetric-tree/
 * https://www.naukri.com/code360/problems/tree-symmetricity_630426
 * https://www.geeksforgeeks.org/problems/symmetric-tree/1
 */

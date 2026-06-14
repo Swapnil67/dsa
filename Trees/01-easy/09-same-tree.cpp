@@ -1,11 +1,13 @@
 /*
 * Leetcode - 100
 * Same Tree
-
+*
 * https://leetcode.com/problems/same-tree/
 * https://www.naukri.com/code360/problems/check-identical-trees_799364
 * https://www.geeksforgeeks.org/problems/determine-if-two-trees-are-identical/1
 */
+
+// ! Microsoft, Google, Samsung, Apple
 
 #include <queue>
 #include <vector>

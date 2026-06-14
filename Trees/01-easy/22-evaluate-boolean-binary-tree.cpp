@@ -11,7 +11,7 @@
  * Input        : root = [0]
  * Output       : false
  * 
- * https://leetcode.com/problems/evaluate-boolean-binary-tree/description/
+ * https://leetcode.com/problems/evaluate-boolean-binary-tree/
 */
 
 #include <vector>

@@ -12,7 +12,7 @@
 
 * Output: [4, 5, 2, 6, 7, 3, 1]
 
-* https://leetcode.com/problems/binary-tree-postorder-traversal/description/
+* https://leetcode.com/problems/binary-tree-postorder-traversal/
 * https://www.naukri.com/code360/problems/postorder-traversal_2035933
 * https://www.geeksforgeeks.org/problems/postorder-traversal/1
 */

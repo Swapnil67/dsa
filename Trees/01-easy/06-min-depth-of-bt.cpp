@@ -18,7 +18,7 @@
 *                 x     7
 * Output: 3
 
-* https://leetcode.com/problems/minimum-depth-of-binary-tree/description/
+* https://leetcode.com/problems/minimum-depth-of-binary-tree/
 * https://www.naukri.com/code360/problems/minimum-depth-in-a-binary-tree_696332
 * https://www.geeksforgeeks.org/problems/minimum-depth-of-a-binary-tree/1
 */

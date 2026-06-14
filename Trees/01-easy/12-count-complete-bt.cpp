@@ -20,14 +20,19 @@
 
 * Input: root = [1,2,3,4,5,6]
 * Output: 6
-* Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3].
 
-* https://leetcode.com/problems/count-complete-tree-nodes/description/
+* Input: root = []
+* Output: 0
+
+* Input: root = [1]
+* Output: 1
+
+* https://leetcode.com/problems/count-complete-tree-nodes/
 * https://www.naukri.com/code360/problems/count-complete-binary-tree-nodes_982774
 * https://www.geeksforgeeks.org/problems/count-number-of-nodes-in-a-binary-tree/1
 */
 
-// ! Amazon, Microsoft, Meta
+// ! Amazon, Microsoft, Meta, LinkedIn
 
 #include <vector>
 #include <iostream>
@@ -92,7 +97,7 @@ int countRightHeight(TreeNode *root) {
 }
 
 // * ------------------ Approach 1: BRUTE FORCE ---------------------
-// * DFS Recursion
+// * Count using inorder traversal
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(h) (height of tree)
 int bruteForce(TreeNode* root) {    

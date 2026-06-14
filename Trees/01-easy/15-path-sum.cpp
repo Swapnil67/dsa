@@ -27,6 +27,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 typedef struct TreeNode TreeNode;
 
 struct TreeNode {
@@ -42,24 +44,27 @@ struct TreeNode {
 };
 
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << ", ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
-};
+  cout << " ]" << endl;
+}
 
 void levelOrder(TreeNode *root) {
   if (root == nullptr)
     return;
 
   // * Create the queue of TreeNode and push the root node
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
-    std::vector<int> level;
+    vector<int> level;
     int size = q.size();
     for(int i = 0; i < size; ++i) {
       TreeNode *node = q.front();
@@ -71,10 +76,10 @@ void levelOrder(TreeNode *root) {
         q.push(node->right);
 
       level.push_back(node->data);
-      std::cout << node->data << " ";
+      cout << node->data << " ";
     }
   }
-  std::cout << std::endl;
+  cout << endl;
 }
 
 bool solve(TreeNode *node, int target_sum, int total) {
@@ -124,12 +129,12 @@ int main(void) {
   root->right->right->right = new TreeNode(1);
 
   int target = 22;
-  std::cout << "Target Sum: " << target << std::endl;
-  std::cout << "Input Tree: ";
+  cout << "Target Sum: " << target << endl;
+  cout << "Input Tree: ";
   levelOrder(root);
   
   bool ans = hasPathSum(root, target);
-  std::cout << "Path Sum: " << ans << std::endl;
+  cout << "Path Sum: " << ans << endl;
 
   return 0;
 }

@@ -12,7 +12,7 @@
  * Input        : root1 = [1,2,3], root2 = [1,3,2]
  * Output       : false
  * 
- * https://leetcode.com/problems/leaf-similar-trees/description/
+ * https://leetcode.com/problems/leaf-similar-trees/
 */
 
 // ! Amazon, twitter, Meta, Microsoft

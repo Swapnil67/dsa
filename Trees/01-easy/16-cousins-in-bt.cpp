@@ -18,7 +18,6 @@
 * Output: true
 *
 * https://leetcode.com/problems/cousins-in-binary-tree/description/
-* https://www.naukri.com/code360/problems/cousins-of-given-node-in-binary-tree_873363
 */
 
 #include <queue>
@@ -93,6 +92,7 @@ bool isCousins(TreeNode* root, int x, int y) {
 
   while (!q.empty()) {
     int n = q.size();
+    // * For same depth we'll check this in loop for current level
     TreeNode *x_node = nullptr;
     TreeNode *y_node = nullptr;
     while (n--) {
@@ -123,7 +123,7 @@ bool isCousins(TreeNode* root, int x, int y) {
         q.push(node->right);
       }
     }
-    cout << endl;
+    // cout << endl;
   }
 
   return false;

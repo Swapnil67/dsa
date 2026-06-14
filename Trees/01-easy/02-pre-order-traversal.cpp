@@ -12,7 +12,7 @@
 
 * Output: [1, 2, 4, 5, 3, 6, 7]
 
-* https://leetcode.com/problems/binary-tree-preorder-traversal/description/
+* https://leetcode.com/problems/binary-tree-preorder-traversal/
 * https://www.naukri.com/code360/problems/preorder-traversal_2035934
 * https://www.geeksforgeeks.org/problems/preorder-traversal/1
 */

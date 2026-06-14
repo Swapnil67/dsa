@@ -22,7 +22,7 @@
 *
 * Output: [4, 7, 2, 9, 6, 3, 1]
 *
-* https://leetcode.com/problems/invert-binary-tree/description/
+* https://leetcode.com/problems/invert-binary-tree/
 * https://www.naukri.com/code360/problems/invert-a-binary-tree_1281382
 * https://www.geeksforgeeks.org/problems/mirror-tree/1
 */
@@ -66,11 +66,11 @@ void levelOrder(TreeNode *root) {
     return;
 
   // * Create the queue of TreeNode and push the root node
-  std::queue<TreeNode*> q;
+  queue<TreeNode*> q;
   q.push(root);
 
   while (!q.empty()) {
-    std::vector<int> level;
+    vector<int> level;
     int n = q.size();
     while (n--) {
       TreeNode *node = q.front();
@@ -82,9 +82,9 @@ void levelOrder(TreeNode *root) {
         q.push(node->right);
 
       level.push_back(node->data);
-      std::cout << node->data << " ";
+      cout << node->data << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
@@ -97,14 +97,14 @@ TreeNode *invertTreeBFS(TreeNode *root) {
   if (!root)
     return root;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty()) {
     TreeNode* node = q.front();
     q.pop();
 
-    std::swap(node->left, node->right);
+    swap(node->left, node->right);
     
     if (node->left)
       q.push(node->left);
@@ -125,7 +125,7 @@ TreeNode *invertTreeDFS(TreeNode *root) {
   if (!root)
     return nullptr;
   
-  std::swap(root->left, root->right);
+  swap(root->left, root->right);
   invertTreeDFS(root->left);
   invertTreeDFS(root->right);
   return root;
@@ -142,13 +142,13 @@ int main(void) {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(9);
 
-  std::cout << "Tree Before Invert" << std::endl;
+  cout << "Tree Before Invert" << endl;
   levelOrder(root);
   
   // root = invertTreeBFS(root);
   root = invertTreeDFS(root);
   
-  std::cout << "Tree After Invert" << std::endl;
+  cout << "Tree After Invert" << endl;
   levelOrder(root);
 
   return 0;

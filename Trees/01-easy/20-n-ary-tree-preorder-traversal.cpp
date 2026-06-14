@@ -17,7 +17,7 @@
  * Output       : [1,2,3,6,7,11,14,4,8,12,5,9,13,10]
  * Explanation  : 
  * 
- * https://leetcode.com/problems/n-ary-tree-preorder-traversal/
+ * https://leetcode.com/problems/n-ary-tree-preorder-traversal
 */
 
 // * Do this on leetcode

@@ -13,7 +13,7 @@
 
 * Output: ["1->2->5", "1->3"]
 
-* https://leetcode.com/problems/binary-tree-paths/description/
+* https://leetcode.com/problems/binary-tree-paths
 * https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1
 */
 

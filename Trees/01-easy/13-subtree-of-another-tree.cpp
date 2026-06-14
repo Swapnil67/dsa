@@ -6,12 +6,12 @@
 * Input: root = [3,4,5,1,2], subRoot = [4,1,2]
 * Output: true
 
-* https://leetcode.com/problems/subtree-of-another-tree/
+* https://leetcode.com/problems/subtree-of-another-tree
 * https://www.naukri.com/code360/problems/subtree-of-another-tree_893071
 * https://www.geeksforgeeks.org/problems/check-if-subtree/1
 */
 
-// ! Meta, Amazon, Microsoft
+// ! Meta, Amazon, Microsoft, RedHat
 
 #include <vector>
 #include <iostream>

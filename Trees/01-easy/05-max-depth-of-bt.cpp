@@ -16,7 +16,7 @@
 *             x        3
 * Output: 2
 
-* https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+* https://leetcode.com/problems/maximum-depth-of-binary-tree/
 * https://www.naukri.com/code360/problems/maximum-depth-of-a-binary-tree_1090542
 * https://www.geeksforgeeks.org/problems/height-of-binary-tree/1
 */

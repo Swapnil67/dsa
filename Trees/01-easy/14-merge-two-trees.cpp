@@ -27,9 +27,11 @@
 *           /  \        \
 *          5    4        7
 
-* https://leetcode.com/problems/merge-two-binary-trees/description/
+* https://leetcode.com/problems/merge-two-binary-trees/
 * https://www.naukri.com/code360/problems/fasdf_1263729
 */
+
+// ! Apple, CRED, HSBC
 
 #include <queue>
 #include <vector>
