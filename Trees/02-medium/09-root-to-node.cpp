@@ -17,9 +17,9 @@
 
 // ! Amazon, Google, Meta, Microsoft, Flipkart
 
-#include "../common.hpp"
+#include "common.hpp"
 
-bool dfs(TreeNode *root, int x, vector<int> &ans) {
+bool dfs(TreeNode *root, int &x, vector<int> &ans) {
   if (!root)
     return false;
 
@@ -46,7 +46,6 @@ bool dfs(TreeNode *root, int x, vector<int> &ans) {
 vector<int> rootToNode(TreeNode *root, int x) {
   vector<int> ans;
   bool res = dfs(root, x, ans);
-  // cout << res << endl;
   return ans;  
 }
 

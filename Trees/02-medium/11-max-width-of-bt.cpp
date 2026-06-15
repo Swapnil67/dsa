@@ -35,7 +35,7 @@
 
 // ! Meta, Amazon, Flipkart
 
-#include "../common.hpp"
+#include "common.hpp"
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Might go out of 'long long' range if input is too big.

@@ -21,12 +21,12 @@
 * Input: descriptions = [[20,15,1],[20,17,0],[50,20,1],[50,80,0],[80,19,1]]
 * Output: [50,20,80,15,17,19]
 
-* https://leetcode.com/problems/create-binary-tree-from-descriptions/description/
+* https://leetcode.com/problems/create-binary-tree-from-descriptions/description
 */
 
-#include <map>
+#include <unordered_map>
 #include <unordered_set>
-#include "../common.hpp"
+#include "common.hpp"
  
 using namespace std;
 
@@ -35,7 +35,7 @@ using namespace std;
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
 TreeNode *createBinaryTree(vector<vector<int>> &descriptions) {
-  map<int, TreeNode *> hash;
+  unordered_map<int, TreeNode *> hash;
   unordered_set<int> children; // * They can never be root of the tree
 
   for(vector<int> &vec: descriptions) {

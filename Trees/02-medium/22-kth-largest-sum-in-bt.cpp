@@ -24,8 +24,8 @@
 * https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/
 */
 
+#include "common.hpp"
 #include <algorithm>
-#include "../common.hpp"
  
 using namespace std;
 

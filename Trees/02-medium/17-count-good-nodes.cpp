@@ -20,8 +20,7 @@
   * https://www.naukri.com/code360/problems/good-nodes_3169337
 */
 
-#include <iostream>
-#include "../common.hpp"
+#include "common.hpp"
 
 void dfs(TreeNode* root, int &ans, int cur_max) {
   if (!root) // * Base case

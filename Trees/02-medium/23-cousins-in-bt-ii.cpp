@@ -28,7 +28,7 @@
 * https://leetcode.com/problems/cousins-in-binary-tree-ii/description/
 */
 
-#include "../common.hpp"
+#include "common.hpp"
  
 using namespace std;
 

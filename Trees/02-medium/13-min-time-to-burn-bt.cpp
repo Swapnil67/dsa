@@ -27,7 +27,7 @@
 
 */
 
-#include "../common.hpp"
+#include "common.hpp"
 #include <unordered_map>
 
 void markParents(TreeNode *root,

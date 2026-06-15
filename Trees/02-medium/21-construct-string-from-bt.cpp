@@ -1,11 +1,11 @@
 /*
 * Leetcode - 606
 * Construct String from Binary Tree
-
+*
 * Given the root node of a binary tree, your task is to create a string representation of the tree following 
 * a specific set of formatting rules. The representation should be based on a preorder traversal of the 
 * binary tree and must adhere to the following guidelines:
-
+*
 * Node Representation: Each node in the tree should be represented by its integer value.
 * - Parentheses for Children: If a node has at least one child (either left or right), 
 * its children should be represented inside parentheses. Specifically:
@@ -13,43 +13,43 @@
 * immediately following the node's value.
 * - If a node has a right child, the value of the right child should also be enclosed in parentheses. 
 * The parentheses for the right child should follow those of the left child.
-
+*
 * Example 1:
 *                 1
 *               /   \  
 *             2      3
 *              \     
 *               4    
-
+*
 * Output: "1(2()(4))(3)"
-
+*
 * Example 2:
 *                   1
 *               /      \  
 *             2         3
 *           /   \     /  \  
 *          4    5    6    7      
-
+*
 * Output: "1(2(4)(5))(3(6)(7))"
-
+*
 * Example 3:
 *                 1
 *               /      
 *             2      
-
+*
 * Output: "1(2)"
-
+*
 * Example 4:
 *                1
 *                  \      
 *                   2      
-
+*
 * Output: "1()(2)"
-
+*
 * https://leetcode.com/problems/construct-string-from-binary-tree/description/
 */
 
-#include "../common.hpp"
+#include "common.hpp"
  
 using namespace std;
 

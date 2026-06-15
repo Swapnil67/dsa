@@ -22,7 +22,7 @@
 
 // ! Amazon, Apple, Uber, Adobe, Razorpay
 
-#include "../common.hpp"
+#include "common.hpp"
 
 // * Recursive Pre Order Traversal (Root -> Left -> Right)
 void dfs(TreeNode *root, vector<int> &ans, int level) {
@@ -44,7 +44,7 @@ vector<int> leftViewDFS(TreeNode *root) {
   return ans;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Using Level Order Traversal
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
@@ -89,9 +89,10 @@ int main() {
 
   root->right->right = new TreeNode(7);
   
-  cout << "Left view of the BT" << endl;
   vector<int> ans = leftViewDFS(root);
   // vector<int> ans = leftViewBFS(root);
+  
+  cout << "Left view of the BT" << endl;
   printArr(ans);
 
   return 0;

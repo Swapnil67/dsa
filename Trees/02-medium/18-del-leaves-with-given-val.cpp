@@ -32,8 +32,7 @@
 
 // ! Google, Amazon
 
-#include <iostream>
-#include "../common.hpp"
+#include "common.hpp"
 
 TreeNode* removeLeafNodes(TreeNode* root, int target) {
   // * Base Case

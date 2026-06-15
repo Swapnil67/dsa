@@ -23,7 +23,8 @@
 // ! Meta, Amazon, Google, Uber, Adobe, Microsoft
 
 #include <stack>
-#include "../common.hpp";
+#include <vector>
+#include "common.hpp"
 
 bool isLeaf(TreeNode *node) {
   return !node->left && !node->right;

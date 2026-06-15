@@ -25,73 +25,11 @@
 
 * Output: [1, 3, 2, 4, 5, 6, 7]
 
-* https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/description/
+* https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/
 * https://www.geeksforgeeks.org/problems/reverse-alternate-levels-of-a-perfect-binary-tree/1
 */
 
-#include <queue>
-#include <vector>
-#include <iostream>
-
-using namespace std;
-
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val) {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-
-template <typename T>
-void printArr(vector<T> &arr) {
-  int n = arr.size();
-  cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    cout << arr[i];
-    if (i != n - 1)
-      cout << ", ";
-  }
-  cout << " ]" << endl;
-}
-
-vector<vector<int>> bfsTraversal(TreeNode* root) {
-  vector<vector<int>> ans;
-  if (!root)
-    return ans;
-
-  queue<TreeNode*> q;
-  q.push(root);
-
-  while(!q.empty()) {
-    int n = q.size();
-
-    int is_odd_level = 0;
-    vector<int> temp;
-    while(n--) {
-      TreeNode* front = q.front();
-      q.pop();
-
-      temp.push_back(front->data);
-      if (front->left)
-        q.push(front->left);
-      if (front->right)
-        q.push(front->right);
-    }
-
-    ans.push_back(temp);
-  }
-
-  return ans;
-}
+#include "common.hpp"
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
@@ -176,17 +114,13 @@ int main(void) {
   root->right->right = new TreeNode(7);
 
   cout << "Tree Before Reverse" << endl;
-  vector<vector<int>> tree = bfsTraversal(root);
-  for (auto &level : tree)
-    printArr(level);
+  levelOrderTraversal(root);
   
   // root = reverseOddLevelsBFS(root);
   root = reverseOddLevelsDFS(root);
   
   cout << "Tree After Reverse" << endl;
-  tree = bfsTraversal(root);
-  for (auto &level : tree)
-    printArr(level);
+  levelOrderTraversal(root);
 
   return 0;
 }

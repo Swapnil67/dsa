@@ -22,8 +22,8 @@
 * https://www.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1
 */
 
+#include "common.hpp"
 #include <unordered_map>
-#include "../common.hpp"
 
 // * Map the parent node of each node in hashmap
 void markParents(TreeNode *root,
@@ -67,39 +67,35 @@ vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
   
   // * 2. Do any type of traversal on tree 
   // * Visited Map for keeping track of which is we already visited during traversal
-  unordered_map<TreeNode*, bool> visitedMap;
-  visitedMap[target] = true;
+  unordered_map<TreeNode*, bool> visited;
+  visited[target] = true;
   
   queue<TreeNode *> q;
   q.push(target);
-  
-  int distance = 0;
-  while (!q.empty()) {
-    if (distance++ == k)
-      break;
 
+  while (k-- && !q.empty()) {
     // * Loop over the current level
     int n = q.size();
     while (n--) {
-      TreeNode* current = q.front();
+      TreeNode* node = q.front();
       q.pop();
 
       // * Go to the left if not previously visited
-      if(current->left && !visitedMap[current->left]) {
-        q.push(current->left);
-        visitedMap[current->left] = true;
+      if(node->left && !visited[node->left]) {
+        q.push(node->left);
+        visited[node->left] = true;
       }
       
       // * Go to the right if not previously visited
-      if(current->right && !visitedMap[current->right]) {
-        q.push(current->right);
-        visitedMap[current->right] = true;
+      if(node->right && !visited[node->right]) {
+        q.push(node->right);
+        visited[node->right] = true;
       }
       
       // * Go to the parent if not previously visited
-      if(parent_map[current] && !visitedMap[parent_map[current]]) {
-        q.push(parent_map[current]);
-        visitedMap[parent_map[current]] = true;
+      if(parent_map[node] && !visited[parent_map[node]]) {
+        q.push(parent_map[node]);
+        visited[parent_map[node]] = true;
       }
     }
   }

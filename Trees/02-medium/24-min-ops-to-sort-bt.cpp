@@ -30,9 +30,9 @@
 */
 
 
+#include "common.hpp"
 #include <algorithm>
 #include <unordered_map>
-#include "../common.hpp"
  
 using namespace std;
 

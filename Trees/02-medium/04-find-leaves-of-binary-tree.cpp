@@ -13,7 +13,7 @@
 
 * Output: ans = [[4, 5, 3], [2], [1]]
 
-* https://neetcode.io/problems/find-leaves-of-binary-tree/question
+* https://neetcode.io/problems/find-leaves-of-binary-tree/
 * https://www.naukri.com/code360/problems/collect-leaves_1281192
 */
 
@@ -94,7 +94,7 @@ vector<vector<int>> findLeaves1(TreeNode *root) {
   binaryTreeHeight(root, mp);
 
   for (auto &it: mp) {
-    // std::cout << "Height: " << it.first << std::endl;
+    std::cout << "Height: " << it.first << std::endl;
     printArr(it.second);
   }
 
@@ -130,6 +130,7 @@ int main() {
   cout << "Vertical Traversal of tree: " << endl;
   vector<vector<int>> ans = findLeaves1(root);
   // vector<vector<int>> ans = findLeaves2(root);
+
   for (auto &p : ans)
     printArr(p);
 
@@ -138,4 +139,4 @@ int main() {
 
 
 // * run the code
-// * g++ --std=c++20 04-find-leaves-of-binary-tree.cpp -o output && ./output
+// * g++ --std=c++17 04-find-leaves-of-binary-tree.cpp -o output && ./output

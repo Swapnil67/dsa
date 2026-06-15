@@ -17,47 +17,25 @@
 * https://www.naukri.com/code360/problems/top-view-of-binary-tree_799401
 */
 
+// ! Amazon, Microsoft, Adobe, Coinbase
+
 #include <map>
 #include <queue>
 #include <vector>
 #include <iostream>
-
-using namespace std;
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(vector<int> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
+#include "common.hpp"
 
 // * Vertical Order Traversal
-std::vector<int> topView(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> topView(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
     
   // * { vertical, NodeValue }
-  std::map<int, int> nodes;
+  map<int, int> nodes;
 
   // * { vertical, TreeNode* }
-  std::queue<std::pair<int, TreeNode *>> q;
+  queue<pair<int, TreeNode *>> q;
   q.push({0, root});
 
   // * level order traversal
@@ -65,7 +43,7 @@ std::vector<int> topView(TreeNode *root) {
     auto [cur_ver, node] = q.front();
     q.pop();
 
-    // std::cout << cur_ver << std::endl;
+    // cout << cur_ver << endl;
     if (!nodes.count(cur_ver)) {
       nodes[cur_ver] = node->data;     // * Add vertical level to map
     }
@@ -100,8 +78,8 @@ int main() {
   root->right->left = new TreeNode(6);
   root->right->right = new TreeNode(7);
 
-  std::cout << "Top View of BT:" << std::endl;
-  std::vector<int> ans = topView(root);
+  cout << "Top View of BT:" << endl;
+  vector<int> ans = topView(root);
   printArr(ans);
 
   return 0;

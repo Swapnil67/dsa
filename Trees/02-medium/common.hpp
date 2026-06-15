@@ -1,22 +1,24 @@
-#include<queue>
+#include <queue>
+#include <vector>
+#include <iostream>
 
-typedef struct TreeNode TreeNode;
+using namespace std;
 
-struct TreeNode {
+// typedef struct TreeNode TreeNode;
+
+class TreeNode {
 public:
   int data;
   TreeNode *left;
   TreeNode *right;
 
-  TreeNode(int val)
-  {
+  TreeNode(int val) {
     data = val;
     left = nullptr;
     right = nullptr;
   }
 
-  ~TreeNode()
-  {
+  ~TreeNode() {
     if (left)
       delete left;
     if (right)
@@ -25,17 +27,15 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> &arr)
-{
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i)
-  {
-    std::cout << arr[i];
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 void inOrderTraversal(TreeNode* root) {
@@ -43,16 +43,15 @@ void inOrderTraversal(TreeNode* root) {
     return;
 
   inOrderTraversal(root->left);
-  std::cout << root->data << " ";
+  cout << root->data << " ";
   inOrderTraversal(root->right);
 }
 
-void levelOrderTraversal(TreeNode *root)
-{
+void levelOrderTraversal(TreeNode *root) {
   if (!root)
     return;
 
-  std::queue<TreeNode *> q;
+  queue<TreeNode *> q;
   q.push(root);
 
   while (!q.empty())
@@ -64,7 +63,7 @@ void levelOrderTraversal(TreeNode *root)
       TreeNode *node = q.front();
       q.pop();
 
-      std::cout << node->data << " ";
+      cout << node->data << " ";
 
       if (node->left)
         q.push(node->left);
@@ -72,6 +71,6 @@ void levelOrderTraversal(TreeNode *root)
       if (node->right)
         q.push(node->right);
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }

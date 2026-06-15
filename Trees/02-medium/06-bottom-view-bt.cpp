@@ -22,51 +22,28 @@
 #include <map>
 #include <queue>
 #include <vector>
-#include <iostream>
+#include "common.hpp"
 
-using namespace std;
-typedef struct TreeNode TreeNode;
-
-struct TreeNode {
-public:
-  int data;
-  TreeNode *left;
-  TreeNode *right;
-
-  TreeNode(int val)
-  {
-    data = val;
-    left = nullptr;
-    right = nullptr;
-  }
-};
-
-void printArr(vector<int> arr) {
-  cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    cout << arr[i] << ", ";
-  }
-  cout << "]" << endl;
-}
+// ! Amazon, Microsoft, Adobe, HSBC, PayU, Swiggy
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * Vertical Order Traversal
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> bottomView(TreeNode *root) {
-  std::vector<int> ans;
+vector<int> bottomView(TreeNode *root) {
+  vector<int> ans;
   if (!root)
     return ans;
 
-  std::map<int, int> mp;
-  std::queue<std::pair<int, TreeNode *>> q;
+  map<int, int> mp;
+  queue<pair<int, TreeNode *>> q;
   q.push({0, root});
 
   // * Classic BFS
   while (!q.empty()) {
     int n = q.size();
 
-    std::pair<int, TreeNode*> p = q.front();
+    pair<int, TreeNode*> p = q.front();
     q.pop();
 
     int cur_ver = p.first;
@@ -105,8 +82,8 @@ int main() {
   root->left->right->left = new TreeNode(8);
   root->left->right->right = new TreeNode(9);
 
-  std::cout << "Bottom View of BT:" << std::endl;
-  std::vector<int> ans = bottomView(root);
+  cout << "Bottom View of BT:" << endl;
+  vector<int> ans = bottomView(root);
   printArr(ans);
 
   return 0;

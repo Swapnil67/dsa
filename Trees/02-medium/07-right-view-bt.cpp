@@ -22,7 +22,7 @@
 * https://www.geeksforgeeks.org/problems/right-view-of-binary-tree/1
 */
 
-#include "../common.hpp"
+#include "common.hpp"
 
 // * Recursive Pre Order Traversal (Root -> Right -> Left)
 void dfs(TreeNode *root, vector<int> &ans, int level) {

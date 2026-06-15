@@ -28,9 +28,9 @@
 * https://www.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1
 */
 
-// ! Amazon, Microsoft
+// ! Amazon, Microsoft, Oracle, Browserstack
 
-#include "../common.hpp"
+#include "common.hpp"
 
 bool rootToNode(TreeNode* root, TreeNode* node, vector<int> &path) {
   if (!root)

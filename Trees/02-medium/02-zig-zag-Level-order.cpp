@@ -19,7 +19,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "../common.hpp"
+#include "common.hpp"
 
 vector<vector<int>> zigzagLevelOrder(TreeNode *root) {
   vector<vector<int>> ans;
