@@ -26,7 +26,7 @@
 * https://www.geeksforgeeks.org/problems/paths-from-root-with-a-specified-sum/1
 */
 
-#include "../common.hpp"
+#include "common.hpp"
 
 using namespace std;
 

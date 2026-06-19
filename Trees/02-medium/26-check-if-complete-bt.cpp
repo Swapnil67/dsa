@@ -34,7 +34,7 @@
 * https://www.geeksforgeeks.org/problems/complete-binary-tree/1
 */
 
-#include "../common.hpp"
+#include "common.hpp"
 
 using namespace std;
 

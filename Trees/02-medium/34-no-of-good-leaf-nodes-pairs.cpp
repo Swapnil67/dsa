@@ -40,9 +40,9 @@
 
 // ! convert tree to UDG (Undirected Graph)
 
+#include "common.hpp"
 #include <unordered_set>
 #include <unordered_map>
-#include "../common.hpp"
 
 using namespace std;
 

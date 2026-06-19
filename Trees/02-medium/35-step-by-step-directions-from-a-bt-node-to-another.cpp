@@ -37,7 +37,7 @@
 
 // ! Google, Amazon
 
-#include "../common.hpp"
+#include "common.hpp"
 
 using namespace std;
 
@@ -70,14 +70,14 @@ bool root_to_node(TreeNode *root, string &path, int target) {
   if (root_to_node(root->left, path, target)) {
     return true;
   }
-
   path.pop_back();
+
   path.push_back('R');
   if (root_to_node(root->right, path , target)) {
     return true;
   }
-
   path.pop_back();
+  
   return false;
 }
 

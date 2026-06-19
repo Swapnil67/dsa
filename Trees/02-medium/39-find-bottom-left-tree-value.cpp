@@ -25,13 +25,13 @@
 * Output      : 7
 
 
-* https://leetcode.com/problems/find-bottom-left-tree-value/description/
+* https://leetcode.com/problems/find-bottom-left-tree-value/
 * https://www.naukri.com/code360/problems/amusement-park_1280139
 */
 
 
+#include "common.hpp"
 #include <unordered_map>
-#include "../common.hpp"
 
 using namespace std;
 

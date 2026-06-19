@@ -17,24 +17,24 @@
   * Output      : []
 
   * Example 2:
-  *                  5        
-  *               /     \     
-  *             4        8
-  *           /         /  \ 
+  *                   5        
+  *               /      \     
+  *             4         8
+  *           /         /   \ 
   *          11        17   4
-  *        /  \            / \
-  *       7   1           5   3
+  *        /   \           / \
+  *       7    1          5   3
 
   * Input       : root = [5,4,8,11,null,17,4,7,1,null,null,5,3], limit = 22
   * Output      : [5,4,8,11,null,17,4,7,null,null,null,5]
 
 
-  * https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/
+  * https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths
 */
 
 // ! Google
 
-#include "../common.hpp"
+#include "common.hpp"
 
 using namespace std;
 

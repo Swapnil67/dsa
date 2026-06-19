@@ -33,9 +33,9 @@
 * https://leetcode.com/problems/find-duplicate-subtrees/description/
 */
 
+#include "common.hpp"
 #include <unordered_set>
 #include <unordered_map>
-#include "../common.hpp"
 
 using namespace std;
 
