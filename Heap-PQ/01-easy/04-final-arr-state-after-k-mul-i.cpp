@@ -15,7 +15,7 @@
  * input  : nums = [2,1,3,5,6], k = 5, multiplier = 2
  * output : [8,4,6,5,6]
  * 
- * https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-i/description/
+ * https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-i/
 */
 
 #include <queue>
@@ -24,15 +24,21 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int get_smallest_index(std::vector<int> &nums) {
+int get_smallest_index(vector<int> &nums) {
   int idx = 0;
   for (int i = 0; i < nums.size(); ++i) {
     if (nums[idx] > nums[i])
@@ -45,7 +51,7 @@ int get_smallest_index(std::vector<int> &nums) {
 // * Nested Loop + Sorting
 // * TIME COMPLEXITY O(k * n)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<int>& nums, int k, int multiplier) {
+vector<int> bruteForce(vector<int>& nums, int k, int multiplier) {
   int n = nums.size();
   if (n == 0)
     return nums;
@@ -67,10 +73,10 @@ std::vector<int> bruteForce(std::vector<int>& nums, int k, int multiplier) {
 // * Using min_heap
 // * TIME COMPLEXITY O(nlogn + klogn)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> getFinalState(std::vector<int> &nums, int k, int multiplier) {
+vector<int> getFinalState(vector<int> &nums, int k, int multiplier) {
 
-  typedef std::pair<int, int> P;
-  std::priority_queue<P, std::vector<P>, std::greater<P>> min_heap; // * O(nlogn)
+  typedef pair<int, int> P;
+  priority_queue<P, vector<P>, greater<P>> min_heap; // * O(nlogn)
 
   int n = nums.size();
   
@@ -81,8 +87,7 @@ std::vector<int> getFinalState(std::vector<int> &nums, int k, int multiplier) {
 
   while (k > 0) { // * O(klogn)
     // * take the smallest val
-    int cur_min = min_heap.top().first;
-    int cur_min_idx = min_heap.top().second;
+    auto [cur_min, cur_min_idx] = min_heap.top();
     min_heap.pop();
     
     int new_val = cur_min * multiplier;
@@ -98,20 +103,20 @@ std::vector<int> getFinalState(std::vector<int> &nums, int k, int multiplier) {
 int main() {
   // * testcase 1
   // int k = 5, multiplier = 2;
-  // std::vector<int> nums = {2, 1, 3, 5, 6};
+  // vector<int> nums = {2, 1, 3, 5, 6};
   
   // * testcase 2
   int k = 3, multiplier = 4;
-  std::vector<int> nums = {1, 2};
+  vector<int> nums = {1, 2};
 
-  std::cout << "k: " << k << " multiplier: " << multiplier << std::endl;
-  std::cout << "nums: ";
+  cout << "k: " << k << " multiplier: " << multiplier << endl;
+  cout << "nums: ";
   printArr(nums);
 
-  // std::vector<int> ans = bruteForce(nums, k, multiplier);
-  std::vector<int> ans = getFinalState(nums, k, multiplier);
+  // vector<int> ans = bruteForce(nums, k, multiplier);
+  vector<int> ans = getFinalState(nums, k, multiplier);
 
-  std::cout << "Answer nums " << std::endl;
+  cout << "Answer nums " << endl;
   printArr(ans);
 
   return 0;

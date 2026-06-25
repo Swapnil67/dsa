@@ -12,7 +12,6 @@
 #include <vector>
 #include <numeric>
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
@@ -42,6 +41,7 @@ vector<vector<int>> dp;
 int dfs_mem(int l, int r, vector<int> &piles) {
   if (l > r)
     return 0;
+
   if (dp[l][r] != -1)
     return dp[l][r];
 
@@ -83,20 +83,20 @@ bool stoneGame(vector<int> &piles) {
   // * Bottom-up DP: Start from the smallest subproblems (single elements)
   for (int l = n - 1; l >= 0; --l) {
     for (int r = l; r < n; ++r) {
-      int remainingCount = r - l + 1;
-
-      // * In a game with an EVEN total number of piles (like 4 piles):
-      // * - Alice starts when length is 4 (Even)
-      // * - Bob plays when length is 3 (Odd)
-      // * - Alice plays when length is 2 (Even)
-      // * - Bob plays when length is 1 (Odd)
-      bool isAliceTurn = (remainingCount % 2 == 0);
       if (l == r) {
-        dp[l][r] = 0; // Will always be 0 because length 1 is Bob's turn
+        dp[l][r] = 0; // * Will always be 0 because length 1 is Bob's turn
       }
       else {
+        // * In a game with an EVEN total number of piles (like 4 piles):
+        // * - Alice starts when length is 4 (Even)
+        // * - Bob plays when length is 3 (Odd)
+        // * - Alice plays when length is 2 (Even)
+        // * - Bob plays when length is 1 (Odd)
+        int remainingCount = r - l + 1;
+        bool isAliceTurn = (remainingCount % 2 == 0);
         int leftPoints = isAliceTurn ? piles[l] : 0;
         int rightPoints = isAliceTurn ? piles[r] : 0;
+        // * maximum total score Alice can secure for the subarray from index i to j.
         dp[l][r] = max(dp[l + 1][r] + leftPoints, dp[l][r - 1] + rightPoints);
       }
     }

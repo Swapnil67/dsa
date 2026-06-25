@@ -13,43 +13,6 @@
 using namespace std;
 
 
-// * 38 - Operations on Tree
-// TODO (Solve this on leetcode)
-
-// * 39 - Find Bottom Left Tree Value
-// int findBottomLeftValue(TreeNode* root) {
-// TODO
-// }
-
-// * 40 - Insufficient Nodes in Root to Leaf Paths
-// TreeNode* sufficientSubset(TreeNode* root, int &limit) {
-// TODO
-// }
-
-// * 41 - Lowest Common Ancestor of Deepest Leaves
-// TreeNode* lcaDeepestLeaves(TreeNode* root) {
-// TODO  
-// }
-
-// * 42 - Smallest Subtree with all the Deepest Nodes
-// TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-// TODO  
-// }
-
-// * 43 - Sum of Nodes with Even-Valued Grandparent
-// int sumEvenGrandparent(TreeNode* root) {
-// TODO  
-// }
-
-// * 44 - Find Largest Value in Each Tree Row
-// vector<int> largestValues(TreeNode *root) {
-// TODO  
-// }
-
-// * 45 - All Possible Full Binary Trees
-// vector<TreeNode *> allPossibleFBT(int n) {
-// TODO  
-// }
 
 // * 46 - Lowest Common Ancestor of a Binary Tree III
 // Node *lowestCommonAncestor2(vector<Node *> &nodes, Node *p_start, Node *q_start) {
@@ -316,6 +279,44 @@ using namespace std;
 // * 37 - House Robber III
 // int rob(TreeNode* root) {
 // TODO
+// }
+
+// * 38 - Operations on Tree
+// TODO (Solve this on leetcode)
+
+// * 39 - Find Bottom Left Tree Value
+// int findBottomLeftValue(TreeNode* root) {
+// TODO
+// }
+
+// * 40 - Insufficient Nodes in Root to Leaf Paths
+// TreeNode* sufficientSubset(TreeNode* root, int &limit) {
+// TODO
+// }
+
+// * 41 - Lowest Common Ancestor of Deepest Leaves
+// TreeNode* lcaDeepestLeaves(TreeNode* root) {
+// TODO  
+// }
+
+// * 42 - Smallest Subtree with all the Deepest Nodes
+// TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+// TODO  
+// }
+
+// * 43 - Sum of Nodes with Even-Valued Grandparent
+// int sumEvenGrandparent(TreeNode* root) {
+// TODO  
+// }
+
+// * 44 - Find Largest Value in Each Tree Row
+// vector<int> largestValues(TreeNode *root) {
+// TODO  
+// }
+
+// * 45 - All Possible Full Binary Trees
+// vector<TreeNode *> allPossibleFBT(int n) {
+// TODO  
 // }
 
 int main(void) {

@@ -30,17 +30,22 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 class KthLargest {
-  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+  priority_queue<int, vector<int>, greater<int>> min_heap;
   int k_count;
 public:
   void push(int val, int k) {
@@ -49,7 +54,7 @@ public:
       min_heap.pop();
   }
 
-  KthLargest(int k, std::vector<int> &nums) {
+  KthLargest(int k, vector<int> &nums) {
     k_count = k;
     for (auto &n : nums) {
       push(n, k);
@@ -65,14 +70,14 @@ public:
 
 int main() {
   int k = 3;
-  std::vector<int> nums = {4, 5, 8, 2};
+  vector<int> nums = {4, 5, 8, 2};
 
   KthLargest *obj = new KthLargest(k, nums);
-  std::cout << obj->add(3) << std::endl;
-  std::cout << obj->add(5) << std::endl;
-  std::cout << obj->add(10) << std::endl;
-  std::cout << obj->add(9) << std::endl;
-  std::cout << obj->add(4) << std::endl;
+  cout << obj->add(3) << endl;
+  cout << obj->add(5) << endl;
+  cout << obj->add(10) << endl;
+  cout << obj->add(9) << endl;
+  cout << obj->add(4) << endl;
 
   return 0;
 }

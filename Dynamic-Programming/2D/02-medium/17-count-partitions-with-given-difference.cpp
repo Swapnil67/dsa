@@ -75,16 +75,19 @@ int dfs(int i, int k, vector<int>& nums, vector<vector<int>> &dp) {
   return dp[i][k] = (not_take + take);
 }
 
+// * Intuition
+// * s1 = total_sum - s2
+// * s1 - s2 = d
+// * total_sum - s2 - s2 = d
+// * total_sum - d = 2 * s2
+// * s2 = (total_sum - d) / 2;
+// * We need to find subsets whose sum is equal to s2
+
 // * ------------------------- Approach: Brute Force Approach -------------------------
 // * Top Down
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
 int bruteForce(vector<int> &nums, int &diff) {
-  // * s1 = total_sum - s2
-  // * s1 - s2 = d
-  // * total_sum - s2 - s2 = d
-  // * total_sum - d = 2 * s2
-  // * s2 = (total_sum - d) / 2;
 
   int total_sum = accumulate(begin(nums), end(nums), 0);
   if (total_sum - diff < 0 || (total_sum - diff) % 2  != 0)
@@ -127,7 +130,7 @@ int countSubsetSumEqualsK(vector<int> &nums, int &diff) {
 
   // * Base Cases
   dp[0][0] = (nums[0] == 0) ? 2 : 1;
-  if (target >= nums[0] && nums[0] != 0) {
+  if (nums[0] != 0 && target >= nums[0]) {
     dp[0][nums[0]] = 1;
   }
 
@@ -158,7 +161,7 @@ int countSubsetSumEqualsKDP2(vector<int> &nums, int &diff) {
   int n = nums.size();
 
   int total_sum = accumulate(begin(nums), end(nums), 0);
-  if (total_sum - diff < 0 || (total_sum - diff) % 2 != 0)
+  if ((total_sum - diff) < 0 || (total_sum - diff) % 2 != 0)
     return 0;
   
   int target = (total_sum - diff) / 2; 

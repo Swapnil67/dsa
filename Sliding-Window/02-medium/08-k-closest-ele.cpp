@@ -121,7 +121,8 @@ vector<int> findClosestElements(vector<int> &arr, int k, int x) {
       r = m;
     }
   }
-  return vector(arr.begin() + l, arr.begin() + l + k);
+  vector<int> ans(arr.begin() + l, arr.begin() + l + k);
+  return ans;
 }
 
 int main() {

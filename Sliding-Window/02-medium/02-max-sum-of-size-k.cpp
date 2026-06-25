@@ -28,7 +28,7 @@
  * - [4, 4, 4] which does not meet the requirements because the element 4 is repeated.
  * We return 0 because no subarrays meet the conditions.
 
- * https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/
+ * https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/
  * https://www.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
 */
 

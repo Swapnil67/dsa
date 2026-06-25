@@ -19,7 +19,7 @@
  * Input      : grid = [[0,0,1,0,0],[0,1,0,1,0],[0,1,1,1,0]]
  * Output     : 1
  * 
- * https://leetcode.com/problems/keys-and-rooms/description/
+ * https://leetcode.com/problems/keys-and-rooms/
  * https://www.naukri.com/code360/problems/rooms_1214959
  * 
 */

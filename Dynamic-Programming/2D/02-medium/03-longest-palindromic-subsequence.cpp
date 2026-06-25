@@ -7,10 +7,11 @@
  * A subsequence is a sequence that can be derived from another sequence by deleting some or no elements 
  * without changing the order of the remaining elements.
  * 
- * https://leetcode.com/problems/longest-palindromic-subsequence/description/
+ * https://leetcode.com/problems/longest-palindromic-subsequence/
+ * https://www.naukri.com/code360/problems/longest-palindromic-subsequence_842787
 */
 
-// ! Amazon, Google, Meta, Uber, LinkedIn, Paypal
+// ! Amazon, Google, Meta, Uber, LinkedIn, Paypal, MasterCard, IBM
 
 #include <vector>
 #include <iostream>
@@ -18,15 +19,15 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 int main(void) {
@@ -35,8 +36,6 @@ int main(void) {
 
   // * testcase 2
   // string s = "cbbd";
-
-  
 
   return 0;
 }

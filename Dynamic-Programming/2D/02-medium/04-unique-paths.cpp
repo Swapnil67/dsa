@@ -36,7 +36,7 @@ int dfs(int r, int c, int m, int n) {
   if (r >= m || c >= n)
     return 0;
 
-  if (r == m - 1 || c == n - 1)
+  if (r == m - 1 && c == n - 1)
     return 1;
 
   return dfs(r + 1, c, m, n) + dfs(r, c + 1, m, n);
@@ -59,7 +59,7 @@ int dfs(int r, int c, int m, int n, vector<vector<int>>& dp) {
 // * ------------------------- Approach: Brute Force Approach -------------------------
 // * Top Down
 // * TIME COMPLEXITY O(2^(m * n))
-// * SPACE COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(m + n)
 int bruteForce(int m, int n) {
   return dfs(0, 0, m, n);
 }
@@ -73,10 +73,31 @@ int betterApproach(int m, int n) {
   return dfs(0, 0, m, n, dp);
 }
 
+
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * Bottom Up
+// * TIME COMPLEXITY O(m * n)
+// * SPACE COMPLEXITY O(m * n) (No Auxillary Space)
+int uniquePaths(int m, int n) {
+  vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+  dp[m - 1][n - 1] = 1;
+  for (int i = m - 1; i >= 0; --i) {
+    for (int j = n - 1; j >= 0; --j) {
+      dp[i][j] += dp[i + 1][j] + dp[i][j + 1];
+    }
+  }
+
+  // * For Debugging
+  for (auto &vec : dp)
+    printArr(vec);
+
+  return dp[0][0];
+}
+
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * Bottom Up + Space Optimization
 // * TIME COMPLEXITY O(m * n)
-// * SPACE COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n)   (No Auxillary Space)
 int uniquePaths(int m, int n) {
   vector<int> prev_dp(n, 0);
 

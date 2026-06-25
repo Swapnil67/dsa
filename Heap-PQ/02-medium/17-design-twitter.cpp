@@ -1,14 +1,34 @@
+/*
+* Leetcode - 355
+* Design Twitter
+*
+* https://leetcode.com/problems/design-twitter/
+*/
+
+// ! Amazon, Google, Microsoft, Meta, Apple, Uber, PayPal
+
 #include <queue>
 #include <vector>
 #include <iostream>
 #include <unordered_map>
 #include <unordered_set>
 
-// ! Amazon, Google, Microsoft, Meta, Apple, Uber, PayPal
+using namespace std;
 
-typedef std::pair<int, int> pii;
-typedef std::vector<int> vi;
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
+typedef pair<int, int> pii;
+typedef vector<int> vi;
 
 // * ------------------------- Brute Force Approach -------------------------`
 // * Using two min_heap
@@ -20,8 +40,8 @@ typedef std::vector<int> vi;
 // * SPACE COMPLEXITY O(N * m + N * M + n)
 class TwitterBrute {
   int count;
-  std::unordered_map<int, std::vector<vi>> tweet_map;
-  std::unordered_map<int, std::unordered_set<int>> follow_map;
+  unordered_map<int, vector<vi>> tweet_map;
+  unordered_map<int, unordered_set<int>> follow_map;
 public:
   TwitterBrute() {
     count = 0;
@@ -31,20 +51,20 @@ public:
     tweet_map[userId].push_back({count++, tweetId});
   }
   
-  std::vector<int> getNewsFeed(int userId) {
-    std::vector<int> res;
+  vector<int> getNewsFeed(int userId) {
+    vector<int> res;
 
     // * Min Heap with custom comparator function
     const auto compare = [&](const vi &a, const vi &b) {
       return a[0] < b[0];
     };
-    std::priority_queue<vi, std::vector<vi>, decltype(compare)> min_heap(compare);
+    priority_queue<vi, vector<vi>, decltype(compare)> min_heap(compare);
 
     follow_map[userId].insert(userId); // * Follow himself
     // * Get all latest tweets from it's  
     for (int followeeId: follow_map[userId]) {
       if (tweet_map.count(followeeId)) {
-        std::vector<vi> &tweets = tweet_map[followeeId];
+        vector<vi> &tweets = tweet_map[followeeId];
         int idx = tweets.size() - 1;
         // * {count, tweetId, followeeId, tweet_index}
         min_heap.push({tweets[idx][0], tweets[idx][1], followeeId, idx});
@@ -90,8 +110,8 @@ public:
 
 class Twitter {
   int count;
-  std::unordered_map<int, std::vector<pii>> tweet_map;
-  std::unordered_map<int, std::unordered_set<int>> follow_map;
+  unordered_map<int, vector<pii>> tweet_map;
+  unordered_map<int, unordered_set<int>> follow_map;
 public:
   Twitter() {
     count = 0;
@@ -100,7 +120,7 @@ public:
   void postTweet(int userId, int tweetId) {
   }
   
-  std::vector<int> getNewsFeed(int userId) {
+  vector<int> getNewsFeed(int userId) {
    
   }
    

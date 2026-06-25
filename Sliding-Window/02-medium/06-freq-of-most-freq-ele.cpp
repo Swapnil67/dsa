@@ -22,7 +22,7 @@
  * Input  : nums = [3, 9, 6], k = 2
  * Output : 1
 
- * https://leetcode.com/problems/frequency-of-the-most-frequent-element/description/
+ * https://leetcode.com/problems/frequency-of-the-most-frequent-element/
 */
 
 // ! Amazon, Google, Meta, Uber, Apple, Microsoft

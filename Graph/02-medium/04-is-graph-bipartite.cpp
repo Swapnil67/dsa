@@ -25,7 +25,7 @@
  * Input      : graph = [[1,3],[0,2],[1,3],[0,2]]
  * Output     : true
  * 
- * https://leetcode.com/problems/is-graph-bipartite/description/
+ * https://leetcode.com/problems/is-graph-bipartite/
  * https://www.geeksforgeeks.org/problems/bipartite-graph/1
  * https://www.naukri.com/code360/problems/check-graph-is-bipartite-or-not_920551
  * https://www.naukri.com/code360/problems/is-bipartite_3849884

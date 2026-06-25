@@ -30,18 +30,19 @@
 #include <vector>
 #include <iostream>
 
-template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
-  for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
-    if (i != n - 1)
-      std::cout << ", ";
-  }
-  std::cout << " ]" << std::endl;
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 
 // * ------------------------- APPROACH 2: Better Approach -------------------------`
@@ -51,14 +52,14 @@ void printArr(std::vector<T> &arr) {
 // * M = No. of unique students
 // * TIME COMPLEXITY O(NlogK + MlogK)
 // * SPACE COMPLEXITY O(M*K)
-std::vector<std::vector<int>> bruteForce(std::vector<std::vector<int>> &items) {
-  std::map<int, std::priority_queue<int>> score_mp;
+vector<vector<int>> bruteForce(vector<vector<int>> &items) {
+  map<int, priority_queue<int>> score_mp;
   for (auto &result : items) {
     int id = result[0], score = result[1];
     score_mp[id].push(score);
   }
 
-  std::vector<std::vector<int>> ans;
+  vector<vector<int>> ans;
   for (auto &[stu_id, heap] : score_mp) {
     int n = 5, sum = 0;
     while (n--) {
@@ -77,8 +78,8 @@ std::vector<std::vector<int>> bruteForce(std::vector<std::vector<int>> &items) {
 // * M = No. of unique students
 // * TIME COMPLEXITY O(NlogK + MlogK)
 // * SPACE COMPLEXITY O(MlogK)
-std::vector<std::vector<int>> highFive(std::vector<std::vector<int>> &items) {
-  std::map<int, std::priority_queue<int, std::vector<int>, std::greater<>>> score_mp;
+vector<vector<int>> highFive(vector<vector<int>> &items) {
+  map<int, priority_queue<int, vector<int>, greater<>>> score_mp;
   for (auto &result : items) {
     int id = result[0], score = result[1];
     score_mp[id].push(score);
@@ -86,7 +87,7 @@ std::vector<std::vector<int>> highFive(std::vector<std::vector<int>> &items) {
       score_mp[id].pop();
   }
 
-  std::vector<std::vector<int>> ans;
+  vector<vector<int>> ans;
   for (auto &[stu_id, heap] : score_mp) {
     int n = 5, sum = 0;
     while (n--) {
@@ -100,15 +101,34 @@ std::vector<std::vector<int>> highFive(std::vector<std::vector<int>> &items) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> items = {{1, 91}, {1, 92}, {2, 93}, {2, 97}, {1, 60}, {2, 77}, {1, 65}, {1, 87}, {1, 100}, {2, 100}, {2, 76}};
-  
+  vector<vector<int>> items = {{1, 91},
+                               {1, 92},
+                               {2, 93},
+                               {2, 97},
+                               {1, 60},
+                               {2, 77},
+                               {1, 65},
+                               {1, 87},
+                               {1, 100},
+                               {2, 100},
+                               {2, 76}};
+
   // * testcase 2
-  // std::vector<std::vector<int>> items = {{1, 100}, {7, 100}, {1, 100}, {7, 100}, {1, 100}, {7, 100}, {1, 100}, {7, 100}, {1, 100}, {7, 100}};
+  // vector<vector<int>> items = {{1, 100},
+  //                              {7, 100},
+  //                              {1, 100},
+  //                              {7, 100},
+  //                              {1, 100},
+  //                              {7, 100},
+  //                              {1, 100},
+  //                              {7, 100},
+  //                              {1, 100},
+  //                              {7, 100}};
 
-  // std::vector<std::vector<int>> ans = bruteForce(items);
-  std::vector<std::vector<int>> ans = highFive(items);
+  // vector<vector<int>> ans = bruteForce(items);
+  vector<vector<int>> ans = highFive(items);
 
-  std::cout << "High Five" << std::endl;
+  cout << "High Five" << endl;
   for (auto &vec : ans)
     printArr(vec);
 

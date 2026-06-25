@@ -1,5 +1,5 @@
 /*
- * Leetcode - ?
+ * Leetcode - PAID
  * Minimum Cost to Connect Sticks
  * 
  * You have some number of sticks with positive integer lengths. These lengths are given as an array sticks,
@@ -28,31 +28,31 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 2A: Optimal Approach -------------------------`
 // * Using Greedy + min_heap
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(n)
-int connectSticks(std::vector<int> &sticks) {
+int connectSticks(vector<int> &sticks) {
   int n = sticks.size();
   if (n <= 1)
     return 0;
 
-  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
-  for(int i = 0; i < n; ++i) {
-    min_heap.push(sticks[i]);
-  }
+  // * Populate the min_heap with stick cost
+  priority_queue<int, vector<int>, greater<>> min_heap(begin(sticks), end(sticks));
 
   int total = 0;
   // * combine two of the smallest sticks until we are left with just one.
@@ -73,17 +73,17 @@ int connectSticks(std::vector<int> &sticks) {
 
 int main() {
   // * testcase 1
-  std::vector<int> sticks = {2, 4, 3};
+  vector<int> sticks = {2, 4, 3};
 
   // * testcase 2
-  // std::vector<int> sticks = {1, 8, 3, 5};
+  // vector<int> sticks = {1, 8, 3, 5};
 
-  std::cout << "Nums: ";
+  cout << "Nums: ";
   printArr(sticks);
 
   int ans = connectSticks(sticks);
 
-  std::cout << "Kth Largest Element in an Array: " << ans << std::endl;
+  cout << "Kth Largest Element in an Array: " << ans << endl;
 
   return 0;
 }

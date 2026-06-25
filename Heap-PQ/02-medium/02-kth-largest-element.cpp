@@ -23,12 +23,18 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 void swap(int &x, int &y) {
@@ -41,13 +47,13 @@ void swap(int &x, int &y) {
 // * Nested Loop + Sorting
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> nums, int k) {
+int bruteForce(vector<int> nums, int k) {
   int n = nums.size();
   if (n == 0)
     return 0;
 
   // * sort the coordinates in ASC order 
-  std::sort(nums.begin(), nums.end());
+  sort(nums.begin(), nums.end());
   return nums[n - k];
 }
 
@@ -55,12 +61,12 @@ int bruteForce(std::vector<int> nums, int k) {
 // * Using min_heap
 // * TIME COMPLEXITY O(nlogk)
 // * SPACE COMPLEXITY O(k)
-int findKthLargest(std::vector<int> nums, int k) {
+int findKthLargest(vector<int> nums, int k) {
   int n = nums.size();
   if (n == 0)
     return 0;
 
-  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+  priority_queue<int, vector<int>, greater<int>> min_heap;
   for(int i = 0; i < n; ++i) {
     min_heap.push(nums[i]);
     if (min_heap.size() > k)
@@ -76,7 +82,7 @@ int findKthLargest(std::vector<int> nums, int k) {
 // * - Avg Case   : O(n)
 // * - Worst Case : O(n^2)
 // * SPACE COMPLEXITY O(1)
-int quickSelect(std::vector<int> &nums, int l, int r, int k) {
+int quickSelect(vector<int> &nums, int l, int r, int k) {
   int pivot = nums[r];
   int p = l;
 
@@ -97,7 +103,7 @@ int quickSelect(std::vector<int> &nums, int l, int r, int k) {
   return nums[p];
 }
 
-int findKthLargest2(std::vector<int> &nums, int k) {
+int findKthLargest2(vector<int> &nums, int k) {
   int n = nums.size();
   if (n == 0)
     return 0;
@@ -109,21 +115,21 @@ int findKthLargest2(std::vector<int> &nums, int k) {
 int main() {
   // * testcase 1
   // int k = 2;
-  // std::vector<int> nums = {3, 2, 1, 5, 6, 4};
+  // vector<int> nums = {3, 2, 1, 5, 6, 4};
 
   // * testcase 2
   int k = 4;
-  std::vector<int> nums = {3, 2, 3, 1, 2, 4, 5, 5, 6};
+  vector<int> nums = {3, 2, 3, 1, 2, 4, 5, 5, 6};
 
-  std::cout << "k: " << k << std::endl;
-  std::cout << "Nums: ";
+  cout << "k: " << k << endl;
+  cout << "Nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums, k);
   // int ans = findKthLargest(nums, k);
   int ans = findKthLargest2(nums, k);
 
-  std::cout << "Kth Largest Element in an Array: " << ans << std::endl;
+  cout << "Kth Largest Element in an Array: " << ans << endl;
 
   return 0;
 }

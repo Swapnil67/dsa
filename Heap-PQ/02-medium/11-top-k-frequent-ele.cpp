@@ -1,5 +1,7 @@
 /*
+ * Leetcode - 347
  * Top K Frequent Elements
+ * 
  * Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
  * It is guaranteed that the answer is unique.
  * 
@@ -20,23 +22,29 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(N) + O(N) + O(N) = O(3N)
 // * SPACE COMPLEXITY O(N) + O(N) 
-std::vector<int> approach2(std::vector<int> nums, int k) {
+vector<int> approach2(vector<int> nums, int k) {
   int n = nums.size();
 
   // * O(N)
   // * Create a hashmap of number of occurence of each ele
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   for (int i = 0; i < n; ++i) {
     freq_map[nums[i]]++;
   }
@@ -45,7 +53,7 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
 
   // * O(N) -> Worst Case
   // * Create a frequency vector from above hashmap
-  std::vector<std::vector<int>> freqVector(n);
+  vector<vector<int>> freqVector(n);
   for (auto it : freq_map) {
     freqVector[it.second].push_back(it.first);
   }
@@ -54,13 +62,13 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
 
   // * O(N) -> Worst Case
   // * Loop through the frequency vector
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = n; i >= 0; --i) {
     if (!freqVector[i].size()) {
       continue;
     }
 
-    std::vector<int> temp(freqVector[i].begin(), freqVector[i].end());
+    vector<int> temp(freqVector[i].begin(), freqVector[i].end());
     for (int i = 0; i < temp.size(); ++i) {
       ans.push_back(temp[i]);
       k--;
@@ -81,23 +89,26 @@ std::vector<int> approach2(std::vector<int> nums, int k) {
 // * Use Priority Queue
 // * TIME COMPLEXITY O(N) + O(N) + O(k) = O(2N) + O(k)
 // * SPACE COMPLEXITY O(N) + O(N) 
-std::vector<int> topKFrequent(std::vector<int> &nums, int k) {
+vector<int> topKFrequent(vector<int> &nums, int k) {
   int n = nums.size();
 
   // * count freq of every element in nums array
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   for (auto &x: nums) {
     freq_map[x]++;
   }
 
-  std::priority_queue<std::pair<int, int>> min_heap;
   // * Push freq of each elements to min_heap
   // * keep the size of min_heap to 'k'
-  for (auto &p: freq_map) {
-    min_heap.push({p.second, p.first});
+  typedef pair<int, int> P;
+  priority_queue<P, vector<P>, greater<>> min_heap;
+  for (auto &[num, freq] : freq_map) {
+    min_heap.push({freq, num});
+    if (min_heap.size() > k)
+      min_heap.pop();
   }
 
-  std::vector<int> ans;
+  vector<int> ans;
   while (k--) {
     ans.push_back(min_heap.top().second);
     min_heap.pop();
@@ -109,22 +120,22 @@ std::vector<int> topKFrequent(std::vector<int> &nums, int k) {
 int main() {
   // * testcase 1
   int k = 2;
-  std::vector<int> nums = {1, 1, 1, 2, 2, 3};
+  vector<int> nums = {1, 1, 1, 2, 2, 3};
 
   // int k = 2;
-  // std::vector<int> nums = {1, 2, 2, 3, 3};
+  // vector<int> nums = {1, 2, 2, 3, 3};
 
   // int k = 2;
-  // std::vector<int> nums = {1, 2, 1, 2, 1, 2, 3, 1, 3, 2};
+  // vector<int> nums = {1, 2, 1, 2, 1, 2, 3, 1, 3, 2};
 
   // int k = 1;
-  // std::vector<int> nums = {1};
+  // vector<int> nums = {1};
 
   printArr(nums);
 
-  std::vector<int> ans = topKFrequent(nums, k);
+  vector<int> ans = topKFrequent(nums, k);
 
-  std::cout<<"Top k frequent elements "<<std::endl;
+  cout<<"Top k frequent elements "<<endl;
   printArr(ans);
   return 0;
 }

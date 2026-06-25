@@ -18,7 +18,7 @@
  * Input      : numCourses = 2, prerequisites = [[1,0],[0,1]]
  * Output     : false
  * 
- * https://leetcode.com/problems/course-schedule/description/
+ * https://leetcode.com/problems/course-schedule/
 */
 
 // ! Meta, Amazon, Microsoft, Google
@@ -63,9 +63,8 @@ unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
 }
 
 // * Construct adjacency list for BFS
-unordered_map<int, vector<int>> constructadj(
-    vector<int> &indegree,
-    vector<vector<int>> &prerequisites)
+unordered_map<int, vector<int>> constructadj(vector<int> &indegree,
+                                             vector<vector<int>> &prerequisites)
 {
   unordered_map<int, vector<int>> adj;
   for (auto &it: prerequisites) {

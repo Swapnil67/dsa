@@ -17,7 +17,7 @@
 * https://leetcode.com/problems/find-largest-value-in-each-tree-row
 */
 
-#include "../common.hpp"
+#include "common.hpp"
 
 using namespace std;
 

@@ -53,12 +53,7 @@ void printAdjList(unordered_map<int, vector<int>> &adj) {
 }
 
 // * Kahn's Algo
-vector<int> bfs(
-    int n,
-    vector<int> &indegree,
-    unordered_map<int, vector<int>> adj)
-{
-
+vector<int> bfs(int n, vector<int> &indegree, unordered_map<int, vector<int>> adj) {
   int count = 0;
   queue<int> q;
 

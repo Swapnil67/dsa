@@ -19,7 +19,7 @@
  * Input      : isConnected = [[1,0,0],[0,1,0],[0,0,1]]
  * Output     : 3
  * 
- * https://leetcode.com/problems/number-of-provinces/description/
+ * https://leetcode.com/problems/number-of-provinces
  * https://www.naukri.com/code360/problems/find-the-number-of-states_1377943
  * https://www.geeksforgeeks.org/problems/number-of-provinces/1
  * 

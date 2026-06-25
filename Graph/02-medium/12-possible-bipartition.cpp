@@ -17,7 +17,7 @@
  * Input      : n = 3, dislikes = [[1,2],[1,3],[2,3]]
  * Output     : false
  * 
- * https://leetcode.com/problems/possible-bipartition/description/
+ * https://leetcode.com/problems/possible-bipartition/
 */
 
 // ! Microsoft, Flipkart, Samsung

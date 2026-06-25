@@ -18,7 +18,7 @@
  * Input      : grid = [[0,0,0,0,0,0,0,0]]
  * Output     : 0
  * 
- * https://leetcode.com/problems/max-area-of-island/description/
+ * https://leetcode.com/problems/max-area-of-island/
  * https://www.geeksforgeeks.org/problems/length-of-largest-region-of-1s-1587115620/1
  * 
 */

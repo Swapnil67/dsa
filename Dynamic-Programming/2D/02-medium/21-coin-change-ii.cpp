@@ -51,40 +51,34 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+// * Without Memoization
 int dfs(int i, int amount, vector<int> &coins) {
-  if (amount == 0)
-    return 1;
+  if (i == 0)
+    return (amount % coins[i]) == 0;
 
-  if (i >= coins.size())
-    return 0;
-
-  int res = 0;
+  int not_take = dfs(i - 1, amount, coins);
+  int take = 0;
   if (amount >= coins[i]) {
-    res = dfs(i + 1, amount, coins);            // * skip
-    res += dfs(i, amount - coins[i], coins); // * take
+    take = dfs(i, amount - coins[i], coins);
   }
-
-  return res;
+  return (not_take + take);
 }
 
-
+// * With Memoization
 int dfs(int i, int amount, vector<int> &coins, vector<vector<int>> &dp) {
-  if (amount == 0)
-    return 1;
-
-  if (i >= coins.size())
-    return 0;
+  if (i == 0)
+    return (amount % coins[i]) == 0;
 
   if (dp[i][amount] != -1)
     return dp[i][amount];
 
-  int res = 0;
+  int not_take = dfs(i - 1, amount, coins, dp);
+  int take = 0;
   if (amount >= coins[i]) {
-    res = dfs(i + 1, amount, coins, dp);            // * skip
-    res += dfs(i, amount - coins[i], coins, dp); // * take
+    take = dfs(i, amount - coins[i], coins, dp);
   }
 
-  return dp[i][amount] = res;
+  return dp[i][amount] = (not_take + take);
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -93,7 +87,8 @@ int dfs(int i, int amount, vector<int> &coins, vector<vector<int>> &dp) {
 // * SPACE COMPLEXITY O(N)
 int bruteForce(int amount, vector<int> &coins) {
   sort(begin(coins), end(coins));
-  return dfs(0, amount, coins);
+  int n = coins.size();
+  return dfs(n - 1, amount, coins);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
@@ -102,37 +97,37 @@ int bruteForce(int amount, vector<int> &coins) {
 // * SPACE COMPLEXITY O(N * target)
 int betterApproach(int amount, vector<int> &coins) {
   sort(begin(coins), end(coins));
-  vector<vector<int>> dp(coins.size() + 1, vector<int>(amount + 1, -1));
-  return dfs(0, amount, coins);
+  int n = coins.size();
+  vector<vector<int>> dp(n + 1, vector<int>(amount + 1, -1));
+  return dfs(n - 1, amount, coins);
 }
-
 
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * Bottom Up
-// * TIME COMPLEXITY O(N * target)
-// * SPACE COMPLEXITY O(N * target)
+// * TIME COMPLEXITY O(N * amount)
+// * SPACE COMPLEXITY O(N * amount)
 int change(int amount, vector<int> &coins) {
-  sort(begin(coins), end(coins));
   int n = coins.size();
-
   vector<vector<uint>> dp(n + 1, vector<uint>(amount + 1, 0));
-  for (int i = 0; i <= n; ++i)
-    dp[i][0] = 1;
 
-  for (int i = n - 1; i >= 0; --i) {
+  // * If coin at idx = 0 can be used to create amount then set to '1'
+  for (int t = 0; t <= amount; ++t)
+    dp[0][t] = (t % coins[0]) == 0;
+
+  for (int i = 1; i < n; ++i) {
     for (int a = 0; a <= amount; ++a) {
+      dp[i][a] = dp[i - 1][a];
       if (a >= coins[i]) {
-        dp[i][a] = dp[i + 1][a];
         dp[i][a] += dp[i][a - coins[i]];
       }
     }
   }
 
   // * Debugging
-  // for (auto &vec : dp)
-  //   printArr(vec);
+  for (auto &vec : dp)
+    printArr(vec);
 
-  return dp[0][amount];
+  return dp[n - 1][amount];
 }
 
 
@@ -141,20 +136,23 @@ int change(int amount, vector<int> &coins) {
 // * TIME COMPLEXITY O(N * amount)
 // * SPACE COMPLEXITY O(amount)
 int change2(int amount, vector<int> &coins) {
-  sort(begin(coins), end(coins));
-  vector<uint> dp(amount + 1, 0);
-  dp[0] = 1;
-  
   int n = coins.size();
-  for (int i = n - 1; i >= 0; --i) {
-    vector<uint> next_dp(amount + 1, 0);
-    next_dp[0] = 1;
-    for (int a = 1; a <= amount; ++a) {
-      next_dp[a] = dp[a];
-      if (a - coins[i] >= 0)
-        next_dp[a] += next_dp[a - coins[i]];
+  vector<uint> dp(amount + 1, 0);
+  for (int t = 0; t <= amount; ++t)
+    dp[t] = (t % coins[0]) == 0;
+  // printArr(dp);
+
+  vector<uint> next_dp(amount + 1, 0);
+
+  for (int i = 1; i < n; ++i) {
+    for (int t = 0; t <= amount; ++t) {
+      next_dp[t] = dp[t];
+      if (t >= coins[i]) {
+        next_dp[t] += next_dp[t - coins[i]];
+      }
     }
     dp = next_dp;
+    // printArr(dp);
   }
 
   return dp[amount];
@@ -179,8 +177,8 @@ int main(void) {
   
   // int ans = bruteForce(amount, coins);
   // int ans = betterApproach(amount, coins);
-  int ans = change(amount, coins);
-  // int ans = change2(amount, coins);
+  // int ans = change(amount, coins);
+  int ans = change2(amount, coins);
 
   cout << "number of combinations: " << ans << endl;
 }

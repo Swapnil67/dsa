@@ -37,7 +37,7 @@
 
 // ! Google
 
-#include "../common.hpp"
+#include "common.hpp"
 
 using namespace std;
 

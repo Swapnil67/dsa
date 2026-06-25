@@ -22,53 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------------------------------------------------------------------------
-
-// * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
-// int numOfSubarrays(vector<int> &nums, int &k, int &threshold) {
-// TODO
-// }
-
-// * 02 - Maximum Sum of Distinct Subarrays With Length K
-// int subarraySum(vector<int> &nums, int k) {
-// TODO
-// }
-
-// * 03 - First Negative In Every Window
-// vector<int> firstNegative(vector<int> &nums, int &k) {
-// TODO
-// }
-
-// * 04 - Max Consecutive Ones III
-// int longestOnes(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 05 - Fruit Into Baskets
-// int totalFruit(vector<int> &fruits) {
-// TODO
-// }
-
-// * 06 - Frequency of the Most Frequent Element
-// int maxFrequency(vector<int> &nums, int k) {
-// TODO
-// }
-
-// * 07 - Minimum Size Subarray Sum
-// int minSubArrayLen(vector<int> &arr, int &target) {
-// TODO
-// }
-
-// * 08 - Find K Closest Elements
-// vector<int> findClosestElements(vector<int> arr, int k, int x) {
-// TODO
-// }
-
-// * 09 - Minimum Operations to Reduce X to Zero
-// int minOperations(vector<int> &nums, int x) {  
-// TODO
-// }
-
 // * 10 - Binary Subarrays With Sum
 // int numSubarraysWithSum(vector<int> &nums, int goal) {
 // TODO
@@ -208,6 +161,53 @@ void printArr(vector<T> &arr) {
 
 // * 38 - Maximum Points You Can Obtain from Cards
 // int numKLenSubstrNoRepeats(std::vector<int> &cardPoints, int k) {
+// TODO
+// }
+
+// * ------------------------------------------------------------------------------------------
+
+// * 01 - Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold
+// int numOfSubarrays(vector<int> &nums, int &k, int &threshold) {
+// TODO
+// }
+
+// * 02 - Maximum Sum of Distinct Subarrays With Length K
+// int subarraySum(vector<int> &nums, int k) {
+// TODO
+// }
+
+// * 03 - First Negative In Every Window
+// vector<int> firstNegative(vector<int> &nums, int &k) {
+// TODO
+// }
+
+// * 04 - Max Consecutive Ones III
+// int longestOnes(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 05 - Fruit Into Baskets
+// int totalFruit(vector<int> &fruits) {
+// TODO
+// }
+
+// * 06 - Frequency of the Most Frequent Element
+// int maxFrequency(vector<int> &nums, int k) {
+// TODO
+// }
+
+// * 07 - Minimum Size Subarray Sum
+// int minSubArrayLen(vector<int> &arr, int &target) {
+// TODO
+// }
+
+// * 08 - Find K Closest Elements
+// vector<int> findClosestElements(vector<int> arr, int k, int x) {
+// TODO
+// }
+
+// * 09 - Minimum Operations to Reduce X to Zero
+// int minOperations(vector<int> &nums, int x) {  
 // TODO
 // }
 

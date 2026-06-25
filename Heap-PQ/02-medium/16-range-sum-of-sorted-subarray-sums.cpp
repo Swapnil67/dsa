@@ -27,25 +27,30 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
-  }
-  std::cout << "]" << std::endl;
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Using Nested Loop + sorting
 // * TIME COMPLEXITY O(n^2) + O(nlogn)
 // * SPACE COMPLEXITY O(n)
-int bruteForce(std::vector<int> &nums, int n, int left, int right) {
+int bruteForce(vector<int> &nums, int n, int left, int right) {
   int m = nums.size();
   int M = 1e9 + 7;
  
   // * save sum of all subarrays in a `sum` vector
-  std::vector<int> sums;
+  vector<int> sums;
   for (int i = 0; i < n; ++i) {
     int cur_sum = 0;
     for (int j = i; j < n; ++j) {
@@ -55,7 +60,7 @@ int bruteForce(std::vector<int> &nums, int n, int left, int right) {
   }
 
   // * Sort the sum vector
-  std::sort(sums.begin(), sums.end());
+  sort(sums.begin(), sums.end());
 
   // * Find the ans b/w range
   int ans = 0;
@@ -70,9 +75,9 @@ int bruteForce(std::vector<int> &nums, int n, int left, int right) {
 // * Using Nested Loop + Min Heap
 // * TIME COMPLEXITY O(n^2) + O(nlogk)
 // * SPACE COMPLEXITY O(n)
-int betterApproach(std::vector<int>& nums, int n, int left, int right) {
+int betterApproach(vector<int>& nums, int n, int left, int right) {
   int M = 1e9 + 7;
-  std::priority_queue<int, std::vector<int>, std::greater<int>> min_heap;
+  priority_queue<int, vector<int>, greater<int>> min_heap;
   
   // * Calculate all possible subarray sum
   for (int i = 0; i < n; ++i) {
@@ -99,19 +104,19 @@ int betterApproach(std::vector<int>& nums, int n, int left, int right) {
 // * using min_heap
 // * TIME COMPLEXITY O(nlogn) + O(n^2)
 // * SPACE COMPLEXITY O(n)
-int rangeSum(std::vector<int>& nums, int n, int left, int right) {
+int rangeSum(vector<int>& nums, int n, int left, int right) {
   int M = 1e9 + 7;
 
   // * 1. Push all the initial values into heap with their indexes
-  typedef std::pair<int, int> P; // * { num, index }
-  std::priority_queue<P, std::vector<P>, std::greater<P>> min_heap;
+  typedef pair<int, int> P; // * { num, index }
+  priority_queue<P, vector<P>, greater<P>> min_heap;
   for (int i = 0; i < n; ++i) { // * O(nlogn)
     min_heap.push({nums[i], i});
   }
 
   int ans = 0, x = 1;
   while (!min_heap.empty()) { // * O(n^2)
-    std::pair<int, int> p = min_heap.top();
+    pair<int, int> p = min_heap.top();
     min_heap.pop();
 
     // * add to answer
@@ -136,23 +141,23 @@ int rangeSum(std::vector<int>& nums, int n, int left, int right) {
 int main(void) {
   // * testcase 1
   // int n = 4, left = 1, right = 5;
-  // std::vector<int> nums = {1, 2, 3, 4};
+  // vector<int> nums = {1, 2, 3, 4};
 
   // * testcase 2
   int n = 4, left = 3, right = 4;
-  std::vector<int> nums = {1, 2, 3, 4};
+  vector<int> nums = {1, 2, 3, 4};
 
   // * testcase 3
   // int n = 4, left = 1, right = 10;
-  // std::vector<int> nums = {1, 2, 3, 4};
+  // vector<int> nums = {1, 2, 3, 4};
 
-  std::cout << "n: " << n << ", left: " << left << ", right: " << right << std::endl;
+  cout << "n: " << n << ", left: " << left << ", right: " << right << endl;
   printArr(nums);
 
   int ans = bruteForce(nums, n, left, right);
   // int ans = betterApproach(nums, n, left, right);
   // int ans = rangeSum(nums, n, left, right);
-  std::cout << "Range Sum of Sorted Subarray Sums " << ans << std::endl;
+  cout << "Range Sum of Sorted Subarray Sums " << ans << endl;
 
   return 0;
 }

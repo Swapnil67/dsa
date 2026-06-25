@@ -24,15 +24,22 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int findMaxIndex(std::vector<int> &freq) {
+
+int findMaxIndex(vector<int> &freq) {
   int max_idx = 0;
   for (int i = 1; i < freq.size(); ++i) {
     if (freq[i] > freq[max_idx])
@@ -41,11 +48,11 @@ int findMaxIndex(std::vector<int> &freq) {
   return max_idx;
 }
 
-void debug(std::vector<int> &freq) {
+void debug(vector<int> &freq) {
   // * For Debugging
   for (int i = 0; i < 26; ++i) {
     if (freq[i] > 0) {
-      std::cout << (char)('a' + i) << " = " << freq[i] << std::endl;
+      cout << (char)('a' + i) << " = " << freq[i] << endl;
     }
   }
 }
@@ -54,26 +61,26 @@ void debug(std::vector<int> &freq) {
 // * Find max freq for every char
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
-std::string bruteForce(std::string &s) {
+string bruteForce(string &s) {
   int n = s.size();
   // * save the freq of each char in freq vector 
-  std::vector<int> freq(26, 0);
+  vector<int> freq(26, 0);
   for (char &c : s) {
     freq[c - 'a']++;
   }
 
   // * If duplicates are more than (n/2)
-  int max_freq = *std::max_element(freq.begin(), freq.end());
+  int max_freq = *max_element(freq.begin(), freq.end());
   if (max_freq > (n + 1) / 2) {
     return "";
   }
   // debug(freq);
 
-  std::string res = "";
+  string res = "";
   while (res.size() < n) {
     int max_freq_idx = findMaxIndex(freq);
     char max_freq_char = 'a' + max_freq_idx;
-    // std::cout << max_freq_idx << " " << max_freq_char << std::endl;
+    // cout << max_freq_idx << " " << max_freq_char << endl;
     res += max_freq_char;
     freq[max_freq_idx]--;
 
@@ -85,7 +92,7 @@ std::string bruteForce(std::string &s) {
 
     int second_max_freq_idx = findMaxIndex(freq);
     char second_max_freq_char = 'a' + second_max_freq_idx;
-    // std::cout << second_max_freq_idx << " " << second_max_freq_char << std::endl;
+    // cout << second_max_freq_idx << " " << second_max_freq_char << endl;
 
     res += second_max_freq_char;
     freq[second_max_freq_idx]--;
@@ -100,46 +107,49 @@ std::string bruteForce(std::string &s) {
 // * k is the number of distinct characters in the input string s (maximum 26)
 // * TIME COMPLEXITY O(nlogk)
 // * SPACE COMPLEXITY O(1)
-std::string reorganizeString(std::string &s) {
+string reorganizeString(string &s) {
+  int n = s.size();
+
   // * find the freq of each char
-  std::vector<int> freq(26, 0);
+  vector<int> freq(26, 0);
+  int max_freq = 0;
   for (char &c : s) {
     freq[c - 'a']++;
+    max_freq = max(max_freq, freq[c - 'a']);
   }
   
   // * If duplicates are more than (n/2)
-  int n = s.size();
-  int max_freq = *std::max_element(freq.begin(), freq.end());
   if (max_freq > (n + 1) / 2) {
     return "";
   }
 
   // * Fill the max_heap
-  std::priority_queue<std::pair<int, char>> max_heap;
+  priority_queue<pair<int, char>> max_heap;
   for (int i = 0; i < 26; ++i) {
     if (freq[i] > 0) {
       max_heap.push({freq[i], 'a' + i});
     }
   }
 
-  std::string res = "";
+  string res = "";
   while (res.size() < n) {
-    // * first max freq char
-    std::pair<int, char> p = max_heap.top();
+    // * Add the 1st max char
+    auto [freq, ch] = max_heap.top();
     max_heap.pop();
-    res += p.second;
-    p.first -= 1;
-    if (p.first == 0) // * Imp condition
-      continue;
+    res += ch;
+    freq--;
 
-    // * second max freq char
-    std::pair<int, char> p2 = max_heap.top();
-    max_heap.pop();
-    res += p2.second;
-    p2.first -= 1;
+    // * Add the 2nd max char
+    if (!max_heap.empty()) {
+      auto [freq2, ch2] = max_heap.top();
+      max_heap.pop();
+      res += ch2;
+      if (--freq2 > 0)
+        max_heap.push({freq2, ch2});
+    }
 
-    max_heap.push(p);
-    max_heap.push(p2);
+    if (--freq > 0)
+      max_heap.push({freq, ch});
   }
 
   return res;
@@ -147,16 +157,17 @@ std::string reorganizeString(std::string &s) {
 
 int main(void) {
   // * testcase 1
-  // std::string s = "aab";
+  // string s = "aab";
 
   // * testcase 2
-  std::string s = "aaab";
+  string s = "aaab";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
 
-  std::string ans = bruteForce(s);
-  // std::string ans = reorganizeString(s);
-  std::cout << "Reorganize String: " << ans << std::endl;
+  string ans = bruteForce(s);
+  // string ans = reorganizeString(s);
+
+  cout << "Reorganize String: " << ans << endl;
 
   return 0;
 }

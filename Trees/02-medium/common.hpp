@@ -18,6 +18,12 @@ public:
     right = nullptr;
   }
 
+  TreeNode(int val, TreeNode* left_node, TreeNode* right_node) {
+    data = val;
+    left = left_node;
+    right = right_node;
+  }
+
   ~TreeNode() {
     if (left)
       delete left;

@@ -23,7 +23,7 @@
  * input  : heights = [1, 5, 1, 2, 3, 4, 10000], bricks = 4, ladders = 1
  * output : 5
  * 
- * https://leetcode.com/problems/furthest-building-you-can-reach/description/
+ * https://leetcode.com/problems/furthest-building-you-can-reach/
  * https://www.naukri.com/code360/problems/furthest-building-you-can-reach_1382372
 */
 
@@ -32,17 +32,23 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * This will fail
 // * for testcase 3
-int greedyApproach(std::vector<int> &heights, int bricks, int ladders) {
+int greedyApproach(vector<int> &heights, int bricks, int ladders) {
   int n = heights.size();
   int i = 0;
   while (i < n) {
@@ -66,7 +72,7 @@ int greedyApproach(std::vector<int> &heights, int bricks, int ladders) {
   return i;
 }
 
-int helper(std::vector<int> &heights, int idx, int bricks, int ladders) {
+int helper(vector<int> &heights, int idx, int bricks, int ladders) {
   // * On the last building
   if (idx >= heights.size() - 1)
     return 0;
@@ -95,13 +101,13 @@ int helper(std::vector<int> &heights, int idx, int bricks, int ladders) {
     by_ladder = 1 + helper(heights, idx + 1, bricks, ladders - 1);
   }
 
-  return std::max(by_bricks, by_ladder);
+  return max(by_bricks, by_ladder);
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Recursion + Backtracking
 // ! TLE
-int bruteForce(std::vector<int> &heights, int bricks, int ladders) {
+int bruteForce(vector<int> &heights, int bricks, int ladders) {
   int n = heights.size();
   return helper(heights, 0, bricks, ladders);
 }
@@ -110,11 +116,11 @@ int bruteForce(std::vector<int> &heights, int bricks, int ladders) {
 // * Using max_heap
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(n)
-int furthestBuilding(std::vector<int>& heights, int bricks, int ladders) {
+int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
   int n = heights.size();
 
   // * max_heap for extra bricks used
-  std::priority_queue<int> max_heap;
+  priority_queue<int> max_heap;
 
   int i = 0;  
   while (i < n) {
@@ -122,7 +128,7 @@ int furthestBuilding(std::vector<int>& heights, int bricks, int ladders) {
       i++;
     } else {
       int extra_bricks = heights[i + 1] - heights[i];
-      // std::cout << "extra_bricks = " << extra_bricks << ",\t b =  " << bricks << ",\t l = " << ladders << std::endl;
+      // cout << "extra_bricks = " << extra_bricks << ",\t b =  " << bricks << ",\t l = " << ladders << endl;
       if (bricks >= extra_bricks) {
         bricks -= extra_bricks;
         max_heap.push(extra_bricks); // * save bricks used in max_heap
@@ -150,23 +156,23 @@ int furthestBuilding(std::vector<int>& heights, int bricks, int ladders) {
 int main(void) {
   // * testcase 1
   // int bricks = 5, ladders = 1;
-  // std::vector<int> heights = {4, 2, 7, 6, 9, 14, 12};
+  // vector<int> heights = {4, 2, 7, 6, 9, 14, 12};
   
   // * testcase 2
   // int bricks = 10, ladders = 2;
-  // std::vector<int> heights = {4, 12, 2, 7, 3, 18, 20, 3, 19};
+  // vector<int> heights = {4, 12, 2, 7, 3, 18, 20, 3, 19};
   
   // * testcase 3
   int bricks = 4, ladders = 1;
-  std::vector<int> heights = {1, 5, 1, 2, 3, 4, 10000};
+  vector<int> heights = {1, 5, 1, 2, 3, 4, 10000};
 
-  std::cout << "bricks: " << bricks << ", ladders: " << ladders << std::endl;
-  std::cout << "Buildings heights: ";
+  cout << "bricks: " << bricks << ", ladders: " << ladders << endl;
+  cout << "Buildings heights: ";
   printArr(heights);
 
   // int ans = bruteForce(heights, bricks, ladders);
   int ans = furthestBuilding(heights, bricks, ladders);
-  std::cout << "Furthest Building You Can Reach: " << ans << " height." << std::endl;
+  cout << "Furthest Building You Can Reach: " << ans << " height." << endl;
 
   return 0;
 }

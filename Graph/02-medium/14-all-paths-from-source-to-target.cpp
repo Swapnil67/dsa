@@ -55,7 +55,8 @@ void dfs(int u, int &target, vector<int> &path,
   }
   path.pop_back();
 }
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Using DFS
 // * V = Number of vertices
 // * TIME COMPLEXITY O(2^V)

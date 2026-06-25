@@ -22,37 +22,39 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Using sorting
 // * TIME COMPLEXITY O(n + nlogn)
 // * SPACE COMPLEXITY O(n)
-int bruteForce(std::vector<int> &arr, int k) {
+int bruteForce(vector<int> &arr, int k) {
   // * 1. Find the freq of each number
-  std::unordered_map<int, int> freq_mp;
+  unordered_map<int, int> freq_mp;
   for (auto &x : arr) {
     freq_mp[x]++;
   }
 
   // * 2. Add the freq of each number to `temp` vector
-  std::vector<int> temp;
+  vector<int> temp;
   for (auto &[key, freq] : freq_mp) {
     temp.push_back(freq);
   } 
 
   // * 3. sort the temp vector in ASC
-  std::sort(temp.begin(), temp.end());
+  sort(temp.begin(), temp.end());
 
   // * 4. Start removing first 'k' elements with least frequency
   int n = temp.size();
@@ -71,17 +73,17 @@ int bruteForce(std::vector<int> &arr, int k) {
 // * Using min_heap for freq
 // * TIME COMPLEXITY O(n + nlogk)
 // * SPACE COMPLEXITY O(n)
-int findLeastNumOfUniqueInts(std::vector<int> &arr, int k) {
+int findLeastNumOfUniqueInts(vector<int> &arr, int k) {
   int n = arr.size();
 
   // * 1. Find the freq of each number
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
   for (auto &x : arr) {
     freq_map[x]++;
   }
 
   // * 2. Add the freq of each number to `min_heap`
-  std::priority_queue<int, std::vector<int>, std::greater<>> min_heap;
+  priority_queue<int, vector<int>, greater<>> min_heap;
   for (auto &[key, freq] : freq_map) {
     min_heap.push(freq);
   }
@@ -106,19 +108,19 @@ int findLeastNumOfUniqueInts(std::vector<int> &arr, int k) {
 int main(void) {
   // * testcase 1
   int k = 1;
-  std::vector<int> arr = {5, 5, 4};
+  vector<int> arr = {5, 5, 4};
   
   // * testcase 2
   // int k = 3;
-  // std::vector<int> arr = {4, 3, 1, 1, 3, 3, 2};
+  // vector<int> arr = {4, 3, 1, 1, 3, 3, 2};
   
-  std::cout << "k: " << k << std::endl;
-  std::cout << "Input Array: ";
+  cout << "k: " << k << endl;
+  cout << "Input Array: ";
   printArr(arr);
 
   int ans = bruteForce(arr, k);
   // int ans = findLeastNumOfUniqueInts(arr, k);
-  std::cout << "Unique Integers after K Removals " << ans << std::endl;
+  cout << "Unique Integers after K Removals " << ans << endl;
 
   return 0;
 }

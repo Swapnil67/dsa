@@ -16,7 +16,7 @@
  * Input      : grid = [[0,0,1,0,0],[0,1,0,1,0],[0,1,1,1,0]]
  * Output     : 1
  * 
- * https://leetcode.com/problems/number-of-closed-islands/description/
+ * https://leetcode.com/problems/number-of-closed-islands/
  * https://www.geeksforgeeks.org/problems/find-number-of-closed-islands/1
  * 
 */

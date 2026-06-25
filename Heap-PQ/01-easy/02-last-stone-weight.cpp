@@ -2,16 +2,22 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int lastStoneWeight(std::vector<int> &stones) {
-  std::priority_queue<int> max_heap;
+int lastStoneWeight(vector<int> &stones) {
+  priority_queue<int> max_heap;
   for (int &n : stones)
     max_heap.push(n);
 
@@ -22,7 +28,7 @@ int lastStoneWeight(std::vector<int> &stones) {
     max_heap.pop();
 
     if (s1 != s2) {
-      max_heap.push(std::abs(s2 - s1));
+      max_heap.push(abs(s2 - s1));
     }
   }
 
@@ -30,12 +36,12 @@ int lastStoneWeight(std::vector<int> &stones) {
 }
 
 int main() {
-  std::vector<int> stones = {2, 7, 4, 1, 8, 1};
-  std::cout << "Stones: " << std::endl;
+  vector<int> stones = {2, 7, 4, 1, 8, 1};
+  cout << "Stones: " << endl;
   printArr(stones);
 
   int ans = lastStoneWeight(stones);
-  std::cout << "Last Stone Weight " << ans << std::endl;
+  cout << "Last Stone Weight " << ans << endl;
 
   return 0;
 }

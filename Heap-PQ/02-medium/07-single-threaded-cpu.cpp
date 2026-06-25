@@ -34,50 +34,56 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-typedef std::pair<int, int> P;
+typedef pair<int, int> P;
 
 // * ------------------------- Optimal Approach -------------------------
 // * Sort the task in ASC order of start time
 // * Creating a new sorted tasks array.
-std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
+vector<int> cpuTasks(vector<vector<int>> &tasks) {
   int n = tasks.size();
 
   // * Create the sorted task array with each task index
-  std::vector<std::vector<int>> sorted_tasks;
+  vector<vector<int>> sorted_tasks;
   for (int i = 0; i < n; ++i) {
     int start_time = tasks[i][0];
     int processing_time = tasks[i][1];
     sorted_tasks.push_back({start_time, processing_time, i});
   }
-  std::sort(begin(sorted_tasks), end(sorted_tasks));
+  sort(begin(sorted_tasks), end(sorted_tasks));
   // * For debugging
-  // std::cout << "Tasks: " << std::endl;
+  // cout << "Tasks: " << endl;
   // for (auto &vec : sorted_tasks)
   //   printArr(vec);
 
-  std::vector<int> ans;
+  vector<int> ans;
   long time = 0, i = 0;
   // * Heap = {processing_time, index}
-  std::priority_queue<P, std::vector<P>, std::greater<>> busy; 
+  priority_queue<P, vector<P>, greater<>> busy; 
   while (i < n || !busy.empty()) {
     // * initial task time start
     if (busy.empty()) {
-      time = std::max(time, (long)tasks[i][0]);
+      time = max(time, (long)tasks[i][0]);
     }
-    // std::cout << time << std::endl;
+    // cout << time << endl;
     
     // * Here we are push all the task which can be given to cpu
     // * if they have arrived before the time  
     while (i < n && sorted_tasks[i][0] <= time) {
-      // std::cout << "push: " << sorted_tasks[i][0] << std::endl;
+      // cout << "push: " << sorted_tasks[i][0] << endl;
       busy.push({sorted_tasks[i][1], sorted_tasks[i][2]}); // * {processing_time, index}
       i++;
     }
@@ -95,29 +101,31 @@ std::vector<int> cpuTasks(std::vector<std::vector<int>> &tasks) {
 // * ------------------------- Optimal Approach -------------------------`
 // * Sort the task in ASC order of start time
 // * Using Input Array itself.
-std::vector<int> cpuTasks2(std::vector<std::vector<int>> &tasks) {
+vector<int> cpuTasks2(vector<vector<int>> &tasks) {
   int n = tasks.size();
 
   // * Create the sorted task array with each task index
   for (int i = 0; i < n; ++i) {
     tasks[i].push_back(i);
   }
-  std::sort(begin(tasks), end(tasks));
+  sort(begin(tasks), end(tasks));
+
   // * For debugging
-  // std::cout << "Tasks: " << std::endl;
+  // cout << "Tasks: " << endl;
   // for (auto &vec : tasks)
   //   printArr(vec);
 
-  std::vector<int> ans;
+  vector<int> ans;
   long time = 0, i = 0;
+
   // * Heap = {processing_time, index}
-  std::priority_queue<P, std::vector<P>, std::greater<>> busy; 
+  priority_queue<P, vector<P>, greater<>> busy; 
   while (i < n || !busy.empty()) {
     // * initial task time start
     if (busy.empty()) {
-      time = std::max(time, (long)tasks[i][0]);
+      time = max(time, (long)tasks[i][0]);
     }
-    // std::cout << time << std::endl;
+    // cout << time << endl;
     
     // * Here we are push all the task which can be given to cpu
     // * if they have arrived before the time  
@@ -127,10 +135,10 @@ std::vector<int> cpuTasks2(std::vector<std::vector<int>> &tasks) {
     }
 
     // * Get the task with least processing time
-    auto [processing_tm, index] = busy.top();
+    auto [processing_tm, task_idx] = busy.top();
     busy.pop();
     time += processing_tm; // * Add the processing time to `time`
-    ans.push_back(index);
+    ans.push_back(task_idx);
   }
 
   return ans;
@@ -138,17 +146,17 @@ std::vector<int> cpuTasks2(std::vector<std::vector<int>> &tasks) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> tasks = {{1, 2}, {2, 4}, {3, 2}, {4, 1}};
+  vector<vector<int>> tasks = {{1, 2}, {2, 4}, {3, 2}, {4, 1}};
   
   // * testcase 2
-  // std::vector<std::vector<int>> tasks = {{7, 10}, {7, 12}, {7, 5}, {7, 4}, {7, 2}};
+  // vector<vector<int>> tasks = {{7, 10}, {7, 12}, {7, 5}, {7, 4}, {7, 2}};
 
-  std::cout << "Tasks: " << std::endl;
+  cout << "Tasks: " << endl;
   for (auto &vec : tasks)
     printArr(vec);
   
-  std::vector<int> ans = cpuTasks(tasks);
-  std::cout << "Process order index: " << std::endl;
+  vector<int> ans = cpuTasks(tasks);
+  cout << "Process order index: " << endl;
   printArr(ans);
 
   return 0;

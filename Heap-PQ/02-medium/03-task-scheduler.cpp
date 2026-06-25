@@ -28,12 +28,18 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<char> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << "'" << arr[i] << "' ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
@@ -41,15 +47,15 @@ void printArr(std::vector<char> arr) {
 // * We'll use max_heap for storing freq of each task.
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(26)
-int leastInterval(std::vector<char>& tasks, int n) {
+int leastInterval(vector<char>& tasks, int n) {
   // * Step 1. map task to freq
-  std::vector<int> mp(26, 0);
+  vector<int> mp(26, 0);
   for (char &t : tasks) {
     mp[t - 'A']++;
   }
 
   // * Step 2. Push all the task freq to max_heap
-  std::priority_queue<int> max_heap; // * max-size = 26 
+  priority_queue<int> max_heap; // * max-size = 26 
   for (int i = 0; i < 26; ++i) { 
     if (mp[i] > 0)
       max_heap.push(mp[i]);
@@ -57,13 +63,13 @@ int leastInterval(std::vector<char>& tasks, int n) {
 
   int intervals = 0;
   while (!max_heap.empty()) {
-    std::vector<int> pending; // * pending tasks freq
+    vector<int> pending; // * pending tasks freq
 
     // * we'll take (n + 1) tasks from our pq;
     for (int i = 0; i <= n; ++i) {
       if (!max_heap.empty()) {
         int freq = max_heap.top();
-        // std::cout << freq << std::endl;
+        // cout << freq << endl;
         max_heap.pop();
         freq--;
         pending.push_back(freq);
@@ -88,19 +94,19 @@ int leastInterval(std::vector<char>& tasks, int n) {
 
 int main(void) {
   // int n = 2;
-  // std::vector<char> tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+  // vector<char> tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
   
   // int n = 1;
-  // std::vector<char> tasks = {'A', 'C', 'A', 'B', 'D', 'B'};
+  // vector<char> tasks = {'A', 'C', 'A', 'B', 'D', 'B'};
   
   int n = 3;
-  std::vector<char> tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+  vector<char> tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
 
-  std::cout << "Tasks: ";
+  cout << "Tasks: ";
   printArr(tasks);
 
   int ans = leastInterval(tasks, n);
-  std::cout << "Least Intervals: " << ans << std::endl;
+  cout << "Least Intervals: " << ans << endl;
   
   return 0;
 }

@@ -23,8 +23,8 @@
 // ! DP
 // ! Amazon, Google
 
+#include "common.hpp"
 #include <unordered_map>
-#include "../common.hpp"
 
 using namespace std;
 
@@ -127,6 +127,7 @@ int main(void) {
   
   vector<TreeNode *> trees = bruteForce(n);
   // vector<TreeNode *> trees = allPossibleFBT(n);
+
   for (int i = 0; i < trees.size(); ++i) {
     cout << "--------- Tree " << i + 1 << " ---------" << endl;
     levelOrderTraversal(trees[i]);

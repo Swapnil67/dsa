@@ -17,7 +17,7 @@
  * Input      : equations = ["b==a","a==b"]
  * Output     : true
  * 
- * https://leetcode.com/problems/satisfiability-of-equality-equations/description/
+ * https://leetcode.com/problems/satisfiability-of-equality-equations/
  * 
  */
 

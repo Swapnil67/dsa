@@ -16,21 +16,23 @@
  * Explanation      : no subset sum equals 'k'The array cannot be partitioned into equal sum subsets.
  *
  * https://leetcode.com/problems/partition-equal-subset-sum/
- */
+*/
+
+// ! Amazon, Meta, Paypal, Microsoft, Flipkart, Tiktok, Visa
+
+// ! DP on subsequences
 
 #include <vector>
-#include <iostream>
 #include <numeric>
+#include <iostream>
 
 using namespace std;
 
 template <typename T>
-void printArr(vector<T> &arr)
-{
+void printArr(vector<T> &arr) {
   int n = arr.size();
   cout << "[ ";
-  for (int i = 0; i < n; ++i)
-  {
+  for (int i = 0; i < n; ++i) {
     cout << arr[i];
     if (i != n - 1)
       cout << ", ";
@@ -38,8 +40,8 @@ void printArr(vector<T> &arr)
   cout << " ]" << endl;
 }
 
-bool dfs(int i, int target, vector<int> &nums)
-{
+// * Without Memoization
+bool dfs(int i, int target, vector<int> &nums) {
   if (i == nums.size())
     return target == 0;
 
@@ -49,8 +51,8 @@ bool dfs(int i, int target, vector<int> &nums)
   return dfs(i + 1, target, nums) || dfs(i + 1, target - nums[i], nums);
 }
 
+// * With Memoization
 bool dfs(int i, int target, vector<int> &nums, vector<vector<int>> &dp) {
-
   if (i == nums.size())
     return target == 0;
 
@@ -111,6 +113,7 @@ bool canPartition2(vector<int> &nums) {
     dp[i][0] = true;
   }
 
+  // * The i = 0 row is the base case — it represents using zero elements from the array.
   for (int i = 1; i <= n; ++i) {
     for (int j = 1; j <= target; ++j) {
       if (j >= nums[i - 1]) {
@@ -124,8 +127,6 @@ bool canPartition2(vector<int> &nums) {
 
   return dp[n][target];
 }
-
-
 
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * dp = represents all possible sums we can make after processing elements up to index i-1
@@ -146,11 +147,10 @@ bool canPartition3(vector<int>& nums) {
 
   for (int i = 0; i < n; ++i) {
     for (int j = 1; j <= target; ++j) {
+      next_dp[j] = dp[j];
       if (j >= nums[i]) {
         // * dp[j - nums[i]] asks: "Could we make sum j - nums[i] before? If yes, then by adding the current element, we can now make sum j!"
         next_dp[j] = dp[j] || dp[j - nums[i]];
-      } else {
-        next_dp[j] = dp[j];
       }
     }
     dp = next_dp;
@@ -160,7 +160,7 @@ bool canPartition3(vector<int>& nums) {
 }
 
 int main(void) {
-  vector<int> nums = {1,5,11,5};
+  vector<int> nums = {1, 5, 11, 5};
   cout << "Nums: ";
   printArr(nums);
 

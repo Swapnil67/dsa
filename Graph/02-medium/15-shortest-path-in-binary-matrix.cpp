@@ -60,7 +60,7 @@ void printArr(vector<T> &arr)
 }
 const vector<vector<int>> dirs = {{1, 1}, {1, -1}, {-1, -1}, {-1, 1}, {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // ! use this more optimal & easy
 // * Using BFS
 // * TIME COMPLEXITY O(N)

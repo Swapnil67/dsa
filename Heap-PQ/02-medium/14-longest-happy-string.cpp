@@ -29,12 +29,18 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- Optimal Approach -------------------------`
@@ -42,13 +48,13 @@ void printArr(std::vector<int> arr) {
 // * k is the number of distinct characters in the input string s (maximum 26)
 // * TIME COMPLEXITY O(nlogk)
 // * SPACE COMPLEXITY O(1)
-std::string longestDiverseString(int a, int b, int c) {
-  std::priority_queue<std::pair<int, char>> max_heap;
+string longestDiverseString(int a, int b, int c) {
+  priority_queue<pair<int, char>> max_heap;
   if (a > 0) max_heap.push({a, 'a'});
   if (b > 0) max_heap.push({b, 'b'});
   if (c > 0) max_heap.push({c, 'c'});
 
-  std::string ans = "";
+  string ans = "";
   while (!max_heap.empty()) {
     // * first take char with max freq
     auto [count, ch] = max_heap.top();
@@ -62,7 +68,6 @@ std::string longestDiverseString(int a, int b, int c) {
       // * If yes then take the next max freq char
       auto [count2, ch2] = max_heap.top();
       max_heap.pop();
-
       ans += ch2;
       if (--count2 > 0)
         max_heap.push({count2, ch2});
@@ -86,10 +91,10 @@ int main(void) {
   // * testcase 2
   // int a = 7, b = 1, c = 0;
 
-  std::cout << "a: " << a << " b: " << b << " c: " << c << std::endl;
+  cout << "a: " << a << " b: " << b << " c: " << c << endl;
 
-  std::string ans = longestDiverseString(a, b, c);
-  std::cout << "Longest Happy String: " << ans << std::endl;
+  string ans = longestDiverseString(a, b, c);
+  cout << "Longest Happy String: " << ans << endl;
   
   return 0;
 }

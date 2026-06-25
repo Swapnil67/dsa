@@ -27,7 +27,7 @@
  *                      ["0","0","0","1","1"]]
  * Output     : 0
  * 
- * https://leetcode.com/problems/number-of-islands/description/
+ * https://leetcode.com/problems/number-of-islands/
  * https://www.naukri.com/code360/problems/find-number-of-islands_630512
  * https://www.geeksforgeeks.org/problems/find-the-number-of-islands/1
 */

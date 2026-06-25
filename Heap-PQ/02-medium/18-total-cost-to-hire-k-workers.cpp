@@ -35,35 +35,38 @@
 #include <vector>
 #include <climits>
 #include <iostream>
+using namespace std;
 
 // ! Meta
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
+
 
 // * ------------------------- Optimal Approach -------------------------`
 // * Using two min_heap
 // * m - candidates count
 // * TIME COMPLEXITY O(k + n) * O(logm)
 // * SPACE COMPLEXITY O(n)
-long long totalCost(std::vector<int> &costs, int k, int candidates) {
+long long totalCost(vector<int> &costs, int k, int candidates) {
   int n = costs.size();
   int i = 0, j = n - 1;
 
+  // * Create 2 min heaps
   typedef long long ll;
-  std::priority_queue<ll, std::vector<ll>, std::greater<ll>> pq1, pq2;
+  priority_queue<ll, vector<ll>, greater<ll>> pq1, pq2;
   
   int total_cost = 0;
-  while (k > 0) { // * no of sessions
+  while (k--) { // * no of sessions
 
     // * Put costs from start in pq1
     while (i <= j && pq1.size() < candidates) {
@@ -79,7 +82,7 @@ long long totalCost(std::vector<int> &costs, int k, int candidates) {
 
     int cost1 = pq1.empty() ? INT_MAX : pq1.top();
     int cost2 = pq2.empty() ? INT_MAX : pq2.top();
-    // std::cout << cost1 << "   " << cost2 << std::endl;
+    // cout << cost1 << "   " << cost2 << endl;
 
     if (cost1 <= cost2) {
       total_cost += cost1;
@@ -88,9 +91,7 @@ long long totalCost(std::vector<int> &costs, int k, int candidates) {
       total_cost += cost2;
       pq2.pop();
     }
-    k--;
-
-    // std::cout << "total_cost " << total_cost << std::endl;
+    // cout << "total_cost " << total_cost << endl;
   }
 
   return total_cost;
@@ -99,18 +100,18 @@ long long totalCost(std::vector<int> &costs, int k, int candidates) {
 int main(void) {
   // * testcase 1
   // int k = 3, candidates = 4;
-  // std::vector<int> cost = {17, 12, 10, 2, 7, 2, 11, 20, 8};
+  // vector<int> cost = {17, 12, 10, 2, 7, 2, 11, 20, 8};
   
   // * testcase 2
   int k = 3, candidates = 3;
-  std::vector<int> cost = {1, 2, 4, 1};
+  vector<int> cost = {1, 2, 4, 1};
 
-  std::cout << "k: " << k << ", candidates: " << candidates << std::endl;
-  std::cout << "Costs: ";
+  cout << "k: " << k << ", candidates: " << candidates << endl;
+  cout << "Costs: ";
   printArr(cost);
 
   long long ans = totalCost(cost, k, candidates);
-  std::cout << "Total Cost to Hire K Workers: " << ans << std::endl;
+  cout << "Total Cost to Hire K Workers: " << ans << endl;
 
   return 0;
 }

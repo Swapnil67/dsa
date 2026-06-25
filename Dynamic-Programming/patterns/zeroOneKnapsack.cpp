@@ -75,11 +75,6 @@ int maximumProfit(vector<int> &profit, vector<int> &weight, int capacity) {
 int maximumProfit2(vector<int> &profit, vector<int> &weight, int capacity) {
   int n = profit.size(), m = capacity;
   vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
-
-  for (int i = 0; i <= n; ++i) {
-    dp[i][0] = 0;
-  }
-  
   for (int i = 0; i <= m; ++i) {
     if (i >= weight[0])
       dp[0][i] = profit[0];
@@ -90,7 +85,7 @@ int maximumProfit2(vector<int> &profit, vector<int> &weight, int capacity) {
       int skip = dp[i - 1][j];
       int take = 0;
       if (j >= weight[i - 1]) {
-        take += profit[i - 1] + dp[i - 1][j - weight[i - 1]];
+        take = profit[i - 1] + dp[i - 1][j - weight[i - 1]];
       }
       dp[i][j] = max(skip, take);
     }

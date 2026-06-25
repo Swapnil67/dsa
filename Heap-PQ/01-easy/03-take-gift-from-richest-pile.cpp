@@ -31,30 +31,35 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop + Sorting
 // * TIME COMPLEXITY O(k * nlogn)
 // * SPACE COMPLEXITY O(1)
-long long bruteForce(std::vector<int>& gifts, int k) {
+long long bruteForce(vector<int>& gifts, int k) {
   int n = gifts.size();
   if (n == 0)
     return 0;
     
   while (k > 0) {
     // * to get the largest pile of gift
-    std::sort(gifts.begin(), gifts.end());
+    sort(gifts.begin(), gifts.end());
     int cur_gift_pile = gifts[n - 1];
 
-    int new_gift_pile = std::floor(std::sqrt(cur_gift_pile));
+    int new_gift_pile = floor(sqrt(cur_gift_pile));
     gifts[n - 1] = new_gift_pile;
     k--;
 
@@ -72,23 +77,21 @@ long long bruteForce(std::vector<int>& gifts, int k) {
 // * Using max_heap
 // * TIME COMPLEXITY O(nlogn + klogn)
 // * SPACE COMPLEXITY O(n)
-long long pickGifts(std::vector<int>& gifts, int k) {
+long long pickGifts(vector<int>& gifts, int k) {
   // * 1. push all the gift piles to max_heap
-  std::priority_queue<int> max_heap; // * O(nlogn)
+  priority_queue<int> max_heap; // * O(nlogn)
   for (auto &n : gifts) {
     max_heap.push(n);
   }
   
-  while (k > 0) { // * O(klogn)
+  while (k--) { // * O(klogn)
     // * take the largest gift pile
     int cur_gift_pile = max_heap.top();
     max_heap.pop();
     
     // * find the new gift pile
-    int new_gift_pile = std::floor(std::sqrt(cur_gift_pile));
+    int new_gift_pile = floor(sqrt(cur_gift_pile));
     max_heap.push(new_gift_pile);
-
-    k--;
   }
 
   // * find sum of all the gifts
@@ -104,19 +107,19 @@ long long pickGifts(std::vector<int>& gifts, int k) {
 int main() {
   // * testcase 1
   int k = 4;
-  std::vector<int> gifts = {25, 64, 9, 4, 100};
+  vector<int> gifts = {25, 64, 9, 4, 100};
 
   // * testcase 2
   // int k = 4;
-  // std::vector<int> gifts = {1, 1, 1, 1};
+  // vector<int> gifts = {1, 1, 1, 1};
 
-  std::cout << "Gifts: ";
+  cout << "Gifts: ";
   printArr(gifts);
 
   long long ans = bruteForce(gifts, k);
   // long long ans = pickGifts(gifts, k);
 
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

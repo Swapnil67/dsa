@@ -23,7 +23,6 @@
 */
 
 #include <vector>
-#include <climits>
 #include <iostream>
 
 using namespace std;
@@ -45,8 +44,8 @@ void printArr(vector<T> &arr) {
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
 int bruteForce(vector<int> arr, int target) {
-  int ans = INT_MAX;
   int n = arr.size();
+  int ans = n + 1;
   for(int i = 0; i < n; ++i) {
     int curSum = 0;
     int j = i;
@@ -60,7 +59,7 @@ int bruteForce(vector<int> arr, int target) {
     if (curSum >= target)
       ans = min(ans, j - i + 1);
   }
-  return ans == INT_MAX ? 0 : ans;
+  return ans == n + 1 ? 0 : ans;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
@@ -71,7 +70,7 @@ int bruteForce(vector<int> arr, int target) {
 // * SPACE COMPLEXITY O(1)
 int minSubArrayLen(vector<int> arr, int target) {
   int n = arr.size();
-  int ans = INT_MAX, sum = 0;
+  int ans = n + 1, sum = 0;
   int i = 0, j = 0;
   while (j < n) {
     sum += arr[j];
@@ -86,7 +85,7 @@ int minSubArrayLen(vector<int> arr, int target) {
 
     j++;
   }
-  return ans == INT_MAX ? 0 : ans;
+  return ans == n + 1 ? 0 : ans;
 }
 
 

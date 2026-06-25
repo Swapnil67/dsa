@@ -36,13 +36,13 @@
 * Output      : [3,5,1,6,2,0,8,null,null,7,4]
 * Explanation : Deepest leaf nodes are ['7', '4', '10'] depth is '3' and their LCA is '3' (root)
 
-* https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description
+* https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves
 */
 
 // ! Google, Meta
 
+#include "common.hpp"
 #include <unordered_map>
-#include "../common.hpp"
 
 using namespace std;
 

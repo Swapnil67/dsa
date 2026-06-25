@@ -39,22 +39,28 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<int> assignTasks(std::vector<int> &servers, std::vector<int> &tasks) {
+vector<int> assignTasks(vector<int> &servers, vector<int> &tasks) {
   int n = servers.size(), m = tasks.size();
 
   typedef long long ll;
-  typedef std::pair<ll, ll> P;
+  typedef pair<ll, ll> P;
 
   // * 1. Push all the servers to available min heap
-  std::priority_queue<P, std::vector<P>, std::greater<>> free;
+  priority_queue<P, vector<P>, greater<>> free;
   for (int i = 0; i < n; ++i) {
     free.emplace(servers[i], i);
   }
@@ -63,15 +69,15 @@ std::vector<int> assignTasks(std::vector<int> &servers, std::vector<int> &tasks)
   // while (!free.empty()) {
   //   P p = free.top();
   //   free.pop();
-  //   std::cout << p.first << " " << p.second << std::endl;
+  //   cout << p.first << " " << p.second << endl;
   // }
 
-  std::priority_queue<std::vector<ll>, std::vector<std::vector<ll>>, std::greater<>> busy;
+  priority_queue<vector<ll>, vector<vector<ll>>, greater<>> busy;
 
   long long time = 0;
-  std::vector<int> ans(m);
+  vector<int> ans(m);
   for (int i = 0; i < m; ++i) {
-    time = std::max(time, (ll)i);
+    time = max(time, (ll)i);
 
     // * If there is no free server 
     if (free.empty()) { // * check testcase 3
@@ -96,20 +102,20 @@ std::vector<int> assignTasks(std::vector<int> &servers, std::vector<int> &tasks)
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> servers = {3, 3, 2}, tasks = {1, 2, 3, 2, 1, 2};
+  // vector<int> servers = {3, 3, 2}, tasks = {1, 2, 3, 2, 1, 2};
   
   // * testcase 2
-  std::vector<int> servers = {5, 1, 4, 3, 2}, tasks = {2, 1, 2, 4, 5, 2, 1};
+  vector<int> servers = {5, 1, 4, 3, 2}, tasks = {2, 1, 2, 4, 5, 2, 1};
   
   // * testcase 2
-  // std::vector<int> servers = {10, 63, 95, 16, 85, 57, 83, 95, 6, 29, 71}, tasks = {70, 31, 83, 15, 32, 67, 98, 65, 56, 48, 38, 90, 5};
+  // vector<int> servers = {10, 63, 95, 16, 85, 57, 83, 95, 6, 29, 71}, tasks = {70, 31, 83, 15, 32, 67, 98, 65, 56, 48, 38, 90, 5};
 
-  std::cout << "Servers: ";
+  cout << "Servers: ";
   printArr(servers);
-  std::cout << "Tasks: ";
+  cout << "Tasks: ";
   printArr(tasks);
 
-  std::vector<int> ans = assignTasks(servers, tasks);
+  vector<int> ans = assignTasks(servers, tasks);
   printArr(ans);
 
   return 0;

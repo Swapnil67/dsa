@@ -23,16 +23,21 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::string kthLargestNumber(std::vector<std::string>& nums, int k) {
+string kthLargestNumber(vector<string>& nums, int k) {
   int n = nums.size();
   const auto compare = [&](const auto &a, const auto &b)
   { 
@@ -42,7 +47,7 @@ std::string kthLargestNumber(std::vector<std::string>& nums, int k) {
     return a.length() > b.length();
   };
 
-  std::priority_queue<std::string, std::vector<std::string>, decltype(compare)>
+  priority_queue<string, vector<string>, decltype(compare)>
       min_heap(compare);
   for (auto &num: nums) {
     min_heap.push(num);
@@ -52,18 +57,18 @@ std::string kthLargestNumber(std::vector<std::string>& nums, int k) {
 
   // * For debugging
   // while (!min_heap.empty()) { 
-  //   std::string ele = min_heap.top();
-  //   std::cout<< ele <<std::endl;
+  //   string ele = min_heap.top();
+  //   cout<< ele <<endl;
   //   min_heap.pop();
   // }
 
-  return nums[n - k];
+  return min_heap.top();
 }
 
 // * Without heap
-std::string kthLargestNumber2(std::vector<std::string>& nums, int k) {
+string kthLargestNumber2(vector<string>& nums, int k) {
   int n = nums.size();
-  std::sort(begin(nums), end(nums), [](const auto &a, const auto &b) { 
+  sort(begin(nums), end(nums), [](const auto &a, const auto &b) { 
     if(a.length() == b.length()) {
       return a < b;
     }
@@ -76,19 +81,19 @@ std::string kthLargestNumber2(std::vector<std::string>& nums, int k) {
 int main(void) {
   // * testcase 1
   int k = 4;
-  std::vector<std::string> nums = {"3", "6", "7", "10"};
+  vector<string> nums = {"3", "6", "7", "10"};
 
   // * testcase 2
   // int k = 3;
-  // std::vector<std::string> nums = {"2", "21", "12", "1"};
+  // vector<string> nums = {"2", "21", "12", "1"};
 
-  std::cout << "K: " << k << std::endl;
-  std::cout << "nums: ";
+  cout << "K: " << k << endl;
+  cout << "nums: ";
   printArr(nums);
   
-  std::string ans = kthLargestNumber(nums, k);
-  // std::string ans = kthLargestNumber2(nums, k);
-  std::cout << "Ans: " << ans << std::endl;
+  string ans = kthLargestNumber(nums, k);
+  // string ans = kthLargestNumber2(nums, k);
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

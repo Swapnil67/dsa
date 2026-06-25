@@ -14,7 +14,7 @@
  * Input  : nums = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5
  * Output : 6
  * 
- * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
+ * https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold
 */
 
 // ! Amazon, Goldman Sachs, LinkedIn, Turo

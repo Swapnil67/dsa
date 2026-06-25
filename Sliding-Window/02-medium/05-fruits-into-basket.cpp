@@ -24,7 +24,7 @@
  * * Output : 5
  * * Explanation: Do Dry Run
  * 
- * * https://leetcode.com/problems/fruit-into-baskets/description/
+ * * https://leetcode.com/problems/fruit-into-baskets/
  * * https://www.naukri.com/code360/problems/fruits-and-baskets_985356
 */
 
