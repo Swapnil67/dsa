@@ -97,12 +97,12 @@ int countSubarrays(vector<int> &arr, int k) {
 
 int main() {
   // * testcase 1
-  // int k = 2;
-  // vector<int> arr = {1, 3, 2, 3, 3};
+  int k = 2;
+  vector<int> arr = {1, 3, 2, 3, 3};
 
   // * testcase 1
-  int k = 2;
-  vector<int> arr = {1, 3, 2, 5, 1, 5};
+  // int k = 2;
+  // vector<int> arr = {1, 3, 2, 5, 1, 5};
 
   // * testcase 2
   // int k = 3;

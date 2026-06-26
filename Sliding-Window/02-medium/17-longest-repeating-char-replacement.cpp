@@ -15,7 +15,7 @@
  * Output : 4
  * Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
 
- * https://leetcode.com/problems/longest-repeating-character-replacement/description/
+ * https://leetcode.com/problems/longest-repeating-character-replacement
 */
 
 // ! Google, Meta, Microsoft, Apple, Uber, Flipkart, Goldman Sachs

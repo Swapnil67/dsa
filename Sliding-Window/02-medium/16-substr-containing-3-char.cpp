@@ -32,7 +32,7 @@ int bruteForce(string s) {
     vector<int> hash(3, 0);
     for (int j = i; j < n; ++j) {
       hash[s[j] - 'a'] = 1;
-      if(hash[0] + hash[1] + hash[2] == 3) {
+      if (hash[0] + hash[1] + hash[2] == 3) {
         // cout << n - j << endl;
         ans = ans + (n - j);
         break;

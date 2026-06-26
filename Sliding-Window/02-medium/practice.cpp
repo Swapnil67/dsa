@@ -22,61 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 10 - Binary Subarrays With Sum
-// int numSubarraysWithSum(vector<int> &nums, int goal) {
-// TODO
-// }
-
-// * 11 - Subarray Product Less Than K
-// int numSubarrayProductLessThanK(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 12 - Length of Longest Subarray With at Most K Frequency
-// int maxSubarrayLength(vector<int> &arr, int k) {
-// TODO 
-// }
-
-// * 13 - Count Subarrays Where Max Element Appears at Least K Times
-// int countSubarrays(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 14 - Longest Substring Without Repeating Characters
-// int lengthOfLongestSubstring(string s) {
-// TODO
-// }
-
-// * 15 - Longest Substring with At Most K Distinct Characters
-// int kDistinctChars(string s, int k) {
-// TODO
-// }
-
-// * 16 - Number of Substrings Containing All Three Characters
-// int numberOfSubstrings(string &s) {
-// TODO
-// } 
-
-// * 17 - Longest Repeating Character Replacement
-// int characterReplacement(string s, int k) {
-// TODO
-// }
-
-// * 18 - Permutation in String
-// bool checkInclusion(string &s1, string &s2) {
-// TODO
-// }
-
-// * 19 - Maximum Number of Vowels in a Substring of Given Length
-// int maxVowels(string &s, int k) {
-// TODO
-// }
-
-// * 20 - Minimum Number of Flips to Make the Binary String Alternating
-// int minFlips(string s) {
-// TODO
-// }
-
 // * 21 - get Equal Substrings Within Budget
 // int equalSubstring(string s, string t, int max_cost) {
 // TODO
@@ -208,6 +153,61 @@ void printArr(vector<T> &arr) {
 
 // * 09 - Minimum Operations to Reduce X to Zero
 // int minOperations(vector<int> &nums, int x) {  
+// TODO
+// }
+
+// * 10 - Binary Subarrays With Sum
+// int numSubarraysWithSum(vector<int> &nums, int goal) {
+// TODO
+// }
+
+// * 11 - Subarray Product Less Than K
+// int numSubarrayProductLessThanK(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 12 - Length of Longest Subarray With at Most K Frequency
+// int maxSubarrayLength(vector<int> &arr, int k) {
+// TODO 
+// }
+
+// * 13 - Count Subarrays Where Max Element Appears at Least K Times
+// int countSubarrays(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 14 - Longest Substring Without Repeating Characters
+// int lengthOfLongestSubstring(string s) {
+// TODO
+// }
+
+// * 15 - Longest Substring with At Most K Distinct Characters
+// int kDistinctChars(string s, int k) {
+// TODO
+// }
+
+// * 16 - Number of Substrings Containing All Three Characters
+// int numberOfSubstrings(string &s) {
+// TODO
+// } 
+
+// * 17 - Longest Repeating Character Replacement
+// int characterReplacement(string s, int k) {
+// TODO
+// }
+
+// * 18 - Permutation in String
+// bool checkInclusion(string &s1, string &s2) {
+// TODO
+// }
+
+// * 19 - Maximum Number of Vowels in a Substring of Given Length
+// int maxVowels(string &s, int k) {
+// TODO
+// }
+
+// * 20 - Minimum Number of Flips to Make the Binary String Alternating
+// int minFlips(string s) {
 // TODO
 // }
 

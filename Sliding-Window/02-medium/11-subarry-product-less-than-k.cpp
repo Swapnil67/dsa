@@ -76,13 +76,11 @@ int numSubarrayProductLessThanK(vector<int>& nums, int k) {
   int i = 0, j = 0, cur_product = 1;
 
   // * since nums has [1 .... 1000]
-  if(k <= 1) {    // * k = 0, k = 1;
+  if (k <= 1) // * k = 0, k = 1;
     return 0;
-  }
 
   while (j < n) {
     cur_product *= nums[j];
-    // printf("%d\n", cur_product);
 
     // * Shrink the window
     while (i < j && cur_product >= k) {

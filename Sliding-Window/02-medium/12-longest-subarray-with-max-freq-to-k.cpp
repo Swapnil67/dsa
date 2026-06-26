@@ -51,7 +51,7 @@ void printArr(vector<T> &arr) {
 int bruteForce(vector<int>& arr, int k) {
   int n = arr.size();
   int ans = 0;
-  for(int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; ++i) {
     unordered_map<int, int> freq_map;
     int j = i; // * This is done here to save the max sub arr calculation
     for(; j < n; ++j) {

@@ -14,7 +14,8 @@
  * Input  : s1 = "ab", s2 = "eidboaoo"
  * Output : false
 
- * https://leetcode.com/problems/permutation-in-string/description/
+ * https://leetcode.com/problems/permutation-in-string
+ * https://neetcode.io/problems/permutation-string/question
 */
 
 // ! Google, Meta, Microsoft, Apple, Adobe, Oracle, Goldman Sachs

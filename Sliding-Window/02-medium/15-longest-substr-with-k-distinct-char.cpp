@@ -15,7 +15,7 @@
  * Output : 5
  * Explanation: substring "bbbbb"
 
- * https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
+ * https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters
  * https://neetcode.io/problems/longest-substring-with-at-most-k-distinct-characters/
  * https://www.naukri.com/code360/problems/distinct-characters_2221410
  * https://www.geeksforgeeks.org/problems/longest-k-unique-characters-substring0853/10
