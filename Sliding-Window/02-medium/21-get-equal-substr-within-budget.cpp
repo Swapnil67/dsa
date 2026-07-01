@@ -17,7 +17,7 @@
  * Output : 1
  * Explanation: You cannot make any change, so the maximum length is 1.
  * 
- * https://leetcode.com/problems/get-equal-substrings-within-budget/description/
+ * https://leetcode.com/problems/get-equal-substrings-within-budget/
 */
 
 #include <iostream>

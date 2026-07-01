@@ -23,7 +23,7 @@
  * Input  : word = "iqeaouqi", k = 2
  * Output : 3
  * 
- * https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii/description/
+ * https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii
 */
 
 #include <vector>

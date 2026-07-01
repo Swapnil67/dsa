@@ -15,7 +15,7 @@
  * Take five characters from the right of s. You now have four 'a' characters, two 'b' characters, and two 'c' characters.
  * A total of 3 + 5 = 8 minutes is needed.
  *
- * https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/
+ * https://leetcode.com/problems/take-k-of-each-character-from-left-and-right
 */
 
 #include <vector>

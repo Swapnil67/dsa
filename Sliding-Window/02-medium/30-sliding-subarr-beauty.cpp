@@ -36,7 +36,7 @@
  *                For [0, -3], the 1st smallest negative integer is -3.
  * 
  * 
- * https://leetcode.com/problems/sliding-subarray-beauty/description/
+ * https://leetcode.com/problems/sliding-subarray-beauty
 */
 
 #include <vector>

@@ -126,10 +126,9 @@ vector<int> resultsArray2(vector<int> &arr, int k) {
   while (j < n) {
     
     // * Shrink window
-    if (dq.size() == k) {
+    if (dq.size() == k) 
       dq.pop_front();
-    }
-
+    
     // * Not consecutive
     while (!dq.empty() && dq.back() + 1 != arr[j]) {
       dq.pop_front();

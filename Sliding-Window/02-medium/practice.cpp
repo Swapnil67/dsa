@@ -22,56 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 21 - get Equal Substrings Within Budget
-// int equalSubstring(string s, string t, int max_cost) {
-// TODO
-// }
-
-// * 22 - Grumpy Bookstore Owner
-// int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
-// TODO
-// }
-
-// * 23 - Alternating Groups II
-// int numberOfAlternatingGroups(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 24 - Count Number of Nice Subarrays
-// int numberOfSubarrays(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
-// long long countOfSubstrings(string s, int k) {
-// TODO
-// }
-
-// * 26 - Find the Power of K-Size Subarrays I
-// vector<int> resultsArray(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 27 - Maximum Beauty of an Array After Applying Operation
-// int maximumBeauty(vector<int> &arr, int k) {
-// TODO
-// }
-
-// * 28 - Take K of Each Character From Left and Right
-// int takeCharacters(string s, int k) {
-// TODO
-// } 
-
-// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
-// int longestSubarray(vector<int> &nums, int limit) {
-// TODO
-// }
-
-// * 30 - Sliding Subarray Beauty
-// vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
-// TODO
-// }
-
 // * 31 - Partition Array Such That Maximum Difference Is K
 // int partitionArray(vector<int> &nums, int k) {
 // TODO
@@ -208,6 +158,56 @@ void printArr(vector<T> &arr) {
 
 // * 20 - Minimum Number of Flips to Make the Binary String Alternating
 // int minFlips(string s) {
+// TODO
+// }
+
+// * 21 - get Equal Substrings Within Budget
+// int equalSubstring(string s, string t, int max_cost) {
+// TODO
+// }
+
+// * 22 - Grumpy Bookstore Owner
+// int maxSatisfied(vector<int> &customers, vector<int> &grumpy, int minutes) {
+// TODO
+// }
+
+// * 23 - Alternating Groups II
+// int numberOfAlternatingGroups(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 24 - Count Number of Nice Subarrays
+// int numberOfSubarrays(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 25 - Count of Substrings Containing Every Vowel and K Consonants II
+// long long countOfSubstrings(string s, int k) {
+// TODO
+// }
+
+// * 26 - Find the Power of K-Size Subarrays I
+// vector<int> resultsArray(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 27 - Maximum Beauty of an Array After Applying Operation
+// int maximumBeauty(vector<int> &arr, int k) {
+// TODO
+// }
+
+// * 28 - Take K of Each Character From Left and Right
+// int takeCharacters(string s, int k) {
+// TODO
+// } 
+
+// * 29 - Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
+// int longestSubarray(vector<int> &nums, int limit) {
+// TODO
+// }
+
+// * 30 - Sliding Subarray Beauty
+// vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
 // TODO
 // }
 

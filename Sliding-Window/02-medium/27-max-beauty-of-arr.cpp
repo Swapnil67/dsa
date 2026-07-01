@@ -21,7 +21,7 @@
  * Input  : nums = [1, 1, 1, 1], k = 10
  * Output : 4
 
- * https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/
+ * https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation
 */
 
 #include <deque>
@@ -91,7 +91,6 @@ int bruteForce(vector<int> arr, int k) {
 // * Binary Search + Math Equation
 // * TIME COMPLEXITY 2 * O(nlogn)
 // * SPACE COMPLEXITY O(1)
-
 int binarySearch(vector<int> &nums, int target) {
   int n = nums.size();
   int l = 0, r = n - 1, ans = 0;

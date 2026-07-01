@@ -26,7 +26,7 @@
  * 
  * 7             |7 - 7| = 0
 
- * https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/
+ * https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit
 */
 
 // ! Amazon, Google, Meta, Microsoft, Visa, PhonePe, Uber
@@ -50,7 +50,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
@@ -70,12 +70,10 @@ int bruteForce(vector<int> nums, int limit) {
   return ans;
 }
 
-
-// * ------------------------- APPROACH 2A: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2A: Optimal APPROACH -------------------------
 // * Using Min Heap & Max Heap
 // * Min Heap = To find min element in subarray
 // * Max Heap = To find max element in subarray
-
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(N + N)
 int longestSubarray(vector<int> &nums, int limit) {
@@ -131,28 +129,28 @@ int longestSubarray(vector<int> &nums, int limit) {
 // * SPACE COMPLEXITY O(2N)
 int longestSubarray2(vector<int> &nums, int limit) {
   int n = nums.size();
-  deque<int> minDq, maxDq;
+  deque<int> min_dq, max_dq;
   int i = 0, j = 0, ans = 0;
   while (j < n) {
-    // * Maintain minDq (increasing)
-    while (!minDq.empty() && nums[j] < minDq.back()) {
-      minDq.pop_back();
+    // * Maintain min_dq (increasing)
+    while (!min_dq.empty() && nums[j] < min_dq.back()) {
+      min_dq.pop_back();
     }
-    minDq.push_back(nums[j]);
+    min_dq.push_back(nums[j]);
 
-    // * Maintain maxDq (decreasing)
-    while (!maxDq.empty() && nums[j] > maxDq.back()) {
-      maxDq.pop_back();
+    // * Maintain max_dq (decreasing)
+    while (!max_dq.empty() && nums[j] > max_dq.back()) {
+      max_dq.pop_back();
     }
-    maxDq.push_back(nums[j]);
+    max_dq.push_back(nums[j]);
 
     // * Shrink window if limit exceeded
-    while (maxDq.front() - minDq.front() > limit) {
-      if (maxDq.front() == nums[i])
-        maxDq.pop_front();
+    while (max_dq.front() - min_dq.front() > limit) {
+      if (max_dq.front() == nums[i])
+        max_dq.pop_front();
 
-      if (minDq.front() == nums[i])
-        minDq.pop_front();
+      if (min_dq.front() == nums[i])
+        min_dq.pop_front();
       i++;
     }
 
@@ -208,6 +206,7 @@ int main() {
   // int ans = bruteForce(nums, limit);
   // int ans = longestSubarray(nums, limit);
   int ans = longestSubarray2(nums, limit);
+
   cout << "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit: " << ans << endl;
 
   return 0;

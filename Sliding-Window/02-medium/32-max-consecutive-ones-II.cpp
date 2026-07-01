@@ -13,7 +13,7 @@
  * * Output : 4
  * 
  * 
- * https://neetcode.io/problems/max-consecutive-ones-ii/question
+ * https://neetcode.io/problems/max-consecutive-ones-ii
 */
 
 #include <vector>
