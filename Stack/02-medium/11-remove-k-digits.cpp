@@ -17,7 +17,7 @@
  * * Input  : num = "10", k = 2
  * * Output : 0
 
-* https://leetcode.com/problems/remove-k-digits/description/
+* https://leetcode.com/problems/remove-k-digits/
 */
 
 // ! Meta

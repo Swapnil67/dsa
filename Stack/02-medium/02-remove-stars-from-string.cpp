@@ -16,7 +16,7 @@
  * Input  : s = "erase*****";
  * Output : 
 
-* https://leetcode.com/problems/removing-stars-from-a-string/description/
+* https://leetcode.com/problems/removing-stars-from-a-string/
 */
 
 // ! Microsoft

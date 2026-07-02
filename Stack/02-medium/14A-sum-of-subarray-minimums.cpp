@@ -16,6 +16,8 @@
  * Output : 3
  * 
  * https://leetcode.com/problems/sum-of-subarray-minimums/description/
+ * https://www.naukri.com/code360/problems/sum-of-subarray-minimums_8365431
+ * https://www.geeksforgeeks.org/problems/sum-of-subarray-minimum/1
 */
 
 #include <stack>

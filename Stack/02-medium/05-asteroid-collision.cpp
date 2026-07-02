@@ -118,7 +118,7 @@ vector<int> asteroidCollision2(vector<int> &asteroids) {
   return ans;
 }
 
-// * ------------------------- APPROACH 1C: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 1C: Optimal Approach -------------------------
 // * With Zero as a weightless object moving in right (code360)
 vector<int> asteroidCollision3(vector<int> &ast) {
   int n = ast.size();
@@ -172,9 +172,10 @@ int main() {
   printf("Asteroids Before Collision: ");
   printArr(asteroids);
 
-  printf("Asteroids After Collision: ");
   // vector<int> ans = asteroidCollision(asteroids);
   vector<int> ans = asteroidCollision2(asteroids);
+  
+  printf("Asteroids After Collision: ");
   printArr(ans);
 
   return 0;

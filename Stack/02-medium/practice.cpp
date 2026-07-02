@@ -43,8 +43,50 @@ void reverseArr(vector<int> &arr, int i, int j) {
 }
 
 
+// * 18 - Flatten Nested List Iterator
+// ! Solve this on leetcode platform
 
-// * 27 - Minimum Remove to Make Valid Parentheses
+// * 19 - Next Greater II
+// vector<int> nextGreaterElement(vector<int> arr) {
+// TODO
+// };
+
+// * 20 - Minimum Add to Make Parentheses Valid
+// int minAddToMakeValid(string s) {
+// TODO
+// }
+
+// * 21 - Basic Calculator II
+// int calculate(string s) {
+// TODO
+// }
+
+// * 22 - Sum of Subarray Ranges 
+// long long subArrayRanges2(vector<int>& nums) {
+// TODO
+// }
+
+// * 23 - Find Permutation
+// vector<int> findPermutation(string s) {
+// TODO
+// }
+
+// * 24 - Construct Smallest Number From DI String
+// string smallestNumber(string pattern) {
+// TODO
+// }
+
+// * 25 - Minimum Swaps To Make Balance String
+// int minSwaps(string s) {
+// TODO
+// }
+
+// * 26 - Minimum Insertions to Balance a Parentheses String
+// int minInsertions(string s) {
+// TODO
+// }
+
+// * 27 -  Minimum Remove to Make Valid Parentheses
 // string minRemoveToMakeValid(string s) {
 // TODO
 // }
@@ -136,54 +178,6 @@ void reverseArr(vector<int> &arr, int i, int j) {
 
 // * 17 - Maximum Width Ramp
 // int maxWidthRampB(vector<int> nums) {
-// TODO
-// }
-
-// * 18 - Flatten Nested List Iterator
-// ! Solve this on leetcode platform
-
-// * 19 - Next Greater II
-// vector<int> nextGreaterElement(vector<int> arr) {
-// TODO
-// };
-
-// * 20 - Minimum Add to Make Parentheses Valid
-// int minAddToMakeValid(string s) {
-// TODO
-// }
-
-// * 21 - Basic Calculator II
-// int calculate(string s) {
-// TODO
-// }
-
-// * 22 - Sum of Subarray Ranges 
-// long long subArrayRanges2(vector<int>& nums) {
-// TODO
-// }
-
-// * 23 - Find Permutation
-// vector<int> findPermutation(string s) {
-// TODO
-// }
-
-// * 24 - Construct Smallest Number From DI String
-// string smallestNumber(string pattern) {
-// TODO
-// }
-
-// * 25 - Minimum Swaps To Make Balance String
-// int minSwaps(string s) {
-// TODO
-// }
-
-// * 26 - Minimum Insertions to Balance a Parentheses String
-// int minInsertions(string s) {
-// TODO
-// }
-
-// * 27 -  Minimum Remove to Make Valid Parentheses
-// string minRemoveToMakeValid(string s) {
 // TODO
 // }
 

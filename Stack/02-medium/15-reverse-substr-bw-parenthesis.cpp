@@ -4,17 +4,17 @@
  * 
  * You are given a string s that consists of lower case English letters and brackets.
 
- * * Example 1
- * * Input  : s = "(abcd)"
- * * Output : "dcba"
+ * Example 1
+ * Input  : s = "(abcd)"
+ * Output : "dcba"
  * 
- * * Example 2
- * * Input  : s = "(u(love)i)"
- * * Output : "iloveu"
+ * Example 2
+ * Input  : s = "(u(love)i)"
+ * Output : "iloveu"
  * 
- * * Example 2
- * * Input  : s = "(ed(et(oc))el)"
- * * Output : "leetcode"
+ * Example 2
+ * Input  : s = "(ed(et(oc))el)"
+ * Output : "leetcode"
 
  * https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/description/
 */

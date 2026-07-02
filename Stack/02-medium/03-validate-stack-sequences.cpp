@@ -24,11 +24,16 @@
 
 using namespace std;
 
-void printArr(vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(std::vector<T> &arr) {
+  int n = arr.size();
+  std::cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    std::cout << arr[i];
+    if (i != n - 1)
+      std::cout << ", ";
   }
-  printf("\n");
+  std::cout << " ]" << std::endl;
 }
 
 // * TIME COMPLEXITY O(N)

@@ -12,7 +12,7 @@
  * Output       : 0
  * Explanation  : 
  * 
- * https://leetcode.com/problems/steps-to-make-array-non-decreasing/
+ * https://leetcode.com/problems/steps-to-make-array-non-decreasing
 */
 
 #include <stack>

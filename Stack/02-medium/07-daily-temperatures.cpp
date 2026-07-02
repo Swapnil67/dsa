@@ -37,7 +37,7 @@ void printArr(vector<T> &arr) {
 }
 
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)

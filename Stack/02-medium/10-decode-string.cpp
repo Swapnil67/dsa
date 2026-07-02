@@ -15,22 +15,26 @@
  * Output: "abcabccdcdcdef"
  * 
  * https://leetcode.com/problems/decode-string/description/
+ * https://www.naukri.com/code360/problems/decode-string_696319
+ * https://www.geeksforgeeks.org/problems/decode-the-string2444/1
 */
 
 #include <stack>
 #include <iostream>
 
-std::string decodeString(std::string s) {
+using namespace std;
+
+string decodeString(string s) {
   int n = s.size();
   int j = 0;
   
-  std::stack<char> st;
+  stack<char> st;
 
   for (char &ch : s) {
     if (ch == ']') {
 
       // * Get the string
-      std::string temp = "";
+      string temp = "";
       while (!st.empty() && st.top() != '[') {
         temp = st.top() + temp;
         st.pop();
@@ -38,29 +42,29 @@ std::string decodeString(std::string s) {
       st.pop(); // * pop the '[' bracket
 
       // * Get the number
-      std::string num_str = "";
+      string num_str = "";
       while(!st.empty() && isdigit(st.top())) {
         num_str = st.top() + num_str;
         st.pop();
       }
 
       // * 3 x a = "aaa" (do this here)
-      std::string temp2 = "";
-      for(int j = 0; j < std::stoi(num_str); ++j) {
+      string temp2 = "";
+      for(int j = 0; j < stoi(num_str); ++j) {
         temp2 += temp;
       }
       // * Push the result string back to stack
       for (char &c : temp2)
         st.push(c);
 
-      // std::cout << num_str << " -> " << temp << " = " << temp2 << std::endl;
+      // cout << num_str << " -> " << temp << " = " << temp2 << endl;
     }
     else {
       st.push(ch);
     }
   }
 
-  std::string ans = "";
+  string ans = "";
   while(!st.empty()) {
     ans = st.top() + ans;
     st.pop();
@@ -71,18 +75,18 @@ std::string decodeString(std::string s) {
 
 int main() {
   // * testcase 1
-  std::string s = "3[a]2[bc]";
+  string s = "3[a]2[bc]";
 
   // * testcase 2
-  // std::string s = "3[a2[c]]";
+  // string s = "3[a2[c]]";
 
   // * testcase 3
-  // std::string s = "2[abc]3[cd]ef";
+  // string s = "2[abc]3[cd]ef";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
 
-  std::string ans = decodeString(s);
-  std::cout << "Decoded String: " << ans << std::endl;
+  string ans = decodeString(s);
+  cout << "Decoded String: " << ans << endl;
   return 0;
 }
 

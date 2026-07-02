@@ -88,7 +88,7 @@ int carFleetOld(int target, vector<int> &position, vector<int> &speed) {
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * More easy to understand
-// * Monotonic Stack
+// * Save the car time in increasing order 
 // * TIME COMPLEXITY O(NlogN)
 // * SPACE COMPLEXITY O(N)
 int carFleet(int target, vector<int> &position, vector<int> &speed) {
@@ -103,7 +103,8 @@ int carFleet(int target, vector<int> &position, vector<int> &speed) {
   
   stack<double> st;
   for (int i = n - 1; i >= 0; --i) {
-    double time = (double)(target - position[i]) / speed[i];
+    double time = ((double)target - (double)cars[i].first) /
+                  (1.0 * cars[i].second);
     // * Add fleet in increasing order
     if (st.empty() || time > st.top()) {
       st.push(time);

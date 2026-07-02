@@ -23,7 +23,7 @@
  * * Input  : s = "yfttttfbbbbnnnnffbgffffgbbbbgssssgthyyyy", k = 4
  * * Output : "ybth"
 
-* https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/description/
+* https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
 */
 
 #include <stack>

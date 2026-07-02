@@ -34,7 +34,6 @@ string simplifyPath(string s) {
 
   string token = "";
   stringstream ss(s);
-
   stack<string> st;
 
   while(getline(ss, token, '/')) {

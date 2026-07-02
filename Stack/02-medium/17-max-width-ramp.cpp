@@ -17,7 +17,7 @@
  * Output      : 1
  * Explanation : The maximum width ramp is achieved at (i, j) = (0, 1): nums[0] = 2 and nums[1] = 2.
  * 
- * https://leetcode.com/problems/maximum-width-ramp/description/
+ * https://leetcode.com/problems/maximum-width-ramp
 */
 
 #include <stack>
@@ -97,7 +97,7 @@ int betterApproach(vector<int> &nums) {
 // * Monotonic Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int maxWidthRampB(vector<int> &nums) {
+int maxWidthRamp(vector<int> &nums) {
   int n = nums.size();
 
   // * Decreasing stack
@@ -143,8 +143,7 @@ int main() {
 
   // int ans = bruteForce(nums);
   // int ans = betterApproach(nums);
-  // int ans = maxWidthRampA(nums);
-  int ans = maxWidthRampB(nums);
+  int ans = maxWidthRamp(nums);
   
   cout << "Maximum Width Ramp: " << ans << endl;
   return 0;
