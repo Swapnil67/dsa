@@ -22,7 +22,7 @@
  *               [1,2,3], range = 3 - 1 = 2
  *               So the sum of all ranges is 0 + 0 + 0 + 1 + 1 + 2 = 4.
               
- * https://leetcode.com/problems/sum-of-subarray-ranges/description/
+ * https://leetcode.com/problems/sum-of-subarray-ranges
  * https://www.naukri.com/code360/problems/subarray-range-sum_8365419
  * https://www.geeksforgeeks.org/problems/sum-of-subarray-ranges/1
  */
@@ -44,6 +44,7 @@ void printArr(vector<T> &arr) {
   }
   cout << " ]" << endl;
 }
+
 void getSmallerElements(vector<int>& nums, vector<int>& pse,
                         vector<int>& nse) {
     int n = nums.size();
@@ -122,13 +123,13 @@ long long subArrayRanges(vector<int>& nums) {
     int left = i - pge[i];
     int right = nge[i] - i;
     // * itne total_subarrays subarrays honge jinka maximum is arr[i]
-    largest_elements_sum += ((right * left) * 1LL * nums[i]);
+    largest_elements_sum += ((right * left) * 1ll * nums[i]);
     
     // * subarray of minimums
     left = i - pse[i];  // * Left mai kitne elements honge
     right = nse[i] - i; // * Right mai kitne elements honge
     // * itne total_subarrays subarrays honge jinka minimum is arr[i]
-    smallest_elements_sum += ((right * left) * 1LL * nums[i]);
+    smallest_elements_sum += ((right * left) * 1ll * nums[i]);
   }
 
   cout << "Largest Sum: " << largest_elements_sum << endl;
@@ -146,14 +147,11 @@ long long subArrayRanges2(vector<int>& nums) {
   // * Find the sum of all the minimum. [Increasing Stack]
   for (int right = 0; right <= n; ++right) {
     while (!st.empty() &&
-           (right == n || nums[st.top()] >= nums[right]))
-    {
-      int mid = st.top();                          // * next smaller index to right
+           (right == n || nums[st.top()] >= nums[right])) {
+      int mid = st.top(); // * next smaller index to right
       st.pop();
-      int left = st.empty() ? -1 : st.top();       // * prev smaller index to left
-      long long cur = (long long)nums[mid] * (right - mid) * (mid - left);
-      // cout << nums[mid] <<" -> " << cur << endl;
-      ans -= cur;
+      int left = st.empty() ? -1 : st.top(); // * prev smaller index to left
+      ans -= (long long)nums[mid] * (right - mid) * (mid - left);
     }
     st.push(right);
   }
@@ -165,9 +163,9 @@ long long subArrayRanges2(vector<int>& nums) {
     while (!st.empty() &&
            (right == n || nums[st.top()] <= nums[right]))
     {
-      int mid = st.top(); 
+      int mid = st.top();
       st.pop();
-      int left = st.empty() ? -1 : st.top();       // * next greater index in left
+      int left = st.empty() ? -1 : st.top(); // * next greater index in left
       ans += (long long)nums[mid] * (right - mid) * (mid - left);
     }
     st.push(right);

@@ -17,7 +17,7 @@
  * input       : s = "DI"
  * output      : [2,1,3]
 
- * https://neetcode.io/problems/find-permutation/question
+ * https://neetcode.io/problems/find-permutation
 */
 
 // ! Google
@@ -62,7 +62,7 @@ vector<int> findPermutation(string s) {
     }
   }
 
-  st.push(s.length() + 1);
+  st.push(n + 1);
   while (!st.empty()) {
     res[j++] = st.top();
     st.pop();

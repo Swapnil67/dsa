@@ -19,9 +19,9 @@
  *              - Swap index 1 with index 5. s = "[[][]]".
  *              The resulting string is "[[][]]".
 
- * https://www.naukri.com/code360/problems/minimum-number-of-swaps-for-bracket-balancing_1115682
- * https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/
+ * https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced
  * https://www.geeksforgeeks.org/problems/minimum-swaps-for-bracket-balancing2704/1
+ * https://www.naukri.com/code360/problems/minimum-number-of-swaps-for-bracket-balancing_1115682
  * 
 */
 

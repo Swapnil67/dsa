@@ -26,8 +26,8 @@ using namespace std;
 // * Using Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int minAddToMakeValid(std::string s) {
-  std::stack<int> st;
+int minAddToMakeValid(string s) {
+  stack<int> st;
   for (char &ch : s) {
     if(ch == ')') {
       if (!st.empty() && st.top() == '(') {
@@ -46,7 +46,7 @@ int minAddToMakeValid(std::string s) {
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int minAddToMakeValid2(std::string s) {
+int minAddToMakeValid2(string s) {
   int open_cnt = 0, close_cnt = 0;
   for (auto &c : s) {
     if (c == ')') {
@@ -63,16 +63,16 @@ int minAddToMakeValid2(std::string s) {
 
 int main() {
   // * testcase 1
-  std::string s = "())";
+  string s = "())";
 
   // * testcase 2
-  // std::string s = "(((";
+  // string s = "(((";
 
-  std::cout << s << std::endl;
+  cout << s << endl;
 
   // int ans = minAddToMakeValid(s);
   int ans = minAddToMakeValid2(s);
-  std::cout << "Min no of moves required: " << ans << std::endl;
+  cout << "Min no of moves required: " << ans << endl;
 
   return 0;
 }

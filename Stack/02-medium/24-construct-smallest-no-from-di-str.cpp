@@ -25,7 +25,7 @@
  * input       : pattern = "DDD"
  * output      : "4321"
 
- * https://leetcode.com/problems/construct-smallest-number-from-di-string
+ * https://leetcode.com/problems/construct-smallest-number-from-di-string/
 */
 
 #include <stack>

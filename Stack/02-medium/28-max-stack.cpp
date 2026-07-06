@@ -77,8 +77,7 @@ class MaxStack {
     void push(int val) {
       s_top += 1;
       stack[s_top] = val;
-      if (val > last_max)
-        last_max = val;
+      last_max = max(last_max, val);
     }
     
     void pop() {

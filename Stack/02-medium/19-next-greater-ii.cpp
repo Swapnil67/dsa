@@ -14,6 +14,8 @@
  * * Output      : [2,-1,2]
  * 
  * https://leetcode.com/problems/next-greater-element-ii/
+ * https://www.geeksforgeeks.org/problems/next-greater-element/1
+ * https://www.naukri.com/code360/problems/next-greater-element-ii_6212757
 */
 
 // ! Amazon, Flipkart, Microsoft

@@ -16,9 +16,8 @@
  * * Input       : s = " 3+5 / 2 "
  * * Output      : 5
  * 
- * https://leetcode.com/problems/basic-calculator-ii/description/
+ * https://leetcode.com/problems/basic-calculator-ii/
 */
-
 
 #include <stack>
 #include <iostream>
@@ -62,8 +61,8 @@ int calculate(string s) {
         st.pop();
         st.push(operand / num);
       }
-      
-      sign = ch;         // * this is the key to this sum
+
+      sign = ch; // * this is the key to this sum
       num = 0;
     }
   }

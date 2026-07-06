@@ -27,7 +27,7 @@
  * Output      : ""
  * Explanation : An empty string is also valid.
 
- * https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/description/
+ * https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
  * 
 */
 
@@ -90,25 +90,21 @@ string minRemoveToMakeValid(string s) {
   for (auto &c: s) {
     if (c =='(') {
       extra_opens++;
-      temp += c;
       total_opens++;
     }
     else if (c == ')') {
-      if (extra_opens == 0) {
+      if (extra_opens == 0)
         continue;
-      }
       extra_opens--;
-      temp += c;
     }
-    else {
-      temp += c;
-    }
+    temp += c;
   }
-  // cout << "temp: " << temp << endl;
-  // cout << "total_opens: " << total_opens << endl;
-  // cout << "extra_opens: " << extra_opens << endl;
+  
+  cout << "temp: " << temp << endl;
+  cout << "total_opens: " << total_opens << endl;
+  cout << "extra_opens: " << extra_opens << endl;
   int keep = total_opens - extra_opens; // * Final Ans should have only 'keep' number of open brackets
-  // cout << "keep open: " << keep << endl;
+  cout << "keep open: " << keep << endl;
 
   string ans = "";
   for (auto &c: temp) {
@@ -178,8 +174,8 @@ int main() {
 
   cout << "Input string: " << s << endl;
   // string ans = bruteForce(s);
-  // string ans = minRemoveToMakeValid(s);
-  string ans = minRemoveToMakeValid2(s);
+  string ans = minRemoveToMakeValid(s);
+  // string ans = minRemoveToMakeValid2(s);
   
   cout << "Ans: " << ans << endl;
   return 0;
