@@ -26,20 +26,22 @@
 #include <iostream>
 #include <unordered_map>
 
-std::string countOfAtoms(std::string formula) {
+using namespace std;
+
+string countOfAtoms(string formula) {
   int n = formula.size();
 
-  std::stack<std::unordered_map<std::string, int>> st;
-  st.push(std::unordered_map<std::string, int>());
+  stack<unordered_map<string, int>> st;
+  st.push(unordered_map<string, int>());
 
   int i = 0;
   while (i < n) {
     if (formula[i] == '(') { // * push new map to stack top
-      st.push(std::unordered_map<std::string, int>());
+      st.push(unordered_map<string, int>());
       i++;
     }
     else if (formula[i] == ')') {
-      std::unordered_map<std::string, int> cur = st.top(); 
+      unordered_map<string, int> cur = st.top(); 
       st.pop();  // * pop the map from top of stack
 
       i++; // * go to next character
@@ -64,7 +66,7 @@ std::string countOfAtoms(std::string formula) {
     }
     else {
       // * start new chemical 
-      std::string cur_chemical = "";
+      string cur_chemical = "";
       cur_chemical.push_back(formula[i]);
       i++;
 
@@ -83,18 +85,17 @@ std::string countOfAtoms(std::string formula) {
       atoms = (atoms == 0) ? 1 : atoms;
       // * push the element to the stack top map
       st.top()[cur_chemical] += atoms;
-      // std::cout << cur_chemical << ":" << atoms << std::endl;
+      // cout << cur_chemical << ":" << atoms << endl;
     }
   }
 
   // * Since the ans need to be in sorted order alphabetically
-  std::string result = "";
-  std::map<std::string, int> sortedMap(begin(st.top()), end(st.top()));
-
+  string result = "";
+  map<string, int> sortedMap(begin(st.top()), end(st.top()));
   for (auto &it : sortedMap) {
     result += it.first; // * Append the chemical component
     if (it.second > 1)
-      result += std::to_string(it.second); // * Append the no. of atoms
+      result += to_string(it.second); // * Append the no. of atoms
   }
 
   return result;
@@ -102,21 +103,21 @@ std::string countOfAtoms(std::string formula) {
 
 int main() {
   // * testcase 1
-  // std::string formula = "H2O";
+  // string formula = "H2O";
 
   // * testcase 2
-  // std::string formula = "Mg(OH)2";
+  // string formula = "Mg(OH)2";
 
   // * testcase 3
-  // std::string formula = "K4(ON(SO3)2)2";
+  // string formula = "K4(ON(SO3)2)2";
 
   // * testcase 4
-  std::string formula = "H11He49NO35B7N46Li20";
+  string formula = "H11He49NO35B7N46Li20";
 
-  std::cout << "Input formula: " << formula << std::endl;
+  cout << "Input formula: " << formula << endl;
 
-  std::string ans = countOfAtoms(formula);
-  std::cout << ans << std::endl;
+  string ans = countOfAtoms(formula);
+  cout << ans << endl;
   return 0;
 }
 

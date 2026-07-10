@@ -26,6 +26,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 int helper(int x, int y, char op) {
   if (op =='+') {
     return x;
@@ -41,9 +43,12 @@ int helper(int x, int y, char op) {
 // * Using vector as Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int calculate(std::string s) {
+int calculate(string s) {
   s += '@';
-  std::vector<std::pair<int, bool>> st;
+  // * bool 
+  // * true  - its a number
+  // * false - its a operator
+  vector<pair<int, bool>> st;
   int num = 0;
   char prev_op = '+';
   for (auto &c: s) {
@@ -87,18 +92,18 @@ int calculate(std::string s) {
 
 int main() {
   // * testcase 1
-  // std::string s = "1+1";
+  // string s = "1+1";
 
   // * testcase 2
-  std::string s = "6-4/2";
+  string s = "6-4/2";
 
   // * testcase 3
-  // std::string s = "2*(5+5*2)/3+(6/2+8)";
+  // string s = "2*(5+5*2)/3+(6/2+8)";
 
-  std::cout << "Expression: " << s << std::endl;
+  cout << "Expression: " << s << endl;
   
   int ans = calculate(s);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

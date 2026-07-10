@@ -14,28 +14,34 @@
  * * Output      : [null, null, null, null, null, null, null, 5, 7, 5, 4]
  * 
  * https://leetcode.com/problems/maximum-frequency-stack/description/
+ * https://www.naukri.com/code360/problems/maxfrequencystack_1262006
 */
+
+// ! Amazon, Apple, Flipkart
 
 #include <stack>
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 class FreqStack {
 private: 
   // * Map to track frequency of each element
-  std::unordered_map<int, int> freq_map;
+  unordered_map<int, int> freq_map;
 
   // * Map to store stacks of elements for each frequency level
-  std::unordered_map<int, std::stack<int>> freq_stack; // * Hashmap of stack
+  unordered_map<int, stack<int>> freq_stack; // * Hashmap of stack
 
   // * Track the maximum frequency
   int max_freq;
 public:
+  FreqStack() {
+    max_freq = 0;
+    freq_map.clear();
+    freq_stack.clear();
+  }
 
-    FreqStack() {
-      max_freq = 0;
-    }
-    
     void push(int val) {
       // * Increment the frequency of val
       int freq = freq_map[val]++;
@@ -44,7 +50,7 @@ public:
       freq_stack[freq].push(val);
 
       // * Update max_freq if needed
-      max_freq = std::max(max_freq, freq);
+      max_freq = max(max_freq, freq);
     }
     
     int pop() {
@@ -63,8 +69,8 @@ public:
     }
 
     // * Time complexity O(n)
-    void printStack(std::stack<int> s) {
-      std::stack<int> p = s;
+    void printStack(stack<int> s) {
+      stack<int> p = s;
       while (!p.empty()) {
         printf("%d ", p.top());
         p.pop();
@@ -75,7 +81,7 @@ public:
     void printFreqStack() {
       for(auto it: freq_map) {
         printf("-> %d\n", it.second);
-        std::stack st = freq_stack[it.second];
+        stack<int> st = freq_stack[it.second];
         printStack(st);
         printf("\n");
       }

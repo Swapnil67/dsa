@@ -21,13 +21,14 @@
 #include<vector>
 #include<iostream>
 
+using namespace std;
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------`
 // * Using Stack (More Simple)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-bool parseBoolExpr(std::string expression) {
-  std::stack<char> st;
+bool parseBoolExpr(string expression) {
+  stack<char> st;
   for(char &ch: expression) {
     if (ch == ',')
       continue;
@@ -42,8 +43,7 @@ bool parseBoolExpr(std::string expression) {
         st.pop();
       }
 
-      // * pop the opening bracket '('
-      st.pop();
+      st.pop(); // * pop the opening bracket '('
 
       // * Get the last operation
       char operation = st.top(); // * !, |, &
@@ -72,21 +72,21 @@ bool parseBoolExpr(std::string expression) {
 
 int main(void) {
   // * testcase 1
-  // std::string expression = "!(f)";
+  // string expression = "!(f)";
 
   // * testcase 2
-  // std::string expression = "&(|(f))";
+  // string expression = "&(|(f))";
 
   // * testcase 3
-  // std::string expression = "|(f,f,f,t)";
+  // string expression = "|(f,f,f,t)";
 
   // * testcase 4
-  std::string expression = "!(&(f,t))";
+  string expression = "!(&(f,t))";
 
-  std::cout << "Expression: " << expression << std::endl;
+  cout << "Expression: " << expression << endl;
 
   bool ans = parseBoolExpr(expression);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 }
 
 // * run the code

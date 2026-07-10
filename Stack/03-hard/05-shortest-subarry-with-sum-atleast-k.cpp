@@ -69,20 +69,14 @@ int bruteForce(std::vector<int> arr, int k) {
 // * SPACE COMPLEXITY O(N)
 int shortestSubarray(std::vector<int>& nums, int k) {
   int n = nums.size();
-
-  int j = 0;
-  int curSum = 0;
-  int ans = INT_MAX;
-
-  // * monotonic increasing 
-  std::deque<int> dq;
+  std::deque<int> dq; // * monotonic increasing 
   std::vector<long long> prefixSums(n, 0);
-
+  prefixSums[0] = nums[0];
+  
+  int j = 0, ans = INT_MAX;
   while (j < n) {
     // * keep calculating the prefix array
-    if (j == 0) {
-      prefixSums[j] = nums[j];
-    } else {
+    if (j > 0) {
       prefixSums[j] = prefixSums[j - 1] + nums[j];
     }
 

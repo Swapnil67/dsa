@@ -53,8 +53,11 @@ int maximumScore(vector<int> &nums, int k) {
 			st.pop();
 			int nse = i;
 			int pse = !st.empty() ? st.top() : -1;
-			if (pse < k && nse > k) {
-				ans = max(ans, (nums[top] * (nse - pse - 1)));
+			// cout << nums[top] << " -> " << nse << " " << pse << endl;
+			if (pse < k && nse > k) { // * '<' & '>' becoz we need nse & pse out of the range of 'k'
+				int cur = (nums[top] * (nse - pse - 1));
+				// cout << cur << endl;
+				ans = max(ans, cur);
 			}
 		}
 		st.push(i);
@@ -65,7 +68,8 @@ int maximumScore(vector<int> &nums, int k) {
 		st.pop();
 		int nse = n;
 		int pse = !st.empty() ? st.top() : -1;
-		if (pse < k && nse > k) {
+		// cout << nums[top] << " -> " << nse << " " << pse << endl;
+		if (pse < k && nse > k) { // * '<' & '>' becoz we need nse & pse out of the range of 'k'
 			ans = max(ans, (nums[top] * (nse - pse - 1)));
 		}
 	}
@@ -73,6 +77,20 @@ int maximumScore(vector<int> &nums, int k) {
 }
 
 int main(void) {
+  // * testcase 1
+	int k = 3;
+	vector<int> nums = {1, 4, 3, 7, 4, 5};
+
+	// * testcase 2
+	// int k = 0;
+  // vector<int> nums = {5,5,4,5,4,1,1,1};
+
+	cout << "k: " << k << endl;
+	cout << "nums: ";
+	printArr(nums);
+
+  int ans = maximumScore(nums, k);
+  cout << "Maximum Score of a Good Subarray: " << ans << endl;
   return 0;
 }
  

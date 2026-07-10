@@ -33,35 +33,35 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include <numeric> // * Required for std::iota
+#include <numeric> // * Required for iota
 
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Optimal Approach -------------------------
 // * Using Stack
 // * TIME COMPLEXITY O(N) + O(nlogn)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> survivedRobotsHealths(
-    std::vector<int> &positions,
-    std::vector<int> &healths,
+vector<int> survivedRobotsHealths(
+    vector<int> &positions,
+    vector<int> &healths,
     string directions)
 {
   int n = positions.size();
 
-  // * This will fill the std::vector with 0 - n
-  std::vector<int> actual_idx_vec(n);
+  // * This will fill the vector with 0 - n
+  vector<int> actual_idx_vec(n);
   iota(begin(actual_idx_vec), end(actual_idx_vec), 0);
   
   // * Sort the robot index according to position vector
@@ -71,7 +71,7 @@ std::vector<int> survivedRobotsHealths(
   sort(begin(actual_idx_vec), end(actual_idx_vec), lamda); // * O(nlogn)
   // printArr(actual_idx_vec);
   
-  std::stack<int> st;
+  stack<int> st;
   for (int &cur_idx : actual_idx_vec) { 
     // * Any idx is visited atmost twice
     if (directions[cur_idx] == 'R') {
@@ -98,7 +98,7 @@ std::vector<int> survivedRobotsHealths(
     }
   }
 
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = 0; i < n; ++i) {
     if (healths[i] > 0)
       ans.push_back(healths[i]);
@@ -108,28 +108,28 @@ std::vector<int> survivedRobotsHealths(
 }
 
 int main() {
-  // std::vector<int> positions = {5,4,3,2,1}, healths = {2,17,9,15,10};
-  // std::string directions = "RRRRR";
+  // vector<int> positions = {5,4,3,2,1}, healths = {2,17,9,15,10};
+  // string directions = "RRRRR";
 
-  // std::vector<int> positions = {1, 2, 5, 6}, healths = {10, 10, 11, 11};
-  // std::string directions = "RLRL";
+  // vector<int> positions = {1, 2, 5, 6}, healths = {10, 10, 11, 11};
+  // string directions = "RLRL";
 
-  std::vector<int> positions = {3, 5, 2, 6}, healths = {10, 10, 15, 12};
-  std::string directions = "RLRL";
+  vector<int> positions = {3, 5, 2, 6}, healths = {10, 10, 15, 12};
+  string directions = "RLRL";
 
-  // std::vector<int> positions = {3, 47}, healths = {46, 26};
-  // std::string directions = "LR";
+  // vector<int> positions = {3, 47}, healths = {46, 26};
+  // string directions = "LR";
 
-  // std::vector<int> positions = {4, 37, 23}, healths = {50, 15, 49};
-  // std::string directions = "RLR";
+  // vector<int> positions = {4, 37, 23}, healths = {50, 15, 49};
+  // string directions = "RLR";
 
   printf("Positions: ");
   printArr(positions);
   printf("Healths: ");
   printArr(healths);
-  std::cout << "Direction: " << directions << std::endl;
+  cout << "Direction: " << directions << endl;
 
-  std::vector<int> ans = survivedRobotsHealths(positions, healths, directions);
+  vector<int> ans = survivedRobotsHealths(positions, healths, directions);
   printArr(ans);
   return 0;
 }

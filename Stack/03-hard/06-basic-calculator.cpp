@@ -25,14 +25,14 @@
 #include <stack>
 #include <iostream>
 
-int calculate(std::string s) {
+using namespace std;
+
+int calculate(string s) {
   int n = s.length();
 
-  std::stack<char> st;
-
   int sign = 1;
-  int num = 0;
-  int res = 0;
+  long num = 0, res = 0;
+  stack<int> st;
   for (char &ch : s) {
     if (isdigit(ch)) {
       num = num * 10 + (ch - '0');
@@ -74,21 +74,21 @@ int calculate(std::string s) {
 
 int main() {
   // * testcase 1
-  // std::string s = " 2-1 + 2 ";
+  // string s = " 2-1 + 2 ";
 
   // * testcase 2
-  // std::string s = "(1+(4+5+2)-3)+(6+8)";
+  // string s = "(1+(4+5+2)-3)+(6+8)";
 
   // * testcase 3
-  // std::string s = "10 - (4+5+2)-3+(6+8)";
+  // string s = "10 - (4+5+2)-3+(6+8)";
 
   // * testcase 4
-  std::string s = "(1+(4+5+2)-3)+(6+8)";
+  string s = "(1+(4+5+2)-3)+(6+8)";
 
-  std::cout << "Expression: " << s << std::endl;
+  cout << "Expression: " << s << endl;
   
   int ans = calculate(s);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

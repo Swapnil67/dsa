@@ -7,25 +7,37 @@
 #include <algorithm>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-void printStack(std::stack<int> st) {
-  std::stack<int> temp = st;
+void printStack(stack<int> st) {
+  stack<int> temp = st;
   while(!temp.empty()) {
-    std::cout << temp.top() << std::endl;
+    cout << temp.top() << endl;
     temp.pop();
   }
 }
+
+// * 08 - Parsing A Boolean Expression
+// bool parseBoolExpr(string &expression) {
+// TODO
+// }
+
+// * 09 - Number of Atoms
+// string countOfAtoms(string formula) {
+// TODO
+// }
 
 // * ------------------------------------------------------------------------------------
 
@@ -38,46 +50,36 @@ void printStack(std::stack<int> st) {
 // };
 
 // * 02 - Robot Collisions
-// std::vector<int> survivedRobotsHealths(
-//     std::vector<int> &positions,
-//     std::vector<int> &healths,
-//     std::string directions)
+// vector<int> survivedRobotsHealths(
+//     vector<int> &positions,
+//     vector<int> &healths,
+//     string directions)
 // {
 // TODO
 // }
 
 // * 03 - Largest Rectangle in Histogram
-// int largestRectangleArea(std::vector<int> &heights) {
+// int largestRectangleArea(vector<int> &heights) {
 // TODO
 // }
 
 // * 04 - Maximal Rectangle
-// int maximalRectangle(std::vector<std::vector<char>> &matrix) {
+// int maximalRectangle(vector<vector<char>> &matrix) {
 // TODO
 // }
 
 // * 05 - Shortest Subarray with Sum at Least K
-// int shortestSubarray(std::vector<int> &nums, int k) {
+// int shortestSubarray(vector<int> &nums, int k) {
 // TODO
 // }
 
 // * 06 - Basic Calculator
-// int calculate(std::string s) {
+// int calculate(string s) {
 // TODO
 // }
 
 // * 07 - Number of Visible People in a Queue
-// std::vector<int> canSeePersonsCount(std::vector<int>& heights) {
-// TODO
-// }
-
-// * 08 - Parsing A Boolean Expression
-// bool parseBoolExpr(std::string &expression) {
-// TODO
-// }
-
-// * 09 - Number of Atoms
-// std::string countOfAtoms(std::string formula) {
+// vector<int> canSeePersonsCount(vector<int>& heights) {
 // TODO
 // }
 

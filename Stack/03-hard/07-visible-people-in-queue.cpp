@@ -29,24 +29,30 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
-  }
-  printf("\n");
-}
+using namespace std;
 
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
+  }
+  cout << " ]" << endl;
+}
 
 // * ------------------------- APPROACH : Optimal Approach -------------------------`
 // * Using Monotonic Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> canSeePersonsCount(std::vector<int>& heights) {
+vector<int> canSeePersonsCount(vector<int>& heights) {
   int n = heights.size();
-  std::vector<int> ans(n);
+  vector<int> ans(n);
 
   int visible = 0;
-  std::stack<int> st;
+  stack<int> st;
   for (int i = n - 1; i >= 0; --i) {
     // * If st.top() has smaller height than current then pop that height and incr visible count
     while (!st.empty() && st.top() < heights[i]) {
@@ -69,11 +75,11 @@ std::vector<int> canSeePersonsCount(std::vector<int>& heights) {
 }
 
 int main() {
-  std::vector<int> heights = {10, 6, 8, 5, 11, 9};
-  std::cout << "Heights" << std::endl;
+  vector<int> heights = {10, 6, 8, 5, 11, 9};
+  cout << "Heights" << endl;
   printArr(heights);
   
-  std::vector<int> ans = canSeePersonsCount(heights);
+  vector<int> ans = canSeePersonsCount(heights);
   printArr(ans);
 
   return 0;
