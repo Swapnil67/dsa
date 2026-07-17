@@ -44,19 +44,19 @@ void printArr(vector<T> &nums) {
 // ! TLE
 // * TIME COMPLEXITY O(N^2) + O(slog(s))
 // * SPACE COMPLEXITY O(N)
-int bruteForce(std::vector<int>& nums, int k) {
+int bruteForce(vector<int>& nums, int k) {
   int n = nums.size();
 
   // * 1. Create a vector of abs diff of pairs O(N^2)
-  std::vector<int> diff_vec;
+  vector<int> diff_vec;
   for (int i = 0; i < n; ++i) {
     for(int j = i + 1; j < n; ++j) {
-      diff_vec.push_back(std::abs(nums[j] - nums[i]));
+      diff_vec.push_back(abs(nums[j] - nums[i]));
     }
   }
 
   // * 2. Sort the diff_vec in Ascenting O(slog(s))
-  std::sort(diff_vec.begin(), diff_vec.end());
+  sort(diff_vec.begin(), diff_vec.end());
 
   // * 3. return the kth smallest distance
   return diff_vec[k - 1];
@@ -67,16 +67,16 @@ int bruteForce(std::vector<int>& nums, int k) {
 // * kth Smallest = Max Heap
 // * TIME COMPLEXITY O(N^2 * log(k))
 // * SPACE COMPLEXITY O(k)
-int betterApproach(std::vector<int>& nums, int k) {
+int betterApproach(vector<int>& nums, int k) {
   int n = nums.size();
 
   // * 1. Create a max heap (Sorted in Descending Order)
-  std::priority_queue<int> heap;
+  priority_queue<int> heap;
 
   // * 2. Push all the abs diff of pairs into heap
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
-      heap.push(std::abs(nums[j] - nums[i]));  // * O(log(k))
+      heap.push(abs(nums[j] - nums[i]));  // * O(log(k))
       // * If heap size gets greater than k then pop from top
       if (heap.size() > k)
         heap.pop();
@@ -87,36 +87,10 @@ int betterApproach(std::vector<int>& nums, int k) {
   return heap.top();
 }
 
-// * ------------------------- APPROACH 3A: Optimal APPROACH -------------------------`
-// * Using C++ SDL (nth_element)
-// * TIME COMPLEXITY O(N^2) + O(maxEle)
-// * SPACE COMPLEXITY O(maxEle)
-int smallestDistancePair2(std::vector<int> &nums, int k) {
-  int n = nums.size();
-
-  // * 1. Create a vector of size max pairs possible for 'n' size array
-  int maxPairs = (n * (n - 1) / 2);
-  std::vector<int> pairsDiff(maxPairs);
-
-  // * 2. Save the pairs abs diff to pairsDiff vector
-  int idx = 0;
-  for (int i = 0; i < n; ++i) {
-    for (int j = i + 1; j < n; ++j) {
-      pairsDiff[idx] = std::abs(nums[i] - nums[j]);
-      idx++;
-    }
-  }
-
-  // * 3. Use nth_element to find the k - 1 element 
-  std::nth_element(begin(pairsDiff), begin(pairsDiff) + (k - 1), end(pairsDiff));
-
-  return pairsDiff[k - 1];
-}
-
 // * ------------------------- APPROACH 3C: Most Optimal APPROACH -------------------------
 // * Find how many pairs are possible with abs diff less than or equal to maxDist
 // * Sliding window
-bool isPossible(std::vector<int> &nums, int max_pairs, int maxDist) {
+bool isPossible(vector<int> &nums, int max_pairs, int maxDist) {
   int n = nums.size();
   int pairs = 0;
   int i = 0, j = 1;
@@ -127,21 +101,21 @@ bool isPossible(std::vector<int> &nums, int max_pairs, int maxDist) {
     pairs += (j - i);
     j++;
   }
-  // std::cout << "dist: " << maxDist << ", pairs " << pairs << std::endl;
+  cout << "dist: " << maxDist << ", pairs " << pairs << endl;
   return pairs >= max_pairs;
 }
 
 // * Sliding Window + Binary Search
 // * TIME COMPLEXITY O(n*log(n)) + O(n*log(r))
 // * SPACE COMPLEXITY O(1)
-int smallestDistancePair(std::vector<int> &nums, int k) {
+int smallestDistancePair(vector<int> &nums, int k) {
   int n = nums.size();
 
   // * Sort the nums array O(n*log(n))
-  std::sort(nums.begin(), nums.end());
+  sort(nums.begin(), nums.end());
 
   // * Binary Search on pairs difference
-  int l = 0, r = nums[n - 1] - nums[0];
+  int l = 0, r = nums[n - 1] - nums[0]; // * range of answers
   int ans = 0;
   while (l <= r) { // * O(log(r))
     int m = l + (r - l) / 2;
@@ -152,28 +126,30 @@ int smallestDistancePair(std::vector<int> &nums, int k) {
       l = m + 1;
     }
   }
-
   return ans;
 }
 
 int main(void) {
+  // * testcase 1 (Answer 0)
   // int k = 1;
-  // std::vector<int> nums = {1, 3, 1};
-
-  // int k = 3;
-  // std::vector<int> nums = {1, 6, 1};
-
+  // vector<int> nums = {1, 3, 1};
+  
+  // * testcase 2 (Answer 5)
+  // int k = 3; 
+  // vector<int> nums = {1, 6, 1};
+  
+  // * testcase 3 (Answer 3)
   int k = 2;
-  std::vector<int> nums = {1, 5, 4, 10};
+  vector<int> nums = {1, 5, 4, 10};
 
-  std::cout << "Nums: " << std::endl;
+  cout << "Nums: " << endl;
   printArr(nums);
 
   // int ans = bruteForce(nums, k);
   // int ans = betterApproach(nums, k);
   int ans = smallestDistancePair(nums, k);
-  // int ans = smallestDistancePair2(nums, k);
-  std::cout << "Kth smallest distance " << ans << std::endl;
+
+  cout << "Kth smallest distance " << ans << endl;
 
   return 0;
 }

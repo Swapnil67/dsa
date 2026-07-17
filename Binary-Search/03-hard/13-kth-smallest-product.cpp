@@ -96,29 +96,28 @@ bool isKthSmallestProduct(vector<int> &nums1, vector<int> &nums2, ll product, ll
   int pairs = 0;
   for (int i = 0; i < n1; ++i) {
     // * Binary Search on nums2
+    ll l = 0, r = n2 - 1;
     if (nums1[i] >= 0) {
-      ll l = 0, r = n2 - 1;
-      ll curPairs = -1; // * Invalid index on the LHS
+      ll pairIdx = -1; // * Invalid index on the LHS
       while (l <= r) {
         ll m = l + (r - l) / 2;
         ll curProduct = 1ll * nums1[i] * nums2[m];
         if (curProduct <= product) {
-          curPairs = m;
+          pairIdx = m;
           l = m + 1;
         } else {
           r = m - 1;
         }
       }
-      pairs += (curPairs + 1);
+      pairs += (pairIdx + 1);
     } else {
       // * curProduct will be -ve & RHS will contain smaller product & LHS Larger products
-      ll l = 0, r = n2 - 1;
-      ll curPairs = n2; // * Invalid index on the RHS
+      ll pairIdx = n2; // * Invalid index on the RHS
       while (l <= r) {
         ll m = l + (r - l) / 2;
         ll curProduct = 1ll * nums1[i] * nums2[m];
         if (curProduct <= product) {
-          curPairs = m;
+          pairIdx = m;
           r = m - 1;
         } else {
           l = m + 1;
@@ -127,7 +126,7 @@ bool isKthSmallestProduct(vector<int> &nums1, vector<int> &nums2, ll product, ll
 
       // * Here on LHS of 'm' we have greater products so we take from count b/2 m to n2
                                 // *             m    n2
-      pairs += (n2 - curPairs); // * {-10, -15, -20, -30}
+      pairs += (n2 - pairIdx); // * {-10, -15, -20, -30}
     }
   }
 
@@ -189,4 +188,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 09-kth-smallest-product.cpp -o output && ./output
+// * g++ --std=c++20 13-kth-smallest-product.cpp -o output && ./output

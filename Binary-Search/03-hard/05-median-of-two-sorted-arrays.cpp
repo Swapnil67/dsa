@@ -143,8 +143,8 @@ double findMedian(vector<int> arr1, vector<int> arr2) {
   int l = 0, r = n1;
   while (l <= r) {
     cout << "l: " << l << ", r: " << r << endl;
-    int m1 = l + (r - l) / 2;
-    int m2 = left - m1;
+    int m1 = l + (r - l) / 2; // * no of elements from nums1
+    int m2 = left - m1;       // * no of elements from nums2
 
     int l1 = m1 > 0 ? arr1[m1 - 1] : INT_MIN;
     int l2 = m2 > 0 ? arr2[m2 - 1] : INT_MIN;
@@ -176,13 +176,13 @@ double findMedian(vector<int> arr1, vector<int> arr2) {
 }
 
 int main() {
-  // * testcase 1
-  // vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
+  // * testcase 1 (Answer = 5)
+  vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
 
-  // * testcase 2
-  vector<int> nums1 = {7, 12, 14, 15}, nums2 = {1, 2, 3, 4, 9, 11};
+  // * testcase 2 (Answer = 8)
+  // vector<int> nums1 = {7, 12, 14, 15}, nums2 = {1, 2, 3, 4, 9, 11};
 
-  // * testcase 3
+  // * testcase 3 (Answer = 2.5)
   // vector<int> nums1 = {1, 2}, nums2 = {3, 4};
 
   cout << "First Array" << endl;

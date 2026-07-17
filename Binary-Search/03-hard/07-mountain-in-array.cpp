@@ -23,29 +23,28 @@ public:
 	int length();
 };
 
-class Solution
-{
+unordered_map<int, int> cache;
+class Solution {
 public:
-	int peakIdxMountainArr(MountainArray &mountainArr, unordered_map<int, int> &cache)
-	{
+	int peakIdxMountainArr(MountainArray &mountainArr) {
 		int n = mountainArr.length() - 1;
 
-		int first_val = mountainArr.get(0);
-		int second_val = mountainArr.get(1);
-		if (first_val > second_val) {
+		// * Check edge cases
+		int first_val = cache.count(0) ? cache[0] : mountainArr.get(0);
+		int second_val = cache.count(1) ? cache[1] : mountainArr.get(1);
+		if (first_val > second_val)
 			return 0;
-		}
 
-		int last_val = mountainArr.get(n);
-		int second_last_val = mountainArr.get(n - 1);
-		if (last_val > second_last_val) {
-			return n;
-		}
+		first_val = cache.count(n - 1) ? cache[n - 1] : mountainArr.get(n - 1);
+		second_val = cache.count(n - 2) ? cache[n - 2] : mountainArr.get(n - 2);
+		if (first_val > second_val)
+			return n - 1;
 
+		// * Get the Peak index in mountain
 		int l = 1, r = n - 1;
 		while (l <= r) {
 			int m = l + (r - l) / 2;
-			// std::cout << m << std::endl;
+			// cout << m << endl;
 			int mid_val = cache.count(m) == 0 ? mountainArr.get(m) : cache[m];
 			cache[m] = mid_val;
 
@@ -57,8 +56,8 @@ public:
 					cache.count(m + 1) == 0 ? mountainArr.get(m + 1) : cache[m + 1];
 			cache[m + 1] = right_val;
 
-			// std::cout << left_val << " " << mid_val << " " << right_val
-			//           << std::endl;
+			// cout << left_val << " " << mid_val << " " << right_val
+			//           << endl;
 
 			if (left_val < mid_val && mid_val > right_val) {
 				return m;
@@ -75,7 +74,7 @@ public:
 		return -1;
 	}
 
-	int binarySearch(int target, int l, int r, MountainArray &mountainArr, unordered_map<int, int> &cache) {
+	int binarySearch(int &target, MountainArray &mountainArr, int l, int r) {
 		while (l <= r) {
 			int m = l + (r - l) / 2;
 			int mid_val = cache.count(m) == 0 ? mountainArr.get(m) : cache[m];
@@ -95,9 +94,7 @@ public:
 		return -1;
 	}
 
-	int binarySearch2(int target, int l, int r, MountainArray &mountainArr,
-										std::unordered_map<int, int> cache)
-	{
+	int binarySearch2(int target, MountainArray &mountainArr, int l, int r) {
 		while (l <= r) {
 			int m = l + (r - l) / 2;
 			int mid_val = cache.count(m) == 0 ? mountainArr.get(m) : cache[m];
@@ -119,15 +116,15 @@ public:
 
 	int findInMountainArray(int target, MountainArray &mountainArr) {
 		int n = mountainArr.length();
-		std::unordered_map<int, int> cache;
+		unordered_map<int, int> cache;
 
-		int peak = peakIdxMountainArr(mountainArr, cache);
-		// std::cout << "Peak: " << peak << std::endl;
-		int ans = binarySearch(target, 0, peak, mountainArr, cache);
-		if (ans != -1) {
-			return ans;
+		int peak = peakIdxMountainArr(mountainArr);
+		// cout << "Peak: " << peak << endl;
+
+		int ans = binarySearch(target, mountainArr, 0, peak);
+		if (ans == -1) {
+			ans = binarySearch2(target, mountainArr, peak, n - 1);
 		}
-
-		return binarySearch2(target, peak + 1, n - 1, mountainArr, cache);
+		return ans;
 	}
 };

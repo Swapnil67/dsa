@@ -21,6 +21,8 @@ void printArr(vector<T> &nums) {
 
 typedef long long ll;
 
+// * ------------------------------------------------------------------
+
 // * 01 - Find Minimum in Rotated Sorted Array II
 // int findMinimum(vector<int> arr) {
 // TODO
@@ -35,12 +37,12 @@ typedef long long ll;
 // int findMinTimeToPaintBoards(vector<int> &boards, int painters) {
 // TODO
 // }
-  
+
 // * 04 - Find K-th Smallest Pair Distance
 // int smallestDistancePair(vector<int> &nums, int k) {
 // TODO
 // }
-  
+
 // * 05 - Median of Two Sorted Arrays
 // double findMedian(vector<int> &nums1, vector<int> &nums2) {
 // TODO
@@ -56,10 +58,26 @@ typedef long long ll;
 // TODO Solve this on leetcode
 // }
 
-// * 09 - Kth Smallest Product of Two Sorted Arrays
+// * 08 - Aggressive Cows
+// int findMinMaxDistance(vector<int> stalls, int cows) {
+// TODO
+// }
+
+// * 09 - Minimize Max Distance to Gas Station 
+// long double gasStation(vector<int> gasStations, int k) {
+// TODO
+// }
+
+// * 13 - Kth Smallest Product of Two Sorted Arrays
 // ll kthSmallestProduct(vector<int> &nums1, vector<int> &nums2, ll k) {
 // TODO
 // }
+
+// * 14 - Minimize Max Distance to Gas Station 
+// long double gasStation(vector<int> gasStations, int k) {
+// TODO
+// }
+
 
 int main(void) {
   return 0;

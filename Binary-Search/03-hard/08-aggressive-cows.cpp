@@ -1,5 +1,6 @@
 /*
 * Aggressive Cows
+*
 * You are given an array 'arr' consisting of 'n' integers which denote the position of a stall.
 * You are also given an integer 'k' which denotes the number of aggressive cows.
 * You are given the task of assigning stalls to 'k' cows such that the minimum distance between any two of 
@@ -23,21 +24,25 @@
 
 #include<iostream>
 
-// * ------------------------- Utility Functions -------------------------
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  int n = arr.size();
-  for(int i=0; i<n; i++) { 
-    std::cout<<arr[i]<<" ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
-bool findIsPossibleDistance(std::vector<int> stalls, int cows, int distance) {
+bool findIsPossibleDistance(vector<int> stalls, int cows, int distance) {
   int cowsPlaced = 1, lastPlace = stalls[0];
   for (int i = 1; i < stalls.size(); i++) {
-    // std::cout << "stalls[i] - lastPlace " << stalls[i] - lastPlace << std::endl;
-    // std::cout << "cowsPlaced " << cowsPlaced << std::endl;
+    // cout << "stalls[i] - lastPlace " << stalls[i] - lastPlace << endl;
+    // cout << "cowsPlaced " << cowsPlaced << endl;
     if(stalls[i] - lastPlace >= distance) {
       cowsPlaced++;
       lastPlace = stalls[i];
@@ -49,10 +54,10 @@ bool findIsPossibleDistance(std::vector<int> stalls, int cows, int distance) {
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(N(logN)) + O(max - min) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> stalls, int cows) {
+int bruteForce(vector<int> stalls, int cows) {
   int n = stalls.size();
   // * O(N(logN))
-  std::sort(stalls.begin(), stalls.end());
+  sort(stalls.begin(), stalls.end());
   int ans = stalls[n - 1] - stalls[0];
 
   // * O(max - min)
@@ -60,7 +65,7 @@ int bruteForce(std::vector<int> stalls, int cows) {
     int distance = i;
     // * O(N) 
     bool isPossibleDistance = findIsPossibleDistance(stalls, cows, distance);
-    // std::cout << "distance " << distance << ", isPossibleDistance " << isPossibleDistance << std::endl;
+    // cout << "distance " << distance << ", isPossibleDistance " << isPossibleDistance << endl;
     if(isPossibleDistance) {
       continue;
     }
@@ -74,18 +79,17 @@ int bruteForce(std::vector<int> stalls, int cows) {
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(N(logN)) + O(log(max - min)) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int findMinMaxDistance(std::vector<int> stalls, int cows) {
+int findMinMaxDistance(vector<int> stalls, int cows) {
   int n = stalls.size();
   // * O(N(logN))
-  std::sort(stalls.begin(), stalls.end());
+  sort(stalls.begin(), stalls.end());
   int l = 1, r = stalls[n-1] - stalls[0];
   while(l <= r) {
     int mid = l + (r - l) / 2;
     bool isPossibleDistance = findIsPossibleDistance(stalls, cows, mid);
-    if(isPossibleDistance) {
+    if (isPossibleDistance) {
       l = mid + 1;
-    }
-    else {
+    } else {
       r = mid - 1;
     }
   }
@@ -94,23 +98,23 @@ int findMinMaxDistance(std::vector<int> stalls, int cows) {
 
 int main() {
   // * testcase 1
-  std::vector<int> stalls = {1, 2, 3};
+  vector<int> stalls = {1, 2, 3};
   int cows = 2;
 
   // * testcase 2
-  // std::vector<int> stalls = {4, 2, 1, 3, 6};
+  // vector<int> stalls = {4, 2, 1, 3, 6};
   // int cows = 2;
 
   // * testcase 3
-  // std::vector<int> stalls = {0, 3, 4, 7, 10, 9};
+  // vector<int> stalls = {0, 3, 4, 7, 10, 9};
   // int cows = 4;
 
-  std::cout << "Stalls we have" << std::endl;
+  cout << "Stalls we have" << endl;
   printArr(stalls);
-  std::cout << "Cows we have " << cows << std::endl;
+  cout << "Cows we have " << cows << endl;
   // int minMaxDistance = bruteForce(stalls, cows);
   int minMaxDistance = findMinMaxDistance(stalls, cows);
-  std::cout << "Min Max Distance b/w cows is " << minMaxDistance << std::endl;
+  cout << "Min Max Distance b/w cows is " << minMaxDistance << endl;
   return 0;
 }
 

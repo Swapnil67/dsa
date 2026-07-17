@@ -44,7 +44,7 @@ void printArr(vector<T> &nums) {
 // * Minimum element is not present in sorted part [Exclude that part]
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
-int findMinimum(std::vector<int> arr) {
+int findMinimum(vector<int> arr) {
   int n = arr.size();
   if(n == 1) return arr[0];
 
@@ -53,17 +53,17 @@ int findMinimum(std::vector<int> arr) {
   while (l <= r) {
     int m = l + (r - l) / 2;
     if (arr[m] == arr[l] && arr[m] == arr[r]) {
-      minEle = std::min(minEle, arr[l]);
+      minEle = min(minEle, arr[l]);
       l++, r--;
     }
     else if (arr[l] <= arr[m]) {
       // * Left part is sorted
-      minEle = std::min(minEle, arr[l]);
+      minEle = min(minEle, arr[l]);
       l = m + 1;
     }
     else {
       // * Right part is sorted
-      minEle = std::min(minEle, arr[m]);
+      minEle = min(minEle, arr[m]);
       r = m - 1;
     }
   }
@@ -72,17 +72,17 @@ int findMinimum(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {25, 30, 5, 10, 15, 20};
+  // vector<int> arr = {25, 30, 5, 10, 15, 20};
   // * testcase 2
-  // std::vector<int> arr = {10, 1, 10, 10, 10};
+  // vector<int> arr = {10, 1, 10, 10, 10};
   // * testcase 3
-  // std::vector<int> arr = {3, 1, 3, 3};
+  // vector<int> arr = {3, 1, 3, 3};
   // * testcase 3
-  std::vector<int> arr = {-1, -1, -1, -1};
+  vector<int> arr = {-1, -1, -1, -1};
   printArr(arr);
 
   int minimum = findMinimum(arr);
-  std::cout << "Find Minimum " << minimum << std::endl;
+  cout << "Find Minimum " << minimum << endl;
   
   return 0;
 }

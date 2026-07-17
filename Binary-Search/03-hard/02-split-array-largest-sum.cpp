@@ -72,11 +72,13 @@ int splitArray(vector<int> a, int k) {
 int main() {
   cout << "Split Array Largest Sum" << endl;
 
-  int k = 2;
-  vector<int> arr = {7, 2, 5, 10, 8};
+  // * testcase 1 (Answer = 18)
+  // int k = 2;
+  // vector<int> arr = {7, 2, 5, 10, 8};
   
-  // int k = 3;
-  // vector<int> arr = {1, 4, 4};
+  // * testcase 2 (Answer = 4)
+  int k = 3;
+  vector<int> arr = {1, 4, 4};
   
   printArr(arr);
   int ans = splitArray(arr, k);

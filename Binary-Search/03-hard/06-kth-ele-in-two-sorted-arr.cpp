@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <iostream>
+
 using namespace std;
 
 template <typename T>
@@ -30,12 +31,12 @@ void printArr(vector<T> &nums) {
 // * Merge two sorted arrays
 // * TIME COMPLEXITY O(n1 + n2)
 // * SPACE COMPLEXITY O(n1 + n2)
-int bruteForce(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
+int bruteForce(vector<int> &nums1, vector<int> &nums2, int k) {
   int n1 = nums1.size(), n2 = nums2.size();
   if (k > n1 + n2)
     return -1;
 
-  std::vector<int> mergedVec;
+  vector<int> mergedVec;
   int i = 0, j = 0;
   while (i < n1 && j < n2) {
     if (nums1[i] < nums2[j]) {
@@ -62,7 +63,7 @@ int bruteForce(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
 // * Not using extra array (Merged Array)
 // * TIME COMPLEXITY O(n1 + n2)
 // * SPACE COMPLEXITY O(1)
-int kthElement(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
+int kthElement(vector<int> &nums1, vector<int> &nums2, int k) {
   int n1 = nums1.size(), n2 = nums2.size();
   if (k > n1 + n2)
     return -1;
@@ -97,16 +98,16 @@ int kthElement(std::vector<int> &nums1, std::vector<int> &nums2, int k) {
 
 int main(void) {
   int k = 4;
-  std::vector<int> nums1 = {2, 3, 45}, nums2 = {4, 6, 7, 8};
+  vector<int> nums1 = {2, 3, 45}, nums2 = {4, 6, 7, 8};
 
-  std::cout << "First Array" << std::endl;
+  cout << "First Array" << endl;
   printArr(nums1);
-  std::cout << "Second Array" << std::endl;
+  cout << "Second Array" << endl;
   printArr(nums2);
 
   // int ans = bruteForce(nums1, nums2, k);
   int ans = kthElement(nums1, nums2, k);
-  std::cout << "Kth element: " << ans << std::endl;
+  cout << "Kth element: " << ans << endl;
   
   return 0;
 }

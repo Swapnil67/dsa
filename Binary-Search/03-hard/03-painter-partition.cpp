@@ -55,7 +55,7 @@ int findPaintersUsed(vector<int> boards, int &painters, int &maxTime) {
   return paintersRequired <= painters;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * TIME COMPLEXITY O(total) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int bruteForce(vector<int> boards, int painters) {
@@ -94,13 +94,13 @@ int findMinTimeToPaintBoards(vector<int> boards, int painters) {
 }
 
 int main() {
-  // * testcase 1
-  // int painters = 2;
-  // vector<int> boards = {2, 1, 5, 6, 2, 3};
-
-  // * testcase 2
+  // * testcase 1 (Answer 11)
   int painters = 2;
-  vector<int> boards = {48, 90}; 
+  vector<int> boards = {2, 1, 5, 6, 2, 3};
+ 
+  // * testcase 2 (Answer 90)
+  // int painters = 2;
+  // vector<int> boards = {48, 90}; 
 
   printArr(boards);
   // int minTime = bruteForce(boards, painters);
