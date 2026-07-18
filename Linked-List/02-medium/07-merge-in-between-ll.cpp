@@ -27,7 +27,7 @@ ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
   ListNode* temp = list1;
 
   // * Get the 'a - 1' node in nodeBegin & temp to 'b'
-  for(int i = 0; i < b; ++i) {
+  for (int i = 0; i < b; ++i) {
     if (i == a - 1)
       nodeBegin = temp;
     temp = temp->next;

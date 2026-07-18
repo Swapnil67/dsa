@@ -25,6 +25,8 @@
 #include <iostream>
 #include "../common.hpp"
 
+using namespace std;
+
 int countLL(ListNode* head) {
   ListNode* temp = head;
   int c = 0;
@@ -86,26 +88,26 @@ ListNode* deleteMiddle(ListNode* head) {
   // * Here slow is at mid - 1 index in ll
   ListNode* del_node = slow->next;
   slow->next = slow->next->next;
-  std::free(del_node);
+  free(del_node);
 
   return head;
 } 
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 3, 4, 5};
+  // vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  // std::vector<int> arr = {1, 2, 3, 4, 5, 6};
+  // vector<int> arr = {1, 2, 3, 4, 5, 6};
 
   // * testcase 3
-  std::vector<int> arr = {1, 2};
+  vector<int> arr = {1, 2};
 
   ListNode *head = arrayToLL(arr);
-  std::cout << "Before Deleting Middle ListNode" << std::endl;
+  cout << "Before Deleting Middle ListNode" << endl;
   printLL(head);
 
-  std::cout << "After Deleting Middle ListNode" << std::endl;
+  cout << "After Deleting Middle ListNode" << endl;
   // head = bruteForce(head);
   head = deleteMiddle(head);
   printLL(head);

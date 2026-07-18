@@ -151,12 +151,15 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 
 
 int main(void) {
+  // * testcase 1
   // int n = 2;
   // vector<int> arr = {1, 2, 3, 4, 5};
-
+  
+  // * testcase 2
   // int n = 1;
   // vector<int> arr = {1};
-
+  
+  // * testcase 3
   int n = 1;
   vector<int> arr = {1, 2};
 

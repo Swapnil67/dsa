@@ -133,7 +133,7 @@ int main() {
   printLL(head);
 
   // * Rearrange even and odd numbers
-  cout<<"------------ After Rearranging Linked List ------------"<<endl;
+  cout << "------------ After Rearranging Linked List ------------" << endl;
   // head = bruteForce(head);
   // head = betterApproach(head);
   head = oddEvenList(head);

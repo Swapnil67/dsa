@@ -60,8 +60,7 @@ ListNode* bruteForce(ListNode* head) {
   unordered_map<ListNode *, ListNode *> nodeMap;
 
   // * O(N)
-  while(temp)
-  {
+  while(temp) {
     // * O(logN)
     if (nodeMap.count(temp))
       return temp;
