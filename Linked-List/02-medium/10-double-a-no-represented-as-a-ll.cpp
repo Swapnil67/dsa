@@ -78,8 +78,10 @@ int main(void) {
   ListNode *head = arrayToLL(arr);
   cout << "Linked List" << endl;
   printLL(head);
-
+  
   ListNode* ans = doubleIt(head);
+
+  cout << "Double Linked List" << endl;
   printLL(ans);
 
   return 0;

@@ -32,7 +32,7 @@
 #include <iostream>
 #include "../common.hpp"
 
-std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+vector<int> nodesBetweenCriticalPoints(ListNode* head) {
   if (!head || !head->next)
     return {};
 
@@ -51,7 +51,7 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
       if (first_critical_point == -1) {
         first_critical_point = i;
       } else {
-        min_nodes = std::min(min_nodes, i - prev_critical_point);
+        min_nodes = min(min_nodes, i - prev_critical_point);
       }
       prev_critical_point = i;  // * keep the last critical point
     }
@@ -61,7 +61,7 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
     cur = cur->next;
   }
 
-  // std::cout << first_critical_point << " " << prev_critical_point << std::endl;
+  // cout << first_critical_point << " " << prev_critical_point << endl;
   if (min_nodes == INT_MAX)
     return {-1, -1};
 
@@ -72,24 +72,24 @@ std::vector<int> nodesBetweenCriticalPoints(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> arr = {3, 1};
+  // vector<int> arr = {3, 1};
   
   // * testcase 2
-  // std::vector<int> arr = {2, 3, 3, 2};
+  // vector<int> arr = {2, 3, 3, 2};
 
   // * testcase 3
-  std::vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
+  vector<int> arr = {5, 3, 1, 2, 5, 1, 2};
 
   // * testcase 4
-  // std::vector<int> arr = {1, 3, 2, 2, 3, 2, 2, 2, 7};
+  // vector<int> arr = {1, 3, 2, 2, 3, 2, 2, 2, 7};
 
   ListNode *head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
-  std::vector<int> ans = nodesBetweenCriticalPoints(head);
-  std::cout << "Find the Minimum and Maximum Number of Nodes Between Critical Points" << std::endl;
-  std::cout << '{' << ans[0] << ", " << ans[1] << '}' << std::endl;
+  vector<int> ans = nodesBetweenCriticalPoints(head);
+  cout << "Find the Minimum and Maximum Number of Nodes Between Critical Points" << endl;
+  cout << '{' << ans[0] << ", " << ans[1] << '}' << endl;
 
   return 0;
 }

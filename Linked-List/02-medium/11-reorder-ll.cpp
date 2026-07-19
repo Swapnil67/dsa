@@ -86,7 +86,7 @@ void reorderList2(ListNode* head) {
     return;
 
   // * Push all the nodes to stack
-  std::stack<ListNode *> st;
+  stack<ListNode *> st;
   ListNode* cur = head;
   while (cur) {
     st.push(cur);
@@ -109,13 +109,13 @@ void reorderList2(ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 3, 4};
+  // vector<int> arr = {1, 2, 3, 4};
 
   // * testcase 2
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  vector<int> arr = {1, 2, 3, 4, 5};
 
   ListNode *head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
   reorderList(head);

@@ -42,6 +42,9 @@ ListNode* reverse_ll(ListNode* node) {
 // * TIME COMPLEXITY O(N) + O(N) = O(2N)
 // * SPACE COMPLEXITY O(N)
 ListNode* bruteForce(ListNode* head) {
+  if (!head || !head->next)
+    return head;
+
   // * Push on to stack in monotonic decreasing way
   stack<int> st;
   ListNode* temp = head;
@@ -76,6 +79,9 @@ ListNode* bruteForce(ListNode* head) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 ListNode* removeNodes(ListNode* head) {
+  if (!head || !head->next)
+    return head;
+
   ListNode *temp = head;
 
   // * Reverse the temp LL

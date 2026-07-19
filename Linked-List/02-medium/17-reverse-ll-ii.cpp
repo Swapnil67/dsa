@@ -44,16 +44,15 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
   // * Now cur = "left", left_prev = "node before left"
   // * 2. Reverse from left to right
   ListNode* tail = nullptr;
-  int n = right - left + 1;
-  while (n) {
+  int k = (right - left + 1);
+  while (k--) {
     ListNode *front = cur->next;
     cur->next = tail;
     tail = cur;
     cur = front;
-    n -= 1;
   }
-  // std::cout << left_prev->data << std::endl;
-  // std::cout << cur->data << std::endl;
+  // cout << left_prev->data << endl;
+  // cout << cur->data << endl;
 
   // * 'cur' is at right + 1 postion
   // * 'tail' is at right postion
@@ -70,18 +69,18 @@ ListNode* reverseBetween(ListNode* head, int left, int right) {
 int main(void) {
   // * testcase 1
   // int left = 2, right = 4;
-  // std::vector<int> nums = {1, 2, 3, 4, 5};
+  // vector<int> nums = {1, 2, 3, 4, 5};
 
   // * testcase 2
   int left = 1, right = 2;
-  std::vector<int> nums = {3, 5};
+  vector<int> nums = {3, 5};
   
   ListNode* head = arrayToLL(nums);
-  std::cout << "Linked List Before Reverse" << std::endl;
+  cout << "Linked List Before Reverse" << endl;
   printLL(head);
   
   head = reverseBetween(head, left, right);
-  std::cout << "Linked List After Reverse" << std::endl;
+  cout << "Linked List After Reverse" << endl;
   printLL(head);
 
   return 0;

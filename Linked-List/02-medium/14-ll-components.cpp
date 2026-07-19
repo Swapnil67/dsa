@@ -18,7 +18,7 @@
  * Output       : 2
  * Explanation  : 0 and 1 are connected, 3 and 4 are connected, so [0, 1] and [3, 4] are the two connected components.
 
- * https://leetcode.com/problems/linked-list-components/description/
+ * https://leetcode.com/problems/linked-list-components/
 */
 
 // ! Google

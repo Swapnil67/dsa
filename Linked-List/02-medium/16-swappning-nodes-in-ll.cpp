@@ -36,7 +36,7 @@ ListNode* bruteForce(ListNode* head, int k) {
   int t = k - 1;
   int first_val = -1;
   ListNode *first = nullptr;
-  std::stack<ListNode *> st;
+  stack<ListNode *> st;
   ListNode *temp = head;
   while (temp) {
     if (t == 0) {
@@ -61,8 +61,8 @@ ListNode* bruteForce(ListNode* head, int k) {
     st.pop();
   }
 
-  // std::cout << "First: " << first->data << std::endl;
-  // std::cout << "Second: " << second->data << std::endl;
+  // cout << "First: " << first->data << endl;
+  // cout << "Second: " << second->data << endl;
 
   // * Loop over the ll and change the values of kth nodes from start & end.
   temp = head;
@@ -116,19 +116,19 @@ ListNode* swapNodes(ListNode* head, int k) {
 int main(void) {
   // * testcase 1
   // int k = 2;
-  // std::vector<int> nums = {1, 2, 3, 4, 5};
+  // vector<int> nums = {1, 2, 3, 4, 5};
   
   // * testcase 2
   int k = 5;
-  std::vector<int> nums = {7, 9, 6, 6, 7, 8, 3, 0, 9, 5};
+  vector<int> nums = {7, 9, 6, 6, 7, 8, 3, 0, 9, 5};
 
   ListNode* head = arrayToLL(nums);
-  std::cout << "Linked List Before Swap" << std::endl;
+  cout << "Linked List Before Swap" << endl;
   printLL(head);
   
   // head = bruteForce(head, k);
   head = swapNodes(head, k);
-  std::cout << "Linked List After Swap" << std::endl;
+  cout << "Linked List After Swap" << endl;
   printLL(head);
 
   return 0;

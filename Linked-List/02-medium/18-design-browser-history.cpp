@@ -46,10 +46,14 @@ struct DLListNode {
 
 template <typename T>
 void printArr(vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    cout << arr[i] << " ";
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 void printLL(DLListNode* head) {

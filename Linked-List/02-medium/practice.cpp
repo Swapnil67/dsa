@@ -7,59 +7,6 @@
 
 using namespace std;
 
-// * 08 - Merge Nodes in Between Zeros
-// ListNode *mergeNodes(ListNode *head) {
-// TODO
-// }
-
-// * 09 - Find the Minimum and Maximum Number of Nodes Between Critical Points
-// vector<int> nodesBetweenCriticalPoints(ListNode* head) {
-// TODO
-// }
-
-// * 10 - Double a Number Represented as a Linked List
-// ListNode* doubleIt(ListNode* head) {
-// TODO
-// }
-
-// * 11 - Reorder List
-// void reorderList(ListNode* head) {
-// TODO
-// }
-
-// * 12 - Maximum Twin Sum of a Linked List
-// int pairSum(ListNode *head) {
-// TODO
-// }
-
-// * 13 - Remove Nodes From Linked List
-// ListNode *removeNodes(ListNode *head) {
-// TODO
-// }
-
-// * 14 - Linked List Components
-// int numComponents(ListNode *head, vector<int> &nums) {
-// TODO
-// }
-
-// * 15 - Delete Nodes From Linked List Present in Array
-// ListNode *modifiedList(vector<int> &nums, ListNode *head) {
-// TODO
-// }
-
-// * 16 - Swapping Nodes in a Linked List
-// ListNode *swapNodes(ListNode *head, int k) {
-// TODO
-// }
-
-// * 17 - Reverse Linked List II
-// ListNode *reverseBetween(ListNode *head, int left, int right) {
-// TODO
-// }
-
-// * 18 - Design Browser History
-// TODO (Do this on leetcode)
-
 // * 19 - Add Two Numbers II
 // ListNode *addTwoNumbers(ListNode *nums1, ListNode *nums2) {
 // TODO
@@ -150,6 +97,59 @@ using namespace std;
 // ListNode *mergeInBetween(ListNode *list1, int a, int b, ListNode *list2) {
 // TODO 
 // }
+
+// * 08 - Merge Nodes in Between Zeros
+// ListNode *mergeNodes(ListNode *head) {
+// TODO
+// }
+
+// * 09 - Find the Minimum and Maximum Number of Nodes Between Critical Points
+// vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+// TODO
+// }
+
+// * 10 - Double a Number Represented as a Linked List
+// ListNode* doubleIt(ListNode* head) {
+// TODO
+// }
+
+// * 11 - Reorder List
+// void reorderList(ListNode* head) {
+// TODO
+// }
+
+// * 12 - Maximum Twin Sum of a Linked List
+// int pairSum(ListNode *head) {
+// TODO
+// }
+
+// * 13 - Remove Nodes From Linked List
+// ListNode *removeNodes(ListNode *head) {
+// TODO
+// }
+
+// * 14 - Linked List Components
+// int numComponents(ListNode *head, vector<int> &nums) {
+// TODO
+// }
+
+// * 15 - Delete Nodes From Linked List Present in Array
+// ListNode *modifiedList(vector<int> &nums, ListNode *head) {
+// TODO
+// }
+
+// * 16 - Swapping Nodes in a Linked List
+// ListNode* swapNodes(ListNode* head, int k) {
+// TODO
+// }
+
+// * 17 - Reverse Linked List II
+// ListNode* reverseBetween(ListNode* head, int left, int right) {
+// TODO
+// }
+
+// * 18 - Design Browser History
+// TODO (Do this on leetcode)
 
 
 int main(void) {

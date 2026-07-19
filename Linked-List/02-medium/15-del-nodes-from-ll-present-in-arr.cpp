@@ -28,12 +28,12 @@
 // * ------------------ Optimal Solution ---------------------
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(size of nums)
-ListNode* modifiedList(std::vector<int>& nums, ListNode* head) {
+ListNode* modifiedList(vector<int>& nums, ListNode* head) {
   if (!nums.size())
     return head;
 
   // * Push the nums to set
-  std::unordered_set<int> st(begin(nums), end(nums)); // * O(N)
+  unordered_set<int> st(begin(nums), end(nums)); // * O(N)
 
   // * Handle head
   while (head && st.count(head->data)) {
@@ -56,21 +56,21 @@ ListNode* modifiedList(std::vector<int>& nums, ListNode* head) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {1, 2, 3};
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  vector<int> nums = {1, 2, 3};
+  vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
-  // std::vector<int> nums = {1};
-  // std::vector<int> arr = {1, 2, 1, 2, 1, 2};
+  // vector<int> nums = {1};
+  // vector<int> arr = {1, 2, 1, 2, 1, 2};
 
   // * testcase 3
-  // std::vector<int> nums = {1, 7, 6, 2, 4};
-  // std::vector<int> arr = {3, 7, 1, 8, 1};
+  // vector<int> nums = {1, 7, 6, 2, 4};
+  // vector<int> arr = {3, 7, 1, 8, 1};
 
   printArr(nums);
 
   ListNode* head = arrayToLL(arr);
-  std::cout << "Linked List" << std::endl;
+  cout << "Linked List" << endl;
   printLL(head);
 
   head = modifiedList(nums, head);
