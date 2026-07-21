@@ -23,7 +23,7 @@
   * Output: 4
   * 
   * https://www.geeksforgeeks.org/problems/burning-tree/1
-  * https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/
+  * https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected
 
 */
 

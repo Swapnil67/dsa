@@ -41,12 +41,12 @@ TreeNode* reverseOddLevelsBFS(TreeNode* root) {
   queue<TreeNode *> q;
   q.push(root);
 
+  // * Nodes of current level
+  vector<TreeNode *> level;
+
   int is_odd_level = 0;
   while(!q.empty()) {
     int n = q.size();
-
-    // * Nodes of current level
-    vector<TreeNode *> level;
 
     while (n--) {
       TreeNode* node = q.front();
@@ -70,7 +70,7 @@ TreeNode* reverseOddLevelsBFS(TreeNode* root) {
         l++, r--;
       }
     }
-
+    level.clear();
     is_odd_level = !is_odd_level;
   }
 

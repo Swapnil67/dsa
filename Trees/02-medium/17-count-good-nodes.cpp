@@ -16,7 +16,7 @@
   *     Node 5 -> (3,4,5) is the maximum value in the path
   *     Node 3 -> (3,1,3) is the maximum value in the path.
 
-  * https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/
+  * https://leetcode.com/problems/count-good-nodes-in-binary-tree/
   * https://www.naukri.com/code360/problems/good-nodes_3169337
 */
 

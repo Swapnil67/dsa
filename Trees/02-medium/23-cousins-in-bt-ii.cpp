@@ -110,7 +110,7 @@ TreeNode *bruteForce(TreeNode *root) {
 }
 
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Calculate level sum on the go
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)

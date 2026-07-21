@@ -60,12 +60,10 @@ void levelOrderTraversal(TreeNode *root) {
   queue<TreeNode *> q;
   q.push(root);
 
-  while (!q.empty())
-  {
+  while (!q.empty()) {
     int n = q.size();
     // * traverse the whole level
-    while (n--)
-    {
+    while (n--) {
       TreeNode *node = q.front();
       q.pop();
 

@@ -26,7 +26,7 @@
 * - Swap 7 and 5. The 3rd level becomes [5,6,8,7].
 * - Swap 8 and 7. The 3rd level becomes [5,6,7,8].
 
-* https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/description/
+* https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/
 */
 
 

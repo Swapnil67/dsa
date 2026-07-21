@@ -26,7 +26,7 @@
 * Explanation: Leaf nodes in green with value (target = 2) are removed (Picture in left). 
 *              After removing, new nodes become leaf nodes with value (target = 2) (Picture in center).
 * 
-* https://leetcode.com/problems/delete-leaves-with-a-given-value/description/
+* https://leetcode.com/problems/delete-leaves-with-a-given-value/
 * https://www.naukri.com/code360/problems/delete-leaf-nodes-with-value-x_630465
 */
 

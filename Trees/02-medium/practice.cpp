@@ -12,8 +12,6 @@
 
 using namespace std;
 
-
-
 // * 46 - Lowest Common Ancestor of a Binary Tree III
 // Node *lowestCommonAncestor2(vector<Node *> &nodes, Node *p_start, Node *q_start) {
 // TODO

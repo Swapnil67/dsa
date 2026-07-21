@@ -80,19 +80,19 @@ string tree2str(TreeNode* root) {
 
 int main(void) {
   // * testcase 1
-  TreeNode* root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
-  
-  root->left->left = new TreeNode(4);
-  root->left->right = new TreeNode(5);
-  
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(7);
-  
-  // * testcase 2
   // TreeNode* root = new TreeNode(1);
   // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
+  
+  // root->left->left = new TreeNode(4);
+  // root->left->right = new TreeNode(5);
+  
+  // root->right->left = new TreeNode(6);
+  // root->right->right = new TreeNode(7);
+  
+  // * testcase 2
+  TreeNode* root = new TreeNode(1);
+  root->left = new TreeNode(2);
   
   // * testcase 3
   // TreeNode* root = new TreeNode(1);

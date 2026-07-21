@@ -1,20 +1,20 @@
-/**
- * * Leetcode - 114
- * * Flatten Binary Tree to Linked List
+/*
+ * Leetcode - 114
+ * Flatten Binary Tree to Linked List
  * 
- * * Example 1:
- * *             1
- * *           /    \
- * *          2      5
- * *        /   \     \
- * *       3    4      6
+ * Example 1:
+ *             1
+ *           /    \
+ *          2      5
+ *        /   \     \
+ *       3    4      6
  * 
- * * Input: root = [1,2,5,3,4,null,6]
- * * Output: [1,null,2,null,3,null,4,null,5,null,6]
+ * Input: root = [1,2,5,3,4,null,6]
+ * Output: [1,null,2,null,3,null,4,null,5,null,6]
  * 
- * * https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
- * * https://www.naukri.com/code360/problems/flatten-binary-tree-to-linked-list_1112615
- * * https://www.geeksforgeeks.org/problems/flatten-binary-tree-to-linked-list/1
+ * https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+ * https://www.naukri.com/code360/problems/flatten-binary-tree-to-linked-list_1112615
+ * https://www.geeksforgeeks.org/problems/flatten-binary-tree-to-linked-list/1
 */
 
 // ! Meta, Apple

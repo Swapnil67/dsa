@@ -33,7 +33,7 @@
 * https://www.geeksforgeeks.org/problems/maximum-width-of-tree/1
 */
 
-// ! Meta, Amazon, Flipkart
+// ! Meta, Amazon, Flipkart, HSBC
 
 #include "common.hpp"
 

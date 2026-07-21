@@ -21,7 +21,7 @@
 * Input:  root = [5,8,9,2,1,3,7,4,6], k = 2
 * Output: 13
 
-* https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/
+* https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/
 */
 
 #include "common.hpp"
