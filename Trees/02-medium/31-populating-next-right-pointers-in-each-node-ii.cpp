@@ -84,7 +84,6 @@ TreeNode *connect(TreeNode *root) {
     }
     head = dummy->next;  // * Go to the left most node on next level
   }
-
   return root;
 }
 

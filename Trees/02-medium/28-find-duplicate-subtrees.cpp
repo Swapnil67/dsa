@@ -31,6 +31,8 @@
 * Output: [[2,4],[4]]
 
 * https://leetcode.com/problems/find-duplicate-subtrees/description/
+* https://www.naukri.com/code360/problems/duplicate-average_3125884
+* https://www.geeksforgeeks.org/problems/duplicate-subtree-in-binary-tree/1
 */
 
 #include "common.hpp"

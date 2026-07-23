@@ -30,12 +30,8 @@
 
 using namespace std;
 
-void dfs(
-    TreeNode *root,
-    int target_sum,
-    vector<int> &path,
-    vector<vector<int>> &ans)
-{
+void dfs(TreeNode *root, int target_sum,
+    vector<int> &path, vector<vector<int>> &ans) {
   if (!root)
     return;
 

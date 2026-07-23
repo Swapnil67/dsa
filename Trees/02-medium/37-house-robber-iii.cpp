@@ -33,7 +33,7 @@
   * Explanation : Maximum amount of money the thief can rob = 4 + 5 = 9.
 
 
-  * https://leetcode.com/problems/house-robber-iii/description/
+  * https://leetcode.com/problems/house-robber-iii/description
   * https://www.naukri.com/code360/problems/amusement-park_1280139
 */
 

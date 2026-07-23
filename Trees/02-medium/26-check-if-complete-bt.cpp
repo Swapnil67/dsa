@@ -30,8 +30,8 @@
 * Output: false
 
 * https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/
-* https://www.naukri.com/code360/problems/check-whether-binary-tree-is-complete_1280147
 * https://www.geeksforgeeks.org/problems/complete-binary-tree/1
+* https://www.naukri.com/code360/problems/check-whether-binary-tree-is-complete_1280147
 */
 
 #include "common.hpp"

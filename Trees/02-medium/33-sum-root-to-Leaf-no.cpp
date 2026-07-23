@@ -24,7 +24,7 @@
 *               Therefore, sum = 12 + 13 = 25.
 
 
-* https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
+* https://leetcode.com/problems/sum-root-to-leaf-numbers/description
 * https://www.naukri.com/code360/problems/sum-root-to-leaf_1095657
 * https://www.geeksforgeeks.org/problems/root-to-leaf-paths-sum/1
 */

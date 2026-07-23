@@ -81,15 +81,12 @@ Node *connect(Node *root) {
         temp->next = head->left;
         temp = temp->next;
       }
-
       if (head->right) {
         temp->next = head->right;
         temp = temp->next;
       }
-
-      head = head->next;
+      head = head->next; // * First node on next level
     }
-
     head = dummy->next;
   }
 

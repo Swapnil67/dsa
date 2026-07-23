@@ -33,7 +33,7 @@
 *               good because the length of ther shortest path between them is 4.
 *
 *
-* https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/
+* https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/
 */
 
 // ! Meta, Amazon, tiktok

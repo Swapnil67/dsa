@@ -138,13 +138,13 @@ string getDirections(TreeNode* root, int src, int dest) {
 
 int main(void) {
   // * testcase 1
-  int startValue = 3, destValue = 6;
-  TreeNode *root = new TreeNode(5);
-  root->left = new TreeNode(1);
-  root->right = new TreeNode(2);
-  root->left->left = new TreeNode(3);
-  root->right->left = new TreeNode(6);
-  root->right->right = new TreeNode(4);
+  // int startValue = 3, destValue = 6;
+  // TreeNode *root = new TreeNode(5);
+  // root->left = new TreeNode(1);
+  // root->right = new TreeNode(2);
+  // root->left->left = new TreeNode(3);
+  // root->right->left = new TreeNode(6);
+  // root->right->right = new TreeNode(4);
 
   // * testcase 2
   // int startValue = 3, destValue = 6;
@@ -158,9 +158,9 @@ int main(void) {
   // root->right->right->right = new TreeNode(4);
 
   // * testcase 3
-  // int startValue = 2, destValue = 1;
-  // TreeNode *root = new TreeNode(2);
-  // root->left = new TreeNode(1);
+  int startValue = 2, destValue = 1;
+  TreeNode *root = new TreeNode(2);
+  root->left = new TreeNode(1);
 
   cout << "start: " << startValue << ", dest: " << destValue << endl;
   cout << "Input Binary Tree:" << endl;
