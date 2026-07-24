@@ -25,6 +25,7 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
 class ListNode {
   public: 
     int data;
@@ -47,7 +48,7 @@ class ListNode {
 
 // * ------------------- Utility Functions ---------------------
 
-ListNode* arrayToLL(std::vector<int> arr) {
+ListNode* arrayToLL(vector<int> arr) {
   if(!arr.size())
     return nullptr;
 
@@ -65,10 +66,10 @@ ListNode* arrayToLL(std::vector<int> arr) {
 void printLL(ListNode* head) {
   ListNode* temp = head;
   while (temp) {
-    std::cout << temp->data << " -> ";
+    cout << temp->data << " -> ";
     temp = temp->next;
   }
-  std::cout << "NULL" << std::endl;
+  cout << "NULL" << endl;
 }
 
 
@@ -125,8 +126,8 @@ ListNode* kReverse(ListNode* head, int k) {
       // * Reverse the current group
       cur->next = nullptr;
       ListNode *rev_cur = reverse_ll(temp);
-      printLL(rev_cur);
-      std::cout << prev_head->data << std::endl;
+      // printLL(rev_cur);
+      // cout << prev_head->data << endl;
 
       // * Point the prev_head -> next_k_group
       prev_head->next = rev_cur;
@@ -147,17 +148,17 @@ ListNode* kReverse(ListNode* head, int k) {
 int main() {  
   // * testcase 1
   int k = 2;
-  std::vector<int> arr = {1, 2, 3, 4, 5};
+  vector<int> arr = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // int k = 3;
-  // std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  // vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
   ListNode* head = arrayToLL(arr);
-  std::cout<<"Before Reversing"<<std::endl;
+  cout<<"Before Reversing"<<endl;
   printLL(head);
 
-  std::cout<<"After Reversing"<<std::endl;
+  cout<<"After Reversing"<<endl;
   head = kReverse(head, k);
   printLL(head);
 

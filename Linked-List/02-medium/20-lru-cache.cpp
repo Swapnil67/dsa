@@ -12,7 +12,7 @@
  * 
  * The functions get and put must each run in O(1) average time complexity.
 
- * https://leetcode.com/problems/lru-cache/description/
+ * https://leetcode.com/problems/lru-cache/
  * https://www.geeksforgeeks.org/problems/lru-cache/1
  * https://www.naukri.com/code360/problems/lru-cache-implementation_670276
 */

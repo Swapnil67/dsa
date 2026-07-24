@@ -13,7 +13,7 @@
  * Input  : lists = []
  * Output : []
 
- * https://leetcode.com/problems/merge-k-sorted-lists/description/
+ * https://leetcode.com/problems/merge-k-sorted-lists/
 */
 
 #include <queue>
@@ -21,6 +21,7 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
 struct ListNode {
 public:
   int data;
@@ -33,11 +34,15 @@ public:
 };
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 void printLL(ListNode* head) {
@@ -92,35 +97,32 @@ ListNode *bruteForce(std::vector<ListNode *> &lists) {
   return arrayToLL(temp);
 }
 
-ListNode* merge(ListNode *head1, ListNode *head2) {
-  ListNode* temp1 = head1;
-  ListNode* temp2 = head2;
-
+ListNode* merge(ListNode *h1, ListNode *h2) {
   ListNode *dummy = new ListNode(-1);
   ListNode *mover = dummy;
 
-  while (temp1 && temp2) {
-    if (temp1->data < temp2->data) {
-      mover->next = temp1;
-      mover = temp1;
-      temp1 = temp1->next;
+  while (h1 && h2) {
+    if (h1->data < h2->data) {
+      mover->next = h1;
+      mover = h1;
+      h1 = h1->next;
     } else {
-      mover->next = temp2;
-      mover = temp2;
-      temp2 = temp2->next;
+      mover->next = h2;
+      mover = h2;
+      h2 = h2->next;
     }
   }
 
-  while (temp1) {
-    mover->next = temp1;
-    mover = temp1;
-    temp1 = temp1->next;
+  while (h1) {
+    mover->next = h1;
+    mover = h1;
+    h1 = h1->next;
   }
 
-  while (temp2) {
-    mover->next = temp2;
-    mover = temp2;
-    temp2 = temp2->next;
+  while (h2) {
+    mover->next = h2;
+    mover = h2;
+    h2 = h2->next;
   }
 
   return dummy->next;
@@ -199,10 +201,12 @@ int main(void) {
   for (auto &ll : lists)
   printLL(ll);
   
-  std::cout << "Output Lists: " << std::endl;
   // ListNode *ans = bruteForce(lists);
   // ListNode *ans = betterApproach(lists);
   ListNode *ans = mergeKLists(lists);
+  
+  
+  std::cout << "Output Lists: " << std::endl;
   printLL(ans);
 
   return 0;

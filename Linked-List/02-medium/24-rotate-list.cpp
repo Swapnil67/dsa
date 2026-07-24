@@ -119,9 +119,10 @@ int main(void) {
   cout << "Linked List Before Rotating" << endl;
   printLL(head);
 
-  cout << "Linked List After Rotating " << k << " times." << endl;
   // ListNode* ans = bruteForce(head, k);
   ListNode *ans = rotateRight(head, k);
+  
+  cout << "Linked List After Rotating " << k << " times." << endl;
   printLL(ans);
 
   return 0;

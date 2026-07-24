@@ -20,7 +20,7 @@
  * 
 */
 
-// ! Amazon, Paypal
+// ! Amazon, Adobe, Paypal
 
 #include <vector>
 #include <iostream>
@@ -31,13 +31,11 @@ using namespace std;
 
 ListNode* findMiddle(ListNode* head) {
   ListNode* slow = head;
-  ListNode* fast = head->next;  // * This is small change from tortise and hare algo
-
+  ListNode* fast = head->next;  // * To prevent Infinite Loop. (testcase 3)
   while (fast && fast->next) {
     slow = slow->next;
     fast = fast->next->next;
   }
-
   return slow;
 }
 
@@ -119,9 +117,9 @@ ListNode* sortList(ListNode* head) {
   mid->next = nullptr;
   ListNode *leftHead = head;
 
-  printLL(leftHead);
-  printLL(rightHead);
-  cout << "------------------------------------" << endl;
+  // printLL(leftHead);
+  // printLL(rightHead);
+  // cout << "------------------------------------" << endl;
   // cout << leftHead->data << " " << rightHead->data << endl;
 
   // * recursively divide in half
@@ -137,7 +135,10 @@ int main(void) {
   // vector<int> nums = {4, 2, 1, 3};
 
   // * testcase 2
-  vector<int> nums = {-1, 5, 3, 4, 0};
+  // vector<int> nums = {-1, 5, 3, 4, 0};
+
+  // * testcase 2
+  vector<int> nums = {1, 2};
 
   ListNode* head = arrayToLL(nums);
   cout << "Linked List Before Sorting" << endl;

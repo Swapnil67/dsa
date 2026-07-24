@@ -61,17 +61,17 @@ ListNode* partition(ListNode* head, int x) {
 int main(void) {
   // * testcase 1
   int x = 3;
-  std::vector<int> nums = {1, 4, 3, 2, 5, 2};
+  vector<int> nums = {1, 4, 3, 2, 5, 2};
   
   // * testcase 2
   // int x = 2;
-  // std::vector<int> nums = {2, 1};
+  // vector<int> nums = {2, 1};
 
   ListNode *head = arrayToLL(nums);
-  std::cout << "Linked List Before Partition" << std::endl;
+  cout << "Linked List Before Partition" << endl;
   printLL(head);
 
-  std::cout << "Linked List After Partition" << std::endl;
+  cout << "Linked List After Partition" << endl;
   ListNode *ans = partition(head, x);
   printLL(ans);
 

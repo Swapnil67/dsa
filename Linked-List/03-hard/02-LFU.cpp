@@ -5,6 +5,8 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 // ! TLE
 class LFUCacheBrute {
   struct Node {
@@ -13,7 +15,7 @@ class LFUCacheBrute {
   };
 
   int capacity, timestamp;
-  std::unordered_map<int, Node *> cache;
+  unordered_map<int, Node *> cache;
 
 public:
 
@@ -82,7 +84,7 @@ class LFUCache {
   struct DLLinkedList {
     DLLNode *left;
     DLLNode *right;
-    std::unordered_map<int, DLLNode*> mp;
+    unordered_map<int, DLLNode*> mp;
 
     // * constructor
     DLLinkedList() {
@@ -148,9 +150,9 @@ class LFUCache {
 
   int capacity;
   int lfu_count;
-  std::unordered_map<int, int> val_map;               // * Map key -> value
-  std::unordered_map<int, int> count_map;             // * Map key -> count
-  std::unordered_map<int, DLLinkedList*> list_map;    // * Map count -> linked list
+  unordered_map<int, int> val_map;               // * Map key -> value
+  unordered_map<int, int> count_map;             // * Map key -> count
+  unordered_map<int, DLLinkedList*> list_map;    // * Map count -> linked list
 
   void counter(int key) {
     // * Incr the key count

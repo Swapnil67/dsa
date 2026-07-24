@@ -3,6 +3,8 @@
  * Design Circular Deque
  * 
  * https://leetcode.com/problems/design-circular-deque/description/
+ * https://neetcode.io/problems/design-circular-queue/question
+ * https://www.geeksforgeeks.org/problems/implementation-of-deque-using-circular-array--174925/1
 */
 
 #include <vector>

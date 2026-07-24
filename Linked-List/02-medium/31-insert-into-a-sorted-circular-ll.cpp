@@ -46,39 +46,6 @@ public:
     }
 };
 
-
-// * TIME COMPLEXITY O(N)
-// * SPACE COMPLEXITY O(1)
-Node* node_insert(Node* head, int insertVal) {
-  if (!head) {
-    Node* new_head = new Node(insertVal);
-    new_head->next = new_head; // * make it circular
-    return new_head;
-  }
-
-  Node* prev = head;
-  Node* cur = head->next;
-  while (true) { // * test_happy_path
-    if (insertVal >= prev->val && insertVal <= cur->val) {
-      break;
-    }
-    else if ( // * test_out_of_range
-      (prev->val > cur->val) &&
-      (insertVal >= prev->val || insertVal <= cur->val)) 
-    {
-      break;
-    }
-    prev = cur;
-    cur = cur->next;
-
-    if (prev == head)
-      break;
-  }
-
-  prev->next = new Node(insertVal, cur);
-  return head;
-}
-
 void test_happy_path(Node* head) {
   assert(5 == head->val);
   assert(10 == head->next->val);
@@ -107,6 +74,40 @@ void test_duplicates(Node* head) {
   assert(7 == head->next->next->val);
   assert(7 == head->next->next->next->val);
   assert(7 == head->next->next->next->next->val);
+}
+
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+Node* node_insert(Node* head, int insertVal) {
+  if (!head) {
+    Node* new_head = new Node(insertVal);
+    new_head->next = new_head; // * make it circular
+    return new_head;
+  }
+
+  Node* prev = head;
+  Node* cur = head->next;
+  while (true) {
+    
+    // * test_happy_path
+    if (insertVal >= prev->val && insertVal <= cur->val) {
+      break;
+    }
+    else if ( // * test_out_of_range
+      (prev->val > cur->val) &&
+      (insertVal >= prev->val || insertVal <= cur->val)) 
+    {
+      break;
+    }
+    prev = cur;
+    cur = cur->next;
+
+    if (prev == head)
+      break;
+  }
+
+  prev->next = new Node(insertVal, cur);
+  return head;
 }
 
 int main(void) {

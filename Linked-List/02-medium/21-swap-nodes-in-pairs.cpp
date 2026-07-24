@@ -14,7 +14,7 @@
  * * Input  : head = [1,2,3]
  * * Output : [2,1,3]
 
- * https://leetcode.com/problems/swap-nodes-in-pairs/
+ * https://leetcode.com/problems/swap-nodes-in-pairs
 */
 
 #include <vector>

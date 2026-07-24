@@ -15,10 +15,12 @@
  * Output: 0 -> 1 -> NULL
  *
  * https://leetcode.com/problems/plus-one-linked-list/description/
- * https://www.naukri.com/code360/problems/add-one-to-a-number-represented-as-linked-list_920557
  * https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1
+ * https://www.naukri.com/code360/problems/add-one-to-a-number-represented-as-linked-list_920557
  * 
  */
+
+// ! Google, Amazon
 
 #include <vector>
 #include <iostream>

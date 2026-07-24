@@ -90,7 +90,7 @@ ListNode* bruteForce(ListNode* h1, ListNode* h2) {
 
 ListNode* addTwoNumbers(ListNode* h1, ListNode* h2) {
   // * Push the h1 elements to stack (st1)
-  std::stack<int> st1;
+  stack<int> st1;
   ListNode *temp1 = h1;
   while (temp1) {
     st1.push(temp1->data);
@@ -98,7 +98,7 @@ ListNode* addTwoNumbers(ListNode* h1, ListNode* h2) {
   }
   
   // * Push the h2 elements to stack (st2)
-  std::stack<int> st2;
+  stack<int> st2;
   temp1 = h2;
   while (temp1) {
     st2.push(temp1->data);
@@ -134,28 +134,28 @@ ListNode* addTwoNumbers(ListNode* h1, ListNode* h2) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> nums1 = {7, 2, 4, 3};
-  // std::vector<int> nums2 = {5, 6, 4};
+  // vector<int> nums1 = {7, 2, 4, 3};
+  // vector<int> nums2 = {5, 6, 4};
 
   // * testcase 2
-  // std::vector<int> nums1 = {2, 4, 3};
-  // std::vector<int> nums2 = {5, 6, 4};
+  // vector<int> nums1 = {2, 4, 3};
+  // vector<int> nums2 = {5, 6, 4};
 
   // * testcase 3
-  std::vector<int> nums1 = {9, 9};
-  std::vector<int> nums2 = {9};
+  vector<int> nums1 = {9, 9};
+  vector<int> nums2 = {9};
 
   ListNode* n1_head = arrayToLL(nums1);
   ListNode* n2_head = arrayToLL(nums2);
 
-  std::cout << "First Linked List" << std::endl;
+  cout << "First Linked List" << endl;
   printLL(n1_head);
-  std::cout << "Second Linked List" << std::endl;
+  cout << "Second Linked List" << endl;
   printLL(n2_head);
 
   // ListNode* addHead = bruteForce(n1_head, n2_head);
   ListNode *addHead = addTwoNumbers(n1_head, n2_head);
-  std::cout << "-----------------------------------------" << std::endl;
+  cout << "-----------------------------------------" << endl;
   printLL(addHead);
 
   return 0;

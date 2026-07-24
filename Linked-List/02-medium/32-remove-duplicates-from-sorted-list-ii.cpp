@@ -13,7 +13,7 @@
  * Input  : head = [1,1,1,2,3]
  * Output : [2,3]
 
- * https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/
+ * https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
 */
 
 #include <vector>

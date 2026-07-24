@@ -76,12 +76,12 @@ vector<ListNode *> splitListToParts(ListNode *head, int k) {
 
 int main(void) {
   // * testcase 1
-  // int k = 5;
-  // vector<int> nums = {1, 2, 3};
+  int k = 5;
+  vector<int> nums = {1, 2, 3};
 
   // * testcase 2
-  int k = 3;
-  vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  // int k = 3;
+  // vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
   ListNode* head = arrayToLL(nums);
   cout << "Linked List Before Sorting" << endl;
