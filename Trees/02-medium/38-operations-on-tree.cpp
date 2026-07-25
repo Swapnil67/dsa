@@ -14,8 +14,7 @@
 #include <iostream>
 using namespace std;
 
-class LockingTree
-{
+class LockingTree {
   vector<int> locked;
   vector<int> parent;
   vector<vector<int>> child;

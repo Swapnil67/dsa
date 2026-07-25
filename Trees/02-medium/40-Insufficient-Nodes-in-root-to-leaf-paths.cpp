@@ -66,10 +66,10 @@ TreeNode* sufficientSubset(TreeNode* root, int &limit) {
 
 int main(void) {
   // * testcase 1
-  int limit = 21;
-  TreeNode *root = new TreeNode(10);
-  root->left = new TreeNode(5);
-  root->right = new TreeNode(10);
+  // int limit = 21;
+  // TreeNode *root = new TreeNode(10);
+  // root->left = new TreeNode(5);
+  // root->right = new TreeNode(10);
 
   // * testcase 2
   // int limit = 22;
@@ -86,12 +86,12 @@ int main(void) {
   // root->right->right->right = new TreeNode(3);
 
   // * testcase 3
-  // int limit = -1;
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(2);
-  // root->right = new TreeNode(-3);
-  // root->left->left = new TreeNode(-5);
-  // root->right->left = new TreeNode(4);
+  int limit = -1;
+  TreeNode *root = new TreeNode(1);
+  root->left = new TreeNode(2);
+  root->right = new TreeNode(-3);
+  root->left->left = new TreeNode(-5);
+  root->right->left = new TreeNode(4);
 
   std::cout << "Input Binary Tree:" << std::endl;
   levelOrderTraversal(root);

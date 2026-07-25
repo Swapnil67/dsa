@@ -48,8 +48,7 @@ using namespace std;
 // * Maps the depth of each node {node: depth}
 void build_depth_map(
     TreeNode *root, int d, int &max_depth,
-    unordered_map<TreeNode *, int> &depth_map)
-{
+    unordered_map<TreeNode *, int> &depth_map) {
   if (!root)
     return;
 
@@ -61,8 +60,7 @@ void build_depth_map(
 }
 
 TreeNode *dfs(TreeNode *root, int &max_depth,
-              unordered_map<TreeNode *, int> &depth_map)
-{
+              unordered_map<TreeNode *, int> &depth_map) {
   // * Found null or node with max depth
   if (!root || max_depth == depth_map[root])
     return root;
