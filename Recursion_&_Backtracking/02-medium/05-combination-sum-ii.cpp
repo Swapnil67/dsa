@@ -18,6 +18,7 @@
  * 
  * https://leetcode.com/problems/combination-sum-ii/description/
  * https://www.naukri.com/code360/problems/combination-sum-ii_1112622
+ * https://www.geeksforgeeks.org/problems/combination-sum-ii-1664263832/1
 */
 
 // ! Amazon, Google, Meta, Microsoft, Apple, Tiktok, Walmart
@@ -96,7 +97,7 @@ void solve(
   solve(i + 1, target - nums[i], nums, temp, ans);
 
   // * To avoid duplicates
-  while (i < nums.size() && nums[i] == nums[i + 1]) {
+  while (i + 1 < nums.size() && nums[i] == nums[i + 1]) {
     i += 1;
   }
 

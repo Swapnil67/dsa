@@ -19,48 +19,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 24 - Count Number of Maximum Bitwise-OR Subsets
-// int countMaxOrSubsets(vector<int> nums) {
-// TODO
-// }
-
-// * 25 - Generate Parentheses
-// vector<string> generateParenthesis(int n) {
-// TODO
-// }
-
-// * --------------------------------------------------------------------------------
-
-// * 01 - Subsets
-// vector<vector<int>> subsets(vector<int> &nums) {
-// TODO
-// }
-
-// * 02 - Subsets II
-// vector<vector<int>> subsets(vector<int> &nums) {
-// TODO
-// }
-
-// * 03 - Combinations
-// vector<vector<int>> combine(int n, int k) {
-// TODO
-// }
-
-// * 04 - Combination Sum
-// vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
-// TODO
-// }
-
-// * 05 - Combination Sum II
-// vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
-// TODO
-// }
-
-// * 06 - Permutations
-// vector<vector<int>> permutations(vector<int> &arr) {
-// TODO
-// }
-
 // * 07 - Word Search
 // bool exist(vector<vector<char>> &board, string &word) {
 // TODO
@@ -146,6 +104,47 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 24 - Count Number of Maximum Bitwise-OR Subsets
+// int countMaxOrSubsets(vector<int> nums) {
+// TODO
+// }
+
+// * 25 - Generate Parentheses
+// vector<string> generateParenthesis(int n) {
+// TODO
+// }
+
+// * --------------------------------------------------------------------------------
+
+// * 01 - Subsets
+// vector<vector<int>> subsets(vector<int> &nums) {
+// TODO
+// }
+
+// * 02 - Subsets II
+// vector<vector<int>> subsets(vector<int> &nums) {
+// TODO
+// }
+
+// * 03 - Combinations
+// vector<vector<int>> combine(int n, int k) {
+// TODO
+// }
+
+// * 04 - Combination Sum
+// vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+// TODO
+// }
+
+// * 05 - Combination Sum II
+// vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
+// TODO
+// }
+
+// * 06 - Permutations
+// vector<vector<int>> permutations(vector<int> &arr) {
+// TODO
+// }
 
 int main(void) {
   return 0;

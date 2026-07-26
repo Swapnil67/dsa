@@ -40,8 +40,8 @@ void printArr(vector<T> &arr) {
 
 void helper(vector<int> arr,
             vector<int> &cur,
-            vector<vector<int>> &ans,
-            vector<bool> &used)
+            vector<bool> &used,
+            vector<vector<int>> &ans)
 {
   // * Base case
   if (cur.size() == arr.size()) {
@@ -57,7 +57,7 @@ void helper(vector<int> arr,
     cur.push_back(arr[i]);
     used[i] = true;
 
-    helper(arr, cur, ans, used);
+    helper(arr, cur, used, ans);
 
     cur.pop_back();
     used[i] = false;
@@ -72,8 +72,8 @@ vector<vector<int>> permutations(vector<int> &arr) {
   vector<vector<int>> ans;
   vector<int> cur;
   vector<bool> used(n);
-  
-  helper(arr, cur, ans, used);
+
+  helper(arr, cur, used, ans);
   return ans;
 }
 

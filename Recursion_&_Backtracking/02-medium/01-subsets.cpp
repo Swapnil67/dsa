@@ -14,6 +14,8 @@
  * output : [[],[0]]
  * 
  * https://leetcode.com/problems/subsets/description/
+ * https://www.naukri.com/code360/problems/find-all-subsets_2041970
+ * https://www.geeksforgeeks.org/problems/subsets-1613027340/1
 */
 
 // ! Unique elements in array.

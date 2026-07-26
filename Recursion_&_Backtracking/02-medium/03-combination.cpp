@@ -58,10 +58,7 @@ void helper(
 }
 
 // * OR
-void helper2(int start,
-             vector<int> &temp,
-             int k, int &n)
-{
+void helper2(int start, vector<int> &temp, int k, int &n) {
   if (k == 0) {
     ans.push_back(temp);
     return;
