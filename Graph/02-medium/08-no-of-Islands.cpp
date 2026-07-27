@@ -54,15 +54,6 @@ void printArr(vector<T> &arr) {
   cout << "]" << endl;
 }
 
-// * Print adjacency list
-template <typename T>
-void printAdjList(vector<T> &adj) {
-  int n = adj.size();
-  for (int i = 0; i < n; ++i) {
-    cout << i << " -> ";
-    printArr(adj[i]);
-  }
-}
 const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
 void dfs(int r, int c, vector<vector<int>> &visited, vector<vc>& grid) {

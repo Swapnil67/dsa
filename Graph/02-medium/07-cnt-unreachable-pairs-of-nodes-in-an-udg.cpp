@@ -113,19 +113,19 @@ long long countPairsDFS(int n, vector<vector<int>> &edges) {
   cout << "Adjacency List" << endl;
   printAdjList(adj); // * For Debugging
 
-  long long res = 0;
+  long long pairs = 0;
   long long total_nodes = n;
   for (int i = 0; i < n; ++i) {
     if (!visited[i]) {
       long long grp_size = 0;
       dfs(i, grp_size, visited, adj);
-      res += grp_size * (total_nodes - grp_size);
-      // cout << "grp_size  " << grp_size < ", pairs  " << res << endl;
+      pairs += grp_size * (total_nodes - grp_size);
+      // cout << "grp_size  " << grp_size < ", pairs  " << pairs << endl;
       total_nodes -= grp_size;
     }
   }
 
-  return res;
+  return pairs;
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
@@ -196,4 +196,4 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++20 07-cnt-unreachable-pairs-of-nodes-in-an-undirected-graph.cpp -o output && ./output
+// * g++ --std=c++20 07-cnt-unreachable-pairs-of-nodes-in-an-udg.cpp -o output && ./output

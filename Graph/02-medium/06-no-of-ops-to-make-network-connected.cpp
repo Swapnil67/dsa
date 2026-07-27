@@ -106,12 +106,8 @@ int makeConnected(int n, vector<vector<int>> &connections) {
   if (n - 1 > e)
     return -1;
 
+  // * 1. Initialize DSU
   DSU du(n);
-
-  // * 1. Initialize rank and parent vectors
-  vector<int> rank(n, 0);
-  vector<int> parent(n);
-  iota(begin(parent), end(parent), 0);
 
   // * 2. Classic DSU
   for (auto &vec : connections) {

@@ -18,7 +18,6 @@
  * Output     : true
  * 
  * https://leetcode.com/problems/satisfiability-of-equality-equations/
- * 
  */
 
 // ! DSU

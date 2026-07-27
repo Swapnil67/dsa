@@ -28,15 +28,15 @@ using namespace std;
 // * SPACE COMPLEXITY O(N)
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 class DSU {
@@ -66,7 +66,8 @@ public:
   }
 };
 
-int solve(int n, vector<vector<int>>& edge) {
+int minEdgesReq(int n, vector<vector<int>>& edge) {
+  // * 1. DSU
   DSU ds(n);
 
   int extra_edges = 0;
@@ -85,8 +86,12 @@ int solve(int n, vector<vector<int>>& edge) {
     if (i == ds.parent[i])
       components++;
   }
+  cout << "Parent: ";
+  printArr(ds.parent);
 
   int ans = components - 1; // * Graph Theory
+  // cout << "ans " << ans << endl;
+  // cout << "components " << components << ", extra_edges " << extra_edges << endl;
   if (extra_edges >= ans)   // * If there are extra edges greater than components
     return ans;
 
@@ -95,12 +100,12 @@ int solve(int n, vector<vector<int>>& edge) {
 
 int main(void) {
   // * testcase 1
-  int n = 6;
-  std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
+  // int n = 6;
+  // vector<vector<int>> edges = {{0, 1}, {0, 2}, {0, 3}, {1, 2}, {1, 3}};
 
   // * testcase 2
-  // int n = 4;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}};
+  int n = 4;
+  vector<vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}};
   
   cout << "n: " << n << endl;
   cout << "edges: " << endl;
@@ -108,8 +113,8 @@ int main(void) {
     printArr(vec);
 
 
-  int ans = solve(n, edges);
-  std::cout << "Answer: " << ans << std::endl;
+  int ans = minEdgesReq(n, edges);
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

@@ -94,6 +94,61 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
   }
 }
 
+// * 11 - Keys and Rooms
+// bool canVisitAllRooms(vector<vector<int>>& rooms) {
+// TODO
+// }
+
+// * 12 - Possible Bipartition
+// bool possibleBipartition(int n, vector<vector<int>> &dislikes) {
+// TODO
+// }
+
+// * 13 - Shortest Path in Weighted undirected graph
+// vector<int> shortestPath(int m, int n, vector<vector<int>> &edges) {
+// TODO
+// }
+
+// * 14 - All Paths From Source to Target
+// vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &graph) {
+// TODO
+// }
+
+// * 15 - Shortest Path in Binary Matrix
+// int shortestPathBinaryMatrixBFS(vector<vector<int>> &grid) {
+// TODO
+// }
+
+// * 16 - Battleships in a Board
+// int countBattleships(vector<vector<char>>& board) {
+// TODO
+// }
+
+// * 17 - 01 Matrix
+// vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+// TODO
+// }
+
+// * 18 - As Far from Land as Possible
+// int maxDistance(vector<vector<int>> &grid) {
+// TODO
+// }
+
+// * 19 - Rotting Oranges
+// int orangesRotting(vector<vector<int>>& grid) {
+// TODO
+// }
+
+// * 20 - Redundant Connection
+// vector<int> findRedundantConnection(vector<vector<int>> &edges) {
+// TODO
+// }
+
+// * 21 - Accounts Merge
+// vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
+// TODO
+// }
+
 // * 22 - Most Stones Removed with Same Row or Column
 // int removeStones(vector<vector<int>> &stones) {
 // TODO
@@ -336,64 +391,10 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // TODO
 // }
 
-// * 11 - Keys and Rooms
-// bool canVisitAllRooms(vector<vector<int>>& rooms) {
-// TODO
-// }
-
-// * 12 - Possible Bipartition
-// bool possibleBipartition(int n, vector<vector<int>> &dislikes) {
-// TODO
-// }
-
-// * 13 - Shortest Path in Weighted undirected graph
-// vector<int> shortestPath(int m, int n, vector<vector<int>> &edges) {
-// TODO
-// }
-
-// * 14 - All Paths From Source to Target
-// vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &graph) {
-// TODO
-// }
-
-// * 15 - Shortest Path in Binary Matrix
-// int shortestPathBinaryMatrixBFS(vector<vector<int>> &grid) {
-// TODO
-// }
-
-// * 16 - Battleships in a Board
-// int countBattleships(vector<vector<char>>& board) {
-// TODO
-// }
-
-// * 17 - 01 Matrix
-// vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-// TODO
-// }
-
-// * 18 - As Far from Land as Possible
-// int maxDistance(vector<vector<int>> &grid) {
-// TODO
-// }
-
-// * 19 - Rotting Oranges
-// int orangesRotting(vector<vector<int>>& grid) {
-// TODO
-// }
-
-// * 20 - Redundant Connection
-// vector<int> findRedundantConnection(vector<vector<int>> &edges) {
-// TODO
-// }
-
-// * 21 - Accounts Merge
-// vector<vector<string>> accountsMerge(vector<vector<string>> &accounts) {
-// TODO
-// }
-
 int main(void) {
   return 0;
 }
 
 // * Run the code
 // * g++ --std=c++20 practice.cpp -o output && ./output
+

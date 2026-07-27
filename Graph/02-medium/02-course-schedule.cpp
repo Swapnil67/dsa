@@ -18,7 +18,7 @@
  * Input      : numCourses = 2, prerequisites = [[1,0],[0,1]]
  * Output     : false
  * 
- * https://leetcode.com/problems/course-schedule/
+ * https://leetcode.com/problems/course-schedule
 */
 
 // ! Meta, Amazon, Microsoft, Google

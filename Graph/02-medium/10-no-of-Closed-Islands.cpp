@@ -49,12 +49,12 @@ bool dfs(int r, int c, vector<vector<int>> &grid) {
 
   grid[r][c] = 1; // * mark visited
 
-  bool left_closed    = dfs(r, c - 1, grid);
-  bool right_closed   = dfs(r, c + 1, grid);
-  bool top_closed     = dfs(r - 1, c, grid);
-  bool bottom_closed  = dfs(r + 1, c, grid);
+  bool res = dfs(r, c - 1, grid);
+  res &= dfs(r, c + 1, grid);
+  res &= dfs(r - 1, c, grid);
+  res &= dfs(r + 1, c, grid);
 
-  return left_closed && right_closed && top_closed && bottom_closed; 
+  return res;
 }
 
 // * ------------------------- Approach 1: Optimal -------------------------
