@@ -66,7 +66,6 @@ int solve(int i, vector<int> &cost, vector<int> &dp) {
 // * TIME COMPLEXITY O(2^N)
 // * SPACE COMPLEXITY O(2^N)
 int bruteForce(vector<int> &cost) {
-  int n = cost.size();
   return min(dfs_brute(0, cost), dfs_brute(1, cost));
 }
 

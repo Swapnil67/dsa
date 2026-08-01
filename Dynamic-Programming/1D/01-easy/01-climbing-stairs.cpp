@@ -14,8 +14,8 @@
  * Input     : n = 3
  * Output    : 3
  * 
- * https://www.naukri.com/code360/problems/count-ways-to-reach-nth-stairs_798650 
  * https://leetcode.com/problems/climbing-stairs/description/
+ * https://www.naukri.com/code360/problems/count-ways-to-reach-nth-stairs_798650 
  * https://www.geeksforgeeks.org/problems/count-ways-to-reach-the-nth-stair-1587115620/1
 */
 

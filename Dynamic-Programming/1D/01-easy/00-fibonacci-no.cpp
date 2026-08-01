@@ -52,18 +52,18 @@ int get_fib(int x) {
 // * Bottom Up approach (Space Optimization)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int get_fib2(int x) {
-  if (x <= 1)
-    return x;
+int get_fib2(int n) {
+  if (n <= 1)
+    return n;
 
-  int prev1 = 1;
-  int prev2 = 0;
-  for (int i = 2; i < x + 1; ++i) {
-    int cur = prev1 + prev2;
-    prev2 = prev1;
-    prev1 = cur;
+  int a = 0, b = 1;
+  int ans = 0;
+  for (int i = 2; i <= n; ++i) {
+    ans = a + b;
+    a = b;
+    b = ans;
   }
-  return prev1;
+  return ans;
 }
 
 // * Generates first 'n' fibonacci numbers

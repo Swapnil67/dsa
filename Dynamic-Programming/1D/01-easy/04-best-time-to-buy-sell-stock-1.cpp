@@ -44,7 +44,7 @@ void printArr(vector<T> &arr) {
 // * Nested loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int>& prices) {
+int bruteForce(vector<int>& prices) {
   int n = prices.size();
   if (n == 0 || n == 1)
     return 0;
@@ -52,7 +52,7 @@ int bruteForce(std::vector<int>& prices) {
   int maxProfit = 0;
   for (int i = 0; i < n; ++i) {
     for(int j = i + 1; j < n; ++j) {
-      maxProfit = std::max(maxProfit, prices[j] - prices[i]);
+      maxProfit = max(maxProfit, prices[j] - prices[i]);
     }
   }
 
@@ -63,7 +63,7 @@ int bruteForce(std::vector<int>& prices) {
 // * Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int maxProfit(std::vector<int>& prices) {
+int maxProfit(vector<int>& prices) {
   int n = prices.size();
   if (n == 0 || n == 1)
     return 0;
@@ -73,7 +73,7 @@ int maxProfit(std::vector<int>& prices) {
 
   while (j < n) {
     int cur_profit = prices[j] - prices[i];
-    max_profit = std::max(max_profit, cur_profit);
+    max_profit = max(max_profit, cur_profit);
 
     if (prices[i] > prices[j]) {
       i = j;
@@ -107,18 +107,18 @@ int maxProfitDP(vector<int> &prices) {
 
 int main(void) {
   // * testcase 1
-  std::vector<int> prices = {7, 1, 5, 3, 6, 4};
+  vector<int> prices = {7, 1, 5, 3, 6, 4};
 
   // * testcase 2
-  // std::vector<int> prices = {7, 6, 4, 3, 1};
+  // vector<int> prices = {7, 6, 4, 3, 1};
 
-  std::cout << "Stock Prices" << std::endl;
+  cout << "Stock Prices" << endl;
   printArr(prices);
 
   int p = bruteForce(prices);
   // int p = maxProfit(prices);
   // int p = maxProfitDP(prices);
-  std::cout << "Maximum profit: " << p << std::endl;
+  cout << "Maximum profit: " << p << endl;
   
   return 0;
 }

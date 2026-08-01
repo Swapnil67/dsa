@@ -62,7 +62,7 @@ int bruteForce(vector<int> &nums) {
   return max_diff;
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------`
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
