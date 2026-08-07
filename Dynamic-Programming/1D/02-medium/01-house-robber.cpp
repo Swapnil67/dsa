@@ -27,96 +27,101 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int dfs_brute(int i, std::vector<int> &nums) {
+int dfs_brute(int i, vector<int> &nums) {
   int n = nums.size();
   if (i >= n)
     return 0;
   int steal = nums[i] + dfs_brute(i + 2, nums);
   int skip = dfs_brute(i + 1, nums);
-  return std::max(steal, skip);
+  return max(steal, skip);
 }
 
-int dfs(int i, std::vector<int> &nums, std::vector<int> &cache) {
+int dfs(int i, vector<int> &nums, vector<int> &dp) {
   int n = nums.size();
   if (i >= n)
     return 0;
 
-  if (cache[i] != -1)
-    return cache[i];
+  if (dp[i] != -1)
+    return dp[i];
 
-  int steal = nums[i] + dfs(i + 2, nums, cache);
-  int skip = dfs(i + 1, nums, cache);
-  return cache[i] = std::max(steal, skip);
+  int steal = nums[i] + dfs(i + 2, nums, dp);
+  int skip = dfs(i + 1, nums, dp);
+  return dp[i] = max(steal, skip);
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(2^n) 
-int bruteForce(std::vector<int> nums) {
+int bruteForce(vector<int> nums) {
   return dfs_brute(0, nums);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) 
-int betterApproach(std::vector<int> nums) {
-  std::vector<int> cache(101, -1);
+int betterApproach(vector<int> nums) {
+  vector<int> cache(101, -1);
   return dfs(0, nums, cache);
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n) 
-int rob(std::vector<int> nums) {
+int rob(vector<int> nums) {
   int n = nums.size();
   if (n == 1)
     return nums[0];
+  if (n == 2)
+    return max(nums[0], nums[1]);
 
-  std::vector<int> dp(n + 1, 0);
-  dp[0] = 0;       // * 0 house
-  dp[1] = nums[0]; // * 1 house
-  for (int i = 2; i <= n; ++i) {
+  vector<int> dp(n + 1, 0);
+  dp[0] = nums[0];
+  dp[1] = max(nums[0], nums[1]);
+  for (int i = 2; i < n; ++i) {
     int skip = dp[i - 1];
-    int steal = nums[i - 1] + dp[i - 2];
-    dp[i] = std::max(skip, steal);
+    int steal = nums[i] + dp[i - 2];
+    dp[i] = max(skip, steal);
   }
-  // printArr(dp); // * For debugging
-
-  return dp[n];
+  return dp[n - 1];
 }
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums = {1, 2, 3, 1};
+  // vector<int> nums = {1, 2, 3, 1};
 
   // * testcase 2
-  // std::vector<int> nums = {2, 7, 9, 3, 1};
+  // vector<int> nums = {2, 7, 9, 3, 1};
 
   // * testcase 3
-  // std::vector<int> nums = {2, 5};
+  // vector<int> nums = {2, 5};
   
   // * testcase 4
-  // std::vector<int> nums = {2};
+  // vector<int> nums = {2};
 
   // * testcase 5
-  std::vector<int> nums = {2, 1, 1, 2};
+  vector<int> nums = {2, 1, 1, 2};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums);
   // int ans = betterApproach(nums);
   int ans = rob(nums);
-  std::cout << "found: " << ans << std::endl;
+  cout << "found: " << ans << endl;
 
   return 0;
 }

@@ -18,15 +18,15 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 bool is_palindrome(string &s, int l, int r) {
@@ -39,7 +39,7 @@ bool is_palindrome(string &s, int l, int r) {
   return false;
 }
 
-bool is_palindrome_dp(string &s, int l, int r, std::vector<std::vector<int>> &dp) {
+bool is_palindrome_dp(string &s, int l, int r, vector<vector<int>> &dp) {
   if (l >= r)
     return true;
 
@@ -79,7 +79,7 @@ int betterApproach(string s) {
   int n = s.size();
   int ans = 0;
 
-  std::vector<std::vector<int>> dp(n, std::vector<int>(n, -1));
+  vector<vector<int>> dp(n, vector<int>(n, -1));
 
   for (int i = 0; i < n; ++i) {
     for (int j = i; j < n; ++j) {
@@ -99,10 +99,8 @@ int betterApproach(string s) {
 int countSubstrings(string s) {
   int n = s.size();
   int ans = 0;
+  vector<vector<bool>> t(n, vector<bool>(n, false));
 
-  std::vector<std::vector<bool>> t(n, std::vector<bool>(n, false));
-
-  int count = 0;
   for (int L = 1; L <= n; ++L) {
     for (int i = 0; i + L - 1 < n; ++i) {
       int j = i + L - 1;
@@ -116,11 +114,11 @@ int countSubstrings(string s) {
         t[i][j] = (s[i] == s[j] && t[i + 1][j - 1]);
       }
 
-      count += t[i][j];
+      ans += t[i][j];
     }
   }
 
-  return count;
+  return ans;
 }
 
 int main(void) {
@@ -130,14 +128,28 @@ int main(void) {
   // * testcase 2
   string s = "aaa";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
 
   // int ans = bruteForce(s);
   // int ans = betterApproach(s);
   int ans = countSubstrings(s);
-  std::cout << "Palindromic Substrings: " << ans << std::endl;
+  cout << "Palindromic Substrings: " << ans << endl;
   return 0;
 }
  
 // * Run the code
 // * g++ --std=c++20 05-palindromic-substrings.cpp -o output && ./output
+
+/*
+* str = abacaba
+*
+*        0(a)  1(b)  2(a)  3(c)  4(a)  5(b)  6(a)
+* 0(a)     1     0     1     0     0     0     1
+* 1(b)     -     1     0     0     0     1     0
+* 2(a)     -     -     1     0     1     0     0
+* 3(c)     -     -     -     1     0     0     0
+* 4(a)     -     -     -     -     1     0     1
+* 5(b)     -     -     -     -     -     1     0
+* 6(a)     -     -     -     -     -     -     1
+* 
+*/

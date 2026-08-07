@@ -36,44 +36,92 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
+}
+long long dfsBrute(int i, bool flag, vector<int> &nums) {
+  if (i >= nums.size())
+    return 0;
+
+  long long skip = dfsBrute(i + 1, flag, nums);
+  long long val = flag ? -nums[i] : nums[i];
+  long long steal = val + dfsBrute(i + 1, !flag, nums);
+
+  return max(skip, steal);
 }
 
-void solve(vector<int>& nums, int i, std::vector<int> cur) {
-  if (i >= nums.size()) {
-    printArr(cur);
-    return;
-  }
+// * flag -> true : odd
+// * flag -> false : even
+long long dfs(int i, bool flag, vector<int> &nums,
+              vector<vector<long long>> &dp) {
+  if (i >= nums.size())
+    return 0;
 
-  cur.push_back(nums[i]);
-  solve(nums, i + 1, cur);
-  
-  cur.pop_back();
-  solve(nums, i + 1, cur);
+  if (dp[i][flag] != -1)
+    return dp[i][flag];
+
+  long long skip = dfs(i + 1, flag, nums, dp);
+  long long val = flag ? -nums[i] : nums[i];
+  long long steal = val + dfs(i + 1, !flag, nums, dp);
+
+  return dp[i][flag] = max(skip, steal);
 }
 
-long long maxAlternatingSum(vector<int>& nums) {
-  solve(nums, 0, {});
-  return 0;
+// * ------------------------- Approach 1: Brute Approach -------------------------
+// * Top Down
+// * TIME COMPLEXITY O(2^N)
+// * SPACE COMPLEXITY O(2^N)
+long long bruteForce(vector<int>& nums) {
+  int n = nums.size();
+  return dfsBrute(0, false, nums);
+}
+
+// * ------------------------- Approach 2: Better Approach -------------------------
+// * Top Down + Memoization
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+long long betterApproach(vector<int>& nums) {
+  int n = nums.size();
+  vector<vector<long long>> dp(n + 1, vector<long long>(2, -1));
+  return dfs(0, false, nums, dp);
+}
+
+// * ------------------------- Approach 3: Optimal Approach -------------------------
+// * Classic Pattern
+// * flag -> true : odd
+// * flag -> false : even
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(1)
+long long maxAlternatingSum(vector<int> &nums) {
+  long long even_sum = 0, odd_sum = 0;
+  for (auto &x : nums) {
+    long long next_even = max(even_sum, odd_sum + x);
+    long long next_odd = max(odd_sum, even_sum - x);
+    even_sum = next_even;
+    odd_sum = next_odd;
+  }
+  return even_sum;
 }
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {4, 2, 5};
+  vector<int> nums = {4, 2, 5};
 
   // * testcase 2
-  // std::vector<int> nums = {5, 6, 7, 8};
+  // vector<int> nums = {5, 6, 7, 8};
 
+  // long long ans = bruteForce(nums);
+  // long long ans = betterApproach(nums);
   long long ans = maxAlternatingSum(nums);
-  std::cout << "Maximum Alternating Subsequence Sum : " << ans << std::endl;
+
+  cout << "Maximum Alternating Subsequence Sum : " << ans << endl;
 
   return 0;
 }

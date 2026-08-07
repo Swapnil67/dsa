@@ -26,6 +26,8 @@
 
 // ! Amazon, Google, Meta, Microsoft, Oracle, Uber, Paypal, Bloomberg
 
+// ! LIS
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -59,7 +61,7 @@ int solve_brute(int i, int prev_idx, vector<vector<int>> &pairs) {
     return 0;
 
   int take = 0;
-  if (prev_idx == -1 || pairs[prev_idx][1] < pairs[i][0]) {
+  if (prev_idx == -1 || pairs[i][0] > pairs[prev_idx][1]) {
     take = 1 + solve_brute(i + 1, i, pairs);
   }
   int skip = solve_brute(i + 1, prev_idx, pairs);

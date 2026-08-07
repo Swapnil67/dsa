@@ -5,9 +5,12 @@
  * Given an integer array nums, return the length of the longest strictly increasing subsequence.
  *
  * https://leetcode.com/problems/longest-increasing-subsequence/description/
+ * https://www.geeksforgeeks.org/problems/longest-increasing-subsequence-1587115620/1
 */
 
 // ! Amazon, Google, Meta, Microsoft, Oracle, Uber, Paypal, Bloomberg
+
+// ! LIS
 
 #include <vector>
 #include <iostream>
@@ -15,18 +18,18 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool is_increasing(std::vector<int> &nums) {
+bool is_increasing(vector<int> &nums) {
   int n = nums.size();
   for (int i = 1; i < n; ++i) {
     if (nums[i - 1] >= nums[i])
@@ -35,12 +38,10 @@ bool is_increasing(std::vector<int> &nums) {
   return true;
 }
 
-
-void solve_brute(int i, int &ans, std::vector<int> cur, vector<int> &nums) {
+void solve_brute(int i, int &ans, vector<int> cur, vector<int> &nums) {
   if (i >= nums.size()) {
     // printArr(cur);
-    if (cur.size() > ans)
-      ans = cur.size();
+    ans = max(ans, (int)cur.size());
     return;
   }
 
@@ -56,30 +57,27 @@ void solve_brute(int i, int &ans, std::vector<int> cur, vector<int> &nums) {
 
   if (cur.size() > 0)
     cur.pop_back();
+
   solve_brute(i + 1, ans, cur, nums);
 }
 
-
-int lis(int i, int prev_idx, vector<int> &nums, std::vector<std::vector<int>> &dp) {
+int dfs(int i, int prev_idx, vector<int> &nums, vector<vector<int>> &dp) {
   if (i >= nums.size()) {
     return 0;
   }
 
-  if (prev_idx != -1 && dp[i][prev_idx] != -1) // * Imp Check
-    return dp[i][prev_idx];
+  // * Add +1 to prevent indexing '-1'
+  if (dp[i][prev_idx + 1] != -1) 
+    return dp[i][prev_idx + 1];
 
   // * only take if cur number is strictly greater previous number
   int take = 0;
   if (prev_idx == -1 || nums[prev_idx] < nums[i]) { 
-    take = 1 + lis(i + 1, i, nums, dp);
+    take = 1 + dfs(i + 1, i, nums, dp);
   }
+  int skip = dfs(i + 1, prev_idx, nums, dp);
 
-  int skip = lis(i + 1, prev_idx, nums, dp);
-
-  if (prev_idx != -1) // * Imp Check
-    dp[i][prev_idx] = max(take, skip);
-
-  return max(take, skip);
+  return dp[i][prev_idx + 1] = max(take, skip);
 }
 
 // * ------------------------- Approach 1: Brute Force Approach -------------------------
@@ -98,8 +96,8 @@ int bruteForce(vector<int> &nums) {
 // * SPACE COMPLEXITY O(n^2) 
 int lengthOfLIS(vector<int> &nums) {
   int n = nums.size();
-  std::vector<std::vector<int>> dp(n + 1, std::vector<int>(n + 1, -1));
-  return lis(0, -1, nums, dp);
+  vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
+  return dfs(0, -1, nums, dp);
 }
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
@@ -118,29 +116,30 @@ int lengthOfLIS2(vector<int> &nums) {
         max_len = max(max_len, t[i]);
       }
     }
+    printArr(t);
   }
   
-  // printArr(t);
   return max_len;
 }
 
 int main(void) {
   // * testcase 1
-  std::vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
+  vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
 
   // * testcase 2
-  // std::vector<int> nums = {0, 1, 0, 3, 2, 3};
+  // vector<int> nums = {0, 1, 0, 3, 2, 3};
 
   // * testcase 3
-  // std::vector<int> nums = {7, 7, 7, 7, 7, 7, 7};
+  // vector<int> nums = {7, 7, 7, 7, 7, 7, 7};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums);
   // int ans = lengthOfLIS(nums);
   int ans = lengthOfLIS2(nums);
-  std::cout << "Ans: " << ans << std::endl;
+
+  cout << "Ans: " << ans << endl;
 
   return 0;
 }

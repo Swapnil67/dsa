@@ -42,20 +42,20 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 bool is_predecessor(string s, string t) {
   int n1 = s.size(), n2 = t.size();
-  // std::cout << s << " " << t << std::endl;
+  // cout << s << " " << t << endl;
   if (n1 > n2 || n2 - n1 != 1)
     return false;
 
@@ -76,9 +76,7 @@ int solve_brute(int i, int prev_idx, vector<string> &words) {
 
   int take = 0;
   if (prev_idx == -1 || is_predecessor(words[prev_idx], words[i])) {
-    // if (prev_idx != -1) {
-    //   std::cout << words[prev_idx] << " " << words[i] << std::endl;
-    // }
+    // if (prev_idx != -1) { cout << words[prev_idx] << " " << words[i] << endl; }
     take = 1 + solve_brute(i + 1, i, words);
   }
 
@@ -98,7 +96,7 @@ int solve(int i, int prev_idx, vector<string> &words, vector<vector<int>> &dp) {
   int take = 0;
   if (prev_idx == -1 || is_predecessor(words[prev_idx], words[i])) {
     // if (prev_idx != -1) {
-    //   std::cout << words[prev_idx] << " " << words[i] << std::endl;
+    //   cout << words[prev_idx] << " " << words[i] << endl;
     // }
     take = 1 + solve(i + 1, i, words, dp);
   }
@@ -118,10 +116,10 @@ static bool sortBy(string &s1, string &s2) {
 // * Generate All the subsequences
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(2^n) 
-int bruteForce(std::vector<std::string> words) {
+int bruteForce(vector<string> words) {
   int n = words.size();
   // * Sort the input string by length
-  std::sort(begin(words), end(words), sortBy);
+  sort(begin(words), end(words), sortBy);
   return solve_brute(0, -1, words);
 }
 
@@ -129,11 +127,11 @@ int bruteForce(std::vector<std::string> words) {
 // * Recursion + Memoization (Top Down)
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n^2) 
-int betterApproach(std::vector<std::string> words) {
+int betterApproach(vector<string> words) {
   int n = words.size();
   // * Sort the input string by length
-  std::sort(begin(words), end(words), sortBy);
-  std::vector<std::vector<int>> dp(n + 1, std::vector<int>(n + 1, -1));
+  sort(begin(words), end(words), sortBy);
+  vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
   return solve(0, -1, words, dp);
 }
 
@@ -141,12 +139,12 @@ int betterApproach(std::vector<std::string> words) {
 // * Bottom Up
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n^2) 
-int longestStrChain(std::vector<std::string> words) {
+int longestStrChain(vector<string> words) {
   int n = words.size();
-  std::vector<int> t(n + 1, 1);
+  vector<int> t(n + 1, 1);
 
   // * Sort the input string by length
-  std::sort(begin(words), end(words), sortBy);
+  sort(begin(words), end(words), sortBy);
 
   int max_len = 1;
   for (int i = 0; i < n; ++i) {
@@ -166,24 +164,24 @@ int longestStrChain(std::vector<std::string> words) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::string> words = {"a", "b", "ba", "bca", "bda", "bdca"};
+  // vector<string> words = {"a", "b", "ba", "bca", "bda", "bdca"};
 
   // * testcase 2
-  // std::vector<std::string> words = {"xbc", "pcxbcf", "xb", "cxbc", "pcxbc"};
+  // vector<string> words = {"xbc", "pcxbcf", "xb", "cxbc", "pcxbc"};
 
   // * testcase 3
-  // std::vector<std::string> words = {"abcd", "dbqca"};
+  // vector<string> words = {"abcd", "dbqca"};
 
   // * testcase 4
-  std::vector<std::string> words = {"a", "b", "ba", "abc", "abd", "bdca"};
+  vector<string> words = {"a", "b", "ba", "abc", "abd", "bdca"};
 
-  std::cout << "Input Words: ";
+  cout << "Input Words: ";
   printArr(words);
 
   // int ans = bruteForce(words);
   // int ans = betterApproach(words);
   int ans = longestStrChain(words);
-  std::cout << "Longest String Chain: " << ans << std::endl;
+  cout << "Longest String Chain: " << ans << endl;
 
 
   return 0;

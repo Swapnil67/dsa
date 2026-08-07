@@ -18,17 +18,16 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
-
 
 bool is_palindrome(string s) {
   int n = s.size();
@@ -65,7 +64,7 @@ string bruteForce(string s) {
     for (int j = i; j < n; ++j) {
       string str = s.substr(i, j);
       if (is_palindrome(str)) {
-        // std::cout << str << std::endl;
+        // cout << str << endl;
         if ((j - i + 1) > max_len) {
           max_len = (j - i);
           ans = str;
@@ -90,7 +89,7 @@ string betterApproach(string s) {
     for (int j = n - 1; j >= i; --j) {
       string str = s.substr(i, j);
       if (is_palindrome(str)) {
-        std::cout << str << std::endl;
+        cout << str << endl;
         if ((j - i + 1) > max_len) {
           max_len = (j - i);
           ans = str;
@@ -134,12 +133,12 @@ int main(void) {
   // * testcase 2
   // string s = "cbbd";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
 
   string ans = bruteForce(s);
   // string ans = betterApproach(s);
   // int ans = longestPalindrome(s);
-  std::cout << "Longest Palindromic Substring: " << ans << std::endl;
+  cout << "Longest Palindromic Substring: " << ans << endl;
 
   return 0;
 }

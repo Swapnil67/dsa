@@ -20,19 +20,21 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-bool check_subarray_exists(std::vector<int> &subarr, std::vector<int> &nums) {
+bool check_subarray_exists(vector<int> &subarr, vector<int> &nums) {
   int n = nums.size();
   for (int i = 0; i < n; ++i) {
     if (subarr[i] == nums[i]) {
@@ -48,41 +50,90 @@ bool check_subarray_exists(std::vector<int> &subarr, std::vector<int> &nums) {
   return true;
 }
 
-int findLength(std::vector<int> &nums1, std::vector<int> &nums2) {
+int findLength(vector<int> &nums1, vector<int> &nums2) {
   int n1 = nums1.size();
   int ans = 0;
   for (int i = 0; i < n1; ++i) {
-    std::vector<int> temp;
+    vector<int> temp;
     for (int j = i; j < n1; ++j) {
       temp.push_back(nums1[j]);
       if (check_subarray_exists(temp, nums2)) {
         printArr(temp);
-        std::cout << j - i << std::endl;
-        ans = std::max(ans, (j - i));
+        cout << j - i << endl;
+        ans = max(ans, (j - i));
       }
     }
   }
-
   return ans;
 }
 
+int dfs(int i, int j, int &ans, vector<int> &nums1, vector<int> &nums2) {
+  if (i >= nums1.size() || j >= nums2.size())
+    return 0;
+  dfs(i + 1, j, ans, nums1, nums2);
+  dfs(i, j + 1, ans, nums1, nums2);
+  int common =
+      (nums1[i] == nums2[j]) ? 1 + dfs(i + 1, j + 1, ans, nums1, nums2) : 0;
+  ans = max(ans, common);
+  return common;
+}
+
+int dfs(int i, int j, int &ans, vector<int> &nums1, vector<int> &nums2, vector<vector<int>> &dp) {
+  if (i >= nums1.size() || j >= nums2.size())
+    return 0;
+
+  if (dp[i][j] != -1)
+    return dp[i][j];
+
+  dfs(i + 1, j, ans, nums1, nums2);
+  dfs(i, j + 1, ans, nums1, nums2);
+  int common =
+      (nums1[i] == nums2[j]) ? 1 + dfs(i + 1, j + 1, ans, nums1, nums2) : 0;
+  ans = max(ans, common);
+  return dp[i][j] = common;
+}
+
+
+// * ------------------------- Approach: Brute Force Approach -------------------------
+// * Top Down approach
+// * TIME COMPLEXITY O(2^(n + m))
+// * SPACE COMPLEXITY O(n + m) 
+int bruteForce(vector<int> &nums1, vector<int> &nums2) {
+  int ans = 0;
+  dfs(0, 0, ans, nums1, nums2);
+  return ans;
+}
+
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * Top Down approach with memoization
+// * TIME COMPLEXITY O(n x m)
+// * SPACE COMPLEXITY O(n x m) 
+int findLength(vector<int> &nums1, vector<int> &nums2) {
+  int ans = 0;
+  vector<vector<int>> dp(nums1.size(), vector<int>(nums2.size(), -1));
+  dfs(0, 0, ans, nums1, nums2, dp);
+  return ans;
+}
+
+
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums1 = {1, 2, 3, 2, 1};
-  // std::vector<int> nums2 = {3, 2, 1, 4, 7};
+  // vector<int> nums1 = {1, 2, 3, 2, 1};
+  // vector<int> nums2 = {3, 2, 1, 4, 7};
 
   // * testcase 2
-  std::vector<int> nums1 = {0, 0, 0, 0, 0};
-  std::vector<int> nums2 = {0, 0, 0, 0, 0};
+  vector<int> nums1 = {0, 0, 0, 0, 0};
+  vector<int> nums2 = {0, 0, 0, 0, 0};
 
-  std::cout << "nums1: ";
+  cout << "nums1: ";
   printArr(nums1);
 
-  std::cout << "nums2: ";
+  cout << "nums2: ";
   printArr(nums2);
 
   int ans = findLength(nums1, nums2);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
+  
   return 0;
 }
 
