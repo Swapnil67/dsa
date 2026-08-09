@@ -115,7 +115,6 @@ int findLength(vector<int> &nums1, vector<int> &nums2) {
   return ans;
 }
 
-
 int main(void) {
   // * testcase 1
   // vector<int> nums1 = {1, 2, 3, 2, 1};

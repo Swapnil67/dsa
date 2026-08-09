@@ -65,7 +65,6 @@ int climbStairs(int n) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
-
 // * Bottom Up approach
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)

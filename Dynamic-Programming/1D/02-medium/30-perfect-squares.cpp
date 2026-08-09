@@ -1,5 +1,5 @@
 /*
- * Leetcode - 
+ * Leetcode - 279
  * Perfect Squares
  * 
  * You are given an integer n, return the least number of perfect square numbers that sum to n.
@@ -67,6 +67,7 @@ int dfs(int n, vector<int> &dp) {
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
+// ! TLE
 // * Top Down
 // * TIME COMPLEXITY O(n^(sqrt(n)))
 // * SPACE COMPLEXITY O(n)
@@ -77,6 +78,7 @@ int bruteForce(int n) {
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
+// ! TLE
 // * Top Down + Memoization
 // * TIME COMPLEXITY O(n * sqrt(n))
 // * SPACE COMPLEXITY O(n)
@@ -90,13 +92,15 @@ int betterApproach(int n) {
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * Bottom Up
 // * TIME COMPLEXITY O(n * sqrt(n))
-// * SPACE COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(n) (no Auxillary Stack Space)
 int numSquares(int n) {
-  vector<int> dp(n + 1, n);
-  dp[0] = 0;
-  for (int target = 1; target <= n; ++target) {
-    for (int s = 1; s * s <= target; ++s) {
-      dp[target] = min(dp[target], 1 + dp[target - s * s]);
+  // * dp[i] -> minimum number of perfect squares that sum to 'i'
+  vector<int> dp(n + 1, n); // * Initialize all values to n (worst case: sum of n ones)
+  dp[0] = 0; // * Base case: 0 requires 0 perfect squares
+  for (int t = 1; t <= n; ++t) {
+    for (int s = 1; s * s <= t; ++s) {
+      // * If we use one perfect square s*s, we need 1 + dp[i - s*s] total squares
+      dp[t] = min(dp[t], 1 + dp[t - s * s]);
     }
   }
   return dp[n];

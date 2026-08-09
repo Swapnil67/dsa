@@ -130,20 +130,19 @@ int coinChange(vector<int> &coins, int amount) {
 }
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
-// * Instead of asking “how many coins to make this amount?” recursively, we build answers from smaller 
-// * amounts to larger ones.
 // * Bottom Up - Space Optimized
 // * 'n' - length of coins, 't' - given amount
 // * TIME COMPLEXITY O(n * t)
 // * SPACE COMPLEXITY O(t)
 int coinChange2(int amount, vector<int> &coins) {
   int n = coins.size();
-  // * 1D array initialized to a large value
-  vector<int> dp(amount + 1, amount + 1);
+  // * dp[t] stores the minimum number of coins to make amount t
+  vector<int> dp(amount + 1, amount + 1); // * 1D array initialized to a large value
   dp[0] = 0; // * 0 coins needed to make amount 0
 
   for (int coin : coins) {
     for (int t = coin; t <= amount; ++t) {
+      // * If using the current coin results in fewer coins, update
       dp[t] = min(dp[t], 1 + dp[t - coin]);
     }
   }
@@ -151,10 +150,52 @@ int coinChange2(int amount, vector<int> &coins) {
   return dp[amount] > amount ? -1 : dp[amount];
 }
 
+
+
+// * ------------------------- Approach 3: Optimal Approach -------------------------
+// * Follow Up question
+// * Bottom Up - Space Optimized
+// * 'n' - length of coins, 't' - given amount
+// * TIME COMPLEXITY O(n * t)
+// * SPACE COMPLEXITY O(t)
+vector<int> coinChangeWithPath(int amount, vector<int> &coins) {
+  int n = coins.size();
+  // * dp[t] stores the minimum number of coins to make amount t
+  vector<int> dp(amount + 1, amount + 1); // * 1D array initialized to a large value
+  dp[0] = 0; // * 0 coins needed to make amount 0
+
+  vector<int> parent(amount + 1, -1);
+
+  for (int coin : coins) {
+    for (int t = coin; t <= amount; ++t) {
+      // * If using the current coin results in fewer coins, update
+      if (1 + dp[t - coin] < dp[t]) {
+        dp[t] = 1 + dp[t - coin];
+        parent[t] = coin; // * Record the coin
+      }
+    }
+  }
+
+  // * If the amount is unreachable, return an empty list
+  if (dp[amount] > amount) 
+    return {};
+
+  // * Backtrack from the target amount to 0 using the parent vector
+  vector<int> path;
+  int currentAmount = amount;
+  while (currentAmount > 0) {
+    int coin = parent[currentAmount];
+    path.push_back(coin);
+    currentAmount -= coin;
+  }
+  return path;
+}
+
+
 int main(void) {
   // * testcase 1
-  // int amount = 11;
-  // vector<int> coins = {1, 2, 5};
+  int amount = 11;
+  vector<int> coins = {1, 2, 5};
 
   // * testcase 2
   // int amount = 3;
@@ -165,8 +206,8 @@ int main(void) {
   // vector<int> coins = {1};
 
   // * testcase 4
-  int amount = 11;
-  vector<int> coins = {9,6,5,1};
+  // int amount = 11;
+  // vector<int> coins = {9, 6, 5, 1};
 
   cout << "Amount: " << amount << endl;
   cout << "Input coins: ";
@@ -177,7 +218,11 @@ int main(void) {
   int ans = coinChange(coins, amount);
   // int ans = coinChange2(amount, coins);
 
+  vector<int> path = coinChangeWithPath(amount, coins);
+
   cout << "Answer: " << ans << endl;
+  cout << "Coins used: ";
+  printArr(path);
 
   return 0;
 }

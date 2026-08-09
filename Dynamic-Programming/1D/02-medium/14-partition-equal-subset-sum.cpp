@@ -62,10 +62,8 @@ bool dfs(int i, int target, vector<int> &nums, vector<vector<int>> &dp) {
   if (dp[i][target] != -1)
     return dp[i][target];
 
-  dp[i][target] = dfs(i + 1, target, nums, dp) ||
-                  dfs(i + 1, target - nums[i], nums, dp);
-
-  return dp[i][target];
+  return dp[i][target] = dfs(i + 1, target, nums, dp) ||
+                         dfs(i + 1, target - nums[i], nums, dp);
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -106,26 +104,30 @@ bool canPartition2(vector<int> &nums) {
   if (sum % 2 == 1)
     return false;
 
-  int target = sum / 2;
-  vector<vector<bool>> dp(n + 1, vector<bool>(target + 1, false));
+  int k = sum / 2;
+  vector<vector<bool>> dp(n + 1, vector<bool>(k + 1, false));
 
-  for (int i = 0; i <= n; ++i) {
+  // * base cases
+  for (int i = 0; i < n; ++i) // * For every index at target '0' is true
     dp[i][0] = true;
-  }
+
+  // * Base Case 2: Guard against out-of-bounds if nums[0] is larger than k
+  if (nums[0] <= k)
+    dp[0][nums[0]] = true;
 
   // * The i = 0 row is the base case — it represents using zero elements from the array.
-  for (int i = 1; i <= n; ++i) {
-    for (int j = 1; j <= target; ++j) {
-      if (j >= nums[i - 1]) {
-        dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
+  for (int i = 1; i < n; ++i) {
+    for (int t = 1; t <= k; ++t) {
+      int not_take = dp[i - 1][t];
+      int take = 0;
+      if (t >= nums[i]) {
+        take = dp[i - 1][t - nums[i]];
       }
-      else {
-        dp[i][j] = dp[i - 1][j];
-      }
+      dp[i][t] = (not_take | take);
     }
   }
 
-  return dp[n][target];
+  return dp[n][k];
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
@@ -138,25 +140,34 @@ bool canPartition3(vector<int>& nums) {
   int n = nums.size();
 
   int sum = accumulate(begin(nums), end(nums), 0);
-  if (sum % 2 == 1) return false;
+  if (sum % 2 == 1)
+    return false;
 
-  int target = sum / 2;
-  vector<int> dp(target + 1, false);
-  vector<int> next_dp(target + 1, false);
-  dp[0] = true;
+  int k = sum / 2;
 
-  for (int i = 0; i < n; ++i) {
-    for (int j = 1; j <= target; ++j) {
-      next_dp[j] = dp[j];
-      if (j >= nums[i]) {
-        // * dp[j - nums[i]] asks: "Could we make sum j - nums[i] before? If yes, then by adding the current element, we can now make sum j!"
-        next_dp[j] = dp[j] || dp[j - nums[i]];
-      }
-    }
-    dp = next_dp;
-  }
+  // * base cases
+  vector<bool> prev_dp(k + 1, false);
+  prev_dp[0] = true;
+  if (nums[0] <= k) // * Base Case 2: Guard against out-of-bounds if nums[0] is larger than k
+    prev_dp[nums[0]] = true;
+
+  vector<bool> cur_dp(k + 1, false);
   
-  return dp[target];
+  for (int i = 0; i < n; ++i) {
+    cur_dp[0] = true;
+    for (int t = 1; t <= k; ++t) {
+      bool not_take = prev_dp[t];
+      bool take = false;
+      if (t >= nums[i]) {
+        take = prev_dp[t - nums[i]];
+      }
+      cur_dp[t] = (not_take | take);
+    }
+    prev_dp = cur_dp;
+    // printArr(prev_dp);
+  }
+
+  return prev_dp[k];
 }
 
 int main(void) {

@@ -70,6 +70,37 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 16 - Minimum Cost For Tickets
+// int mincostTickets(vector<int> &days, vector<int> &costs) {
+// TODO
+// }
+
+// * 27 - Number of Longest Increasing Subsequence
+// int findNumberOfLIS(vector<int> &nums) {
+// TODO
+// }
+
+// * 28 - Partition Equal Subset Sum
+// bool canPartition(vector<int> &nums) {
+// TODO
+// }
+
+// * 29 - Combination Sum IV
+// bool canPartition(vector<int> &nums) {
+// TODO
+// }
+
+// * 30 - Perfect Squares
+// bool canPartition(vector<int> &nums) {
+// TODO
+// }
+
+// * 31 - Integer Break
+// bool canPartition(vector<int> &nums) {
+// TODO
+// }
+
+
 int main(void) {
   return 0;
 }

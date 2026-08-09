@@ -72,7 +72,6 @@ int dfs(int n, vector<int>& dp) {
   return dp[n] = ans;
 }
 
-
 // * ------------------------- Approach: Brute Force Approach -------------------------
 // * Top Down
 // * TIME COMPLEXITY O(N^N)
@@ -100,6 +99,7 @@ int betterApproach(int n) {
 // * TIME COMPLEXITY O(n^2 target)
 // * SPACE COMPLEXITY O(n)
 int integerBreak(int n) {
+  // * dp[num] = maximum product when breaking num into at least 2 parts
   vector<int> dp(n + 1, 0);
   dp[1] = 1;
   for (int num = 2; num <= n; ++num) {
@@ -129,6 +129,11 @@ int main(void) {
   cout << "Ans: " << ans << endl;
 }
 
+
+// ! Intuition
+// * For each split point 'n', you have two choices:
+// * Use i as one part: i * (num - i)
+// * Further break num - i: (i * dp[num - i]) or (i * dfs(num - i))
 
 // * Run the code
 // * g++ --std=c++17 31-integer-break.cpp -o output && ./output

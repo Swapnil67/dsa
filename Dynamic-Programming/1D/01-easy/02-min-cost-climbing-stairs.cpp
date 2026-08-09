@@ -61,7 +61,6 @@ int solve(int i, vector<int> &cost, vector<int> &dp) {
 }
 
 // * ------------------------- APPROACH: Brute Force -------------------------
-
 // * Top Down approach 
 // * TIME COMPLEXITY O(2^N)
 // * SPACE COMPLEXITY O(2^N)

@@ -70,26 +70,21 @@ int solve_brute(int i, int prev_idx, vector<vector<int>> &pairs) {
 }
 
 // * Recursion With Memoization
-// * i - current index
-// * pi - previous index
-int solve(int i, int pi, vector<vector<int>> &pairs,
-          vector<vector<int>> &dp) {
+// * i - current index, prevIdx - previous index
+int solve(int i, int prevIdx, vector<vector<int>> &pairs, vector<vector<int>> &dp) {
   if (i >= pairs.size())
     return 0;
 
-  if (pi != -1 && dp[i][pi] != -1)
-    return dp[i][pi];
+  if (dp[i][prevIdx + 1] != -1)
+    return dp[i][prevIdx + 1];
 
   int take = 0;
-  if (pi == -1 || pairs[pi][1] < pairs[i][0]) {
+  if (prevIdx == -1 || pairs[prevIdx][1] < pairs[i][0]) {
     take = 1 + solve(i + 1, i, pairs, dp);
   }
-  int skip = solve(i + 1, pi, pairs, dp);
+  int skip = solve(i + 1, prevIdx, pairs, dp);
 
-  if (pi != -1)
-    dp[i][pi] = max(take, skip);
-
-  return max(take, skip);
+  return dp[i][prevIdx + 1] = max(take, skip);
 }
 
 // * ------------------------- Approach 1: Brute Force Approach -------------------------

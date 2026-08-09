@@ -76,7 +76,6 @@ int solve_brute(int i, int prev_idx, vector<string> &words) {
 
   int take = 0;
   if (prev_idx == -1 || is_predecessor(words[prev_idx], words[i])) {
-    // if (prev_idx != -1) { cout << words[prev_idx] << " " << words[i] << endl; }
     take = 1 + solve_brute(i + 1, i, words);
   }
 
@@ -95,9 +94,6 @@ int solve(int i, int prev_idx, vector<string> &words, vector<vector<int>> &dp) {
 
   int take = 0;
   if (prev_idx == -1 || is_predecessor(words[prev_idx], words[i])) {
-    // if (prev_idx != -1) {
-    //   cout << words[prev_idx] << " " << words[i] << endl;
-    // }
     take = 1 + solve(i + 1, i, words, dp);
   }
   int skip = solve(i + 1, prev_idx, words, dp);

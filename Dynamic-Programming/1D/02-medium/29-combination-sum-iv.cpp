@@ -18,7 +18,10 @@
  * Explanation      :
  *
  * https://leetcode.com/problems/combination-sum-iv/description/
+ * https://neetcode.io/problems/combination-sum-iv/question
  */
+
+// ! Meta, Snapchat
 
 #include <vector>
 #include <iostream>
@@ -38,36 +41,34 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-int dfs(vector<int> &nums, int target) {
-  if (target == 0)
+// * without Memoization
+int dfs(vector<int> &nums, int k) {
+  if (k == 0)
     return 1;
 
   int res = 0;
   for (int num : nums) {
-    if (target < num)
+    if (k < num) // * early exit
       break;
-    res += dfs(nums, target - num);
+    res += dfs(nums, k - num);
   }
 
   return res;
 }
 
+// * with Memoization
+int dfs(vector<int> &nums, int k, unordered_map<int, int> &memo) {
+  if (memo.count(k))
+    return memo[k];
 
-int dfs(vector<int> &nums, int target, vector<int> &dp) {
-  if (target == 0)
-    return dp[target];
-
-  if (dp[target] != -1)
-   return dp[target];
-
-  int res = 0;
-  for (int num : nums) {
-    if (target < num)
+  int ways = 0;
+  for (auto &num : nums) {
+    if (k < num)
       break;
-    res += dfs(nums, target - num);
+    ways += dfs(nums, k - num, memo);
   }
 
-  return dp[target] = res;
+  return memo[k] = ways;
 }
 
 
@@ -87,24 +88,20 @@ int bruteForce(vector<int>& nums, int target) {
 // * SPACE COMPLEXITY O(t)
 int combinationSum4(vector<int>& nums, int target) {
  sort(begin(nums), end(nums));
-  // * dp[t] = number of ways to sum to value t
-
- vector<int> dp(target + 1, -1);
- dp[0] = 1;
- return dfs(nums, target, dp);
+ // * memo[t] = number of ways to sum to value t
+ unordered_map<int, int> memo;
+ memo[0] = 1;
+ return dfs(nums, target, memo);
 }
 
 
-// * ------------------------- Approach: Better Approach -------------------------
-// * Top Down + Memoization
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * BOTTOM UP 
 // * TIME COMPLEXITY O(N * target)
 // * SPACE COMPLEXITY O(N * target)
-int combinationSum4(vector<int>& nums, int target) {
- sort(begin(nums), end(nums));
- vector<int> dp(target + 1, -1);
- dp[0] = 1;
- return dfs(nums, target, dp);
-}
+// int combinationSum4(vector<int>& nums, int target) {
+// TODO
+// }
 
 int main(void) {
   // * testcase 1
@@ -116,9 +113,7 @@ int main(void) {
   printArr(nums);
 
   int ans = bruteForce(nums, target);
-  // bool ans = canPartition(nums);
-  // bool ans = canPartition2(nums);
-  // bool ans = canPartition3(nums);
+  // bool ans = combinationSum4(nums);
 
   cout << "possible combinations: " << ans << endl;
   
