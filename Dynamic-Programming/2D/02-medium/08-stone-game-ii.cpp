@@ -41,13 +41,14 @@ void printArr(vector<T> &arr) {
 }
 
 int dfs(bool alice, int i, int M, vector<int> &piles) {
-  if (i >= piles.size())
+  int n = piles.size();
+  if (i >= n)
     return 0;
 
   int res = alice ? 0 : INT_MAX;
   int stones = 0;
   for (int x = 1; x <= 2 * M; ++x) {
-    if (i + x > piles.size())
+    if (i + x > n)
       break;
 
     if (alice) { // * Take Maximum for alice
@@ -104,16 +105,6 @@ int betterApproach(vector<int> &piles) {
   dp.resize(2, vector<vector<int>> (n + 1, vector<int>(n + 1, -1)));
   return dfs_mem(true, 0, 1, piles);
 }
-
-// * ------------------------- Approach: Optimal Approach -------------------------
-// * Bottom Up + Space Optimization
-// * TIME COMPLEXITY O(m * n)
-// * SPACE COMPLEXITY O(n)
-int stoneGameII(vector<int> &piles) {
-  int n = piles.size();
-  return 0;
-}
-
 
 int main(void) {
   // * testcase 1

@@ -14,6 +14,8 @@
  * https://leetcode.com/problems/unique-paths
 */
 
+// ! Google, Walmart, Paytm, LinkedIn
+
 #include <vector>
 #include <iostream>
 
@@ -67,12 +69,11 @@ int bruteForce(int m, int n) {
 // * ------------------------- Approach: Better Approach -------------------------
 // * Top Down + Memoization
 // * TIME COMPLEXITY O(m * n)
-// * SPACE COMPLEXITY O(m * n)
+// * SPACE COMPLEXITY O(m * n) + O(m + n) (Auxillary Space)
 int betterApproach(int m, int n) {
   vector<vector<int>> dp(m, vector<int>(n, -1));
   return dfs(0, 0, m, n, dp);
 }
-
 
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * Bottom Up
@@ -98,7 +99,7 @@ int uniquePaths(int m, int n) {
 // * Bottom Up + Space Optimization
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(n)   (No Auxillary Space)
-int uniquePaths(int m, int n) {
+int uniquePaths2(int m, int n) {
   vector<int> prev_dp(n, 0);
 
   for (int r = m - 1; r >= 0; --r) {
@@ -113,6 +114,21 @@ int uniquePaths(int m, int n) {
   return prev_dp[0];
 }
 
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * Bottom Up + Space Optimization
+// * TIME COMPLEXITY O(m * n)
+// * SPACE COMPLEXITY O(n)   (No Auxillary Space)
+int uniquePaths(int m, int n) {
+  vector<int> dp(n + 1, 0);
+  dp[n - 1] = 1;
+  for (int r = m - 1; r >= 0; --r) {
+    for (int c = n - 2; c >= 0; --c) {
+      dp[c] += dp[c + 1];
+    }
+  }
+  return dp[0];
+}
+
 int main(void) {
   // int m = 3, n = 7;
   int m = 3, n = 2;
@@ -121,6 +137,7 @@ int main(void) {
   // int ans = bruteForce(m, n);
   // int ans = betterApproach(m, n);
   int ans = uniquePaths(m, n);
+  // int ans = uniquePaths2(m, n);
 
   cout << "Unique Paths: " << ans << endl; 
 
@@ -129,3 +146,4 @@ int main(void) {
  
 // * Run the code
 // * g++ --std=c++17 04-unique-paths.cpp -o output && ./output
+

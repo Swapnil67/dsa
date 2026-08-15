@@ -9,6 +9,14 @@
 
 // ! Amazon, Google, Meta, Uber
 
+// ! 0/1 Knapsack
+
+// * Intuition
+// * The key insight is that smashing stones is equivalent to partitioning them into two groups and finding the minimum 
+// * difference between their sums. When two stones collide, the result is the absolute difference of their weights. 
+// * If we think of assigning a positive or negative sign to each stone, the final result is the absolute value of the sum. 
+// * This transforms the problem into finding a subset with sum as close to half the total as possible.
+
 #include <vector>
 #include <numeric>
 #include <iostream>
@@ -28,11 +36,14 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+// * total - current total
+// * sum   - Sum of all the stones
 int dfs(int i, int total, int &sum, int &target, vector<int> &stones) {
   if (total >= target || i >= stones.size()) {
     return abs(total - (sum - total));
   }
 
+  // * simple not take and take
   return min(dfs(i + 1, total, sum, target, stones),
              dfs(i + 1, total + stones[i], sum, target, stones));
 }
@@ -46,6 +57,7 @@ int dfs(int i, int total, int &sum, int &target, vector<int> &stones,
   if (dp[i][total] != -1)
     return dp[i][total];
 
+  // * simple not take and take
   return dp[i][total] =
              min(dfs(i + 1, total, sum, target, stones, dp),
                  dfs(i + 1, total + stones[i], sum, target, stones, dp));
@@ -56,7 +68,6 @@ int dfs(int i, int total, int &sum, int &target, vector<int> &stones,
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
 bool bruteForce(vector<int> &stones) {
-  int n = stones.size();
   int sum = accumulate(begin(stones), end(stones), 0);
   int target = sum / 2;
   return dfs(0, 0, sum, target, stones);
@@ -88,10 +99,8 @@ bool lastStoneWeightII(vector<int> &stones) {
   for (int i = 1; i <= n; ++i) {
     for (int t = 1; t <= target; ++t) {
       if (t >= stones[i - 1]) {
-        // * This represents the maximum weight you get if you do choose to include the current stone.
-        // * stones[i - 1]: The weight of the stone you are taking.
-        // * t - stones[i - 1]: The remaining capacity left in your bag after putting this stone in.
-        // * dp[i - 1][t - stones[i - 1]]: Look at the previous row to find the absolute best weight you achieved using that exact remaining capacity.
+        // * stones[i - 1][t]: Skip current stone
+        // * dp[i - 1][t - stones[i - 1]] + stones[i - 1]: Take the current stone
         dp[i][t] = max(dp[i - 1][t], dp[i - 1][t - stones[i - 1]] + stones[i - 1]);
       } else {
         // * This represents the maximum weight you could get without using the current stone.

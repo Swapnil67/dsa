@@ -11,6 +11,7 @@
  * Find and return the maximum profit you can achieve.
  * 
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
+ * https://www.naukri.com/code360/problems/best-time-to-buy-and-sell-stock-ii_630282
 */
 
 // ! Amazon, Google, Meta, Uber
@@ -35,40 +36,38 @@ void printArr(vector<T> &arr) {
 }
 
 // * Without Memoization
-int dfs(int i, bool buying, vector<int> &prices) {
-  if (i >= prices.size())
+int dfs(int i, bool bought, vector<int> &prices) {
+  if (i == prices.size())
     return 0;
-
-  int profit = 0;
-  if (buying) {
-    profit = max((dfs(i + 1, false, prices) - prices[i]),
-                 dfs(i + 1, buying, prices));
+  int res = dfs(i + 1, bought, prices);
+  if (bought) { // * already bought
+    // * add to profit
+    res = max(res, dfs(i + 1, false, prices) + prices[i]);
   } else {
-    profit = max((dfs(i + 1, true, prices) + prices[i]),
-                 dfs(i + 1, buying, prices));
+    // * buying so deduct from profit
+    res = max(res, dfs(i + 1, true, prices) - prices[i]);
   }
-
-  return profit;
+  return res;
 }
 
 // * With Memoization
-int dfs(int i, bool buying, vector<int> &prices, vector<vector<int>> &dp) {
-  if (i >= prices.size())
+int dfs(int i, bool bought, vector<int> &prices, vector<vector<int>> &dp) {
+  if (i == prices.size())
     return 0;
 
-  if (dp[i][buying] != -1)
-    return dp[i][buying];
+  if (dp[i][bought] != -1)
+    return dp[i][bought];
 
-  int profit = 0;
-  if (buying) {
-    profit = max((dfs(i + 1, false, prices, dp) - prices[i]),
-                 dfs(i + 1, buying, prices, dp));
+  int res = dfs(i + 1, bought, prices, dp);
+  if (bought) { // * already bought
+    // * add to profit
+    res = max(res, dfs(i + 1, false, prices, dp) + prices[i]);
   } else {
-    profit = max((dfs(i + 1, true, prices, dp) + prices[i]),
-                 dfs(i + 1, buying, prices, dp));
+    // * buying so deduct from profit
+    res = max(res, dfs(i + 1, true, prices, dp) - prices[i]);
   }
 
-  return dp[i][buying] = profit;
+  return dp[i][bought] = res;
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -77,7 +76,7 @@ int dfs(int i, bool buying, vector<int> &prices, vector<vector<int>> &dp) {
 // * SPACE COMPLEXITY O(n)
 int bruteForce(vector<int> &prices) {
   int n = prices.size();
-  return dfs(0, true, prices);
+  return dfs(0, false, prices); // * starting with false since we have not bought yet
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
@@ -87,7 +86,7 @@ int bruteForce(vector<int> &prices) {
 int betterApproach(vector<int> &prices) {
   int n = prices.size();
   vector<vector<int>> dp(n + 1, vector<int>(2, -1));
-  return dfs(0, true, prices, dp);
+  return dfs(0, false, prices, dp); // * starting with false since we have not bought yet
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
@@ -98,13 +97,8 @@ int maxProfit(vector<int> &prices) {
   int n = prices.size();
   vector<vector<int>> dp(n + 1, vector<int>(2, 0));
   for (int i = n - 1; i >= 0; --i) {
-    for (int buying = 1; buying >= 0; --buying) {
-      if (buying == 1) {
-        dp[i][buying] = max(dp[i + 1][0] - prices[i], dp[i + 1][1]);
-      } else {
-        dp[i][buying] = max(dp[i + 1][1] + prices[i], dp[i + 1][0]);
-      }
-    }
+    dp[i][0] = max(dp[i + 1][0], dp[i + 1][1] - prices[i]);
+    dp[i][1] = max(dp[i + 1][1], dp[i + 1][0] + prices[i]);
   }
 
   for (auto &vec : dp)
@@ -114,21 +108,17 @@ int maxProfit(vector<int> &prices) {
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
-// * Bottom Up + Space Optimization
+// * Greedy
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
 int maxProfitDP2(vector<int> &prices) {
-  int n = prices.size();
-  int cur_buy = 0, cur_sell = 0;
-  int next_buy = 0, next_sell = 0;
-  for (int i = n - 1; i >= 0; --i) {
-    cur_buy = max(next_sell - prices[i], next_buy);
-    cur_sell = max(next_buy + prices[i], next_sell);
-    next_buy = cur_buy;
-    next_sell = cur_sell;
+  int profit = 0;
+  for (int i = 1; i < prices.size(); i++) {
+    if (prices[i] > prices[i - 1]) {
+      profit += (prices[i] - prices[i - 1]);
+    }
   }
-
-  return cur_buy;
+  return profit;
 }
 
 int main(void) {

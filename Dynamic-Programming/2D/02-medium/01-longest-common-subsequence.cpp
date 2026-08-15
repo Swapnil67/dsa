@@ -13,6 +13,7 @@
  * A common subsequence of two strings is a subsequence that is common to both strings.
  * 
  * https://leetcode.com/problems/longest-common-subsequence/
+ * https://neetcode.io/problems/longest-common-subsequence/question
  * https://www.naukri.com/code360/problems/longest-common-subsequence_624879
  * https://www.geeksforgeeks.org/problems/longest-common-subsequence-1587115620/1
 */
@@ -93,44 +94,45 @@ int longestCommonSubsequence(string s1, string s2) {
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
   for (int i = m - 1; i >= 0; --i) {
     for (int j = n - 1; j >= 0; --j) {
-      if (s1[i] == s2[j]) {
+      if (s1[i] == s2[j]) 
         dp[i][j] = 1 + dp[i + 1][j + 1];
-      }
-      else {
+      else 
         dp[i][j] = max(dp[i][j + 1], dp[i + 1][j]);
-      }
     }
+    printArr(dp[i]);
   }
 
   // * For Debugging
-  for (auto &vec : dp)
-    printArr(vec);
+  // for (auto &vec : dp)
+  //   printArr(vec);
 
   return dp[0][0];
 }
-
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
 // * m - size of s1, n - size of s2
 // * Bottom Up Approach + Space Optimized
 // * TIME COMPLEXITY  O(m * n)
 // * SPACE COMPLEXITY O(min(m,n)) (No Auxillary Stack Space)
-int longestCommonSubsequence2(string s1, string s2) {
-  if (s1.size() < s2.size()) {
-    swap(s1, s2);
+int longestCommonSubsequence2(string s, string t) {
+  if (s.size() < t.size()) {
+    swap(s, t);
   }
 
-  vector<int> prev(s2.size() + 1, 0);
-  vector<int> cur(s2.size() + 1, 0);
+  int m = s.size(), n = t.size();
+  vector<int> prev(n + 1, 0);
+  vector<int> cur(n + 1, 0);
 
-  int m = s1.size(), n = s2.size();
   for (int i = m - 1; i >= 0; --i) {
     for (int j = n - 1; j >= 0; --j) {
-      if (s1[i] == s2[j]) {
+      if (s[i] == t[j]) {
         cur[j] = 1 + prev[j + 1];
       } else {
-        // * dp[i][j] = max(dp[i][j + 1], dp[i + 1][j]);
+        // * cur[j + 1] : This represents skipping the current char of string (t) (t[j]) and moving to the next char. 
+        // * prev[j]    : This represents skipping the current char of string (s) (s[i]) and moving to the next char 
+        // *              (which belongs to the previous outer loop iteration, prev). 
         cur[j] = max(cur[j + 1], prev[j]);
+        // * dp[i][j] = max(dp[i][j + 1], dp[i + 1][j]);
       }
     }
     prev = cur;
@@ -141,7 +143,7 @@ int longestCommonSubsequence2(string s1, string s2) {
 
 int main(void) {
   // * testcase 1
-  string s1 = "abcde", s2 = "ace";
+  // string s1 = "abcde", s2 = "ace";
 
   // * testcase 2
   // string s1 = "abc", s2 = "abc";
@@ -149,15 +151,19 @@ int main(void) {
   // * testcase 3
   // string s1 = "abc", s2 = "def";
 
+  // * testcase 4
+  string s1 = "acd", s2 = "ced";
+
   cout << "s1: " << s1 << ", s2: " << s2 << endl;
   // int ans = bruteForce(s1, s2);
   // int ans = betterApproach(s1, s2);
-  // int ans = longestCommonSubsequence(s1, s2);
-  int ans = longestCommonSubsequence2(s1, s2);
+  int ans = longestCommonSubsequence(s1, s2);
+  // int ans = longestCommonSubsequence2(s1, s2);
+
   cout << "Longest Common Subsequence: " << ans << endl;
 
   return 0;
 }
  
 // * Run the code
-// * g++ --std=c++17 01-longest-common-subsequence.cpp -o output && ./output
+// * g++ --std=c++20 01-longest-common-subsequence.cpp -o output && ./output

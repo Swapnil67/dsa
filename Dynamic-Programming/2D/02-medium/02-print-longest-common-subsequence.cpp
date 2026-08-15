@@ -1,37 +1,16 @@
 /*
- * Leetcode - 518
- * Coin Change II
- * 
- * You are given an integer array coins representing coins of different denominations and an integer 
- * amount representing a total amount of money.
- * 
- * Return the number of combinations that make up that amount. 
- * If that amount of money cannot be made up by any combination of the coins, return 0.
- * 
- * You may assume that you have an infinite number of each kind of coin.
- * 
- * The answer is guaranteed to fit into a signed 32-bit integer.
- * 
- * Example 1
- * input            : amount = 5, coins = [1,2,5]
- * output           : 4
- * Explanation      : there are four ways to make up the amount:
- *                    5=5
- *                    5=2+2+1
- *                    5=2+1+1+1
- *                    5=1+1+1+1+1
+ * Print Longest Common Subsequence
  *
- * Example 2
- * input            : amount = 3, coins = [2]
- * output           : 0
- * Explanation      : the amount of 3 cannot be made up just with coins of 2.
+ * Example 1    :
+ * Input        : ‘s’  = “abcab”, ‘t’ = “cbab”
+ * Output       : "bab"
  * 
- * Example 3
- * input            : amount = 10, coins = [10]
- * output           : 1
- * 
- * https://leetcode.com/problems/coin-change-ii
- */
+ * Example 2    :
+ * Input        : ‘s’  = “abc”, ‘t’ = “xyx”
+ * Output       : ""
+ *
+ * https://www.naukri.com/code360/problems/print-longest-common-subsequence_8416383
+*/
 
 #include <vector>
 #include <iostream>
@@ -51,7 +30,46 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-string findLCS(string &s1, string &s2) {
+// * ------------------------- Approach 1: Optimal Approach -------------------------
+// * m - size of s1, n - size of s2
+// * Bottom Up Approach
+// * TIME COMPLEXITY  O(m * n)
+// * SPACE COMPLEXITY O(m * n) (No Auxillary Stack Space)
+string findLCS(string &s, string &t) {
+  if (s.size() < t.size())
+    swap(s, t);
+
+  int m = s.size(), n = t.size();
+  vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+  for (int i = m - 1; i >= 0; --i) {
+    for (int j = n - 1; j >= 0; --j) {
+      if (s[i] == t[j]) {
+        dp[i][j] = 1 + dp[i + 1][j + 1];
+      } else {
+        dp[i][j] = max(dp[i][j + 1], dp[i + 1][j]);
+      }
+    }
+  }
+
+  // * For Debugging
+  for (auto &vec : dp)
+    printArr(vec);
+
+  // * Reconstruct the string by walking forward
+  string ans = "";
+  int i = 0, j = 0;
+  while (i < m && j < n) {
+    if (s[i] == t[j]) {
+      ans += s[i]; // * Collect the matching character
+      i++, j++;    // * Move diagonally
+    } else if (dp[i][j + 1] >= dp[i + 1][j]) {
+      j++; // * Move right because it has the better/equal optimal path
+    } else {
+      i++; // * Move Down
+    }
+  }
+
+  return ans;
 }
 
 int main(void) {
@@ -70,5 +88,5 @@ int main(void) {
 }
 
 // * Run the code
-// * g++ --std=c++17 02-print-longest-common-subsequence.cpp -o output && ./output
+// * g++ --std=c++20 02-print-longest-common-subsequence.cpp -o output && ./output
 

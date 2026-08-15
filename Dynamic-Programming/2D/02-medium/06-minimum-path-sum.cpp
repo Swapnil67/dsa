@@ -7,6 +7,15 @@
  * 
  * Note: You can only move either down or right at any point in time.
  * 
+ * Example 1    :
+ * Input        : grid = [[1,3,1],[1,5,1],[4,2,1]]
+ * Output       : 7
+ * Explanation  : Because the path 1 → 3 → 1 → 1 → 1 minimizes the sum.
+ * 
+ * Example 2    :
+ * Input        : grid = [[1,2,3],[4,5,6]]
+ * Output       : 12
+ *
  * https://leetcode.com/problems/minimum-path-sum
 */
 
@@ -89,7 +98,11 @@ int minPathSum(vector<vector<int>> &grid) {
   for (int r = n - 1; r >= 0; --r) {
     for (int c = m - 1; c >= 0; --c) {
       dp[r][c] = grid[r][c] + min(dp[r + 1][c], dp[r][c + 1]);
+      // cout << "dp[" << c << "] = grid[" << r << "][" << c
+      //      << "] + min(dp[" << c << "], dp[" << c + 1 << "])" << endl;
     }
+    // cout << endl;
+    // printArr(dp);
   }
 
   return dp[0][0];
@@ -132,3 +145,30 @@ int main(void) {
  
 // * Run the code
 // * g++ --std=c++17 06-minimum-path-sum.cpp -o output && ./output
+
+/*
+* r = 2, c = 2
+*   - dp[2] = grid[2][2] + min(dp[2], dp[3])
+* r = 2, c = 1
+*   - dp[1] = grid[2][1] + min(dp[1], dp[2])
+* r = 2, c = 0
+*   - dp[0] = grid[2][0] + min(dp[0], dp[1])
+* dp => [ 7, 3, 1, 2147483647 ]
+
+* r = 1, c = 2
+*   - dp[2] = grid[1][2] + min(dp[2], dp[3])
+* r = 1, c = 1
+* - dp[1] = grid[1][1] + min(dp[1], dp[2])
+* r = 1, c = 0
+* - dp[0] = grid[1][0] + min(dp[0], dp[1])
+* dp => [ 8, 7, 2, 2147483647 ]
+
+* r = 0, c = 2
+*   - dp[2] = grid[0][2] + min(dp[2], dp[3])
+* r = 0, c = 1
+*   - dp[1] = grid[0][1] + min(dp[1], dp[2])
+* r = 0, c = 2
+*   - dp[0] = grid[0][0] + min(dp[0], dp[1])
+* dp => [ 7, 6, 3, 2147483647 ]
+*/
+

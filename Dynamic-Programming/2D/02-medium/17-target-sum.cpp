@@ -20,6 +20,14 @@
 
 // * Same as Partitions With Given Difference
 
+// * Intuition
+// * s1 = total_sum - s2
+// * s1 - s2 = d
+// * total_sum - s2 - s2 = d
+// * total_sum - d = 2 * s2
+// * s2 = (total_sum - d) / 2;
+// * We need to find subsets whose sum is equal to s2
+
 #include <vector>
 #include <numeric>
 #include <climits>
@@ -54,18 +62,19 @@ int dfs(int i, int k, vector<int> &nums) {
 }
 
 // * With Memoization
-int sum;
-int dfs(int i, int cur, int &target, vector<int> &nums,
-        vector<vector<int>> &dp) {
-  if (i >= nums.size())
-    return target == cur;
+int dfs(int i, int k, vector<int> &nums, vector<vector<int>> &dp) {
+  if (i == nums.size())
+    return k == 0;
 
-  // * Add sum to cur to prevent indexing -ve element (i.e. cur can be -ve)
-  if (dp[i][cur + sum] != INT_MIN)
-    return dp[i][cur + sum];
+  if (dp[i][k] != -1)
+    return dp[i][k];
 
-  return dp[i][cur + sum] = dfs(i + 1, cur + nums[i], target, nums, dp) +
-                            dfs(i + 1, cur - nums[i], target, nums, dp);
+  int not_take = dfs(i + 1, k, nums, dp);
+  int take = 0;
+  if (k >= nums[i]) {
+    take = dfs(i + 1, k - nums[i], nums, dp);
+  }
+  return dp[i][k] = (not_take + take);
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -74,20 +83,25 @@ int dfs(int i, int cur, int &target, vector<int> &nums,
 // * SPACE COMPLEXITY O(n)
 int bruteForce(vector<int> &nums, int target) {
   int sum = accumulate(begin(nums), end(nums), 0);
+  if (sum - target < 0 || (sum - target) % 2 != 0)
+    return 0;
   int k = (sum - target) / 2;
   return dfs(0, k, nums);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
-// * Solved in a little different way
 // * Top Down + Memoization
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n^2)
 int betterApproach(vector<int> &nums, int target) {
   int n = nums.size();
-  sum = accumulate(begin(nums), end(nums), 0);
-  vector<vector<int>> dp(n + 1, vector<int>(2 * sum + 1, INT_MIN));
-  return dfs(0, 0, target, nums, dp);
+  int sum = accumulate(begin(nums), end(nums), 0);
+  if (sum - target < 0 || (sum - target) % 2 != 0)
+    return 0;
+
+  int k = (sum - target) / 2;
+  vector<vector<int>> dp(n + 1, vector<int>(k + 1, -1));
+  return dfs(0, k, nums, dp);
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
@@ -102,19 +116,21 @@ int findTargetSumWays(vector<int> &nums, int target) {
   int n = nums.size();
   int k = (sum - target) / 2;
   vector<vector<int>> dp(n + 1, vector<int>(k + 1, -1));
+
+  // * Base Cases
   dp[0][0] = (nums[0] == 0) ? 2 : 1;
   if (nums[0] != 0 && k >= nums[0]) {
     dp[0][nums[0]] = 1;
   }
 
   for (int i = 1; i < n; ++i) {
-    for (int j = 0; j <= k; ++j) {
-      int not_take = dp[i - 1][j];
+    for (int t = 0; t <= k; t++) {
+      int not_take = dp[i - 1][t];
       int take = 0;
-      if (j >= nums[i - 1]) {
-        take = dp[i - 1][j - nums[i - 1]];
+      if (t >= nums[i - 1]) {
+        take = dp[i - 1][t - nums[i - 1]];
       }
-      dp[i][j] = (not_take + take);
+      dp[i][t] = (not_take + take);
     }
   }
 
@@ -136,7 +152,6 @@ int findTargetSumWaysDP2(vector<int> &nums, int target) {
 
   int n = nums.size();
   int k = (sum - target) / 2;
-  // cout << "k: " << k << endl;
 
   vector<int> dp(k + 1, 0);
   dp[0] = nums[0] == 0 ? 2 : 1; // * Base Case
@@ -144,18 +159,10 @@ int findTargetSumWaysDP2(vector<int> &nums, int target) {
     dp[nums[0]] = 1;
   // printArr(dp);
 
-  vector<int> next_dp(k + 1, 0);
-
   for (int i = 1; i < n; ++i) {
-    for (int j = 0; j <= k; ++j) {
-      int not_take = dp[j];
-      int take = 0;
-      if (j >= nums[i]) {
-        take = dp[j - nums[i]];
-      }
-      next_dp[j] = (not_take + take);
+    for (int t = k; t >= nums[i]; --t)  {
+      dp[t] = dp[t] + dp[t - nums[i]];
     }
-    dp = next_dp;
     // printArr(dp);
   }
 

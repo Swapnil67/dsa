@@ -46,10 +46,10 @@ int dfs(int i, bool buying, vector<int> &prices) {
   if (buying) {
     int buy = dfs(i + 1, false, prices) - prices[i];
     return max(buy, cooldown);
-  } else {
-    int sell = dfs(i + 2, true, prices) + prices[i];
-    return max(sell, cooldown);
   }
+  // * i + 2 -> since 1 day cooldown after sell
+  int sell = dfs(i + 2, true, prices) + prices[i];
+  return max(sell, cooldown);
 }
 
 // * With Memoization
@@ -65,10 +65,9 @@ int dfs(int i, bool buying, vector<int> &prices, vector<vector<int>> &dp) {
     int buy = dfs(i + 1, false, prices, dp) - prices[i];
     return dp[i][buying] = max(buy, cooldown);
   }
-  else {
-    int sell = dfs(i + 2, true, prices, dp) + prices[i];
-    return dp[i][buying] = max(sell, cooldown);
-  }
+  // * i + 2 -> since 1 day cooldown after sell
+  int sell = dfs(i + 2, true, prices, dp) + prices[i];
+  return dp[i][buying] = max(sell, cooldown);
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -96,7 +95,7 @@ int betterApproach(vector<int> &prices) {
 // * SPACE COMPLEXITY O(n)
 int maxProfit(vector<int> &prices) {
   int n = prices.size();
-  vector<vector<int>> dp(n + 1, vector<int>(2, 0));
+  vector<vector<int>> dp(n + 2, vector<int>(2, 0));
   for (int i = n - 1; i >= 0; --i) {
     for (int buying = 1; buying >= 0; --buying) {
       if (buying == 1) {
@@ -104,7 +103,8 @@ int maxProfit(vector<int> &prices) {
         int cooldown = dp[i + 1][1];
         dp[i][1] = max(buy, cooldown);
       } else {
-        int sell = (i + 2 < n) ? dp[i + 2][1] + prices[i] : prices[i];
+        // * i + 2 -> since 1 day cooldown after sell
+        int sell = dp[i + 2][1] + prices[i];
         int cooldown = dp[i + 1][0];
         dp[i][0] = max(sell, cooldown);
       }
@@ -112,14 +112,6 @@ int maxProfit(vector<int> &prices) {
   }
 
   return dp[0][1];
-}
-
-// * ------------------------- Approach: Optimal Approach -------------------------
-// * Bottom Up + Space Optimization
-// * TIME COMPLEXITY O(n^2)
-// * SPACE COMPLEXITY O(n^2)
-int maxProfitDP2(vector<int> &prices) {
-  return 0;
 }
 
 int main(void) {
@@ -135,10 +127,9 @@ int main(void) {
   cout << "Prices: ";
   printArr(prices);
 
-  int ans = bruteForce(prices);
+  // int ans = bruteForce(prices);
   // int ans = betterApproach(prices);
-  // int ans = lastStoneWeightII(prices);
-  // int ans = lastStoneWeightIIDP2(prices);
+  int ans = maxProfit(prices);
 
   cout << "Answer: " << ans << endl;
 
@@ -146,7 +137,7 @@ int main(void) {
 }
  
 // * Run the code
-// * g++ --std=c++17 12-best-time-to-buy-and-sell-stock-with-cooldown.cpp -o output && ./output
+// * g++ --std=c++17 11-best-time-to-buy-and-sell-stock-with-cooldown.cpp -o output && ./output
 
 /*
 * Tree Diagram

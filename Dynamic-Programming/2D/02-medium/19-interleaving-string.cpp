@@ -25,7 +25,12 @@
  * 
  * https://leetcode.com/problems/interleaving-string
  * https://neetcode.io/problems/interleaving-string
+ * https://www.naukri.com/code360/problems/interleaving-two-strings_1062567
+ * https://www.geeksforgeeks.org/problems/interleaved-strings/1
+ * https://www.youtube.com/watch?v=CfzP4oXxZTI
 */
+
+// ! Amazon, Google, Meta, Uber, Microsoft, Apple
 
 #include <vector>
 #include <cstring>
@@ -91,7 +96,7 @@ bool dfs(int i, int j, int k, string &s1, string &s2, string &s3,
 
 
 bool dfs(int i, int j, string &s1, string &s2, string &s3,
-         int (&t)[][101]) {
+         int (&t)[101][101]) {
   if (i == m && j == n)
     return true;
 
@@ -101,15 +106,14 @@ bool dfs(int i, int j, string &s1, string &s2, string &s3,
   if (t[i][j] != -1)
     return t[i][j];
 
-
   bool res = false;
-  if (s1[i] == s3[i + j])
+  if (s1[i] == s3[i + j]) // * k = i + j
     res = dfs(i + 1, j, s1, s2, s3, t);
 
   if (res == true)
     return res;
 
-  if (s2[j] == s3[i + j])
+  if (s2[j] == s3[i + j]) // * k = i + j
     res = dfs(i, j + 1, s1, s2, s3, t);
 
   return t[i][j] = res;
@@ -133,7 +137,7 @@ int bruteForce(string s1, string s2, string s3) {
 // * Top Down + Memoization
 // * TIME COMPLEXITY O(m * n * N)
 // * SPACE COMPLEXITY O(m * n * N)
-int isInterleave(string s1, string s2, string s3) {
+int betterApproach(string s1, string s2, string s3) {
   m = s1.length(), n = s2.length(), N = s3.length();
   if (N != m + n)
     return false;
@@ -160,8 +164,24 @@ int isInterleave(string s1, string s2, string s3) {
 }
 
 int main(void) {
+  // * testcase 1
+  string s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac";
+
+  // * testcase 2
+  // string s1 = "aabcc", s2 = "dbbca", s3 = "aadbbbaccc";
+
+  // * testcase 3
+  // string s1 = "", s2 = "", s3 = "";
+
+  cout << "s1: " << s1 << ", s2: " << s2 << ", s3: " << s3 << endl;
+
+  // int ans = bruteForce(s1, s2, s3);
+  // int ans = betterApproach(s1, s2, s3);
+  int ans = isInterleave(s1, s2, s3);
+  cout << "Answer: " << ans << endl;
+
   return 0;
 }
  
 // * Run the code
-// * g++ --std=c++17 19-interleaving-string.cpp -o output && ./output
+// * g++ --std=c++20 19-interleaving-string.cpp -o output && ./output

@@ -19,7 +19,11 @@
  * output           : 5
  * 
  * https://leetcode.com/problems/edit-distance/
+ * https://www.naukri.com/code360/problems/edit-distance_630420
+ * https://www.geeksforgeeks.org/problems/edit-distance3702/1
 */
+
+// ! Amazon, Microsoft, LinkedIn, Google, Paytm
 
 #include <vector>
 #include <iostream>
@@ -38,6 +42,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+// * Without Memoization
 int dfs(int m, int n, string word1, string word2) {
   // * word2 got completed first
   if (n == 0)
@@ -47,9 +52,8 @@ int dfs(int m, int n, string word1, string word2) {
   if (m == 0) 
     return n; // * Insert extra chars from word2
 
-  // * Both char same at 'm' and 'n'
-  if (word1[m - 1] == word2[n - 1])
-    return dfs(m - 1, n - 1, word1, word2);
+  if (word1[m - 1] == word2[n - 1]) // * Both char same at 'm' and 'n'
+    return dfs(m - 1, n - 1, word1, word2); // * no need to add any operation
 
   // * Insert a char at 'm'
   int insert_res = 1 + dfs(m, n - 1, word1, word2);
@@ -60,10 +64,10 @@ int dfs(int m, int n, string word1, string word2) {
   // * Replace a char at 'm'
   int replace_res = 1 + dfs(m - 1, n - 1, word1, word2);
 
-  return min(insert_res, min(delete_res, replace_res));
+  return min({insert_res, delete_res, replace_res});
 }
 
-
+// * With Memoization
 int dfs(int m, int n, string &word1, string &word2, vector<vector<int>>& dp) {
   // * word2 got completed first
   if (n == 0)
@@ -89,7 +93,7 @@ int dfs(int m, int n, string &word1, string &word2, vector<vector<int>>& dp) {
   // * Replace a char at 'm'
   int replace_res = 1 + dfs(m - 1, n - 1, word1, word2, dp);
 
-  return dp[m][n] = min(insert_res, min(delete_res, replace_res));
+  return dp[m][n] = min({insert_res, delete_res, replace_res});
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -124,7 +128,7 @@ int minDistance(string word1, string word2) {
   vector<vector<int>> t(m + 1, vector<int>(n + 1, 0));
   for (int i = 0; i <= m; ++i) {
     for (int j = 0; j <= n; ++j) {
-      if (i == 0 || j == 0) {
+      if (i == 0 || j == 0) { // * for any i = 0 return 'j' or for any j = 0 return 'i'
         t[i][j] = i + j;
       } else if (word1[i - 1] == word2[j - 1]) {
         t[i][j] = t[i - 1][j - 1];
@@ -148,7 +152,7 @@ int minDistance(string word1, string word2) {
 // * Bottom Up + Space Optimized
 // * TIME COMPLEXITY O(m * n) (No Recursion Auxillary Space O(n))
 // * SPACE COMPLEXITY O(n)
-int minDistance(string word1, string word2) {
+int minDistance2(string word1, string word2) {
   int m = word1.size(), n = word2.size();
   vector<int> prev(n + 1, 0);
 
@@ -156,7 +160,7 @@ int minDistance(string word1, string word2) {
   for (int j = 0; j <= n; ++j) {
     prev[j] = j;
   }
-  // printArr(prev);
+  printArr(prev);
 
   vector<int> cur(n + 1, 0);
   for (int i = 1; i <= m; ++i) {
@@ -173,7 +177,7 @@ int minDistance(string word1, string word2) {
       }
     }
     prev = cur;
-    // printArr(prev);
+    printArr(prev);
   }
 
   return prev[n];
@@ -191,7 +195,9 @@ int main(void) {
 
   // int ans = bruteForce(word1, word2);
   // int ans = betterApproach(word1, word2);
-  int ans = minDistance(word1, word2);
+  // int ans = minDistance(word1, word2);
+  int ans = minDistance2(word1, word2);
+
   cout << "Answer: " << ans << endl;
 
   return 0;
