@@ -55,14 +55,9 @@ int dfs(int m, int n, string word1, string word2) {
   if (word1[m - 1] == word2[n - 1]) // * Both char same at 'm' and 'n'
     return dfs(m - 1, n - 1, word1, word2); // * no need to add any operation
 
-  // * Insert a char at 'm'
-  int insert_res = 1 + dfs(m, n - 1, word1, word2);
-
-  // * Delete a char at 'm'
-  int delete_res = 1 + dfs(m - 1, n, word1, word2);
-
-  // * Replace a char at 'm'
-  int replace_res = 1 + dfs(m - 1, n - 1, word1, word2);
+  int insert_res = 1 + dfs(m, n - 1, word1, word2); // * Insert a char at 'm'
+  int delete_res = 1 + dfs(m - 1, n, word1, word2); // * Delete a char at 'm'
+  int replace_res = 1 + dfs(m - 1, n - 1, word1, word2); // * Replace a char at 'm'
 
   return min({insert_res, delete_res, replace_res});
 }
@@ -116,7 +111,6 @@ int betterApproach(string word1, string word2) {
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, -1));
   return dfs(m, n, word1, word2, dp);
 }
-
 
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * t[i][j] = min operations for making word1 of length 'i' and word2 of length 'j' equal
@@ -205,3 +199,12 @@ int main(void) {
  
 // * Run the code
 // * g++ --std=c++17 20-edit-distance.cpp -o output && ./output
+
+/*
+ * 
+       ""  c   u   t
+ * ""  0   1   2   3
+ * c   1   0   1   2
+ * a   2   1   1   2
+ * t   3   2   2   1
+ */

@@ -78,10 +78,10 @@ int bruteForce(string s1, string s2) {
 // * Recursion + Memoization (Top Down)
 // * TIME COMPLEXITY  O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n) (Auxillary Stack Space)
-int betterApproach(string s1, string s2) {
-  int m = s1.size(), n = s2.size();
+int betterApproach(string s, string t) {
+  int m = s.size(), n = t.size();
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, -1));
-  return dfs(m, n, s1, s2, dp);
+  return dfs(m, n, s, t, dp);
 }
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
