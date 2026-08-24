@@ -35,6 +35,8 @@
 
 // ! Google
 
+// ! LIS
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -54,19 +56,18 @@ void printArr(vector<T> &arr) {
 }
 
 bool is_predecessor(string s, string t) {
-  int n1 = s.size(), n2 = t.size();
-  // cout << s << " " << t << endl;
-  if (n1 > n2 || n2 - n1 != 1)
+  int m = s.size(), n = t.size();
+  if (m > n || n - m != 1)
     return false;
 
   int i = 0, j = 0;
-  while (i < n1 && j < n2) {
+  while (i < m && j < n) {
     if (s[i] == t[j]) {
       i++;
     }
     j++;
   }
-  return i == n1;
+  return i == m;
 }
 
 
@@ -88,8 +89,8 @@ int solve(int i, int prev_idx, vector<string> &words, vector<vector<int>> &dp) {
   if (i >= words.size())
     return 0;
 
-  if (prev_idx != -1 && dp[i][prev_idx] != -1) {
-    return dp[i][prev_idx];
+  if (dp[i][prev_idx + 1] != -1) {
+    return dp[i][prev_idx + 1];
   }
 
   int take = 0;
@@ -97,11 +98,8 @@ int solve(int i, int prev_idx, vector<string> &words, vector<vector<int>> &dp) {
     take = 1 + solve(i + 1, i, words, dp);
   }
   int skip = solve(i + 1, prev_idx, words, dp);
-  if (prev_idx != -1) {
-    dp[i][prev_idx] = max(take, skip);
-  }
 
-  return max(take, skip);
+  return dp[i][prev_idx + 1] = max(take, skip);
 }
 
 static bool sortBy(string &s1, string &s2) {
@@ -147,7 +145,6 @@ int longestStrChain(vector<string> words) {
     string cur = words[i];
     for (int j = 0; j < i; ++j) {
       if (is_predecessor(words[j], cur)) {
-        // cout << words[j] << " " << cur << endl;
         t[i] = max(t[i], t[j] + 1);
         max_len = max(max_len, t[i]);
       }

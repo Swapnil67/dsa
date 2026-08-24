@@ -23,6 +23,14 @@
 
 // ! DP on subsequences (Same as question 15)
 
+// * Intuition
+// * s1 = total_sum - s2
+// * s1 - s2 = d
+// * total_sum - s2 - s2 = d
+// * total_sum - d = 2 * s2
+// * s2 = (total_sum - d) / 2;
+// * We need to find subsets whose sum is equal to s2
+
 #include <vector>
 #include <numeric>
 #include <iostream>
@@ -45,10 +53,8 @@ const int M = (int)(1e9 + 7);
 
 // * Without Memoization
 int dfs(int i, int k, vector<int>& nums) {
-  // cout << i << " " << k << endl;
-  if (i == nums.size()) {
+  if (i == nums.size()) 
     return (k == 0);
-  }
 
   int not_take = dfs(i + 1, k, nums);
   int take = 0;
@@ -60,9 +66,8 @@ int dfs(int i, int k, vector<int>& nums) {
 
 // * With Memoization
 int dfs(int i, int k, vector<int>& nums, vector<vector<int>> &dp) {
-  if (i == nums.size()) {
+  if (i == nums.size()) 
     return (k == 0);
-  }
 
   if (dp[i][k] != -1)
     return dp[i][k];
@@ -75,20 +80,11 @@ int dfs(int i, int k, vector<int>& nums, vector<vector<int>> &dp) {
   return dp[i][k] = (not_take + take);
 }
 
-// * Intuition
-// * s1 = total_sum - s2
-// * s1 - s2 = d
-// * total_sum - s2 - s2 = d
-// * total_sum - d = 2 * s2
-// * s2 = (total_sum - d) / 2;
-// * We need to find subsets whose sum is equal to s2
-
 // * ------------------------- Approach: Brute Force Approach -------------------------
 // * Top Down
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
 int bruteForce(vector<int> &nums, int &diff) {
-
   int total_sum = accumulate(begin(nums), end(nums), 0);
   if (total_sum - diff < 0 || (total_sum - diff) % 2  != 0)
     return 0; 

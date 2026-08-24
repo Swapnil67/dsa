@@ -9,7 +9,7 @@
  * Explanation  : The array itself is a mountain array so we do not need to remove any elements.
  *
  * Example 2    :
- * Input        : nums = [2,1,1,5,6,2,3,1]
+ * Input        : nums = [2, 1, 1, 5, 6, 2, 3, 1]
  * Output       : 3
  * Explanation  : Remove the elements at indices 0, 1, and 5, making the array nums = [1,5,6,3,1].
  *

@@ -29,9 +29,10 @@
  * Output       : Tie
  * 
  * https://leetcode.com/problems/stone-game-iii/description/
+ * https://neetcode.io/problems/stone-game-iii/question
 */
 
-// ! Amazon, Google, Meta, Uber
+// ! Amazon, Google, Meta
 
 #include <vector>
 #include <numeric>
@@ -49,17 +50,6 @@ void printArr(vector<T> &arr) {
       cout << ", ";
   }
   cout << " ]" << endl;
-}
-
-int dfs(int l, int r, vector<int> &piles) {
-  if (l > r)
-    return 0;
-
-  // * Alice will only play when even piles and we try to maximize that sum
-  bool even = (r - l + 1) % 2 == 0;
-  int left = even ? piles[l] : 0;
-  int right = even ? piles[r] : 0;
-  return max(left + dfs(l + 1, r, piles), right + dfs(l, r - 1, piles));
 }
 
 int dfs(int i, vector<int> &stoneValue) {
