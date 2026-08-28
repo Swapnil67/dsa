@@ -96,7 +96,7 @@ bool betterApproach(vector<int> nums, int k) {
 // * Bottom Up
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-int subsetSumEqualsK(vector<int> &nums, int &k) {
+bool subsetSumEqualsK(vector<int> &nums, int &k) {
   int n = nums.size();
   vector<vector<bool>> dp(n + 1, vector<bool>(k + 1, false));
 
@@ -132,12 +132,12 @@ int subsetSumEqualsK(vector<int> &nums, int &k) {
 // * Bottom Up + Space Optimization
 // * TIME COMPLEXITY O(n * k)
 // * SPACE COMPLEXITY O(n)
-int subsetSumEqualsKDP2(vector<int> &nums, int k) {
+bool subsetSumEqualsKDP2(vector<int> &nums, int k) {
   int n = nums.size();
-  vector<int> dp(k + 1, 0);
-  dp[0] = 1; 
+  vector<bool> dp(k + 1, 0);
+  dp[0] = true; 
   if (nums[0] <= k) {
-    dp[nums[0]] = 1; // * 1 way to make nums[0]
+    dp[nums[0]] = true; // * 1 way to make nums[0]
   }
 
   for (int i = 1; i < n; ++i) {

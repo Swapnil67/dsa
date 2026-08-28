@@ -26,7 +26,7 @@
  * https://www.naukri.com/code360/problems/minimum-elements_3843091
 */
 
-// ! Amazon, Meta, Paypal, Microsoft, Flipkart, Tiktok, Visa
+// ! Amazon, Meta, Paypal, Microsoft, Flipkart, Tiktok, Visa, Walmart, HSBC
 
 // * Unbounded Knapsack
 // * 0/1 Knapsack DP on subsequences 
@@ -116,7 +116,6 @@ int coinChange(vector<int> &coins, int amount) {
     for (int t = 1; t <= amount; ++t) {
         // * If i > 0, get value from top row. If i == 0, it stays 1e9
         int not_take = (i > 0) ? dp[i - 1][t] : 1e9; 
-        
         int take = 1e9;
         if (t >= coins[i]) {
             take = 1 + dp[i][t - coins[i]];
@@ -142,7 +141,8 @@ int coinChange2(int amount, vector<int> &coins) {
 
   for (int coin : coins) {
     for (int t = coin; t <= amount; ++t) {
-      // * If using the current coin results in fewer coins, update
+      // * dp[t] -> skip the current coin
+      // * dp[t - coin] -> take current coin + take the remaing amount from dp (previously calculated)
       dp[t] = min(dp[t], 1 + dp[t - coin]);
     }
   }
@@ -174,6 +174,7 @@ vector<int> coinChangeWithPath(int amount, vector<int> &coins) {
         parent[t] = coin; // * Record the coin
       }
     }
+    printArr(dp);
   }
 
   // * If the amount is unreachable, return an empty list

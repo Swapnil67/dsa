@@ -133,7 +133,8 @@ int main(void) {
   // int ans = bruteForce(s);
   // int ans = betterApproach(s);
   int ans = countSubstrings(s);
-  cout << "Palindromic Substrings: " << ans << endl;
+
+  cout << "Palindromic Substrings Count: " << ans << endl;
   return 0;
 }
  

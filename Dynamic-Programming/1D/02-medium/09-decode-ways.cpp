@@ -55,8 +55,7 @@ int dfs(int i, string& s, vector<int>& dp) {
   // * Base case: Leading zero cannot be decoded
   if (s[i] == '0') return 0;
   
-  // * Return already computed result to save time
-  if (dp[i] != -1) return dp[i];
+  if (dp[i] != -1) return dp[i]; // * cache
   
   // * Option 1: Take a single digit
   int ways = dfs(i + 1, s, dp);

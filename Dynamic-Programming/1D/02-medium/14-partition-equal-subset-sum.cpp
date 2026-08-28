@@ -108,7 +108,7 @@ bool canPartition2(vector<int> &nums) {
   vector<vector<bool>> dp(n + 1, vector<bool>(k + 1, false));
 
   // * base cases
-  for (int i = 0; i < n; ++i) // * For every index at target '0' is true
+  for (int i = 0; i < n; ++i) // * target '0' is possible for every index
     dp[i][0] = true;
 
   // * Base Case 2: Guard against out-of-bounds if nums[0] is larger than k
@@ -119,7 +119,7 @@ bool canPartition2(vector<int> &nums) {
   for (int i = 1; i < n; ++i) {
     for (int t = 1; t <= k; ++t) {
       int not_take = dp[i - 1][t];
-      int take = 0;
+      int take = false;
       if (t >= nums[i]) {
         take = dp[i - 1][t - nums[i]];
       }

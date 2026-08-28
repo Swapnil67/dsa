@@ -105,7 +105,7 @@ string betterApproach(string s) {
 // * ------------------------- Approach 2: Better Approach -------------------------
 // * Recursion + Memoization
 // * TIME COMPLEXITY O(n^2)
-// * SPACE COMPLEXITY O(n^2) 
+// * SPACE COMPLEXITY O(n^2) + (Auxillary Stack Space)
 string longestPalindrome(string s) {
   int n = s.size();
   int max_len = 0, start_idx = 0;
@@ -126,6 +126,38 @@ string longestPalindrome(string s) {
   return s.substr(start_idx, max_len);
 }
 
+
+// * ------------------------- Approach 3: Optimal Approach -------------------------
+// * Bottom Up
+// * TIME COMPLEXITY O(n^2)
+// * SPACE COMPLEXITY O(n^2) (No Auxillary Stack Space)
+string longestPalindrome2(string s) {
+  int n = s.length();
+  int start_idx = -1, max_len = 0;
+  vector<vector<bool>> t(n + 1, vector<bool>(n + 1, false));
+  for (int L = 1; L <= n; ++L) {
+    for (int i = 0; i + L - 1 < n; ++i) {
+      int j = i + L - 1;
+      if (i == j) {
+        t[i][j] = true;
+      }
+      else if (i + 1 == j) {
+        t[i][j] = (s[i] == s[j]);
+      }
+      else {
+        t[i][j] = (s[i] == s[j]) && t[i + 1][j - 1];
+      }
+
+      if (t[i][j] && (j - i + 1) > max_len) {
+        start_idx = i;
+        max_len = (j - i + 1);
+      }
+    }
+  }
+
+  return s.substr(start_idx, max_len);
+}
+
 int main(void) {
   // * testcase 1
   string s = "babad";
@@ -138,6 +170,7 @@ int main(void) {
   string ans = bruteForce(s);
   // string ans = betterApproach(s);
   // int ans = longestPalindrome(s);
+
   cout << "Longest Palindromic Substring: " << ans << endl;
 
   return 0;

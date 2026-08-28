@@ -67,28 +67,26 @@ int findLength(vector<int> &nums1, vector<int> &nums2) {
   return ans;
 }
 
-int dfs(int i, int j, int &ans, vector<int> &nums1, vector<int> &nums2) {
-  if (i >= nums1.size() || j >= nums2.size())
+int dfs(int i, int j, int &ans, vector<int> &a, vector<int> &b) {
+  if (i >= a.size() || j >= b.size())
     return 0;
-  dfs(i + 1, j, ans, nums1, nums2);
-  dfs(i, j + 1, ans, nums1, nums2);
-  int common =
-      (nums1[i] == nums2[j]) ? 1 + dfs(i + 1, j + 1, ans, nums1, nums2) : 0;
+  dfs(i + 1, j, ans, a, b);
+  dfs(i, j + 1, ans, a, b);
+  int common = (a[i] == b[j]) ? 1 + dfs(i + 1, j + 1, ans, a, b) : 0;
   ans = max(ans, common);
   return common;
 }
 
-int dfs(int i, int j, int &ans, vector<int> &nums1, vector<int> &nums2, vector<vector<int>> &dp) {
-  if (i >= nums1.size() || j >= nums2.size())
+int dfs(int i, int j, int &ans, vector<int> &a, vector<int> &b, vector<vector<int>> &dp) {
+  if (i >= a.size() || j >= b.size())
     return 0;
 
   if (dp[i][j] != -1)
     return dp[i][j];
 
-  dfs(i + 1, j, ans, nums1, nums2);
-  dfs(i, j + 1, ans, nums1, nums2);
-  int common =
-      (nums1[i] == nums2[j]) ? 1 + dfs(i + 1, j + 1, ans, nums1, nums2) : 0;
+  dfs(i + 1, j, ans, a, b);
+  dfs(i, j + 1, ans, a, b);
+  int common = (a[i] == b[j]) ? 1 + dfs(i + 1, j + 1, ans, a, b) : 0;
   ans = max(ans, common);
   return dp[i][j] = common;
 }

@@ -15,6 +15,9 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+
+// * ------------------------------------------------------------------------
+
 // * 01 - House Robber
 // int rob(vector<int> &nums) {
 // TODO
@@ -70,7 +73,27 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
-// * 16 - Minimum Cost For Tickets
+// * 14 Partition Equal Subset Sum
+// bool canPartition(vector<int> &nums) {
+// TODO
+// }
+
+// * 15 Subset Sum Equal To K
+// bool subsetSumEqualsK(vector<int> &nums, int &k) {
+// TODO
+// }
+
+// * 16 - Count Subsets Sum Equal To K
+// int countSubsetSumEqualsK(vector<int> &nums, int &k) {
+// TODO
+// }
+
+// * 17 - Partitions With Given Difference
+// int countSubsetSumEqualsK(vector<int> &nums, int &diff) {
+// TODO
+// }
+
+// * 18 - Minimum Cost For Tickets
 // int mincostTickets(vector<int> &days, vector<int> &costs) {
 // TODO
 // }
@@ -100,6 +123,10 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
+// * 32 - Largest Divisible Subset
+// vector<int> largestDivisibleSubset(vector<int>& nums) {
+// TODO
+// }
 
 int main(void) {
   return 0;

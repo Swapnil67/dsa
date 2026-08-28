@@ -131,10 +131,10 @@ int rob(vector<int> nums) {
 
 int main(void) {
   // * testcase 1
-  // vector<int> nums = {1, 2, 3, 1};
+  vector<int> nums = {1, 2, 3, 1};
 
   // * testcase 2
-  vector<int> nums = {2, 7, 9, 3, 1};
+  // vector<int> nums = {2, 7, 9, 3, 1};
 
   // * testcase 3
   // vector<int> nums = {2};

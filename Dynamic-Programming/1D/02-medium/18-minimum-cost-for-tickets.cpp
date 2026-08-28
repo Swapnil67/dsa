@@ -49,13 +49,13 @@ int dfs(int i, vector<int> &days, vector<int> &costs) {
 
 	int costDay = costs[0] + dfs(i + 1, days, costs);
 
-	// * skip till ith day is curr_day+7 as we are buying week pass
+	// * Current Day + 7 is my travelling limit (days[i] + 7 > days[j])
 	int j = i;
 	while (j < n && days[i] + 7 > days[j])
 		j++;
 	int costWeek = costs[1] + dfs(j, days, costs);
 
-	// * skip till ith day is curr_day+30 as we are buying month pass
+	// * Current Day + 30 is my travelling limit (days[i] + 30 > days[j])
 	j = i;
 	while (j < n && days[i] + 30 > days[j])
 		j++;
@@ -75,13 +75,13 @@ int dfs(int i, vector<int> &days, vector<int> &costs, vector<int> &dp) {
 
 	int costDay = costs[0] + dfs(i + 1, days, costs, dp);
 
-	// * skip till ith day is curr_day+7 as we are buying week pass
+	// * Current Day + 7 is my travelling limit (days[i] + 7 > days[j])
 	int j = i;
 	while (j < n && days[i] + 7 > days[j])
 		j++;
 	int costWeek = costs[1] + dfs(j, days, costs, dp);
 
-	// * skip till ith day is curr_day+30 as we are buying month pass
+	// * Current Day + 30 is my travelling limit (days[i] + 30 > days[j])
 	j = i;
 	while (j < n && days[i] + 30 > days[j])
 		j++;
@@ -119,7 +119,6 @@ int mincostTickets(vector<int> &days, vector<int> &costs) {
 	int last_day = days.back();
 	// * t[i] = min cost to travel to date 'i'
 	vector<int> t(last_day + 1, 0);
-	t[0] = 0;
 	for (int i = 1; i <= last_day; ++i) {
 		if (!st.count(i)) { // * not travelling this day
 			t[i] = t[i - 1]; // * skip
@@ -154,6 +153,7 @@ int main(void) {
 	// int ans = bruteForce(days, costs);
 	// int ans = betterApproach(days, costs);
 	int ans = mincostTickets(days, costs);
+
 	cout << "Minimum cost: " << ans << endl;
 
 	return 0;

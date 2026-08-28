@@ -89,7 +89,6 @@ int bruteForce(int n) {
 int betterApproach(int n) {
   if (n <= 1)
     return n;
-
   vector<int> dp(60, -1);
   return dfs(n, dp);
 }
@@ -103,6 +102,7 @@ int integerBreak(int n) {
   vector<int> dp(n + 1, 0);
   dp[1] = 1;
   for (int num = 2; num <= n; ++num) {
+    // * dp[num] = max product after breaking num 
     int ans = INT_MIN;
     for (int i = 1; i <= num; ++i) {
       int res = i * max((num - i), dp[num - i]);

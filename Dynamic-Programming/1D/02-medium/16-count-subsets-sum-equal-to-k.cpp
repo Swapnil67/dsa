@@ -22,7 +22,7 @@
  * https://www.naukri.com/code360/problems/count-subsets-with-sum-k_3952532
 */
 
-// ! PharmEasy
+// ! Amazon, Microsoft, Tesco, PharmEasy
 
 // ! DP on subsequences (Same as question 15)
 
@@ -47,13 +47,12 @@ typedef long long ll;
 
 // * Without Memoization
 int dfs(int i, int k, vector<int> &nums) {
-  if (i < 0)
-    return k == 0 ? 1 : 0;
+  if (i < 0) // * testcase 6 -> (Even when k becomes 0 early, the recursion keeps going.)
+    return k == 0;
 
   int not_take = dfs(i - 1, k, nums);
   int take = 0;
-  if (k >= nums[i])
-  {
+  if (k >= nums[i]) {
     take = dfs(i - 1, k - nums[i], nums);
   }
   return (not_take + take);
@@ -99,6 +98,7 @@ int betterApproach(vector<int> nums, int k) {
 // * SPACE COMPLEXITY O(n)
 int countSubsetSumEqualsK(vector<int> &nums, int &k) {
   int n = nums.size();
+  // * dp[i][t] means number of subsets using first 'i' elements that sum up to 't'
   vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
 
   // * Base Cases
@@ -107,15 +107,16 @@ int countSubsetSumEqualsK(vector<int> &nums, int &k) {
     dp[0][nums[0]] = 1;
   }
 
-  int M = (int)(1e9 + 7);
+  const int MOD = 1e9 + 7;
   for (int i = 1; i < n; i++) {
+    // * Start t from 0 so that dp[0][0] propagates and compounds with more zeroes!
     for (int t = 0; t <= k; t++) {
       int not_take = dp[i - 1][t];
       int take = 0;
       if (t >= nums[i]) {
         take = dp[i - 1][t - nums[i]];
       }
-      dp[i][t] = (take + not_take) % M;
+      dp[i][t] = (take + not_take) % MOD;
     }
   }
 
@@ -123,7 +124,7 @@ int countSubsetSumEqualsK(vector<int> &nums, int &k) {
   for (auto &vec : dp)
     printArr(vec);
 
-  return dp[n - 1][k] % M;
+  return dp[n - 1][k] % MOD;
 }
 
 
@@ -178,16 +179,20 @@ int main(void) {
   // vector<int> nums = {0, 1, 3};
 
   // * testcase 5
-  int k = 10;
-  vector<int> nums = {5, 2, 3, 10, 6, 8};
+  // int k = 10;
+  // vector<int> nums = {5, 2, 3, 10, 6, 8};
+
+  // * testcase 6
+  int k = 2;
+  vector<int> nums = {2, 0, 0};
 
   cout << "k: " << k << endl;
   cout << "Input nums: ";
   printArr(nums);
 
-  int ans = bruteForce(nums, k);
+  // int ans = bruteForce(nums, k);
   // int ans = betterApproach(nums, k);
-  // int ans = countSubsetSumEqualsK(nums, k);
+  int ans = countSubsetSumEqualsK(nums, k);
   // int ans = countSubsetSumEqualsKDP2(nums, k);
   
   cout << "Number of subsets: " << ans << endl;
@@ -201,13 +206,13 @@ int main(void) {
 /*
 ? Intuition behind why are we using forward loop
 
-* Let’s make it even simpler. Imagine you have a piggy bank (your dp array) and exactly one ₹5 coin in your hand.
+* Imagine you have a piggy bank (your dp array) and exactly one ₹5 coin in your hand.
 * You want to track what total amounts of money you can make.
 * Initially, your piggy bank tracks two amounts:
 
-* ₹0: Yes (you can always have nothing) -> dp[0] = 1
-* ₹5: No (you don’t have it in the bank yet) -> dp[5] = 0
-* ₹10: No -> dp[10] = 0
+* ₹ 0  : Yes (you can always have nothing) -> dp[0] = 1
+* ₹ 5  : No (you don’t have it in the bank yet) -> dp[5] = 0
+* ₹ 10 : No -> dp[10] = 0
 
 ------------------------------
 * ## ❌ What happens if you go Forward (0 to 10)?
@@ -215,7 +220,8 @@ int main(void) {
 
    * 1. At ₹5: You look back at ₹0. Since you can make ₹0, you add your ₹5 coin.
     * -> Result: Your bank now says "Yes, I can make ₹5!" (dp[5] = 1).
-   * 2. At ₹10: You look back at ₹5. Your bank just said a second ago that ₹5 is possible. So you say, "Great! I'll add my ₹5 coin to that ₹5 to make ₹10!"
+   * 2. At ₹10: You look back at ₹5. Your bank just said a second ago that ₹5 is possible. So you say, "Great!
+       * I'll add my ₹5 coin to that ₹5 to make ₹10!"
     * -> Result: Your bank now says "Yes, I can make ₹10!" (dp[10] = 1).
    
 ! The Bug: You only had one ₹5 coin in your hand, but because you updated the ₹5 slot before checking the ₹10 slot,

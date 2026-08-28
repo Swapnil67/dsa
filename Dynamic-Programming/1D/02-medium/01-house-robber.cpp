@@ -17,7 +17,7 @@
  * input            : nums = [2,7,9,3,1]
  * output           : 12
 
- * https://leetcode.com/problems/house-robber/description/
+ * https://leetcode.com/problems/house-robber/description
  * https://www.naukri.com/code360/problems/loot-houses_630510
  * https://www.geeksforgeeks.org/problems/stickler-theif-1587115621/1
 */

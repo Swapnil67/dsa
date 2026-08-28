@@ -53,7 +53,7 @@ int bruteForce(vector<int> arr) {
   return maxProduct;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach A -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach A -------------------------
 // * Prefix & Suffix product
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

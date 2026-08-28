@@ -95,8 +95,6 @@ long long betterApproach(vector<int>& nums) {
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
 // * Classic Pattern
-// * flag -> true : odd
-// * flag -> false : even
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 long long maxAlternatingSum(vector<int> &nums) {

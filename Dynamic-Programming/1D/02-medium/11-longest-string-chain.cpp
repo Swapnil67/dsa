@@ -31,9 +31,11 @@
  *                ["abcd","dbqca"] is not a valid word chain because the ordering of the letters is changed.
  * 
  * https://leetcode.com/problems/longest-string-chain/
+ * https://www.naukri.com/code360/problems/longest-string-chain_3752111
+ * https://www.geeksforgeeks.org/problems/longest-string-chain/1
 */
 
-// ! Google
+// ! Google, Meta
 
 // ! LIS
 

@@ -175,7 +175,7 @@ vector<int> getLIS(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  // vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
+  vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
 
   // * testcase 2
   // vector<int> nums = {0, 1, 0, 3, 2, 3};
@@ -184,7 +184,7 @@ int main(void) {
   // vector<int> nums = {7, 7, 7, 7, 7, 7, 7};
 
   // * testcase 4
-  vector<int> nums = {13, 10, 4, 4};
+  // vector<int> nums = {13, 10, 4, 4};
 
   cout << "Input nums: ";
   printArr(nums);
