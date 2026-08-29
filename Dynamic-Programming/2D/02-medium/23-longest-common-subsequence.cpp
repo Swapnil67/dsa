@@ -64,17 +64,17 @@ int dfs(int i, int j, string &t1, string &t2, vector<vector<int>> &dp) {
 }
 
 // * ------------------------- Approach 1: Brute Force Approach -------------------------
-// * n - size of s1, m - size of s2
+// * n - size of s, m - size of t
 // * Recursion
 // * TIME COMPLEXITY  O(2^(m+n))
 // * SPACE COMPLEXITY O(2^n * 2^m)
-int bruteForce(string s1, string s2) {
-  int m = s1.size(), n = s2.size();
-  return dfs(m, n, s1, s2);
+int bruteForce(string s, string t) {
+  int m = s.size(), n = t.size();
+  return dfs(m, n, s, t);
 }
 
 // * ------------------------- Approach 2: Optimal Approach -------------------------
-// * m - size of s1, n - size of s2
+// * m - size of s, n - size of t
 // * Recursion + Memoization (Top Down)
 // * TIME COMPLEXITY  O(m * n)
 // * SPACE COMPLEXITY O(m * n) + O(m + n) (Auxillary Stack Space)
@@ -85,21 +85,20 @@ int betterApproach(string s, string t) {
 }
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
-// * m - size of s1, n - size of s2
+// * m - size of s, n - size of t
 // * Bottom Up Approach
 // * TIME COMPLEXITY  O(m * n)
 // * SPACE COMPLEXITY O(m * n) (No Auxillary Stack Space)
-int longestCommonSubsequence(string s1, string s2) {
-  int m = s1.size(), n = s2.size();
+int longestCommonSubsequence(string s, string t) { // * Using Backward Loop
+  int m = s.size(), n = t.size();
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
   for (int i = m - 1; i >= 0; --i) {
     for (int j = n - 1; j >= 0; --j) {
-      if (s1[i] == s2[j]) 
+      if (s[i] == t[j]) 
         dp[i][j] = 1 + dp[i + 1][j + 1];
       else 
         dp[i][j] = max(dp[i][j + 1], dp[i + 1][j]);
     }
-    printArr(dp[i]);
   }
 
   // * For Debugging
@@ -109,12 +108,34 @@ int longestCommonSubsequence(string s1, string s2) {
   return dp[0][0];
 }
 
+// * Using Forward Loop (Same as above)
+int longestCommonSubsequence2(string s, string t) {
+  int m = s.size(), n = t.size();
+  vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+  for (int i = 1; i <= m; ++i) {
+    for (int j = 1; j <= n; ++j) {
+      // * Shift string indices back by 1 to match 0-based indexing
+      if (s[i - 1] == t[j - 1]) {
+        dp[i][j] = 1 + dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+  }
+
+  // * For Debugging
+  // for (auto &vec : dp)
+  //   printArr(vec);
+
+  return dp[m][n];
+}
+
 // * ------------------------- Approach 3: Optimal Approach -------------------------
-// * m - size of s1, n - size of s2
+// * m - size of s, n - size of t
 // * Bottom Up Approach + Space Optimized
 // * TIME COMPLEXITY  O(m * n)
 // * SPACE COMPLEXITY O(min(m,n)) (No Auxillary Stack Space)
-int longestCommonSubsequence2(string s, string t) {
+int longestCommonSubsequence3(string s, string t) {
   if (s.size() < t.size()) {
     swap(s, t);
   }
@@ -143,22 +164,22 @@ int longestCommonSubsequence2(string s, string t) {
 
 int main(void) {
   // * testcase 1
-  // string s1 = "abcde", s2 = "ace";
+  // string s = "abcde", t = "ace";
 
   // * testcase 2
-  // string s1 = "abc", s2 = "abc";
+  // string s = "abc", t = "abc";
 
   // * testcase 3
-  // string s1 = "abc", s2 = "def";
+  // string s = "abc", t = "def";
 
   // * testcase 4
-  string s1 = "acd", s2 = "ced";
+  string s = "acd", t = "ced";
 
-  cout << "s1: " << s1 << ", s2: " << s2 << endl;
-  // int ans = bruteForce(s1, s2);
-  // int ans = betterApproach(s1, s2);
-  int ans = longestCommonSubsequence(s1, s2);
-  // int ans = longestCommonSubsequence2(s1, s2);
+  cout << "s: " << s << ", t: " << t << endl;
+  // int ans = bruteForce(s, t);
+  // int ans = betterApproach(s, t);
+  int ans = longestCommonSubsequence(s, t);
+  // int ans = longestCommonSubsequence3(s, t);
 
   cout << "Longest Common Subsequence: " << ans << endl;
 

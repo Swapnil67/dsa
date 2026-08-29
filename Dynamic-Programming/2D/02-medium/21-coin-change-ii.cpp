@@ -31,6 +31,9 @@
  * output           : 1
  * 
  * https://leetcode.com/problems/coin-change-ii
+ * https://www.geeksforgeeks.org/problems/coin-change2448/1
+ * https://www.naukri.com/code360/problems/ways-to-make-coin-change_630471
+ * 
  */
 
 // * Unbounded Knapsack

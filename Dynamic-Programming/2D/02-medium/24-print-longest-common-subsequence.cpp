@@ -39,6 +39,7 @@ string findLCS(string &s, string &t) {
   if (s.size() < t.size())
     swap(s, t);
 
+  // * Same as LCS
   int m = s.size(), n = t.size();
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
   for (int i = m - 1; i >= 0; --i) {

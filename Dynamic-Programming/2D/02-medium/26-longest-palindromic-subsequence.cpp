@@ -30,8 +30,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-
-
 int dfs(int m, int n, string &s, string &t) {
   // * Base case: if either string is empty
   if (m == 0 || n == 0)
