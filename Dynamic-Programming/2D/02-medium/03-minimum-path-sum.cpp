@@ -91,20 +91,24 @@ int betterApproach(vector<vector<int>> &grid) {
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(m * n)
 int minPathSum(vector<vector<int>> &grid) {
-  m = grid.size(), n = grid[0].size();
+  int m = grid.size(), n = grid[0].size();
+  // * Create a DP table padded with an extra row and column initialized to INT_MAX.
+  // * This padding acts as a boundary guard so we don't pick out-of-bounds paths.
   vector<vector<int>> dp(m + 1, vector<int>(n + 1, INT_MAX));
+  
+  // * Base case: Set the neighbor of the destination (bottom-right cell) to 0.
+  // * This ensures that dp[m-1][n-1] correctly computes to grid[m-1][n-1] + 0.
   dp[m - 1][n] = 0;
-
-  for (int r = n - 1; r >= 0; --r) {
-    for (int c = m - 1; c >= 0; --c) {
+  
+  // * Build the DP table bottom-up, starting from the destination up to the top-left
+  for (int r = m - 1; r >= 0; --r) {
+    for (int c = n - 1; c >= 0; --c) {
+      // * The minimum path from the current cell is its own value plus
+      // * the minimum of moving down (dp[r+1][c]) or moving right (dp[r][c+1])
       dp[r][c] = grid[r][c] + min(dp[r + 1][c], dp[r][c + 1]);
-      // cout << "dp[" << c << "] = grid[" << r << "][" << c
-      //      << "] + min(dp[" << c << "], dp[" << c + 1 << "])" << endl;
     }
-    // cout << endl;
-    // printArr(dp);
   }
-
+  
   return dp[0][0];
 }
 
@@ -114,13 +118,26 @@ int minPathSum(vector<vector<int>> &grid) {
 // * SPACE COMPLEXITY O(n)
 int minPathSum2(vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
+
+  // * Allocate space for n + 1 elements initialized to INT_MAX.
+  // * The extra space at index 'n' acts as a boundary guard for the rightmost column (c = n - 1),
+  // * ensuring dp[c + 1] (dp[n]) is always INT_MAX and never out of bounds.
   vector<int> dp(n + 1, INT_MAX);
+
+  // * Base Case Setup:
+  // * Setting dp[n - 1] to 0 forces the absolute bottom-right cell (grid[m-1][n-1])
+  // * to pick 0 in the min() function, effectively bootstrapping the calculation.
   dp[n - 1] = 0;
+
   for (int r = m - 1; r >= 0; --r) {
     for (int c = n - 1; c >= 0; --c) {
+      // * dp[c] currently stores the minimum path sum from the row directly below.
+      // * dp[c + 1] stores the minimum path sum from the cell directly to the right.
+      // * We take the minimum of these two choices and add the current cell value.
       dp[c] = grid[r][c] + min(dp[c], dp[c + 1]);
     }
   }
+
   return dp[0];
 }
 

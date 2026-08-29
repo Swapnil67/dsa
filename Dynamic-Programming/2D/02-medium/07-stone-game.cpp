@@ -145,8 +145,7 @@ bool stoneGameDP2(vector<int> &piles) {
       }
     }
   }
-
-  printArr(dp);
+  // printArr(dp);
 
   int sum = accumulate(begin(piles), end(piles), 0);
   int aliceScore = dp[n - 1];

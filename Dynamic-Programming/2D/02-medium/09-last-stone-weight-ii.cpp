@@ -1,9 +1,9 @@
 /*
- * Leetcode - 1140
- * Stone Game I
+ * Leetcode - 1049
+ * Last Stone Weight II
  * 
  * 
- * https://leetcode.com/problems/stone-game
+ * https://leetcode.com/problems/last-stone-weight-ii/description
  * https://neetcode.io/problems/stone-game
 */
 
@@ -12,7 +12,7 @@
 // ! 0/1 Knapsack
 
 // * Intuition
-// * The key insight is that smashing stones is equivalent to partitioning them into two groups and finding the minimum 
+// * The key insight is that smashing stones is equivalent to partitioning them into two groups and finding the min 
 // * difference between their sums. When two stones collide, the result is the absolute difference of their weights. 
 // * If we think of assigning a positive or negative sign to each stone, the final result is the absolute value of the sum. 
 // * This transforms the problem into finding a subset with sum as close to half the total as possible.
@@ -38,29 +38,29 @@ void printArr(vector<T> &arr) {
 
 // * total - current total
 // * sum   - Sum of all the stones
-int dfs(int i, int total, int &sum, int &target, vector<int> &stones) {
-  if (total >= target || i >= stones.size()) {
-    return abs(total - (sum - total));
+int dfs(int i, int curTotal, int &sum, int &target, vector<int> &stones) {
+  if (curTotal >= target || i >= stones.size()) {
+    return abs(curTotal - (sum - curTotal));
   }
 
   // * simple not take and take
-  return min(dfs(i + 1, total, sum, target, stones),
-             dfs(i + 1, total + stones[i], sum, target, stones));
+  return min(dfs(i + 1, curTotal, sum, target, stones),
+             dfs(i + 1, curTotal + stones[i], sum, target, stones));
 }
 
-int dfs(int i, int total, int &sum, int &target, vector<int> &stones,
+int dfs(int i, int curTotal, int &sum, int &target, vector<int> &stones,
         vector<vector<int>> &dp) {
-  if (total >= target || i >= stones.size()) {
-    return abs(total - (sum - total));
+  if (curTotal >= target || i >= stones.size()) {
+    return abs(curTotal - (sum - curTotal));
   }
 
-  if (dp[i][total] != -1)
-    return dp[i][total];
+  if (dp[i][curTotal] != -1)
+    return dp[i][curTotal];
 
   // * simple not take and take
-  return dp[i][total] =
-             min(dfs(i + 1, total, sum, target, stones, dp),
-                 dfs(i + 1, total + stones[i], sum, target, stones, dp));
+  return dp[i][curTotal] =
+             min(dfs(i + 1, curTotal, sum, target, stones, dp),
+                 dfs(i + 1, curTotal + stones[i], sum, target, stones, dp));
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -101,6 +101,7 @@ bool lastStoneWeightII(vector<int> &stones) {
       if (t >= stones[i - 1]) {
         // * stones[i - 1][t]: Skip current stone
         // * dp[i - 1][t - stones[i - 1]] + stones[i - 1]: Take the current stone
+        // * max because the 0-1 Knapsack sub-problem requires us to get Pile B as close to the target
         dp[i][t] = max(dp[i - 1][t], dp[i - 1][t - stones[i - 1]] + stones[i - 1]);
       } else {
         // * This represents the maximum weight you could get without using the current stone.
@@ -112,6 +113,8 @@ bool lastStoneWeightII(vector<int> &stones) {
   for (auto &vec : dp)
     printArr(vec);
 
+  // * (sum - dp[n][target]) - dp[n][target]
+  // * sum - (2 * dp[n][target])
   return sum - (2 * dp[n][target]);
 }
 
@@ -198,7 +201,7 @@ int main(void) {
 * 
 * Turn 6: Stone = 3 (Loop: t from 10 down to 3)
 * t = 10: max(10, dp[7] + 3) --> max(10, 7 + 3) = 10 (No change)
-* t = 9 down to 3: Every single comparison matches its existing value because the array is already perfectly    optimized up to its capacity limits.
+* t = 9 down to 3: Every single comparison matches its existing value because the array is already perfectly optimized up to its capacity limits.
 * Array after Turn 6: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
 * 
 */

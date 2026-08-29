@@ -24,6 +24,8 @@
  * https://leetcode.com/problems/unique-paths-ii/
 */
 
+// ! Amazon, Google
+
 #include <vector>
 #include <iostream>
 
@@ -121,18 +123,23 @@ int uniquePathsWithObstacles(vector<vector<int>> &grid) {
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(n) (No Auxillary Space)
 int uniquePaths(vector<vector<int>> &grid) {
-  m = grid.size(), n = grid[0].size();
+  int m = grid.size(), n = grid[0].size();
+  
+  // * If the start or end is blocked, no paths are possible
   if (grid[0][0] == 1 || grid[m - 1][n - 1] == 1)
     return 0;
 
+  // * Use a single 1D DP table initialized to 0
   vector<unsigned int> dp(n + 1, 0);
-  dp[n - 1] = 1;
+  dp[n - 1] = 1; // * Base case: 1 way to reach the destination from itself
+
+  // * Iterate backwards from the bottom row to the top row
   for (int r = m - 1; r >= 0; --r) {
     for (int c = n - 1; c >= 0; --c) {
       if (grid[r][c] == 1) {
-        dp[c] = 0;
+        dp[c] = 0; // * Obstacle blocks all paths passing through here
       } else {
-        dp[c] += dp[c + 1];
+        dp[c] += dp[c + 1]; // * Current paths = paths from below (dp[c]) + paths from right (dp[c+1])
       }
     }
   }

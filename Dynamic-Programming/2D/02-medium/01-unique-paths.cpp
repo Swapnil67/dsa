@@ -12,9 +12,11 @@
  * The test cases are generated so that the answer will be less than or equal to 2 * 109.
  * 
  * https://leetcode.com/problems/unique-paths
+ * https://www.naukri.com/code360/problems/total-unique-paths_1081470
+ * https://www.geeksforgeeks.org/problems/number-of-paths0926/1
 */
 
-// ! Google, Walmart, Paytm, LinkedIn
+// ! Google, Walmart, Paytm, LinkedIn, Microsoft, Amazon, Razorpay
 
 #include <vector>
 #include <iostream>
@@ -119,13 +121,17 @@ int uniquePaths2(int m, int n) {
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(n)   (No Auxillary Space)
 int uniquePaths(int m, int n) {
-  vector<int> dp(n + 1, 0);
-  dp[n - 1] = 1;
+  // * Use a single 1D DP table initialized to 0
+  vector<unsigned int> dp(n + 1, 0);
+  dp[n - 1] = 1; // * Base case: 1 way to reach the destination from itself
+
+  // * Iterate backwards from the bottom row to the top row
   for (int r = m - 1; r >= 0; --r) {
-    for (int c = n - 2; c >= 0; --c) {
-      dp[c] += dp[c + 1];
+    for (int c = n - 1; c >= 0; --c) {
+      dp[c] += dp[c + 1]; // * Current paths = paths from below (dp[c]) + paths from right (dp[c+1])
     }
   }
+
   return dp[0];
 }
 

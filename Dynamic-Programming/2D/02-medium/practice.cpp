@@ -15,6 +15,16 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+// * 01 - Unique Paths
+// int uniquePaths(int m, int n) {
+// TODO
+// }
+
+// * 02 - Unique Paths II
+// int uniquePaths(vector<vector<int>> &grid) {
+// TODO
+// }
+
 // * 24 - Print Longest Common Subsequence
 // string findLCS(string &s, string &t) {
 // TODO
