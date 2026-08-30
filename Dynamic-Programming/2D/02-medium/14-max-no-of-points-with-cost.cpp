@@ -1,6 +1,6 @@
 /*
- * Leetcode - 931
- * Minimum Falling Path Sum
+ * Leetcode - 1937
+ * Maximum Number of Points with Cost
  * 
  * Given an n x n array of integers matrix, return the minimum sum of any falling path through matrix.
  * 
@@ -9,12 +9,12 @@
  * (row, col) will be (row + 1, col - 1), (row + 1, col), or (row + 1, col + 1).
  * 
  * Example 1    :
- * Input        : matrix = [[2,1,3],[6,5,4],[7,8,9]]
- * Output       : 13
+ * Input        : points = [[1,2,3],[1,5,1],[3,1,1]]
+ * Output       : 9
  * 
  * Example 2    :
- * Input        : matrix = [[-19,57],[-40,-5]]
- * Output       : -59
+ * Input        : points = [[1,5],[2,3],[4,2]]
+ * Output       : 11
  *
  * https://leetcode.com/problems/minimum-falling-path-sum/description/
  * https://www.geeksforgeeks.org/problems/minimum-sum-in-a-falling-path/1
@@ -40,41 +40,52 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-int dfs(int r, int c, vector<vector<int>>& matrix) {
-	int m = matrix.size(), n = matrix[0].size();
-	// * Out of bound
-	if (r >= m || r < 0 || c >= n || c < 0)
-		return 1e9;
+int m, n;
+typedef long long ll;
+vector<vector<ll>> dp;
 
-	// * base case
+ll dfs(int r, int c, vector<vector<int>> &points) {
+	if (r < 0 || r >= m || c < 0 || c >= n) // * Out-of-bounds guard
+		return -1e9;
+
+	// * Base Case: If we reach the top row (row 0), the max value is just the cell's points
 	if (r == 0)
-		return matrix[r][c];
+		return points[r][c];
 
-	int upper = matrix[r][c] + dfs(r - 1, c, matrix);
-	int leftDiagnol = matrix[r][c] + dfs(r - 1, c - 1, matrix);
-	int rightDiagnol = matrix[r][c] + dfs(r - 1, c + 1, matrix);
+	// * Choice 1: Move straight up from the same column in the previous row (No distance penalty)
+	ll upper = points[r][c] + dfs(r - 1, c, points);
 
-	return min({upper, leftDiagnol, rightDiagnol});
+	// * Choice 2: Move from the left diagonal (column c - 1) in the previous row. Penalty = abs(c - (c-1)) = 1
+	ll leftDiagnol = (points[r][c] + dfs(r - 1, c - 1, points)) - abs(c - (c - 1));
+
+	// * Choice 3: Move from the right diagonal (column c + 1) in the previous row. Penalty = abs(c - (c+1)) = 1
+	ll rightDiagnol = (points[r][c] + dfs(r - 1, c + 1, points)) - abs(c - (c + 1));
+
+	return max({upper, leftDiagnol, rightDiagnol});
 }
 
-int dfs(int r, int c, vector<vector<int>> &matrix, vector<vector<int>> &dp) {
-	int n = matrix.size();
-	// * Out of bound
-	if (r >= n || r < 0 || c >= n || c < 0)
-		return 1e9;
+ll dfs(int r, int c, vector<vector<int>> &points) {
+	if (r < 0 || r >= m || c < 0 || c >= n) // * Out-of-bounds guard
+		return -1e9;
 
-	// * base case
+	// * Base Case: If we reach the top row (row 0), the max value is just the cell's points
 	if (r == 0)
-		return matrix[r][c];
+		return points[r][c];
 
+	// * Memoization check: If we have already calculated this state, return it immediately
 	if (dp[r][c] != -1)
 		return dp[r][c];
 
-	int upper = matrix[r][c] + dfs(r - 1, c, matrix, dp);
-	int leftDiagnol = matrix[r][c] + dfs(r - 1, c - 1, matrix, dp);
-	int rightDiagnol = matrix[r][c] + dfs(r - 1, c + 1, matrix, dp);
+	// * Choice 1: Move straight up from the same column in the previous row (No distance penalty)
+	ll upper = points[r][c] + dfs(r - 1, c, points);
 
-	return dp[r][c] = min({upper, leftDiagnol, rightDiagnol});
+	// * Choice 2: Move from the left diagonal (column c - 1) in the previous row. Penalty = abs(c - (c-1)) = 1
+	ll leftDiagnol = (points[r][c] + dfs(r - 1, c - 1, points)) - abs(c - (c - 1));
+
+	// * Choice 3: Move from the right diagonal (column c + 1) in the previous row. Penalty = abs(c - (c+1)) = 1
+	ll rightDiagnol = (points[r][c] + dfs(r - 1, c + 1, points)) - abs(c - (c + 1));
+
+	return dp[r][c] = max({upper, leftDiagnol, rightDiagnol});
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -82,12 +93,20 @@ int dfs(int r, int c, vector<vector<int>> &matrix, vector<vector<int>> &dp) {
 // * Top Down
 // * TIME COMPLEXITY O(3^n)
 // * SPACE COMPLEXITY O(n)
-int bruteForce(vector<vector<int>>& matrix) {
-	int m = matrix.size(), n = matrix[0].size();
-	int ans = INT_MAX;
+ll bruteForce(vector<vector<int>>& points) {
+	m = points.size();
+	n = points[0].size();
+	
+	// Initialize the memoization table with -1 (representing unvisited states)
+	// dp.assign(m, vector<ll>(n, -1));
+	
+	ll ans = LLONG_MIN;
+	
+	// Start the DFS from every possible starting column in the bottom row (row m - 1)
 	for (int j = 0; j < n; ++j) {
-		ans = min(ans, dfs(n - 1, j, matrix));
+			ans = max(ans, dfs(m - 1, j, points));
 	}
+	
 	return ans;
 }
 
@@ -96,13 +115,20 @@ int bruteForce(vector<vector<int>>& matrix) {
 // * Top Down + Memoization
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n^2) + O(n) (for recursion stack)
-int betterApprach(vector<vector<int>>& matrix) {
-	int n = matrix[0].size();
-	vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
-	int ans = INT_MAX;
+int betterApprach(vector<vector<int>>& points) {
+	m = points.size();
+	n = points[0].size();
+	
+	// Initialize the memoization table with -1 (representing unvisited states)
+	dp.assign(m, vector<ll>(n, -1));
+	
+	ll ans = LLONG_MIN;
+	
+	// Start the DFS from every possible starting column in the bottom row (row m - 1)
 	for (int j = 0; j < n; ++j) {
-		ans = min(ans, dfs(n - 1, j, matrix, dp));
+			ans = max(ans, dfs(m - 1, j, points));
 	}
+	
 	return ans;
 }
 
@@ -191,24 +217,24 @@ int minFallingPathSum2(vector<vector<int>> &mat) {
 
 int main(void) {
 	// * testcase 1
-	vector<vector<int>> matrix = {{2, 1, 3}, {6, 5, 4}, {7, 8, 9}};
+	vector<vector<int>> points = {{1, 2, 3}, {1, 5, 1}, {3, 1, 1}};
 
 	// * testcase 2
-	// vector<vector<int>> matrix = {{-19, 57}, {-40, -5}};
+	// vector<vector<int>> points = {{1,5},{2,3},{4,2}};
 
-  cout << "matrix" << endl;
-  for (auto &vec : matrix)
-    printArr(vec);
+	cout << "points" << endl;
+	for (auto &vec : points)
+		printArr(vec);
 
-	// int ans = bruteForce(matrix);
-	// int ans = betterApprach(matrix);
-	// int ans = minFallingPathSum(matrix);
-	int ans = minFallingPathSum2(matrix);
+	// int ans = bruteForce(points);
+	// int ans = betterApprach(points);
+	// int ans = minFallingPathSum(points);
+	int ans = minFallingPathSum2(points);
 
 	cout << "Minimum Falling Path Sum " << ans << endl;
 
 	return 0;
 }
- 
+
 // * Run the code
 // * g++ --std=c++20 13-minimum-falling-path-sum.cpp -o output && ./output

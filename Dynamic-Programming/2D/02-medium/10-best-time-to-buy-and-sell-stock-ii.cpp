@@ -10,11 +10,30 @@
  * 
  * Find and return the maximum profit you can achieve.
  * 
+ * 
+ * Example 1    :
+ * Input        : prices = [7,1,5,3,6,4]
+ * Output       : 7
+ * Explanation  : Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+ *                Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+ *                Total profit is 4 + 3 = 7.
+ * 
+ * Example 2    :
+ * Input        : prices = [1,2,3,4,5]
+ * Output       : 4
+ * Explanation  : Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+ * 
+ * Example 3    :
+ * Input        : prices = [7,6,4,3,1]
+ * Output       : 0
+ * Explanation  : There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.
+ *
+ * 
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
  * https://www.naukri.com/code360/problems/best-time-to-buy-and-sell-stock-ii_630282
 */
 
-// ! Amazon, Google, Meta, Uber
+// ! Amazon, Google, Meta, Uber, PhonePe, LinkedIn
 
 #include <vector>
 #include <numeric>
@@ -39,6 +58,7 @@ void printArr(vector<T> &arr) {
 int dfs(int i, bool bought, vector<int> &prices) {
   if (i == prices.size())
     return 0;
+
   int res = dfs(i + 1, bought, prices);
   if (bought) { // * already bought
     // * add to profit
@@ -95,16 +115,28 @@ int betterApproach(vector<int> &prices) {
 // * SPACE COMPLEXITY O(n)
 int maxProfit(vector<int> &prices) {
   int n = prices.size();
+
+  // * dp[i][0] represents the max profit at day 'i' if we do NOT hold a stock (free to buy)
+  // * dp[i][1] represents the max profit at day 'i' if we HOLD a stock (free to sell)
+  // * Size is (n + 1) to naturally handle the base case at day 'n' (out of bounds) as 0 profit
   vector<vector<int>> dp(n + 1, vector<int>(2, 0));
+
+  // * Iterate backwards from the last day to the first day
   for (int i = n - 1; i >= 0; --i) {
+
+    // * Case 0: We do not hold a stock today. We can either:
+    // * 1. Skip today: keep the profit from not holding a stock tomorrow -> dp[i + 1][0]
+    // * 2. Buy today: pay today's price (-prices[i]) and move to the 'holding' state tomorrow -> dp[i + 1][1] - prices[i]
     dp[i][0] = max(dp[i + 1][0], dp[i + 1][1] - prices[i]);
+
+    // * Case 1: We hold a stock today. We can either:
+    // * 1. Skip today: keep the profit from holding a stock tomorrow -> dp[i + 1][1]
+    // * 2. Sell today: gain today's price (+prices[i]) and move to the 'not holding' state tomorrow -> dp[i + 1][0] + prices[i]
     dp[i][1] = max(dp[i + 1][1], dp[i + 1][0] + prices[i]);
   }
 
-  for (auto &vec : dp)
-    printArr(vec);
-
-  return dp[0][1];
+  // * Return the max profit starting from day 0 without holding any stock initially
+  return dp[0][0];
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------

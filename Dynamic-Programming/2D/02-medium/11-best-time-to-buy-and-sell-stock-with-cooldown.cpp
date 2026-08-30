@@ -39,34 +39,59 @@ void printArr(vector<T> &arr) {
 
 // * Without Memoization
 int dfs(int i, bool buying, vector<int> &prices) {
+  // * Base Case: If we reach or pass the last day, no more transactions can be made
   if (i >= prices.size())
     return 0;
 
+  // * Option 1: Cooldown/Skip today. 
+  // * We do nothing today, keep the same state (buying or selling), and move to day i + 1
   int cooldown = dfs(i + 1, buying, prices);
+  
   if (buying) {
+    // * Option 2 (When looking to buy): Buy today.
+    // * Subtract today's price (-prices[i]) and move to day i + 1 with buying set to false
     int buy = dfs(i + 1, false, prices) - prices[i];
+    
+    // * Cache and return the maximum profit between buying today or skipping today
     return max(buy, cooldown);
   }
-  // * i + 2 -> since 1 day cooldown after sell
+  
+  // * Option 2 (When holding a stock): Sell today.
+  // * Add today's price (+prices[i]). Due to the mandatory 1-day cooldown after a sell,
+  // * we must skip the next day and jump directly to day i + 2 to buy again
   int sell = dfs(i + 2, true, prices) + prices[i];
+  
   return max(sell, cooldown);
 }
 
 // * With Memoization
 int dfs(int i, bool buying, vector<int> &prices, vector<vector<int>> &dp) {
+  // * Base Case: If we reach or pass the last day, no more transactions can be made
   if (i >= prices.size())
     return 0;
 
+  // * Memoisation: Return the result if we have already calculated this state
   if (dp[i][buying] != -1)
     return dp[i][buying];
 
+  // * Option 1: Cooldown/Skip today. 
+  // * We do nothing today, keep the same state (buying or selling), and move to day i + 1
   int cooldown = dfs(i + 1, buying, prices, dp);
+  
   if (buying) {
+    // * Option 2 (When looking to buy): Buy today.
+    // * Subtract today's price (-prices[i]) and move to day i + 1 with buying set to false
     int buy = dfs(i + 1, false, prices, dp) - prices[i];
+    
+    // * Cache and return the maximum profit between buying today or skipping today
     return dp[i][buying] = max(buy, cooldown);
   }
-  // * i + 2 -> since 1 day cooldown after sell
+  
+  // * Option 2 (When holding a stock): Sell today.
+  // * Add today's price (+prices[i]). Due to the mandatory 1-day cooldown after a sell,
+  // * we must skip the next day and jump directly to day i + 2 to buy again
   int sell = dfs(i + 2, true, prices, dp) + prices[i];
+  
   return dp[i][buying] = max(sell, cooldown);
 }
 
@@ -95,23 +120,29 @@ int betterApproach(vector<int> &prices) {
 // * SPACE COMPLEXITY O(n)
 int maxProfit(vector<int> &prices) {
   int n = prices.size();
+
+  // * Size is (n + 2) because a sell on day 'i' looks up day 'i + 2' due to cooldown.
+  // * dp[i][0] -> Max profit starting at day 'i' if we do NOT hold a stock (free to buy)
+  // * dp[i][1] -> Max profit starting at day 'i' if we HOLD a stock (free to sell)
   vector<vector<int>> dp(n + 2, vector<int>(2, 0));
+
+  // * Iterate backwards from the last day to the first day
   for (int i = n - 1; i >= 0; --i) {
-    for (int buying = 1; buying >= 0; --buying) {
-      if (buying == 1) {
-        int buy = dp[i + 1][0] - prices[i];
-        int cooldown = dp[i + 1][1];
-        dp[i][1] = max(buy, cooldown);
-      } else {
-        // * i + 2 -> since 1 day cooldown after sell
-        int sell = dp[i + 2][1] + prices[i];
-        int cooldown = dp[i + 1][0];
-        dp[i][0] = max(sell, cooldown);
-      }
-    }
+
+    // * Case 0: Free to buy. We take the max of:
+    // * 1. Skipping today: stay free to buy tomorrow -> dp[i + 1][0]
+    // * 2. Buying today: spend prices[i], must sell tomorrow onwards -> dp[i + 1][1] - prices[i]
+    dp[i][0] = max(dp[i + 1][0], dp[i + 1][1] - prices[i]);
+
+    // * Case 1: Free to sell. We take the max of:
+    // * 1. Skipping today: stay holding the stock tomorrow -> dp[i + 1][1]
+    // * 2. Selling today: gain prices[i], must skip tomorrow due to 1-day cooldown,
+    // *    so we are free to buy again on day 'i + 2' -> dp[i + 2][0] + prices[i]
+    dp[i][1] = max(dp[i + 1][1], dp[i + 2][0] + prices[i]);
   }
 
-  return dp[0][1];
+  // * Return the maximum profit starting from Day 0 without holding any stock initially
+  return dp[0][0];
 }
 
 int main(void) {

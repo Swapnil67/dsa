@@ -1,6 +1,6 @@
 /*
- * Leetcode - 309
- * Best Time to Buy and Sell Stock with Cooldown
+ * Leetcode - 714
+ * Best Time to Buy and Sell Stock with Transaction Fee
  * 
  * You are given an array prices where prices[i] is the price of a given stock on the ith day.
  * 
@@ -12,11 +12,22 @@
  * Note: You may not engage in multiple transactions simultaneously
  * (i.e., you must sell the stock before you buy again).
  * 
- * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown
- * https://neetcode.io/problems/buy-and-sell-crypto-with-cooldown
+ * Example 1    :
+ * Input        : prices = [1,3,2,8,4,9], fee = 2
+ * Output       : 8
+ * Explanation  : The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
+ * 
+ * Example 2    :
+ * Input        : prices = [1,3,7,5,10,3], fee = 3
+ * Output       : 6
+ * Explanation  : The total profit is ((10 - 1) - 3) = 6
+ * 
+ * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+ * https://www.geeksforgeeks.org/problems/buy-stock-with-transaction-fee/1
+ * https://www.naukri.com/code360/problems/best-time-to-buy-and-sell-stock-with-transaction-fee_3118974
 */
 
-// ! Amazon, Google, Meta, Uber
+// ! Amazon, Google, Meta, Uber, IBM
 
 #include <vector>
 #include <numeric>
@@ -38,34 +49,52 @@ void printArr(vector<T> &arr) {
 }
 
 // * Without Memoization
-int dfs(int i, bool buy, vector<int> &prices, int &fee) {
+int dfs(int i, bool buying, vector<int> &prices, int &fee) {
 	if (i >= prices.size())
 		return 0;
 
-	int res = dfs(i + 1, buy, prices, fee);
-	if (buy) {
+	// * Option 1: Skip today. Move to day i + 1 keeping the exact same state
+	int res = dfs(i + 1, buying, prices, fee);
+
+	if (buying) {
+		// * Option 2 (When looking to buy): Buy today.
+		// * Subtract today's stock price and move to day i + 1 with buying set to false
 		res = max(res, dfs(i + 1, false, prices, fee) - prices[i]);
-	} else {
-		res = max(res, dfs(i + 1, true, prices, fee) + (prices[i] - fee));
+	}
+	else {
+		// * Option 2 (When holding a stock): Sell today.
+		// * Gain today's stock price, subtract the transaction fee (-fee),
+		// * and move to day i + 1 where we are free to buy again (buying = true)
+		res = max(res, (dfs(i + 1, true, prices, fee) + prices[i]) - fee);
 	}
 	return res;
 }
 
 // * With Memoization
-int dfs(int i, bool buy, vector<int> &prices, int &fee, vector<vector<int>> &dp) {
+int dfs(int i, bool buying, vector<int> &prices, int &fee, vector<vector<int>> &dp) {
+	// * Base Case: If we pass the last day, no more transactions can occur, profit is 0
 	if (i >= prices.size())
 		return 0;
 
-	if (dp[i][buy] != -1)
-		return dp[i][buy];
+	if (dp[i][buying] != -1) // * cache
+		return dp[i][buying];
 
-	int res = dfs(i + 1, buy, prices, fee, dp);
-	if (buy) {
+	// * Option 1: Skip today. Move to day i + 1 keeping the exact same state
+	int res = dfs(i + 1, buying, prices, fee, dp);
+
+	if (buying) {
+		// * Option 2 (When looking to buy): Buy today.
+		// * Subtract today's stock price and move to day i + 1 with buying set to false
 		res = max(res, dfs(i + 1, false, prices, fee, dp) - prices[i]);
-	} else {
-		res = max(res, dfs(i + 1, true, prices, fee, dp) + (prices[i] - fee));
 	}
-	return dp[i][buy] = res;
+	else {
+		// * Option 2 (When holding a stock): Sell today.
+		// * Gain today's stock price, subtract the transaction fee (-fee),
+		// * and move to day i + 1 where we are free to buy again (buying = true)
+		res = max(res, (dfs(i + 1, true, prices, fee, dp) + prices[i]) - fee);
+	}
+
+	return dp[i][buying] = res;
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -82,9 +111,12 @@ int bruteForce(vector<int> &prices, int fee) {
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(n^2)
 int betterApproach(vector<int> &prices, int fee) {
-  int n = prices.size();
-  vector<vector<int>> dp(n + 1, vector<int>(2, -1));
-  return dfs(0, true, prices, fee, dp);
+	int n = prices.size();
+	// * dp table initialized to -1 to track unvisited states
+	// * dp[i][1] -> Max profit from day 'i' if we are looking to BUY
+	// * dp[i][0] -> Max profit from day 'i' if we are looking to SELL
+	vector<vector<int>> dp(n + 1, vector<int>(2, -1));
+	return dfs(0, true, prices, fee, dp);
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------

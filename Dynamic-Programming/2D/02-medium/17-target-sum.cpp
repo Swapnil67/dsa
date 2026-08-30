@@ -115,22 +115,39 @@ int findTargetSumWays(vector<int> &nums, int target) {
 
   int n = nums.size();
   int k = (sum - target) / 2;
-  vector<vector<int>> dp(n + 1, vector<int>(k + 1, -1));
+  vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
 
-  // * Base Cases
-  dp[0][0] = (nums[0] == 0) ? 2 : 1;
-  if (nums[0] != 0 && k >= nums[0]) {
-    dp[0][nums[0]] = 1;
+  // * --- Base Case: Initialize the first element (row 0) ---
+  // * If the first element is 0, we can either include it or exclude it,
+  // * both resulting in a subset sum of 0 (2 ways).
+  if (nums[0] == 0) {
+    dp[0][0] = 2;
+  }
+  else {
+    dp[0][0] = 1; // * If it's non-zero, there's exactly 1 way to make a sum of 0 (by not taking it).
+
+    // * If the first element fits within our target sum constraint,
+    // * there is 1 way to make a sum equal to its value (by taking it).
+    if (nums[0] <= k) 
+      dp[0][nums[0]] = 1;
   }
 
-  for (int i = 1; i < n; ++i) {
-    for (int t = 0; t <= k; t++) {
+  // * --- DP Transitions ---
+  for (int i = 1; i < n; ++i) { // * we have already handled i = '0' case
+    for (int t = 0; t <= k; ++t) {
+      // * Case 1: Exclude the current element nums[i].
+      // * The number of ways remains the same as the previous state.
       int not_take = dp[i - 1][t];
+
+      // * Case 2: Include the current element nums[i].
+      // * This is only possible if the current target 't' is at least nums[i].
       int take = 0;
-      if (t >= nums[i - 1]) {
-        take = dp[i - 1][t - nums[i - 1]];
+      if (t >= nums[i]) {
+        take = dp[i - 1][t - nums[i]];
       }
-      dp[i][t] = (not_take + take);
+
+      // * Total ways for the current state is the sum of both choices.
+      dp[i][t] = not_take + take;
     }
   }
 
@@ -138,6 +155,7 @@ int findTargetSumWays(vector<int> &nums, int target) {
   for (auto &vec : dp)
     printArr(vec);
 
+  // Return the total ways to achieve target 'k' using all 'n' elements.
   return dp[n - 1][k];
 }
 
@@ -146,26 +164,45 @@ int findTargetSumWays(vector<int> &nums, int target) {
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(1)
 int findTargetSumWaysDP2(vector<int> &nums, int target) {
+  int n = nums.size();
+
+  //* Calculate the total sum of all elements in the array
   int sum = accumulate(begin(nums), end(nums), 0);
-  if (sum - target < 0 || (sum - target) % 2 != 0)
+
+  //* --- Edge Cases / Math Guards ---
+  //* 1. If the absolute target is greater than the total sum possible, it's impossible.
+  //* 2. S1 - S2 = target and S1 + S2 = sum implies S2 = (sum - target) / 2.
+  //*    Therefore, (sum - target) must be non-negative and perfectly divisible by 2.
+  if (abs(target) > sum || (sum - target) % 2 != 0)
     return 0;
 
-  int n = nums.size();
+  //* k is our target subset sum for the elements assigned a negative sign
   int k = (sum - target) / 2;
 
+  //* dp[t] stores the number of ways to achieve a subset sum of 't'
+  //* Space Complexity: O(k) instead of O(n * k)
   vector<int> dp(k + 1, 0);
-  dp[0] = nums[0] == 0 ? 2 : 1; // * Base Case
-  if (nums[0] != 0 && k >= nums[0]) // * Base Case
-    dp[nums[0]] = 1;
-  // printArr(dp);
 
-  for (int i = 1; i < n; ++i) {
-    for (int t = k; t >= nums[i]; --t)  {
-      dp[t] = dp[t] + dp[t - nums[i]];
+  //* Base Case: There is exactly 1 way to form a sum of 0 (by choosing an empty subset)
+  dp[0] = 1;
+
+  //* Process each number from the input array one by one
+  for (int i = 0; i < n; ++i) {
+    int cur_num = nums[i];
+
+    //* --- Reverse Loop Optimization ---
+    //* We iterate backwards from 'k' down to 'cur_num'.
+    //* Why backwards? It ensures that we build dp[t] using values from the *previous*
+    //* iteration (dp[t - cur_num]), preventing us from reusing the same element 'cur_num' multiple times.
+    //* Why stop at cur_num? If t < cur_num, it's impossible to include cur_num,
+    //* so its value remains unchanged (dp[t] = dp[t] + 0). Skipping it saves CPU cycles.
+    for (int t = k; t >= cur_num; --t) {
+      //* Total ways to get sum 't' = (Ways without taking cur_num) + (Ways by taking cur_num)
+      dp[t] += dp[t - cur_num];
     }
-    // printArr(dp);
   }
 
+  //* Return the total number of ways to form the subset sum 'k'
   return dp[k];
 }
 

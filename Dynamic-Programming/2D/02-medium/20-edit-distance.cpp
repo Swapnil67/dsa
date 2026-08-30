@@ -43,21 +43,19 @@ void printArr(vector<T> &arr) {
 }
 
 // * Without Memoization
-int dfs(int m, int n, string word1, string word2) {
-  // * word2 got completed first
-  if (n == 0)
-    return m; // * delete extra chars from word1
+int dfs(int m, int n, string s, string t) {
+  if (n == 0) // * 't' got completed first
+    return m; // * delete extra chars from 's'
 
-  // * word1 got completed first
-  if (m == 0) 
-    return n; // * Insert extra chars from word2
+  if (m == 0) // * 's' got completed first
+    return n; // * Insert extra chars from 't'
 
-  if (word1[m - 1] == word2[n - 1]) // * Both char same at 'm' and 'n'
-    return dfs(m - 1, n - 1, word1, word2); // * no need to add any operation
+  if (s[m - 1] == t[n - 1]) // * Both char same at 'm' and 'n'
+    return dfs(m - 1, n - 1, s, t); // * no need to add any operation
 
-  int insert_res = 1 + dfs(m, n - 1, word1, word2); // * Insert a char at 'm'
-  int delete_res = 1 + dfs(m - 1, n, word1, word2); // * Delete a char at 'm'
-  int replace_res = 1 + dfs(m - 1, n - 1, word1, word2); // * Replace a char at 'm'
+  int insert_res = 1 + dfs(m, n - 1, s, t); // * Insert a char at 'm'
+  int delete_res = 1 + dfs(m - 1, n, s, t); // * Delete a char at 'm'
+  int replace_res = 1 + dfs(m - 1, n - 1, s, t); // * Replace a char at 'm'
 
   return min({insert_res, delete_res, replace_res});
 }
@@ -130,7 +128,7 @@ int minDistance(string word1, string word2) {
         int insert_res = 1 + t[i][j - 1];
         int delete_res = 1 + t[i - 1][j];
         int replace_res = 1 + t[i - 1][j - 1];
-        t[i][j] = min(insert_res, min(delete_res, replace_res));
+        t[i][j] = min({insert_res, delete_res, replace_res});
       }
     }
   }
@@ -167,7 +165,7 @@ int minDistance2(string word1, string word2) {
         int insert_res = 1 + cur[j - 1];
         int delete_res = 1 + prev[j];
         int replace_res = 1 + prev[j - 1];
-        cur[j] = min(insert_res, min(delete_res, replace_res));
+        cur[j] = min({insert_res, delete_res, replace_res});
       }
     }
     prev = cur;
