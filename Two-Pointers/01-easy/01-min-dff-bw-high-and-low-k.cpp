@@ -50,14 +50,13 @@ int minimumDifference(vector<int> arr, int k) {
   // * Step 2. Loop over the window
   int i = 0, j = k - 1;
   int res = INT_MAX;
-  while(j < n) {
+  while (j < n) {
     res = min(res, arr[j] - arr[i]);
     i += 1;
     j += 1;
   }
   return res;
 }
-
 
 int main() {
   int k = 3;

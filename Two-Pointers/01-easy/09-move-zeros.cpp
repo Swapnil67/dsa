@@ -1,20 +1,24 @@
-/**
- * * Leetcode - 283
- * * Move Zero's to End
- * * Given an array 'arr' of 'n' non-negative integers, your task is to move all the zeros to the end of the array while keeping 
- * * the non-zero elements at the start of the array in their original order. Return the modified array.
-
- * * Example 1
- * * Input  : 'k' = 1, 'arr '= [1, 2, 0, 0, 2, 3]
- * * Output : [1, 2, 2, 3, 0, 0]
+/*
+ * Leetcode - 283
+ * Move Zero's to End
  * 
- * * Example 2
- * * Input  : 'k' = 4, 'arr '= [0, 0, 0, 1]
- * * Output : [1, 0, 0, 0]
+ * Given an array 'arr' of 'n' non-negative integers, your task is to move all the zeros to the end of the array while keeping 
+ * the non-zero elements at the start of the array in their original order. Return the modified array.
 
- * * https://www.naukri.com/code360/problems/ninja-and-the-zero-s_6581958
- * * https://leetcode.com/problems/move-zeroes/
+ * Example 1
+ * Input  : 'k' = 1, 'arr '= [1, 2, 0, 0, 2, 3]
+ * Output : [1, 2, 2, 3, 0, 0]
+ * 
+ * Example 2
+ * Input  : 'k' = 4, 'arr '= [0, 0, 0, 1]
+ * Output : [1, 0, 0, 0]
+
+ * https://www.naukri.com/code360/problems/ninja-and-the-zero-s_6581958
+ * https://neetcode.io/problems/move-zeroes/question
+ * https://leetcode.com/problems/move-zeroes/
 */
+
+// ! Amazon, Apple, Gooogle, Microsoft, Meta
 
 #include <iostream>
 #include <vector>

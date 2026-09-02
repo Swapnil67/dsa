@@ -22,21 +22,15 @@
 
 using namespace std;
 
-string mergeAlternately(string word1, string word2) {
-  int n1 = word1.size(), n2 = word2.size();
-  int i = 0, j = 0;
+string mergeAlternately(string s, string t) {
+  int n1 = s.length(), n2 = t.length();
   string ans = "";
-  while (i < n1 && j < n2) {
-    ans += word1[i++];
-    ans += word2[j++];
-  }
-
-  while (i < n1) {
-    ans += word1[i++];
-  }
-
-  while (j < n2) {
-    ans += word2[j++];
+  int i = 0, j = 0;
+  while (i < n1 || j < n2) {
+    if (i < n1)
+      ans.push_back(s[i++]);
+    if (j < n2)
+      ans.push_back(t[j++]);
   }
   return ans;
 }

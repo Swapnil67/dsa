@@ -25,16 +25,22 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
+
+
+// * If nums[l] + nums[r] <= target, it means nums[l] paired with the largest element in our current window is valid. 
+// * Therefore, nums[l] will also be valid when paired with every other element smaller than nums[r] up to nums[l+1].
+// * The elements available to pair with nums[l] are at indices: (l + 1), (l + 2), ..., r.
+// * The total count of these indices is exactly r - l.
 
 // * ------------------------- APPROACH 1: Brute Force APPROACH -------------------------
 // * Nested Loop
@@ -53,6 +59,7 @@ int countPairs(vector<int> &nums, int target) {
   int l = 0, r = nums.size() - 1;
   while (l <= r) {
     if (nums[l] + nums[r] < target) {
+      // * Add no of sub arrays starting from index 'l'
       ans += (r - l);
       l++;
     } else {
@@ -68,11 +75,11 @@ int main(void) {
   vector<int> nums = {-1, 1, 2, 3, 1};
 
   cout << "Target: " << target << endl;
-  std::cout << "Input Nums: ";
+  cout << "Input Nums: ";
   printArr(nums);
 
   int ans = countPairs(nums, target);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }
