@@ -91,9 +91,6 @@ int maxProfit(vector<int>& prices) {
 // * SPACE COMPLEXITY O(1)
 int maxProfitDP(vector<int> &prices) {
   int n = prices.size();
-  if (n <= 1)
-    return 0;
-
   int j = 1;
   int max_profit = 0, min_buy = prices[0];
   while (j < n) {

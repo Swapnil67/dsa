@@ -121,23 +121,31 @@ int countSubsetSumEqualsK(vector<int> &nums, int &diff) {
   if (total_sum - diff < 0 || (total_sum - diff) % 2 != 0)
     return 0;
   
-  int target = (total_sum - diff) / 2; 
-  vector<vector<int>> dp(n + 1, vector<int>(target + 1, 0));
+  int k = (total_sum - diff) / 2; 
+  vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
 
   // * Base Cases
   dp[0][0] = (nums[0] == 0) ? 2 : 1;
-  if (nums[0] != 0 && target >= nums[0]) {
+  if (nums[0] != 0 && k >= nums[0]) {
     dp[0][nums[0]] = 1;
   }
 
-  for (int i = 1; i < n; i++) {
-    for (int t = 0; t <= target; t++) {
+  // * --- DP Transitions ---
+  for (int i = 1; i < n; ++i) { // * we have already handled i = '0' case
+    for (int t = 0; t <= k; ++t) {
+      // * Case 1: Exclude the current element nums[i].
+      // * The number of ways remains the same as the previous state.
       int not_take = dp[i - 1][t];
+
+      // * Case 2: Include the current element nums[i].
+      // * This is only possible if the current target 't' is at least nums[i].
       int take = 0;
-      if (nums[i] <= t) {
+      if (t >= nums[i]) {
         take = dp[i - 1][t - nums[i]];
       }
-      dp[i][t] = (take + not_take) % M;
+
+      // * Total ways for the current state is the sum of both choices.
+      dp[i][t] = (not_take + take) % M;
     }
   }
 
@@ -145,7 +153,7 @@ int countSubsetSumEqualsK(vector<int> &nums, int &diff) {
   for (auto &vec : dp)
     printArr(vec);
 
-  return dp[n - 1][target] % M;
+  return dp[n - 1][k] % M;
 }
 
 
@@ -156,11 +164,17 @@ int countSubsetSumEqualsK(vector<int> &nums, int &diff) {
 int countSubsetSumEqualsKDP2(vector<int> &nums, int &diff) {
   int n = nums.size();
 
-  int total_sum = accumulate(begin(nums), end(nums), 0);
-  if ((total_sum - diff) < 0 || (total_sum - diff) % 2 != 0)
+  //* Calculate the total sum of all elements in the array
+  int sum = accumulate(begin(nums), end(nums), 0);
+
+  //* --- Edge Cases / Math Guards ---
+  //* 1. If the absolute target is greater than the total sum possible, it's impossible.
+  //* 2. S1 - S2 = target and S1 + S2 = sum implies S2 = (sum - target) / 2.
+  //*    Therefore, (sum - target) must be non-negative and perfectly divisible by 2.
+  if (abs(diff) > sum || (sum - diff) % 2 != 0)
     return 0;
   
-  int target = (total_sum - diff) / 2; 
+  int target = (sum - diff) / 2; 
 
   vector<int> dp(target + 1, 0);
   dp[0] = nums[0] == 0 ? 2 : 1; // * Base Case
@@ -185,6 +199,54 @@ int countSubsetSumEqualsKDP2(vector<int> &nums, int &diff) {
 
   return dp[target] % M;
 }
+
+
+// * ------------------------- Approach: Optimal Approach -------------------------
+// * Bottom Up + Space Optimization
+// * TIME COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(1)
+int findTargetSumWaysDP3(vector<int> &nums, int target) {
+  int n = nums.size();
+
+  //* Calculate the total sum of all elements in the array
+  int sum = accumulate(begin(nums), end(nums), 0);
+
+  //* --- Edge Cases / Math Guards ---
+  //* 1. If the absolute target is greater than the total sum possible, it's impossible.
+  //* 2. S1 - S2 = target and S1 + S2 = sum implies S2 = (sum - target) / 2.
+  //*    Therefore, (sum - target) must be non-negative and perfectly divisible by 2.
+  if (abs(target) > sum || (sum - target) % 2 != 0)
+    return 0;
+
+  //* k is our target subset sum for the elements assigned a negative sign
+  int k = (sum - target) / 2;
+
+  //* dp[t] stores the number of ways to achieve a subset sum of 't'
+  //* Space Complexity: O(k) instead of O(n * k)
+  vector<int> dp(k + 1, 0);
+  //* Base Case: There is exactly 1 way to form a sum of 0 (by choosing an empty subset)
+  dp[0] = 1;
+
+  //* Process each number from the input array one by one
+  for (int i = 0; i < n; ++i) {
+    int cur_num = nums[i];
+
+    //* --- Reverse Loop Optimization ---
+    //* We iterate backwards from 'k' down to 'cur_num'.
+    //* Why backwards? It ensures that we build dp[t] using values from the *previous*
+    //* iteration (dp[t - cur_num]), preventing us from reusing the same element 'cur_num' multiple times.
+    //* Why stop at cur_num? If t < cur_num, it's impossible to include cur_num,
+    //* so its value remains unchanged (dp[t] = dp[t] + 0). Skipping it saves CPU cycles.
+    for (int t = k; t >= cur_num; --t) {
+      //* Total ways to get sum 't' = (Ways without taking cur_num) + (Ways by taking cur_num)
+      dp[t] = (dp[t] + dp[t - cur_num]) % M;
+    }
+  }
+
+  //* Return the total number of ways to form the subset sum 'k'
+  return dp[k] % M;
+}
+
 
 int main(void) {
   // * testcase 1
