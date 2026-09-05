@@ -27,7 +27,7 @@
  * Output: -1
  * Explanation: There is no way to divide the players into teams such that the total skill of each team is equal.
  * 
- * https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/
+ * https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/
 */
 
 #include <vector>

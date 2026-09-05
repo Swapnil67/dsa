@@ -54,12 +54,12 @@ string addSpaces(string s, vector<int> spaces) {
 
 int main(void) {
   // * testcase 1
-  string s = "LeetcodeHelpsMeLearn";
-  vector<int> spaces = {8, 13, 15};
+  // string s = "LeetcodeHelpsMeLearn";
+  // vector<int> spaces = {8, 13, 15};
   
   // * testcase 2
-  // string s = "icodeinpython";
-  // vector<int> spaces = {1, 5, 7, 9};
+  string s = "icodeinpython";
+  vector<int> spaces = {1, 5, 7, 9};
   
   // * testcase 3
   // string s = "spacing";

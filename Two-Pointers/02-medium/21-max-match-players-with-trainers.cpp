@@ -20,7 +20,7 @@
  * Input  : players = [1, 1, 1], trainers = [10]
  * Output : 1
 
- * https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/
+ * https://leetcode.com/problems/maximum-matching-of-players-with-trainers/
 */
 
 #include <vector>

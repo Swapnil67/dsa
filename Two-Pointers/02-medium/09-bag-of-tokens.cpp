@@ -55,27 +55,22 @@ int bagOfTokensScore(vector<int> tokens, int power) {
   int i = 0, j = n - 1;
 
   int score = 0, max_score = 0;
-  while(i <= j) {
-    // cout << power << endl;
-    // * Increase the score by reducing power
-    if(power >= tokens[i]) {
+  while (i <= j) {
+    if (power >= tokens[i]) { // * Increase the score by reducing power
       power -= tokens[i];
       score += 1;
       i++;
       max_score = max(max_score, score);
     }
+    else if (score > 0) { // * Increase the power by reducing score
+      power += tokens[j--];
+      score -= 1;
+    }
     else {
-      if (score >= 1) {
-        // * Increase the power by reducing score
-        power += tokens[j];
-        score -= 1;
-        j--;
-      }
-      else {
-        return max_score;
-      }
+      break;
     }
   }
+  
   return max_score;
 }
 

@@ -104,7 +104,7 @@ int main(void) {
   // int ans = bruteForce(nums);
   int ans = removeDuplicates(nums);
 
-  cout << ans << endl;
+  cout << "Unique: " << ans << endl;
   printArr(nums);
   return 0;
 }

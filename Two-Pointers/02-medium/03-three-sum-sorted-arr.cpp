@@ -149,10 +149,10 @@ vector<vector<int>> threeSum(vector<int> arr) {
 
 int main(void) {
   // * testcase 1
-  // vector<int> arr = {-1, 0, 1, 2, -1, -4};
+  vector<int> arr = {-1, 0, 1, 2, -1, -4};
 
   // * testcase 2
-  vector<int> arr = {-2, -2, -2, -1, -1, -1, 0, 0, 0, 2, 2, 2, 2};
+  // vector<int> arr = {-2, -2, -2, -1, -1, -1, 0, 0, 0, 2, 2, 2, 2};
 
   cout << "Input nums: ";
   printArr(arr);

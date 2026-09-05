@@ -83,9 +83,9 @@ int main(void) {
   int target = 9;
   vector<int> arr = {2, 7, 11, 15};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(arr);
-  std::cout << "target: " << target << std::endl;
+  cout << "target: " << target << endl;
 
   // * Note that this does not returns the index
   // bool ans = findTwoSum(arr, target);

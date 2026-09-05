@@ -74,13 +74,21 @@ int maxArea(vector<int> height) {
 }
 
 int main(void) {
+  // * testcase 1
   vector<int> nums = {3, 1, 2, 3};
+
+  // * testcase 2
   // vector<int> nums = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+
+  // * testcase 3
   // vector<int> nums = {1, 1};
+
+  cout << "nums: ";
   printArr(nums);
 
   // int ans = bruteForce(nums);
   int ans = maxArea(nums);
+  
   cout << "maximum amount of water a container can store : " << ans << endl;
 
   return 0;

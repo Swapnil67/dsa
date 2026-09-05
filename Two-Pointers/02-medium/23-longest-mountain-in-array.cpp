@@ -16,6 +16,8 @@
  * https://www.naukri.com/code360/problems/longest-mountain-subarray_893069
 */
 
+// ! Oracle
+
 #include <vector>
 #include <iostream>
 
@@ -37,8 +39,8 @@ void printArr(vector<T> &arr) {
 // * Find the peak element and then count on left & right elements
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int longestMountain(vector<int> &arr) {
-  int n = arr.size();
+int longestMountain(vector<int> &nums) {
+  int n = nums.size();
   if (n < 3)
     return 0;
   
@@ -46,21 +48,18 @@ int longestMountain(vector<int> &arr) {
   // * 1 to n - 2 (only possible peak elements)
   for (int i = 1; i <= n - 2;) {
     // * Found peak element (Greater than both the neighbours)
-    if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {
+    if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
       int cnt = 1; // * for the peak element
 
       // * count left of mountain
       int j = i;
-      while (j > 0 && arr[j] > arr[j - 1]) {
-        j--;
-        cnt++;
-      }
+      while (j > 0 && nums[j] > nums[j - 1])
+        j--, cnt++;
 
       // * count right of mountain
-      while (i < n - 1 && arr[i] > arr[i + 1]) {
-        i++;
-        cnt++;
-      }
+      while (i < n - 1 && nums[i] > nums[i + 1]) 
+        i++, cnt++;
+
       ans = max(ans, cnt);
     }
     else {

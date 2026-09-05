@@ -24,56 +24,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 13 - Rotate array by K places
-// vector<int> rotate(vector<int> &nums, int k) {
-// TODO
-// } 
-
-// * 14 - Minimum Time to Make Rope Colorful
-// int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime) {
-// TODO
-// }
-
-// * 15 - Minimum Length of String After Deleting Similar Ends
-// int minimumLength(string s) {
-// TODO
-// }
-
-// * 16 - Sentence Similarity III
-// bool areSentencesSimilar(string s1, string s2) {
-// TODO
-// }
-
-// * 17 - Reverse Words in a String
-// string reverseWords(string &s) {
-// TODO
-// } 
-
-// * 18 - Adding Spaces to a String
-// string addSpaces(string s, vector<int> &spaces) {
-// TODO
-// }
-
-// * 19 - Maximum Width Ramp
-// int maxWidthRampA(vector<int> &nums) {
-// TODO
-// }
-
-// * 20 - Array With Elements Not Equal to Average of Neighbors 
-// vector<int> rearrangeArray(vector<int> &nums) {
-// TODO
-// }
-
-// * 21 - Maximum Matching of Players With Trainers
-// int matchPlayersAndTrainers(vector<int> players, vector<int> trainers) {
-// TODO
-// }
-
-// * 22 - String Compression
-// int compress(vector<char> &chars) {
-// TODO
-// }
-
 // * ----------------------------------------------------------------
 
 // * 01 - Remove Duplicates from Sorted Array II
@@ -133,6 +83,56 @@ void printArr(vector<T> &arr) {
 
 // * 12 - Partition Array According to Given Pivot
 // vector<int> pivotArray(vector<int> &nums, int pivot) {
+// TODO
+// }
+
+// * 13 - Rotate array by K places
+// vector<int> rotate(vector<int> &nums, int k) {
+// TODO
+// } 
+
+// * 14 - Minimum Time to Make Rope Colorful
+// int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime) {
+// TODO
+// }
+
+// * 15 - Minimum Length of String After Deleting Similar Ends
+// int minimumLength(string s) {
+// TODO
+// }
+
+// * 16 - Sentence Similarity III
+// bool areSentencesSimilar(string s1, string s2) {
+// TODO
+// }
+
+// * 17 - Reverse Words in a String
+// string reverseWords(string &s) {
+// TODO
+// } 
+
+// * 18 - Adding Spaces to a String
+// string addSpaces(string s, vector<int> &spaces) {
+// TODO
+// }
+
+// * 19 - Maximum Width Ramp
+// int maxWidthRampA(vector<int> &nums) {
+// TODO
+// }
+
+// * 20 - Array With Elements Not Equal to Average of Neighbors 
+// vector<int> rearrangeArray(vector<int> &nums) {
+// TODO
+// }
+
+// * 21 - Maximum Matching of Players With Trainers
+// int matchPlayersAndTrainers(vector<int> players, vector<int> trainers) {
+// TODO
+// }
+
+// * 22 - String Compression
+// int compress(vector<char> &chars) {
 // TODO
 // }
 

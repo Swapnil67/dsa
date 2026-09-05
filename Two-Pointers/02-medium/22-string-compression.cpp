@@ -22,6 +22,7 @@
  * Output : ["a","b","1","2"].
 
  * https://leetcode.com/problems/string-compression/description/
+ * https://www.naukri.com/code360/problems/compress-the-string_526
 */
 
 // ! Amazon, Google, Meta, Microsoft, Apple, Oracle

@@ -62,9 +62,8 @@ vector<string> getStringVector(string sentence) {
 // * SPACE COMPLEXITY O(s1 + s2)
 bool areSentencesSimilar(string s1, string s2) {
   int n1 = s1.size(), n2 = s2.size();
-  if(n1 < n2) {
+  if (n1 < n2) // * let s1 be the greater string always
     return areSentencesSimilar(s2, s1);
-  }
 
   // * create vector string of words of s1
   vector<string> vec1 = getStringVector(s1);
@@ -80,18 +79,16 @@ bool areSentencesSimilar(string s1, string s2) {
   int l = 0, r = vec2.size() - 1; // * for s2
 
   while (l < vec2.size() && i < vec1.size() && vec1[i] == vec2[l]) {
-    // cout << vec1[i] << " " << vec2[k] << endl;
-    i++;
-    l++;
+    // cout << vec1[i] << " " << vec2[l] << endl;
+    i++, l++;
   }
 
   while (j >= 0 && r >= 0 && (vec1[j] == vec2[r])) {
-    // cout << vec1[j] << " " << vec2[l] << endl;
-    j--;
-    r--;
+    // cout << vec1[j] << " " << vec2[r] << endl;
+    j--, r--;
   }
 
-  // cout << k << " " << l << endl;
+  // cout << l << " " << r << endl;
   return l > r;
 }
 
@@ -103,7 +100,10 @@ int main() {
   // string s1 = "of", s2 = "of course";
 
   // * testcase 3
-  string s1 = "of", s2 = "A lot of words";
+  // string s1 = "of", s2 = "A lot of words";
+  
+  // * testcase 4
+  string s1 = "CwFfRo regR", s2 = "CwFfRo H regR";
 
   cout << s1 << endl;
   cout << s2 << endl;

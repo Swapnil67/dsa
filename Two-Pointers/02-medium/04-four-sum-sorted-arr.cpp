@@ -25,6 +25,8 @@
 
 using namespace std;
 
+using namespace std;
+
 template <typename T>
 void printArr(vector<T> &arr) {
   int n = arr.size();
@@ -171,10 +173,14 @@ int main(void) {
   // int target = 8;
   // vector<int> arr = {2, 2, 2, 2, 2};
 
+  cout << "Input nums: ";
+  printArr(arr);
+
   // vector<vector<int>> ans = bruteForce(arr);
   // vector<vector<int>> ans = betterApproach(arr);
   vector<vector<int>> ans = fourSum(arr, target);
 
+  cout << "unique quadruplets" << endl;
   for (auto &vec : ans)
     printArr(vec);
   return 0;

@@ -52,7 +52,7 @@ void printArr(vector<T> &arr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int kthGrammar(int n, int k) {
-  // int l = 1, r = pow(2, n - 1);
+  // * 1 based indexing
   int l = 1, r = 1 << (n - 1);
   int cur = 0;
   while (l <= r) {

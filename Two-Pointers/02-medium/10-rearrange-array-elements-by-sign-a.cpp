@@ -15,8 +15,8 @@
  * Output: [1,-1]
  * Explanation: 1 is the only positive integer and -1 the only negative integer in nums.
  * 
+ * https://leetcode.com/problems/rearrange-array-elements-by-sign/
  * https://www.naukri.com/code360/problems/alternate-numbers_6783445
- * https://leetcode.com/problems/rearrange-array-elements-by-sign/description/
 */
 
 // ! Here number of -ve & +ve integers are equal

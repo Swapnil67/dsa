@@ -56,7 +56,10 @@ int minimumLength(string s) {
 
 int main() {
   std::cout << "Minimum Length of String After Deleting Similar Ends" << std::endl;
-  vector<string> testcases = {"cabaabac", "aabccabba", "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb"};
+  vector<string> testcases = {
+      "cabaabac",
+      "aabccabba",
+      "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb"};
 
   for (size_t i = 0; i < testcases.size(); ++i) {
     cout << "-------------------- testcase " << i << "-----------------------\n" << endl;

@@ -42,7 +42,7 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * TIME COMPLEXITY O(N) + O(d)
 // * SPACE COMPLEXITY O(d)
 void bruteForce(vector<int> &arr, int k) {

@@ -93,9 +93,7 @@ string reverseWords(string &s) {
   while (i < n) {
     // * put the char from 'i' to 'r'
     while (i < n && !isspace(s[i])) {
-      s[r] = s[i];
-      i++;
-      r++;
+      s[r++] = s[i++];
     }
 
     // * Reverse l to r

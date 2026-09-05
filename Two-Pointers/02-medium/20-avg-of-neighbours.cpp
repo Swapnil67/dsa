@@ -48,20 +48,17 @@ vector<int> rearrangeArray(vector<int> &nums) {
   // * sort the nums
   sort(nums.begin(), nums.end());
 
-  // * Shuffle the numbers
-  vector<int> ans;
   int n = nums.size();
+  vector<int> ans(n);
   int l = 0, r = n - 1;
-  while (ans.size() != n) {
-    ans.push_back(nums[l]);
-    l++;
 
-    if (l <= r) {
-      ans.push_back(nums[r]);
-      r--;
-    }
+  // * shuffle numbers
+  for (int i = 0; i < n; ++i) {
+    if (i % 2 == 0)
+      ans[i] = nums[l++];
+    else
+      ans[i] = nums[r--];
   }
-
   return ans;
 }
 
@@ -73,7 +70,7 @@ vector<int> rearrangeArray2(vector<int> &nums) {
   sort(nums.begin(), nums.end());
 
   // * create a deque with nums
-  deque q(nums.begin(), nums.end());
+  deque<int> q(nums.begin(), nums.end());
 
   vector<int> ans;
   while (q.size() > 0) {

@@ -106,7 +106,7 @@ vector<int> pivotArray(vector<int> &arr, int pivot) {
 vector<int> pivotArray2(vector<int> &arr, int pivot) {
   int n = arr.size();
   
-  vector<int> ans(n);
+  vector<int> ans(n, pivot);
   int i = 0, j = n - 1;
   int start_idx = 0, end_idx = n - 1; // * For ans index
 
@@ -125,12 +125,6 @@ vector<int> pivotArray2(vector<int> &arr, int pivot) {
 
     // * Keep incr/decr the i & j pointers
     i++, j--;
-  }
-
-  // * Put pivot in indexes from l -> r
-  while (start_idx <= end_idx) {
-    ans[start_idx] = pivot;
-    start_idx++;
   }
 
   return ans;

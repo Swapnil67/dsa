@@ -62,8 +62,8 @@ int minTimeToMakeRopeColorful(string &colors, vector<int> &neededTime)
 
 int main(void) {
   // * testcase 1
-  // string colors = "abaac";
-  // vector<int> neededTime = {1, 2, 3, 4, 5};
+  string colors = "abaac";
+  vector<int> neededTime = {1, 2, 3, 4, 5};
 
   // * testcase 2
   // string colors = "abc";
@@ -74,8 +74,8 @@ int main(void) {
   // vector<int> neededTime = {1, 2, 3, 4, 1};
   
   // * testcase 4
-  string colors = "aaabbbabbbb";
-  vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
+  // string colors = "aaabbbabbbb";
+  // vector<int> neededTime = {3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1};
 
   cout << "Rope: " << colors << endl;
   printArr(neededTime);

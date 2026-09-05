@@ -22,6 +22,8 @@
  * https://www.naukri.com/code360/problems/minimum-boats-to-cross-river_1402321
 */
 
+// ! Microsoft, Salesforce
+
 #include <vector>
 #include <iostream>
 #include <algorithm>
