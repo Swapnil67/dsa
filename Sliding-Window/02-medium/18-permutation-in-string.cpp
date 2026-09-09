@@ -95,10 +95,10 @@ bool checkInclusion(string s1, string s2) {
 
 int main() {
   // * testcase 1
-  string s1 = "ab", s2 = "eidbaooo";
+  // string s1 = "ab", s2 = "eidbaooo";
 
   // * testcase 2
-  // string s1 = "ab", s2 = "eidboaoo";
+  string s1 = "ab", s2 = "eidboaoo";
 
   cout << "String 1: " << s1 << endl;
   cout << "String 2: " << s2 << endl;

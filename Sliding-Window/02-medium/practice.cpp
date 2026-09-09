@@ -22,42 +22,6 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * 31 - Partition Array Such That Maximum Difference Is K
-// int partitionArray(vector<int> &nums, int k) {
-// TODO
-// }
-
-// * 32 - Max Consecutive Ones II
-// int findMaxConsecutiveOnes(vector<int> &nums) {
-// TODO
-// }
-
-// * 33 - TODO
-
-// * 34 - Longest Subarray with Sum K
-// int longestSubarray(vector<int> &nums, int &k) {
-// TODO
-// }
-
-// * 35 - Longest Substring with At Most Two Distinct Characters
-// int lengthOfLongestSubstringTwoDistinct(std::string s) {
-// TODO
-// }
-
-// * 36 - Maximum Erasure Value
-// int maximumUniqueSubarray(vector<int> &nums) {
-// TODO
-// }
-
-// * 37 - Find K-Length Substrings With No Repeated Characters
-// int numKLenSubstrNoRepeats(std::string s, int k) {
-// TODO
-// }
-
-// * 38 - Maximum Points You Can Obtain from Cards
-// int numKLenSubstrNoRepeats(std::vector<int> &cardPoints, int k) {
-// TODO
-// }
 
 // * ------------------------------------------------------------------------------------------
 
@@ -96,10 +60,7 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
-// * 08 - Find K Closest Elements
-// vector<int> findClosestElements(vector<int> arr, int k, int x) {
-// TODO
-// }
+// * 08 - TODO
 
 // * 09 - Minimum Operations to Reduce X to Zero
 // int minOperations(vector<int> &nums, int x) {  
@@ -208,6 +169,42 @@ void printArr(vector<T> &arr) {
 
 // * 30 - Sliding Subarray Beauty
 // vector<int> getSubarrayBeauty(vector<int> &nums, int k, int x) {
+// TODO
+// }
+
+// * 31 - TODO
+
+// * 32 - Max Consecutive Ones II
+// int findMaxConsecutiveOnes(vector<int> &nums) {
+// TODO
+// }
+
+// * 33 - Longest Nice Subarray
+// int longestNiceSubarray(vector<int>& nums) {
+// TODO
+// }
+// * 34 - Longest Subarray with Sum K
+// int longestSubarray(vector<int> &nums, int &k) {
+// TODO
+// }
+
+// * 35 - Longest Substring with At Most Two Distinct Characters
+// int lengthOfLongestSubstringTwoDistinct(std::string s) {
+// TODO
+// }
+
+// * 36 - Maximum Erasure Value
+// int maximumUniqueSubarray(vector<int> &nums) {
+// TODO
+// }
+
+// * 37 - Find K-Length Substrings With No Repeated Characters
+// int numKLenSubstrNoRepeats(std::string s, int k) {
+// TODO
+// }
+
+// * 38 - Maximum Points You Can Obtain from Cards
+// int numKLenSubstrNoRepeats(std::vector<int> &cardPoints, int k) {
 // TODO
 // }
 

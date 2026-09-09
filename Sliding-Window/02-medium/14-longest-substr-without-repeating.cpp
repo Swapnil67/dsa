@@ -19,7 +19,7 @@
  * Output : 5
  * Explanation: The answer is "mzuxt", with the length of 5.
 
- * https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/
  * https://www.naukri.com/code360/problems/longest-substring-without-repeating-characters_758894
  * https://www.geeksforgeeks.org/problems/longest-distinct-characters-in-string5848/1
 */

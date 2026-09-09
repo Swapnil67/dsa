@@ -42,6 +42,10 @@ int bruteForce(string s) {
   return ans;
 }
 
+// * ans += (n - j)
+// * fixed index i, we are counting all the valid substrings that start at i and end anywhere from index j 
+// * all the way to the last index n - 1.
+
 // * ------------------------- APPROACH 2A: Optimal Approach -------------------------
 // * Classic sliding window
 // * TIME COMPLEXITY O(N)
@@ -55,7 +59,7 @@ int numberOfSubstrings(string s) {
 
     // * While all 3 characters are present
     while (i <= j && hash[0] > 0 && hash[1] > 0 && hash[2] > 0) {
-      ans = ans + (n - j);
+      ans += (n - j);
       hash[s[i] - 'a']--;
       i++;
     }

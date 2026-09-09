@@ -28,6 +28,7 @@
 #include <vector>
 #include <iostream>
 #include <unordered_map>
+
 using namespace std;
 
 template <typename T>
@@ -99,44 +100,6 @@ int subarraysWithKDistinct(vector<int> &arr, int k) {
   return n1 - n2;
 }
 
-// * ------------------------- APPROACH 2B: Optimal Approach -------------------------
-// * find the smallest subarray with k elements ending at 'j'
-// * TIME COMPLEXITY O(2N)
-// * SPACE COMPLEXITY O(N)
-int subarraysWithKDistinct2(vector<int> &arr, int k) {
-  int n = arr.size();
-  int i = 0, j = 0, ans = 0;
-  int i_bada = 0;
-  unordered_map<int, int> freq_map;
-  while (j < n) {
-    freq_map[arr[j]]++;
-
-    // * Handle invalid subarray - (Shrink)
-    while (freq_map.size() > k) {
-      freq_map[arr[i]]--;
-      if (freq_map[arr[i]] == 0)
-        freq_map.erase(arr[i]);
-      
-      i++;
-      i_bada = i;
-    }
-
-    // * Find smallest subarray ending at 'j'
-    while (freq_map[arr[j]] > 1) {
-      freq_map[arr[i]]--;
-      i++;
-    }
-
-    if (freq_map.size() == k) {
-      ans += (i - i_bada) + 1;
-    }
-    j++;
-  }
-
-  return ans;
-}
-
-
 int main() {
   // * testcase 1
   // int k = 2;
@@ -152,7 +115,7 @@ int main() {
 
   // int ans = bruteForce(arr, k);
   int ans = subarraysWithKDistinct(arr, k);
-  // int ans = subarraysWithKDistinct2(arr, k);
+
   printf("Subarrays with %d Different Integers is %d\n", k, ans);
 
   return 0;

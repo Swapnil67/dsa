@@ -22,8 +22,8 @@
  * Input  : nums = [3,2,3,2,3,2], k = 2
  * Output : [-1,3,-1,3,-1]
  * 
- * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-ii/
  * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/
+ * https://leetcode.com/problems/find-the-power-of-k-size-subarrays-ii
 */
 
 #include <deque>

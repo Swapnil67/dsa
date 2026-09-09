@@ -21,6 +21,9 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+
+// * ------------------------------------------------------------------------------------------
+
 // * 01 - Subarrays with K Different Integers
 // int subarraysWithKDistinct(std::vector<int> &nums, int k) {
 // TODO
@@ -46,8 +49,12 @@ void printArr(vector<T> &arr) {
 // TODO
 // }
 
-int main(void) {
+// * 07 - Count Subarrays With Fixed Bounds
+// long long countSubarrays(vector<int> &nums, int minK, int maxK) {
+// TODO
+// }
 
+int main(void) {
 }
 
 // * Run the code

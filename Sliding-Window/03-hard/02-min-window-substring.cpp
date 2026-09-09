@@ -19,6 +19,8 @@
  * Since the largest window of s only has one 'a', return empty string.
  * 
  * https://leetcode.com/problems/minimum-window-substring/description/
+ * https://neetcode.io/problems/minimum-window-with-characters/
+ * https://www.naukri.com/code360/problems/minimum-window-substring_1215004
 */
 
 // ! Amazon, Google, Meta, Microsoft, Adobe, Oracle, Tiktok, Apple
@@ -36,32 +38,29 @@ using namespace std;
 // * SPACE COMPLEXITY O(256) ~ O(1)
 string bruteForce(string s, string t) {
   int n1 = s.length(), n2 = t.length();
-
   if (n2 > n1)
     return "";
 
   int start_i = -1, min_window_size = INT_MAX;
 
   // * Create 't' char frequency vector
-  vector<int> t_vec_saved(256, 0);
-  for(char &c: t) {
+  vector<int> t_vec_saved(128, 0);
+  for (char &c : t)
     t_vec_saved[c]++;
-  }
 
   for(int i = 0; i <= n1 - n2; ++i) {
     // * use the pre-savaed t_vec
     vector<int> hash = t_vec_saved;
     int cur_count = 0;
-    for(int j = i; j < n1; ++j) {
+    for (int j = i; j < n1; ++j) {
       if (hash[s[j]] > 0)
         cur_count++;
       
       hash[s[j]]--;
       if (cur_count == n2) {
-        int cur_window = j - i + 1;
-        if (cur_window < min_window_size) {
+        if ((j - i + 1) < min_window_size) {
           start_i = i;
-          min_window_size = cur_window;
+          min_window_size = (j - i + 1);
         }
         break;
       }
@@ -69,7 +68,6 @@ string bruteForce(string s, string t) {
   }
 
   return start_i == -1 ? "" : s.substr(start_i, min_window_size);
-
 }
 
 
@@ -84,13 +82,13 @@ string minWindow(string s, string t) {
     return "";
 
   // * calculate the frequency map for string 't'
-  vector<int> t_vec(256, 0);
+  vector<int> t_vec(128, 0);
   for (char &ch : t)
     t_vec[ch]++;
 
   int countRequired = n2, start_i = -1;
   int i = 0, j = 0, min_window_size = INT_MAX;
-  while(j < n1) {
+  while (j < n1) {
     // * If char is present in 't' the decr countRequired
     if (t_vec[s[j]] > 0) {
       countRequired--;
@@ -104,7 +102,7 @@ string minWindow(string s, string t) {
       // cout << i << " " << j << endl;
 
       // * get the substring count
-      if((j - i + 1) < min_window_size) {
+      if (min_window_size > (j - i + 1)) {
         start_i = i;
         min_window_size = (j - i + 1);
       }

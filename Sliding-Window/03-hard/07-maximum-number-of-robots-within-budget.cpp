@@ -112,4 +112,4 @@ int main(void) {
 }
  
 // * Run the code
-// * g++ --std=c++20 08-maximum-number-of-robots-within-budget.cpp -o output && ./output
+// * g++ --std=c++20 07-maximum-number-of-robots-within-budget.cpp -o output && ./output

@@ -30,12 +30,11 @@
  * Change the fourth element to 4.
  * The resulting array is [1,2,3,4], which is continuous.
  * 
- * https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/description/
+ * https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/
 */
 
 #include <set>
 #include <vector>
-#include <climits>
 #include <iostream>
 #include <algorithm>
 
@@ -68,6 +67,13 @@ void printArr(vector<T> &arr) {
 // * min_ele = 5, max_ele = 9
 // * min_ele = 6, max_ele = 10
 
+// ! Intuition
+// * Target Length (N) = original = nums.size()
+// * Target Window for Element x = [x, x + N - 1]
+// * Valid Elements (K) = Count of unique elements in [x, x + N - 1]
+// * Operations Needed = N - K
+// * Objective = min(N - K) -> max(K)
+
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Treat each ith element as min_ele
 // * Find [min_ele, max_ele] window for every 'i'
@@ -76,13 +82,13 @@ void printArr(vector<T> &arr) {
 // * SPACE COMPLEXITY O(N)
 int bruteForce(vector<int> &nums) {
   int n = nums.size();
-  int min_ops = INT_MAX;
+  int min_ops = n;
   for (int i = 0; i < n; ++i) {
-    set<int> st;                                  // * Set is used for tracking duplicate elements
-    int min_ele = nums[i], max_ele = min_ele + n - 1; // * cur range [min_ele, max_ele]
+    set<int> st;                                        // * Set is used for tracking duplicate elements
     int cur_ops = 0;
+    int min_ele = nums[i], max_ele = min_ele + (n - 1); // * cur range [min_ele, max_ele]
     for (int j = 0; j < n; ++j) {
-      // * cur element exists b/w [min_ele...max_ele] range & also not duplicate
+      // * cur element exists b/w [min_ele...max_ele] range & also unique.
       if ((nums[j] >= min_ele && nums[j] <= max_ele) && (!st.count(nums[j]))) {
         st.insert(nums[j]);
         continue;
@@ -97,56 +103,39 @@ int bruteForce(vector<int> &nums) {
   return min_ops;
 }
 
+
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
-// * Here we'll sort the inp nums array which will help us find the which elements are
-// * out of our cur [min_ele, max_ele] range
+// * TIME COMPLEXITY O(nlogn)
+// * SPACE COMPLEXITY O(1) + auxiliary space because you are modifying the input vector nums in-place.
+int minOperations(vector<int>& nums) {
+  int original = nums.size();
 
-// * TIME COMPLEXITY O(Nlogn)
-// * SPACE COMPLEXITY O(N)
-int minOperations(vector<int> &arr) {
-  int n = arr.size();
-  
-  // * Sort the Arr & Eliminate Duplicates
-  set<int> st(arr.begin(), arr.end());
-  vector<int> temp(st.begin(), st.end());
-  // printArr(temp);
-  
-  int r = 0, min_operations = INT_MAX;
+  // * Sort and remove duplicates (duplicates must be replaced anyway)
+  sort(nums.begin(), nums.end());
+  nums.erase(unique(nums.begin(), nums.end()), nums.end());
 
-  for (int l = 0; l < temp.size(); ++l) {
-    int minEle = temp[l];
-    int maxEle = minEle + (temp.size() - 1);
-
-    // * Find the upper bound of maxEle
-    int r = upper_bound(begin(temp), end(temp), maxEle) - begin(temp);
-
-    // * Current valid window
-    int within_range = r - l; // * elements b/w minEle & maxEle
-
-    // * To find elements out of range we subtract from the total no. of elements
-    min_operations = min(min_operations, (n - within_range));
-  }
-
-  return min_operations;
-}
-
-int minOperations2(vector<int>& nums) {
   int n = nums.size();
+  int ans = original;
+  int r = 0; // * Right pointer for the sliding window
 
-  // * Sort the Arr & Eliminate Duplicates
-  set<int> st(nums.begin(), nums.end());
-  vector<int> arr(st.begin(), st.end()); // * new nums without duplicates
+  // * Slide the left pointer 'l' to test each element as the minimum value
+  for (int l = 0; l < n; ++l) {
+    int minimum = nums[l];
+    int max_needed =
+        minimum + original - 1; // * Maximum valid value for this window
 
-  int r = 0, min_ops = n;
-  for (int l = 0; l < arr.size(); ++l) {
-    while (r < arr.size() && arr[r] < arr[l] + n) {
-      r += 1;
+    // * Expand right pointer while numbers fit within the range
+    while (r < n && nums[r] <= max_needed) {
+      r++;
     }
 
-    int window = r - l;
-    min_ops = min(min_ops, n - window);
+    int already = r - l;                 // * Unique numbers already valid in this window
+    int operations = original - already; // * Elements left to replace
+
+    ans = min(ans, operations); // * Track the minimum operations needed
   }
-  return min_ops;
+
+  return ans;
 }
 
 int main() {

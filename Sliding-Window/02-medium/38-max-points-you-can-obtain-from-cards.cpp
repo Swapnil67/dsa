@@ -31,7 +31,7 @@
  * Output       : 248
  * Explanation  : Sum from = [100, 73, 75]
 
- * https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/
+ * https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards
 */
 
 // ! Amazon

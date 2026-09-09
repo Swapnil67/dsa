@@ -16,6 +16,8 @@
  * Explanation: Replace the one 'A' in the middle with 'B' and form "AABBBBA".
 
  * https://leetcode.com/problems/longest-repeating-character-replacement
+ * https://www.geeksforgeeks.org/problems/longest-repeating-character-replacement/1
+ * https://neetcode.io/problems/longest-repeating-substring-with-replacement/question
 */
 
 // ! Google, Meta, Microsoft, Apple, Uber, Flipkart, Goldman Sachs

@@ -26,7 +26,7 @@
  * Output       : 1
  * Explanation  : The length of the longest nice subarray is 1. Any subarray of length 1 can be chosen.
  * 
- * https://leetcode.com/problems/longest-nice-subarray/
+ * https://leetcode.com/problems/longest-nice-subarray
 */
 
 #include <vector>

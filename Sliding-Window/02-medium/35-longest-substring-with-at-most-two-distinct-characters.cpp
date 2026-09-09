@@ -27,24 +27,30 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Check all possible substrings
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(256)
-int bruteForce(std::string s) {
+int bruteForce(string s) {
   int n = s.size();
   int max_len = 0;
   for (int i = 0; i < n; ++i) {
     // * All ASCII characters [0-255]
-    std::unordered_map<char, int> freq_mp;
+    unordered_map<char, int> freq_mp;
     int j = i;
     for (; j < n; ++j) {
       freq_mp[s[j]]++;
@@ -52,7 +58,7 @@ int bruteForce(std::string s) {
         break;
       }
     }
-    max_len = std::max(max_len, j - i);
+    max_len = max(max_len, j - i);
   }
   return max_len;
 }
@@ -61,9 +67,9 @@ int bruteForce(std::string s) {
 // * Keep the map of character positions & using sliding window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int lengthOfLongestSubstringTwoDistinct(std::string s) {
+int lengthOfLongestSubstringTwoDistinct(string s) {
   int n = s.size();
-  std::unordered_map<char, int> freq_mp;
+  unordered_map<char, int> freq_mp;
 
   int ans = 0;
   int i = 0, j = 0;
@@ -79,7 +85,7 @@ int lengthOfLongestSubstringTwoDistinct(std::string s) {
       i++;
     }
 
-    ans = std::max(ans, j - i + 1);
+    ans = max(ans, j - i + 1);
     j++;
   }
 
@@ -88,16 +94,16 @@ int lengthOfLongestSubstringTwoDistinct(std::string s) {
 
 int main(void) {
   // * testcase 1
-  // std::string s = "eceba";
+  // string s = "eceba";
 
   // * testcase 2
-  std::string s = "ccaabbb";
+  string s = "ccaabbb";
 
-  std::cout << "Input String: " << s << std::endl;
+  cout << "Input String: " << s << endl;
 
   int ans = bruteForce(s);
   // int ans = lengthOfLongestSubstringTwoDistinct(s);
-  std::cout << "Longest Substring with At Most Two Distinct Characters: " << ans << std::endl;
+  cout << "Longest Substring with At Most Two Distinct Characters: " << ans << endl;
 
   return 0;
 }

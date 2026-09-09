@@ -43,7 +43,7 @@ int bruteForce(string s, int k) {
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Keep count c for cur vowel substring length
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

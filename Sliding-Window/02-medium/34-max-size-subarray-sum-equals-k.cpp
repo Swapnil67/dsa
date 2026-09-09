@@ -53,7 +53,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^3)
 // * SPACE COMPLEXITY O(1)
@@ -120,17 +120,15 @@ int betterApproach(vector<int> &nums, int &k) {
 // * SPACE COMPLEXITY O(1)
 int longestSubarray(vector<int> &nums, int &k) {
   int n = nums.size();
-  int max_len = 0;
   long long sum = 0;
-  int i = 0, j = 0;
+  int i = 0, j = 0, max_len = 0;
 
   while (j < n) {
     sum += nums[j];
-    while (i <= j && sum > k) {
+    while (i <= j && sum > k) { // * shrink Window
       sum -= nums[i];
       i++;
     }
-    // cout << sum << endl;
     
     if (sum == k) {
       max_len = max(max_len, (j - i + 1));

@@ -34,11 +34,16 @@
 
 using namespace std;
 
-void printArr(vector<int> &arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    printf("%d ", arr[i]);
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  printf("\n");
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
@@ -66,18 +71,16 @@ int bruteForce(vector<int> arr, int k) {
 // * SPACE COMPLEXITY O(N)
 int shortestSubarray(vector<int>& nums, int k) {
   int n = nums.size();
-
   int j = 0, ans = INT_MAX;
 
   // * monotonic increasing 
   deque<int> dq;
   vector<long long> prefixSums(n, 0);
+  prefixSums[0] = nums[0];
 
   while (j < n) {
-    // * keep calculating the prefix array
-    if(j == 0) {
-      prefixSums[j] = nums[j];
-    } else {
+    // * keep calculating the prefix array on the go.
+    if (j > 0) {
       prefixSums[j] = prefixSums[j - 1] + nums[j];
     }
 
@@ -95,8 +98,7 @@ int shortestSubarray(vector<int>& nums, int k) {
     }
 
     // * Maintain monotonicity by removing indices with larger prefix sums
-    // * strictly increasing
-    while (!dq.empty() && prefixSums[j] <= prefixSums[dq.back()]) {
+    while (!dq.empty() && prefixSums[j] <= prefixSums[dq.back()]) { // * strictly increasing
       dq.pop_back();
     }
     dq.push_back(j);

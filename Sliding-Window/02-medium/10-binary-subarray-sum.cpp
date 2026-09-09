@@ -25,9 +25,11 @@
  * Explanation: The 15 subarray whose sum is equal to 0
  * 
  * https://leetcode.com/problems/binary-subarrays-with-sum/description/
+ * https://www.geeksforgeeks.org/problems/binary-subarray-with-sum/1
+ * https://www.naukri.com/code360/problems/binary-subarrays-with-sum_23249783
 */
 
-// ! Amazon, Google, Meta, Microsoft, Bloomberg, Adobe
+// ! Amazon, Google, Meta, Microsoft, Bloomberg, Adobe, Swiggy
 
 // ! Similar sum
 // ! Count the Number of Fair Pairs

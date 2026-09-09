@@ -21,7 +21,7 @@
  * Output : 2
  * Explanation: The longest possible good subarray is [1,2] or [2,1]
  * 
- * https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/description/
+ * https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/
 */
 
 // ! Google, Swiggy, Goldman Sachs

@@ -75,12 +75,12 @@ int bruteForce(vector<int> arr, int k) {
 
   int max_beauty = 0;
   deque<int> dq;
-  for (pair<int, int> &interval : intervals) { // * o(n)
-    // * Here we are checking are the intervals overlapping, if not the pop the front interval
-    while (!dq.empty() && dq.front() < interval.first) {
+  for (pair<int, int> &it : intervals) { // * o(n)
+    // * Here we are checking are the intervals overlapping, if not the pop the front it
+    while (!dq.empty() && it.first > dq.front()) {
       dq.pop_front();
     }
-    dq.push_back(interval.second);
+    dq.push_back(it.second);
     max_beauty = max(max_beauty, (int)dq.size());
   }
 
@@ -179,6 +179,7 @@ int main() {
   // int ans = bruteForce(arr, k);
   int ans = maximumBeauty(arr, k);
   // int ans = maximumBeauty2(arr, k);
+
   cout << "Maximum Beauty of an Array After Applying Operation: " << ans << endl;
 
   return 0;

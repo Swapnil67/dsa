@@ -24,7 +24,7 @@
 
 using namespace std;
 
-// * ------------------------- APPROACH 1: Optimal Approach -------------------------
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

@@ -37,7 +37,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Classic Sliding Window
 // * Keep frequency map of character occurences
 // * TIME COMPLEXITY O(N)

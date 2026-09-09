@@ -117,12 +117,12 @@ int numOfSubarrays(vector<int> &arr, int &k, int &threshold) {
 
 int main() {
   // * testcase 1
-  int k = 3, threshold = 4;
-  vector<int> arr = {2, 2, 2, 2, 5, 5, 5, 8};
+  // int k = 3, threshold = 4;
+  // vector<int> arr = {2, 2, 2, 2, 5, 5, 5, 8};
 
   // * testcase 2
-  // int k = 3, threshold = 5;
-  // vector<int> arr = {11, 13, 17, 23, 29, 31, 7, 5, 2, 3};
+  int k = 3, threshold = 5;
+  vector<int> arr = {11, 13, 17, 23, 29, 31, 7, 5, 2, 3};
 
   cout << "k = " << k << " & threshold = " << threshold << endl;
   cout << "Input Array " << endl;

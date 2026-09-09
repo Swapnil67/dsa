@@ -20,6 +20,7 @@
  * Quoted numbers were flipped from 0 to 1. The longest subarray is underlined.
  * 
  * https://leetcode.com/problems/max-consecutive-ones-iii/
+ * https://www.geeksforgeeks.org/problems/maximize-number-of-1s0905/1
 */
 
 // ! Amazon, Google, Meta, Microsoft, IBM, Adobe, Apple, Oracle

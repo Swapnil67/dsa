@@ -126,12 +126,12 @@ int main() {
   // vector<int> arr = {1, 1, 4, 2, 3};
 
   // * testcase 3
-  // int x = 4;
-  // vector<int> arr = {5, 6, 7, 8, 9};
+  int x = 4;
+  vector<int> arr = {5, 6, 7, 8, 9};
 
   // * testcase 4
-  int x = 10;
-  vector<int> arr = {3, 2, 20, 1, 1, 3};
+  // int x = 10;
+  // vector<int> arr = {3, 2, 20, 1, 1, 3};
 
   printf("Input Array\n");
   printArr(arr);

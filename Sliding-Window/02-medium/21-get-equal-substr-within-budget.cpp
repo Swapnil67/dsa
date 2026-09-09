@@ -72,8 +72,7 @@ int equalSubstring(string s, string t, int max_cost) {
   return ans;
 }
 
-int main() {
-
+int main(void) {
   // * testcase 1
   int max_cost = 3;
   string s = "abcd", t = "bcdf";

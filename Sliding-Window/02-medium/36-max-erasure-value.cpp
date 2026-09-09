@@ -22,6 +22,8 @@
  * Explanation  : The optimal subarray here is [5,2,1] or [1,2,5].
  * 
  * https://leetcode.com/problems/maximum-erasure-value
+ * https://www.naukri.com/code360/problems/maximum-points-from-cards_8391016
+ * https://www.geeksforgeeks.org/problems/maximum-point-you-can-obtain-from-cards/1
 */
 
 #include <vector>
@@ -68,16 +70,16 @@ int maximumUniqueSubarray(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums = {4, 2, 4, 5, 6};
+  // vector<int> nums = {4, 2, 4, 5, 6};
 
   // * testcase 2
-  std::vector<int> nums = {5, 2, 1, 2, 5, 2, 1, 2, 5};
+  vector<int> nums = {5, 2, 1, 2, 5, 2, 1, 2, 5};
 
-  std::cout << "Nums: ";
+  cout << "Nums: ";
   printArr(nums);
 
   int ans = maximumUniqueSubarray(nums);
-  std::cout << "Maximum Erasure Value: " << ans << std::endl;
+  cout << "Maximum Erasure Value: " << ans << endl;
 
   return 0;
 }

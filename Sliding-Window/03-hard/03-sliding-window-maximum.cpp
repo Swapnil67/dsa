@@ -22,7 +22,7 @@
  * 1  3  -1  -3 [5  3  6] 7       6
  * 1  3  -1  -3  5 [3  6  7]      7
 
- * https://leetcode.com/problems/sliding-window-maximum/description/
+ * https://leetcode.com/problems/sliding-window-maximum/
  * https://www.naukri.com/code360/problems/sliding-window-maximum_980226
  * https://www.naukri.com/code360/problems/maximum-of-all-subarrays-of-size-k_1170789 
  * https://www.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k3101/1
@@ -73,8 +73,8 @@ vector<int> bruteForce(vector<int> arr, int k) {
 vector<int> maxSlidingWindow(vector<int> &nums, int k) {
   int n = nums.size();
   deque<int> dq;
-  int i = 0, j = 0;
   vector<int> ans;
+  int i = 0, j = 0;
   while (j < n) {
     // * Monotonic Decreasing Deque
     while (!dq.empty() && nums[j] > dq.back()) {
@@ -82,8 +82,7 @@ vector<int> maxSlidingWindow(vector<int> &nums, int k) {
     }
     dq.push_back(nums[j]);
 
-    // * Shrink the window
-    if ((j - i + 1) > k) {
+    if ((j - i + 1) > k) { // * Shrink the window
       // * Remove from the front of deque
       // * since we are using queue ds 'i' element might be at queue front
       if (nums[i] == dq.front())

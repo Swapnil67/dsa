@@ -17,7 +17,7 @@
  * Output       : 5
  * Explanation  : 
  * 
- * https://leetcode.com/problems/count-the-number-of-good-subarrays/description/
+ * https://leetcode.com/problems/count-the-number-of-good-subarrays
 */
 
 // ! Amazon, Uber
@@ -46,13 +46,12 @@ long long countGood(vector<int> &nums, int k) {
   int n = nums.size();
   unordered_map<int, int> freq_mp;
   int i = 0, j = 0, pairs = 0;
-  long long ans = 0;
+  long long ans = 0L;
   while (j < n) {
     pairs += freq_mp[nums[j]]; // * Add the possible pairs
     freq_mp[nums[j]]++;
 
-    while (pairs >= k)
-    {                            // * atleast 'k' pairs
+    while (pairs >= k) {         // * atleast 'k' pairs
       ans += (n - j);            // * Take all subarray after and including 'j'
       freq_mp[nums[i]]--;        // * Decr freq
       pairs -= freq_mp[nums[i]]; // * Remove the pairs

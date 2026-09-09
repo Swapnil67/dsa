@@ -66,13 +66,13 @@ int bSearch(
     int m = l + (r - l) / 2;
 
     // * Make all numbers equal to target_idx value and calculate sum
-    ll window_sum = (ll)(target_idx - m + 1) * arr[target_idx];
+    ll window_sum = (target_idx - m + 1) * 1ll * arr[target_idx];
 
     // * Sum from mid to target_idx in array using prefix sum method
     ll original_sum = prefix_arr[target_idx] - prefix_arr[m] + arr[m];
 
     // * Calculate how many operations we need
-    if(window_sum - original_sum > k) {
+    if((window_sum - original_sum) > k) {
       // * Decrease the gap b/w m -> target_idx
       l = m + 1;
     }
@@ -169,10 +169,9 @@ int maxFrequency(vector<int> arr, int k) {
     if (window_sum - cur_sum > k) {
       cur_sum -= arr[i];
       i++;
-    } else {
-      ans = max(ans, (j - i + 1));
     }
     
+    ans = max(ans, (j - i + 1));
     j++;
   }
   return ans;

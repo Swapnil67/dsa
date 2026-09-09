@@ -24,6 +24,7 @@
  * Output : 3
  * 
  * https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-ii
+ * https://leetcode.com/problems/count-of-substrings-containing-every-vowel-and-k-consonants-i/
 */
 
 #include <vector>
@@ -79,7 +80,6 @@ long long bruteForce(string s, int k) {
 long long countOfSubstrings(string s, int k) {
   int n = s.size();
   unordered_map<char, int> vowels_map;
-  unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
   
   // * Pre calculate the next consonant index
   // *  a e i o q q
@@ -145,61 +145,6 @@ long long countOfSubstrings(string s, int k) {
   return ans;
 }
 
-long long countOfSubstrings2(string s, int k) {
-  const unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
-  int ans = 0;
-  int n = s.size();
-  vector<int> next_consonant(n, n);
-  int next_consonant_idx = n;
-  for (int i = n - 1; i >= 0; --i) {
-    next_consonant[i] = next_consonant_idx;
-    if (!vowels.count(s[i])) {
-      next_consonant_idx = i;
-    }
-  }
-  printArr(next_consonant);
-
-  unordered_map<char, int> cur_vowels;
-  int cur_consonants = 0;
-  int i = 0, j = 0;
-  while (j < n) {
-    if (vowels.count(s[j])) {
-      cur_vowels[s[j]]++;
-    } else {
-      cur_consonants++;
-    }
-    
-    if(cur_consonants > k) {
-      if (vowels.count(s[i])) {
-        cur_vowels[s[i]]--;
-        if (cur_vowels[s[i]] == 0)
-          cur_vowels.erase(s[i]);
-      } else {
-        cur_consonants--;
-      }
-      i++;
-    }
-
-    while (cur_consonants == k && cur_vowels.size() == vowels.size()) {
-      ans += (next_consonant[j] - j); // * Here we took all the possible substr starting from 'i'.
-
-      // * So we need to skip this 'i'
-      if (vowels.count(s[i])) {
-        cur_vowels[s[i]]--;
-        if (cur_vowels[s[i]] == 0)
-          cur_vowels.erase(s[i]);
-      } else {
-        cur_consonants--;
-      }
-      i++;
-    }
-
-    j++;
-  }
-
-  return ans;
-}
-
 int main() {
   // int k = 1;
   // string word = "aeioqq"; 
@@ -222,7 +167,8 @@ int main() {
   cout << word << endl;
 
   // long long ans = bruteForce(word, k);
-  long long ans = countOfSubstrings2(word, k);
+  long long ans = countOfSubstrings(word, k);
+
   cout << ans << endl;
 
   return 0;

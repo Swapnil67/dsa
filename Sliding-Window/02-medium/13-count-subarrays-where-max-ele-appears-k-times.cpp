@@ -16,7 +16,7 @@
  * Output : 0
  * Explanation: No subarray contains the element 4 at least 3 times.
  * 
- * https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/
+ * https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/
 */
 
 #include <vector>

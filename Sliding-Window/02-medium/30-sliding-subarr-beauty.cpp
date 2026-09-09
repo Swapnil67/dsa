@@ -58,7 +58,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: Brute Force -------------------------`
+// * ------------------------- APPROACH 1: Brute Force -------------------------
 // * TIME COMPLEXITY O(N * K)
 // * SPACE COMPLEXITY O(1)
 vector<int> bruteForce(vector<int> &nums, int k, int x) {

@@ -94,7 +94,7 @@ int numberOfSubarrays(std::vector<int> &nums, int k) {
   return helper(nums, k) - helper(nums, k - 1);
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Similar to subarray sum equals k
 // * Using odd count map
 // * TIME COMPLEXITY O(N)

@@ -96,15 +96,11 @@ int longestSubarray(vector<int> &nums, int limit) {
       // * Find the next position for 'i'
       i = min(maxPq.top().second, minPq.top().second) + 1;
 
-      // * Remove all index less than 'i' from 'maxPq'
-      while (i > maxPq.top().second) {
-        maxPq.pop(); // * log(n)
-      }
-      
-      // * Remove all index less than 'i' from 'minPq'
-      while (i > minPq.top().second) {
-        minPq.pop(); // * log(n)
-      }
+      while (i > maxPq.top().second) // * Remove all index less than 'i' from 'maxPq'
+        maxPq.pop();                 // * log(n)
+
+      while (i > minPq.top().second) // * Remove all index less than 'i' from 'minPq'
+        minPq.pop();                 // * log(n)
     }
 
     ans = max(ans, j - i + 1);
@@ -133,7 +129,7 @@ int longestSubarray2(vector<int> &nums, int limit) {
   int i = 0, j = 0, ans = 0;
   while (j < n) {
     // * Maintain min_dq (increasing)
-    while (!min_dq.empty() && nums[j] < min_dq.back()) {
+    while (!min_dq.empty() && min_dq.back() > nums[j]) {
       min_dq.pop_back();
     }
     min_dq.push_back(nums[j]);
@@ -160,31 +156,6 @@ int longestSubarray2(vector<int> &nums, int limit) {
   return ans;
 }
 
-
-// * ------------------------- APPROACH 2C: Optimal APPROACH -------------------------`
-// * Using multiset data-structure
-// * TIME COMPLEXITY O(n * log(n))
-// * SPACE COMPLEXITY O(N)
-int longestSubarray3(vector<int> &nums, int limit) {
-  int n = nums.size();
-  
-  int i = 0, j = 0, ans = 0;
-  multiset<int> ms;
-
-  while (j < n) { // * (n * log(n))
-    ms.insert(nums[j]);
-
-    while (*ms.rbegin() - *ms.begin() > limit) {
-      ms.erase(ms.find(nums[i])); // * log(n)
-      i++;
-    }
-
-    ans = max(ans, j - i + 1);
-    j++;
-  }
-
-  return ans;
-}
 
 int main() {
   // * testcase 1 (ans = 2)
