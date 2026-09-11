@@ -46,10 +46,10 @@ void printArr(vector<T> &nums) {
 
 // * If we can distribute products in more stores than given the return false 
 bool isValidQuantities(vector<int> quantities, int stores, int maxQuantity) {
-  for (int &products : quantities) {
-    // stores -= ceil((float)products / (float)maxQuantity);
-    stores -= ((products + maxQuantity - 1) / maxQuantity); // * alternative for ceil (faster than ceil)
-    // cout << " --> " << (products + maxQuantity - 1) / maxQuantity << endl;
+  for (int &q : quantities) {
+    // stores -= ceil((float)q / (float)maxQuantity);
+    stores -= ((q + maxQuantity - 1) / maxQuantity); // * alternative for ceil (faster than ceil)
+    // cout << " --> " << (q + maxQuantity - 1) / maxQuantity << endl;
     // * products were distributed in more than necessary stores
     if (stores < 0)
       return false;

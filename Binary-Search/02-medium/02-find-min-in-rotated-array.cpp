@@ -12,7 +12,7 @@
 * Input: nums = [4, 5, 6, 7, 0, 1, 2]
 * Output: 0
 *
-* https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+* https://leetcode.com/problems/find-minimum-in-rotated-sorted-array
 * https://www.naukri.com/code360/problems/rotated-array_1093219
 *
 */

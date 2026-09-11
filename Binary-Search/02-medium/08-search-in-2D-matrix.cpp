@@ -8,7 +8,7 @@
  * 
  * Given an integer target, return true if target is in matrix or false otherwise.
  * 
- * https://leetcode.com/problems/search-a-2d-matrix/description/
+ * https://leetcode.com/problems/search-a-2d-matrix/
 */
 
 #include <vector>

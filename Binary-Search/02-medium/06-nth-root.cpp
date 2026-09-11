@@ -10,10 +10,9 @@
  * Output: -1
 
  * https://www.naukri.com/code360/problems/nth-root-of-m_1062679
- * https://www.youtube.com/watch?v=rjEJeYCasHs&list=PLgUwDviBIf0oF6QL8m22w1hIDC1vJ_BHz&index=54&t=181s
 */
 
-#include<iostream>
+#include <iostream>
 
 // * return 0 if nthRoot == m
 // * return 1 if nthRoot > m

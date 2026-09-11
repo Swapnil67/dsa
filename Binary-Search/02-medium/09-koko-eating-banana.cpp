@@ -61,7 +61,7 @@ bool is_valid(vector<int> &piles, int &bananas, int &h) {
   return total_hrs <= h;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * TIME COMPLEXITY O(N) * O(maxBananasPerHr) 
 // * SPACE COMPLEXITY O(1)
 int bruteForce(vector<int> piles, int maxHrs) {

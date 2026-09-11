@@ -43,29 +43,33 @@ void printArr(vector<T> &arr) {
 }
 
 // * O(N) 
-bool findIsLeastPossibleWeight(vector<int> weights, int maximumDays, long long capacity) {
-  int daysTook = 1, totalWeight = 0;
+bool findIsLeastPossibleWeight(vector<int> &weights, int &maxDays, long long capacity) {
+  int days = 1, totalWeight = 0;
+  long long current_weight;
   for (auto &w : weights) {
-    // cout << "totalWeight " << totalWeight << endl;
-    if (totalWeight + w > capacity) {
-      daysTook++;
-      totalWeight = w;
-    } else {
-      totalWeight += w;
+    // * Edge case safety: an item is too heavy for the capacity
+    if (w > capacity)
+      return false;
+
+    if (current_weight + w > capacity) {
+      days++;
+      current_weight = 0; // * Reset for the next day
     }
+    totalWeight += w;
   }
-  return daysTook <= maximumDays;
+
+  return days <= maxDays;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * TIME COMPLEXITY O(total - max) * O(N) 
 // * SPACE COMPLEXITY O(1)
-int bruteForce(vector<int> weights, int maximumDays) {
+int bruteForce(vector<int> weights, int maxDays) {
   long long maxWeight = *max_element(begin(weights), end(weights));
   long long totalWeight = accumulate(weights.begin(), weights.end(), 0);
 
   for (int i = maxWeight; i <= totalWeight; i++) {
-    bool isLeastPossibleWeight = findIsLeastPossibleWeight(weights, maximumDays, i);
+    bool isLeastPossibleWeight = findIsLeastPossibleWeight(weights, maxDays, i);
     if (isLeastPossibleWeight)
       return i;
   }
@@ -77,6 +81,8 @@ int bruteForce(vector<int> weights, int maximumDays) {
 // * TIME COMPLEXITY O(log(total - max)) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int findLeastPossileWeight(vector<int> weights, int maximumDays) {
+  // * Setting l = max_weight is necessary because the ship must be able to carry the heaviest individual package in the list.
+  // * If l = 1 and the heaviest package weighs 10, the ship can never carry that package.
   long long l = *max_element(begin(weights), end(weights));
   long long r = accumulate(weights.begin(), weights.end(), 0);
   // * O(log(total - max))

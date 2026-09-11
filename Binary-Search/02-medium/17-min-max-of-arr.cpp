@@ -19,7 +19,7 @@
  * - Choose i = 3, and nums becomes [4,6,2,5].
  * - Choose i = 1, and nums becomes [5,5,2,5].
  
- * https://leetcode.com/problems/minimize-maximum-of-array/description/
+ * https://leetcode.com/problems/minimize-maximum-of-array/
  */
 
 // ! Meta
@@ -113,6 +113,7 @@ int main(void) {
 
   int ans = minimizeArrayValue(arr);
   // int ans = minimizeArrayValue2(arr);
+  
   cout << "Minimize Maximum of Array " << ans << endl;
 
   return 0;

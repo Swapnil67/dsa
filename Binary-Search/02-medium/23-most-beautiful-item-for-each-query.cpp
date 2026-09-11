@@ -17,7 +17,7 @@
  * Input: items = [[1,2],[1,2],[1,3],[1,4]], queries = [1]
  * Output: [4]
  * 
- * https://leetcode.com/problems/most-beautiful-item-for-each-query/description/
+ * https://leetcode.com/problems/most-beautiful-item-for-each-query/
 */
 
 #include <vector>
@@ -56,6 +56,7 @@ void printArr(vector<T> &nums) {
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
+// * Nested Loop
 // * TIME COMPLEXITY O(n^2)
 // * SPACE COMPLEXITY O(1)
 vector<int> bruteForce(vector<vector<int>> items, vector<int> queries) {

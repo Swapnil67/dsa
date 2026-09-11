@@ -37,7 +37,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Linear search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

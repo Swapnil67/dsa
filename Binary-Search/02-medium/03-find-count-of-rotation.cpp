@@ -88,7 +88,7 @@ int findKRotation(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  std::vector<int> nums = {5, 6, 0, 1, 2};
+  vector<int> nums = {5, 6, 0, 1, 2};
 
   // * testcase 2
   // std::vector<int> nums = {2, 3, 4, 1};
@@ -97,7 +97,7 @@ int main() {
   printArr(nums);
 
   int count = findKRotation(nums);
-  std::cout << "Rotation Count: " << count << std::endl;
+  cout << "Rotation Count: " << count << std::endl;
   return 0;
 }
 

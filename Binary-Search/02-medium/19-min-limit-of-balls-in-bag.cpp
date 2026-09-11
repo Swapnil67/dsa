@@ -31,7 +31,7 @@
  * 
  * The bag with the most number of balls has 2 balls, so your penalty is 2, and you should return 2.
  * 
- * https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/description/
+ * https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/
 */
 
 // ! Binary Search on Answers

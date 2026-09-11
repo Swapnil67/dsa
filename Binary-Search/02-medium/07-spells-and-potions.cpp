@@ -40,7 +40,7 @@ void printArr(vector<T> &nums) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(n x m)
 // * SPACE COMPLEXITY O(1)

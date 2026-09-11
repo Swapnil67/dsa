@@ -23,7 +23,7 @@
  * Input     : candies = [4, 7, 5], k = 4
  * Output    : 3
 
- * https://leetcode.com/problems/maximum-candies-allocated-to-k-children/description/
+ * https://leetcode.com/problems/maximum-candies-allocated-to-k-children/
 */
 
 // ! Google, Meta
@@ -47,7 +47,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-bool checkIsChildrenSatisfied(vector<int> candies, long long k, int &min_candies) {
+bool checkIsChildrenSatisfied(vector<int> &candies, long long k, long &min_candies) {
   for (auto &c : candies) {
     k -= (c / min_candies);
     if (k <= 0) // * all children got min_candies
@@ -59,7 +59,7 @@ bool checkIsChildrenSatisfied(vector<int> candies, long long k, int &min_candies
 int maximumCandies(vector<int> &candies, long long k) {
   int n = candies.size();
   int max_candies = 0;
-  long long total_candies = 0;
+  long total_candies = 0;
   for (auto &c : candies) {
     total_candies += c;
     max_candies = max(max_candies, c);
@@ -70,17 +70,17 @@ int maximumCandies(vector<int> &candies, long long k) {
     return 0;
 
   int ans = 0;
-  int l = 1, r = max_candies;
+  long l = 1, r = max_candies;
   while (l <= r) {
-    int curCandies = l + (r - l) / 2;
-    bool areChildrenSatisfied = checkIsChildrenSatisfied(candies, k, curCandies);
-    // cout << curCandies << " -> " << areChildrenSatisfied << endl;
+    long m = l + (r - l) / 2;
+    bool areChildrenSatisfied = checkIsChildrenSatisfied(candies, k, m);
+    // cout << m << " -> " << areChildrenSatisfied << endl;
     if (areChildrenSatisfied) {
-      ans = curCandies;
-      l = curCandies + 1; // * becoz we need allocated maximum amount of candies
+      ans = m;
+      l = m + 1; // * becoz we need allocated maximum amount of candies
     }
     else {
-      r = curCandies - 1;
+      r = m - 1;
     }
   }
   return ans;

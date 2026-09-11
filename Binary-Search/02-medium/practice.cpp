@@ -21,6 +21,17 @@ void printArr(vector<T> &nums) {
   cout << " ]" << endl;
 }
 
+
+// * 23 - Most Beautiful Item for Each Query
+// vector<int> maximumBeauty(vector<vector<int>> &items, vector<int> queries) {
+// TODO
+// }
+
+// * 24 - Search Suggestions System
+// vector<vector<string>> suggestedProducts(vector<string> &products, string &searchWord) {
+// TODO
+// }
+
 // * 25 - Minimum Speed to Arrive on Time
 // int minSpeedOnTime(vector<int>& dist, double hour) {
 // TODO
@@ -75,8 +86,7 @@ void printArr(vector<T> &nums) {
 // }
 
 // * 07 - Successful Pairs of Spells and Potions
-// vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, long long success)
-// {
+// vector<int> successfulPairs(vector<int> &spells, vector<int> &potions, long long success) {
 // TODO
 // }
 
@@ -118,7 +128,7 @@ void printArr(vector<T> &nums) {
 // * 15 - Minimize the Maximum Difference of Pairs
 // int minimizeMax(vector<int>& nums, int p) {
 // TODO
-// }
+// } 
 
 // * 16 - Minimized Maximum of Products Distributed to Any Store
 // int minimizedMaximum(vector<int> &quantities, int stores) {
@@ -130,9 +140,8 @@ void printArr(vector<T> &nums) {
 // TODO
 // } 
 
-// * 18 - Maximum Value at a Given Index in a Bounded Array
-// * Too Difficult problem Skip
-// int maxValue(int n, int index, int maxSum) {
+// * 18 - Kth Smallest Element in a Sorted Matrix
+// int kthSmallest(vector<vector<int>> &matrix, int k) {
 // TODO
 // }
 
@@ -153,16 +162,6 @@ void printArr(vector<T> &nums) {
 
 // * 22 - Maximum Number of Removable Characters
 // int maximumRemovals(string s, string p, vector<int> removable) {
-// TODO
-// }
-
-// * 23 - Most Beautiful Item for Each Query
-// vector<int> maximumBeauty(vector<vector<int>> &items, vector<int> queries) {
-// TODO
-// }
-
-// * 24 - Search Suggestions System
-// vector<vector<string>> suggestedProducts(vector<string> &products, string &searchWord) {
 // TODO
 // }
 

@@ -13,7 +13,7 @@
  * Output: 1 or 5
  * Explanation: Index 1 or 5 are peak elements
 
- * https://leetcode.com/problems/find-peak-element/description/
+ * https://leetcode.com/problems/find-peak-element/
  * https://leetcode.com/problems/peak-index-in-a-mountain-array
  * https://www.naukri.com/code360/problems/find-peak-element_1081482
 */

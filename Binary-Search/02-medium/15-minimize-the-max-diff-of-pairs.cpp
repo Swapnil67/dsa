@@ -44,25 +44,22 @@ void printArr(vector<T> &nums) {
 }
 
 // * A function to check abs difference of how many pairs is '<=' max_pair_diff
-// * returns `true` if we found no. of pairs greater than `required_pairs`
-bool isValid(vector<int> &nums, int required_pairs, int max_pair_diff) {
+// * returns `true` if we found no. of pairs greater than `pairs`
+bool isValid(vector<int> &nums, int pairs, int max_pair_diff) {
   int n = nums.size();
-  int cur_pairs = 0;
 
   for (int i = 0; i < n - 1; ++i) {
-    if (cur_pairs >= required_pairs)
-      return true;
-
     // * current pair difference
-    int cur_diff = nums[i + 1] - nums[i];
-    if (cur_diff <= max_pair_diff) {
-      cur_pairs++;  
+    if ((nums[i + 1] - nums[i]) <= max_pair_diff) {
       i++;          // * Go to next pair
+      pairs--;
     }
+    if (pairs == 0)
+      break;
   }
 
-  // cout << cur_pairs << " " << required_pairs << endl;
-  return cur_pairs >= required_pairs;
+  // cout << max_pair_diff << " " << pairs << endl;
+  return pairs <= 0;
 }
 
 // * ------------------------- APPROACH : Optimal APPROACH -------------------------

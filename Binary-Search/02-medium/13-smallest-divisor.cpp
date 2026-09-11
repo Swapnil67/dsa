@@ -48,7 +48,7 @@ bool findIsPossibleDivisor(vector<int> &nums, int &threshold, int &divisor) {
   return divisor_sum <= threshold;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * TIME COMPLEXITY O(Max) * O(N) 
 // * SPACE COMPLEXITY O(1)
 int bruteForce(vector<int> arr, int threshold) {

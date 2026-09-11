@@ -47,22 +47,21 @@ void printArr(vector<T> &arr) {
 // ! Binary Search on Answers
 
 // * Checks if roober can rob from 'min_houses' which contains atleast 'amount' money
-bool isValidCapability(vector<int> &nums, int &amount, int min_houses) {
+bool isValidCapability(vector<int> &nums, int &amount, int houses) {
   int n = nums.size();
   for (int i = 0; i < n; ++i) {
     // * If current house money is less than or equal than amount then we can rob this house.
-    if (min_houses > 0 && nums[i] <= amount) {
-      min_houses--;
+    if (nums[i] <= amount) {
+      houses -= 1;
       i++; // * skip the adjacent house
     }
 
     // * We have robbed the desired number of homes
-    if (min_houses == 0)
+    if (houses <= 0)
       break;
   }
-  // cout << "Amount: " << amount << ", houses Remaining: " << min_houses << endl;
-
-  return (min_houses == 0); // * We successfully robbed all the houses with min capability of 'amount'
+  // cout << "Amount: " << amount << ", houses Remaining: " << houses << endl;
+  return (houses == 0); // * We successfully robbed all the houses with min capability of 'amount'
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------

@@ -18,6 +18,8 @@
 * https://www.naukri.com/code360/problems/search-in-rotated-sorted-array_1082554
 */
 
+// ! Meta, Microsoft, Google, Apple, Amazon, Uber, Flipkart, LinkedIn
+
 // ! Array does not have duplicates
 
 #include <vector>
@@ -37,7 +39,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Linear search
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)

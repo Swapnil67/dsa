@@ -18,7 +18,7 @@
  * Output      : 1
  * Explanation : There is a single fair pair: (2,3).
  * 
- * https://leetcode.com/problems/count-the-number-of-fair-pairs/description/
+ * https://leetcode.com/problems/count-the-number-of-fair-pairs/
 */
 
 // * Prerequisite
@@ -137,7 +137,9 @@ ll countFairPairs(vector<int> nums, int lower, int upper) {
     // int ub = idx - 1 - i;
     
     cout << "nums[i] = " << nums[i] << endl;
-    cout << "lower bound: " << lb << " & upper bound: " << ub << endl;
+    cout << "lower bound: of " << lower - nums[i] << " = " << lb << endl;
+    cout << "upper bound: of " << upper - nums[i] << " = " << ub << endl;
+    //  << " & upper bound: " << ub << endl;
     cout << "----------------------------" << endl;
 
     ans += (ub - lb);

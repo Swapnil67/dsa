@@ -10,7 +10,7 @@
  * Find the minimum number of days required to make at least 'm' bouquets each containing 'k' roses.
  * Return -1 if it is not possible.
  *
- * https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/description/
+ * https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets
  * https://www.naukri.com/code360/problems/rose-garden_2248080
 */
 
