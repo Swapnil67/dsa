@@ -1,56 +1,122 @@
 /*
- * Leetcode - 1552
- * Magnetic Force Between Two Balls
- * 
- * 
- * In the universe Earth C-137, Rick discovered a special form of magnetic force between two balls if they are put in
- * his new invented basket. Rick has n empty baskets, the ith basket is at position[i], 
- * Morty has m balls and needs to distribute the balls into the baskets such that the minimum magnetic force between 
- * any two balls is maximum.
- * 
- * Rick stated that magnetic force between two different balls at positions x and y is |x - y|.
- * 
- * Given the integer array position and the integer m. Return the required force.
- * 
- * 
- * 
- * https://leetcode.com/problems/magnetic-force-between-two-balls/description/
+* Leetcode - 1552
+* Aggressive Cows / Magnetic Force Between Two Balls
+*
+* You are given an array 'arr' consisting of 'n' integers which denote the position of a stall.
+* You are also given an integer 'k' which denotes the number of aggressive cows.
+* You are given the task of assigning stalls to 'k' cows such that the minimum distance between any two of 
+* them is the maximum possible.
+* Return the maximum possible minimum distance.
+
+* Example 1:
+* Input: 'cows' = 2 and 'arr' = {1, 2, 3}
+* Output: 2
+
+* Example 2:
+* Input: 'cows' = 4 and 'arr' = {0, 3, 4, 7, 10, 9};
+* Output: 3
+
+* https://www.spoj.com/problems/AGGRCOW/
+* https://leetcode.com/problems/magnetic-force-between-two-balls/description/
+* https://www.naukri.com/code360/problems/aggressive-cows_1082559
+* https://www.geeksforgeeks.org/problems/aggressive-cows/1
 */
 
-#include <vector>
-#include <iostream>
+// ! Binary Search on Min/Max
+
+#include<iostream>
+
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << nums[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int maxDistance(std::vector<int> &position, int m) {
-
+bool findIsPossibleDistance(vector<int> stalls, int &cows, int &minDist) {
+  int cowsPlaced = 1, lastPlace = stalls[0];
+  for (int i = 1; i < stalls.size(); i++) {
+    if (stalls[i] - lastPlace >= minDist) {
+      cowsPlaced++;
+      lastPlace = stalls[i];
+    }
+    if (cowsPlaced >= cows) break;
+  }
+  return cowsPlaced >= cows;
 }
 
-int main(void) {
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * TIME COMPLEXITY O(N(logN)) + O(max - min) * O(N) 
+// * SPACE COMPLEXITY O(1)
+int bruteForce(vector<int> stalls, int cows) {
+  int n = stalls.size();
+  // * O(N(logN))
+  sort(stalls.begin(), stalls.end());
+  int ans = stalls[n - 1] - stalls[0];
+
+  // * O(max - min)
+  for (int i = 1; i <= stalls[n - 1] - stalls[0]; i++) {
+    int distance = i;
+    // * O(N) 
+    bool isPossibleDistance = findIsPossibleDistance(stalls, cows, distance);
+    // cout << "distance " << distance << ", isPossibleDistance " << isPossibleDistance << endl;
+    if(isPossibleDistance) {
+      continue;
+    }
+    else {
+      return distance - 1;
+    }
+  }
+  return ans;
+}
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * TIME COMPLEXITY O(N(logN)) + O(log(max - min)) * O(N) 
+// * SPACE COMPLEXITY O(1)
+int findMinMaxDistance(vector<int> stalls, int cows) {
+  int n = stalls.size();
+  // * O(N(logN))
+  sort(stalls.begin(), stalls.end());
+  int l = 1, r = stalls[n-1] - stalls[0];
+  while(l <= r) {
+    int mid = l + (r - l) / 2;
+    if (findIsPossibleDistance(stalls, cows, mid)) {
+      l = mid + 1;
+    } else {
+      r = mid - 1;
+    }
+  }
+  return r;
+}
+
+int main() {
   // * testcase 1
-  int m = 3;
-  std::vector<int> positions = {1, 2, 3, 4, 7};
-  
+  vector<int> stalls = {1, 2, 3};
+  int cows = 2;
+
   // * testcase 2
-  // int m = 2;
-  // std::vector<int> positions = {5, 4, 3, 2, 1, 1000000000};
+  // vector<int> stalls = {4, 2, 1, 3, 6};
+  // int cows = 2;
 
-  std::cout << "m: " << m << std::endl;
-  std::cout << "Positions: ";
-  printArr(positions);
+  // * testcase 3
+  // vector<int> stalls = {0, 3, 4, 7, 10, 9};
+  // int cows = 4;
 
+  cout << "Stalls we have" << endl;
+  printArr(stalls);
+  cout << "Cows we have " << cows << endl;
+  // int minMaxDistance = bruteForce(stalls, cows);
+  int minMaxDistance = findMinMaxDistance(stalls, cows);
+  cout << "Min Max Distance b/w cows is " << minMaxDistance << endl;
   return 0;
 }
- 
+
 // * Run the code
 // * g++ --std=c++20 30-magnetic-force-bw-two-balls.cpp -o output && ./output

@@ -46,12 +46,18 @@
 #include <iostream>
 #include <algorithm>
 
-void printArr(std::vector<int> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH: Optimal APPROACH -------------------------`
@@ -66,11 +72,11 @@ void printArr(std::vector<int> arr) {
 
 // * TIME COMPLEXITY O(klog(n))
 // * SPACE COMPLEXITY O(n)
-int maxTotalFruits(std::vector<std::vector<int>> &fruits, int start_pos, int k) {
+int maxTotalFruits(vector<vector<int>> &fruits, int start_pos, int k) {
   int n = fruits.size();
 
-  std::vector<int> positions(n);
-  std::vector<int> fruits_prefix_sum(n);
+  vector<int> positions(n);
+  vector<int> fruits_prefix_sum(n);
   for (int i = 0; i < n; ++i) { // * O(n)
     fruits_prefix_sum[i] = (i > 0 ? fruits_prefix_sum[i - 1] : 0) + fruits[i][1];
     positions[i] = fruits[i][0];
@@ -83,12 +89,12 @@ int maxTotalFruits(std::vector<std::vector<int>> &fruits, int start_pos, int k) 
     int i = start_pos - d;
     int j = start_pos + remain;
 
-    int left_pos = std::lower_bound(begin(positions), end(positions), i) - std::begin(positions);
-    int right_pos = std::upper_bound(begin(positions), end(positions), j) - std::begin(positions) - 1;
+    int left_pos = lower_bound(begin(positions), end(positions), i) - begin(positions);
+    int right_pos = upper_bound(begin(positions), end(positions), j) - begin(positions) - 1;
 
     if (left_pos <= right_pos) {
       int total = fruits_prefix_sum[right_pos] - (left_pos > 0 ? fruits_prefix_sum[left_pos - 1] : 0);
-      max_fruits = std::max(max_fruits, total);
+      max_fruits = max(max_fruits, total);
     }
     
     // * Case 2 - moved 'd' steps to right
@@ -96,12 +102,12 @@ int maxTotalFruits(std::vector<std::vector<int>> &fruits, int start_pos, int k) 
     i = start_pos - remain;
     j = start_pos + d;
 
-    left_pos = std::lower_bound(begin(positions), end(positions), i) - std::begin(positions);
-    right_pos = std::upper_bound(begin(positions), end(positions), j) - std::begin(positions) - 1;
+    left_pos = lower_bound(begin(positions), end(positions), i) - begin(positions);
+    right_pos = upper_bound(begin(positions), end(positions), j) - begin(positions) - 1;
 
     if (left_pos <= right_pos) {
       int total = fruits_prefix_sum[right_pos] - (left_pos > 0 ? fruits_prefix_sum[left_pos - 1] : 0);
-      max_fruits = std::max(max_fruits, total);
+      max_fruits = max(max_fruits, total);
     }
   }
 
@@ -111,19 +117,19 @@ int maxTotalFruits(std::vector<std::vector<int>> &fruits, int start_pos, int k) 
 int main(void) {
   // * testcase 1
   // int start_pos = 5, k = 4;
-  // std::vector<std::vector<int>> fruits = {{2, 8}, {6, 3}, {8, 6}};
+  // vector<vector<int>> fruits = {{2, 8}, {6, 3}, {8, 6}};
 
   // * testcase 2
   int start_pos = 5, k = 4;
-  std::vector<std::vector<int>> fruits = {{0, 9}, {4, 1}, {5, 7}, {6, 2}, {7, 4}, {10, 9}};
+  vector<vector<int>> fruits = {{0, 9}, {4, 1}, {5, 7}, {6, 2}, {7, 4}, {10, 9}};
 
-  std::cout << "start_pos: " << start_pos << ", k: " << k << std::endl;
-  std::cout << "Fruits: " << std::endl;
+  cout << "start_pos: " << start_pos << ", k: " << k << endl;
+  cout << "Fruits: " << endl;
   for (auto &vec : fruits)
     printArr(vec);
 
   int ans = maxTotalFruits(fruits, start_pos, k);
-  std::cout << "Maximum Fruits Harvested After at Most K Steps: " << ans << std::endl;
+  cout << "Maximum Fruits Harvested After at Most K Steps: " << ans << endl;
 
   return 0;
 }

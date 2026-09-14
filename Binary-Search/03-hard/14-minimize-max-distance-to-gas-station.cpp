@@ -16,7 +16,10 @@
 
 * https://leetcode.com/problems/minimize-max-distance-to-gas-station/description/
 * https://www.naukri.com/code360/problems/minimise-max-distance_7541449
+* https://www.geeksforgeeks.org/problems/minimize-max-distance-to-gas-station/1
 */
+
+// ! BS on Answers
 
 #include <queue>
 #include <iostream>
@@ -81,8 +84,7 @@ long double betterApproach(vector<int> gasStations, int extra) {
   // * Keep all the consecutive diff in priority queue (pq)
   priority_queue<pair<ld, int>> pq;
   for (int i = 0; i < n - 1; i++) {
-    int diff = (ld)(gasStations[i + 1] - gasStations[i]);
-    pq.push({diff, i});
+    pq.push({(ld)(gasStations[i + 1] - gasStations[i]), i});
   }
 
   // * O(extra) * O(logN)
@@ -103,55 +105,81 @@ long double betterApproach(vector<int> gasStations, int extra) {
 // * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
 // * Binary Search
 
-long double countGasStations(vector<int> gasStations, long double distance) {
-  int n = gasStations.size(), cnt = 0;
-  for (int i = 1; i < n; i++) {
-    int gsPossible = (gasStations[i] - gasStations[i - 1]) / distance;
-    if ((gasStations[i] - gasStations[i - 1]) == gsPossible * distance) {
-      gsPossible--;
+// * Helper function: Calculates how many new stations are required 
+// * to ensure no two adjacent stations are further apart than 'distance'.
+int countGasStations(const vector<int> &gasStations, long double distance) {
+    int n = gasStations.size();
+    int cnt = 0;
+    
+    // * Iterate through every existing adjacent pair of gas stations
+    for (int i = 1; i < n; i++) {
+        // * Calculate how many times 'distance' fits into the current gap.
+        // * Integer division automatically truncates the decimal part.
+        int gsPossible = (gasStations[i] - gasStations[i - 1]) / distance;
+        
+        // * If the gap divides perfectly by 'distance', the last placed station 
+        // * would land exactly on top of the existing station at gasStations[i].
+        // * We subtract 1 to prevent overcounting this overlapping station.
+        if ((gasStations[i] - gasStations[i - 1]) == gsPossible * distance) {
+            gsPossible--;
+        }
+        
+        // * Add the required stations for this gap to the total count
+        cnt += gsPossible;
     }
-    // cout << "gsPossible " << gsPossible << endl;
-    cnt += gsPossible;
-  }
-  return cnt;
+    return cnt;
 }
 
+// * TIME COMPLEXITY O(nlog(maxDist))
+// * SPACE COMPLEXITY O(n)
 long double gasStation(vector<int> gasStations, int k) {
   int n = gasStations.size();
-  long double l = 0;
-  long double r;
-  // * Get the max section diff from given gs
-  for (long double i = 1; i < n; i++) {
+  long double l = 0; // * lower bound (minimum possible distance)
+  // * 'r' represents the upper bound (maximum possible distance).
+  // * BUG FIX: Initialized 'r' to 0.0 to avoid undefined behavior from garbage values.
+  long double r = 0.0;
+
+  // * Find the largest existing gap between any two stations to set our upper bound 'r'
+  for (int i = 1; i < n; i++) {
     r = max(r, (long double)(gasStations[i] - gasStations[i - 1]));
   }
-  cout << "l = " << l << " & r = " << r << endl;
 
+  // * Define the precision limit (stop searching when the search window is smaller than 10^-6)
   long double diff = 1e-6;
-  while (r - l > diff) {
-    long double m = l + (r - l) / (2.0);
-    long double cnt = countGasStations(gasStations, m);
-    // cout << "distance: " << m << " & gas stations placed " << cnt << endl;
-    if(cnt > k) {
+
+  // * Perform binary search on the answer
+  while ((r - l) > diff) {
+    // * Calculate the midpoint distance to test
+    long double m = l + (r - l) / 2.0;
+
+    // * Count how many stations are needed if the max distance allowed is 'm'
+    int cnt = countGasStations(gasStations, m);
+
+    if (cnt > k) { // * If we need MORE than 'k' stations, 'm' is too small.
+      // * We must look for a larger maximum distance, so move the lower bound up.
       l = m;
     }
-    else {
+    else { // * If we need 'k' or fewer stations, 'm' is achievable.
+      // * Since we want to MINIMIZE the distance, we save this as a valid upper bound
+      // * and try to find an even smaller max distance.
       r = m;
     }
   }
 
-  // * For understanding purpose
-  // long double cnt = countGasStations(gasStations, 3);
-  // cout << "distance: " << 3 << " & gas stations placed " << cnt << endl;
-
+  // * 'r' (or 'l') will hold the minimized maximum distance within the 1e-6 precision limits
   return r;
 }
 
 int main() {
   // * testcase 1
-  int extra = 5;
-  vector<int> gasStations = {1, 13, 17, 23};
+  int extra = 2;
+  vector<int> gasStations = {1, 13, 25};
 
   // * testcase 2
+  // int extra = 5;
+  // vector<int> gasStations = {1, 13, 17, 23};
+
+  // * testcase 3
   // int extra = 6;
   // vector<int> gasStations = {1, 2, 3, 4, 5, 6, 7};
 

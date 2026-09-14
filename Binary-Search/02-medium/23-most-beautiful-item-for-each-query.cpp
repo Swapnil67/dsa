@@ -35,8 +35,7 @@ void printMatrix(vector<vector<int>> matrix) {
     for (int j = 0; j < c; ++j) {
       cout << matrix[i][j] << " ";
     }
-    cout << "},";
-    cout << endl;
+    cout << "}," << endl;
   }
   cout << endl;
 }

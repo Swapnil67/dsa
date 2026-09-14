@@ -50,7 +50,7 @@ int bruteForce(vector<int>& nums, int k) {
   // * 1. Create a vector of abs diff of pairs O(N^2)
   vector<int> diff_vec;
   for (int i = 0; i < n; ++i) {
-    for(int j = i + 1; j < n; ++j) {
+    for (int j = i + 1; j < n; ++j) {
       diff_vec.push_back(abs(nums[j] - nums[i]));
     }
   }
@@ -71,29 +71,29 @@ int betterApproach(vector<int>& nums, int k) {
   int n = nums.size();
 
   // * 1. Create a max heap (Sorted in Descending Order)
-  priority_queue<int> heap;
+  priority_queue<int> pq;
 
-  // * 2. Push all the abs diff of pairs into heap
+  // * 2. Push all the abs diff of pairs into pq
   for (int i = 0; i < n; ++i) {
     for (int j = i + 1; j < n; ++j) {
-      heap.push(abs(nums[j] - nums[i]));  // * O(log(k))
-      // * If heap size gets greater than k then pop from top
-      if (heap.size() > k)
-        heap.pop();
+      pq.push(abs(nums[j] - nums[i]));  // * O(log(k))
+      // * If pq size gets greater than k then pop from top
+      if (pq.size() > k)
+        pq.pop();
     }
   }
 
-  // * 3. Since our heap size it 'k' then top most element will contain kth smallest element
-  return heap.top();
+  // * 3. Since our pq size it 'k' then top most element will contain kth smallest element
+  return pq.top();
 }
 
 // * ------------------------- APPROACH 3C: Most Optimal APPROACH -------------------------
 // * Find how many pairs are possible with abs diff less than or equal to maxDist
 // * Sliding window
-bool isPossible(vector<int> &nums, int max_pairs, int maxDist) {
+bool isPossiblePairs(vector<int> &nums, int &max_pairs, int &maxDist) {
   int n = nums.size();
-  int pairs = 0;
   int i = 0, j = 1;
+  int pairs = 0;
   while (j < n) {  
     while (nums[j] - nums[i] > maxDist) {
       i++;
@@ -101,7 +101,7 @@ bool isPossible(vector<int> &nums, int max_pairs, int maxDist) {
     pairs += (j - i);
     j++;
   }
-  cout << "dist: " << maxDist << ", pairs " << pairs << endl;
+  // cout << "dist: " << maxDist << ", pairs " << pairs << endl;
   return pairs >= max_pairs;
 }
 
@@ -119,7 +119,7 @@ int smallestDistancePair(vector<int> &nums, int k) {
   int ans = 0;
   while (l <= r) { // * O(log(r))
     int m = l + (r - l) / 2;
-    if (isPossible(nums, k, m)) { // * O(n)
+    if (isPossiblePairs(nums, k, m)) { // * O(n)
       ans = m;
       r = m - 1;
     } else {

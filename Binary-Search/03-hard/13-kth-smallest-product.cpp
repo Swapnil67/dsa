@@ -1,20 +1,20 @@
 /*
-* Leetcode - 2040
-* Kth Smallest Product of Two Sorted Arrays
-*
-* Given two sorted 0-indexed integer arrays nums1 and nums2 as well as an integer k, return the kth (1-based) 
-* smallest product of nums1[i] * nums2[j] where 0 <= i < nums1.length and 0 <= j < nums2.length.
-*
-* Example 1:
-* Input: nums1 = [2,5], nums2 = [3,4], k = 2
-* Output: 8
-*
-* Example 2:
-* Input: nums1 = [-4,-2,0,3], nums2 = [2,4], k = 6
-* Output: 0
-*
-* https://leetcode.com/problems/kth-smallest-product-of-two-sorted-arrays/description/
-*/
+ * Leetcode - 2040
+ * Kth Smallest Product of Two Sorted Arrays
+ *
+ * Given two sorted 0-indexed integer arrays nums1 and nums2 as well as an integer k, return the kth (1-based)
+ * smallest product of nums1[i] * nums2[j] where 0 <= i < nums1.length and 0 <= j < nums2.length.
+ *
+ * Example 1:
+ * Input: nums1 = [2,5], nums2 = [3,4], k = 2
+ * Output: 8
+ *
+ * Example 2:
+ * Input: nums1 = [-4,-2,0,3], nums2 = [2,4], k = 6
+ * Output: 0
+ *
+ * https://leetcode.com/problems/kth-smallest-product-of-two-sorted-arrays/description/
+ */
 
 // ! Amazon, Google, Meta, Microsoft, LinkedIn, Bloomberg
 
@@ -26,10 +26,12 @@
 using namespace std;
 
 template <typename T>
-void printArr(vector<T> &nums) {
+void printArr(vector<T> &nums)
+{
   int n = nums.size();
   cout << "[ ";
-  for (int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; ++i)
+  {
     cout << nums[i];
     if (i != n - 1)
       cout << ", ";
@@ -43,7 +45,8 @@ typedef long long ll;
 // ! TLE
 // * TIME COMPLEXITY O(N^2) + O(slog(s))
 // * SPACE COMPLEXITY O(N)
-ll bruteForce(vector<int> &nums1, vector<int> &nums2, int k) {
+ll bruteForce(vector<int> &nums1, vector<int> &nums2, int k)
+{
   int n1 = nums1.size(), n2 = nums2.size();
 
   // * Edge case
@@ -51,8 +54,10 @@ ll bruteForce(vector<int> &nums1, vector<int> &nums2, int k) {
     return -1;
 
   vector<ll> productVec;
-  for (int i = 0; i < n1; ++i) {
-    for (int j = 0; j < n2; ++j) {
+  for (int i = 0; i < n1; ++i)
+  {
+    for (int j = 0; j < n2; ++j)
+    {
       productVec.push_back((ll)nums1[i] * (ll)(nums2[j]));
     }
   }
@@ -68,7 +73,8 @@ ll bruteForce(vector<int> &nums1, vector<int> &nums2, int k) {
 // * kth Smallest = Max Heap
 // * TIME COMPLEXITY O(N^2 * log(k))
 // * SPACE COMPLEXITY O(k)
-ll betterApproach(vector<int> &nums1, vector<int> &nums2, int k) {
+ll betterApproach(vector<int> &nums1, vector<int> &nums2, int k)
+{
   int n1 = nums1.size(), n2 = nums2.size();
   // * Edge case
   if (k > n1 + n2)
@@ -78,7 +84,7 @@ ll betterApproach(vector<int> &nums1, vector<int> &nums2, int k) {
   priority_queue<ll> pq;
 
   // * 2. Push all the products into heap
-  for (int i = 0; i < n1; ++i) { 
+  for (int i = 0; i < n1; ++i) {
     for (int j = 0; j < n2; ++j) {
       pq.push((ll)(nums1[i] * nums2[j]));
       // * If heap size gets greater than k then pop from top
@@ -91,80 +97,105 @@ ll betterApproach(vector<int> &nums1, vector<int> &nums2, int k) {
   return pq.top();
 }
 
-bool isKthSmallestProduct(vector<int> &nums1, vector<int> &nums2, ll product, ll k) {
-  int n1 = nums1.size(), n2 = nums2.size();
-  int pairs = 0;
-  for (int i = 0; i < n1; ++i) {
-    // * Binary Search on nums2
-    ll l = 0, r = n2 - 1;
-    if (nums1[i] >= 0) {
-      ll pairIdx = -1; // * Invalid index on the LHS
-      while (l <= r) {
-        ll m = l + (r - l) / 2;
-        ll curProduct = 1ll * nums1[i] * nums2[m];
-        if (curProduct <= product) {
-          pairIdx = m;
-          l = m + 1;
-        } else {
-          r = m - 1;
-        }
-      }
-      pairs += (pairIdx + 1);
-    } else {
-      // * curProduct will be -ve & RHS will contain smaller product & LHS Larger products
-      ll pairIdx = n2; // * Invalid index on the RHS
-      while (l <= r) {
-        ll m = l + (r - l) / 2;
-        ll curProduct = 1ll * nums1[i] * nums2[m];
-        if (curProduct <= product) {
-          pairIdx = m;
-          r = m - 1;
-        } else {
-          l = m + 1;
-        }
-      }
+/*
+ * Helper function to check if there are AT LEAST 'maxPairs' (k) pairs
+ * whose product is less than or equal to 'maxProduct'.
+ */
+bool isValid(vector<int> &a, vector<int> &b, ll &maxPairs, ll &maxProduct)
+{
+  int n1 = a.size(), n2 = b.size();
+  ll pairs = 0; // Tracks total valid pairs found
 
-      // * Here on LHS of 'm' we have greater products so we take from count b/2 m to n2
-                                // *             m    n2
-      pairs += (n2 - pairIdx); // * {-10, -15, -20, -30}
+  // * Iterate through each element in the first array
+  for (int i = 0; i < n1; ++i) {
+    ll l = 0, r = n2 - 1;
+
+    // * CASE 1: The element from array 'a' is positive.
+    // * Multiplying by a larger number increases the product.
+    // * We want to find the largest index in 'b' where (a[i] * b[m] <= maxProduct).
+    if (a[i] > 0) {
+      ll pairIdx = -1; // * Stores the rightmost valid index in 'b'
+      while (l <= r) {
+        ll m = l + (r - l) / 2;
+        ll curProduct = a[i] * 1ll * b[m];
+
+        if (curProduct <= maxProduct) {
+          pairIdx = m; // * 'm' is valid, record it
+          l = m + 1;   // * Try to find a larger valid index to the right
+        }
+        else {
+          r = m - 1; // * Product is too large, look to the left
+        }
+      }
+      // * All elements from index 0 up to 'pairIdx' form valid pairs
+      pairs += (pairIdx + 1);
+
+      // * CASE 2: The element from array 'a' is negative or zero.
+      // * Multiplying a negative number by a larger number DECREASES the product (makes it more negative).
+      // * We want to find the smallest index in 'b' where (a[i] * b[m] <= maxProduct).
+    }
+    else {
+      ll pairIdx = n2; // * Stores the leftmost valid index in 'b'
+      while (l <= r) {
+        ll m = l + (r - l) / 2;
+        ll curProduct = a[i] * 1ll * b[m];
+
+        if (curProduct <= maxProduct) {
+          pairIdx = m; // * 'm' is valid, record it
+          r = m - 1;   // * Try to find a smaller valid index to the left
+        }
+        else {
+          l = m + 1; // * Product is too large, look to the right
+        }
+      }
+      // * All elements from index 'pairIdx' up to the end of array 'b' form valid pairs
+      pairs += (n2 - pairIdx);
     }
   }
 
-  // cout << "Product: " << product << ", Pairs: " << pairs << endl;
-  return pairs >= k;
+  // * If the total number of valid pairs is >= k, then 'maxProduct' is a viable upper bound
+  return pairs >= maxPairs;
 }
 
-ll kthSmallestProduct(vector<int> &nums1, vector<int> &nums2, ll k) {
+
+// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------
+// * Binary Search
+// * TIME COMPLEXITY: O(log(2 * 10^10) * n1 * log(n2))
+// * SPACE COMPLEXITY: O(1)
+ll kthSmallestProduct(vector<int> &nums1, vector<int> &nums2, long long k) {
   int n1 = nums1.size(), n2 = nums2.size();
 
-  // * Binary Search
+  // * The search space ranges from the minimum possible product (-10^10)
+  // * to the maximum possible product (10^10) based on constraints (-10^5 * 10^5)
   ll l = -1e10, r = 1e10;
-  // ll l = -50, r = 50;
-
+  // ll l = -50, r = 50; // * For debug
   ll ans = -1;
+
+  // * Binary search to find the exact Kth smallest product
   while (l <= r) {
-    ll m = l + (r - l) / 2;
-    cout << "l: " << l << " r: " << r << ", m: " << m << endl;
-    if (isKthSmallestProduct(nums1, nums2, m, k)) {
-      ans = m;
-      r = m - 1;
-    } else {
-      l = m + 1;
+    ll m = l + (r - l) / 2; // * Current product threshold to test
+
+    if (isValid(nums1, nums2, k, m)) {
+      ans = m;   // * 'm' is a possible candidate since it has >= k pairs below/equal to it
+      r = m - 1; // * Try to look for a smaller valid product threshold
     }
-    cout << "------------ \n";
+    else {
+      l = m + 1; // * 'm' has fewer than k pairs; threshold is too small, look higher
+    }
   }
 
   return ans;
 }
 
-int main(void) {
+int main(void)
+{
   // * testcase 1
-  int k = 2;
-  vector<int> nums1 = {2, 5}, nums2 = {3, 4};
+  // int k = 2;
+  // vector<int> nums1 = {2, 5}, nums2 = {3, 4};
 
   // * testcase 2
-  // int k = 6;
-  // vector<int> nums1 = {-4, -2, 0, 3}, nums2 = {2, 4};
+  int k = 6;
+  vector<int> nums1 = {-4, -2, 0, 3}, nums2 = {2, 4};
 
   // * testcase 3
   // int k = 3;
@@ -183,7 +214,7 @@ int main(void) {
   // long long ans = betterApproach(nums1, nums2, k);
   int ans = kthSmallestProduct(nums1, nums2, k);
   cout << "Kth Smallest product: " << ans << endl;
-  
+
   return 0;
 }
 

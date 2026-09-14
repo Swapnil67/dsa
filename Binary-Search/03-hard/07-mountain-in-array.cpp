@@ -26,34 +26,32 @@ public:
 unordered_map<int, int> cache;
 class Solution {
 public:
-	int peakIdxMountainArr(MountainArray &mountainArr) {
-		int n = mountainArr.length() - 1;
-
+	int peakIdxMountainArr(int n, MountainArray &ma) {
 		// * Check edge cases
-		int first_val = cache.count(0) ? cache[0] : mountainArr.get(0);
-		int second_val = cache.count(1) ? cache[1] : mountainArr.get(1);
-		if (first_val > second_val)
+		int val1 = cache.count(0) ? cache[0] : ma.get(0);
+		int val2 = cache.count(1) ? cache[1] : ma.get(1);
+		if (val1 > val2)
 			return 0;
 
-		first_val = cache.count(n - 1) ? cache[n - 1] : mountainArr.get(n - 1);
-		second_val = cache.count(n - 2) ? cache[n - 2] : mountainArr.get(n - 2);
-		if (first_val > second_val)
+		val1 = cache.count(n - 1) ? cache[n - 1] : ma.get(n - 1);
+		val2 = cache.count(n - 2) ? cache[n - 2] : ma.get(n - 2);
+		if (val1 > val2)
 			return n - 1;
 
 		// * Get the Peak index in mountain
-		int l = 1, r = n - 1;
+		int l = 1, r = n - 2;
 		while (l <= r) {
 			int m = l + (r - l) / 2;
 			// cout << m << endl;
-			int mid_val = cache.count(m) == 0 ? mountainArr.get(m) : cache[m];
+			int mid_val = cache.count(m) == 0 ? ma.get(m) : cache[m];
 			cache[m] = mid_val;
 
 			int left_val =
-					cache.count(m - 1) == 0 ? mountainArr.get(m - 1) : cache[m - 1];
+					cache.count(m - 1) == 0 ? ma.get(m - 1) : cache[m - 1];
 			cache[m - 1] = left_val;
 
 			int right_val =
-					cache.count(m + 1) == 0 ? mountainArr.get(m + 1) : cache[m + 1];
+					cache.count(m + 1) == 0 ? ma.get(m + 1) : cache[m + 1];
 			cache[m + 1] = right_val;
 
 			// cout << left_val << " " << mid_val << " " << right_val
@@ -74,10 +72,11 @@ public:
 		return -1;
 	}
 
-	int binarySearch(int &target, MountainArray &mountainArr, int l, int r) {
+	// * Increasing Array
+	int binarySearch(int &target, MountainArray &ma, int l, int r) {
 		while (l <= r) {
 			int m = l + (r - l) / 2;
-			int mid_val = cache.count(m) == 0 ? mountainArr.get(m) : cache[m];
+			int mid_val = cache.count(m) == 0 ? ma.get(m) : cache[m];
 			cache[m] = mid_val;
 
 			if (target == mid_val) {
@@ -94,10 +93,11 @@ public:
 		return -1;
 	}
 
-	int binarySearch2(int target, MountainArray &mountainArr, int l, int r) {
+	// * Decreasing Array
+	int binarySearch2(int target, MountainArray &ma, int l, int r) {
 		while (l <= r) {
 			int m = l + (r - l) / 2;
-			int mid_val = cache.count(m) == 0 ? mountainArr.get(m) : cache[m];
+			int mid_val = cache.count(m) == 0 ? ma.get(m) : cache[m];
 			cache[m] = mid_val;
 
 			if (target == mid_val) {
@@ -114,16 +114,16 @@ public:
 		return -1;
 	}
 
-	int findInMountainArray(int target, MountainArray &mountainArr) {
-		int n = mountainArr.length();
+	int findInMountainArray(int target, MountainArray &ma) {
+		int n = ma.length();
 		unordered_map<int, int> cache;
 
-		int peak = peakIdxMountainArr(mountainArr);
+		int peak = peakIdxMountainArr(n, ma);
 		// cout << "Peak: " << peak << endl;
 
-		int ans = binarySearch(target, mountainArr, 0, peak);
+		int ans = binarySearch(target, ma, 0, peak);
 		if (ans == -1) {
-			ans = binarySearch2(target, mountainArr, peak, n - 1);
+			ans = binarySearch2(target, ma, peak, n - 1);
 		}
 		return ans;
 	}

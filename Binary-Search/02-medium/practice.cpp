@@ -21,33 +21,6 @@ void printArr(vector<T> &nums) {
   cout << " ]" << endl;
 }
 
-
-// * 23 - Most Beautiful Item for Each Query
-// vector<int> maximumBeauty(vector<vector<int>> &items, vector<int> queries) {
-// TODO
-// }
-
-// * 24 - Search Suggestions System
-// vector<vector<string>> suggestedProducts(vector<string> &products, string &searchWord) {
-// TODO
-// }
-
-// * 25 - Minimum Speed to Arrive on Time
-// int minSpeedOnTime(vector<int>& dist, double hour) {
-// TODO
-// }
-
-// * 26 - Time Based Key-Value Store
-// TODO (Do this on leetcode)
-
-// * 27 - Random Pick with Weight
-// TODO (Do this on leetcode)
-
-// * 28 - Search a 2D Matrix II
-// bool searchMatrix(vector<vector<int>>& matrix, int target) {
-// TODO
-// }
-
 // * ------------------------------------------------------------------
 
 // * 00 - Search In Rotated Sorted Array (Without duplicates)
@@ -162,6 +135,37 @@ void printArr(vector<T> &nums) {
 
 // * 22 - Maximum Number of Removable Characters
 // int maximumRemovals(string s, string p, vector<int> removable) {
+// TODO
+// }
+
+// * 23 - Most Beautiful Item for Each Query
+// vector<int> maximumBeauty(vector<vector<int>> &items, vector<int> queries) {
+// TODO
+// }
+
+// * 24 - Search Suggestions System
+// vector<vector<string>> suggestedProducts(vector<string> &products, string &searchWord) {
+// TODO
+// }
+
+// * 25 - Minimum Speed to Arrive on Time
+// int minSpeedOnTime(vector<int>& dist, double hour) {
+// TODO
+// }
+
+// * 26 - Time Based Key-Value Store
+// TODO (Do this on leetcode)
+
+// * 27 - Random Pick with Weight
+// TODO (Do this on leetcode)
+
+// * 28 - Search a 2D Matrix II
+// bool searchMatrix(vector<vector<int>>& matrix, int target) {
+// TODO
+// }
+
+// * 29 - Minimum Time to Complete Trips
+// ll minimumTime(vector<int> time, int totalTrips) {
 // TODO
 // }
 

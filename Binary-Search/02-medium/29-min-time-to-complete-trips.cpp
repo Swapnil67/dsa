@@ -35,36 +35,41 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
-  int n = arr.size();
-  std::cout << "[ ";
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << nums[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 typedef long long ll;
 
-bool is_valid(std::vector<int> time, ll total_time, int total_trips) {
+bool is_valid(vector<int> time, ll total_time, int total_trips) {
   int trips = 0;
   for (auto &trip_time: time) {
     trips += (total_time / trip_time);
     if (trips >= total_trips)
       break;
   }
-  // std::cout << "Total Time: " << total_time << ", Trips: " << trips << " => " << (trips >= total_trips) << std::endl;
+  // cout << "Total Time: " << total_time << ", Trips: " << trips << " => " << (trips >= total_trips) << endl;
   return trips >= total_trips;
 }
 
 // * ------------------------- APPROACH : Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(1)
-ll minimumTime(std::vector<int> time, int totalTrips) {
-  ll l = 0, r = (ll)(totalTrips) * (*std::min_element(begin(time), end(time)));
+ll minimumTime(vector<int> time, int totalTrips) {
+  ll l = 0;
+  // * The time it takes for the fastest bus to make one trip is found using *min_element(begin(time), end(time)).
+  // * If that fastest bus has to make all the trips by itself, the total time required would be following
+  int r = (ll)(totalTrips) * (*min_element(begin(time), end(time)));
   ll ans = 0;
   while (l <= r){
     ll m = l + (r - l) / 2;
@@ -81,26 +86,26 @@ ll minimumTime(std::vector<int> time, int totalTrips) {
 int main(void) {
   // * testcase 1
   // int totalTrips = 5;
-  // std::vector<int> time = {1,2,3};
+  // vector<int> time = {1,2,3};
   
   // * testcase 2
   int totalTrips = 9;
-  std::vector<int> time = {5, 10, 10};
+  vector<int> time = {5, 10, 10};
   
   // * testcase 3
   // int totalTrips = 1;
-  // std::vector<int> time = {4};
+  // vector<int> time = {4};
   
   // * testcase 4
   // int totalTrips = 10000000;
-  // std::vector<int> time = {10000};
+  // vector<int> time = {10000};
 
-  std::cout << "totalTrips: " << totalTrips << std::endl;
-  std::cout << "Time: ";
+  cout << "totalTrips: " << totalTrips << endl;
+  cout << "Time: ";
   printArr(time);
 
   ll ans = minimumTime(time, totalTrips);
-  std::cout << "Minimum Time to Complete Trips: " << ans << std::endl;
+  cout << "Minimum Time to Complete Trips: " << ans << endl;
   
   return 0;
 }

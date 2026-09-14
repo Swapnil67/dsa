@@ -22,34 +22,39 @@
 #include <iostream>
 #include <algorithm>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> arr) {
-  std::cout << "[ ";
-  for (int i = 0; i < arr.size(); ++i) {
-    std::cout << arr[i] << " ";
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << " ]" << endl;
 }
+
 
 // ! TLE
 // * ------------------------- APPROACH 1: Brute Force Approach -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(m * n)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(std::vector<std::vector<int>> &flowers, std::vector<int> &people) {
+vector<int> bruteForce(vector<vector<int>> &flowers, vector<int> &people) {
   int n = flowers.size();
   int m = people.size();
 
-  std::vector<int> ans(m);
-  for (int i = 0; i < m; ++i) {
-    int pos = people[i];
+  vector<int> ans;
+  for (auto &pos: people) {
     int flowers_seen = 0;
     for (int j = 0; j < n; ++j) {
       if (pos >= flowers[j][0] && pos <= flowers[j][1]) {
         flowers_seen++;
       }
     }
-    ans[i] = flowers_seen;
+    ans.push_back(flowers_seen);
   }
 
   return ans;
@@ -62,29 +67,32 @@ std::vector<int> bruteForce(std::vector<std::vector<int>> &flowers, std::vector<
 
 // * TIME COMPLEXITY O(nlogn + mlogn)
 // * SPACE COMPLEXITY O(m + n)
-std::vector<int> fullBloomFlowers(std::vector<std::vector<int>> &flowers, std::vector<int> &people) {
+vector<int> fullBloomFlowers(vector<vector<int>> &flowers, vector<int> &people) {
   int n = flowers.size();
   int m = people.size();
 
-  std::vector<int> start;
-  std::vector<int> die;
+  vector<int> start, die;
   for (int i = 0; i < n; ++i) {
     start.push_back(flowers[i][0]);
     die.push_back(flowers[i][1]);
   }
-  std::sort(begin(start), end(start));
-  std::sort(begin(die), end(die));
+  sort(begin(start), end(start));
+  sort(begin(die), end(die));
 
-  std::vector<int> ans(m);
+  // cout << "start: ";
+  // printArr(start);
+  // cout << "die: ";
+  // printArr(die);
+
+  vector<int> ans(m);
   for (int i = 0; i < m; ++i) {
     int pos = people[i];
-    int bloom_idx = std::upper_bound(begin(start), end(start), pos) - begin(start);
-    int die_idx = std::lower_bound(begin(die), end(die), pos) - begin(die);
+    int bloom_idx = upper_bound(begin(start), end(start), pos) - begin(start);
+    int die_idx = lower_bound(begin(die), end(die), pos) - begin(die);
     ans[i] = bloom_idx - die_idx;
-    
-    // std::cout << "Person: " << pos << std::endl;
-    // std::cout << bloom_idx << " - " << die_idx << " = " << bloom_idx - die_idx << std::endl;
-    // std::cout << "------------------------------------" << pos << std::endl;
+    // cout << "------------------------------------" << endl;
+    // cout << "Person: " << pos << endl;
+    // cout << bloom_idx << " - " << die_idx << " = " << bloom_idx - die_idx << endl;
   }
 
   return ans;
@@ -92,7 +100,7 @@ std::vector<int> fullBloomFlowers(std::vector<std::vector<int>> &flowers, std::v
 
 
 // * 0 1 2 3    => index
-// * 1 2 4 9    => start
+// * 1 3 4 9    => start
 // * 6 7 12 14  => die
 
 // * Person = 2nd day
@@ -114,27 +122,28 @@ std::vector<int> fullBloomFlowers(std::vector<std::vector<int>> &flowers, std::v
 
 int main(void) {
   // * testcase 1
-  std::vector<int> people = {2, 3, 7, 11};
-  std::vector<std::vector<int>> flowers = {{1, 6}, {3, 7}, {9, 12}, {4, 13}};
+  vector<int> people = {2, 3, 7, 11};
+  vector<vector<int>> flowers = {{1, 6}, {3, 7}, {9, 12}, {4, 13}};
 
   // * testcase 2
-  // std::vector<int> people = {3, 3, 2};
-  // std::vector<std::vector<int>> flowers = {{1, 10}, {3, 3}};
+  // vector<int> people = {3, 3, 2};
+  // vector<vector<int>> flowers = {{1, 10}, {3, 3}};
 
-  std::cout << "people: ";
+  cout << "people: ";
   printArr(people);
-  std::cout << "Flowers: " << std::endl;
+  cout << "Flowers: " << endl;
   for (auto &vec : flowers)
     printArr(vec);
 
   
-  // std::vector<int> ans = bruteForce(flowers, people);
-  std::vector<int> ans = fullBloomFlowers(flowers, people);
-  std::cout << "Number of Flowers in Full Bloom: " << std::endl;
+  // vector<int> ans = bruteForce(flowers, people);
+  vector<int> ans = fullBloomFlowers(flowers, people);
+
+  cout << "Number of Flowers in Full Bloom: " << endl;
   printArr(ans);
 
   return 0;
 }
 
 // * Run the code
-// * g++ --std=c++20 06-no-of-flowers-in-full-bloom.cpp -o output && ./output
+// * g++ --std=c++20 11-no-of-flowers-in-full-bloom.cpp -o output && ./output

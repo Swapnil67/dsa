@@ -83,14 +83,12 @@ int kthElement(vector<int> &nums1, vector<int> &nums2, int k) {
 
   while (i < n1) {
     if (cnt == k) return nums1[i];
-    i++; 
-    cnt++;
+    i++, cnt++;
   }
 
   while (j < n2) {
     if (cnt == k) return nums2[j];
-    j++;
-    cnt++;
+    j++, cnt++;
   }
 
   return -1;

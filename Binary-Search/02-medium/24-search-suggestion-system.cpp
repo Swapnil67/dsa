@@ -18,25 +18,16 @@
 
 using namespace std;
 
-void printArr(vector<string> arr) {
-  int n = arr.size();
-  cout << "[";
-  for (string &s : arr) {
-    cout << '"' << s  << '"' << ", ";
+template <typename T>
+void printArr(vector<T> &nums) {
+  int n = nums.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << nums[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  cout << "]" << endl;
-}
-
-void printMatrix(vector<vector<string>>&mat) {
-  int n = mat.size();
-  if(n == 0) return;
-  int m = mat[0].size();
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      cout << mat[i][j] << " ";
-    }
-    cout << endl;
-  }
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------

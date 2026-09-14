@@ -18,7 +18,7 @@ using namespace std;
 class TimeMap {
 public:
   // * Map -> { key: { value, timestamp } }
-  std::unordered_map<string, vector<pair<string, int>>> tmMap;
+  unordered_map<string, vector<pair<string, int>>> tmMap;
   TimeMap() { tmMap = {}; }
 
   void set(string key, string value, int timestamp) {

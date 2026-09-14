@@ -1,6 +1,6 @@
 /*
 * Leetcode - 410
-* Split Array Largest Sum
+* Split Array Largest Sum / Painter's Partition Problem 
 *
 * Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any 
 * subarray is minimized. Return the minimized largest sum of the split.
@@ -12,8 +12,13 @@
 * The best way is to split it into [7,2,5] and [10,8], where the largest sum among the two subarrays is only 18.
 *
 * https://leetcode.com/problems/split-array-largest-sum/
+* https://www.geeksforgeeks.org/problems/split-array-largest-sum--141634/1
+* https://www.naukri.com/code360/problems/allocate-books_1090540
 * https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557
+* https://www.naukri.com/code360/problems/split-the-given-array-into-k-sub-arrays_1215015
 */
+
+// ! Amazon
 
 #include <vector>
 #include <numeric>
@@ -34,22 +39,23 @@ void printArr(vector<T> &nums) {
   cout << " ]" << endl;
 }
 
-int isValidPartition(vector<int> arr, int maxSum, int k) {
-  int n = arr.size();
-  long long curSum = 0;
+// * With a limit of maxSum, we can distribute these books using at most k students.
+int isValidPartition(vector<int> &nums, int &maxSum, int &k) {
   int splits = 1;
-  for (int i = 0; i < n; i++) {
-    if (curSum + arr[i] <= maxSum) {
-      curSum += arr[i];
+  long long curSum = 0;
+  for (auto &n: nums) {
+    if (n > maxSum) return false;
+    if (curSum + n <= maxSum) {
+      curSum += n;
     } else {
       splits++;
-      curSum = arr[i];
+      curSum = n;
     }
   }
   return splits <= k;
 }
 
-// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// * ------------------------- APPROACH : Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(nlog(total - max)) ~ O(nlogS)
 // * SPACE COMPLEXITY O(1)
 int splitArray(vector<int> a, int k) {

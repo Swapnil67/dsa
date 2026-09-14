@@ -21,6 +21,8 @@ void printArr(vector<T> &nums) {
 
 typedef long long ll;
 
+
+
 // * ------------------------------------------------------------------
 
 // * 01 - Find Minimum in Rotated Sorted Array II
@@ -28,7 +30,7 @@ typedef long long ll;
 // TODO
 // }
 
-// * 02 - Split Array Largest Sum
+// * 02 - Split Array Largest Sgum
 // int splitArray(vector<int> &nums, int k) {
 // TODO
 // }
@@ -58,13 +60,19 @@ typedef long long ll;
 // TODO Solve this on leetcode
 // }
 
-// * 08 - Aggressive Cows
-// int findMinMaxDistance(vector<int> stalls, int cows) {
+// ! Ignore this problem [Too Difficult]
+// * 10 - Maximum Fruits Harvested After at Most K Steps
+// int maxTotalFruits(vector<vector<int>> &fruits, int start_pos, int k) {
 // TODO
 // }
 
-// * 09 - Minimize Max Distance to Gas Station 
-// long double gasStation(vector<int> gasStations, int k) {
+// * 11 - Number of Flowers in Full Bloom
+// vector<int> fullBloomFlowers(vector<vector<int>> &flowers, vector<int> &people) {
+// TODO
+// }
+
+// * 12 - Divide Chocolate  
+// int maximizeSweetness(vector<int> &sweetness, int k) {
 // TODO
 // }
 
@@ -77,7 +85,6 @@ typedef long long ll;
 // long double gasStation(vector<int> gasStations, int k) {
 // TODO
 // }
-
 
 int main(void) {
   return 0;

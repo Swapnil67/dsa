@@ -43,22 +43,21 @@ vector<int> mergeTwoSortedArrays(vector<int> arr1, vector<int> arr2) {
   int n1 = arr1.size(), n2 = arr2.size();
   vector<int> ans;
   int i = 0, j = 0;
-  while(i < n1 && j < n2) {
-    if(arr1[i] <= arr2[j])
+
+  while (i < n1 && j < n2) {
+    if (arr1[i] <= arr2[j])
       ans.push_back(arr1[i++]);
     else
       ans.push_back(arr2[j++]);
   }
 
-  // * Put the remaining elements for arr1 
-  while(i < n1) {
+  // * Put the remaining elements for arr1
+  while (i < n1)
     ans.push_back(arr1[i++]);
-  }
 
   // * Put the remaining elements for arr2
-  while(j < n2) {
+  while (j < n2)
     ans.push_back(arr2[j++]);
-  }
 
   return ans;
 }
@@ -66,16 +65,16 @@ vector<int> mergeTwoSortedArrays(vector<int> arr1, vector<int> arr2) {
 pair<int, int> returnMedianPositions(vector<int> a, vector<int> b) {
   int n1 = a.size(), n2 = b.size();
   int n3 = n1 + n2;
-  int idx2 = n3 / 2;
-  int idx1 = idx2 - 1;
+  int idx2 = n3 / 2, idx1 = idx2 - 1;
   int i = 0, j = 0, cnt = 0;
   int ele1, ele2;
   while (i < n1 && j < n2) {
-    if(a[i] < b[j]) {
+    if (a[i] < b[j]) {
       if (cnt == idx1) ele1 = a[i];
       if (cnt == idx2) ele2 = a[i];
       i++;
-    } else {
+    }
+    else {
       if (cnt == idx1) ele1 = b[j];
       if (cnt == idx2) ele2 = b[j];
       j++;
@@ -83,20 +82,18 @@ pair<int, int> returnMedianPositions(vector<int> a, vector<int> b) {
     cnt++;
   }
 
-  while(i < n1) {
+  while (i < n1) {
     if (cnt == idx1) ele1 = a[i];
     if (cnt == idx2) ele2 = a[i];
-    cnt++;
-    i++; 
+    cnt++, i++; 
   }
 
-  while(j < n2) {
+  while (j < n2) {
     if (cnt == idx1) ele1 = b[j];
     if (cnt == idx2) ele2 = b[j];
-    cnt++;
-    j++;
+    cnt++, j++;
   }
-  return { ele1, ele2 };
+  return {ele1, ele2};
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
@@ -138,8 +135,6 @@ double findMedian(vector<int> arr1, vector<int> arr2) {
     findMedian(arr2, arr1);
 
   int left = (n1 + n2 + 1) / 2;
-  int n = n1 + n2;
-  
   int l = 0, r = n1;
   while (l <= r) {
     cout << "l: " << l << ", r: " << r << endl;
@@ -157,9 +152,9 @@ double findMedian(vector<int> arr1, vector<int> arr2) {
     cout << "-------------" << endl;
 
     if (l1 <= r2 && l2 <= r1) {
-      if (n % 2 == 1) {
+      if ((n1 + n2) % 2 == 1)
         return (double)max(l1, l2);
-      }
+
       return ((double)(max(l1, l2) + min(r1, r2))) / 2.0;
     }
 
@@ -177,13 +172,13 @@ double findMedian(vector<int> arr1, vector<int> arr2) {
 
 int main() {
   // * testcase 1 (Answer = 5)
-  vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
+  // vector<int> nums1 = {1, 3, 4, 7, 10, 12}, nums2 = {2, 3, 6, 15};
 
   // * testcase 2 (Answer = 8)
   // vector<int> nums1 = {7, 12, 14, 15}, nums2 = {1, 2, 3, 4, 9, 11};
 
   // * testcase 3 (Answer = 2.5)
-  // vector<int> nums1 = {1, 2}, nums2 = {3, 4};
+  vector<int> nums1 = {1, 2}, nums2 = {3, 4};
 
   cout << "First Array" << endl;
   printArr(nums1);

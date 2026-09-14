@@ -13,7 +13,12 @@
 * Output: 1
 *
 * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+* https://neetcode.io/problems/find-minimum-in-rotated-sorted-array/question
+* https://www.geeksforgeeks.org/problems/minimum-element-in-a-sorted-and-rotated-array3611/1
+* https://www.naukri.com/code360/problems/search-in-a-rotated-sorted-array-ii_7449547
 */
+
+// ! Amazon, Google, Uber, Meta, Walmart, flipkart
 
 #include <vector>
 #include <climits>

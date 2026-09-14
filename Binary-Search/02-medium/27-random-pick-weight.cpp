@@ -18,10 +18,12 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 class Solution {
 public:
-  std::vector<int> prefix_vec;
-  Solution(std::vector<int>& w) {
+  vector<int> prefix_vec;
+  Solution(vector<int> &w) {
     int n = w.size();
     // * Build the prefix array
     for (int& x : w) {
