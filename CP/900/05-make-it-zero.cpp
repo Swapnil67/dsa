@@ -27,6 +27,7 @@
  *                4 5
  * Explanation  : For odd n, clear an even prefix [1, 4] twice, then clear the overlapping suffix [4, 5] twice.
  * 
+ * https://codeforces.com/contest/1869/problem/A
 */
 
 
@@ -71,3 +72,42 @@
 *                           Array: [  0,  0,  0,  0,  0 ]
 * ====================================================================
 */
+
+
+#include <vector>
+#include <iostream>
+
+using namespace std;
+typedef long long ll;
+
+int main(void) {
+  // Optimize standard I/O operations for competitive programming
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+
+  int t;
+  cin >> t;
+  while (t--) {
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for (int i = 0; i < n; ++i)
+      cin >> a[i];
+
+    if (n % 2 == 0) {
+      cout << 2 << endl;
+      cout << 1 << " " << n << endl;
+      cout << 1 << " " << n << endl;
+    }
+    else {
+      cout << 4 << endl;
+      cout << 1 << " " << n - 1 << endl;
+      cout << 1 << " " << n - 1 << endl;
+      cout << n - 1 << " " << n << endl;
+      cout << n - 1 << " " << n << endl;
+    }
+  }
+
+  return 0;
+}
+
