@@ -87,13 +87,13 @@ int main(void) {
 
     // * If n is odd or n < 4 answer not possible
     if (n & 1LL || n < 4LL) {
-      cout << -1 << endl;
+      cout << -1 << "\n";
       continue;
     }
 
     ll min_buses = ceil((n * 1.0) / 6); // * ceil
     ll max_buses = n / 4;               // * floor
-    cout << min_buses << " " << max_buses << endl;
+    cout << min_buses << " " << max_buses << "\n";
   }
 
   return 0;

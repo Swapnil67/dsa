@@ -83,7 +83,7 @@ int main(void)
       }
     }
 
-    cout << min_ops << endl;
+    cout << min_ops << "\n";
   }
 
   return 0;

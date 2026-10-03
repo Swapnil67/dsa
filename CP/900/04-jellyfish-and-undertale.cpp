@@ -56,7 +56,7 @@ int main(void) {
     for (int i = 0; i < n; ++i)
       b = b + min(tools[i], a - 1);
 
-    cout << b << endl;
+    cout << b << "\n";
   }
 
   return 0;

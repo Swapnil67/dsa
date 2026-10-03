@@ -84,7 +84,7 @@ int main(void) {
     
     // * For debug
     // for (auto &it: king_hits) {
-    //     cout << it.first << "," << it.second << endl;
+    //     cout << it.first << "," << it.second << "\n";
     // }
     
     ll ans = 0;
@@ -93,7 +93,7 @@ int main(void) {
         ans++;
     }
     
-    cout << ans << endl;
+    cout << ans << "\n";
   }
 
   return 0;

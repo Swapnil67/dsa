@@ -82,7 +82,7 @@ int main(void) {
       k = gcd(k, abs(i - a[i])); // * O(logn)
     }
 
-    cout << k << endl;
+    cout << k << "\n";
   }
 
   return 0;

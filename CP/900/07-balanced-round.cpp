@@ -86,7 +86,7 @@ int main(void) {
       balanced = max(balanced, cnt);
     }
 
-    cout << n - balanced << endl;
+    cout << n - balanced << "\n";
   }
 
   return 0;

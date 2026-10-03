@@ -55,11 +55,11 @@ int main(void) {
       cin >> l >> r >> val;
       ll range_sum = p[r] - p[l] + nums[l];
       ll new_sum = (total_sum - range_sum) + (r - l + 1LL) * val;
-      // cout << range_sum << " " << new_sum << endl;
+      // cout << range_sum << " " << new_sum << "\n";
       if (new_sum & 1)
-        cout << "YES" << endl;
+        cout << "YES" << "\n";
       else
-        cout << "NO" << endl;
+        cout << "NO" << "\n";
     }
   }
 

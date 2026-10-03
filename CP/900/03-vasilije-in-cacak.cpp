@@ -60,9 +60,9 @@ int main(void) {
     ll k_last_sum = total_sum - k_sum2;
 
     if (x >= k_first_sum && x <= k_last_sum)
-      cout << "YES" << endl;
+      cout << "YES" << "\n";
     else
-      cout << "NO" << endl;
+      cout << "NO" << "\n";
   }
 
   return 0;

@@ -100,9 +100,9 @@ int main(void)
     }
 
     if (segments >= 2)
-      cout << 2 << endl;
+      cout << 2 << "\n";
     else
-      cout << segments << endl;
+      cout << segments << "\n";
   }
 
   return 0;

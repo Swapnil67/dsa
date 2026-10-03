@@ -84,7 +84,7 @@ int main(void)
     }
     longest_substr_len = max(longest_substr_len, cur_substr_len);
 
-    cout << longest_substr_len + 1 << endl;
+    cout << longest_substr_len + 1 << "\n";
   }
 
   return 0;

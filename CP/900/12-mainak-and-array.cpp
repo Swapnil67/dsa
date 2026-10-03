@@ -105,7 +105,7 @@ int main(void) {
       ans = max(ans, (a[i] - a[i + 1]));
     }
 
-    cout << ans << endl;
+    cout << ans << "\n";
   }
 
   return 0;

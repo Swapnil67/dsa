@@ -84,9 +84,9 @@ int main(void) {
   while (t--) {
     bool res = solve();
     if (res) 
-        cout << "YES" << endl;
+        cout << "YES" << "\n";
     else 
-        cout << "NO" << endl;
+        cout << "NO" << "\n";
   }
 
   return 0;
