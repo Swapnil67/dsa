@@ -21,6 +21,8 @@
  * https://leetcode.com/problems/simplify-path/description/
 */
 
+// ! Meta, Nvidia
+
 #include <stack>
 #include <vector>
 #include <sstream>

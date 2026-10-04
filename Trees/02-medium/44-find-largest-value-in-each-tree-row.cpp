@@ -59,17 +59,17 @@ vector<int> largestValues(TreeNode *root) {
 
 int main(void) {
   // * testcase 1
-  // TreeNode *root = new TreeNode(1);
-  // root->left = new TreeNode(3);
-  // root->right = new TreeNode(2);
-  // root->left->left = new TreeNode(5);
-  // root->left->right = new TreeNode(3);
-  // root->right->right = new TreeNode(9);
+  TreeNode *root = new TreeNode(1);
+  root->left = new TreeNode(3);
+  root->right = new TreeNode(2);
+  root->left->left = new TreeNode(5);
+  root->left->right = new TreeNode(3);
+  root->right->right = new TreeNode(9);
 
   // * testcase 2
-  TreeNode *root = new TreeNode(1);
-  root->left = new TreeNode(2);
-  root->right = new TreeNode(3);
+  // TreeNode *root = new TreeNode(1);
+  // root->left = new TreeNode(2);
+  // root->right = new TreeNode(3);
 
   cout << "Input Binary Tree:" << endl;
   levelOrderTraversal(root);

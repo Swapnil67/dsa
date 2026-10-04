@@ -25,7 +25,7 @@
  * Input     : board = [[-1,-1],[-1,3]]
  * Output    : 1
 
- * https://leetcode.com/problems/snakes-and-ladders/
+ * https://leetcode.com/problems/snakes-and-ladders
  * https://www.naukri.com/code360/problems/snake-and-ladder_630458
 */
 
@@ -61,7 +61,7 @@ pair<int, int> intToPos(int square, int n) {
   return {r, c};
 }
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------
+// * ------------------------- APPROACH : Optimal Approach ------------------------
 // * Since we need a shortest path we'll use BFS approach 
 // * TIME COMPLEXITY O(n x n)
 // * SPACE COMPLEXITY O(n x n)

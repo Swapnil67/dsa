@@ -24,23 +24,25 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> &nums, int k) {
+int bruteForce(vector<int> &nums, int k) {
   int n = nums.size();
   int ans = 0;
   for (int i = 0; i < n; ++i) {
@@ -58,11 +60,11 @@ int bruteForce(std::vector<int> &nums, int k) {
 // * Using Prefix Sum Map
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int subarraySum(std::vector<int> &nums, int k) {
+int subarraySum(vector<int> &nums, int k) {
   int n = nums.size();
   int sum = 0, cnt = 0;
 
-  std::unordered_map<int, int> prefix_sum_map;
+  unordered_map<int, int> prefix_sum_map;
   prefix_sum_map[0] = 1;
 
   for (int i = 0; i < n; ++i) {
@@ -78,27 +80,27 @@ int subarraySum(std::vector<int> &nums, int k) {
 int main(void) {
   // * testcase 1
   int k = 2;
-  std::vector<int> nums = {1, 1, 1};
+  vector<int> nums = {1, 1, 1};
 
   // * testcase 2
   // int k = 3;
-  // std::vector<int> nums = {1, 2, 3};
+  // vector<int> nums = {1, 2, 3};
 
   // * testcase 3
   // int k = 0;
-  // std::vector<int> nums = {1};
+  // vector<int> nums = {1};
 
   // * testcase  4
   // int k = 0;
-  // std::vector<int> nums = {-1, -1, 1};
+  // vector<int> nums = {-1, -1, 1};
 
-  std::cout << "K: " << k << std::endl;
-  std::cout << "Nums: ";
+  cout << "K: " << k << endl;
+  cout << "Nums: ";
   printArr(nums);
 
   int ans = bruteForce(nums, k);
   // int ans = subarraySum(nums, k);
-  std::cout << "Total number of subarrays whose sum equals to k: " << ans << std::endl;
+  cout << "Total number of subarrays whose sum equals to k: " << ans << endl;
   return 0;
 }
 

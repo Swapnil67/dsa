@@ -131,58 +131,6 @@ vector<bool> checkIfPrerequisite(
   return ans;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------
-// * Q - No of queries
-// * Topological Sort (Kahn's Algo)
-// * TIME COMPLEXITY O(V^2 * (V + E)) ~ O(numCourses² + Q)
-// * SPACE COMPLEXITY O(V + E)        ~ O(numCourses²)
-vector<bool> checkIfPrerequisite2(
-    int numCourses,
-    vector<vector<int>> &prerequisites,
-    vector<vector<int>> &queries)
-{
-  // * Create a adjaency list & indegree vector
-  vector<int> indegree(numCourses);
-  unordered_map<int, vector<int>> adj = constructadj(indegree, prerequisites);
-  printAdjList(adj); // * For debugging
-  
-  // * Push all the vertices whose indegree is '0'
-  queue<int> q;
-  for (int i = 0; i < numCourses; ++i) {
-    if (indegree[i] == 0)
-      q.push(i);
-  }
-  
-  // * Map from the node as key to the set of prerequisite nodes.
-  unordered_map<int, unordered_set<int>> mp_st;
-  while (!q.empty()) {
-    int u = q.front();
-    q.pop();
-
-    for (auto &v : adj[u]) { // * O(V)
-      mp_st[v].insert(u);
-      for (auto &prereq : mp_st[u]) { // * O(V) - add the prerequisites of parent 'u' to the current prereq set
-        mp_st[v].insert(prereq);
-      }
-
-      indegree[v]--;
-      if (indegree[v] == 0) {
-        q.push(v);
-      }
-    }
-  }
-
-  int Q = queries.size();
-  vector<bool> ans(Q, false);
-  // * TC = O(Q)
-  for (int i = 0; i < Q; ++i) {
-    int src = queries[i][0], dest = queries[i][1];
-    ans[i] = mp_st[dest].find(src) != mp_st[dest].end();
-  }
-
-  return ans;
-}
-
 int main(void) {
   // * testcase 1
   // int numCourses = 2;
@@ -203,8 +151,7 @@ int main(void) {
   for (auto &vec : queries)
   printArr(vec);
   
-  // vector<bool> ans = checkIfPrerequisite(numCourses, prerequisites, queries);
-  vector<bool> ans = checkIfPrerequisite2(numCourses, prerequisites, queries);
+  vector<bool> ans = checkIfPrerequisite(numCourses, prerequisites, queries);
   cout << "-------- Answer -------- " << endl;
   for (int i = 0; i < queries.size(); ++i) {
     auto it = queries[i];

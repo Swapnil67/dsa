@@ -12,6 +12,7 @@
  * Find and return the maximum profit you can achieve.
  * 
  * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
+ * https://www.naukri.com/code360/problems/best-time-to-buy-and-sell-stock-iii_1071012
 */
 
 // ! Amazon, Google, Meta, Uber
@@ -36,38 +37,44 @@ void printArr(vector<T> &arr) {
 }
 
 // * Without Memoization
-int dfs(int i, bool buying, int cap, vector<int> &prices) {
-  if (i >= prices.size() || cap == 0)
+int dfs(int i, bool buy, int cap, vector<int> &prices) {
+  if (i == prices.size() || cap == 0)
     return 0;
 
-  if (buying) {
-    return max(dfs(i + 1, false, cap, prices) - prices[i],
-               dfs(i + 1, buying, cap, prices));
+  // * Option 1: Skip today
+  int res = dfs(i + 1, buy, cap, prices);
+  if (buy) {
+    // * Option 2: Buy today (Pay money now, move to sell state)
+    res = max(res, dfs(i + 1, false, cap, prices) - prices[i]);
+  } else {
+    // * Option 2: Sell today (Get money now)
+    // * when selling we decrease no of transaction (i.e cap)
+    res = max(res, dfs(i + 1, true, cap - 1, prices) + prices[i]);
   }
-  else {
-    return max(dfs(i + 1, true, cap - 1, prices) + prices[i],
-               dfs(i + 1, buying, cap, prices));
-  }
+
+  return res;
 }
 
 // * With Memoization
-int dfs(int i, bool buying, vector<int> &prices, vector<vector<int>> &dp) {
-  if (i >= prices.size())
+int dfs(int i, bool buy, int cap, vector<int> &prices, vector<vector<vector<int>>> &dp) {
+  if (i == prices.size() || cap == 0)
     return 0;
 
-  if (dp[i][buying] != -1)
-    return dp[i][buying];
+  if (dp[i][buy][cap] != -1)
+    return dp[i][buy][cap];
 
-  int profit = 0;
-  if (buying) {
-    profit = max((dfs(i + 1, false, prices, dp) - prices[i]),
-                 dfs(i + 1, buying, prices, dp));
+  // * Option 1: Skip today
+  int res = dfs(i + 1, buy, cap, prices, dp);
+  if (buy) {
+    // * Option 2: Buy today (Pay money now, move to sell state)
+    res = max(res, dfs(i + 1, false, cap, prices, dp) - prices[i]);
   } else {
-    profit = max((dfs(i + 1, true, prices, dp) + prices[i]),
-                 dfs(i + 1, buying, prices, dp));
+    // * Option 2: Sell today (Get money now, decrease remaining transactions)
+    // * when selling we decrease no of transaction (i.e cap)
+    res = max(res, dfs(i + 1, true, cap - 1, prices, dp) + prices[i]);
   }
 
-  return dp[i][buying] = profit;
+  return dp[i][buy][cap] = res;
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
@@ -75,8 +82,8 @@ int dfs(int i, bool buying, vector<int> &prices, vector<vector<int>> &dp) {
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
 int bruteForce(vector<int> &prices) {
-  int n = prices.size();
-  return dfs(0, true, 2, prices);
+  int cap = 2; // * max no of transactions
+  return dfs(0, true, cap, prices);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
@@ -85,8 +92,9 @@ int bruteForce(vector<int> &prices) {
 // * SPACE COMPLEXITY O(n^2)
 int betterApproach(vector<int> &prices) {
   int n = prices.size();
-  vector<vector<int>> dp(n + 1, vector<int>(2, -1));
-  return dfs(0, true, prices, dp);
+  int cap = 2; // * max no of transactions
+  vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(2, vector<int>(3, -1)));
+  return dfs(0, true, cap, prices, dp);
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
@@ -95,44 +103,25 @@ int betterApproach(vector<int> &prices) {
 // * SPACE COMPLEXITY O(n)
 int maxProfit(vector<int> &prices) {
   int n = prices.size();
-  vector<vector<int>> dp(n + 1, vector<int>(2, 0));
+  int cap = 2;
+  vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(2, vector<int>(3, 0)));
   for (int i = n - 1; i >= 0; --i) {
-    for (int buying = 1; buying >= 0; --buying) {
-      if (buying == 1) {
-        dp[i][buying] = max(dp[i + 1][0] - prices[i], dp[i + 1][1]);
-      } else {
-        dp[i][buying] = max(dp[i + 1][1] + prices[i], dp[i + 1][0]);
-      }
+    for (int cap = 1; cap <= 2; ++cap) {
+      // * Sell logic (decrease no of transaction, i.e cap)
+      dp[i][0][cap] =
+          max(dp[i + 1][0][cap], dp[i + 1][1][cap - 1] + prices[i]);
+
+      // * Buy logic
+      dp[i][1][cap] =
+          max(dp[i + 1][1][cap], dp[i + 1][0][cap] - prices[i]);
     }
   }
-
-  for (auto &vec : dp)
-    printArr(vec);
-
-  return dp[0][1];
-}
-
-// * ------------------------- Approach: Optimal Approach -------------------------
-// * Bottom Up + Space Optimization
-// * TIME COMPLEXITY O(n)
-// * SPACE COMPLEXITY O(1)
-int maxProfitDP2(vector<int> &prices) {
-  int n = prices.size();
-  int cur_buy = 0, cur_sell = 0;
-  int next_buy = 0, next_sell = 0;
-  for (int i = n - 1; i >= 0; --i) {
-    cur_buy = max(next_sell - prices[i], next_buy);
-    cur_sell = max(next_buy + prices[i], next_sell);
-    next_buy = cur_buy;
-    next_sell = cur_sell;
-  }
-
-  return cur_buy;
+  return dp[0][1][2];
 }
 
 int main(void) {
   // * testcase 1
-  // vector<int> prices = {3, 3, 5, 0, 0, 3, 1, 4};
+  vector<int> prices = {3, 3, 5, 0, 0, 3, 1, 4};
 
   // * testcase 2
   // vector<int> prices = {1, 2, 3, 4, 5};
@@ -141,15 +130,14 @@ int main(void) {
   // vector<int> prices = {7, 6, 4, 3, 1};
 
   // * testcase 4
-  vector<int> prices = {2, 1, 4, 5, 2, 9, 7};
+  // vector<int> prices = {2, 1, 4, 5, 2, 9, 7};
 
   cout << "Prices: ";
   printArr(prices);
 
-  int ans = bruteForce(prices);
+  // int ans = bruteForce(prices);
   // int ans = betterApproach(prices);
-  // int ans = maxProfit(prices);
-  // int ans = maxProfitDP2(prices);
+  int ans = maxProfit(prices);
 
   cout << "Answer: " << ans << endl;
 
@@ -157,4 +145,4 @@ int main(void) {
 }
  
 // * Run the code
-// * g++ --std=c++17 1-best-time-to-buy-and-sell-stock-iii.cpp -o output && ./output
+// * g++ --std=c++20 1-best-time-to-buy-and-sell-stock-iii.cpp -o output && ./output

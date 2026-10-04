@@ -32,7 +32,7 @@
 *           /  \       /
 *          3    1     5
 
-* https://leetcode.com/problems/add-one-row-to-tree/description/
+* https://leetcode.com/problems/add-one-row-to-tree/description
 */
 
 // ! Google

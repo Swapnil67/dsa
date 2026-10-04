@@ -22,15 +22,15 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: Optimal APPROACH -------------------------
@@ -45,9 +45,12 @@ int totalSteps(vector<int> &nums) {
   int max_cnt = 0;
 
   for (int i = n - 1; i >= 0; --i) {
-    int cnt = 0;
+    int cnt = 0; // * Tracks the no of steps needed to remove elements smaller than nums[i]
 
     while (!st.empty() && nums[i] > st.top().first) {
+      // * If the element at the top takes 'st.top().second' steps to clear out its own right side,
+      // * nums[i] has to wait out those steps, plus 1 more step to consume that element itself.
+      // * We take the maximum because elements can be removed in parallel rounds.
       cnt = max(cnt + 1, st.top().second);
       st.pop();
     }
@@ -61,19 +64,19 @@ int totalSteps(vector<int> &nums) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<int> nums = {5, 3, 4, 4, 7, 3, 6, 11, 8, 5, 11};
+  // vector<int> nums = {5, 3, 4, 4, 7, 3, 6, 11, 8, 5, 11};
 
   // * testcase 2
-  // std::vector<int> nums = {4, 5, 7, 7, 13};
+  // vector<int> nums = {4, 5, 7, 7, 13};
 
   // * testcase 3
-  std::vector<int> nums = {7, 14, 4, 14, 13, 2, 6, 13};
+  vector<int> nums = {7, 14, 4, 14, 13, 2, 6, 13};
 
-  std::cout << "Input nums: ";
+  cout << "Input nums: ";
   printArr(nums);
 
   int ans = totalSteps(nums);
-  std::cout << "Total Steps: " << ans << std::endl;
+  cout << "Total Steps: " << ans << endl;
   return 0;
 }
  

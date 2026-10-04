@@ -10,6 +10,7 @@
  * https://www.naukri.com/code360/problems/longest-palindromic-substring_758900
 */
 
+// ! [confidence 4/5]
 // ! Amazon, Google, Meta, Microsoft, Oracle, Adobe
 
 #include <vector>

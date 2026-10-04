@@ -18,6 +18,7 @@
  * Explanation  : 
  * 
  * https://leetcode.com/problems/count-the-number-of-good-subarrays
+ * https://www.naukri.com/code360/problems/count-good-subarrays_19247257
 */
 
 // ! Amazon, Uber

@@ -61,7 +61,7 @@ pair<int, int> bruteForce(vector<int> &nums, int target) {
 
 
 // * ------------------------- APPROACH 2: OPTIMAL APPROACH -------------------------
-// * TIME COMPLEXITY O(N^2)
+// * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 pair<int, int> findLargestAndSmallestSubarraySum(vector<int> &nums, int target) {
 	int n = nums.size();

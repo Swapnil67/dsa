@@ -20,6 +20,7 @@
  * https://leetcode.com/problems/132-pattern
 */
 
+// ! [confidence 2/5]
 // ! Monotonic Stack
 // ! Meta, Amazon, Google
 
@@ -83,16 +84,16 @@ bool betterApproach(vector<int> nums) {
 }
 
 // * ------------------------- APPROACH 3: Optimal Approach -------------------------
+// * Using Monotonic decreasing Stack
 // * num1 < num3 < num2 
 // * num2 will be largest & num3 will be second largest
-// * Using Monotonic Stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 bool find132pattern(vector<int> nums) {
   int n = nums.size();
-  int num3 = INT_MIN; 
   stack<int> st;
-
+  
+  int num3 = INT_MIN;  // * k index element
   // * consider st.top() as the largest element (i.e., num2)
   // * consider nums[j] as num1
 

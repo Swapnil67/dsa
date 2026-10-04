@@ -28,7 +28,7 @@
  * input  : servers = [5,1,4,3,2], tasks = [2,1,2,4,5,2,1]
  * output : [1,4,1,4,1,3,2]
  * 
- * https://leetcode.com/problems/process-tasks-using-servers/description/
+ * https://leetcode.com/problems/process-tasks-using-servers/description
 */
 
 // ! Google

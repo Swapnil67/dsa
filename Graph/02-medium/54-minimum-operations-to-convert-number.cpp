@@ -9,6 +9,8 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
 // * BFS
 // * N = Size of queue

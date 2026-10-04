@@ -76,7 +76,28 @@ int bruteForce(vector<int> &nums, int k) {
   return max_len;
 }
 
-// * ------------------------- APPROACH 2: Better Approach -------------------------`
+// * ============================================================================
+// * WHY rem = sum - k (AND NOT k - sum)
+// * ============================================================================
+// *
+// * At any index 'i', 'sum' is the current prefix sum (from index 0 to i).
+// * We want to find an older index 'j' such that the subarray from j+1 to i
+// * sums up exactly to 'k'.
+// *
+// * 1. Core Logic:
+// *    Current_Prefix_Sum - Past_Prefix_Sum = Target_Subarray_Sum (k)
+// *
+// * 2. Substitute our variables:
+// *    sum - Past_Prefix_Sum = k
+// *
+// * 3. Solve for Past_Prefix_Sum (which is our remainder 'rem'):
+// *    sum - k = Past_Prefix_Sum
+// *    rem = sum - k
+// *
+// * This checks if 'sum - k' exists in our map. If it does, the elements
+// * between index 'j' and 'i' must sum up to 'k'.
+
+// * ------------------------- APPROACH 2: Better Approach -------------------------
 // ! This is optimal for +ve & -ve
 // * Prefix Sum HashMap
 // * TIME COMPLEXITY 
@@ -87,7 +108,8 @@ int betterApproach(vector<int> &nums, int &k) {
   int n = nums.size();
   
   // * {sum, index} Map
-  unordered_map<long long, int> prefix_mp;
+  unordered_map<long long, int> mp;
+  mp[0] = -1;
   
   int max_len = 0;
   long long cur_sum = 0;
@@ -99,15 +121,15 @@ int betterApproach(vector<int> &nums, int &k) {
     }
 
     // * check if (x - k) exists in map
-    int rem_sum = cur_sum - k;
-    if (prefix_mp.count(rem_sum)) {
-      max_len = max(max_len, j - prefix_mp[rem_sum]);
+    int past_prefix_sum = cur_sum - k;
+    if (mp.count(past_prefix_sum)) {
+      max_len = max(max_len, j - mp[past_prefix_sum]);
     }
 
     // * Only update sub array if it does not exists previously 
     // * becoz we need left most possible index for longest subarray
-    if (!prefix_mp.count(cur_sum))
-      prefix_mp[cur_sum] = j;
+    if (!mp.count(cur_sum))
+      mp[cur_sum] = j;
   }
 
   return max_len;

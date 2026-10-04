@@ -23,6 +23,9 @@
  * output           : true
  * 
  * https://leetcode.com/problems/wildcard-matching/description/
+ * https://www.naukri.com/code360/problems/wildcard-pattern-matching_701650
+ * https://www.geeksforgeeks.org/problems/wildcard-pattern-matching/1
+ * https://www.youtube.com/watch?v=ZmlQ3vgAOMo&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=35
 */
 
 // ! Amazon, Meta, Google, Oracle, Walmart, Bloomberg, JP Morgan, Microsoft, Swiggy
@@ -54,7 +57,7 @@ bool dfs(int i, int j, string &s, string &p) {
     return false;
 
   if (i < 0 && j >= 0) {
-    // * Pattern must only contain '*' for this (testcase - 3)
+    // * Remaning Pattern must only contain '*' for this (testcase - 3)
     for (int ii = 0; ii < j; ++ii) {
       if (p[ii] != '*')
         return false;
@@ -101,18 +104,15 @@ bool dfs(int i, int j, string &s, string &p, vector<vector<int>> &dp) {
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
-// * 'm' is the length of the string 's'
 // * Top Down
 // * TIME COMPLEXITY O(2^(m + n))
 // * SPACE COMPLEXITY O(m + n)
 int bruteForce(string &s, string &p) {
   m = s.length(), n = p.length();
-  return dfs(0, 0, s, p);
+  return dfs(m, n, s, p);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
-// * 'm' is the length of the string 's'
-// * 'n' is the length of the string 't'
 // * Top Down + Memoization
 // * TIME COMPLEXITY O(m * n) (With Recursion Auxillary Space O(n))
 // * SPACE COMPLEXITY O(m * n)
@@ -123,7 +123,6 @@ int betterApproach(string &s, string &p) {
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
-// * t[i][j] = min operations for making word1 of length 'i' and word2 of length 'j' equal
 // * Bottom Up
 // * TIME COMPLEXITY O(m * n) (No Recursion Auxillary Space O(n))
 // * SPACE COMPLEXITY O(m * n)
@@ -199,7 +198,7 @@ int main(void) {
   // * testcase 2
   // string s = "aa", p = "a*";
 
-  // * testcase 2
+  // * testcase 3
   // string s = "ab", p = ".*";
 
   // * testcase 4

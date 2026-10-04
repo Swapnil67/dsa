@@ -32,27 +32,29 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
+unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
+  unordered_map<int, vector<int>> adj;
   for (auto &it: edges) {
     int u = it[0], v = it[1];
     adj[v].push_back(u);
@@ -62,8 +64,8 @@ std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<i
 }
 
 void dfs(int u, int &edges, int &vertices,
-         std::vector<bool> &visited,
-         std::unordered_map<int, std::vector<int>> adj)
+         vector<bool> &visited,
+         unordered_map<int, vector<int>> adj)
 {
   visited[u] = true;
   vertices += 1;
@@ -78,10 +80,10 @@ void dfs(int u, int &edges, int &vertices,
 
 void bfs(int node,
          int &edges, int &vertices,
-         std::vector<bool> &visited,
-         std::unordered_map<int, std::vector<int>> adj)
+         vector<bool> &visited,
+         unordered_map<int, vector<int>> adj)
 {
-  std::queue<int> q;
+  queue<int> q;
   q.push(node);
   visited[node] = true; // * mark visited
 
@@ -106,13 +108,13 @@ void bfs(int node,
 // * V * (V - 1) == E
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-int countCompleteComponentsDFS(int n, std::vector<std::vector<int>>& edges) {
+int countCompleteComponentsDFS(int n, vector<vector<int>>& edges) {
   // * 1. Construct adj matrix
-  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
+  unordered_map<int, vector<int>> adj = constructadj(edges);
   // printAdjList(adj); // * For Debugging
   
   // * 2. Classic DFS
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
 
   int ans = 0;
   for (int u = 0; u < n; ++u) {
@@ -120,7 +122,7 @@ int countCompleteComponentsDFS(int n, std::vector<std::vector<int>>& edges) {
       int e = 0, v = 0;
       dfs(u, e, v,visited, adj);
       int edges = (v * (v - 1)) / 2;
-      // std::cout << "u: " << u << ", e: " << e << ", v: " << v << std::endl;
+      // cout << "u: " << u << ", e: " << e << ", v: " << v << endl;
       if (edges == e / 2) // * Here we did 'e/2' becoz we count 2 edge for ever node since our graph is undirected
         ans++;
     }
@@ -134,19 +136,19 @@ int countCompleteComponentsDFS(int n, std::vector<std::vector<int>>& edges) {
 // * V * (V - 1) == E
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-int countCompleteComponentsBFS(int n, std::vector<std::vector<int>>& edges) {
+int countCompleteComponentsBFS(int n, vector<vector<int>>& edges) {
   // * 1. Construct adj matrix
-  std::unordered_map<int, std::vector<int>> adj = constructadj(edges);
+  unordered_map<int, vector<int>> adj = constructadj(edges);
   // printAdjList(adj); // * For Debugging
   
   // * 2. Classic BFS
-  std::vector<bool> visited(n, false);
+  vector<bool> visited(n, false);
   int ans = 0;
   for (int u = 0; u < n; ++u) {
     if (!visited[u]) {
       int e = 0, v = 0;
       bfs(u, e, v, visited, adj);
-      // std::cout << "u: " << u << ", e: " << e << ", v: " << v << std::endl;
+      cout << "u: " << u << ", e: " << e << ", v: " << v << endl;
       if ((v * (v - 1)) == e)
         ans++;
     }
@@ -158,23 +160,23 @@ int countCompleteComponentsBFS(int n, std::vector<std::vector<int>>& edges) {
 int main(void) {
   // * testcase 1
   // int n = 6;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {3, 4}};
+  // vector<vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {3, 4}};
   
   // * testcase 2
   // int n = 6;
-  // std::vector<std::vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {3, 4}, {3, 5}};
+  // vector<vector<int>> edges = {{0, 1}, {0, 2}, {1, 2}, {3, 4}, {3, 5}};
   
   // * testcase 3
   int n = 3;
-  std::vector<std::vector<int>> edges = {{0, 2}, {0, 1}, {1, 2}};
+  vector<vector<int>> edges = {{0, 2}, {0, 1}, {1, 2}};
 
-  std::cout << "edges" << std::endl;
+  cout << "edges" << endl;
   for (auto &vec : edges)
     printArr(vec);
 
   // int ans = countCompleteComponentsDFS(n, edges);
   int ans = countCompleteComponentsBFS(n, edges);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

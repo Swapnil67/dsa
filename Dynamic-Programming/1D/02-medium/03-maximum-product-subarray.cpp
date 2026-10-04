@@ -18,6 +18,8 @@
  * https://www.naukri.com/code360/problems/subarray-with-maximum-product_6890008
 */
 
+// ! [confidence 0/5]
+
 #include <vector>
 #include <climits>
 #include <iostream>

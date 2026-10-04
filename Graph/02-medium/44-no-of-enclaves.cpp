@@ -43,9 +43,9 @@ void printArr(vector<T> &arr) {
 }
 
 // * check out of bound
-bool check_not_oob(const int &row, const int &col, vector<vector<int>> &grid) {
+bool check_not_oob(const int &r, const int &c, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
-  return row >= 0 && row < m && col >= 0 && col < n;
+  return r >= 0 && r < m && c >= 0 && c < n;
 }
 
 const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -71,7 +71,7 @@ void mark_visited(int r, int c, vector<vector<int>> &grid) {
   }
 }
 
-// * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * ------------------------- APPROACH: Optimal Approach -------------------------
 // * Mark All the islands from boundary as visited then count the remaining land area
 // * use a visited matrix
 // * TIME COMPLEXITY O(m x n)

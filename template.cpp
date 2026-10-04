@@ -1,11 +1,30 @@
 /*
+ * NAME
  * 
+ * Description:
+ * 
+ * Constraints:
+ * 
+ * Example 1    :
+ * Input        : nums = [-1,1,2,3,1], target = 2
+ * Output       : 3
+ * Explanation  : There are 3 pairs of indices that satisfy the conditions in the statement:
+ * 
+ * Example 2    :
+ * Input        : nums = [-6,2,5,-2,-7,-1,3], target = -2
+ * Output       : 10
+ * Explanation  : There are 10 pairs of indices that satisfy the conditions in the statement:
+ *
+ * Link 
 */
 
 #include <vector>
 #include <iostream>
 
 using namespace std;
+typedef long long ll;
+
+#define all(v) v.begin(), v.end()
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -16,8 +35,11 @@ void printArr(vector<T> &arr) {
     if (i != n - 1)
       cout << ", ";
   }
-  cout << " ]" << endl;
+  cout << " ]" << "\n";
 }
+
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(N)
 
 int main(void) {
   return 0;

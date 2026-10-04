@@ -14,38 +14,44 @@
 */
 
 #include<iostream>
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> bruteForce(int n) {
-  std::vector<int> ans;
-  for (int i = 1; i <= n; ++i) {
-    if(n % i == 0) {
-      ans.push_back(i);
-    }
+vector<int> bruteForce(int n) {
+  vector<int> factors;
+  for (int i = 1; i <= 12; ++i) {
+    if (n % i == 0)
+      factors.push_back(i);
   }
-  return ans;
-} 
+  return factors;
+}
 
-// * TIME COMPLEXITY O(SQRT(N))
+// * TIME COMPLEXITY O(sqrt(N))
 // * SPACE COMPLEXITY O(1)
-std::vector<int> printDivisors(int n) {
-  std::vector<int> ans;
-  for (int i = 1; i <= std::sqrt(n); ++i) {
-    if(n % i == 0) {
-      ans.push_back(i);
-      if (n / i != i)
-        ans.push_back(n / i);
+vector<int> printDivisors(int n) {
+  vector<int> factors;
+  for (int i = 1; i <= sqrt(n); ++i) {
+    if (n % i == 0) {
+      factors.push_back(i);
+      if (n / i != i) {
+        factors.push_back(n / i);
+      }
     }
   }
-  return ans;
+  return factors;
 } 
 
 int main() {

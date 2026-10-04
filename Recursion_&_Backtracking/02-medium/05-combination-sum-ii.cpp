@@ -21,6 +21,7 @@
  * https://www.geeksforgeeks.org/problems/combination-sum-ii-1664263832/1
 */
 
+// ! [confidence 2/5]
 // ! Amazon, Google, Meta, Microsoft, Apple, Tiktok, Walmart
 
 #include <set>
@@ -76,33 +77,39 @@ vector<vector<int>> bruteForce(vector<int> &candidates, int target) {
   return ans;
 }
 
-void solve(
-    int i,
-    int target,
-    vector<int> &nums,
-    vector<int> &temp,
-    vector<vector<int>> &ans) {
-  if (target < 0)
-    return;
-    
+void dfs(int start, int target, vector<int> &cur, vector<int> &nums, vector<vector<int>> &ans) {
+  // * BASE CASE: Success!
   if (target == 0) {
-    ans.push_back(temp);
+    ans.push_back(cur); // * Save this unique combination
     return;
   }
 
-  if (i >= nums.size() || nums[i] > target)
-    return;
+  // * Loop through all possible candidates starting from the current index 'start'
+  for (int i = start; i < nums.size(); ++i) {
+    // * 1. SKIP DUPLICATES at the current decision level.
+    // * If the current number is the same as the previous number in this loop,
+    // * it will generate a duplicate combination branch. We skip it.
+    // * 'i > start' ensures we don't accidentally skip an element when
+    // * moving down into a deeper recursive call.
+    if (i > start && nums[i] == nums[i - 1])
+      continue;
 
-  temp.push_back(nums[i]);
-  solve(i + 1, target - nums[i], nums, temp, ans);
+    // * 2. EARLY PRUNING (Optimization)
+    // * Because the array is sorted, if 'nums[i]' is greater than our remaining target,
+    // * all subsequent elements (which are equal or larger) will also exceed the target.
+    // * We can break out of the loop early and stop exploring completely.
+    if (target - nums[i] < 0)
+      break;
 
-  // * To avoid duplicates
-  while (i + 1 < nums.size() && nums[i] == nums[i + 1]) {
-    i += 1;
+    // * 3. EXPLORE: Include nums[i] in the current combination
+    cur.push_back(nums[i]);
+
+    // * Move to the next index (i + 1) so we never reuse the exact same element instance.
+    dfs(i + 1, target - nums[i], cur, nums, ans);
+
+    // * 4. BACKTRACK: Remove the element to restore state for the next loop iteration
+    cur.pop_back();
   }
-
-  temp.pop_back();
-  solve(i + 1, target, nums, temp, ans);
 }
 
 // * ------------------------- Optimal Approach -------------------------
@@ -112,10 +119,17 @@ void solve(
 // * TIME COMPLEXITY O(2^n * n)
 // * SPACE COMPLEXITY O(n)
 vector<vector<int>> combinationSum(vector<int> &candidates, int target) {
-  sort(begin(candidates), end(candidates));
-  vector<int> temp;
   vector<vector<int>> ans;
-  solve(0, target, candidates, temp, ans);
+  vector<int> cur;
+
+  // * CRUCIAL STEP: Sorting is mandatory for Combination Sum II!
+  // * It allows us to group duplicates together to skip them cleanly,
+  // * and enables early loop pruning to make the code run significantly faster.
+  sort(candidates.begin(), candidates.end());
+
+  // * Start DFS traversal from index 0
+  dfs(0, target, cur, candidates, ans);
+
   return ans;
 }
 
@@ -129,6 +143,7 @@ int main(void) {
 
   // vector<vector<int>> ans = bruteForce(candidates, target);
   vector<vector<int>> ans = combinationSum(candidates, target);
+
   cout << "Combination sum: " << endl;
   for (auto &vec : ans)
     printArr(vec);

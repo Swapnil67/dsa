@@ -29,29 +29,31 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * check out of bound
-bool check_not_oob(const int &row, const int &col, std::vector<std::vector<int>> &grid) {
+bool check_not_oob(const int &row, const int &col, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   return row >= 0 && row < m && col >= 0 && col < n;
 }
 
-std::unordered_map<int, std::vector<int>> constructadj(
-    std::vector<int> &indegree,
-    std::vector<std::vector<int>> &edges)
+unordered_map<int, vector<int>> constructadj(
+    vector<int> &indegree,
+    vector<vector<int>> &edges)
 {
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
   for (auto &it : edges)
   {
     indegree[it[1]]++;
@@ -64,13 +66,13 @@ std::unordered_map<int, std::vector<int>> constructadj(
 // * Do Kahn's Algo
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> bruteForce(int n, std::vector<std::vector<int>> edges) {
+vector<int> bruteForce(int n, vector<vector<int>> edges) {
   // * 1. Create a Adj List
-  std::vector<int> indegree(n, 0);
-  std::unordered_map<int, std::vector<int>> adj = constructadj(indegree, edges);
+  vector<int> indegree(n, 0);
+  unordered_map<int, vector<int>> adj = constructadj(indegree, edges);
 
-  std::vector<int> ans;
-  std::queue<int> q;
+  vector<int> ans;
+  queue<int> q;
   for (int i = 0; i < n; ++i) {
     if (indegree[i] == 0) {
       ans.push_back(i);
@@ -102,16 +104,16 @@ std::vector<int> bruteForce(int n, std::vector<std::vector<int>> edges) {
 // * Do Kahn's Algo
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-std::vector<int> findSmallestSetOfVertices(int n, std::vector<std::vector<int>> edges) {
+vector<int> findSmallestSetOfVertices(int n, vector<vector<int>> edges) {
   // * 1. mark all the nodes to true which have indegree 
-  std::vector<int> indegree(n, 0);
+  vector<int> indegree(n, 0);
   for (auto &it : edges) {
     int from = it[0], to = it[1];
     indegree[to] = 1;
   }
 
   // * 2. Return the nodes which do not have any degree
-  std::vector<int> ans;
+  vector<int> ans;
   for (int i = 0; i < n; ++i) {
     if (indegree[i] == 0)
       ans.push_back(i);
@@ -123,19 +125,19 @@ std::vector<int> findSmallestSetOfVertices(int n, std::vector<std::vector<int>> 
 int main(void) {
   // * testcase 1
   int n = 6;
-  std::vector<std::vector<int>> grid = {{0, 1}, {0, 2}, {2, 5}, {3, 4}, {4, 2}};
+  vector<vector<int>> grid = {{0, 1}, {0, 2}, {2, 5}, {3, 4}, {4, 2}};
   
   // * testcase 2
   // int n = 5;
-  // std::vector<std::vector<int>> grid = {{0, 1}, {2, 1}, {3, 1}, {1, 4}, {2, 4}};
+  // vector<vector<int>> grid = {{0, 1}, {2, 1}, {3, 1}, {1, 4}, {2, 4}};
 
-  std::cout << "-------- Grid -------- " << std::endl;
+  cout << "-------- Grid -------- " << endl;
   for (auto &vec : grid)
   printArr(vec);
   
-  std::cout << "-------- Answer -------- " << std::endl;
-  // std::vector<int> ans = bruteForce(n, grid);
-  std::vector<int> ans = findSmallestSetOfVertices(n, grid);
+  cout << "-------- Answer -------- " << endl;
+  // vector<int> ans = bruteForce(n, grid);
+  vector<int> ans = findSmallestSetOfVertices(n, grid);
   printArr(ans);
 
   return 0;

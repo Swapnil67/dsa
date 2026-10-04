@@ -40,16 +40,18 @@
 #include <iostream>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------
@@ -58,16 +60,16 @@ void printArr(std::vector<T> &arr) {
 // * w = no. of wheels (we have 4)
 // * TIME COMPLEXITY O(n^w + D)   ~ O(10^4 + D)
 // * SPACE COMPLEXITY O(n^w + D)  ~ O(10^4 + D) 
-int openLock(std::vector<std::string> &deadends, std::string target) {
+int openLock(vector<string> &deadends, string target) {
   // * For checking deadends
-  std::unordered_set<std::string> dead_st(begin(deadends), end(deadends));
+  unordered_set<string> dead_st(begin(deadends), end(deadends));
 
   // * Edge case
-  std::string start = "0000";
+  string start = "0000";
   if (dead_st.count(start))
     return -1;
 
-  std::queue<std::string> q;
+  queue<string> q;
   q.push(start);
 
   int level = 0;
@@ -75,7 +77,7 @@ int openLock(std::vector<std::string> &deadends, std::string target) {
     int n = q.size();
 
     while (n--) {
-      std::string s = q.front();
+      string s = q.front();
       q.pop();
  
       if (s == target) // * Reached target
@@ -111,15 +113,15 @@ int openLock(std::vector<std::string> &deadends, std::string target) {
 }
 
 int main(void) {
-  std::string target = "0202";
-  std::vector<std::string> deadends = {"0201", "0101", "0102", "1212", "2002"};
+  string target = "0202";
+  vector<string> deadends = {"0201", "0101", "0102", "1212", "2002"};
 
-  std::cout << "Target: " << target << std::endl;
-  std::cout << "Deadends: ";
+  cout << "Target: " << target << endl;
+  cout << "Deadends: ";
   printArr(deadends);
 
   int ans = openLock(deadends, target);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Ans: " << ans << endl;
   return 0;
 }
  

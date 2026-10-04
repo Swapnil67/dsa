@@ -15,6 +15,8 @@
  * https://www.geeksforgeeks.org/problems/sum-of-max-of-subarrays/1
 */
 
+// ! [confidence 1/5]
+
 #include <stack>
 #include <vector>
 #include <iostream>

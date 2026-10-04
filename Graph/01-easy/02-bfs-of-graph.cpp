@@ -16,28 +16,30 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<int> bfs(std::vector<std::vector<int>> &adj) {
+vector<int> bfs(vector<vector<int>> &adj) {
   int V = adj.size();
-  std::vector<int> result;
+  vector<int> result;
 
   // * visited bool vector
-  std::vector<bool> visited(V + 1, false);
+  vector<bool> visited(V + 1, false);
   visited[0] = true;
 
   // * push the first node to queue
-  std::queue<int> q;
+  queue<int> q;
   q.push(0);
   
   while (!q.empty()) {
@@ -58,16 +60,16 @@ std::vector<int> bfs(std::vector<std::vector<int>> &adj) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> adj = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
+  vector<vector<int>> adj = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> adj = {{1, 2}, {0, 2}, {0, 1, 3, 4}, {2}, {2}};
+  // vector<vector<int>> adj = {{1, 2}, {0, 2}, {0, 1, 3, 4}, {2}, {2}};
 
   for (auto &vec : adj)
     printArr(vec);
 
-  std::vector<int> ans = bfs(adj);
-  std::cout << "BFS on Graph" << std::endl;
+  vector<int> ans = bfs(adj);
+  cout << "BFS on Graph" << endl;
   printArr(ans);
 
   return 0;

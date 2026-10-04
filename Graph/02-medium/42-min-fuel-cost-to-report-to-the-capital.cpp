@@ -32,47 +32,40 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 // ! Microsoft
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-std::unordered_map<int, std::vector<int>> constructadj(std::vector<std::vector<int>> &edges) {
-  std::unordered_map<int, std::vector<int>> adj;
-  for (auto &it: edges) {
-    int u = it[0], v = it[1];
-    adj[u].push_back(v);
-    adj[v].push_back(u);
-  }
-  return adj;
-}
-
 long long dfs(int u, int parent, long long& res, int &seats,
-              std::unordered_map<int, std::vector<int>>& adj) {
+              unordered_map<int, vector<int>>& adj) {
     int passengers = 0;
     for (auto& v : adj[u]) {
         if (v == parent)
             continue;
+
         int p = dfs(v, u, res, seats, adj);
-        // std::cout << "u: " << u << ", p: " << p << std::endl;
+        // cout << "u: " << u << ", p: " << p << endl;
         passengers += p;
-        res += std::ceil((double)p / seats);
+        res += ceil((double)p / seats);
     }
     return passengers + 1;
 }
@@ -82,10 +75,15 @@ long long dfs(int u, int parent, long long& res, int &seats,
 // * then add the result to final answer.
 // * TIME COMPLEXITY O(n)
 // * SPACE COMPLEXITY O(n)
-long long minimumFuelCost(int seats, std::vector<std::vector<int>> &roads)
+long long minimumFuelCost(int seats, vector<vector<int>> &roads)
 {
   // * 1. Create Adj list
-  std::unordered_map<int, std::vector<int>> adj = constructadj(roads);
+  unordered_map<int, vector<int>> adj;
+  for (auto &it: roads) {
+    int u = it[0], v = it[1];
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
   // printAdjList(adj); // * For Debugging
 
   // * DFS
@@ -97,18 +95,18 @@ long long minimumFuelCost(int seats, std::vector<std::vector<int>> &roads)
 int main(void) {
   // * testcase 1
   // int seats = 3;
-  // std::vector<std::vector<int>> roads = {{0, 1}, {0, 2}, {0, 3}};
+  // vector<vector<int>> roads = {{0, 1}, {0, 2}, {0, 3}};
 
   // * testcase 2
   int seats = 2;
-  std::vector<std::vector<int>> roads = {{3, 1}, {3, 2}, {1, 0}, {0, 4}, {0, 5}, {4, 6}};
+  vector<vector<int>> roads = {{3, 1}, {3, 2}, {1, 0}, {0, 4}, {0, 5}, {4, 6}};
 
-  std::cout << "-------- blue edges -------- " << std::endl;
+  cout << "-------- blue edges -------- " << endl;
   for (auto &vec : roads)
     printArr(vec);
 
   long long ans = minimumFuelCost(seats, roads);
-  std::cout << ans << std::endl;
+  cout << ans << endl;
 
   return 0;
 }
@@ -116,3 +114,56 @@ int main(void) {
 // * Run the code
 // * g++ --std=c++20 42-min-fuel-cost-to-report-to-the-capital.cpp -o output && ./output
 
+/*
+* roads = [[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]] and seats = 2
+* Step-by-Step Execution1.
+
+* Branch 1: 0 -> 1 -> 3 -> 2
+* dfs(2): It is a leaf node.
+* - Loops over no children.
+* - Returns 0 + 1 = 1 passenger.
+* 
+* dfs(3): Processes child 2.
+* - Receives p = 1 from city 2.
+* - Adds fuel: ceil(1 / 2) = 1. Running res = 1.
+* - Returns 1 + 1 = 2 passengers.
+* 
+* dfs(1): Processes child 3.
+* - Receives p = 2 from city 3.
+* - Adds fuel: ceil(2 / 2) = 1. Running res = 2.
+* - Returns 2 + 1 = 3 passengers.
+* 
+* Back at dfs(0): Processes child 1.
+* - Receives p = 3 from city 1.
+* - Adds fuel: ceil(3 / 2) = 2. Running res = 4.
+* - Cumulative passengers = 3.
+* 
+* 2. Branch 2: 0 -> 4 -> 6
+* dfs(6): It is a leaf node.
+* - Loops over no children.
+* - Returns 0 + 1 = 1 passenger.
+* 
+* dfs(4): Processes child 6.
+* - Receives p = 1 from city 6.
+* - Adds fuel: ceil(1 / 2) = 1. Running res = 5.
+* - Returns 1 + 1 = 2 passengers.
+* 
+* Back at dfs(0): Processes child 4.
+* - Receives p = 2 from city 4.
+* - Adds fuel: ceil(2 / 2) = 1. Running res = 6.
+* - Cumulative passengers = 3 + 2 = 5.
+* 
+* 3. Branch 3: 0 -> 5
+* - dfs(5): It is a leaf node.
+* - Loops over no children.
+* - Returns 0 + 1 = 1 passenger.
+* 
+* Back at dfs(0): Processes child 5.
+* - Receives p = 1 from city 5.
+* - Adds fuel: ceil(1 / 2) = 1. Running res = 7.
+* - Cumulative passengers = 5 + 1 = 6.
+* 
+* Final Summary
+* Total Fuel: 7.
+* Total Passengers at Root: 6 (plus 1 at city 0 equals 7 total people).
+*/

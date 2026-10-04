@@ -13,7 +13,7 @@
  * Input  : pushed = [1,2,3,4,5], popped = [4,3,5,1,2]
  * Output : false
 
-* https://leetcode.com/problems/validate-stack-sequences/description/
+* https://leetcode.com/problems/validate-stack-sequences/description
 */
 
 // ! Amazon

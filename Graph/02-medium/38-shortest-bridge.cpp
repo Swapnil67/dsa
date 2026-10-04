@@ -135,9 +135,9 @@ int main(void) {
   // vector<vector<int>> grid = {{0, 1}, {1, 0}};
 
   // * testcase 2 // * Ans = 2
-  // vector<vector<int>> grid = {{0, 1, 0},
-  //                             {0, 0, 0},
-  //                             {0, 0, 1}};
+  vector<vector<int>> grid = {{0, 1, 0},
+                              {0, 0, 0},
+                              {0, 0, 1}};
 
   // * testcase 3 // * Ans = 1
   // vector<vector<int>> grid = {{1, 1, 1, 1, 1},
@@ -147,11 +147,11 @@ int main(void) {
   //                             {1, 1, 1, 1, 1}};
 
   // * testcase 3 // * Ans = 1
-  vector<vector<int>> grid = {{0, 0, 1, 0, 1},
-                              {0, 1, 1, 0, 1},
-                              {0, 1, 0, 0, 1},
-                              {0, 0, 0, 0, 0},
-                              {0, 0, 0, 0, 0}};
+  // vector<vector<int>> grid = {{0, 0, 1, 0, 1},
+  //                             {0, 1, 1, 0, 1},
+  //                             {0, 1, 0, 0, 1},
+  //                             {0, 0, 0, 0, 0},
+  //                             {0, 0, 0, 0, 0}};
 
   cout << "-------- Board -------- " << endl;
   for (auto &vec : grid)

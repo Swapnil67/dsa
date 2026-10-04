@@ -161,13 +161,13 @@ int main() {
   // vector<int> asteroids = {10, 2, -5};
 
   // * testcase 4
-  vector<int> asteroids = {-2, -1, 1, 2};
+  // vector<int> asteroids = {-2, -1, 1, 2};
 
   // * testcase 5
   // vector<int> asteroids = {-2, -2, 1, -1};
 
   // * testcase 6
-  // vector<int> asteroids = {1, -2, -2, -2};
+  vector<int> asteroids = {1, -2, -2, -2};
 
   printf("Asteroids Before Collision: ");
   printArr(asteroids);

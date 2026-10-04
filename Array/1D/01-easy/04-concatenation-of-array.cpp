@@ -21,40 +21,41 @@
 #include <vector>
 #include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
-std::vector<int> getConcatenation(std::vector<int>& nums) {
-  std::vector<int> ans(nums.begin(), nums.end());
-
-  int n = nums.size();
-  if (n == 0)
-    return ans;
-
-  for (int i = 0; i < n; ++i) {
-    ans.push_back(nums[i]);
+vector<int> getConcatenation(vector<int>& nums) {
+  vector<int> ans(begin(nums), end(nums));
+  for (auto &num : nums) {
+    ans.push_back(num);
   }
-
   return ans;
 }
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 1};
+  // vector<int> arr = {1, 2, 1};
 
   // * testcase 2
-  std::vector<int> arr = {1, 3, 2, 1};
+  vector<int> arr = {1, 3, 2, 1};
 
-  std::cout << "Before Concatenation" << std::endl;
+  cout << "Before Concatenation" << endl;
   printArr(arr);
 
-  std::vector<int> ans = getConcatenation(arr);
+  vector<int> ans = getConcatenation(arr);
 
-  std::cout<<"After Concatenation"<<std::endl;
+  cout<<"After Concatenation"<<endl;
   printArr(ans);
   
   return 0;

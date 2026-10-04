@@ -26,6 +26,10 @@
 * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
 */
 
+// ! [confidence 5/5]
+// ! Amazon, Meta, Google, Disney, Microsoft
+
+
 #include <stack>
 #include <vector>
 #include <iostream>

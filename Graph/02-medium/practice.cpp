@@ -339,6 +339,36 @@ void Union(int x, int y, vector<int> &rank, vector<int> &parent) {
 // TODO
 // }
 
+// * 58 - Find the Celebrity  
+// int findCelebrity(int n) {
+// TODO
+// }
+
+// * 59 - Minimum Number of Operations to Make X and Y Equal
+// int minimumOperationsToMakeEqual(int x, int y) {
+// TODO
+// }
+
+// * 63 - Kill Process
+// vector<int> killProcess(vector<int> &pid, vector<int> &ppid, int kill) {
+// TODO
+// }
+
+// * 64 - Number of Connected Components
+// int countConnected(int V, vector<vector<int>> &edges) {
+// TODO
+// }
+
+// * 65 - Number of Distinct Islands
+// int numDistinctIslands(vector<vector<int>>& grid) {
+// TODO
+// }
+
+// * 66 - Connecting the graph
+// int minEdgesReq(int n, vector<vector<int>>& edge) {
+// TODO
+// }
+
 // * ------------------------------------------------------------------------------------------
 
 // * 01 - Number of Provinces

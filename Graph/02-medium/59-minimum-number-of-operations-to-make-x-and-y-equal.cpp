@@ -35,15 +35,15 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 int minimumOperationsToMakeEqual(int x, int y) {
@@ -105,7 +105,7 @@ int main(void) {
   int x = 25, y = 30;
 
   int ans = minimumOperationsToMakeEqual(x, y);
-  std::cout << "Min no. of operations: " << ans << std::endl;
+  cout << "Min no. of operations: " << ans << endl;
 
   return 0;
 }

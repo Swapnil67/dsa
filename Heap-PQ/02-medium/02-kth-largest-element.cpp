@@ -43,7 +43,7 @@ void swap(int &x, int &y) {
   y = temp;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Nested Loop + Sorting
 // * TIME COMPLEXITY O(nlogn)
 // * SPACE COMPLEXITY O(1)

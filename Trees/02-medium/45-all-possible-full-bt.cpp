@@ -75,9 +75,8 @@ vector<TreeNode *> solve(int n, unordered_map<int, vector<TreeNode *>> &cache) {
   if (n % 2 == 0) // * Cannot create FBT with even nodes
     return {};
 
-  if (n == 1) {
+  if (n == 1) 
     return {new TreeNode(0)};
-  }
 
   vector<TreeNode *> ans;
   for (int i = 1; i < n; i += 2) { // * odd loop

@@ -42,7 +42,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Greedly try to finish those tasks first whose frequency is more
 // * We'll use max_heap for storing freq of each task.
 // * TIME COMPLEXITY O(n)

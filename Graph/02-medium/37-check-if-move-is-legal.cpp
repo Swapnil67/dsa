@@ -42,7 +42,7 @@
  *                      [ '.'   '.'   '.'   '.'   '.'   '.'   '.'   'B' ]
  * Output    : false
 
- * https://leetcode.com/problems/check-if-move-is-legal/description/
+ * https://leetcode.com/problems/check-if-move-is-legal/
 */
 
 // ! Google, Meta, Amazon

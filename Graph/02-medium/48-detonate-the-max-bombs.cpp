@@ -38,21 +38,23 @@
 #include <unordered_map>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
@@ -61,8 +63,8 @@ typedef long long ll;
 
 void dfs(
     int u, int &bombs,
-    std::vector<bool> &visited,
-    std::unordered_map<int, std::vector<int>> &adj)
+    vector<bool> &visited,
+    unordered_map<int, vector<int>> &adj)
 {
   bombs += 1;
   visited[u]= true;
@@ -73,11 +75,11 @@ void dfs(
   }
 }
 
-int bfs(int node, std::unordered_map<int, std::vector<int>> &adj) {
-  std::unordered_set<int> visited;
+int bfs(int node, unordered_map<int, vector<int>> &adj) {
+  unordered_set<int> visited;
   visited.insert(node);
 
-  std::queue<int> q;
+  queue<int> q;
   q.push(node);
 
   while (!q.empty()) {
@@ -99,11 +101,11 @@ int bfs(int node, std::unordered_map<int, std::vector<int>> &adj) {
 // * Calculate count of vertices & edges for each subgraph and check if the following formula is valid
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-int maximumDetonationDFS(std::vector<std::vector<int>> &edges) {
+int maximumDetonationDFS(vector<vector<int>> &edges) {
   int n = edges.size();
   
   // * 1. Construct adj matrix
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
   for (int i = 0; i < n; ++i) {
     ll x1 = (ll)edges[i][0], y1 = (ll)edges[i][1];
     ll r_sqr = (edges[i][2] * edges[i][2]) * 1ll;
@@ -115,7 +117,7 @@ int maximumDetonationDFS(std::vector<std::vector<int>> &edges) {
       ll dx = (x2 - x1), dy = (y2 - y1);
       // * caculate distance b/w two coordinates
       ll d_sqr = (dx * dx) + (dy * dy);
-      // std::cout << r_sqr << " " << d_sqr << std::endl;
+      // cout << r_sqr << " " << d_sqr << endl;
       if (r_sqr >= d_sqr) {
         adj[i].push_back(j);
       }
@@ -126,10 +128,10 @@ int maximumDetonationDFS(std::vector<std::vector<int>> &edges) {
   // * 2. DFS for every ith bomb and check how far it can reach
   int max_bombs = 0;
   for (int i = 0; i < n; ++i) {
-    std::vector<bool> visited(n, false);
+    vector<bool> visited(n, false);
     int bombs = 0;
     dfs(i, bombs, visited, adj);
-    max_bombs = std::max(max_bombs, bombs);
+    max_bombs = max(max_bombs, bombs);
   }
 
   return max_bombs;
@@ -138,19 +140,19 @@ int maximumDetonationDFS(std::vector<std::vector<int>> &edges) {
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(V + E)
 // * SPACE COMPLEXITY O(V + E)
-int maximumDetonationBFS(std::vector<std::vector<int>> &edges) {
+int maximumDetonationBFS(vector<vector<int>> &edges) {
   int n = edges.size();
 
   // * 1. Construct adj matrix
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
   for (int i = 0; i < n; ++i) {
     ll x1 = (ll)edges[i][0], y1 = (ll)edges[i][1];
-    ll r_sqr = (edges[i][2] * edges[i][2]) * 1ll;
+    ll r_sqr = (edges[i][2] * 1ll * edges[i][2]);
     for (int j = 0; j < n; ++j) {
       if (i == j) // * same bomb
         continue;
       
-      ll x2 = (ll)edges[j][0], y2 = (ll)edges[j][1];
+      ll x2 = (ll)edges[j][0], y2 = (ll)edges[j][1];  
       ll dist_sqr = (x2 - x1) * (x2 - x2) + (y2 - y1) * (y2 - y1);
       if (r_sqr >= dist_sqr) {
         adj[i].push_back(j);
@@ -163,7 +165,7 @@ int maximumDetonationBFS(std::vector<std::vector<int>> &edges) {
   // * 2. BFS for every ith bomb and check how far it can reach
   for (int u = 0; u < n; ++u) {
     int bombs = bfs(u, adj);
-    max_bombs = std::max(max_bombs, bombs);
+    max_bombs = max(max_bombs, bombs);
   }
 
   return max_bombs;
@@ -171,21 +173,22 @@ int maximumDetonationBFS(std::vector<std::vector<int>> &edges) {
 
 int main(void) {
   // * testcase 1 // * bombs denotate = 2
-  // std::vector<std::vector<int>> bombs = {{2, 1, 3}, {6, 1, 4}};
+  // vector<vector<int>> bombs = {{2, 1, 3}, {6, 1, 4}};
 
   // * testcase 2 // * bombs denotate = 1
-  // std::vector<std::vector<int>> bombs = {{1, 1, 5}, {10, 10, 5}};
+  // vector<vector<int>> bombs = {{1, 1, 5}, {10, 10, 5}};
 
   // * testcase 3 // * bombs denotate = 5
-  std::vector<std::vector<int>> bombs = {{1, 2, 3}, {2, 3, 1}, {3, 4, 2}, {4, 5, 3}, {5, 6, 4}};
+  vector<vector<int>> bombs = {{1, 2, 3}, {2, 3, 1}, {3, 4, 2}, {4, 5, 3}, {5, 6, 4}};
 
-  std::cout << "------------ Bombs -------------" << std::endl;
+  cout << "------------ Bombs -------------" << endl;
   for (auto &vec : bombs)
     printArr(vec);
 
   // int ans = maximumDetonationDFS(bombs);
   int ans = maximumDetonationBFS(bombs);
-  std::cout << "Bombs Denotate: " << ans << std::endl;
+
+  cout << "Bombs Denotate: " << ans << endl;
 
   return 0;
 }

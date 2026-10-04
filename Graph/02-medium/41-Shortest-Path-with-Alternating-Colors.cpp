@@ -62,7 +62,7 @@ unordered_map<int, vector<int>> constructadj(vector<vector<int>> &edges) {
   return adj;
 }
 
-// * ------------------------- APPROACH : Optimal Approach -------------------------`
+// * ------------------------- APPROACH : Optimal Approach -------------------------
 // * red edge = 0
 // * blue edge = 1
 

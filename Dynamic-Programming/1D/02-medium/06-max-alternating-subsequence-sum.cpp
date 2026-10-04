@@ -28,6 +28,7 @@
  * https://leetcode.com/problems/maximum-alternating-subsequence-sum/description/
 */
 
+// ! [confidence 2/5]
 // ! Google, Amazon, Meta
 
 #include <vector>
@@ -97,16 +98,34 @@ long long betterApproach(vector<int>& nums) {
 // * Classic Pattern
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-long long maxAlternatingSum(vector<int> &nums) {
-  long long even_sum = 0, odd_sum = 0;
-  for (auto &x : nums) {
-    long long next_even = max(even_sum, odd_sum + x);
-    long long next_odd = max(odd_sum, even_sum - x);
-    even_sum = next_even;
-    odd_sum = next_odd;
-  }
-  return even_sum;
+long long maxAlternatingSum(vector<int>& nums) {
+    int n = nums.size();
+    
+    // * even_sum: Max alternating sum ending at an EVEN index (last action was ADDING a number)
+    // * odd_sum:  Max alternating sum ending at an ODD index  (last action was SUBTRACTING a number)
+    long long even_sum = 0, odd_sum = 0;
+    
+    for (auto& x : nums) {
+        // * Option 1: To end with an ADDITION (even index), we can either:
+        // * - Skip the current element 'x' and keep the existing 'even_sum'.
+        // * - Take a previous sequence ending in subtraction ('odd_sum') and add 'x'.
+        long long next_even = max(even_sum, odd_sum + x);
+        
+        // * Option 2: To end with a SUBTRACTION (odd index), we can either:
+        // * - Skip the current element 'x' and keep the existing 'odd_sum'.
+        // * - Take a previous sequence ending in addition ('even_sum') and subtract 'x'.
+        long long next_odd = max(odd_sum, even_sum - x);
+        
+        // * Update the states for the next iteration
+        even_sum = next_even;
+        odd_sum = next_odd;
+    }
+    
+    // * The maximum sum will always end on an addition (even index),
+    // * because subtracting a final positive number would only decrease the total.
+    return even_sum;
 }
+
 
 int main(void) {
   // * testcase 1

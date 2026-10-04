@@ -88,12 +88,12 @@ int closestMeetingNode(vector<int> &edges, int node1, int node2) {
 
 int main(void) {
   // * testcase 1 // * Ans = 1
-  int node1 = 0, node2 = 1;
-  vector<int> edges = {2, 2, 3, -1};
+  // int node1 = 0, node2 = 1;
+  // vector<int> edges = {2, 2, 3, -1};
   
   // * testcase 2 // * Ans = 2
-  // int node1 = 0, node2 = 2;
-  // vector<int> edges = {1, 2, -1};
+  int node1 = 0, node2 = 2;
+  vector<int> edges = {1, 2, -1};
 
   cout << "node1: " << node1 << " " << "node2: " << node2 << endl;
   cout << "Edges:  ";

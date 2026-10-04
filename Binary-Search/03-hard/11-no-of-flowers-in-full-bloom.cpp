@@ -24,6 +24,9 @@
 
 using namespace std;
 
+typedef long long ll;
+#define all(v) v.begin(), v.end()
+
 template <typename T>
 void printArr(vector<T> &nums) {
   int n = nums.size();
@@ -98,27 +101,48 @@ vector<int> fullBloomFlowers(vector<vector<int>> &flowers, vector<int> &people) 
   return ans;
 }
 
+// ! Line Sweep Algorithm
+// * TIME COMPLEXITY O(nlogn)
+// * SPACE COMPLEXITY O(n)
+vector<int> fullBloomFlowers2(vector<vector<int>> &flowers, vector<int> &people) {
+  vector<pair<ll, ll>> pos;
 
-// * 0 1 2 3    => index
-// * 1 3 4 9    => start
-// * 6 7 12 14  => die
+  // * 1. Gather all events (0 = start, 1 = person arrival, 2 = end)
+  for (auto &f : flowers) {
+    pos.push_back({f[0], 0});
+    pos.push_back({f[1], 2});
+  }
+  for (auto &p : people) {
+    pos.push_back({p, 1});
+  }
 
-// * Person = 2nd day
-// * bloom_idx = 1, die_idx = 0 
-// * Ans = bloom_idx - die_idx = 1 flowers
+  // * 2. Sort chronologically (weights ensure: start -> person -> end)
+  sort(all(pos));
 
-// * Person = 3rd day
-// * bloom_idx = 2, die_idx = 0 
-// * Ans = bloom_idx - die_idx = 2 flowers
+  // * 3. Process events using a line sweep
+  unordered_map<ll, ll> mp;
+  ll c = 0;
 
-// * Person = 7th day
-// * bloom_idx = 3, die_idx = 1 
-// * Ans = bloom_idx - die_idx = 2 flowers
+  for (auto &p : pos) {
+    if (p.second == 0) {
+      c++; // * Flower opened
+    }
+    else if (p.second == 1) {
+      mp[p.first] = c; // * Record count for this timestamp
+    }
+    else {
+      c--; // * Flower closed
+    }
+  }
 
-// * Person = 11th day
-// * bloom_idx = 4, die_idx = 2 
-// * Ans = bloom_idx - die_idx = 2 flowers
+  // * 4. Map the recorded counts back to the original people list
+  vector<int> ans;
+  for (auto &p : people) {
+    ans.push_back(mp[p]);
+  }
 
+  return ans;
+}
 
 int main(void) {
   // * testcase 1
@@ -147,3 +171,24 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 11-no-of-flowers-in-full-bloom.cpp -o output && ./output
+
+
+// * 0 1 2 3    => index
+// * 1 3 4 9    => start
+// * 6 7 12 14  => die
+
+// * Person = 2nd day
+// * bloom_idx = 1, die_idx = 0 
+// * Ans = bloom_idx - die_idx = 1 flowers
+
+// * Person = 3rd day
+// * bloom_idx = 2, die_idx = 0 
+// * Ans = bloom_idx - die_idx = 2 flowers
+
+// * Person = 7th day
+// * bloom_idx = 3, die_idx = 1 
+// * Ans = bloom_idx - die_idx = 2 flowers
+
+// * Person = 11th day
+// * bloom_idx = 4, die_idx = 2 
+// * Ans = bloom_idx - die_idx = 2 flowers

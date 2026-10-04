@@ -22,7 +22,10 @@
  * Output : 4
 
  * https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation
+ * https://www.desiqna.in/13650/google-girl-hackathon-coding-questions-solutions-2023-kumar
 */
+
+// ! Google Hackathon
 
 #include <deque>
 #include <vector>
@@ -160,7 +163,6 @@ int maximumBeauty2(vector<int> arr, int k) {
   return max_beauty;
 }
 
-
 int main() {
   // * testcase 1 (Ans = 3)
   int k = 2;
@@ -177,9 +179,9 @@ int main() {
   printArr(arr);
 
   // int ans = bruteForce(arr, k);
-  int ans = maximumBeauty(arr, k);
-  // int ans = maximumBeauty2(arr, k);
-
+  // int ans = maximumBeauty(arr, k);
+  int ans = maximumBeauty2(arr, k);
+  
   cout << "Maximum Beauty of an Array After Applying Operation: " << ans << endl;
 
   return 0;

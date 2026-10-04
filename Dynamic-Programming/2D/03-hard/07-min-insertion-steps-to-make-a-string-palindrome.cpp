@@ -106,9 +106,6 @@ int main(void) {
 
   cout << "s: " << s << endl;
 
-  // int ans = bruteForce(s);
-  // int ans = betterApproach(s);
-  // int ans = longestPalindromeSubseq(s);
   int ans = minInsertions(s);
 
   cout << "Longest Palindromic Subsequence: " << ans << endl;

@@ -22,6 +22,7 @@
  * https://www.geeksforgeeks.org/problems/stickler-theif-1587115621/1
 */
 
+// ! [confidence 5/5]
 // ! Amazon, Paytm, Walmart, Google, Flipkart, LinkedIn, Airbnb
 
 #include <vector>

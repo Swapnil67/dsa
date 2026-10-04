@@ -21,26 +21,32 @@
  * Output    : 3
  * 
  * https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/description/
+ * https://www.geeksforgeeks.org/problems/pairs-with-difference-k1713/1
+ * https://www.naukri.com/code360/problems/pair-with-diff-k_5393
 */
+
+// ! Duplicates pairs are allowed
 
 #include <vector>
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-int countKDifference(std::vector<int> &nums, int k) {
-  std::unordered_map<int, int> freq_mp;
+int bruteForce(vector<int> &nums, int k) {
+  unordered_map<int, int> freq_mp;
   for (auto &x : nums) {
     freq_mp[x]++;
   }
@@ -49,31 +55,47 @@ int countKDifference(std::vector<int> &nums, int k) {
   for (auto &x : nums) {
     // * nums[i] - nums[j] = k
     // * nums[i] = k + nums[j]
-    pairs += freq_mp[std::abs(k + x)];
+    pairs += freq_mp[abs(k + x)];
   }
 
   return pairs;
 }
 
+// * |i - j| = k
+// * case 1: (i > j) => i - j = k 
+// *         i = j + k
+// * case 2: (i < j) => j - i = k 
+// *         i = j - k
+int countKDifference(vector<int> &nums, int k) {
+    unordered_map<int, int> mp;
+    int pairs = 0;
+    for (auto &x: nums) {
+      if (mp.count(x + k)) pairs += mp[x + k]; 
+      if (mp.count(x - k)) pairs += mp[x - k];
+      mp[x]++;
+    }
+    return pairs;
+}
+
 int main(void) {
   // * testcase 1
   // int k = 1;
-  // std::vector<int> nums = {1, 2, 2, 1};
+  // vector<int> nums = {1, 2, 2, 1};
 
   // * testcase 2
   int k = 2;
-  std::vector<int> nums = {3, 2, 1, 5, 4};
+  vector<int> nums = {3, 2, 1, 5, 4};
 
   // * testcase 3
   // int k = 3;
-  // std::vector<int> nums = {1, 3};
+  // vector<int> nums = {1, 3};
 
-  std::cout << "k: " << k << std::endl;
-  std::cout << "Nums: ";
+  cout << "k: " << k << endl;
+  cout << "Nums: ";
   printArr(nums);
 
   int ans = countKDifference(nums, k);
-  std::cout << "Pairs: " << ans << std::endl;
+  cout << "Pairs: " << ans << endl;
   return 0;
 }
  

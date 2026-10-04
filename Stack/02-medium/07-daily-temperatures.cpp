@@ -90,10 +90,10 @@ int main() {
   // vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
 
   // * testcase 2
-  // vector<int> temperatures = {30, 40, 50, 60};
+  vector<int> temperatures = {30, 40, 50, 60};
 
   // * testcase 3
-  vector<int> temperatures = {30, 60, 90};
+  // vector<int> temperatures = {30, 60, 90};
 
   cout << "Daily Temperatures" << endl;
   printArr(temperatures);

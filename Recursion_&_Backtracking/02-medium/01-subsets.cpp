@@ -18,9 +18,10 @@
  * https://www.geeksforgeeks.org/problems/subsets-1613027340/1
 */
 
-// ! Unique elements in array.
-
+// ! [confidence 5/5]
 // ! Amazon, Google, Meta, Microsoft, Apple, Adobe
+
+// ! Unique elements in array.
 
 #include <vector>
 #include <iostream>

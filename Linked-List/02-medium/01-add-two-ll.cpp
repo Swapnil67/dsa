@@ -18,6 +18,7 @@
  * https://www.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1
 */
 
+// ! [confidence 5/5]
 // ! Amazon, Google, Meta, Microsoft, Adobe, Uber, ByteDance
 
 #include <vector>

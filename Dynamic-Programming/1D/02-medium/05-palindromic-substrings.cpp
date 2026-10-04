@@ -10,6 +10,7 @@
  * https://leetcode.com/problems/palindromic-substrings/description/
 */
 
+// ! [confidence 4/5]
 // ! Amazon, Google, Meta, Microsoft, Oracle, Apple, Paypal, Bloomberg
 
 #include <vector>

@@ -76,9 +76,9 @@ bool dfs_bob(
   visited[u] = true;
   bob_time_map[u] = time;
   
-  if (u == 0) { // * Reached Destination
+  // * Reached Destination
+  if (u == 0)
     return true;
-  }
 
   for (auto &v: adj[u]) {
     if (!visited[v]) {
@@ -103,13 +103,14 @@ void dfs_alice(
 
   // * Check if bob never reached this node or bob reached after alice
   if (bob_time_map.count(u) == 0 || time < bob_time_map[u]) {
-    income += amount[u];
-  } else if (time == bob_time_map[u]) {
-    income += (amount[u] / 2);
+    income += amount[u]; // * All profit goes to alice
+  } else if (time == bob_time_map[u]) { 
+    income += (amount[u] / 2); // * Profit gets shared
   }
 
-  // * Alice reached any leaf node & it should not be the starting node [For Alice Starting Node = 0]
-  if (adj[u].size() == 1 && u != 0) { // * update the max_alice_income for alice
+  // * Leaf not will atleast have one ngbr since its a undirected graph
+  // * Single-node tree edge case: if root is the only node, it acts as a leaf
+  if (adj[u].size() == 0 || (adj[u].size() == 1 && u != 0)) { 
     max_alice_income = max(max_alice_income, income);
   }
   

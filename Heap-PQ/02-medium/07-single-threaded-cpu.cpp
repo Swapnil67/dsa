@@ -64,6 +64,7 @@ vector<int> cpuTasks(vector<vector<int>> &tasks) {
     sorted_tasks.push_back({start_time, processing_time, i});
   }
   sort(begin(sorted_tasks), end(sorted_tasks));
+  
   // * For debugging
   // cout << "Tasks: " << endl;
   // for (auto &vec : sorted_tasks)
@@ -76,7 +77,7 @@ vector<int> cpuTasks(vector<vector<int>> &tasks) {
   while (i < n || !busy.empty()) {
     // * initial task time start
     if (busy.empty()) {
-      time = max(time, (long)tasks[i][0]);
+      time = max(time, (long)sorted_tasks[i][0]);
     }
     // cout << time << endl;
     

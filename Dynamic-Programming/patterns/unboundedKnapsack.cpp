@@ -35,11 +35,7 @@ int dfs(int i, int cap, vector<int> &profit, vector<int> &weight) {
   return max(not_take, take);
 }
 
-int dfs(int i, int cap,
-        vector<int> &profit,
-        vector<int> &weight,
-        vector<vector<int>> &dp)
-{
+int dfs(int i, int cap, vector<int> &profit, vector<int> &weight, vector<vector<int>> &dp) {
   if (i == 0)
     return (cap / weight[i]) * profit[i];
 
@@ -56,7 +52,6 @@ int dfs(int i, int cap,
   }
   return dp[i][cap] = max(not_take, take);
 }
-
 
 // * ------------------------- Approach: Brute Force Approach -------------------------
 // * Top Down [from 0 to n]

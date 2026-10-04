@@ -23,6 +23,7 @@
  * Output       : [1]
  * 
  * https://neetcode.io/problems/kill-process/question
+ * https://www.naukri.com/code360/problems/kill-process_20737877
 */
 
 #include <vector>
@@ -31,17 +32,16 @@
 
 using namespace std;
 
-
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 void dfs(int u, vector<int> &ans, unordered_map<int, vector<int>> &adj) {
@@ -71,19 +71,19 @@ vector<int> killProcess(vector<int> &pid, vector<int> &ppid, int kill) {
 int main(void) {
   // * testcase 1
   int kill = 5;
-  std::vector<int> pid = {1, 3, 10, 5}, ppid = {3, 0, 5, 3};
+  vector<int> pid = {1, 3, 10, 5}, ppid = {3, 0, 5, 3};
   
   // * testcase 2
   // int kill = 1;
-  // std::vector<int> pid = {1}, ppid = {0};
+  // vector<int> pid = {1}, ppid = {0};
 
-  std::cout << "pid: ";
+  cout << "pid: ";
   printArr(pid);
-  std::cout << "ppid: ";
+  cout << "ppid: ";
   printArr(ppid);
 
-  std::vector<int> ans = killProcess(pid, ppid, kill);
-  std::cout << "Killed Processes: ";
+  vector<int> ans = killProcess(pid, ppid, kill);
+  cout << "Killed Processes: ";
   printArr(ans);
   return 0;
 }

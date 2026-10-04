@@ -37,8 +37,8 @@ void printArr(std::vector<int> arr) {
 int upperBoundBrute(std::vector<int> arr, int x) {
   int n = arr.size();
   int uppderIdx = n;
-  for(int i=0; i<n; i++) {
-    if(arr[i] > x) {
+  for (int i = 0; i < n; i++) {
+    if (arr[i] > x) {
       uppderIdx = std::min(uppderIdx, i);
     }
   }

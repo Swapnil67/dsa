@@ -21,6 +21,7 @@
  * https://www.naukri.com/code360/problems/linked-list-cycle-ii_1112628
 */
 
+// ! [confidence 2/5]
 // ! Microsoft
 
 #include <vector>

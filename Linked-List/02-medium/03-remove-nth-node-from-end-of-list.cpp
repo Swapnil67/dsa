@@ -20,6 +20,7 @@
  * https://www.naukri.com/code360/problems/delete-kth-node-from-end_799912
 */
 
+// ! [confidence 1/5]
 // ! Microsoft, Amazon, Meta, Oracle
 
 #include <stack>

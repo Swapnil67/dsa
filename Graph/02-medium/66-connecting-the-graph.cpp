@@ -15,6 +15,7 @@
  * Input        : n = 6, edges = [ [0,1] , [0,2] , [0,3] , [1,2] , [1,3] ]
  * Output       : 2
  * Explanation  : 
+ * 
  * https://www.geeksforgeeks.org/problems/connecting-the-graph/1
 */
 
@@ -41,8 +42,10 @@ void printArr(vector<T> &arr) {
 
 class DSU {
 public:
+  int components;
   vector<int> parent, rank;
   DSU(int n) {
+    components = n;
     rank.resize(n);
     parent.resize(n);
     iota(begin(parent), end(parent), 0);
@@ -54,19 +57,28 @@ public:
     return parent[x] = find(parent[x]);
   }
 
-  void Union(int x, int y) {
+  bool Union(int x, int y) {
     int x_parent = find(x);
     int y_parent = find(y);
+    if (x_parent == y_parent)
+      return false;
+
     if (rank[x_parent] > rank[y_parent]) {
       parent[y_parent] = x_parent;
     } else {
       parent[x_parent] = y_parent;
       rank[y_parent]++;
     }
+    components--;
+    return true;
   }
 };
 
-int minEdgesReq(int n, vector<vector<int>>& edge) {
+// * ------------------------- APPROACH 1: Optimal Approach -------------------------
+// * DSU
+// * TIME COMPLEXITY O(N + E)
+// * SPACE COMPLEXITY O(N + E)
+int bruteForce(int n, vector<vector<int>>& edge) {
   // * 1. DSU
   DSU ds(n);
 
@@ -80,15 +92,17 @@ int minEdgesReq(int n, vector<vector<int>>& edge) {
     }
   }
 
-  // * Number of actual components in a graph
+  // * Counting Isolated Components
   int components = 0;
   for (int i = 0; i < n; ++i) {
-    if (i == ds.parent[i])
+    if (i == ds.find(i))
       components++;
   }
   cout << "Parent: ";
   printArr(ds.parent);
+  printArr(ds.rank);
 
+  // * The absolute minimum number of edges needed to link all separate components together.
   int ans = components - 1; // * Graph Theory
   // cout << "ans " << ans << endl;
   // cout << "components " << components << ", extra_edges " << extra_edges << endl;
@@ -96,6 +110,27 @@ int minEdgesReq(int n, vector<vector<int>>& edge) {
     return ans;
 
   return -1; // * no extra edge
+}
+
+
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
+// * DSU
+// * TIME COMPLEXITY O(N + E)
+// * SPACE COMPLEXITY O(N + E)
+int minEdgesReq(int n, vector<vector<int>> &edges) {
+  // * Total edges must be at least n - 1 to connect n nodes
+  if (edges.size() < n - 1) {
+    return -1;
+  }
+
+  DSU ds(n);
+
+  for (const auto &edge : edges) {
+    ds.Union(edge[0], edge[1]);
+  }
+
+  // * The number of operations needed is always (components - 1)
+  return ds.components - 1;
 }
 
 int main(void) {
@@ -112,7 +147,7 @@ int main(void) {
   for (auto &vec : edges)
     printArr(vec);
 
-
+  // int ans = bruteForce(n, edges);
   int ans = minEdgesReq(n, edges);
   cout << "Answer: " << ans << endl;
 

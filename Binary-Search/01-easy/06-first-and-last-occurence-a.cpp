@@ -39,41 +39,38 @@ void printArr(vector<T> &nums) {
 }
 
 // * Lower bound -> arr[i] >= k
-int findLowerBound(vector<int> arr, int k) {
-  int n = arr.size();
-  int l = 0, r = n - 1;
-  int idx = n;
-  while(l <= r) {
+int findLowerBound(vector<int> &nums, int target) {
+  int l = 0, r = nums.size() - 1;
+  int ans = -1;
+  while (l <= r) {
     int m = l + (r - l) / 2;
-    if(arr[m] >= k) {
-      idx = m;
+    if (nums[m] >= target) {
+      ans = m;
       r = m - 1;
     }
     else {
       l = m + 1;
     }
   }
-  
-  return idx;
+  return ans;
 }
 
 // * Upper bound -> arr[i] > k
-int findUpperBound(vector<int> arr, int k) {
-  int n = arr.size();
-  int l = 0, r = n - 1;
-  int idx = n;
-  while(l <= r) {
+int findUpperBound(vector<int> &nums, int target) {
+  int l = 0, r = nums.size() - 1;
+  int ans = -1;
+  while (l <= r) {
     int m = l + (r - l) / 2;
-    if (arr[m] > k) {
-      idx = m - 1;
+    if (nums[m] > target) {
       r = m - 1;
     }
     else {
+      if (nums[m] == target) // * check if element found
+        ans = m;
       l = m + 1;
     }
   }
-
-  return idx;
+  return ans;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
@@ -98,18 +95,17 @@ pair<int, int> bruteForce(vector<int> arr, int k) {
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(2logN)
 // * SPACE COMPLEXITY O(1)
-pair<int, int> firstAndLastOccurence(vector<int> arr, int k) {
-  int n = arr.size();
-  int firstOccurence = findLowerBound(arr, k);
+pair<int, int> firstAndLastOccurence(vector<int> nums, int k) {
+  int n = nums.size();
+  int firstIdx = findLowerBound(nums, k);
   
   // * If k not found
-  if (firstOccurence == n || arr[firstOccurence] != k) {
+  if (firstIdx == n || nums[firstIdx] != k) {
     return {-1, -1};
   }
 
-  int lastOccurence = findUpperBound(arr, k);
-  pair<int, int> ans(firstOccurence, lastOccurence);
-  return ans;
+  int lastIdx = findUpperBound(nums, k);
+  return {firstIdx, lastIdx};
 }
 
 int main() {
@@ -124,7 +120,11 @@ int main() {
   // * testcase 3
   // vector<int> arr = {1, 3, 3, 5};
   // int k = 9;
-  
+
+  // * testcase 4
+  // int k = 1;
+  // vector<int> arr = {1};
+
   printArr(arr);
   // pair<int, int> ans = bruteForce(arr, k);
   pair<int, int> ans = firstAndLastOccurence(arr, k);

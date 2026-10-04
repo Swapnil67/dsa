@@ -36,30 +36,32 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<int, std::vector<int>> &adj) {
+void printAdjList(unordered_map<int, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-int bfs(int &dest, std::unordered_map<int, std::vector<int>> &adj) {
-  std::queue<int> q;
+int bfs(int &dest, unordered_map<int, vector<int>> &adj) {
+  queue<int> q;
   q.push(0);
 
-  std::vector<bool> visited(dest, false);
+  vector<bool> visited(dest, false);
   visited[0] = true;
 
   int level = 0;
@@ -91,16 +93,16 @@ int bfs(int &dest, std::unordered_map<int, std::vector<int>> &adj) {
 // * E = num of edges
 // * TIME COMPLEXITY O(Q) * O(V + E)
 // * SPACE COMPLEXITY O(Q) * O(V + E)
-std::vector<int> shortestDistanceAfterQueries(int n, std::vector<std::vector<int>> &queries) {
+vector<int> shortestDistanceAfterQueries(int n, vector<vector<int>> &queries) {
   // * 1. Create a default adj list
-  std::unordered_map<int, std::vector<int>> adj;
+  unordered_map<int, vector<int>> adj;
   for (int i = 0; i <= n - 2; ++i) {
     adj[i].push_back(i + 1);
   }
   // printAdjList(adj);
 
   // * 2. Add each query to Adj list & then find min distance from 0 -> n
-  std::vector<int> ans;
+  vector<int> ans;
   for (auto &it : queries) {
     int u = it[0], v = it[1];
     adj[u].push_back(v);
@@ -115,18 +117,18 @@ std::vector<int> shortestDistanceAfterQueries(int n, std::vector<std::vector<int
 int main(void) {
   // * testcase 1
   int n = 5;
-  std::vector<std::vector<int>> queries = {{2, 4}, {0, 2}, {0, 4}};
+  vector<vector<int>> queries = {{2, 4}, {0, 2}, {0, 4}};
 
   // * testcase 2
   // int n = 4;
-  // std::vector<std::vector<int>> queries = {{0, 3}, {0, 2}};
+  // vector<vector<int>> queries = {{0, 3}, {0, 2}};
 
-  std::cout << "------------ queries -------------" << std::endl;
+  cout << "------------ queries -------------" << endl;
   for (auto &vec : queries)
     printArr(vec);
 
-  std::vector<int> ans = shortestDistanceAfterQueries(n, queries);
-  std::cout << "Shortest Distance From 0 -> n" << std::endl;
+  vector<int> ans = shortestDistanceAfterQueries(n, queries);
+  cout << "Shortest Distance From 0 -> n" << endl;
   printArr(ans);
 
   return 0;

@@ -25,28 +25,29 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
 // * check out of bound
-bool check_not_oob(const int &row, const int &col, std::vector<std::vector<int>> &grid) {
+bool check_not_oob(const int &row, const int &col, vector<vector<int>> &grid) {
   int m = grid.size(), n = grid[0].size();
   return row >= 0 && row < m && col >= 0 && col < n;
 }
 
-const std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-void dfs(int r, int c, std::vector<std::vector<int>> &grid) {
+void dfs(int r, int c, vector<vector<int>> &grid) {
   grid[r][c] = 1;
   for (auto &dir: dirs) {
     int dr = r + dir[0];
@@ -58,11 +59,12 @@ void dfs(int r, int c, std::vector<std::vector<int>> &grid) {
 }
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
+// * This sum is extended version of No. of Islands
 // * TIME COMPLEXITY O(m x n)
 // * SPACE COMPLEXITY O(m x n)
-int regionsBySlashes(std::vector<std::string> &grid) {
+int regionsBySlashes(vector<string> &grid) {
   int n = grid.size();
-  std::vector<std::vector<int>> matrix(n * 3, std::vector<int>(n * 3, 0));
+  vector<vector<int>> matrix(n * 3, vector<int>(n * 3, 0));
 
   // * Create the matrix out of given string
   for (int r = 0; r < n; ++r) {
@@ -100,19 +102,19 @@ int regionsBySlashes(std::vector<std::string> &grid) {
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::string> grid = {" /", "/ "};
+  // vector<string> grid = {" /", "/ "};
   
   // * testcase 2
-  // std::vector<std::string> grid = {" /", "  "};
+  // vector<string> grid = {" /", "  "};
   
   // * testcase 3
-  std::vector<std::string> grid = {"/\\", "\\/"};
+  vector<string> grid = {"/\\", "\\/"};
 
-  std::cout << "grid ";
+  cout << "grid ";
   printArr(grid);
 
   int ans = regionsBySlashes(grid);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
 
   return 0;
 }

@@ -18,23 +18,31 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr) {
+int bruteForce(vector<int> arr) {
   int n = arr.size();
-  for(int i=0; i<n; i++) {
+  for (int i = 0; i < n; i++) {
     int cnt = 0;
-    for(int j=0; j<n; j++) {
-      if(arr[i] == arr[j]) cnt++;
+    for (int j = 0; j < n; j++) {
+      if (arr[i] == arr[j])
+        cnt++;
     }
     if (cnt > (n / 2))
       return arr[i];
@@ -47,9 +55,9 @@ int bruteForce(std::vector<int> arr) {
 // * Hashmap
 // * TIME COMPLEXITY O(NlogN) + O(N) (for traversing map)
 // * SPACE COMPLEXITY O(N)
-int betterApproach(std::vector<int> arr) {
+int betterApproach(vector<int> arr) {
   int n = arr.size();
-  std::unordered_map<int, int> countMap;
+  unordered_map<int, int> countMap;
   // * O(NlogN)
   for (int i = 0; i < n; i++) {
     countMap[arr[i]]++;
@@ -71,7 +79,7 @@ int betterApproach(std::vector<int> arr) {
 */
 // * TIME COMPLEXITY O(2N)
 // * SPACE COMPLEXITY O(1)
-int majorityElement(std::vector<int> arr) {
+int majorityElement(vector<int> arr) {
   int cnt = 0, n = arr.size();
   int ele;
 
@@ -91,17 +99,17 @@ int majorityElement(std::vector<int> arr) {
 }
 
 int main() {
-  // std::vector<int> arr = {3, 2, 3}; // * 3
-  // std::vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 }; // * 58
-  std::vector<int> arr = {2, 2, 1, 1, 1, 2, 2}; // * 2
+  // vector<int> arr = {3, 2, 3}; // * 3
+  // vector<int> arr = {58, 58, 28, 95, 58, 15, 58, 58 }; // * 58
+  vector<int> arr = {2, 2, 1, 1, 1, 2, 2}; // * 2
 
-  std::cout << "Input Array" << std::endl;
+  cout << "Input Array" << endl;
   printArr(arr);
 
   // int ans = bruteForce(arr);
   // int ans = betterApproach(arr);
   int ans = majorityElement(arr);
-  std::cout << "Majority Element " << ans << std::endl;
+  cout << "Majority Element " << ans << endl;
 
   return 0;
 }

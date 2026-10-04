@@ -45,8 +45,9 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+typedef long long ll;
 
-long long solve(int i, int cur_sum,
+ll solve(int i, int cur_sum,
                 int cur_min, int k,
                 vector<int> &nums1,
                 vector<int> &nums2)
@@ -63,22 +64,23 @@ long long solve(int i, int cur_sum,
   if (cur_min == 0)
     return 0;
 
-  long long res = solve(i + 1, cur_sum, cur_min, k, nums1, nums2); // * not take
+  ll res = solve(i + 1, cur_sum, cur_min, k, nums1, nums2); // * not take
   return max(res, solve(i + 1, cur_sum + nums1[i], min(cur_min, nums2[i]), k - 1, nums1, nums2));
 }
 
 // * ------------------------- Brute Force Approach -------------------------`
+// ! TLE
 // * Recursion & Backtracking
 // * TIME COMPLEXITY O(2^n)
 // * SPACE COMPLEXITY O(n)
-long long bruteForce(vector<int> &nums1, vector<int> &nums2, int k) {
+ll bruteForce(vector<int> &nums1, vector<int> &nums2, int k) {
   return solve(0, 0, INT_MAX, k, nums1, nums2);
 }
 
 // * ------------------------- Optimal Approach -------------------------`
 // * TIME COMPLEXITY O(nlogn + nlogk) ~ O(nlogn)
 // * SPACE COMPLEXITY O(n)
-long long maxScore(vector<int> &nums1, vector<int> &nums2, int k) {
+ll maxScore(vector<int> &nums1, vector<int> &nums2, int k) {
   int n = nums1.size();
 
   // * Create a pairs of vec
@@ -96,8 +98,8 @@ long long maxScore(vector<int> &nums1, vector<int> &nums2, int k) {
   //   cout << it.first << " " << it.second << endl;
   // }
 
-  priority_queue<long long, vector<long long>, greater<long long>> min_heap;
-  long long k_sum = 0, result = 0;
+  priority_queue<ll, vector<ll>, greater<ll>> min_heap;
+  ll k_sum = 0, result = 0;
 
   for (auto &pair: pairs) {
     k_sum += pair.first;
@@ -110,7 +112,7 @@ long long maxScore(vector<int> &nums1, vector<int> &nums2, int k) {
     }
     
     if (min_heap.size() == k) {
-      result = max(result, k_sum * (long long)pair.second);
+      result = max(result, k_sum * (ll)pair.second);
     }
     cout << "k_sum: " << k_sum << ", result: " << result << endl;
   }
@@ -140,8 +142,8 @@ int main(void) {
   cout << "nums2: ";
   printArr(nums2);
 
-  long long ans = bruteForce(nums1, nums2, k);
-  // long long ans = maxScore(nums1, nums2, k);
+  ll ans = bruteForce(nums1, nums2, k);
+  // ll ans = maxScore(nums1, nums2, k);
 
   cout << "Maximum Subsequence Score " << ans << endl;
 

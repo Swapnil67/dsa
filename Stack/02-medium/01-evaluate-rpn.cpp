@@ -17,6 +17,7 @@
   * Explanation: ((2 + 1) * 3) = 9
  
   * https://leetcode.com/problems/evaluate-reverse-polish-notation/
+  * https://www.naukri.com/code360/problems/evaluate-reverse-polish-notation_15790672
 */
 
 // ! Microsoft, Google, Amazon, Meta, Oracle, Goldman Sacs, Apple

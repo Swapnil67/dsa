@@ -41,26 +41,28 @@
 #include <unordered_map>
 #include <unordered_set>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-void printAdjList(std::unordered_map<std::string, std::vector<int>> &adj) {
+void printAdjList(unordered_map<string, vector<int>> &adj) {
   for (auto &[key, vec] : adj) {
-    std::cout << key << " -> ";
+    cout << key << " -> ";
     printArr(vec);
   }
 }
 
-typedef std::vector<std::string> vs;
+typedef vector<string> vs;
 
 
 // * ------------------------- APPROACH: Optimal Approach -------------------------`
@@ -69,37 +71,37 @@ typedef std::vector<std::string> vs;
 // * s = num of supplies
 // * TIME COMPLEXITY O(n^2 * m)
 // * SPACE COMPLEXITY O(n + s)
-std::vector<std::string> bruteForce(
-    std::vector<std::string> &recipes,
-    std::vector<std::string> &supplies,
-    std::vector<std::vector<std::string>> &ingredients)
+vector<string> bruteForce(
+    vector<string> &recipes,
+    vector<string> &supplies,
+    vector<vector<string>> &ingredients)
 {
   // * Add all the supplies to set
-  std::unordered_set<std::string> supplies_set(begin(supplies), end(supplies));
+  unordered_set<string> supplies_set(begin(supplies), end(supplies));
 
-  std::vector<std::string> ans;
+  vector<string> ans;
   
   int recipes_cnt = recipes.size();
-  std::vector<bool> cooked(recipes_cnt, false);
+  vector<bool> cooked(recipes_cnt, false);
   int count = recipes_cnt;
   while (count--) { // * O(n)
     for (int i = 0; i < recipes_cnt; ++i) {
       if (cooked[i])
         continue;
 
-      std::string recipe = recipes[i];
+      string recipe = recipes[i];
 
       // * check if all ingredients are available in supplies
       bool can_make = true;
       for (auto &i : ingredients[i]) { // * O(m)
         if (!supplies_set.count(i)) {
-          // std::cout << i << std::endl;
+          // cout << i << endl;
           can_make = false;
           break;
         }
       }
 
-      // std::cout << recipe << ' ' << can_make << std::endl;
+      // cout << recipe << ' ' << can_make << endl;
       // * If we can cook recipe then add it to the supplies set
       if (can_make) {
         cooked[i] = true;
@@ -120,18 +122,18 @@ std::vector<std::string> bruteForce(
 // * s = num of supplies
 // * TIME COMPLEXITY O(n * m)
 // * SPACE COMPLEXITY O(n + s)
-std::vector<std::string> findAllRecipes(
-    std::vector<std::string> &recipes,
-    std::vector<std::string> &supplies,
-    std::vector<std::vector<std::string>> &ingredients)
+vector<string> findAllRecipes(
+    vector<string> &recipes,
+    vector<string> &supplies,
+    vector<vector<string>> &ingredients)
 {
   // * Add all the supplies to set
-  std::unordered_set<std::string> supplies_set(begin(supplies), end(supplies));
+  unordered_set<string> supplies_set(begin(supplies), end(supplies));
+  unordered_map<string, vector<int>> adj;
 
   // * Create an adj list of ingredients who are dependent on recipe
   int recipes_cnt = recipes.size();
-  std::vector<int> indegree(recipes_cnt, 0);
-  std::unordered_map<std::string, std::vector<int>> adj;
+  vector<int> indegree(recipes_cnt, 0);
   for (int i = 0; i < recipes_cnt; ++i) { // * O(n)
     for (auto &ing : ingredients[i]) { // * O(m)
       // * If ingredient is not found in supplies that means this recipe depends on `ing`
@@ -142,30 +144,31 @@ std::vector<std::string> findAllRecipes(
       }
     }
   }
+  // * For Debugging
   // printAdjList(adj);
-  // std::cout << "Indegree" << std::endl;
+  // cout << "Indegree" << endl;
   // printArr(indegree);
 
   // * Kahn's Algo 
-  std::queue<int> q;
+  // * Make those recipes first who have zero dependency 
+  queue<int> q;
   for (int i = 0; i < recipes_cnt; ++i) {
     if (indegree[i] == 0)
       q.push(i);
   }
 
-  std::vector<std::string> ans;
+  vector<string> ans;
   while (!q.empty()) { // * O(n) ~ Worst case all recipes
     int u = q.front();
     q.pop();
 
-    std::string recipe = recipes[u];
+    string recipe = recipes[u];
     ans.push_back(recipe);
-    // std::cout << recipe << std::endl;
+    // cout << recipe << endl;
 
     for (auto &v: adj[recipe]) {
       indegree[v]--;
       if (indegree[v] == 0) {
-        indegree[v]--;
         q.push(v);
       }
     }
@@ -176,32 +179,33 @@ std::vector<std::string> findAllRecipes(
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::string> recipes = {"bread"}, supplies = {"yeast", "flour", "corn"};
-  // std::vector<std::vector<std::string>> ingredients = {{"yeast", "flour"}};
+  // vector<string> recipes = {"bread"}, supplies = {"yeast", "flour", "corn"};
+  // vector<vector<string>> ingredients = {{"yeast", "flour"}};
 
   // * testcase 2
-  // std::vector<std::string> recipes = {"bread", "sandwich"}, supplies = {"yeast", "flour", "meat"};
-  // std::vector<std::vector<std::string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}};
+  // vector<string> recipes = {"bread", "sandwich"}, supplies = {"yeast", "flour", "meat"};
+  // vector<vector<string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}};
 
   // * testcase 3
-  std::vector<std::string> recipes = {"bread", "sandwich", "burger"}, supplies = {"yeast", "flour", "meat"};
-  std::vector<std::vector<std::string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}, {"sandwich", "meat", "bread"}};
+  // vector<string> recipes = {"bread", "sandwich", "burger"}, supplies = {"yeast", "flour", "meat"};
+  // vector<vector<string>> ingredients = {{"yeast", "flour"}, {"bread", "meat"}, {"sandwich", "meat", "bread"}};
 
   // * testcase 4
-  // std::vector<std::string> recipes = {"sandwich,", "bread", "burger"}, supplies = {"yeast", "flour", "meat"};
-  // std::vector<std::vector<std::string>> ingredients = {{"bread", "meat"}, {"yeast", "flour"}, {"meat", "bread"}};
+  vector<string> recipes = {"sandwich,", "bread", "burger"}, supplies = {"yeast", "flour", "meat"};
+  vector<vector<string>> ingredients = {{"bread", "meat"}, {"yeast", "flour"}, {"meat", "bread"}};
 
-  std::cout << "Recipes: ";
+  cout << "Recipes: ";
   printArr(recipes);
-  std::cout << "Supplies: ";
+  cout << "Supplies: ";
   printArr(supplies);
-  std::cout << "------------ ingredients -------------" << std::endl;
+  cout << "------------ ingredients -------------" << endl;
   for (auto &vec : ingredients)
     printArr(vec);
 
-  // std::vector<std::string> ans = bruteForce(recipes, supplies, ingredients);
-  std::vector<std::string> ans = findAllRecipes(recipes, supplies, ingredients);
-  std::cout << "Cooked Foods: ";
+  // vector<string> ans = bruteForce(recipes, supplies, ingredients);
+  vector<string> ans = findAllRecipes(recipes, supplies, ingredients);
+
+  cout << "Cooked Foods: ";
   printArr(ans);
 
   return 0;

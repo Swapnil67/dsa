@@ -30,7 +30,6 @@
 
 #include <queue>
 #include <vector>
-#include <climits>
 #include <iostream>
 #include <unordered_map>
 
@@ -115,7 +114,7 @@ vector<int> bruteForce(int n, vector<vector<int>> &edges) {
   // * 2. Find Minimum height for all possible roots and save it to map
   for (int u = 0; u < n; ++u) {
     int height = bfs(n, u, adj);
-    std::cout << "u: " << u << ", height: " << height << std::endl;
+    cout << "u: " << u << ", height: " << height << endl;
     min_height = min(min_height, height);
     height_mp[height].push_back(u);
   }
@@ -139,6 +138,9 @@ vector<int> bruteForce(int n, vector<vector<int>> &edges) {
 // * TIME COMPLEXITY O(n) * O(V + E)
 // * SPACE COMPLEXITY O(n) * O(V + E)
 vector<int> findMinHeightTrees(int n, vector<vector<int>> &edges) {
+  if (n == 1)
+    return {0};
+    
   // * 1. Create a default adj list with indegree
   vector<int> indegree(n, 0);
   unordered_map<int, vector<int>> adj;
@@ -158,7 +160,7 @@ vector<int> findMinHeightTrees(int n, vector<vector<int>> &edges) {
   for (int i = 0; i < n; ++i) {
     // * Since we are excluding leaf nodes
     if (indegree[i] == 1) {
-      // std::cout << i << std::endl;
+      // cout << i << endl;
       q.push(i);
     }
   }
@@ -166,15 +168,15 @@ vector<int> findMinHeightTrees(int n, vector<vector<int>> &edges) {
   while (n > 2) { // * we'll have atmost two roots possible
     int N = q.size();
     n -= N;
-    std::cout << n << std::endl;
+    cout << n << endl;
     
     while (N--) {
       int u = q.front();
       q.pop();
-      // std::cout << "u: " << u << std::endl;
+      // cout << "u: " << u << endl;
 
       for (auto &v: adj[u]) {
-        // std::cout << v << std::endl;
+        // cout << v << endl;
         indegree[v]--;
         if (indegree[v] == 1)
           q.push(v);
@@ -206,6 +208,7 @@ int main(void) {
 
   // vector<int> ans = bruteForce(n, edges);
   vector<int> ans = findMinHeightTrees(n, edges);
+
   cout << "Minimum Height Trees root: " << endl;
   printArr(ans);
 

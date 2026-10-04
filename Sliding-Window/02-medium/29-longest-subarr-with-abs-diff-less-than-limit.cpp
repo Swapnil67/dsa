@@ -157,6 +157,56 @@ int longestSubarray2(vector<int> &nums, int limit) {
 }
 
 
+// * ------------------------- APPROACH 2C: Optimal APPROACH -------------------------
+// ! Multiset Approach 
+int longestSubarray3(vector<int>& nums, int k) {
+  int n = nums.size();
+
+  // * A balanced BST (multiset) to automatically keep numbers sorted.
+  // * This allows us to find the min and max of the current window in O(1)
+  // * time.
+  multiset<int> ms;
+
+  int i = 0, j = 0;
+  int diff = 0, maxLen = 0;
+
+  // * Outer loop: Expand the right boundary (j) of our sliding window
+  while (i < n && j < n) {
+    // * Insert the current element into our sorted multiset
+    ms.insert(nums[j]);
+
+    // * Calculate the maximum difference inside the current window.
+    // * *ms.rbegin() gets the largest element, *ms.begin() gets the
+    // * smallest.
+    diff = *ms.rbegin() - *ms.begin();
+
+    // * Inner loop: If the condition is broken, shrink the window from
+    // * the left (i)
+    while (diff > k) {
+      // * CRITICAL: ms.erase(nums[i]) deletes ALL copies of that
+      // * number. ms.find(nums[i]) returns an iterator to just ONE
+      // * instance, ensuring we only delete a single copy out of the
+      // * current window.
+      ms.erase(ms.find(nums[i]));
+
+      // * Move the left pointer forward to shrink the window
+      i++;
+
+      // * Recalculate the difference for the newly shrunk window
+      diff = *ms.rbegin() - *ms.begin();
+    }
+
+    // * At this point, the window [i...j] is guaranteed to be valid.
+    // * Update our maximum tracked length.
+    maxLen = max(maxLen, (j - i + 1));
+
+    // * Move the right pointer forward to check the next element
+    j++;
+  }
+
+  return maxLen;
+}
+
 int main() {
   // * testcase 1 (ans = 2)
   // int limit = 4;

@@ -17,11 +17,18 @@ void swap(int &a, int &b) {
   b = temp;
 }
 
-void print(vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << endl;
 }
 
 template <typename T>
@@ -34,7 +41,7 @@ void reverse(vector<T> &arr) {
   }
 }
 
-void reverseString(std::string &str) {
+void reverseString(string &str) {
   int s = 0, e = str.size() - 1;
   while (s <= e) {
     swap(str[s], str[e]);
@@ -46,17 +53,17 @@ void reverseString(std::string &str) {
 int main() {
   vector<int> arr = {1, 2, 3, 4};
   cout << "Before Reversing" << endl;
-  print(arr);
+  printArr(arr);
   reverse(arr);
   cout << "After Reversing" << endl;
-  print(arr);
+  printArr(arr);
 
-  std::string str = "Hello World";
+  string str = "Hello World";
   cout << "Before Reversing" << endl;
-  std::cout << str << std::endl;
+  cout << str << endl;
   reverseString(str);
   cout << "After Reversing" << endl;
-  std::cout << str << std::endl;
+  cout << str << endl;
   return 0;
 }
 

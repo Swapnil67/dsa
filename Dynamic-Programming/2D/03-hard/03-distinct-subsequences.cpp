@@ -17,6 +17,7 @@
  * https://neetcode.io/problems/count-subsequences
  * https://leetcode.com/problems/distinct-subsequences
  * https://www.naukri.com/code360/problems/subsequence-counting_3755256
+ * https://www.youtube.com/watch?v=nVG7eTiD2bY&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=33
 */
 
 // ! Amazon, Meta, Google, Oracle, Walmart, Bloomberg, JP Morgan, Microsoft, Swiggy
@@ -38,34 +39,44 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+typedef unsigned long long ull;
 int m, n;
 
 // * Without Memoization
 int dfs(int i, int j, string &s, string &t) {
-  if (j < 0 || i < 0)
-    return (j < 0);
+  if (j == 0 || i == 0)
+    return (j == 0);
 
-  if (s[i] == t[j]) {
+  if (s[i - 1] == t[j - 1]) {
     // * (i - 1, j - 1) find the next possible char
     // * (i - 1, j) find another occurence of same char
     return dfs(i - 1, j - 1, s, t) + dfs(i - 1, j, s, t);
-  } else {
-    return dfs(i - 1, j, s, t);
   }
+  return dfs(i - 1, j, s, t);
 }
 
 // * With Memoization
 int dfs(int i, int j, string &s, string &t, vector<vector<int>> &dp) {
-  if (j == 0 || i == 0)
-    return (j == 0);
+  // * Base case: If t is completely matched
+  if (j == 0)
+    return 1;
+  // * Base case: If s is exhausted but t still has remaining characters
+  if (i == 0)
+    return 0;
 
+  // * Return the result if this subproblem has already been solved
   if (dp[i][j] != -1)
     return dp[i][j];
 
+  // * If current characters match, we have two choices:
+  // * 1. Match s[i] with t[j] and move both pointers: dfs(i-1, j-1)
+  // * 2. Ignore s[i] and try to find t[j] earlier in string s: dfs(i-1, j)
   if (s[i - 1] == t[j - 1]) {
     return dp[i][j] =
                dfs(i - 1, j - 1, s, t, dp) + dfs(i - 1, j, s, t, dp);
   }
+
+  // * If characters do not match, we must ignore s[i] and skip it
   return dp[i][j] = dfs(i - 1, j, s, t, dp);
 }
 
@@ -76,7 +87,7 @@ int dfs(int i, int j, string &s, string &t, vector<vector<int>> &dp) {
 // * SPACE COMPLEXITY O(m)
 int bruteForce(string s, string t) {
   m = s.length(), n = t.length();
-  return dfs(m - 1, n - 1, s, t);
+  return dfs(m, n, s, t);
 }
 
 // * ------------------------- Approach: Better Approach -------------------------
@@ -98,17 +109,22 @@ int betterApproach(string s, string t) {
 // * SPACE COMPLEXITY O(m * n)
 int numDistinct(string s, string t) {
   int m = s.length(), n = t.length();
-  vector<vector<uint>> dp(m + 1, vector<uint>(n + 1, 0));
+  vector<vector<ull>> dp(m + 1, vector<ull>(n + 1, 0));
 
   // * Base cases (For every 'i' if 'j' becomes 0 we found one subsequence)
+  // * Base case: An empty string t can always be formed by deleting all characters of s (1 way)
   for (int i = 0; i < m; ++i)
     dp[i][0] = 1;
 
   for (int i = 1; i <= m; ++i) {
     for (int j = 1; j <= n; ++j) {
+      // * If characters match, we sum two choices:
+      // * 1. Include s[i-1] to match t[j-1] -> dp[i-1][j-1]
+      // * 2. Exclude s[i-1] and look for the match earlier -> dp[i-1][j]
       if (s[i - 1] == t[j - 1]) {
         dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
       } else {
+        // * If characters do not match, we must exclude s[i-1]
         dp[i][j] = dp[i - 1][j];
       }
     }
@@ -129,27 +145,23 @@ int numDistinct2(string s, string t) {
   int m = s.size(), n = t.size();
 
   // * Base Case
-  vector<int> prev(n + 1, 0);
-  prev[0] = 1;
+  vector<ull> dp(n + 1, 0);
+  dp[0] = 1; // * Base Case: An empty string t can always be matched (1 way)
 
-  vector<int> cur(n + 1, 0);
-  cur[0] = 1;
-
-  printArr(prev);
+  // printArr(dp);
 
   for (int i = 1; i <= m; ++i) {
-    for (int j = 1; j <= n; ++j) {
+    // * Iterate BACKWARDS to prevent overwriting values needed from the previous iteration
+    for (int j = n; j >= 1; --j) {
       if (s[i - 1] == t[j - 1]) {
-        cur[j] = prev[j - 1] + prev[j];
-      } else {
-        cur[j] = prev[j];
+        dp[j] = dp[j - 1] + dp[j];
       }
+      // * Note: The 'else' case (dp[j] = dp[j]) is omitted because
+      // * the value already remains unchanged in the 1D array!
     }
-    prev = cur;
-    printArr(prev);
   }
 
-  return prev[n];
+  return dp[n];
 }
 
 int main(void) {

@@ -20,20 +20,26 @@
 #include <iostream>
 #include <unordered_map>
 
-void printArr(std::vector<int> arr) {
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  for (int i = 0; i < n; i++) {
-    std::cout << arr[i] << " ";
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout<<std::endl;
+  cout << " ]" << endl;
 }
 
 // * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
 // * Hashmap to Count
 // * TIME COMPLEXITY O(N) + O(N)
 // * SPACE COMPLEXITY O(N)
-bool bruteForce(std::vector<int> &nums) {
-  std::unordered_map<int, int> countMap;
+bool bruteForce(vector<int> &nums) {
+  unordered_map<int, int> countMap;
   int n = nums.size();
   for (int i = 0; i < n; i++) {
     countMap[nums[i]]++;
@@ -52,8 +58,8 @@ bool bruteForce(std::vector<int> &nums) {
 // * Set Data Structure
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-bool containsDuplicate(std::vector<int> &nums) {
-  std::set<int> st;
+bool containsDuplicate(vector<int> &nums) {
+  set<int> st;
   for (int i = 0; i < nums.size(); i++) {
     if (st.find(nums[i]) != st.end()) {
       return true;
@@ -64,13 +70,13 @@ bool containsDuplicate(std::vector<int> &nums) {
 }
 
 int main() {
-  // std::vector<int> arr = {1, 2, 3, 4};
-  std::vector<int> arr = {1, 2, 3, 1};
-  std::cout<<"Input Array "<<std::endl;
+  // vector<int> arr = {1, 2, 3, 4};
+  vector<int> arr = {1, 2, 3, 1};
+  cout<<"Input Array "<<endl;
   printArr(arr);
   bool isDuplicate = bruteForce(arr);
   // bool isDuplicate = containsDuplicate(arr);
-  std::cout<<"Does array contains duplicate "<<isDuplicate<<std::endl;
+  cout<<"Does array contains duplicate "<<isDuplicate<<endl;
   return 0;
 }
 

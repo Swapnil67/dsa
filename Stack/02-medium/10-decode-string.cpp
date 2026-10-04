@@ -19,6 +19,8 @@
  * https://www.geeksforgeeks.org/problems/decode-the-string2444/1
 */
 
+// ! Amazon, Google
+
 #include <stack>
 #include <iostream>
 

@@ -12,6 +12,7 @@
  * https://www.naukri.com/code360/problems/combinations_3625257
 */
 
+// ! [confidence 2/5]
 // ! Amazon, Google, Meta, Microsoft
 
 #include <vector>
@@ -76,7 +77,7 @@ void helper2(int start, vector<int> &temp, int k, int &n) {
 
 // * ------------------------- Optimal Approach -------------------------
 // * TIME COMPLEXITY O(nCk)
-// * SPACE COMPLEXITY O(n)
+// * SPACE COMPLEXITY O(k)
 vector<vector<int>> combine(int n, int k) {
   vector<int> temp;
   // helper(1, temp, k, n, ans);
@@ -106,3 +107,20 @@ int main(void) {
 
 // * Run the code
 // * g++ --std=c++20 03-combination.cpp -o output && ./output
+
+/*
+*                                    [ ]  (Initial State: dfs(1))
+*          ___________________________|___________________________
+*         |                           |                           |
+*      Pick 1                      Pick 2                      Pick 3
+*     dfs(2)                      dfs(3)                      dfs(4)
+*       |                           |                           |
+*      [1]                         [2]                         [3]
+*   ___|___                     ___|___                         |
+*  |   |   |                   |       |                     Pick 4
+* P2  P3  P4                  P3      P4                     dfs(5)
+*  |   |   |                   |       |                      |
+* [1,2][1,3][1,4]             [2,3]   [2,4]                 [3,4]
+*  (✓)  (✓)  (✓)              (✓)     (✓)                   (✓)
+
+*/

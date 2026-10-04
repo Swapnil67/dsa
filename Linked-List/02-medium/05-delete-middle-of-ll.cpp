@@ -19,6 +19,7 @@
  * https://www.naukri.com/code360/problems/delete-middle-node_763267?leftPanelTabValue=PROBLEM
 */
 
+// ! [confidence 2/5]
 // ! Microsoft
 
 #include <vector>

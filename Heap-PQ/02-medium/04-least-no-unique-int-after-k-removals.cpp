@@ -36,7 +36,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Using sorting
 // * TIME COMPLEXITY O(n + nlogn)
 // * SPACE COMPLEXITY O(n)

@@ -13,22 +13,24 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
-void solve(std::vector<std::vector<int>> &adj,
+void solve(vector<vector<int>> &adj,
                        int u,
-                       std::vector<bool> &visited,
-                       std::vector<int> &result)
+                       vector<bool> &visited,
+                       vector<int> &result)
 {
   if (visited[u])
     return;
@@ -43,26 +45,26 @@ void solve(std::vector<std::vector<int>> &adj,
   }
 }
 
-std::vector<int> dfs(std::vector<std::vector<int>> &adj) {
+vector<int> dfs(vector<vector<int>> &adj) {
   int u = adj.size();
-  std::vector<int> result;
-  std::vector<bool> visited(u, false);
+  vector<int> result;
+  vector<bool> visited(u, false);
   solve(adj, 0, visited, result);
   return result;
 }
 
 int main(void) {
   // * testcase 1
-  // std::vector<std::vector<int>> adj = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
+  // vector<vector<int>> adj = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
 
   // * testcase 2
-  std::vector<std::vector<int>> adj = {{1, 2}, {0, 2}, {0, 1, 3, 4}, {2}, {2}};
+  vector<vector<int>> adj = {{1, 2}, {0, 2}, {0, 1, 3, 4}, {2}, {2}};
 
   for (auto &vec : adj)
     printArr(vec);
 
-  std::vector<int> ans = dfs(adj);
-  std::cout << "DFS on Graph" << std::endl;
+  vector<int> ans = dfs(adj);
+  cout << "DFS on Graph" << endl;
   printArr(ans);
 
   return 0;

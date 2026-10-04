@@ -17,8 +17,10 @@
  * Output : "leetcode"
 
  * https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/description/
+ * https://www.naukri.com/code360/problems/reverse-substrings-between-each-pair-of-parentheses_1473865
 */
 
+// ! [confidence 5/5]
 // ! Amazon, Meta
 
 #include <stack>

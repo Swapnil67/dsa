@@ -39,17 +39,14 @@ void printArr(vector<T> &arr) {
 vector<vector<string>> ans;
 
 bool check_palindrome(string &s, int i, int j) {
-  while (i <= j) {
-    if (s[i] != s[j]) 
-      return false;
-    i++;
-    j--;
-  }
-  return true;
+  if (i >= j)
+    return true;
+  if (s[i] == s[j])
+    return check_palindrome(s, i + 1, j - 1);
+  return false;
 }
 
-void dfs(int i, string &s, vector<string> cur)
-{
+void dfs(int i, string &s, vector<string> cur) {
   // * Base case
   if (i == s.size()) {
     ans.push_back(cur);
@@ -57,7 +54,7 @@ void dfs(int i, string &s, vector<string> cur)
   }
 
   for (int j = i; j < s.size(); ++j) {
-    cout << s.substr(i, j - i + 1) << endl;
+    // cout << s.substr(i, j - i + 1) << endl;
     if (check_palindrome(s, i, j)) {
       cur.push_back(s.substr(i, j - i + 1));
       dfs(j + 1, s, cur);

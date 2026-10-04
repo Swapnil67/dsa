@@ -33,6 +33,7 @@ void printArr(vector<T> &arr) {
 }
 
 // ! a, b < 10^9
+// * binary exponentiation
 // * TIME COMPLEXITY O(logN)
 // * SPACE COMPLEXITY O(1)
 int binExprIter(ll a, ll b) {

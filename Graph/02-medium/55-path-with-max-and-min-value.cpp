@@ -42,7 +42,7 @@ void printArr(vector<T> &arr) {
 
 const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-// * ------------------------- APPROACH 2: Optimal Approach -------------------------`
+// * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Dijkstra Algorithm (max heap)
 // * v = no of vertices
 // * e = no of edges

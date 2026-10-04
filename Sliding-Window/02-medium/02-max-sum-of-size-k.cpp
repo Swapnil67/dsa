@@ -63,7 +63,7 @@ int bruteForce(vector<int> arr, int k) {
     int cur_sum = 0;
     unordered_set<int> st;
     for (int j = i; j < i + k; ++j) {
-      if(st.count(arr[j])) {
+      if (st.count(arr[j])) {
         // * found duplicate
         cur_sum = 0;
         break;

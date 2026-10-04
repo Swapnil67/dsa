@@ -1,17 +1,18 @@
-/**
- * * Left Rotate an Array by One
- * * Rotating the array left by one means shifting all elements by one place to the left and 
- * * moving the first element to the last position in the array.
+/*
+ * Left Rotate an Array by One
+ * Rotating the array left by one means shifting all elements by one place to the left and 
+ * moving the first element to the last position in the array.
 
- * * Example 1
- * * Input  : 'n' = 5, 'arr' = [1, 2, 3, 4, 5]
- * * Output : [2, 3, 4, 5, 1]
+ * Example 1
+ * Input  : 'n' = 5, 'arr' = [1, 2, 3, 4, 5]
+ * Output : [2, 3, 4, 5, 1]
  * 
- * * Example 2
- * * Input  : ‘n’ = 4, ‘a’ = [5 7 3 2]
- * * Output : [7 3 2 5]
+ * Example 2
+ * Input  : ‘n’ = 4, ‘a’ = [5 7 3 2]
+ * Output : [7 3 2 5]
 
- * * https://www.naukri.com/code360/problems/left-rotate-an-array-by-one_5026278
+ * https://www.naukri.com/code360/problems/left-rotate-an-array-by-one_5026278
+ * https://www.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1
 */
 
 #include <set>

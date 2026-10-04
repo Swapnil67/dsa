@@ -20,6 +20,8 @@
  * https://www.geeksforgeeks.org/problems/sum-of-subarray-minimum/1
 */
 
+// ! [confidence 1/5]
+
 #include <stack>
 #include <vector>
 #include <iostream>
@@ -132,11 +134,7 @@ int sumSubarrayMins(vector<int> nums) {
     int ps = i - pse[i]; // * Left mai kitne elements honge
     int ns = nse[i] - i; // * Right mai kitne elements honge
     long long total_subarrays = ps * ns;
-    // cout << total_subarrays << endl;
-    // * itne total_subarrays subarrays honge jinka minimum is arr[i]
-    long long total_sum = total_subarrays * nums[i];
-    // cout << total_sum << endl;
-    sum = (sum + total_sum) % M;
+    sum += ((total_subarrays * nums[i]) % M);
   }
   
   cout << "Smallest Sum: " << sum << endl;

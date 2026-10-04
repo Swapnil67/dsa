@@ -23,7 +23,7 @@
  * input  : heights = [1, 5, 1, 2, 3, 4, 10000], bricks = 4, ladders = 1
  * output : 5
  * 
- * https://leetcode.com/problems/furthest-building-you-can-reach/
+ * https://leetcode.com/problems/furthest-building-you-can-reach
  * https://www.naukri.com/code360/problems/furthest-building-you-can-reach_1382372
 */
 
@@ -104,7 +104,7 @@ int helper(vector<int> &heights, int idx, int bricks, int ladders) {
   return max(by_bricks, by_ladder);
 }
 
-// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------`
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
 // * Recursion + Backtracking
 // ! TLE
 int bruteForce(vector<int> &heights, int bricks, int ladders) {

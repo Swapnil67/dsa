@@ -16,6 +16,7 @@
  * Output       : 10
  *
  * https://www.geeksforgeeks.org/problems/number-of-provinces/1
+ * https://neetcode.io/problems/count-connected-components/question
  */
 
 // ! Amazon, Microsoft, Google

@@ -16,11 +16,6 @@ void printArr(std::vector<T> &arr) {
   std::cout << " ]" << std::endl;
 }
 
-// * 14 - Maximum Product Subarray
-// int subarraysDivByK(std::vector<int> &nums, int k) {
-// TODO
-// }
-
 // * ------------------------------------------------------------------------------------------
 
 // * 01 - Average Waiting Time

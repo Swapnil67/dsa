@@ -103,12 +103,14 @@ int carFleet(int target, vector<int> &position, vector<int> &speed) {
   
   stack<double> st;
   for (int i = n - 1; i >= 0; --i) {
+    // * calculate time to reach target position
     double time = ((double)target - (double)cars[i].first) /
                   (1.0 * cars[i].second);
+
     // * Add fleet in increasing order
-    if (st.empty() || time > st.top()) {
+    if (st.empty() || time > st.top())
       st.push(time);
-    }
+    
   }
   
   return st.size();

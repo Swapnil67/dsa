@@ -101,9 +101,10 @@ vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
 
 int main(void) {
   // * testcase 1
-  vector<vector<int>> graph = {{1, 2}, {2, 3}, {5}, {0}, {5}, {}, {}};
+  // vector<vector<int>> graph = {{1, 2}, {2, 3}, {5}, {0}, {5}, {}, {}};
   
-  // vector<vector<int>> graph = {{1, 2, 3, 4}, {1, 2}, {3, 4}, {0, 4}, {}};
+  // * testcase 2
+  vector<vector<int>> graph = {{1, 2, 3, 4}, {1, 2}, {3, 4}, {0, 4}, {}};
 
   cout << "-------- graph -------- " << endl;
   for (auto &vec : graph)

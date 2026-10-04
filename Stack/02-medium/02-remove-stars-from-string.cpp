@@ -21,6 +21,8 @@
 
 // ! Microsoft
 
+using namespace std;
+
 #include <stack>
 #include <iostream>
 
@@ -29,9 +31,9 @@
 // * Using stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::string removeStars(std::string s) {
+string removeStars(string s) {
   int n = s.size();
-  std::stack<char> st;
+  stack<char> st;
   for (auto &c: s) {
     if (c == '*' && !st.empty()) {
       st.pop();
@@ -40,7 +42,7 @@ std::string removeStars(std::string s) {
     }
   }
 
-  std::string ans = "";
+  string ans = "";
   while(!st.empty()) {
     ans = st.top() + ans;
     st.pop();
@@ -53,10 +55,10 @@ std::string removeStars(std::string s) {
 // * Using string as stack
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::string removeStars2(std::string s) {
+string removeStars2(string s) {
   int n = s.size();
 
-  std::string ans = "";
+  string ans = "";
   for (char &ch : s) {
     if(ch == '*') {
       ans.pop_back();
@@ -72,7 +74,7 @@ std::string removeStars2(std::string s) {
 // * Using Two Pointer
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::string removeStars3(std::string s) {
+string removeStars3(string s) {
   int i = 0;
   for (char ch : s) {
     if (ch == '*') {
@@ -89,13 +91,13 @@ std::string removeStars3(std::string s) {
 }
 
 int main() {
-  std::string s = "leet**cod*e";
-  // std::string s = "erase*****";
+  string s = "leet**cod*e";
+  // string s = "erase*****";
   
-  std::cout << "Input String: " << s << std::endl;
-  // std::string ans = removeStars(s);
-  std::string ans = removeStars2(s);
-  std::cout << "Ans: " << ans << std::endl;
+  cout << "Input String: " << s << endl;
+  // string ans = removeStars(s);
+  string ans = removeStars2(s);
+  cout << "Ans: " << ans << endl;
   
   return 0;
 }

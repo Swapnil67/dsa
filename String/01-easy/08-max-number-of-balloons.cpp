@@ -1,20 +1,26 @@
-/**
- * * Leetcode - 1189
- * * Maximum Number of Balloons
- * * Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
+/*
+ * Leetcode - 1189
+ * Maximum Number of Balloons
+ * 
+ * Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.
 
- * * You can use each character in text atmost once. Return the maximum number of instances that can be formed.
+ * You can use each character in text atmost once. Return the maximum number of instances that can be formed.
 
- * * Example 1
- * * Input  : text = "nlaebolko"
- * * Output : 1
+ * Example 1
+ * Input  : text = "nlaebolko"
+ * Output : 1
 
- * * Example 2
- * * Input  : text = "loonbalxballpoon"
- * * Output : 2
+ * Example 2
+ * Input  : text = "loonbalxballpoon"
+ * Output : 2
 
- * * https://leetcode.com/problems/maximum-number-of-balloons/description/
+ * https://leetcode.com/problems/maximum-number-of-balloons/description/
+ * https://leetcode.com/problems/rearrange-characters-to-make-target-string/
+ * https://leetcode.com/discuss/post/3114099/amazon-oa-intern-2024-by-anonymous_user-57od/
 */
+
+// ! OA 
+// ! Amazon
 
 #include <string>
 #include <vector>
@@ -22,25 +28,14 @@
 #include <iostream>
 #include <unordered_map>
 
+using namespace std;
+
 // * ------------------------- Utility -------------------------`
 
-bool findStringInMap(std::string str, std::unordered_map<char, int> &charCount) {
+bool findStringInMap(string str, unordered_map<char, int> &charCount) {
   for(char c : str) {
     if (charCount.find(c) != charCount.end() && charCount[c] > 0) {
       charCount[c]--;
-    }
-    else {
-      return false;
-    }
-  }
-  return true;
-}
-
-bool findStringInArr(std::string str, std::vector<int> &alphabets) {
-  for(char c : str) {
-    int idx = (int)(c) - (int)'a';
-    if(alphabets[idx] > 0) {
-      alphabets[idx]--; 
     }
     else {
       return false;
@@ -53,8 +48,8 @@ bool findStringInArr(std::string str, std::vector<int> &alphabets) {
 // * Use Hashmap and count characters
 // * TIME COMPLEXITY O(N) + O(N * no of balloons)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::string str, std::string findStr) {
-  std::unordered_map<char, int> charCount;
+int bruteForce(string str, string findStr) {
+  unordered_map<char, int> charCount;
   for(char c : str) {
     charCount[c]++;
   }
@@ -67,72 +62,42 @@ int bruteForce(std::string str, std::string findStr) {
   return c;
 }
 
-// * ------------------------- APPROACH 2: BETTER APPROACH -------------------------`
-// * Use Hash Array and count characters
-// * TIME COMPLEXITY O(N) + O(N * no of balloons)
-// * SPACE COMPLEXITY O(1)
-int betterApproach(std::string str, std::string findStr) {
-  std::vector<int> alphabets(26, 0);
-  for(char c : str) {
-    int idx = (int)(c) - (int)'a';
-    // std::cout << "Idx of " << c << " is " << idx << std::endl;
-    alphabets[idx]++;
-  }
-
-  int c = 0;
-  while(findStringInArr(findStr, alphabets)) {
-    c++;
-  }
-
-  return c;
-}
-
-// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------`
-// * Use Basic Maths
+// * ------------------------- APPROACH 3: Optimal APPROACH -------------------------
+// * Hashing Array + Basic Maths
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int maxNumberOfBalloons(std::string str, std::string findStr) {
-  // * Create find string char count map
-  std::unordered_map<char, int> findStrMap;
-   for(char ch : findStr) {
-    findStrMap[ch]++;
-  } 
-  
-  // * Create Input string char count map
-  std::unordered_map<char, int> strMap;
-  for (char ch : str) {
-    if (findStrMap.find(ch) != findStrMap.end()) {
-      strMap[ch]++;
-    }
-  }
+int maxNumberOfBalloons(string s, string t) {
+  vector<int> sFreq(26, 0);
+  for (auto &c : s)
+    sFreq[c - 'a']++;
 
-  int cnt = INT_MAX;
-  for(char ch: findStr) {
-    int ans = strMap[ch] / findStrMap[ch];
-    // std::cout << ch << " -> " << ans << std::endl;
-    if(ans < cnt) {
-      cnt = ans;
-    }
-  }
+  vector<int> tFreq(26, 0);
+  for (auto &c : t)
+    tFreq[c - 'a']++;
 
-  return cnt;
+  int ans = s.length();
+  for (auto &c : t) {
+    int freq = sFreq[c - 'a'] / tFreq[c - 'a'];
+    ans = min(ans, freq);
+  }
+  return ans;
 }
 
 int main() {
   // * testcase 1
-  // std::string str = "nlaebolko";
+  // string str = "nlaebolko";
 
   // * testcase 2
-  std::string str = "loonbalxballpoon";
+  string str = "loonbalxballpoon";
 
   // * testcase 3
-  // std::string str = "leetcode";
+  // string str = "leetcode";
   
-  std::string findStr = "balloon";
+  string findStr = "balloon";
   // int ans = bruteForce(str, findStr);
   // int ans = betterApproach(str, findStr);
   int ans = maxNumberOfBalloons(str, findStr);
-  std::cout << "There are " << ans << " " << findStr << " in " << str << std::endl;
+  cout << "There are " << ans << " " << findStr << " in " << str << endl;
   return 0;
 }
 

@@ -5,7 +5,7 @@
  * You are starving :( and you want to eat food as quickly as possible.
  * You want to find shortest path to arrive at any food cell
  * 
- * You are given a mxn character matrix, grid of these different types of cells:
+ * You are given a character matrix, grid of these different types of cells:
  * - '*' is your location. There is exactly one '*' cell.
  * - '#' is a food cell. There may be multiple food cell.
  * - 'o' is a free space. You can travel through these cells.
@@ -33,30 +33,32 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i] << " ";
+    cout << arr[i] << " ";
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << "]" << std::endl;
+  cout << "]" << endl;
 }
 
-const std::vector<std::vector<int>> dirs = {
+const vector<vector<int>> dirs = {
     {1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-int getFood(std::vector<std::vector<char>> &grid) {
+int getFood(vector<vector<char>> &grid) {
   int m = grid.size(), n = grid[0].size();
 
   // * Step 1: Find the starting cell
-  std::queue<std::pair<int, int>> q;
+  queue<pair<int, int>> q;
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (grid[r][c] == '*') {
-        q.push(std::make_pair(r, c));
+        q.push(make_pair(r, c));
         break;
       }
     }
@@ -91,7 +93,7 @@ int getFood(std::vector<std::vector<char>> &grid) {
             return steps;
           else if (grid[dr][dc] == 'O') {
             grid[dr][dc] = 'X';
-            q.push(std::make_pair(dr, dc));
+            q.push(make_pair(dr, dc));
           }
         }
       }
@@ -104,7 +106,7 @@ int getFood(std::vector<std::vector<char>> &grid) {
 
 int main(void) {
   // * testcase 1
-  //  std::vector<std::vector<char>> grid = {
+  //  vector<vector<char>> grid = {
   //      {'X', 'X', 'X', 'X', 'X', 'X'},
   //      {'X', '*', 'O', 'O', 'O', 'X'},
   //      {'X', 'O', 'O', '#', 'O', 'X'},
@@ -112,7 +114,7 @@ int main(void) {
   //  };
 
   // * testcase 2
-   std::vector<std::vector<char>> grid = {
+   vector<vector<char>> grid = {
        {'X', 'X', 'X', 'X', 'X', 'X'},
        {'X', '*', 'X', 'O', 'X', 'X'},
        {'X', 'O', 'X', '#', 'X', 'X'},
@@ -120,7 +122,7 @@ int main(void) {
    };
 
   // * testcase 3
-  // std::vector<std::vector<char>> grid = {
+  // vector<vector<char>> grid = {
   //     {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
   //     {'X', '*', 'O', 'X', 'O', '#', 'O', 'X'},
   //     {'X', 'O', 'O', 'X', 'O', 'O', 'X', 'X'},
@@ -128,12 +130,12 @@ int main(void) {
   //     {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
   // };
 
-  std::cout << "Input Grid: " << std::endl;
+  cout << "Input Grid: " << endl;
   for (auto &vec : grid)
     printArr(vec);
 
   int ans = getFood(grid);
-  std::cout << "Answer: " << ans << std::endl;
+  cout << "Answer: " << ans << endl;
   return 0;
 }
 

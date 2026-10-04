@@ -32,22 +32,22 @@
 using namespace std;
 
 template <typename T>
-void printArr(std::vector<T> &arr) {
+void printArr(vector<T> &arr) {
   int n = arr.size();
-  std::cout << "[ ";
+  cout << "[ ";
   for (int i = 0; i < n; ++i) {
-    std::cout << arr[i];
+    cout << arr[i];
     if (i != n - 1)
-      std::cout << ", ";
+      cout << ", ";
   }
-  std::cout << " ]" << std::endl;
+  cout << " ]" << endl;
 }
 
 typedef pair<int, int> P;
 const vector<vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
 void dfs(int r, int c, int r_base, int c_base, vector<P> &coordinates,
-         std::vector<std::vector<bool>> &visited,
+         vector<vector<bool>> &visited,
          vector<vector<int>> &grid)
 {
   visited[r][c] = true;
@@ -72,7 +72,7 @@ void dfs(int r, int c, int r_base, int c_base, vector<P> &coordinates,
 int numDistinctIslands(vector<vector<int>>& grid) {
   int m = grid.size(), n = grid[0].size();
   set<vector<P>> st;
-  std::vector<std::vector<bool>> visited(m, std::vector<bool>(n, false));
+  vector<vector<bool>> visited(m, vector<bool>(n, false));
   for (int r = 0; r < m; ++r) {
     for (int c = 0; c < n; ++c) {
       if (!visited[r][c] && grid[r][c] == 1) {
@@ -88,24 +88,24 @@ int numDistinctIslands(vector<vector<int>>& grid) {
 
 int main(void) {
   // * testcase 1
-  std::vector<std::vector<int>> grid = {{1, 1, 0, 0, 0},
+  vector<vector<int>> grid = {{1, 1, 0, 0, 0},
                                         {1, 1, 0, 0, 0},
                                         {0, 0, 0, 1, 1},
                                         {0, 0, 0, 1, 1}};
 
   // * testcase 2
-  // std::vector<std::vector<int>> grid = {{1, 1, 0, 1, 1},
+  // vector<vector<int>> grid = {{1, 1, 0, 1, 1},
   //                                       {1, 0, 0, 0, 0},
   //                                       {0, 0, 0, 0, 1},
   //                                       {1, 1, 0, 1, 1}};
 
-  std::cout << "Grid" << std::endl;
+  cout << "Grid" << endl;
   for (auto &vec: grid) {
     printArr(vec);
   }
 
   int ans = numDistinctIslands(grid);
-  std::cout << "Number of Distinct Islands: " << ans << std::endl;
+  cout << "Number of Distinct Islands: " << ans << endl;
 
   return 0;
 }

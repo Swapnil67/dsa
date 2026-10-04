@@ -18,9 +18,10 @@
  * https://www.naukri.com/code360/problems/unique-subsets_3625236
 */
 
-// ! Contains Duplicates in array.
-
+// ! [confidence 5/5]
 // ! Amazon, Google, Meta, Microsoft, Apple
+
+// ! Contains Duplicates in array.
 
 #include <set>
 #include <vector>
@@ -91,11 +92,11 @@ vector<vector<int>> bruteForce(vector<int> &nums) {
 }
 
 // * ------------------------- Optimal Approach -------------------------
-// * TIME COMPLEXITY  O(n * 2^n)
+// * TIME COMPLEXITY  O(n * 2^n) + o(nlogn)
 // * SPACE COMPLEXITY O(n)
 vector<vector<int>> subsets(vector<int> &nums) {
   // ! Important step
-  sort(nums.begin(), nums.end()); // * to handle duplicates
+  sort(nums.begin(), nums.end()); // * to handle duplicates -> o(nlogn)
 
   vector<vector<int>> ans;
   vector<int> temp;

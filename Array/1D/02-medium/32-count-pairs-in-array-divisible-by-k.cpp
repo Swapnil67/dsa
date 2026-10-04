@@ -13,7 +13,6 @@
  * Explanation  : There are seven pairs whose sum is divisible by 3, i.e, (9, 36), (9,42), (74, 52), (36, 42), (74, 31), (31, 5) and (5, 52).
  *
  * https://www.naukri.com/code360/problems/sum-of-numbers_975486
- * https://www.geeksforgeeks.org/problems/pairs-with-difference-k1713/1
 */
 
 // ! Paypal
@@ -53,10 +52,10 @@ int countKdivPairs(vector<int> &arr, int k) {
 	unordered_map<int, int> mp;
 	for (auto &x : arr) {
 		// * 1. Get the remainder (and handle negative numbers safely)
-		int rem = ((x % k) + k) % k;
+		int rem = ((x % k) + k) % k; // * this is 'a'
 
 		// * 2. Calculate the target remainder we need to form a pair
-		int check = (k - rem) % k; // * % k to if rem becomes '0'
+		int check = (k - rem) % k; // * % k to if rem becomes '0' (this is 'b')
 
 		// * 3. If we saw that target remainder before, add its count to pairs
 		if (mp.count(check))
@@ -68,7 +67,8 @@ int countKdivPairs(vector<int> &arr, int k) {
 	return pairs;
 }
 
-// * Another same questoin
+// ! From naukri
+// * Another same question
 int countOfDivisiblePairs(int n, int m){
 	int pairs = 0;
 	for (int i = 1; i <= n; ++i) {

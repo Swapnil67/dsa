@@ -23,6 +23,8 @@
  * https://leetcode.com/problems/minimum-size-subarray-sum/description/
 */
 
+// ! [confidence 5/5]
+
 #include <vector>
 #include <iostream>
 
