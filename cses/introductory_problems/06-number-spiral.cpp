@@ -20,7 +20,7 @@ typedef long long ll;
 *
 * Case 2: x > y (Vertical)
 *      A: x is even => (x-1)^2 + y
-*      B: x is odd => x^2 + (y-1)
+*      B: x is odd => x^2 - (y-1)
 */
 
 // * TIME COMPLEXITY O(1)
@@ -40,8 +40,8 @@ int main(void) {
         cout << (y * y) - (x - 1) << endl;
       }
     } else {
-      if (x & 1) {
-        // * x^2 + (y-1)
+      if (x & 1) { // * odd
+        // * x^2 - (y-1)
         cout << (x * x) - (y - 1) << endl;
       } else {
         // * (x-1)^2 + y
