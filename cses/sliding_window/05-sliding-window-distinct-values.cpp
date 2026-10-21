@@ -74,6 +74,10 @@ void solve() {
 // * TIME COMPLEXITY O(NlogN)
 // * SPACE COMPLEXITY O(N)
 void solve2() {
+  // * Optimize standard I/O operations for competitive programming
+  cin.tie(0); cout.tie(0);
+  ios_base::sync_with_stdio(false);
+  
   ll n, k;
   cin >> n >> k;
   VEC(a, n, ll); READ_VEC(a);

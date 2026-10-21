@@ -42,6 +42,24 @@ void printArr(vector<T> &arr) {
 
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
+void solve(vector<ll> x, ll n, ll k) {
+  ll sum = 0;
+  // * add the first k elements
+  for (int i = 0; i < k; ++i) {
+    sum += x[i];
+  }
+
+  // cout << sum << ' ';
+  ll answer = sum;
+  for (int i = k; i < n; ++i) {
+    // * sum from x[i-k+1...i]
+    sum += x[i] - x[i - k];
+    // cout << sum << ' ';
+    answer ^= sum;
+  }
+  cout << answer << '\n';
+}
+
 int main(void) {
   ll n, k;
   cin >> n >> k;
@@ -54,20 +72,7 @@ int main(void) {
   }
   // printArr(x); // * For debug
 
-  ll sum = 0;
-  // * add the first k elements
-  for (int i = 0; i < k; ++i) {
-    sum += x[i];
-  }
-  // cout << sum << ' ';
-  ll answer = sum;
-  for (int i = k; i < n; ++i) {
-    // * sum from x[i-k+1...i]
-    sum += x[i] - x[i - k];
-    // cout << sum << ' ';
-    answer ^= sum;
-  }
-  cout << answer << '\n';
+  solve(x, n, k);
 
   return 0;
 }

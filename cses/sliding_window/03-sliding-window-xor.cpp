@@ -71,6 +71,10 @@ void optimalApproach(vi nums, ll k) {
 }
 
 int main(void) {
+  // * Optimize standard I/O operations for competitive programming
+  cin.tie(0); cout.tie(0);
+  ios_base::sync_with_stdio(false);
+  
   ll n, k;
   cin >> n >> k;
   ll A, B, C;
@@ -80,7 +84,6 @@ int main(void) {
     // cout << a << " * " << x[i - 1] << " + " << b << " % " << c << '\n';
     a[i] = (1LL * A * a[i - 1] + B) % C;
   }
-  // cout << "nums: ";
   // printArr(a); // * For debug
 
   optimalApproach(a, k);

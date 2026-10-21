@@ -23,6 +23,21 @@
  * https://cses.fi/problemset/task/3224
 */
 
+
+// ! Observation
+/*
+* Set without negative 
+* [{1, 1}, {3, 5}, {3, 7}]
+* Here, st.rbegin()->second = 7 
+* which is correct according to set but we need the minimum value if freq is same.
+*
+* So we'll keep the 2nd value as -ve in the set
+* [{1, -1}, {3, -7}, {3, -5}]
+* Here, st.rbegin()->second = 5
+* 5 is correct since it has max freq and it is smallest among the [7, 5] both have freq of 3.
+*
+*/
+
 #include <set>
 #include <map>
 #include <vector>
@@ -50,6 +65,8 @@ void printArr(vector<T> &arr) {
   cout << " ]" << "\n";
 }
 
+
+// * Using set
 // * TIME COMPLEXITY O(NlogN)
 // * SPACE COMPLEXITY O(N)
 void solve(){ 
@@ -137,6 +154,10 @@ void solve2(){
 }
 
 int main(void) {
+  // * Optimize standard I/O operations for competitive programming
+  cin.tie(0); cout.tie(0);
+  ios_base::sync_with_stdio(false);
+
   // solve();
   solve2();
   return 0;

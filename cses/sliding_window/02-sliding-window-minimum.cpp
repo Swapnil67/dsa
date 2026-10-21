@@ -120,8 +120,13 @@ int main(void) {
 8 5
 3 7 1 11
 
+8 1
+3 7 1 11
+
 * Output:
 3
+
+13
 
 * Explanation:
 * The input array is [3,0,1,8,2,4,7,6]. 
