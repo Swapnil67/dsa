@@ -4,7 +4,8 @@
  * Count Frequency Staircase Subarrays II
  * 
  * https://leetcode.com/problems/count-frequency-staircase-subarrays-ii/
-*/
+ * https://leetcode.com/problems/count-frequency-staircase-subarrays-ii/submissions/2181382874/
+ */
 
 #include <vector>
 #include <iostream>
@@ -32,65 +33,56 @@ void printArr(vector<T> &arr) {
 // * 6 -> 3
 // * 10 -> 4
 
+// * Condition for valid staircase  
+// * Len of subarray == (rank * (rank + 1) / 2)
+// * where rank is number of unique elements in current subarray
+
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N)
 int countStaircase(vector<int> &nums) {
+  typedef long long ll;
   ll n = nums.size();
 
-  // * g -> {len_of_subarr, 1}
-  // * g2 -> {len_of_subarr, distinct_elements}
-  unordered_map<ll, ll> g, g2;
-  g.clear();
-  g2.clear();
-  ll sum = 0, i = 1;
-  while (sum <= n) {
-    sum = sum + i;
-    g[sum] = 1;
-    g2[sum] = i;
-    i++;
-  }
-  // PRINT_VEC_PAIRS(g); PRINT_VEC_PAIRS(g2);
-
-  unordered_map<ll, ll> freq, rank_mp;
   ll ans = 0;
+  vector<ll> freq_vec(1e5 + 2, 0);
+  vector<ll> rank_vec(1e5 + 2, 0);
+  vector<ll> seen;
+
   for (ll i = 0; i < n; ++i) {
-    freq.clear();
-    rank_mp.clear();
     ll rank = 0;
     for (ll j = i; j < n; ++j) {
-      ll val = nums[j];
-      freq[val]++;
-      if (!rank_mp.count(val)) {
+      int v = nums[j];
+      seen.push_back(v);
+      freq_vec[v]++;
+      if (rank_vec[v] == 0) {
         rank++;
-        rank_mp[val] = rank;
+        rank_vec[v] = rank;
       }
 
-      // * Ele cannot appear more than its rank. (freq = 3, but rank = 2)
-      if (freq[val] > rank_mp[val]) {
+      if (freq_vec[v] > rank_vec[v]) // * Invalid Staircase
         break;
+
+      // * If valid staircase
+      if ((j - i + 1) == rank * (rank + 1) / 2) {
+        ans += 1;
       }
 
-      int len = j - i + 1;
-      // * check if this is valid len
-      if (g[len] == 1) {
-        ll distinct_count = g2[len]; // * how many distinct elements
-                                     // should this subarray have.
-        if (rank == distinct_count)
-          ans = ans + 1;
-      }
-
-      // * Minimum subarray len required to satisfy 'u' distinct
-      // * elements is 1 + 2 + ... + u = u * (u + 1) / 2. (sum of 1...u)
-      // * If not enough elements remain in nums, break early.
-      ll u = freq.size();
-      if (i + (1LL * u * (u + 1) / 2) > n) {
-        j = n + 5;
-      }
+      // * Pruning
+      if (i + (rank * 1LL * (rank + 1) / 2) > n)
+        break;
     }
+
+    // * Reset the vectors
+    for (auto s : seen) {
+      freq_vec[s] = 0;
+      rank_vec[s] = 0;
+    }
+    seen.clear();
   }
 
   return ans;
 }
+
 int main(void) {
   // * Optimize standard I/O operations for competitive programming
   cin.tie(0); cout.tie(0);
