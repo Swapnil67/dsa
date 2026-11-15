@@ -58,12 +58,12 @@ void solve() {
     
     // * Find how many elements a[j] satisfy a[i] + a[j] >= L   (Lower Bound)
     // * * a[i] + a[j] >= L  =>  a[j] >= L - a[j]
-    ll L = lower_bound(a.begin() + i + 1, a.end(), (l-a[i])) - a.begin();
-    
+    ll L = lower_bound(a.begin() + i + 1, a.end(), (l - a[i])) - a.begin();
+
     // * Find how many elements a[j] satisfy a[i] + a[j] >= R  (Upper Bound)
     // * * a[i] + a[j] >= R  =>  a[j] >= R - a[j]
-    ll R = upper_bound(a.begin() + L, a.end(), (r-a[i])) - a.begin();
-    
+    ll R = upper_bound(a.begin() + L, a.end(), (r - a[i])) - a.begin();
+
     // * cout << L << ' ' << R << " => " << (R - L) << '\n';
     
     if (L <= R)

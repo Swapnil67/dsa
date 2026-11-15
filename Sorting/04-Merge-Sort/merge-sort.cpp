@@ -1,13 +1,21 @@
 // * Merge Sort - Divide & Combine
 
-#include<iostream>
+// ! Stable Sorting 
+// * Relative order of SAME elements preserved.
+
+#include <iostream>
 using namespace std;
 
-void print(vector<int> &arr, int size) {
-  for(int i=0; i<size; i++) {
-    cout<<arr[i]<<" ";
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  cout<<endl;
+  cout << " ]" << "\n";
 }
 
 // * Merge two arrays in sorted way
@@ -17,39 +25,33 @@ void mergeArrays(vector<int> &arr, int low, int mid, int high) {
   // * [low...mid] 1st Array
   // * [mid+1...high] 2nd Array
 
-  int left = low, right = mid + 1;
-  while(left <= mid && right <= high) {
-    if(arr[left] <= arr[right]) {
-      temp.push_back(arr[left]);
-      left++;
-    } 
+  int l = low, r = mid + 1;
+  while (l <= mid && r <= high) {
+    if (arr[l] <= arr[r]) {
+      temp.push_back(arr[l++]);
+    }
     else {
-      temp.push_back(arr[right]);
-      right++;
+      temp.push_back(arr[r++]);
     }
   }
 
-  while(left <= mid) {
-    temp.push_back(arr[left++]);
-  }
+  // * Push all remaining left elements
+  while (l <= mid) temp.push_back(arr[l++]);
+  
+  // * Push all remaining right elements
+  while (r <= high) temp.push_back(arr[r++]);
 
-  while(right <= high) {
-    temp.push_back(arr[right++]);
-  }
-
-  for(int i = low; i <= high; ++i) {
+  for (int i = low; i <= high; ++i) {
     arr[i] = temp[i - low];
-  } 
-
+  }
 }
 
 // * TIME COMPLEXITY O(N) * O(LogN) = O(NlogN)
 // * SPACE COMPLEXITY O(N) - (for temp array)
-void mergeSort(vector<int> &arr, int low, int high) {
-
-  // * O(logN)
+void mergeSort(vector<int> &arr, int low, int high) { // * O(logN)
   if (low == high)
     return;
+
   int mid = (low + high) / 2;
   // cout << "low " << low << " high " << high << " mid " << mid << endl;
   mergeSort(arr, low, mid);
@@ -60,12 +62,17 @@ void mergeSort(vector<int> &arr, int low, int high) {
 }
 
 int main() {
-  vector<int> arr = { 3, 2, 4, 1, 3 };
+  vector<int> arr = {3, 2, 4, 1, 3};
   int size = arr.size();
+  
+  cout << "Merge Sort" << endl;
+  printArr(arr);
 
-  cout<<"Merge Sort"<<endl;
-  print(arr, size);
-  mergeSort(arr, 0, size-1);
-  print(arr, size); 
+  mergeSort(arr, 0, size - 1);
+
+  printArr(arr);
   return 0;
 }
+
+// * Run the code
+// * g++ --std=c++20 merge-sort.cpp -o output && ./output

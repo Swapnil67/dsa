@@ -34,8 +34,7 @@ vector<ll> sieve(ll n) {
   primes[0] = false;
   primes[1] = false;
 
-  ll m = sqrt(n);
-  for (ll p = 2; p <= m; ++p) {
+  for (ll p = 2; p * p <= n; ++p) {
     if (primes[p]) {
       // * Update all multiples of p
       for (ll i = p * p; i <= n; i += p) {

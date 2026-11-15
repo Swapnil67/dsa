@@ -111,54 +111,53 @@ int betterApproach(string word1, string word2) {
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
-// * t[i][j] = min operations for making word1 of length 'i' and word2 of length 'j' equal
+// * t[i][j] = min operations for making s of length 'i' and t of length 'j' equal
 // * Bottom Up
 // * TIME COMPLEXITY O(m * n) (No Recursion Auxillary Space O(n))
 // * SPACE COMPLEXITY O(m * n)
-int minDistance(string word1, string word2) {
-  int m = word1.size(), n = word2.size();
-  vector<vector<int>> t(m + 1, vector<int>(n + 1, 0));
+int minDistance(string s, string t) {
+  int m = s.size(), n = t.size();
+  vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
   for (int i = 0; i <= m; ++i) {
     for (int j = 0; j <= n; ++j) {
       if (i == 0 || j == 0) { // * for any i = 0 return 'j' or for any j = 0 return 'i'
-        t[i][j] = i + j;
-      } else if (word1[i - 1] == word2[j - 1]) {
-        t[i][j] = t[i - 1][j - 1];
+        dp[i][j] = i + j;
+      } else if (s[i - 1] == t[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
       } else {
-        int insert_res = 1 + t[i][j - 1];
-        int delete_res = 1 + t[i - 1][j];
-        int replace_res = 1 + t[i - 1][j - 1];
-        t[i][j] = min({insert_res, delete_res, replace_res});
+        int insert_cost = 1 + dp[i][j - 1];
+        int remove_cost = 1 + dp[i - 1][j];
+        int replace_cost = 1 + dp[i - 1][j - 1];
+        dp[i][j] = min({insert_cost, remove_cost, replace_cost});
       }
     }
   }
 
   // * For Debugging
-  for (auto &vec : t)
-    printArr(vec);
+  // for (auto &vec : dp) printArr(vec);
 
-  return t[m][n];
+  return dp[m][n];
 }
 
 // * ------------------------- Approach: Optimal Approach -------------------------
 // * Bottom Up + Space Optimized
 // * TIME COMPLEXITY O(m * n) (No Recursion Auxillary Space O(n))
 // * SPACE COMPLEXITY O(n)
-int minDistance2(string word1, string word2) {
-  int m = word1.size(), n = word2.size();
+int minDistance2(string s, string t) {
+  int m = s.size(), n = t.size();
   vector<int> prev(n + 1, 0);
 
   // * Base Case
   for (int j = 0; j <= n; ++j) {
     prev[j] = j;
   }
-  printArr(prev);
+  // printArr(prev);
 
   vector<int> cur(n + 1, 0);
   for (int i = 1; i <= m; ++i) {
     cur[0] = i; // * For every 0th row ans will be 'i'
     for (int j = 1; j <= n; ++j) {
-      if (word1[i - 1] == word2[j - 1]) {
+      if (s[i - 1] == t[j - 1]) {
         cur[j] = prev[j - 1];
       }
       else {
@@ -169,7 +168,7 @@ int minDistance2(string word1, string word2) {
       }
     }
     prev = cur;
-    printArr(prev);
+    // printArr(prev);
   }
 
   return prev[n];

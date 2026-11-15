@@ -18,20 +18,38 @@
  * https://www.naukri.com/code360/problems/count-subarrays-consisting-of-only-0-s-and-only-1-s-in-a-binary-array_1262154
 */
 
-#include<iostream>
+#include <vector>
+#include <iostream>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+typedef long long ll;
+typedef vector<int> vi;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << "\n";
+}
+
+
+void printArr(vector<int> arr) {
+  for (int i = 0; i < arr.size(); i++) {
+    cout << arr[i] << " ";
+  }
+  cout << endl;
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Nested Loop [Find all subarray]
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-long long zeroFilledSubarrayBrute(std::vector<int>& nums) {
+long long zeroFilledSubarrayBrute(vector<int>& nums) {
   int n = nums.size();
   long long zero_subarray_cnt = 0;
   for (int i = 0; i < n; ++i) {
@@ -39,12 +57,11 @@ long long zeroFilledSubarrayBrute(std::vector<int>& nums) {
     for (int j = i; j < n; ++j) {
       if(nums[j] == 0) {
         c++;
-      }
-      else {
+      } else {
         break;
       }
     }
-    std::cout << c << std::endl;
+    cout << c << endl;
     zero_subarray_cnt += c;
   }
 
@@ -52,27 +69,28 @@ long long zeroFilledSubarrayBrute(std::vector<int>& nums) {
 }
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------`
-// * Check the pattern below & do dry run 
+// * Non-Empty Consecutive Subsets = (N * (N + 1)) / 2
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-long long zeroFilledSubarray(std::vector<int>& nums) {
-  int n = nums.size();
-  long long zero_c = 0, res = 0;
+long long zeroFilledSubarray(vector<int>& nums) {
+  long long n = nums.size();
+  long long ans = 0, count = 0;
   for (int i = 0; i < n; ++i) {
     if (nums[i] == 0) {
-      zero_c += 1;
-      res += zero_c;
-    } 
-    else {
-      zero_c = 0;
+      count++;
+    } else {
+      // * Consecutive Subsets count
+      ans += count * (count + 1LL) / 2LL;
+      count = 0;
     }
   }
-  return res;
+  ans += count * (count + 1LL) / 2LL;
+  return ans;
 }
 
 // * Coding Ninja version 
 // * count both 0s, 1s subarrays
-long long numberofSubarrays(std::vector<int>& nums) {
+long long numberofSubarrays(vector<int>& nums) {
   int n = nums.size();
    int one_c = 0, zero_c = 0, res_zero = 0, res_one = 0;
    for (int i = 0; i < n; ++i) {
@@ -96,20 +114,21 @@ long long numberofSubarrays(std::vector<int>& nums) {
 
 int main() {
   // * testcase 1
-  std::vector<int> arr = {1, 3, 0, 0, 2, 0, 0, 4};
-  // * testcase 2
-  // std::vector<int> arr = {2, 10, 2019};
+  vi arr = {1, 3, 0, 0, 2, 0, 0, 4};
 
-  std::cout << "Input Array" << std::endl;
+  // * testcase 2
+  // vi arr = {2, 10, 2019};
+
+  cout << "Input Array: ";
   printArr(arr);
 
   // long long ans = zeroFilledSubarrayBrute(arr);
   long long ans = zeroFilledSubarray(arr);
-  std::cout << "Zero filled subarrays: " << ans << std::endl;
+  cout << "Zero filled subarrays: " << ans << endl;
 
-  std::vector<int> arr1 = {1, 0, 0, 0, 1, 0, 1};
+  vi arr1 = {1, 0, 0, 0, 1, 0, 1};
   long long ans1 = numberofSubarrays(arr1);
-  std::cout << "Zero & one filled subarrays: " << ans1 << std::endl;
+  cout << "Zero & one filled subarrays: " << ans1 << endl;
   return 0;
 }
 

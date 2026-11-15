@@ -81,8 +81,8 @@ void solve()
 
 int main(void) {
   // Optimize standard I/O operations for competitive programming
+  cin.tie(0);
   ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
 
   int t;
   cin >> t;

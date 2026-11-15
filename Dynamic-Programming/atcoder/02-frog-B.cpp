@@ -39,6 +39,11 @@
 
 using namespace std;
 typedef long long ll;
+const ll MAXN = 1e18;
+
+// * Macros
+#define VEC(name, size, ...) vector<__VA_ARGS__> name(static_cast<size_t>(size))
+#define READ_VEC(name) for(size_t i = 0; i < (name).size(); ++i) cin >> (name)[i]
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -52,47 +57,61 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
-#include<vector>
-#include<iostream>
-
-using namespace std;
-typedef long long ll;
-const ll MAXN = 1e18;
-
 void solve() {
   ll n, k;
-  cin >> n;
-  cin >> k;
-  vector<ll> a(n + 1, 0); 
-  for (int i = 1; i <= n; ++i) {
-    cin >> a[i];
-  }
+  cin >> n >> k;
+  VEC(h, n, ll); READ_VEC(h);
   
-  vector<ll> dp(n + 1, 0); 
-
-  dp[1] = 0;
-  dp[2] = abs(a[1] - a[2]);
-  ll i = 3;
-  while (i <= n) {
-    ll minCost = MAXN;
-    ll j = 1;
-    while (j <= k && i - j >= 1) {
-      minCost = min(minCost, abs(a[i] - a[i - j]) + dp[i - j]);
-      j++;
-    }
-    dp[i] = minCost;
-    i++;
+  // * dp[i] = min cost to reach index 'i'
+  VEC(dp, n, ll);
+  dp[0] = 0;
+  for (int j = 1; j < n; ++j) {
+    ll min_cost = MAXN;
+    int i = 1;
+    while (i <= k && j - i >= 0) { // * check prev 'k' steps
+      min_cost = min(min_cost, abs(h[j] - h[j - i]) + dp[j - i]);
+      i++;
+    } 
+    dp[j] = min_cost;
   }
 
-  cout << dp[n] << " " << endl;
+  cout << dp[n - 1] << " " << endl;
+}
+
+void solvePath() {
+  ll n, k;
+  cin >> n >> k;
+  VEC(h, n, ll); READ_VEC(h);
+  
+  // * dp[i] = min cost to reach index 'i'
+  vector<ll> path(n); 
+  VEC(dp, n, ll);
+  dp[0] = 0;
+  for (int j = 1; j < n; ++j) {
+    ll min_cost = MAXN;
+    int i = 1;
+    while (i <= k && j - i >= 0) { // * check prev 'k' steps
+      ll cur_cost = abs(h[j] - h[j - i]) + dp[j - i];
+      if (min_cost > cur_cost) {
+        path[j] = (j - i);
+        min_cost = cur_cost;
+      }
+      i++;
+    } 
+    dp[j] = min_cost;
+  }
+
+  printArr(path);
 }
 
 int main(void) {
-  // Optimize standard I/O operations for competitive programming
+  // * Optimize standard I/O operations for competitive programming
+  cin.tie(0); cout.tie(0);
   ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
   
   solve();
+  // * To see the optimal path run the following function and enter input again
+  // solvePath(); 
   return 0;
 }
 
@@ -117,3 +136,4 @@ int main(void) {
 10 4
 40 10 20 70 80 10 20 70 80 60
 */
+

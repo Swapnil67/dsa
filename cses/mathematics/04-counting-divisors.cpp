@@ -5,7 +5,6 @@
 */
 
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 typedef long long ll;
@@ -24,7 +23,9 @@ void bruteForce() {
   cout << count << '\n';
 }
 
-void optimal() {
+// * TIME COMPLEXITY O(sqrt(n))
+// * SPACE COMPLEXITY O(1)
+void betterApproach() {
   ll n;
   cin >> n;
   int count = 0;
@@ -38,6 +39,25 @@ void optimal() {
   cout << count << '\n';
 }
 
+// * TIME COMPLEXITY O(logn)
+// * SPACE COMPLEXITY O(1)
+void optimal() {
+  ll n;
+  cin >> n;
+  ll ans = 1;
+  for (int d = 2; d * d <= n; ++d) {
+    ll cnt = 0;
+    while (n % d == 0) {
+      n /= d;
+      cnt++;
+    }
+    ans *= (cnt + 1);
+  }
+  if (n > 1)
+    ans *= 2; // * remaining prime
+  cout << ans << '\n';
+}
+
 int main() {
   // * Optimize standard I/O operations for competitive programming
   cin.tie(0); cout.tie(0);
@@ -46,7 +66,8 @@ int main() {
   ll t;
   cin >> t;
   while (t--) {
-    bruteForce();
+    // bruteForce();
+    // betterApproach();
     optimal();
   }
   return 0;

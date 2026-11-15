@@ -15,8 +15,16 @@
  * Output       : 10
  * Explanation  : There are 10 pairs of indices that satisfy the conditions in the statement:
  *
+ * 
+ * https://codeforces.com/problemset/problem/1398/C (Easier Version)
+ * 
  * https://ideone.com/hSbSA4
+ * Old recording
  * https://drive.google.com/file/d/1fXzb7EMA72N4SSoRmVSnm0kaheg9BEnI/view
+ * https://docs.google.com/document/d/1KvjLTpkL1NtQ4ZdkFpWQr1yfWoeW1J3jb1WH4oFTWTc/edit?tab=t.0
+ * 
+ * Same taught again
+ * https://drive.google.com/file/d/1CmU1DDfDhiS4PJtBGvGAVmSvt81zZ8Ac/view
  * https://docs.google.com/document/d/1KvjLTpkL1NtQ4ZdkFpWQr1yfWoeW1J3jb1WH4oFTWTc/edit?tab=t.0
 */
 
@@ -27,6 +35,7 @@
 #include <iostream>
 
 using namespace std;
+typedef long long ll;
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -59,12 +68,14 @@ int bruteForce(vector<int> &nums, int k) {
 	return count;
 }
 
+// ! Observation
+
 // ! sum[i...j] = (j - i + 1)
 // ! let 'p' be the prefix array
 // ! p[j] - p[i - 1] = j - i + 1
 // ! p[j] - j = p[i - 1] - i + 1
-// ! p[j] - j = p[j - 1] - (j - 1)
-// ! p[x] - x = p[x] - (x)
+// ! p[j] - j = p[i - 1] - (i - 1)
+// ! p[j] - j = p[k] - k
 
 // * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
 // * TIME COMPLEXITY O(N)
@@ -75,43 +86,39 @@ int countGoodSubarrays(vector<int> &nums, int k) {
 		return 0;
 
 	// * 1. Build the Prefix Sum array safely (size n)
-	vector<int> p(n, 0);
-	p[0] = nums[0];
-	for (int i = 1; i < n; ++i)
-		p[i] = p[i - 1] + nums[i];
+	vector<ll> p(n + 1, 0);
+	p[0] = 0;
+	for (int i = 1; i <= n; ++i)
+		p[i] = p[i - 1] + nums[i - 1];
 
 	printArr(p); // * For debug
 
 	// * Base Case for i - 1 = -1: (p[-1] - 0) % k = (0 - 0) % k = 0
 	unordered_map<int, int> mp;
 	mp[0] = 1;
-	
+ 
 	int count = 0;
 	// * Maximum valid length based on your intuition (Sum % k can only be 0 to k-1)
 	int max_valid_len = k - 1;
 
-	for (int j = 0; j < n; ++j) {
-		// * A. SLIDING WINDOW CLEANUP
-		// * Identify the expired boundary index (i - 1) using max_valid_len
-		int expired_idx = j - max_valid_len - 1;
-		if (expired_idx >= -1) { // * testcase 4
-			int old_p_val = (expired_idx == -1) ? 0 : p[expired_idx];
-			// * Since (i - 1) = expired_idx, then i = expired_idx + 1
-			long long old_expr = (long long)old_p_val - (expired_idx + 1);
-			int old_check = ((old_expr % k) + k) % k;
-			mp[old_check]--;
-			if (mp[old_check] == 0) 
-				mp.erase(old_check);
-		}
-
+	
+	for (int j = 1; j <= n; ++j) {
 		// * B. MATCH CHECK & MAP UPDATE
 		// * Grouping formula for current index j: p[j] - (j + 1)
-		long long val = (long long)p[j] - (j + 1);
-		int check = ((val % k) + k) % k;
-		cout << p[j] << " " << check << endl;
+		ll check = (((p[j] % k) - (j % k)) + k) % k;
+		cout << "(" << p[j] << " % " << k << ") - (" << j << " % " << k << ") => " << check << endl;
 
 		if (mp.count(check))
 			count += mp[check];
+		
+		// * (j - i + 1) < k      - (len of valid subarray must be less than 'k' since we are doing sum % k)
+		// * (j - k + 1) < i
+		// * A. SLIDING WINDOW CLEANUP
+		if ((j - k + 1) >= 0) {
+			ll idx = (j - k + 1);
+			ll check2 = (((p[idx] % k) - (idx % k)) + k) % k;
+			mp[check2]--;
+		}
 
 		mp[check]++;
 	}
@@ -143,12 +150,16 @@ int main(void) {
 	int k = 2;
 	vector<int> nums = {1, 1, 1, 1};
 	
+	// * testcase 6
+	// int k = 3;
+	// vector<int> nums = {1, 2, 3, 4, 5};
+
 	cout << "k: " << k << endl;
 	cout << "Array: ";
 	printArr(nums);
 
-	// int ans = bruteForce(nums, k);
-	int ans = countGoodSubarrays(nums, k);
+	int ans = bruteForce(nums, k);
+	// int ans = countGoodSubarrays(nums, k);
 	
 	cout << "Number of good subarrays: " << ans << endl;
 

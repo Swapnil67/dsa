@@ -59,12 +59,10 @@ void solve() {
   vector<ll> dp(n + 1, 0); 
   dp[1] = 0;
   dp[2] = abs(a[1] - a[2]);
-  ll i = 3;
-  while (i <= n) {
-    ll val1 = abs(a[i] - a[i - 2]) + dp[i - 2];
-    ll val2 = abs(a[i] - a[i - 1]) + dp[i - 1];
+  for (int i = 2; i < n; ++i) {
+    ll val1 = abs(a[i] - a[i - 2]) + dp[i - 2]; // * jump from 2 steps back
+    ll val2 = abs(a[i] - a[i - 1]) + dp[i - 1]; // * jump from 1 step back
     dp[i] = min(val1, val2);
-    i++;
   }
 
   // printArr(dp); // * for debug
@@ -72,9 +70,9 @@ void solve() {
 }
 
 int main(void) {
-  // Optimize standard I/O operations for competitive programming
+  // * Optimize standard I/O operations for competitive programming
+  cin.tie(0); cout.tie(0);
   ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
   
   solve();
   return 0;

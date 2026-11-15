@@ -20,11 +20,22 @@
 
 #include <vector>
 #include <iostream>
+#pragma GCC optimize("O3")
 
 using namespace std;
 typedef long long ll;
+typedef vector<int> vi;
+typedef vector<ll> vl;
 
+// * Macros
 #define all(v) v.begin(), v.end()
+#define VEC(name, size, ...) vector<__VA_ARGS__> name(static_cast<size_t>(size))
+#define READ_VEC(name) for(size_t i = 0; i < (name).size(); ++i) cin >> (name)[i]
+#define PRINT_VEC_PAIRS(p) for (auto &it: p) cout << it.first << ' ' << it.second << '\n'
+#define PRINT_VEC(p)   \
+  for (auto &it : p)   \
+    cout << it << ' '; \
+  cout << '\n'
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -42,6 +53,10 @@ void printArr(vector<T> &arr) {
 // * SPACE COMPLEXITY O(N)
 
 int main(void) {
+  // * Optimize standard I/O operations for competitive programming
+  cin.tie(0); cout.tie(0);
+  ios_base::sync_with_stdio(false);
+  
   return 0;
 }
  

@@ -33,7 +33,7 @@ void printArr(vector<T> &arr) {
 }
 
 
-// * TIME COMPLEXITY O(nlogn)
+// * TIME COMPLEXITY O(n log log n)
 // * SPACE COMPLEXITY O(1)
 vector<ll> leastPrimeFactor(ll n) {
   // * Assume every number is spf of itself
@@ -41,8 +41,7 @@ vector<ll> leastPrimeFactor(ll n) {
   iota(all(spf), 0);
   // printArr(spf);
 
-  ll m = sqrt(n);
-  for (ll p = 2; p <= m; p++) {
+  for (ll p = 2; p * p <= n; p++) {
     // * If this is prime of itself
     if (spf[p] == p) {
       // * SPF of all the multiples of 'i' will be 'i'.

@@ -19,51 +19,55 @@
  * https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty/description/
 */
 
-#include<unordered_map>
-#include<iostream>
+#include <iostream>
+#include <unordered_map>
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+using namespace std;
+
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << "\n";
 }
 
-int minOperations(std::vector<int> arr) {
-  int n = arr.size();
-  std::unordered_map<int, int> countMap;
-
-  for (int i = 0; i < n; ++i) {
-    countMap[arr[i]]++;
-  }
+int minOperations(vector<int> nums) {
+  unordered_map<int, int> freq_mp;
+  for (auto &x : nums)
+    freq_mp[x]++;
 
   // * count map
-  // for(auto it : countMap) {
-  //   std::cout << it.first << " => " << it.second << std::endl;
+  // for (auto it : freq_mp) {
+  //   cout << it.first << " => " << it.second << endl;
   // }
 
   int c = 0;
-  for(auto it : countMap) {
-    if(it.second == 1) 
+  for (auto it : freq_mp) {
+    if (it.second == 1)
       return -1;
 
-    c += std::ceil(it.second / 3.0);
+    c += ceil(it.second / 3.0);
   }
 
   return c;
 }
 
 int main() {
-  std::vector<int> arr = {3, 3};
-  // std::vector<int> arr = {2, 1, 2, 2, 3, 3};
-  // std::vector<int> arr = {2, 3, 3, 2, 2, 4, 2, 3, 4};
-  // std::vector<int> arr = {14, 12, 14, 14, 12, 14, 14, 12, 12, 12, 12, 14, 14, 12, 14, 14, 14, 12, 12};
+  vector<int> arr = {3, 3};
+  // vector<int> arr = {2, 1, 2, 2, 3, 3};
+  // vector<int> arr = {2, 3, 3, 2, 2, 4, 2, 3, 4};
+  // vector<int> arr = {14, 12, 14, 14, 12, 14, 14, 12, 12, 12, 12, 14, 14, 12, 14, 14, 14, 12, 12};
   printArr(arr);
 
   int ans = minOperations(arr);
-  std::cout << "Minimum Number of Operations to Make Array Empty " << ans << std::endl;
+  cout << "Minimum Number of Operations to Make Array Empty " << ans << endl;
   return 0;
 }
 
 // * run the code
-// * g++ --std=c++17 21-make-arr-empty.cpp -o output && ./output
+// * g++ --std=c++20 03-make-arr-empty.cpp -o output && ./output

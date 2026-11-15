@@ -47,8 +47,7 @@ int numSubarrayBoundedMax(vector<int> &nums, int left, int right) {
     if (nums[i] > right)
       culprit_idx = i;
 
-    // * Element is a valid candidate to be the maximum value in a
-    // * subarray
+    // * Element is a valid candidate to be the maximum value in a subarray
     if (nums[i] >= left)
       valid_idx = i;
 

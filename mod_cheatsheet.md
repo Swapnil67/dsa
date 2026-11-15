@@ -43,3 +43,23 @@ int modPow(long long base, long long exp, int M) {
     return res;
 }
 ```
+---
+
+### 6. Fast modulo operation
+
+#### Slower
+```cpp
+int MOD = 1e9 + 5;
+a = (a + b) % MOD
+```
+
+#### Faster
+```cpp
+void add_self(int &a, int &b) {
+  int MOD = 1e9 + 5;
+  a += b;
+  if (a >= MOD) {
+    a -= MOD;
+  }
+}
+```

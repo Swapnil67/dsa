@@ -18,10 +18,13 @@
  * https://leetcode.com/problems/delete-operation-for-two-strings/description/
 */
 
+// ! LCS
+
 #include <vector>
 #include <iostream>
 
 using namespace std;
+typedef long long ll;
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -34,6 +37,31 @@ void printArr(vector<T> &arr) {
   }
   cout << " ]" << endl;
 }
+
+// ! Longest Common substring
+// * Time Complexity (TC): O(n^4)
+// * Space Complexity (SC): O(2*n)
+int bruteForce(string a, string b) {
+  int n = a.length(), m = b.length();
+  int lcs = 0;
+  for (int len = 1; len <= min(n, m); ++len) {
+    for (int i = 0; i <= n - len; ++i) {
+      for (int j = 0; j <= m - len; ++j) {
+        // * Extract substrings of length 'len' from A and B
+        string extract_A = a.substr(i, len);
+        string extract_B = b.substr(j, len);
+        // cout << extract_A << " " << extract_B << endl;
+        if (extract_A == extract_B) {
+          lcs = max(lcs, len);
+        }
+      }
+    }
+  }
+
+  // * Calculate the minimum number of operations to make A and B equal
+  return (n + m) - (2 * lcs);
+}
+
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
 // * m - size of s, n - size of t

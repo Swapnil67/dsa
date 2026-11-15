@@ -67,35 +67,64 @@ vector<int> bruteForce(vector<int> arr, int k) {
 
 // * ------------------------- APPROACH 2: Optimal Approach -------------------------
 // * Monotonic Deque
-// * Put the largest element at front of deque
+// * Put the largest element idx at front of deque
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
 vector<int> maxSlidingWindow(vector<int> &nums, int k) {
-  int n = nums.size();
-  deque<int> dq;
   vector<int> ans;
-  int i = 0, j = 0;
-  while (j < n) {
-    // * Monotonic Decreasing Deque
-    while (!dq.empty() && nums[j] > dq.back()) {
+  int n = nums.size();
+
+  deque<int> dq;
+  const auto push = [&](int i) {
+    while (!dq.empty() && nums[i] >= nums[dq.back()]) {
       dq.pop_back();
     }
-    dq.push_back(nums[j]);
+    dq.push_back(i);
+  };
 
-    if ((j - i + 1) > k) { // * Shrink the window
-      // * Remove from the front of deque
-      // * since we are using queue ds 'i' element might be at queue front
-      if (nums[i] == dq.front())
-        dq.pop_front();
-      i++;
-    }
-
-    if ((j - i + 1) == k)
-      ans.push_back(dq.front());
-
-    j++;
+  // * Check for first 'k' elements
+  for (int i = 0; i < k; ++i) {
+    push(i);
   }
+  ans.push_back(nums[dq.front()]); // * First min element in 1st kth window
 
+  // * Now for all the k windows find min element
+  for (int i = k; i < n; ++i) {
+    push(i);
+    if (dq.front() == i - k)
+      dq.pop_front();
+    ans.push_back(nums[dq.front()]);
+  }
+  return ans;
+}
+
+// * Same as above just using vector instead of deque
+vector<int> maxSlidingWindow2(vector<int> &nums, int k) {
+  int n = nums.size();
+  vector<int> dq;
+  int start = 0;
+  const auto push = [&](int i) {
+    // * dq.size() > start checks if there are still valid elements left in your active window.
+    // * Since elements are never removed from front of vector we've a start pointer
+    while ((int)dq.size() > start && nums[i] >= nums[dq.back()]) {
+      dq.pop_back();
+    }
+    dq.push_back(i);
+  };
+
+  vector<int> ans;
+  for (int i = 0; i < k; ++i) {
+    push(i);
+  }
+  ans.push_back(nums[dq.front()]);
+
+  for (int i = k; i < n; ++i) {
+    push(i);
+    if (dq[start] == i - k) {
+      start++;
+    }
+    ans.push_back(nums[dq[start]]);
+  }
   return ans;
 }
 

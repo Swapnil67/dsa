@@ -18,7 +18,6 @@
  * https://www.geeksforgeeks.org/problems/subsets-1613027340/1
 */
 
-// ! [confidence 5/5]
 // ! Amazon, Google, Meta, Microsoft, Apple, Adobe
 
 // ! Unique elements in array.
@@ -67,6 +66,24 @@ vector<vector<int>> subsets(vector<int> &nums) {
   vector<int> temp;
   helper(0, temp, nums, ans);
   return ans;
+}
+
+// * ------------------------- Optimal Approach -------------------------
+// ! Bit manipulation
+// * TIME COMPLEXITY O(2^n * n)
+// * SPACE COMPLEXITY O(1)
+vector<vector<int>> subsets(vector<int> &nums) {
+  int n = nums.size(), p = 1 << n;
+  vector<vector<int>> subs(p);
+  for (int i = 0; i < p; ++i) {
+    for (int j = 0; j < n; ++j) {
+      // * check if jth bit in 'i' is set or not.
+      if ((i >> j) & 1) {
+        subs[i].push_back(nums[j]);
+      }
+    }
+  }
+  return subs;
 }
 
 int main(void) {

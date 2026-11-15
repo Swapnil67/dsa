@@ -23,14 +23,6 @@
 
 using namespace std;
 typedef long long ll;
-typedef vector<int> vi;
-typedef vector<ll> vl;
-
-// * Macros
-#define all(v) v.begin(), v.end()
-#define VEC(name, size, ...) vector<__VA_ARGS__> name(static_cast<size_t>(size))
-#define READ_VEC(name) for(size_t i = 0; i < (name).size(); ++i) cin >> (name)[i]
-#define PRINT_VEC_PAIRS(p) for (auto &it: p) cout << it.first << ' ' << it.second << '\n'
 
 template <typename T>
 void printArr(vector<T> &arr) {

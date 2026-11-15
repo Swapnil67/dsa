@@ -35,6 +35,7 @@
 #include <iostream>
 
 using namespace std;
+typedef long long ll;
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -114,14 +115,13 @@ int coinChange(vector<int> &coins, int amount) {
     dp[i][0] = 0; // * Base case: 0 amount needs 0 coins
     
     for (int t = 1; t <= amount; ++t) {
-        // * If i > 0, get value from top row. If i == 0, it stays 1e9
-        int not_take = (i > 0) ? dp[i - 1][t] : 1e9; 
-        int take = 1e9;
-        if (t >= coins[i]) {
-            take = 1 + dp[i][t - coins[i]];
-        }
-        
-        dp[i][t] = min(not_take, take);
+      // * If i > 0, get value from top row. If i == 0, it stays 1e9
+      int not_take = (i > 0) ? dp[i - 1][t] : 1e9; 
+      int take = 1e9;
+      if (t >= coins[i])
+        take = 1 + dp[i][t - coins[i]];
+      
+      dp[i][t] = min(not_take, take);
     }
   }
 
@@ -136,21 +136,19 @@ int coinChange(vector<int> &coins, int amount) {
 int coinChange2(int amount, vector<int> &coins) {
   int n = coins.size();
   // * dp[t] stores the minimum number of coins to make amount t
-  vector<int> dp(amount + 1, amount + 1); // * 1D array initialized to a large value
+  vector<unsigned int> dp(amount + 1, amount + 1); // * 1D array initialized to a large value
   dp[0] = 0; // * 0 coins needed to make amount 0
 
-  for (int coin : coins) {
-    for (int t = coin; t <= amount; ++t) {
-      // * dp[t] -> skip the current coin
-      // * dp[t - coin] -> take current coin + take the remaing amount from dp (previously calculated)
-      dp[t] = min(dp[t], 1 + dp[t - coin]);
+  for (ll s = 0; s < amount; ++s) {
+    for (ll coin : coins) {
+      if (s + coin <= amount) {
+        dp[s + coin] = min(dp[s + coin], dp[s] + 1);
+      }
     }
   }
 
-  return dp[amount] > amount ? -1 : dp[amount];
+  return (dp[amount] > amount) ? -1 : dp[amount];
 }
-
-
 
 // * ------------------------- Approach 3: Optimal Approach -------------------------
 // * Follow Up question

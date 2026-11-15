@@ -61,19 +61,19 @@ pair<ll, ll> solve() {
   ll ans_a = 1, ans_b = n - 1;
   
   // * Iterate over possible factors of n up to sqrt(n)
-  for (int fac = 2; fac*fac <= n; ++fac) {
-    
+  for (int d = 2; d * d <= n; ++d) {
+
     // * Check if fac is a factor of n
-    if (n % fac == 0) { // * (This is from #5)
-			// * If fac is a factor, set ans_a to n / fac
-      ans_a = n / fac;
+    if (n % d == 0) { // * (This is from #5)
+			// * If d is a factor, set ans_a to n / d
+      ans_a = n / d;
       // * Set ans_b to n - ans_a (since we know this b = n - a)
 			ans_b = n - ans_a;
 			// * Break the loop as we found a valid pair
       break;
     }
   }
-  
+
   return {ans_a, ans_b};
 }
 

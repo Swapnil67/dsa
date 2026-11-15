@@ -72,19 +72,17 @@ int main(void)
     cin >> s;
 
     // * Length of longest substring made of same characters
-    ll cur_substr_len = 1LL, longest_substr_len = 1LL;
+    ll cur_streak = 1LL, longest_streak = 1LL;
     for (int i = 1; i < n; ++i) {
       if (s[i] == s[i - 1]) {
-        cur_substr_len++;
+        cur_streak++;
+      } else {
+        cur_streak = 1;
       }
-      else {
-        longest_substr_len = max(longest_substr_len, cur_substr_len);
-        cur_substr_len = 1;
-      }
+      longest_streak = max(longest_streak, cur_streak);
     }
-    longest_substr_len = max(longest_substr_len, cur_substr_len);
 
-    cout << longest_substr_len + 1 << "\n";
+    cout << longest_streak + 1 << "\n";
   }
 
   return 0;

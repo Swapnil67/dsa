@@ -33,6 +33,8 @@
 #include <iostream>
 using namespace std;
 
+typedef long long ll;
+
 // ! Observation
 /*
 * s = 111100

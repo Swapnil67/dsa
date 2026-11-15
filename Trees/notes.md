@@ -13,7 +13,7 @@
 1. Non linear Data Structure
 2. Collection of n nodes & (n-1) incoming edges where one of the node is root node.
 3. Degree of a node - No. of children it has.
-3. Degree of a tree - Max degree a node can have.
+4. Degree of a tree - Max degree a node can have.
 
 #### Note
 #### length of path == No. of edges
@@ -210,7 +210,10 @@ L-(h+1) = 2^0 + 2^1 + 2^2 + 2^3 + ..... + 2^h                    - Total nodes o
 - Number of Activation Records = No of levels in tree or Height of Tree
 - Number of Activation Records = O(height of tree)
 
-
 ## BST
 - Inorder of BST is always sorted because BST has property that everything to the left will be smaller
 and everything to the right will be greater.
+
+## Centroid
+- A node that splits the tree into smaller trees of size <= n / 2.
+- There can be atmost 2 centroids in a tree.

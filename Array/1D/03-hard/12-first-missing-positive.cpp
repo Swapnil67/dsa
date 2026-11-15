@@ -21,16 +21,24 @@
  * https://www.naukri.com/code360/problems/first-missing-positive_699946
 */
 
-#include<set>
-#include<iostream>
+#include <set>
+#include <vector>
+#include <iostream>
+
+using namespace std;
 
 // * ------------------------- UTILITY FUNCTIONS -------------------------`
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << "\n";
 }
 
 template <typename T>
@@ -40,7 +48,7 @@ void swap(T &a, T &b) {
   b = temp;
 }
 
-bool isElementPresent(std::vector<int> arr, int n, int ele) {
+bool isElementPresent(vector<int> arr, int n, int ele) {
   for (int i = 0; i < n; ++i) {
     if(arr[i] == ele)
       return true;
@@ -52,7 +60,7 @@ bool isElementPresent(std::vector<int> arr, int n, int ele) {
 // * Nested Loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(1)
-int bruteForce(std::vector<int> arr) {
+int bruteForce(vector<int> arr) {
   int n = arr.size();
   for (int i = 1; i <= n + 1; ++i) {
     if (!isElementPresent(arr, n, i))
@@ -65,11 +73,11 @@ int bruteForce(std::vector<int> arr) {
 // * HashSet
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-int betterApproach(std::vector<int> arr) {
+int betterApproach(vector<int> arr) {
   int n = arr.size();
 
   // * put all elements into hashSet
-  std::set<int> hashSet;
+  set<int> hashSet;
   for (int i = 0; i < n; ++i)
     hashSet.insert(arr[i]);
 
@@ -85,7 +93,7 @@ int betterApproach(std::vector<int> arr) {
 // * Put the element at its right position (swap)
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-int firstMissingPositive(std::vector<int> arr) {
+int firstMissingPositive(vector<int> arr) {
   int n = arr.size();
   // * Put the elements to their particular positions
   for (int i = 0; i < n; ++i) {
@@ -114,18 +122,18 @@ int firstMissingPositive(std::vector<int> arr) {
 
 int main() {
   // * testcase 1
-  // std::vector<int> arr = {1, 2, 0};
+  // vector<int> arr = {1, 2, 0};
   // * testcase 2
-  std::vector<int> arr = {3, 4, -1, 1};
+  vector<int> arr = {3, 4, -1, 1};
   // * testcase 3
-  // std::vector<int> arr = {7, 8, 9, 11, 12};
+  // vector<int> arr = {7, 8, 9, 11, 12};
 
-  std::cout << "Input Array" << std::endl;
+  cout << "Input Array" << endl;
   printArr(arr);
   // int ans = bruteForce(arr);
   // int ans = betterApproach(arr);
   int ans = firstMissingPositive(arr);
-  std::cout << "Missing positive integer " << ans << std::endl;
+  cout << "Missing positive integer " << ans << endl;
   return 0;
 }
 

@@ -29,13 +29,14 @@
  * https://docs.google.com/document/d/1KvjLTpkL1NtQ4ZdkFpWQr1yfWoeW1J3jb1WH4oFTWTc/edit?tab=t.0
  */
 
-// ! codeforces
+// ! Prefix Sum with Map
 
 #include <vector>
 #include <iostream>
 #include <unordered_map>
 
 using namespace std;
+typedef long long ll;
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -92,6 +93,62 @@ void printArr(vector<T> &arr) {
 *    Therefore, we pre-populate our hash map with mp[0] = 1.
 * ================================================================================
 */
+
+// * ------------------------- APPROACH 1: BRUTE FORCE APPROACH -------------------------
+// * TIME COMPLEXITY O(N^2)
+// * SPACE COMPLEXITY O(1)
+void bruteForce() {
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+
+  ll good_subarrays = 0;
+  for (size_t i = 0; i < n; ++i) {
+    ll sum = 0;
+    for (size_t j = i; j < n; ++j) {
+      sum += s[j] - '0';
+      if (sum == (j - i + 1)) {
+        cout << "sum: " << sum << "\n";
+        good_subarrays++;
+      }
+    }
+  }
+
+  cout << good_subarrays << "\n";
+}
+
+// * ------------------------- APPROACH 2: Optimal APPROACH -------------------------
+// ! Hashmap
+// * TIME COMPLEXITY O(N)
+// * SPACE COMPLEXITY O(N)
+void optimal() {
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
+
+  // * Use a map to store the frequencies of (Prefix Sum - Index)
+  unordered_map<int, int> prefix_counts;
+  prefix_counts[0] = 1; // * Base case: P[0] - 0 = 0
+
+  ll good_subarrays = 0;
+  ll current_prefix_sum = 0;
+
+  for (int j = 0; j < n; j++) {
+    current_prefix_sum += (s[j] - '0'); // * Convert character digit to integer
+
+    int target = current_prefix_sum - (j + 1); // * Since we need to check length, so we are doing (j + 1)
+
+    if (prefix_counts.count(target)) // * If the target has been seen before, add its frequency to the answer
+      good_subarrays += prefix_counts[target];
+
+    prefix_counts[target]++; // * Record the occurrence of the current target value
+  }
+
+  cout << good_subarrays << "\n";
+}
+
 int main(void) {
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
@@ -100,33 +157,8 @@ int main(void) {
   cin >> t;
 
   while (t--) {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-
-    // * Use a map to store the frequencies of (Prefix Sum - Index)
-    unordered_map<int, int> prefix_counts;
-    prefix_counts[0] = 1; // * Base case: P[0] - 0 = 0
-
-    long long good_subarrays = 0;
-    int current_prefix_sum = 0;
-
-    for (int j = 0; j < n; j++) {
-      // * Convert character digit to integer
-      current_prefix_sum += (s[j] - '0');
-
-      int target = current_prefix_sum - (j + 1);
-
-      // * If the target has been seen before, add its frequency to the answer
-      if (prefix_counts.count(target))
-        good_subarrays += prefix_counts[target];
-
-      // * Record the occurrence of the current target value
-      prefix_counts[target]++;
-    }
-
-    cout << good_subarrays << "\n";
+    bruteForce();
+    // optimal();
   }
 
   return 0;

@@ -18,28 +18,34 @@
  * https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/description/
  * https://www.naukri.com/code360/problems/absolute-ninja_1462468
 */
-#include<iostream>
-#include<numeric>
+#include <iostream>
+#include <numeric>
+using namespace std;
 
-void printArr(std::vector<int> arr) {
-  for (int i = 0; i < arr.size(); i++) {
-    std::cout << arr[i] << " ";
+template <typename T>
+void printArr(vector<T> &arr) {
+  int n = arr.size();
+  cout << "[ ";
+  for (int i = 0; i < n; ++i) {
+    cout << arr[i];
+    if (i != n - 1)
+      cout << ", ";
   }
-  std::cout << std::endl;
+  cout << " ]" << "\n";
 }
 
 // * ------------------------- APPROACH 1: Brute Force -------------------------`
 // * Nested loop
 // * TIME COMPLEXITY O(N^2)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> bruteForce(std::vector<int> arr) {
+vector<int> bruteForce(vector<int> arr) {
   int n = arr.size();
-  std::vector<int> ans;
+  vector<int> ans;
 
   for (int i = 0; i < n; ++i) {
     int sum = 0;
     for (int j = 0; j < n; ++j) {
-      sum += std::abs(arr[i] - arr[j]);
+      sum += abs(arr[i] - arr[j]);
     }
     ans.push_back(sum);
   }
@@ -51,9 +57,9 @@ std::vector<int> bruteForce(std::vector<int> arr) {
 // * Prefix sum array
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(N)
-std::vector<int> betterApproach(std::vector<int>& nums) {
+vector<int> betterApproach(vector<int>& nums) {
   int n = nums.size();
-  std::vector<int> prefix_arr, ans;
+  vector<int> prefix_arr, ans;
 
   int prefix = 0;
   for (int i = 0; i < n; ++i) {
@@ -66,7 +72,7 @@ std::vector<int> betterApproach(std::vector<int>& nums) {
   for (int i = 0; i < n; ++i) {
     int left_sum = prefix_arr[i] - nums[i];           // * left sum => 0 to i-1 ka sum
     int right_sum = prefix_arr[n - 1] - prefix_arr[i]; // * right sum => i+1 to n-1 ka sum
-    // std::cout << left_sum << " " << right_sum << std::endl;
+    // cout << left_sum << " " << right_sum << endl;
 
     // * val = ((nums[i] * i) - (0 to i - 1 ka sum) + ((i + 1 to n - 1 ka sum) - (nums[i] * (n - i - 1)))  
     int val = ((nums[i] * i) - left_sum) + (right_sum - (nums[i] * (n - i - 1)));
@@ -81,9 +87,9 @@ std::vector<int> betterApproach(std::vector<int>& nums) {
 // * Prefix sum without prefix Array
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
-std::vector<int> getSumAbsoluteDifferences(std::vector<int>& nums) {
+vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
   int n = nums.size();
-  std::vector<int> prefixArr, ans;
+  vector<int> prefixArr, ans;
 
   int total = accumulate(nums.begin(), nums.end(), 0);
 
@@ -92,7 +98,7 @@ std::vector<int> getSumAbsoluteDifferences(std::vector<int>& nums) {
     prefix_sum += nums[i];
     int left_sum = prefix_sum - nums[i];       // * left sum => 0 to i-1 ka sum
     int right_sum = total - prefix_sum;        // * right sum => i+1 to n-1 ka sum
-    // std::cout << left_sum << " " << right_sum << std::endl;
+    // cout << left_sum << " " << right_sum << endl;
 
     // * val = ((nums[i] * i) - (0 to i - 1 ka sum) + ((i + 1 to n - 1 ka sum) - (nums[i] * (n - i - 1)))
     int val = ((nums[i] * i) - left_sum) + (right_sum - (nums[i] * (n - i - 1)));
@@ -103,10 +109,10 @@ std::vector<int> getSumAbsoluteDifferences(std::vector<int>& nums) {
 }
 
 int main() {
-  // std::vector<int> arr = {2, 3, 5};
-  std::vector<int> arr = {1, 4, 6, 8, 10};
+  // vector<int> arr = {2, 3, 5};
+  vector<int> arr = {1, 4, 6, 8, 10};
   printArr(arr);
-  std::vector<int> ans = getSumAbsoluteDifferences(arr);
+  vector<int> ans = getSumAbsoluteDifferences(arr);
   printArr(ans);
 
   return 0;

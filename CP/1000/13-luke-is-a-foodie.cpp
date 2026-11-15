@@ -71,7 +71,7 @@ ll solve() {
   // * Create segments for each pile representing the range [a[i] - x, a[i] + x]
   VEC(segments, n, pair<ll, ll>);
   for (int i = 0; i < n; ++i) {
-    segments[i] = {a[i]-x, a[i]+x};
+    segments[i] = {a[i] - x, a[i] + x};
   }
   
   ll ans = 0;
@@ -94,7 +94,7 @@ ll solve() {
   return ans;
 }
 
-// * Greedy Range Intersection
+// ! Greedy Range Intersection
 // * Time Complexity (TC): O(n) = O(2*10^5)
 // * Space Complexity (SC): O(n) = O(2*10^5)
 int main() {

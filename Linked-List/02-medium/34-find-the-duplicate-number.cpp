@@ -53,34 +53,66 @@ void printArr(vector<T> &arr) {
 // * TIME COMPLEXITY O(N)
 // * SPACE COMPLEXITY O(1)
 int findDuplicate(vector<int>& nums) {
-    // * Phase 1: Initialize both pointers to the starting position
-    // * We treat the array values as links/pointers to other indices
-    int slow = nums[0];
-    int fast = nums[0];
+	// * Phase 1: Initialize both pointers to the starting position
+	// * We treat the array values as links/pointers to other indices
+	int slow = nums[0];
+	int fast = nums[0];
 
-    // * Move pointers until they intersect inside the cycle
-    while (true) {
-        slow = nums[slow];       // * Slow pointer moves 1 step
-        fast = nums[nums[fast]]; // * Fast pointer moves 2 steps
+	// * Move pointers until they intersect inside the cycle
+	while (true) {
+		slow = nums[slow];			 // * Slow pointer moves 1 step
+		fast = nums[nums[fast]]; // * Fast pointer moves 2 steps
 
-        if (slow == fast) // * They met! A cycle is confirmed
-            break;
-    }
+		if (slow == fast) // * They met! A cycle is confirmed
+			break;
+	}
 
-    // * Phase 2: Find the entrance of the cycle (the duplicate number)
-    // * Keep 'slow' at the meeting point, and place a new pointer at the start
-    int slow2 = nums[0];
+	// * Phase 2: Find the entrance of the cycle (the duplicate number)
+	// * Keep 'slow' at the meeting point, and place a new pointer at the start
+	int slow2 = nums[0];
 
-    // * Move both pointers at the same speed (1 step at a time)
-    // * Mathematically, they are guaranteed to meet exactly at the cycle entrance
-    while (slow != slow2) {
-        slow = nums[slow];
-        slow2 = nums[slow2];
-    }
+	// * Move both pointers at the same speed (1 step at a time)
+	// * Mathematically, they are guaranteed to meet exactly at the cycle entrance
+	while (slow != slow2) {
+		slow = nums[slow];
+		slow2 = nums[slow2];
+	}
 
-    // * Both pointers now point to the cycle entrance, which is the duplicate value
-    return slow;
+	// * Both pointers now point to the cycle entrance, which is the duplicate value
+	return slow;
 }
+
+// * Binary Search Solution
+// * TIME COMPLEXITY O(nlogn)
+// * SPACE COMPLEXITY O(1)
+int findDuplicate(vector<int> &nums) {
+	int n = nums.size();
+	int l = 1, r = n;
+
+	int ans = 0;
+	while (l <= r) {
+		int m = l + (r - l) / 2;
+
+		// * check how many numbers are smaller by current 'm'
+		// * If 3 is duplicate then there should be atleast 4 numbers <= m (1,2,3,3)
+		int cnt = 0;
+		for (int i = 0; i < n; ++i) {
+			if (nums[i] <= m)
+				cnt++;
+		}
+
+		if (cnt <= m) { // * m is not duplicate is check bigger
+			l = m + 1;
+		}
+		else {
+			// * m can be duplicate, go to left
+			ans = m;
+			r = m - 1;
+		}
+	}
+	return ans;
+}
+
 int main(void) {
     // * testcase 1
     // vector<int> nums = {1, 3, 4, 2, 2};

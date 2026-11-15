@@ -14,9 +14,22 @@
  * https://docs.google.com/document/d/15ZFZuxIGZgwbrT9NeBfUT00c-6KMjpuN-M7JRl8HFVI/edit?tab=t.0
 */
 
+/*
+* Lets say we've a number 'n'
+* p % n = 0 & q % n = 0
+* we can also say
+* p >= sqrt(n) or q >= sqrt(n)    True
+* p > sqrt(n) and q > sqrt(n)   False
+* 
+* Both number cannot be greater than sqrt(n) if they become the we'll have
+* pq > n  - (This is not possible since p*q % n == 0)
+* 
+* So one prime factor will be always found before the sqrt(n) and atmost one after sqrt(n)
+*/
+
 #include <vector>
-#include <iostream>
 #include <numeric>
+#include <iostream>
 #include <unordered_map>
 
 using namespace std;
@@ -35,6 +48,7 @@ void printArr(vector<T> &arr) {
   cout << " ]" << endl;
 }
 
+// ! Trial Division Method
 // * TIME COMPLEXITY O(sqrt(N))
 // * SPACE COMPLEXITY O(1)
 unordered_map<ll, ll> bruteForce(int n) {
@@ -47,7 +61,9 @@ unordered_map<ll, ll> bruteForce(int n) {
   }
 
   // * n must be odd at this point. So we can skip
-  for (ll i = 3; i <= sqrt(n); i += 2) {
+  // * Since we've removed all possible even factors from 
+  // * the number 'n' we can do i += 2 (only check odd factors now).
+  for (ll i = 3; i * i <= n; i += 2) { // * O(sqrt(n))
     while (n % i == 0) {
       pf[i]++;
       n = n / i;
@@ -55,8 +71,8 @@ unordered_map<ll, ll> bruteForce(int n) {
   }
    
 	// * This condition is to handle the case when n
-	// * is a prime number greater than 2
-  if (n > 2)
+	// * is a prime number greater than 2.
+  if (n > 2) // * Its prime factor exists after sqrt(n)
     pf[n]++;
 
   return pf;
@@ -107,8 +123,8 @@ int main(void) {
   // * testcase 3
   int n = 50;
 
-  // unordered_map<ll, ll> pf = bruteForce(n);
-  unordered_map<ll, ll> pf = findPrimeFactors(n);
+  unordered_map<ll, ll> pf = bruteForce(n);
+  // unordered_map<ll, ll> pf = findPrimeFactors(n);
 
   cout << "Prime Factors of " << n << endl;
   for (auto &it: pf) {

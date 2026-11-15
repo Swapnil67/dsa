@@ -35,6 +35,7 @@
 #include <algorithm>
 
 using namespace std;
+typedef long long ll;
 
 template <typename T>
 void printArr(vector<T> &arr) {
@@ -75,6 +76,34 @@ int dfs(int i, int k, vector<int> &nums, vector<vector<int>> &dp) {
     take = dfs(i + 1, k - nums[i], nums, dp);
   }
   return dp[i][k] = (not_take + take);
+}
+
+// * ------------------------- Brute Force Approach -------------------------
+// ! TLE
+// ! Bit manipulation
+// * TIME COMPLEXITY O(2^n * n)
+// * SPACE COMPLEXITY O(1)
+int findTargetSumWays(vector<int> &a, int target) {
+  int n = a.size();
+  ll p = 1 << n;
+
+  int ans = 0;
+  for (int i = 0; i < p; ++i) { // * O(2^n)
+    
+    int val = 0;
+    for (int j = 0; j < n; ++j) { // * O(n)
+      if ((i >> j) & 1) {
+        val += a[j];
+      } else {
+        val -= a[j];
+      }
+    }
+
+    if (val == target) // * accumulate no. of ways to get target
+      ans += 1;
+  }
+
+  return ans;
 }
 
 // * ------------------------- Approach: Brute Force Approach -------------------------

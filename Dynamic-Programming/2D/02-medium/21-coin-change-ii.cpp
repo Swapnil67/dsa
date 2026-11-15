@@ -121,7 +121,12 @@ int change(int amount, vector<int> &coins) {
 
   for (int i = 1; i < n; ++i) {
     for (int a = 0; a <= amount; ++a) {
+      // * Path 1: Exclude the current coin.
+      // * Inherit all ways to make amount 'a' using only the previous (i-1) coins.
       dp[i][a] = dp[i - 1][a];
+      
+      // * Path 2: Include the coin[i] (if the coin value fits).
+      // * Add the ways to make the remaining amount (a - coin[i]) using the same coin subset.
       if (a >= coins[i]) {
         dp[i][a] += dp[i][a - coins[i]];
       }
@@ -137,27 +142,45 @@ int change(int amount, vector<int> &coins) {
 
 
 // * ------------------------- Approach: Optimal Approach -------------------------
+/*
+ * INTUITION & APPROACH:
+ * ---------------------
+ * This problem asks for the number of unique COMBINATIONS (where order doesn't matter,
+ * e.g., [1, 2] is the same as [2, 1]) to make a target amount using an infinite supply of given coins.
+ * 
+ * 1. State Definition: We use a 1D Dynamic Programming array `dp`, where `dp[i]` stores 
+ *    the total number of unique ways to make the amount `i`.
+ * 
+ * 2. Base Case: `dp[0] = 1`. There is exactly 1 way to make an amount of 0—by choosing no coins.
+ * 
+ * 3. Loop Order (Crucial for Combinations): The outer loop iterates over the COINS, and the 
+ *    inner loop iterates over the AMOUNTS. By processing each coin completely one by one, we enforce 
+ *    a strict choice order. This prevents counting the same set of coins in different orders (permutations).
+ * 
+ * 4. State Transition: For every amount `s` that we can already form, adding the current `coin` 
+ *    takes us to a new amount `s + coin`. Therefore, all the ways to form `s` (`dp[s]`) are added 
+ *    to the ways to form `s + coin` (`dp[s + coin]`).
+*/
 // * Bottom Up + Space Optimization
 // * TIME COMPLEXITY O(N * amount)
 // * SPACE COMPLEXITY O(amount)
-int change2(int amount, vector<int> &coins) {
+int changeBottomup(int amount, vector<int> &coins)
+{
   int n = coins.size();
-  vector<uint> dp(amount + 1, 0);
-  for (int t = 0; t <= amount; ++t)
-    dp[t] = (t % coins[0]) == 0;
-  // printArr(dp);
 
-  vector<uint> next_dp(amount + 1, 0);
+  // * dp[i] stores the number of ways to make change for amount 'i'.
+  vector<unsigned int> dp(amount + 1, 0);
+  // * Base case initialization
+  dp[0] = 1;
 
-  for (int i = 1; i < n; ++i) {
-    for (int t = 0; t <= amount; ++t) {
-      next_dp[t] = dp[t];
-      if (t >= coins[i]) {
-        next_dp[t] += next_dp[t - coins[i]];
+  // * Process each coin denomination one at a time to prevent duplicate combinations
+  for (int coin : coins) {
+    for (long long s = 0; s < amount; ++s) {
+      if (s + coin <= amount) { // * should not exceed target amount
+        // * Contributed ways from amount 's' are pushed forward to amount 's + coin'
+        dp[s + coin] += dp[s];
       }
     }
-    dp = next_dp;
-    // printArr(dp);
   }
 
   return dp[amount];
@@ -183,7 +206,7 @@ int main(void) {
   // int ans = bruteForce(amount, coins);
   // int ans = betterApproach(amount, coins);
   // int ans = change(amount, coins);
-  int ans = change2(amount, coins);
+  int ans = changeBottomup(amount, coins);
 
   cout << "number of combinations: " << ans << endl;
 }

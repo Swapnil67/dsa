@@ -5,6 +5,10 @@ dsa-problems.json
 *.png
 .vscode
 .idea
+*.bin
+
+.cph
+*/.cph/*
 
 tomorrow.md
 output
@@ -12,3 +16,4 @@ output
 random*
 
 output.dSYM*
+
