@@ -41,6 +41,7 @@
 */
 
 // ! Observation
+// * Check for k only if n % k == 0 & do bruteforce
 
 #include <vector>
 #include <iostream>
@@ -63,22 +64,22 @@ void solve() {
     pre[i] = pre[i - 1] + a[i];
   }
   
-  ll ans = 0; // Variable to store the maximum absolute difference
-  for (ll k = 1; k <= n; k++) { // Iterate over all possible k values
+  ll ans = 0;
+  for (ll k = 1; k <= n; k++) { 
     if (n % k) // * If k does not divide n, skip this k
       continue; 
     
-    ll start = k - 1; // Starting index for the first truck
-    ll maxi = pre[start]; // Initialize maximum sum for the first truck
-		ll mini = pre[start]; // Initialize minimum sum for the first truck
+    ll start = k - 1; // * Starting index for the first truck
+    ll maxi = pre[start]; // * Initialize maximum sum for the first truck
+		ll mini = pre[start]; // * Initialize minimum sum for the first truck
 		
 		for (ll idx = start + k; idx < n; idx += k) {
 		  ll cur = pre[idx] - pre[idx - k]; // * Calculate current truck's weight
-		  maxi = max(maxi, cur); // Update maximum weight
-      mini = min(mini, cur); // Update minimum weight
+		  maxi = max(maxi, cur); // * Update maximum weight
+      mini = min(mini, cur); // * Update minimum weight
 		}  
 
-		ans = max(ans, maxi - mini); // Update the maximum absolute difference
+		ans = max(ans, maxi - mini); // * Update the maximum absolute difference
   }
   
   cout << ans << "\n";
